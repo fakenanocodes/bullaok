@@ -1,7 +1,17 @@
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import Home from './pages/Home';
+import WhoWeAre from './pages/WhoWeAre';
 
 function App() {
-  return <div className="bg-slate-300">hello</div>;
+  return (
+    <div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about-us" element={<WhoWeAre />} />
+      </Routes>
+    </div>
+  );
 }
 
 export default App;
