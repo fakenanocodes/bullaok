@@ -1,7 +1,14 @@
 import './App.css';
+import OptionsPage from './Pages/OptionsPage';
 
 function App() {
-  return <div className="bg-slate-300">hello</div>;
+  return (
+    <div>
+      <div className="">
+        <OptionsPage/>
+      </div>
+    </div>
+  );
 }
 
 export default App;
