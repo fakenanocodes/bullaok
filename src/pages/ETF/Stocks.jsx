@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function Stocks() {
   return (
     <section className="flex justify-center stocks py-8">
