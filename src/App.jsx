@@ -3,6 +3,7 @@ import './App.css';
 import ETF from './pages/ETF';
 import Home from './pages/Home';
 import MarginTrading from './pages/MarginTrading';
+import Otc from './pages/Otc';
 import Stock from './pages/Stock';
 import WhoWeAre from './pages/WhoWeAre';
 
@@ -15,6 +16,7 @@ function App() {
         <Route path="/etf" element={<ETF />} />
         <Route path="/margin-trading" element={<MarginTrading />} />
         <Route path="/stocks" element={<Stock />} />
+        <Route path="/otc-stock-trading" element={<Otc />} />
       </Routes>
     </div>
   );
