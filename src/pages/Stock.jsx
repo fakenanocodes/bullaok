@@ -4,7 +4,9 @@ import stock_img from '../assets/stock_img.png';
 import stock_mobile from '../assets/stock_mobile.png';
 import stock_mobile2 from '../assets/stock_mobile2.png';
 import MainLayout from '../components/MainLayout';
+import StockSteps from '../components/StockSteps';
 import StockSwiper from '../components/StockSwiper';
+import StockCardsContainer from '../components/utils/StockCardsContainer';
 
 const Stock = () => {
   return (
@@ -213,6 +215,10 @@ const Stock = () => {
           <div className="absolute left-[37%] md:left-[43%] lg:left-[47%] bottom-0 w-24 border-b-8 rounded-t-md border-[#30022ECC]"></div>
         </div>
       </div>
+
+      <StockCardsContainer />
+
+      <StockSteps />
     </MainLayout>
   );
 };
