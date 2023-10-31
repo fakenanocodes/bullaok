@@ -187,7 +187,7 @@ const Stock = () => {
 
       <div className="px-5 lg:px-10 xl:px-48 py-[2rem] my-[2rem] flex flex-col md:flex-row justify-center items-center gap-10">
         <div>
-          <p className="md:text-lg text-gray-700 w-full lg:w-[27rem]">
+          <p className="md:text-lg text-gray-700 w-full lg:w-[30rem]">
             {`Bulloak now provides 11 stock order types as following:`}
             <br />
             <br />
@@ -198,6 +198,20 @@ const Stock = () => {
           </p>
         </div>
         <img src={stock_mobile2} alt="" className="h-[35rem]" />
+      </div>
+
+      <div className="px-5 lg:px-10 xl:px-20 my-[5rem]">
+        <div className="bg-[#30022e1a] mx-auto bg-opacity-10 py-3 px-5 font-bold text-center max-w-max text-[#30022ECC] rounded-[50%] border-4 border-[#30022ECC] text-4xl">
+          0
+        </div>
+        <div className="border-b py-7 relative">
+          <p className="text-center text-3xl font-semibold lg:w-[50rem] mx-auto">
+            Leverage Webull’s customer support and knowledge building.
+            Communicate with other traders.
+          </p>
+
+          <div className="absolute left-[37%] md:left-[43%] lg:left-[47%] bottom-0 w-24 border-b-8 rounded-t-md border-[#30022ECC]"></div>
+        </div>
       </div>
     </MainLayout>
   );
