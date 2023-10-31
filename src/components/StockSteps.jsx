@@ -20,14 +20,16 @@ const StockSteps = () => {
         <StockStepsCard
           image={fund_icon}
           step={'2'}
-          title={'Apply for an account'}
-          description={'Fill out our simple application form'}
+          title={'Fund your account'}
+          description={'Fund your account with any amount'}
         />
         <StockStepsCard
           image={trade_icon}
           step={'3'}
-          title={'Apply for an account'}
-          description={'Fill out our simple application form'}
+          title={'Start trade'}
+          description={
+            'Start trading on our platforms through web, mobile or desktop'
+          }
         />
       </div>
     </div>
