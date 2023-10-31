@@ -60,9 +60,32 @@ h1 {
   line-height: 1.1;
 }
 
-.stocks{
-  background: url('/bg.png') no-repeat;
+.stocks {
+  background-image: url('/bg.png');
+  background-repeat: no-repeat;
+  background-color: #41073f;
   background-size: cover;
+  background-blend-mode: screen;
+}
+.etf,
+.data-etf,
+.chart,
+.commission {
+  background-position: center;
+  background-size: 50%;
+  
+}
+.etf {
+  background: url('/box1.png') no-repeat;
+}
+.data-etf {
+  background: url('/box2.png') no-repeat;
+}
+.chart {
+  background: url('/box3.png') no-repeat;
+}
+.commission {
+  background: url('/box4.png') no-repeat;
 }
 
 @media (prefers-color-scheme: light) {

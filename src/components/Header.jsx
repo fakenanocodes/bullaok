@@ -7,7 +7,7 @@ import ProfileIcon from './utils/icons/ProfileIcon';
 // bg-[#30022ECC]
 const Header = () => {
   return (
-    <div className="w-full flex justify-between items-center py-5 px-5 lg:px-10 xl:px-20 bg-[#41073F] shadow-md fixed top-0 left-0">
+    <div className="w-full flex justify-between items-center py-5 px-5 lg:px-10 xl:px-20 bg-[#41073F] shadow-md fixed z-40 top-0 left-0">
       <p className="font-semibold text-white">Logo</p>
       <div className="flex items-center gap-5">
         <p className="font-semibold text-white text-sm cursor-pointer">Home</p>
