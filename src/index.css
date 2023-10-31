@@ -63,6 +63,7 @@ h1 {
 .stocks {
   background-image: url('/bg.png');
   background-repeat: no-repeat;
+  /* background-color: #a53aa1; */
   background-color: #41073f;
   background-size: cover;
   background-blend-mode: screen;

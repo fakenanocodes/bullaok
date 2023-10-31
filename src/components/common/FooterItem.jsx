@@ -8,12 +8,12 @@ const FooterItem = ({ key, faq, about, terms, contact }) => {
   console.log({ faq });
   return (
     <div className=" items-center text-[#fff] mt-5 py-8">
-      <ul className="gap-5">
+      <ul className="">
         {faq ? (
           <>
             <h2 className="font-bold">FAQ</h2>
             {faq.categories.map((item, index) => (
-              <li key={index} className="mt-4">
+              <li key={index} className="mt-4 lg:text-lg text-xs">
                 {item}
               </li>
             ))}
@@ -26,7 +26,7 @@ const FooterItem = ({ key, faq, about, terms, contact }) => {
           <>
             <h2 className="font-bold">About</h2>
             {about.categories.map((item, index) => (
-              <li key={index} className="mt-4">
+              <li key={index} className="mt-4 lg:text-lg text-xs">
                 {item}
               </li>
             ))}
@@ -54,7 +54,7 @@ const FooterItem = ({ key, faq, about, terms, contact }) => {
                 {item}
               </li>
             ))}
-            <div className="flex gap-4 mt-5">
+            <div className="md:flex gap-4 mt-5 hidden">
               <BiLogoFacebook
                 style={{
                   fontSize: '30px',
