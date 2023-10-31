@@ -69,7 +69,7 @@ export default function Learn() {
           <span> Open an account</span> <BsArrowRight />
         </button>
       </div>
-      <div className="bg-[#021333]">
+      <div className="bg-[#021333] md:hidden block">
         <img src="/mobile2.png" alt="" />
       </div>
     </section>

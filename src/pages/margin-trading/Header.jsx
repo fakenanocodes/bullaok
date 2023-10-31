@@ -1,11 +1,13 @@
 export default function Header() {
   return (
-    <section className="flex flex-col lg:flex-row px-8 items-center justify-center md:gap-16 gap-8 py-9  ">
-      <div className="flex text-center md:text-start flex-col gap-10 text-[#fff] md:items-start items-center w-full lg:w-3/4 items-start">
+    <section className="flex flex-col lg:flex-row px-8 items-center justify-center md:gap-16 gap-8 py-9  bg-cover bg-center bg-no-repeat  w-full relative"  style={{
+        backgroundImage: `url('bg_margin.jpg')`,
+      }}>
+      <div className="flex text-center md:text-start flex-col gap-10 text-[#fff] md:items-start items-center w-full lg:w-2/4 items-start">
         <h1 className="font-bold md:text-[70px] text-5xl  text-center md:text-start mt-9 text-[#fff]">
           Margin Trading Overview
         </h1>
-        <p className="">
+        <p className="w-2/5">
           Margin trading enables you to borrow money from Bulloak and leverage
           your holdings to purchase securities. This gives you access to
           additional buying power based on the value of certain securities and

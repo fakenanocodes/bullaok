@@ -1,11 +1,11 @@
 import React from 'react';
 import Layout from '../components/Layout';
 import Header from './ETF/Header';
+import Learn from './ETF/Learn';
 import OpenAccount from './ETF/OpenAccount';
 import Stocks from './ETF/Stocks';
 import Trading from './ETF/Trading';
 import WhyInvest from './ETF/WhyInvest';
-import Learn from './ETF/Learn';
 
 export default function ETF() {
   return (
