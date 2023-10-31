@@ -35,7 +35,7 @@ const Otc = () => {
           What is the Over-The-Counter Market?
         </p>
         <div className="w-24 border-b-8 rounded-md border-[#30022ECC]"></div>
-        <div className="w-[95vw] md:w-[80vw] lg:w-[75vw] bg-gray-50 flex justify-between items-center gap-5 lg:gap-14 py-5 px-10 rounded-xl mt-[3rem]">
+        <div className="w-[95vw] md:w-[80vw] lg:w-[75vw] bg-gray-50 flex flex-col-reverse lg:flex-row justify-between items-center gap-5 lg:gap-14 py-5 px-10 rounded-xl mt-[3rem]">
           <p className="flex-1 text-base lg:text-lg text-[#636872]">
             {` Over-the-counter (OTC) refers to trading securities outside official stock exchanges like Nasdaq or NYSE. A wide range of securities can be traded over-the-counter, including common stocks, American Depository Receipts (ADRs), and even derivatives.`}
             <br />
@@ -56,7 +56,7 @@ const Otc = () => {
         <p className="text-2xl lg:text-4xl font-bold tracking-wide text-center my-[1rem]">
           Tiers of OTC Markets
         </p>
-        <p className="text-lg md:text-xl tracking-wide text-center w-full lg:w-[75vw] text-[#636872]">
+        <p className="text-lg md:text-xl tracking-wide text-center w-full px-3 lg:w-[75vw] text-[#636872]">
           OTC markets are mainly divided into three markets—the OTCQX, OTCQB,
           and OTC Pink. The OTC QX ranks the first in high listing requirements,
           OTCQB the second.
