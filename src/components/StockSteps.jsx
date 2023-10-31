@@ -32,6 +32,12 @@ const StockSteps = () => {
           }
         />
       </div>
+
+      <div className="flex justify-center">
+        <button className="text-white font-bold text-xl py-5 px-7 bg-[#D4B716] rounded-lg">
+          Open An Account
+        </button>
+      </div>
     </div>
   );
 };
