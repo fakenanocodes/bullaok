@@ -1,11 +1,12 @@
 import otc_bg_img from '../assets/otc_bg_img.png';
 import otc_img1 from '../assets/otc_img1.png';
 import MainLayout from '../components/MainLayout';
+import OtcTable from '../components/utils/reusables/OtcTable';
 
 const Otc = () => {
   return (
     <MainLayout>
-      <div className="bg-[#41073F] bg-opacity-90 relative w-full h-[90vh] lg:h-[75vh] flex flex-col lg:flex-row justify-between items-center pt-[5rem] pd:mt-0">
+      <div className="bg-[#41073F] bg-opacity-90 relative w-full h-[90vh] lg:h-[78vh] flex flex-col lg:flex-row justify-between items-center pt-[5rem] pd:mt-0">
         <div className="flex flex-col justify-center items-start gap-12  text-white pl-3 md:pl-5 lg:pl-10 xl:pl-20">
           <div>
             <p className="text-5xl font-extrabold w-full md:w-[30rem] tracking-wider text-[#E0DDDD] mb-5">
@@ -51,7 +52,7 @@ const Otc = () => {
         </div>
       </div>
 
-      <div className="flex flex-col justify-center items-center gap-4 my-[5rem]">
+      <div className="flex flex-col justify-center items-center gap-4 my-[3rem]">
         <p className="text-2xl lg:text-4xl font-bold tracking-wide text-center my-[1rem]">
           Tiers of OTC Markets
         </p>
@@ -60,7 +61,11 @@ const Otc = () => {
           and OTC Pink. The OTC QX ranks the first in high listing requirements,
           OTCQB the second.
         </p>
-        <div className="w-24 border-b-8 rounded-md border-[#30022ECC]"></div>
+        <div className="w-24 border-b-8 rounded-md border-[#30022ECC] mt-5"></div>
+      </div>
+
+      <div className="px-5 lg:px-10 xl:px-48 mb-[3rem]">
+        <OtcTable />
       </div>
     </MainLayout>
   );
