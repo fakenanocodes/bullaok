@@ -1,7 +1,7 @@
-import Layout from '../components/Layout';
+import MainLayout from '../components/MainLayout';
 
 const WhoWeAre = () => {
-  return <Layout>Who we are</Layout>;
+  return <MainLayout>Who we are</MainLayout>;
 };
 
 export default WhoWeAre;
