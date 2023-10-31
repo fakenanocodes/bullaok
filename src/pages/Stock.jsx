@@ -1,6 +1,8 @@
 import bg_img from '../assets/bg_img.png';
 import chart_sys from '../assets/chart_sys.png';
 import stock_img from '../assets/stock_img.png';
+import stock_mobile from '../assets/stock_mobile.png';
+import stock_mobile2 from '../assets/stock_mobile2.png';
 import Layout from '../components/Layout';
 import StockSwiper from '../components/StockSwiper';
 
@@ -63,7 +65,7 @@ const Stock = () => {
           </div>
         </div>
         <p className="my-[3rem] text-center font-medium">
-          In addition to our low fees, Webull also offers competitive margin
+          In addition to our low fees, Bulloak also offers competitive margin
           rates.{' '}
           <span className="text-[#FFD700] cursor-pointer">
             See more pricing
@@ -153,6 +155,49 @@ const Stock = () => {
 
           <div className="absolute left-[37%] md:left-[43%] lg:left-[47%] bottom-0 w-24 border-b-8 rounded-t-md border-[#30022ECC]"></div>
         </div>
+      </div>
+
+      <div className="px-5 lg:px-10 xl:px-48 py-[2rem] my-[2rem] flex flex-col md:flex-row justify-center items-center gap-10">
+        <div>
+          <p className="md:text-lg text-gray-700 w-full lg:w-[27rem]">
+            {`Fractional shares are pieces, or fractions, of whole shares of a company or ETF.`}
+            <br />
+            <br />
+            {` You can buy fractions of stocks and ETFs at a $5 minimum on Bulloak.`}
+          </p>
+          <p className="text-blue-600 mt-[1rem] cursor-pointer">
+            Explore Fractional Shares Trading
+          </p>
+        </div>
+        <img src={stock_mobile} alt="" className="h-[35rem]" />
+      </div>
+
+      <div className="px-5 lg:px-10 xl:px-20 my-[5rem]">
+        <div className="bg-[#30022e1a] mx-auto bg-opacity-10 py-3 px-5 font-bold text-center max-w-max text-[#30022ECC] rounded-[50%] border-4 border-[#30022ECC] text-4xl">
+          0
+        </div>
+        <div className="border-b py-7 relative">
+          <p className="text-center text-3xl font-semibold lg:w-[50rem] mx-auto">
+            Understand how Order Types can enhance your experience.
+          </p>
+
+          <div className="absolute left-[37%] md:left-[43%] lg:left-[47%] bottom-0 w-24 border-b-8 rounded-t-md border-[#30022ECC]"></div>
+        </div>
+      </div>
+
+      <div className="px-5 lg:px-10 xl:px-48 py-[2rem] my-[2rem] flex flex-col md:flex-row justify-center items-center gap-10">
+        <div>
+          <p className="md:text-lg text-gray-700 w-full lg:w-[27rem]">
+            {`Bulloak now provides 11 stock order types as following:`}
+            <br />
+            <br />
+            {`Simple orders: Limit order, Market order, Stop order, Stop-Limit order, and Trailing Stop order.`}
+            <br />
+            <br />
+            {`Group orders: ·Stop-Loss/Take-Profit orders (Bracket orders), One-Triggers-the-Other order (OTO), One-Cancels-the-Other order (OCO), and One-Triggers-a-One-Cancels-the-Other order (OTOCO).`}
+          </p>
+        </div>
+        <img src={stock_mobile2} alt="" className="h-[35rem]" />
       </div>
     </Layout>
   );
