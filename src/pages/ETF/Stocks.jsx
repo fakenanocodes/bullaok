@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function Stocks() {
   return (
     <section className="flex justify-center stocks py-8">
@@ -11,9 +9,13 @@ export default function Stocks() {
             Get up to 12 free stocks when you open and fund a new account. Each
             free stock is valued from $3 to $3000.
           </p>
-          <button className="text-[#000] bg-transparent">Learn more {'>'} </button>
+          <button className="text-[#000] bg-transparent">
+            Learn more {'>'}{' '}
+          </button>
         </div>
-        <button className="mt-3 bg-[#0D86ff] rounded-lg p-3">Open an account</button>
+        <button className="mt-3 bg-[#0D86ff] rounded-lg p-3">
+          Open an account
+        </button>
       </div>
     </section>
   );
