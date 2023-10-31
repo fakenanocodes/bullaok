@@ -64,7 +64,7 @@ const Otc = () => {
         <div className="w-24 border-b-8 rounded-md border-[#30022ECC] mt-5"></div>
       </div>
 
-      <div className="px-5 lg:px-10 xl:px-48 mb-[3rem]">
+      <div className="px-0 md:px-5 lg:px-10 xl:px-48 mb-[3rem]">
         <OtcTable />
       </div>
     </MainLayout>
