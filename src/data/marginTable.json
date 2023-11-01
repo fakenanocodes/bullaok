@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "product": "$0~25,000.00",
+    "bulloak": "9.74%",
+    "robinhood": "12%",
+    "fidelity": "13.57%",
+    "etrade": "13.95%~14.20%",
+    "ameritrade": "14.50%~14.75%"
+  },
+  {
+    "id": 2,
+    "product": "Microsoft Surface Pro",
+    "bulloak": "White",
+    "robinhood": "Laptop PC",
+    "fidelity": "$1999",
+    "etrade": "Edit",
+    "ameritrade": "14.50%~14.75%"
+  },
+  {
+    "id": 3,
+    "product": "Magic Mouse 2",
+    "bulloak": "Black",
+    "robinhood": "Accessories",
+    "fidelity": "$99",
+    "etrade": "Edit",
+    "ameritrade": "14.50%~14.75%"
+  },
+  {
+    "id": 4,
+    "product": "Google Pixel Phone",
+    "bulloak": "Gray",
+    "robinhood": "Phone",
+    "fidelity": "$799",
+    "etrade": "Edit",
+    "ameritrade": "14.50%~14.75%"
+  },
+  {
+    "id": 5,
+    "product": "Apple Watch 5",
+    "bulloak": "Red",
+    "robinhood": "Wearables",
+    "fidelity": "$999",
+    "etrade": "Edit",
+    "ameritrade": "14.50%~14.75%"
+  }
+]
