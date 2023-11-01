@@ -1,5 +1,11 @@
 import backgroundImage from '../assets/options_bg.png';
 import data_img from '../assets/data_img.svg';
+import phoneScreen from '../assets/phoneScreen.png';
+import phones from '../assets/phones.png';
+import tradepics from '../assets/tradepics.png'
+import icon1 from '../assets/icon1.png'
+import icon2 from '../assets/icon2.png'
+import icon3 from '../assets/icon3.png'
 import { Link } from 'react-router-dom';
 import ImageCarousel from '../Components/ImageCarousel';
 
@@ -166,7 +172,7 @@ const OptionsPage = () => {
       </div>
       <ImageCarousel />
 
-      <div>
+      <div className="flex justify-around items-center">
         <div className=" mt-20 leading-[20px]">
           <h1 className="text-[#2B3240] font-extrabold text-[2.3rem] mb-8">
             {' '}
@@ -180,7 +186,73 @@ const OptionsPage = () => {
           </p>
         </div>
 
-        <img src="" alt="" />
+        <img src={phoneScreen} className="w-[42rem] h-[40rem]" alt="" />
+      </div>
+
+      <div className="flex justify-around items-center mt-10">
+        <img src={phones} className="w-[33rem] h-[35rem]" alt="" />
+
+        <div className=" mt-20 leading-[20px]">
+          <h1 className="text-[#2B3240] font-extrabold text-[2.3rem] mb-8">
+            {' '}
+            Build Your Options <br /> Knowledge
+          </h1>
+          <p className="text-[#636872] leading-[30px] text-[1.3rem]">
+          Become a more confident investor with our<br />
+          educational resources. Connect with others in the <br />
+          community. Discuss market trends and trading <br />
+          strategies.
+          </p>
+        </div>
+      </div>
+
+      <div className="flex justify-around items-center mt-10">
+
+        <div className=" mt-20 leading-[20px]">
+          <h1 className="text-[#2B3240] font-extrabold text-[2.3rem] mb-8">
+            {' '}
+            Trade On Your Own
+          </h1>
+          <p className="text-[#636872] leading-[30px] text-[1.3rem]">
+          Bulloak desktop and mobile app can help you get<br />
+          started with options trading. <br />
+         
+          </p>
+        </div>
+
+        <img src={tradepics} className="w-[42rem] h-[40rem]" alt="" />
+
+      </div>
+
+
+      <div className='bg-[#116AF7] h-[100vh]'>
+            <p className='text-center text-white font-extrabold text-[2.6rem]'> Start your option trading <br /> journey in 3 easy steps</p>
+            <div className='flex items-end justify-around mt-16'>
+              <div className='border p-5 border-solid border-gray-300 w-[22rem] h-[13rem] rounded-[0.5rem]'>
+              <img src={icon1} alt="" className='h-[3.5rem] w-[3.5rem]'/>
+              <div>
+                <p className='text-white text-[2rem] font-semibold'>Open an acount</p>
+                <p className='text-[#FFFFFF80]'>Fill out our simple application form</p>
+              </div>
+              </div>
+              <div className='border p-5 border-solid border-gray-300 w-[22rem] h-[13rem] rounded-[0.5rem]'>
+              <img src={icon2} alt="" className='h-[3.5rem] w-[3.5rem]' />
+              <div>
+                <p className='text-white text-[2rem] font-semibold'>Fund your account</p>
+                <p className='text-[#FFFFFF80]'>Deposit funds securely with any amount</p>
+              </div>
+              </div>
+              <div className='border border-solid p-5 border-gray-300 w-[22rem] h-[13rem] rounded-[0.5rem]'>
+              <img src={icon3} className='h-[3.5rem] w-[3.5rem]' alt="" />
+              <div className=''>
+                <p className='text-white text-[2rem] font-semibold'>Option trading</p>
+                <p className='text-[#FFFFFF80]'>Start option trading on Webull with free <br /> real time OPRA & index data</p>
+              </div>
+              </div>
+            </div>
+            <button className="flex  gap-3 mt-5 text-white  cursor-pointer h-16 text-2xl bg-blue-500 text-center font-open-sans-semibold font-semibold leading-16 rounded-full tracking-tight">
+        Create Account<span>&rarr;</span>
+          </button>
       </div>
     </div>
   );
