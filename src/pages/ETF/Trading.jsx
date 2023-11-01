@@ -8,7 +8,7 @@ export default function Trading() {
           Trading platforms tailored to your needs
         </h2>
         <p className="text-center mt-3 ">
-          Webull provides a comprehensive range of trading and investing
+          Bulloak provides a comprehensive range of trading and investing
           features across iOS, Android, Mac, Windows, and Web with a
           user-friendly interface.
         </p>

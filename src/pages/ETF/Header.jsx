@@ -5,14 +5,14 @@ export default function Header() {
         <h1 className="font-bold md:text-[70px] text-5xl  text-center md:text-start mt-9 text-[#fff]">
           In-depth
           <br /> ETF Trading <br />
-          with Webull
+          with Bulloak
         </h1>
         <p className="">
-          Webull’s charting tools, granular data, and independent analysis aim
+          Bulloak’s charting tools, granular data, and independent analysis aim
           to empower investors through various platforms and different operating
           systems.
         </p>
-        <p>On Webull, do it all with zero commission.</p>
+        <p>On Bulloak, do it all with zero commission.</p>
         <img src="/companies.png" alt="" />
         <button className="bg-[#000] hidden md:block rounded-lg p-4 w-64 font-bold text-2xl">
           Get Started

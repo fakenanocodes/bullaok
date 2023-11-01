@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function WhyInvest() {
   return (
     <section className="bg-[#fff] flex flex-col items-center py-8">
@@ -8,9 +6,9 @@ export default function WhyInvest() {
           Why invest in ETFs?
         </h2>
         <p className="text-center mt-3">
-          With Webull’s zero commission* platform, combining the diversification
-          of mutual funds, and the liquidity of stock trading, ETFs can be a
-          low-cost approach that offers a variety of benefits.
+          With Bulloak’s zero commission* platform, combining the
+          diversification of mutual funds, and the liquidity of stock trading,
+          ETFs can be a low-cost approach that offers a variety of benefits.
         </p>
       </div>
       <div className="items flex flex-col md:flex-row mt-10 w-2/3 text-center  justify-between">
@@ -34,7 +32,7 @@ export default function WhyInvest() {
           <img src="/choose.png" className="w-28 h-auto " alt="" />
           <h3 className="font-bold text-xl">Choose what you want</h3>
           <p className="text-md">
-            Webull’s zero commission may help you build your portfolio that
+            Bulloak’s zero commission may help you build your portfolio that
             meets your objectives.
           </p>
         </div>

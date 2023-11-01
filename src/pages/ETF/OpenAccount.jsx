@@ -3,7 +3,7 @@ export default function OpenAccount() {
     <section className="py-9 px-5 flex flex-col items-center gap-9">
       <div>
         <h2 className="text-center text-[#fff] md:text-5xl text-3xl font-bold mt-5 md:mb-10">
-          Over 3,300 ETFs available on the Webull App
+          Over 3,300 ETFs available on the Bulloak App
         </h2>
       </div>
       <div className="md:w-2/3 w-full  m-auto mt-5 flex flex-col items-center">
