@@ -24,8 +24,8 @@ export default function How() {
     },
   ];
   return (
-    <section className=" bg-[#fff] py-9 mt-9">
-      <div className="mx-auto text-[#000] mt-8 w-2/3">
+    <section className=" bg-[#fff] py-9 mt-9  ">
+      <div className="mx-auto text-[#000] mt-8 w-2/3 flex flex-col justify-center items-center ">
         <h2 className="font-bold text-4xl text-center my-4">
           How trading securities on margin works​
         </h2>
@@ -41,7 +41,7 @@ export default function How() {
                     alt=""
                   />
                   <img src={item.img} className=" w-12 h-auto" alt="" />
-                  <p className='font-bold'>{item.text}</p>
+                  <p className="font-bold">{item.text}</p>
                 </div>
 
                 <BsChevronDown
@@ -55,17 +55,16 @@ export default function How() {
               </>
             ))}
           </div>
-          <img src="title.png" className='w-4/6 h-auto' alt="" />
+          <img src="title.png" className="w-4/6 h-auto" alt="" />
           {/* <div className="block">
 </div> */}
         </div>
 
-        <button className="bg-[#fff] rounded-lg text-[#3774FE] flex items-center gap-2 ">
-          <BsFillArrowRightCircleFill /> <span>Get Started</span>{' '}
+        <button className="bg-[#41073F] rounded-lg text-[#fff] px-9 py-4 flex items-center gap-2 ">
+          <span>Get Started</span> <BsFillArrowRightCircleFill />
         </button>
       </div>
 
-      {/* <img src="/line.png" className="w-12 mx-auto mt-3 mb-8" alt="" /> */}
     </section>
   );
 }

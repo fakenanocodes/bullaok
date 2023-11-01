@@ -6,29 +6,30 @@ import { Collapse, initTE } from 'tw-elements';
 export default function Faqs() {
   initTE({ Collapse });
   const [isCollapsed, setIsCollapsed] = useState(true);
+  const [activeIndex, setActiveIndex] = useState(null);
 
-  const toggleAccordion = () => {
-    setIsCollapsed(!isCollapsed);
+  const toggleAccordion = (index) => {
+    setActiveIndex(activeIndex === index ? null : index);
   };
 
   return (
     <section>
-      <div className="mx-auto text-center w-1/4 my-5">
-        <h2 className="text-[#fff] text-4xl">FAQs</h2>
+      <div className="mx-auto text-center w-1/4 my-5 py-7">
+        <h2 className="text-[#fff] text-4xl mt-5">FAQs</h2>
         <img src="line.png" className="w-12 mx-auto mt-3" alt="" />
       </div>
-      <div className="w-3/6 mx-auto">
+      <div className="w-3/6 mx-auto mt-8">
         <div id="accordionExample5">
-          <div class="rounded-t-lg border border-neutral-200 bg-white dark:border-neutral-600 dark:bg-neutral-800">
-            <h2 class="mb-0" id="headingOne5">
+          <div class="rounded-t-lg  dark:border-neutral-600 dark:bg-neutral-800">
+            <h2 className="mb-0 " id="headingOne5">
               <button
-                class="group relative flex w-full items-center rounded-t-[15px] border-0 bg-white px-5 py-4 text-left text-base text-neutral-800 transition [overflow-anchor:none] hover:z-[2] focus:z-[3] focus:outline-none dark:bg-neutral-800 dark:text-white [&:not([data-te-collapse-collapsed])]:bg-white [&:not([data-te-collapse-collapsed])]:text-primary [&:not([data-te-collapse-collapsed])]:[box-shadow:inset_0_-1px_0_rgba(229,231,235)] dark:[&:not([data-te-collapse-collapsed])]:bg-neutral-800 dark:[&:not([data-te-collapse-collapsed])]:text-primary-400 dark:[&:not([data-te-collapse-collapsed])]:[box-shadow:inset_0_-1px_0_rgba(75,85,99)]"
+                class="group font-bold  text-lg py-9 rounded-[20px] relative flex w-full items-center rounded-t-[15px] border-0 bg-white px-5 py-4 text-left text-base text-neutral-800 transition [overflow-anchor:none] hover:z-[2] focus:z-[3] focus:outline-none dark:bg-neutral-800 dark:text-white [&:not([data-te-collapse-collapsed])]:bg-white [&:not([data-te-collapse-collapsed])]:text-primary [&:not([data-te-collapse-collapsed])]:[box-shadow:inset_0_-1px_0_rgba(229,231,235)] dark:[&:not([data-te-collapse-collapsed])]:bg-neutral-800 dark:[&:not([data-te-collapse-collapsed])]:text-primary-400 dark:[&:not([data-te-collapse-collapsed])]:[box-shadow:inset_0_-1px_0_rgba(75,85,99)]"
                 type="button"
                 data-te-collapse-init
                 data-te-target="#collapseOne5"
                 aria-expanded="true"
                 aria-controls="collapseOne5"
-                onClick={toggleAccordion}
+                onClick={() => toggleAccordion(1)}
               >
                 What’s the difference between margin and cash accounts ?
                 <span class="-mr-1 ml-auto h-5 w-5 shrink-0 rotate-[-180deg] fill-[#336dec] transition-transform duration-200 ease-in-out group-[[data-te-collapse-collapsed]]:mr-0 group-[[data-te-collapse-collapsed]]:rotate-0 group-[[data-te-collapse-collapsed]]:fill-[#212529] motion-reduce:transition-none dark:fill-blue-300 dark:group-[[data-te-collapse-collapsed]]:fill-white">
@@ -42,114 +43,131 @@ export default function Faqs() {
             </h2>
             <div
               id="collapseOne5"
-              class="!visible"
+              class="!visible bg-[#EFF3F694] my-5 rounded-[20px]"
               data-te-collapse-item
               data-te-collapse-show
               aria-labelledby="headingOne5"
             >
-              <div class="px-5 py-4">
-                <strong>This is the first item's accordion body.</strong> It is
-                shown by default, until the collapse plugin adds the appropriate
-                classes that we use to style each element. These classes control
-                the overall appearance, as well as the showing and hiding via
-                CSS transitions. You can modify any of this with custom CSS or
-                overriding our default variables. It's also worth noting that
-                just about any HTML can go within the{' '}
-                <code>.accordion-body</code>, though the transition does limit
-                overflow.
+              <div class="px-5 py-4 flex flex-col gap-4 text-[#fff]">
+                <video
+                  class=""
+                  controls=""
+                  width="100%"
+                  height="100%"
+                  poster="https://u1sweb.webullfinance.com/oas/74771407c8cf4ae4a178c1eced67b3a0.jpg"
+                  src="https://u1sweb.webullfinance.com/oas/d1f3fb412c4a48de91e538ab85aa0a73.mp4"
+                  playsinline=""
+                ></video>
+                <p>
+                  A cash account is a type of brokerage account in which the
+                  investor must pay the full amount for securities purchased.
+                  <br />
+                  <br />A margin account is a brokerage account which allows
+                  investors to leverage the funds and securities they already
+                  own to purchase additional securities. It provides a great
+                  opportunity to leverage your investment to help increase your
+                  return. At the same time, it has the risks of magnifying your
+                  losses.
+                </p>
+                <a href="" className="text-center">
+                  {' '}
+                  Learn More {'>'}
+                </a>
               </div>
             </div>
           </div>
-          <div class="border border-t-0 border-neutral-200 bg-white dark:border-neutral-600 dark:bg-neutral-800">
+          <div class=" border-t-0   dark:bg-neutral-800">
             <h2 class="mb-0" id="headingTwo5">
               <button
-                class="group relative flex w-full items-center rounded-none border-0 bg-white px-5 py-4 text-left text-base text-neutral-800 transition [overflow-anchor:none] hover:z-[2] focus:z-[3] focus:outline-none dark:bg-neutral-800 dark:text-white [&:not([data-te-collapse-collapsed])]:bg-white [&:not([data-te-collapse-collapsed])]:text-primary [&:not([data-te-collapse-collapsed])]:[box-shadow:inset_0_-1px_0_rgba(229,231,235)] dark:[&:not([data-te-collapse-collapsed])]:bg-neutral-800 dark:[&:not([data-te-collapse-collapsed])]:text-primary-400 dark:[&:not([data-te-collapse-collapsed])]:[box-shadow:inset_0_-1px_0_rgba(75,85,99)]"
+                class="group font-bold  text-lg relative py-9 rounded-[20px] mt-4 flex w-full items-center border-0 bg-white px-5 py-4 text-left text-base text-neutral-800 transition [overflow-anchor:none] hover:z-[2] focus:z-[3] focus:outline-none dark:bg-neutral-800 dark:text-white [&:not([data-te-collapse-collapsed])]:bg-white [&:not([data-te-collapse-collapsed])]:text-primary [&:not([data-te-collapse-collapsed])]:[box-shadow:inset_0_-1px_0_rgba(229,231,235)] dark:[&:not([data-te-collapse-collapsed])]:bg-neutral-800 dark:[&:not([data-te-collapse-collapsed])]:text-primary-400 dark:[&:not([data-te-collapse-collapsed])]:[box-shadow:inset_0_-1px_0_rgba(75,85,99)]"
                 type="button"
                 data-te-collapse-init
                 data-te-collapse-collapsed
                 data-te-target="#collapseTwo5"
                 aria-expanded="false"
                 aria-controls="collapseTwo5"
-                onClick={toggleAccordion}
+                onClick={() => toggleAccordion(2)}
               >
-                Accordion Item #2
+                What are the rules for margin trading?
                 <span class="-mr-1 ml-auto h-5 w-5 shrink-0 rotate-[-180deg] fill-[#336dec] transition-transform duration-200 ease-in-out group-[[data-te-collapse-collapsed]]:mr-0 group-[[data-te-collapse-collapsed]]:rotate-0 group-[[data-te-collapse-collapsed]]:fill-[#212529] motion-reduce:transition-none dark:fill-blue-300 dark:group-[[data-te-collapse-collapsed]]:fill-white">
                   {isCollapsed ? (
                     <AiFillMinusCircle />
                   ) : (
                     <BsFillPlusCircleFill />
                   )}
-
-                 
                 </span>
               </button>
             </h2>
             <div
               id="collapseTwo5"
               //   class="!visible hidden"
-              className={`${isCollapsed ? '!visible' : ''} hidden`}
+              class="!visible "
+              className={`${
+                isCollapsed ? '!visible' : ''
+              } hidden bg-[#EFF3F694] my-5 rounded-[20px] text-[#fff]`}
               data-te-collapse-item
               aria-labelledby="headingTwo5"
             >
               <div class="px-5 py-4">
-                <strong>This is the second item's accordion body.</strong> It is
-                hidden by default, until the collapse plugin adds the
-                appropriate classes that we use to style each element. These
-                classes control the overall appearance, as well as the showing
-                and hiding via CSS transitions. You can modify any of this with
-                custom CSS or overriding our default variables. It's also worth
-                noting that just about any HTML can go within the{' '}
-                <code>.accordion-body</code>, though the transition does limit
-                overflow.
+                While margin trading provides more trading opportunities,
+                understanding the rules and potential risks is essential before
+                you start.​ If you like to day trade, you probably want to keep
+                your equity value (crypto not included) above $25,000. This is
+                because when you’re flagged as a Pattern Day Trader (PDT) and
+                your equity value dips below $25,000, an Equity Maintenance (EM)
+                call may occur.​ Another important thing to understand is buying
+                power. This determines how much you can spend. There are two
+                types of buying power:​ - Day Trade Buying Power (DTBP) refers
+                to the funds you have available to place trades on a given
+                trading day. It is often 4x your equity value.​ - Overnight
+                Buying Power (ONBP) refers to the funds you have available to
+                hold positions overnight. It is often 2x your equity value.​
+                This means you cannot use all of your DTBP and hold the position
+                overnight. You may trigger margin calls related to buying power.
+                Read the rest of our course to learn more about margin calls.​
               </div>
             </div>
           </div>
-          <div class="rounded-b-lg border border-t-0 border-neutral-200 bg-white dark:border-neutral-600 dark:bg-neutral-800">
+          <div class="rounded-b-lg dark:border-neutral-600 dark:bg-neutral-800">
             <h2 class="mb-0" id="headingThree5">
               <button
-                class="group relative flex w-full items-center border-0 bg-white px-5 py-4 text-left text-base text-neutral-800 transition [overflow-anchor:none] hover:z-[2] focus:z-[3] focus:outline-none dark:bg-neutral-800 dark:text-white [&:not([data-te-collapse-collapsed])]:bg-white [&:not([data-te-collapse-collapsed])]:text-primary [&:not([data-te-collapse-collapsed])]:[box-shadow:inset_0_-1px_0_rgba(229,231,235)] dark:[&:not([data-te-collapse-collapsed])]:bg-neutral-800 dark:[&:not([data-te-collapse-collapsed])]:text-primary-400 dark:[&:not([data-te-collapse-collapsed])]:[box-shadow:inset_0_-1px_0_rgba(75,85,99)] [&[data-te-collapse-collapsed]]:rounded-b-[15px] [&[data-te-collapse-collapsed]]:transition-none"
+                class="group font-bold  text-lg relative shadow-xl py-9 rounded-[20px] mt-4 flex w-full items-center border-0 bg-white px-5 py-4 text-left text-base text-neutral-800 transition [overflow-anchor:none] hover:z-[2] focus:z-[3] focus:outline-none dark:bg-neutral-800 dark:text-white [&:not([data-te-collapse-collapsed])]:bg-white [&:not([data-te-collapse-collapsed])]:text-primary [&:not([data-te-collapse-collapsed])]:[box-shadow:inset_0_-1px_0_rgba(229,231,235)] dark:[&:not([data-te-collapse-collapsed])]:bg-neutral-800 dark:[&:not([data-te-collapse-collapsed])]:text-primary-400 dark:[&:not([data-te-collapse-collapsed])]:[box-shadow:inset_0_-1px_0_rgba(75,85,99)] [&[data-te-collapse-collapsed]]:rounded-b-[15px] [&[data-te-collapse-collapsed]]:transition-none"
                 type="button"
                 data-te-collapse-init
                 data-te-collapse-collapsed
                 data-te-target="#collapseThree5"
                 aria-expanded="false"
                 aria-controls="collapseThree5"
+                onClick={() => toggleAccordion(3)}
               >
-                Accordion Item #3
+                How do I know which stocks I can trade with leverage?
                 <span class="-mr-1 ml-auto h-5 w-5 shrink-0 rotate-[-180deg] fill-[#336dec] transition-transform duration-200 ease-in-out group-[[data-te-collapse-collapsed]]:mr-0 group-[[data-te-collapse-collapsed]]:rotate-0 group-[[data-te-collapse-collapsed]]:fill-[#212529] motion-reduce:transition-none dark:fill-blue-300 dark:group-[[data-te-collapse-collapsed]]:fill-white">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    class="h-6 w-6"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M19.5 8.25l-7.5 7.5-7.5-7.5"
-                    />
-                  </svg>
+                  {isCollapsed ? (
+                    <AiFillMinusCircle />
+                  ) : (
+                    <BsFillPlusCircleFill />
+                  )}
                 </span>
               </button>
             </h2>
             <div
               id="collapseThree5"
-              class="!visible hidden"
+              class="!visible hidden bg-[#EFF3F694] my-5 rounded-[20px]"
               data-te-collapse-item
               aria-labelledby="headingThree5"
             >
-              <div class="px-5 py-4">
-                <strong>This is the third item's accordion body.</strong> It is
-                hidden by default, until the collapse plugin adds the
-                appropriate classes that we use to style each element. These
-                classes control the overall appearance, as well as the showing
-                and hiding via CSS transitions. You can modify any of this with
-                custom CSS or overriding our default variables. It's also worth
-                noting that just about any HTML can go within the{' '}
-                <code>.accordion-body</code>, though the transition does limit
-                overflow.
+              <div class="px-5 py-4 text-[#fff]">
+                1) Go to the “Watchlist” tab on the main screen.
+                <br />
+                <br />
+                ​ 2) Look up a stock of your choice and tap on it.
+                <br />
+                <br />
+                ​ 3) Check to see if there is a dollar icon on the top right.
+                <br />
+                <br />
+                4) If there is, tap the icon and you will see the maximum
+                leverage on this stock.​
               </div>
             </div>
           </div>
