@@ -208,7 +208,7 @@ const Stock = () => {
         </div>
         <div className="border-b py-7 relative">
           <p className="text-center text-3xl font-semibold lg:w-[50rem] mx-auto">
-            Leverage Webull’s customer support and knowledge building.
+            Leverage Bulloak’s customer support and knowledge building.
             Communicate with other traders.
           </p>
 

@@ -22,7 +22,7 @@ const StockCardsContainer = () => {
         image={community}
         title={'Community'}
         description={
-          'Connect with others on Webull Community to discuss market trends and trading strategies.'
+          'Connect with others on Bulloak Community to discuss market trends and trading strategies.'
         }
       />
     </div>
