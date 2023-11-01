@@ -2,14 +2,14 @@ import React from 'react';
 import WhyTable from '../../components/common/WhyTable';
 import tableData from '../../data/marginTable.json';
 import data from '../../data/table2.json';
-export default function () {
+export default function Why() {
   return (
     <section className="bg-[#fff] py-8">
-      <div className="text-[#000] py-9 w-2/4  text-center mx-auto">
-        <h2 className="text-4xl font-bold mt-4">
+      <div className="text-[#000] py-9 lg:w-2/4 w-full px-2  text-center mx-auto">
+        <h2 className="lg:text-4xl text-xl font-bold mt-4">
           Why choose Bulloak for margin trading?​
         </h2>
-        <img src="line.png" className='w-12 mx-auto mt-5' alt="" />
+        <img src="line.png" className="w-12 mx-auto mt-5" alt="" />
 
         <h3 className="font-bold my-3">Simple and straightforward pricing​</h3>
         <p>
@@ -19,11 +19,11 @@ export default function () {
       </div>
       <WhyTable tableData={tableData} />
 
-      <div className="grid grid-cols-3 gap-3 divide-x w-2/4 mt-9 mx-auto">
+      <div className="grid lg:grid-cols-3 grid-cols-1 gap-3 lg:divide-x divide-y lg:divide-y-0   lg:w-2/4 w-full  mt-9 mx-auto">
         {data.map((item, index) => (
           <div
             key={index}
-            className="w-72 gap-4 flex flex-col items-start  mx-auto"
+            className="w-72 gap-4 flex flex-col lg:items-start items-center py-5 lg:py-0  mx-auto "
           >
             <img src={item.icon} className="w-12 h-auto " alt="" />
             <h3 className="font-bold text-xl">{item.title}</h3>

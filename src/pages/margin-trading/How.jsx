@@ -25,23 +25,23 @@ export default function How() {
   ];
   return (
     <section className=" bg-[#fff] py-9 mt-9  ">
-      <div className="mx-auto text-[#000] mt-8 w-2/3 flex flex-col justify-center items-center ">
-        <h2 className="font-bold text-4xl text-center my-4">
+      <div className="mx-auto text-[#000] mt-8 w-full lg:w-2/3 flex flex-col justify-center items-center ">
+        <h2 className="font-bold lg:text-4xl text-2xl text-center my-4">
           How trading securities on margin works​
         </h2>
 
-        <div className="grid grid-cols-2 items-center justify-between  mx-auto">
-          <div className="grid gap-2  w-5/6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 items-center justify-between  mx-auto">
+          <div className="grid gap-2 w-full lg:w-5/6 lgpx-2 px-8">
             {data.map((item) => (
               <>
-                <div className="flex items-center gap-5 p-9   relative h-24 bg-gradient-to-r from-[#41073F] to-white-500 w-full  rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-10 ">
+                <div className="flex items-center lg:gap-5 gap-3 lg:p-9 p-4   relative lg:h-24 h-auto bg-gradient-to-r from-[#41073F] to-white-500 w-full  rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-10 ">
                   <img
                     src={item.icon}
                     className="absolute -top-8  -left-5 w-12 h-auto"
                     alt=""
                   />
-                  <img src={item.img} className=" w-12 h-auto" alt="" />
-                  <p className="font-bold">{item.text}</p>
+                  <img src={item.img} className="lg:w-12 w-8 h-auto" alt="" />
+                  <p className="font-bold lg:text-md text-sm ">{item.text}</p>
                 </div>
 
                 <BsChevronDown
@@ -55,16 +55,19 @@ export default function How() {
               </>
             ))}
           </div>
-          <img src="title.png" className="w-4/6 h-auto" alt="" />
+          <img
+            src="title.png"
+            className="lg:w-4/6 w-auto h-auto hidden lg:block"
+            alt=""
+          />
           {/* <div className="block">
 </div> */}
         </div>
 
-        <button className="bg-[#41073F] rounded-lg text-[#fff] px-9 py-4 flex items-center gap-2 ">
+        <button className="bg-[#41073F] rounded-lg text-[#fff] px-9 py-4 flex items-center gap-2 mt-6 ">
           <span>Get Started</span> <BsFillArrowRightCircleFill />
         </button>
       </div>
-
     </section>
   );
 }

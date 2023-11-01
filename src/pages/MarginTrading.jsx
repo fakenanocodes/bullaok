@@ -5,14 +5,16 @@ import Header from './margin-trading/Header';
 import Risks from './margin-trading/Risks';
 import Why from './margin-trading/Why';
 import How from './margin-trading/How';
+import Trading from './margin-trading/Trading';
 
 export default function MarginTrading() {
   return (
     <Layout>
       <Header />
       <Why />
-      <Benefits />
       <Risks />
+      <Benefits />
+      {/* <Trading /> */}
       <How />
       <Faqs />
     </Layout>

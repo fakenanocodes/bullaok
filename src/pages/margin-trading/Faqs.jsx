@@ -14,16 +14,16 @@ export default function Faqs() {
 
   return (
     <section>
-      <div className="mx-auto text-center w-1/4 my-5 py-7">
+      <div className="mx-auto text-center w-full lg:w-1/4 my-5 py-7">
         <h2 className="text-[#fff] text-4xl mt-5">FAQs</h2>
         <img src="line.png" className="w-12 mx-auto mt-3" alt="" />
       </div>
-      <div className="w-3/6 mx-auto mt-8">
+      <div className="lg:w-3/6 w-full mx-auto mt-8">
         <div id="accordionExample5">
           <div class="rounded-t-lg  dark:border-neutral-600 dark:bg-neutral-800">
             <h2 className="mb-0 " id="headingOne5">
               <button
-                class="group font-bold  text-lg py-9 rounded-[20px] relative flex w-full items-center rounded-t-[15px] border-0 bg-white px-5 py-4 text-left text-base text-neutral-800 transition [overflow-anchor:none] hover:z-[2] focus:z-[3] focus:outline-none dark:bg-neutral-800 dark:text-white [&:not([data-te-collapse-collapsed])]:bg-white [&:not([data-te-collapse-collapsed])]:text-primary [&:not([data-te-collapse-collapsed])]:[box-shadow:inset_0_-1px_0_rgba(229,231,235)] dark:[&:not([data-te-collapse-collapsed])]:bg-neutral-800 dark:[&:not([data-te-collapse-collapsed])]:text-primary-400 dark:[&:not([data-te-collapse-collapsed])]:[box-shadow:inset_0_-1px_0_rgba(75,85,99)]"
+                class="group font-bold  lg:text-lg text-sm py-9 rounded-[20px] relative flex w-full items-center rounded-t-[15px] border-0 bg-white px-5 py-4 text-left text-base text-neutral-800 transition [overflow-anchor:none] hover:z-[2] focus:z-[3] focus:outline-none dark:bg-neutral-800 dark:text-white [&:not([data-te-collapse-collapsed])]:bg-white [&:not([data-te-collapse-collapsed])]:text-primary [&:not([data-te-collapse-collapsed])]:[box-shadow:inset_0_-1px_0_rgba(229,231,235)] dark:[&:not([data-te-collapse-collapsed])]:bg-neutral-800 dark:[&:not([data-te-collapse-collapsed])]:text-primary-400 dark:[&:not([data-te-collapse-collapsed])]:[box-shadow:inset_0_-1px_0_rgba(75,85,99)]"
                 type="button"
                 data-te-collapse-init
                 data-te-target="#collapseOne5"
@@ -58,7 +58,7 @@ export default function Faqs() {
                   src="https://u1sweb.webullfinance.com/oas/d1f3fb412c4a48de91e538ab85aa0a73.mp4"
                   playsinline=""
                 ></video>
-                <p>
+                <p className="hidden lg:block">
                   A cash account is a type of brokerage account in which the
                   investor must pay the full amount for securities purchased.
                   <br />
@@ -79,7 +79,7 @@ export default function Faqs() {
           <div class=" border-t-0   dark:bg-neutral-800">
             <h2 class="mb-0" id="headingTwo5">
               <button
-                class="group font-bold  text-lg relative py-9 rounded-[20px] mt-4 flex w-full items-center border-0 bg-white px-5 py-4 text-left text-base text-neutral-800 transition [overflow-anchor:none] hover:z-[2] focus:z-[3] focus:outline-none dark:bg-neutral-800 dark:text-white [&:not([data-te-collapse-collapsed])]:bg-white [&:not([data-te-collapse-collapsed])]:text-primary [&:not([data-te-collapse-collapsed])]:[box-shadow:inset_0_-1px_0_rgba(229,231,235)] dark:[&:not([data-te-collapse-collapsed])]:bg-neutral-800 dark:[&:not([data-te-collapse-collapsed])]:text-primary-400 dark:[&:not([data-te-collapse-collapsed])]:[box-shadow:inset_0_-1px_0_rgba(75,85,99)]"
+                class="group font-bold lg:text-lg text-sm relative py-9 rounded-[20px] mt-4 flex w-full items-center border-0 bg-white px-5 py-4 text-left text-base text-neutral-800 transition [overflow-anchor:none] hover:z-[2] focus:z-[3] focus:outline-none dark:bg-neutral-800 dark:text-white [&:not([data-te-collapse-collapsed])]:bg-white [&:not([data-te-collapse-collapsed])]:text-primary [&:not([data-te-collapse-collapsed])]:[box-shadow:inset_0_-1px_0_rgba(229,231,235)] dark:[&:not([data-te-collapse-collapsed])]:bg-neutral-800 dark:[&:not([data-te-collapse-collapsed])]:text-primary-400 dark:[&:not([data-te-collapse-collapsed])]:[box-shadow:inset_0_-1px_0_rgba(75,85,99)]"
                 type="button"
                 data-te-collapse-init
                 data-te-collapse-collapsed
@@ -108,20 +108,34 @@ export default function Faqs() {
               data-te-collapse-item
               aria-labelledby="headingTwo5"
             >
-              <div class="px-5 py-4">
+              <div class="px-5 py-4 lg:text-md text-sm">
                 While margin trading provides more trading opportunities,
                 understanding the rules and potential risks is essential before
-                you start.​ If you like to day trade, you probably want to keep
-                your equity value (crypto not included) above $25,000. This is
-                because when you’re flagged as a Pattern Day Trader (PDT) and
-                your equity value dips below $25,000, an Equity Maintenance (EM)
-                call may occur.​ Another important thing to understand is buying
-                power. This determines how much you can spend. There are two
-                types of buying power:​ - Day Trade Buying Power (DTBP) refers
-                to the funds you have available to place trades on a given
-                trading day. It is often 4x your equity value.​ - Overnight
-                Buying Power (ONBP) refers to the funds you have available to
-                hold positions overnight. It is often 2x your equity value.​
+                you start.​
+                <br />
+                <br />
+                If you like to day trade, you probably want to keep your equity
+                value (crypto not included) above $25,000. This is because when
+                you’re flagged as a Pattern Day Trader (PDT) and your equity
+                value dips below $25,000, an Equity Maintenance (EM) call may
+                occur.
+                <br />
+                <br />
+                ​ Another important thing to understand is buying power. This
+                determines how much you can spend. There are two types of buying
+                power:​
+                <br />
+                <br />
+                - Day Trade Buying Power (DTBP) refers to the funds you have
+                available to place trades on a given trading day. It is often 4x
+                your equity value.
+                <br />
+                <br />
+                ​ - Overnight Buying Power (ONBP) refers to the funds you have
+                available to hold positions overnight. It is often 2x your
+                equity value.​
+                <br />
+                <br />
                 This means you cannot use all of your DTBP and hold the position
                 overnight. You may trigger margin calls related to buying power.
                 Read the rest of our course to learn more about margin calls.​
@@ -131,7 +145,7 @@ export default function Faqs() {
           <div class="rounded-b-lg dark:border-neutral-600 dark:bg-neutral-800">
             <h2 class="mb-0" id="headingThree5">
               <button
-                class="group font-bold  text-lg relative shadow-xl py-9 rounded-[20px] mt-4 flex w-full items-center border-0 bg-white px-5 py-4 text-left text-base text-neutral-800 transition [overflow-anchor:none] hover:z-[2] focus:z-[3] focus:outline-none dark:bg-neutral-800 dark:text-white [&:not([data-te-collapse-collapsed])]:bg-white [&:not([data-te-collapse-collapsed])]:text-primary [&:not([data-te-collapse-collapsed])]:[box-shadow:inset_0_-1px_0_rgba(229,231,235)] dark:[&:not([data-te-collapse-collapsed])]:bg-neutral-800 dark:[&:not([data-te-collapse-collapsed])]:text-primary-400 dark:[&:not([data-te-collapse-collapsed])]:[box-shadow:inset_0_-1px_0_rgba(75,85,99)] [&[data-te-collapse-collapsed]]:rounded-b-[15px] [&[data-te-collapse-collapsed]]:transition-none"
+                class="group font-bold  lg:text-lg text-sm relative shadow-xl py-9 rounded-[20px] mt-4 flex w-full items-center border-0 bg-white px-5 py-4 text-left text-base text-neutral-800 transition [overflow-anchor:none] hover:z-[2] focus:z-[3] focus:outline-none dark:bg-neutral-800 dark:text-white [&:not([data-te-collapse-collapsed])]:bg-white [&:not([data-te-collapse-collapsed])]:text-primary [&:not([data-te-collapse-collapsed])]:[box-shadow:inset_0_-1px_0_rgba(229,231,235)] dark:[&:not([data-te-collapse-collapsed])]:bg-neutral-800 dark:[&:not([data-te-collapse-collapsed])]:text-primary-400 dark:[&:not([data-te-collapse-collapsed])]:[box-shadow:inset_0_-1px_0_rgba(75,85,99)] [&[data-te-collapse-collapsed]]:rounded-b-[15px] [&[data-te-collapse-collapsed]]:transition-none"
                 type="button"
                 data-te-collapse-init
                 data-te-collapse-collapsed
