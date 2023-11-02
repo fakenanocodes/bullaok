@@ -6,6 +6,7 @@ import MarginTrading from './pages/MarginTrading';
 import Otc from './pages/Otc';
 import Stock from './pages/Stock';
 import WhoWeAre from './pages/WhoWeAre';
+import RecurringInvestments from './pages/RecurringInvestments';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/margin-trading" element={<MarginTrading />} />
         <Route path="/stocks" element={<Stock />} />
         <Route path="/otc-stock-trading" element={<Otc />} />
+        <Route path="/recurring-investment" element={<RecurringInvestments />} />
       </Routes>
     </div>
   );

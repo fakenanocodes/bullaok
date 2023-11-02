@@ -18,7 +18,8 @@ export default function Header() {
         <h1 className="font-bold md:text-[70px] text-4xl  text-center md:text-start mt-9 ">
           Margin Trading
           <br />
-          <span className=" text-[#41073F]">Overview</span>
+          <br />
+          <span className=" text-[#41073F] mt-2">Overview</span>
         </h1>
         <p className="lg:w-2/5 w-full">
           Margin trading enables you to borrow money from Bulloak and leverage
