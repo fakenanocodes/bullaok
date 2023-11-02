@@ -1,5 +1,4 @@
 import React from 'react';
-import { BsFillArrowRightCircleFill } from 'react-icons/bs';
 export default function How() {
   const data = [
     {
@@ -19,12 +18,12 @@ export default function How() {
     },
   ];
   return (
-    <section className=" bg-[#fff] py-9  ">
-      <div className="mx-auto text-[#000] mt-8 w-full lg:w-2/3 flex flex-col justify-center items-center ">
-        <h2 className="font-bold lg:text-4xl text-2xl text-center my-4">
+    <section className=" bg-[#fff] lg:py-9 py-3  ">
+      <div className="mx-auto text-[#000] lg:mt-8 mt-0 w-full lg:w-2/3 flex flex-col justify-center items-center ">
+        <h2 className="font-bold lg:text-4xl text-3xl text-center my-4">
           How it <span className="text-[#41073F] font-bold">works</span>
         </h2>
-        <p>
+        <p className="text-gray-500 lg:w-5/6 w-full lg:text-lg text-sm px-2 lg:px-0 text-center mt-4 mb-8">
           For example, investors A and B decided to invest $800 each in Stock
           XYZ eight months ago. Investor A invested the total sum when the stock
           was trading at $10, holding 80 shares. In contrast, investor B set up
@@ -34,25 +33,24 @@ export default function How() {
           securities may fluctuate.
         </p>
 
-        <img src="works.png" className="mt-5" alt="" />
+        <img src="works.png" className="lg:mt-8 w-full h-auto" alt="" />
 
-        <p>You can access recurring investments in three steps.</p>
+        <p className="font-bold    text-xl my-6 lg:text-start text-center w-2/3 lg:w-full">
+          You can access recurring investments in three Steps.
+        </p>
 
-        <div className="flex justify-between mt-8 border border-red-500 w-full">
+        <div className="flex justify-between mt-8 lg:flex-row flex-col w-full px-5 lg:gap-0 gap-8">
           {data.map((item, index) => (
             <div
               key={index}
-              className="bg-[#F7FAFC] px-4 w-1/4 px-9 py-4 text-center gap-3 flex flex-col justify-center items-center"
+              className="bg-[#F7FAFC] px-4 lg:w-1/4 w-full px-9 py-4 text-center gap-3 flex flex-col justify-center items-center"
             >
               <img src={item.img} className="h-auto w-24" alt="" />
-              <h3 className="font-bold text-2xl">{item.title}</h3>
+              <h3 className="font-bold lg:text-2xl text-xl ">{item.title}</h3>
               <p className="text-[#546988]">{item.text}</p>
             </div>
           ))}
         </div>
-        {/* <button className="bg-[#41073F] rounded-lg text-[#fff] px-9 py-4 flex items-center gap-2 mt-6 ">
-          <span>Get Started</span> <BsFillArrowRightCircleFill />
-        </button> */}
       </div>
     </section>
   );

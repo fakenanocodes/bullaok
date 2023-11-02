@@ -13,17 +13,16 @@ export default function Faqs() {
   };
 
   return (
-    <section>
-      <div className="mx-auto text-center w-full lg:w-1/4 my-5 py-7">
-        <h2 className="text-[#fff] text-4xl mt-5">FAQs</h2>
-        <img src="line.png" className="w-12 mx-auto mt-3" alt="" />
+    <section className='bg-[#fff] py-6'>
+      <div className="mx-auto text-center w-full lg:w-1/4 my-5 lg:py-7 py-2">
+        <h2 className="text-[#000] lg:text-4xl text-2xl font-bold lg:my-5 my-1">Recurring Investment <span className='text-[#41073F]'>FAQs </span></h2>
       </div>
-      <div className="lg:w-3/6 w-full mx-auto mt-8">
-        <div id="accordionExample5">
-          <div class="rounded-t-lg  dark:border-neutral-600 dark:bg-neutral-800">
+      <div className="lg:w-3/6 w-full mx-auto lg:mt-8 mt-0">
+        <div id="accordionExample5 lg:mt-8 mt-2">
+          <div class="rounded-t-lg  dark:border-neutral-600 dark:bg-neutral-800 px-4">
             <h2 className="mb-0 " id="headingOne5">
               <button
-                class="group font-bold  lg:text-lg text-sm py-9 rounded-[20px] relative flex w-full items-center rounded-t-[15px] border-0 bg-white px-5 py-4 text-left text-base text-neutral-800 transition [overflow-anchor:none] hover:z-[2] focus:z-[3] focus:outline-none dark:bg-neutral-800 dark:text-white [&:not([data-te-collapse-collapsed])]:bg-white [&:not([data-te-collapse-collapsed])]:text-primary [&:not([data-te-collapse-collapsed])]:[box-shadow:inset_0_-1px_0_rgba(229,231,235)] dark:[&:not([data-te-collapse-collapsed])]:bg-neutral-800 dark:[&:not([data-te-collapse-collapsed])]:text-primary-400 dark:[&:not([data-te-collapse-collapsed])]:[box-shadow:inset_0_-1px_0_rgba(75,85,99)]"
+                class="group font-bold shadow-lg lg:text-lg text-xs py-9 rounded-[20px] relative flex w-full items-center rounded-t-[15px] border-0 bg-white px-5 py-4 text-left text-base text-neutral-800 transition [overflow-anchor:none] hover:z-[2] focus:z-[3] focus:outline-none dark:bg-neutral-800 dark:text-white [&:not([data-te-collapse-collapsed])]:bg-white [&:not([data-te-collapse-collapsed])]:text-primary [&:not([data-te-collapse-collapsed])]:[box-shadow:inset_0_-1px_0_rgba(229,231,235)] dark:[&:not([data-te-collapse-collapsed])]:bg-neutral-800 dark:[&:not([data-te-collapse-collapsed])]:text-primary-400 dark:[&:not([data-te-collapse-collapsed])]:[box-shadow:inset_0_-1px_0_rgba(75,85,99)]"
                 type="button"
                 data-te-collapse-init
                 data-te-target="#collapseOne5"
@@ -48,17 +47,9 @@ export default function Faqs() {
               data-te-collapse-show
               aria-labelledby="headingOne5"
             >
-              <div class="px-5 py-4 flex flex-col gap-4 text-[#fff]">
-                <video
-                  class=""
-                  controls=""
-                  width="100%"
-                  height="100%"
-                  poster="https://u1sweb.webullfinance.com/oas/74771407c8cf4ae4a178c1eced67b3a0.jpg"
-                  src="https://u1sweb.webullfinance.com/oas/d1f3fb412c4a48de91e538ab85aa0a73.mp4"
-                  playsinline=""
-                ></video>
-                <p className="hidden lg:block">
+              <div class="px-5 py-4 flex flex-col gap-4 text-gray-500 font-bold text-xs lg:text-lg">
+              
+                <p className="">
                   There are two ways to fund a recurring investment schedule.
                   <br />
                   1. Through Webull buying power. When you choose this payment
@@ -69,17 +60,17 @@ export default function Faqs() {
                   and automatic transfers will be initiated 3 days ahead of the
                   next investment date.
                 </p>
-                <a href="" className="text-center">
+                <a href="" className="text-center hidden lg:block">
                   {' '}
                   Learn More {'>'}
                 </a>
               </div>
             </div>
           </div>
-          <div class=" border-t-0   dark:bg-neutral-800">
+          <div class=" border-t-0   dark:bg-neutral-800 px-4">
             <h2 class="mb-0" id="headingTwo5">
               <button
-                class="group font-bold lg:text-lg text-sm relative py-9 rounded-[20px] mt-4 flex w-full items-center border-0 bg-white px-5 py-4 text-left text-base text-neutral-800 transition [overflow-anchor:none] hover:z-[2] focus:z-[3] focus:outline-none dark:bg-neutral-800 dark:text-white [&:not([data-te-collapse-collapsed])]:bg-white [&:not([data-te-collapse-collapsed])]:text-primary [&:not([data-te-collapse-collapsed])]:[box-shadow:inset_0_-1px_0_rgba(229,231,235)] dark:[&:not([data-te-collapse-collapsed])]:bg-neutral-800 dark:[&:not([data-te-collapse-collapsed])]:text-primary-400 dark:[&:not([data-te-collapse-collapsed])]:[box-shadow:inset_0_-1px_0_rgba(75,85,99)]"
+                class="group font-bold lg:text-lg shadow-lg text-xs relative py-9 rounded-[20px] mt-4 flex w-full items-center border-0 bg-white px-5 py-4 text-left text-base text-neutral-800 transition [overflow-anchor:none] hover:z-[2] focus:z-[3] focus:outline-none dark:bg-neutral-800 dark:text-white [&:not([data-te-collapse-collapsed])]:bg-white [&:not([data-te-collapse-collapsed])]:text-primary [&:not([data-te-collapse-collapsed])]:[box-shadow:inset_0_-1px_0_rgba(229,231,235)] dark:[&:not([data-te-collapse-collapsed])]:bg-neutral-800 dark:[&:not([data-te-collapse-collapsed])]:text-primary-400 dark:[&:not([data-te-collapse-collapsed])]:[box-shadow:inset_0_-1px_0_rgba(75,85,99)]"
                 type="button"
                 data-te-collapse-init
                 data-te-collapse-collapsed
@@ -104,11 +95,11 @@ export default function Faqs() {
               class="!visible "
               className={`${
                 isCollapsed ? '!visible' : ''
-              } hidden bg-[#EFF3F694] my-5 rounded-[20px] text-[#fff]`}
+              } hidden bg-[#EFF3F694] my-5 rounded-[20px] text-gray-500  font-bold`}
               data-te-collapse-item
               aria-labelledby="headingTwo5"
             >
-              <div class="px-5 py-4 lg:text-md text-sm">
+              <div class="px-5 py-4 lg:text-md text-xs lg:text-lg">
                 The below options are available.
                 <br />
                 1. Every trading day
@@ -121,10 +112,10 @@ export default function Faqs() {
               </div>
             </div>
           </div>
-          <div class="rounded-b-lg dark:border-neutral-600 dark:bg-neutral-800">
+          <div class="rounded-b-lg dark:border-neutral-600 dark:bg-neutral-800 px-4">
             <h2 class="mb-0" id="headingThree5">
               <button
-                class="group font-bold  lg:text-lg text-sm relative shadow-xl py-9 rounded-[20px] mt-4 flex w-full items-center border-0 bg-white px-5 py-4 text-left text-base text-neutral-800 transition [overflow-anchor:none] hover:z-[2] focus:z-[3] focus:outline-none dark:bg-neutral-800 dark:text-white [&:not([data-te-collapse-collapsed])]:bg-white [&:not([data-te-collapse-collapsed])]:text-primary [&:not([data-te-collapse-collapsed])]:[box-shadow:inset_0_-1px_0_rgba(229,231,235)] dark:[&:not([data-te-collapse-collapsed])]:bg-neutral-800 dark:[&:not([data-te-collapse-collapsed])]:text-primary-400 dark:[&:not([data-te-collapse-collapsed])]:[box-shadow:inset_0_-1px_0_rgba(75,85,99)] [&[data-te-collapse-collapsed]]:rounded-b-[15px] [&[data-te-collapse-collapsed]]:transition-none"
+                class="group font-bold  lg:text-lg text-xs relative shadow-lg py-9 rounded-[20px] mt-4 flex w-full items-center border-0 bg-white px-5 py-4 text-left text-base text-neutral-800 transition [overflow-anchor:none] hover:z-[2] focus:z-[3] focus:outline-none dark:bg-neutral-800 dark:text-white [&:not([data-te-collapse-collapsed])]:bg-white [&:not([data-te-collapse-collapsed])]:text-primary [&:not([data-te-collapse-collapsed])]:[box-shadow:inset_0_-1px_0_rgba(229,231,235)] dark:[&:not([data-te-collapse-collapsed])]:bg-neutral-800 dark:[&:not([data-te-collapse-collapsed])]:text-primary-400 dark:[&:not([data-te-collapse-collapsed])]:[box-shadow:inset_0_-1px_0_rgba(75,85,99)] [&[data-te-collapse-collapsed]]:rounded-b-[15px] [&[data-te-collapse-collapsed]]:transition-none"
                 type="button"
                 data-te-collapse-init
                 data-te-collapse-collapsed
@@ -149,7 +140,7 @@ export default function Faqs() {
               data-te-collapse-item
               aria-labelledby="headingThree5"
             >
-              <div class="px-5 py-4 text-[#fff]">
+              <div class="px-5 py-4 text-xs lg:text-lg text-gray-500 font-bold">
                 1. Recurring investments are available for cash, margin, and IRA
                 accounts.
                 <br />
