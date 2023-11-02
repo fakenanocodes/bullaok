@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import CorporateConnect from './pages/CorporateConnect';
 import ETF from './pages/ETF';
 import FractionalShares from './pages/FractionalShares';
 import Home from './pages/Home';
@@ -24,6 +25,7 @@ function App() {
           element={<RecurringInvestments />}
         />
         <Route path="/fractional-shares" element={<FractionalShares />} />
+        <Route path="/corporate-connect" element={<CorporateConnect />} />
       </Routes>
     </div>
   );

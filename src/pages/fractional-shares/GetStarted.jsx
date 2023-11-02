@@ -25,9 +25,9 @@ export default function GetStarted() {
       </h2>
       {/* Timeline */}
       <div className="flex lg:flex-row flex-col justify-between items-center w-2/3 py-5 mx-auto gap-2">
-        <div className="w-1/5 ">
-          <img src="apply.png" className="w-44 h-auto" alt="" />
-          <h3 className="text-[#550952] font-bold text-xl mt-5">
+        <div className="lg:w-1/5 w-full lg:bg-transparent bg-white lg:rounded-0 rounded-xl py-5">
+          <img src="apply.png" className="lg:w-44 w-20 mx-auto h-auto" alt="" />
+          <h3 className="text-[#550952] lg:text-start text-center font-bold text-xl mt-5">
             Apply for an account
           </h3>
         </div>
@@ -40,9 +40,9 @@ export default function GetStarted() {
         </div>
 
         <hr className="w-[30%] border-2 hidden lg:block" />
-        <div className="w-1/5">
-          <img src="apply.png" className="w-44 h-auto" alt="" />
-          <h3 className="text-[#550952] font-bold text-xl mt-5">
+        <div className="lg:w-1/5 w-full lg:bg-transparent bg-white lg:rounded-0 rounded-xl py-5">
+          <img src="apply.png" className="lg:w-44 w-20 mx-auto h-auto" alt="" />
+          <h3 className="text-[#550952] lg:text-start text-center font-bold text-xl mt-5">
             Start buying & selling
           </h3>
         </div>
@@ -50,7 +50,7 @@ export default function GetStarted() {
       <button className="bg-[#550952] w-64  mx-auto text-center  font-bold lg:text-2xl text-xl rounded-lg text-[#fff]  py-4 flex items-center justify-center gap-2 lg:mt-9">
         <span>Open an account</span>
       </button>
-      <div className="flex flex-col mt-9 w-2/3 mx-auto">
+      <div className="flex flex-col mt-9 lg:w-2/3 px-3 lg:px-0 w-full mx-auto">
         <hr />
         <p className="my-5 text-md text-gray-500">
           Fractional shares Disclosure: This is not an offer, or solicitation of
