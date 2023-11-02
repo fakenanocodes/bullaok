@@ -1,12 +1,13 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import ETF from './pages/ETF';
+import FractionalShares from './pages/FractionalShares';
 import Home from './pages/Home';
 import MarginTrading from './pages/MarginTrading';
 import Otc from './pages/Otc';
+import RecurringInvestments from './pages/RecurringInvestments';
 import Stock from './pages/Stock';
 import WhoWeAre from './pages/WhoWeAre';
-import RecurringInvestments from './pages/RecurringInvestments';
 
 function App() {
   return (
@@ -18,7 +19,11 @@ function App() {
         <Route path="/margin-trading" element={<MarginTrading />} />
         <Route path="/stocks" element={<Stock />} />
         <Route path="/otc-stock-trading" element={<Otc />} />
-        <Route path="/recurring-investment" element={<RecurringInvestments />} />
+        <Route
+          path="/recurring-investment"
+          element={<RecurringInvestments />}
+        />
+        <Route path="/fractional-shares" element={<FractionalShares />} />
       </Routes>
     </div>
   );
