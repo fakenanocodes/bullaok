@@ -60,23 +60,33 @@ h1 {
   line-height: 1.1;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
+.stocks {
+  background-image: url('/bg.png');
+  background-repeat: no-repeat;
+  /* background-color: #a53aa1; */
+  background-color: #41073f;
+  background-size: cover;
+  background-blend-mode: screen;
 }
-button:hover {
-  border-color: #646cff;
+.etf,
+.data-etf,
+.chart,
+.commission {
+  background-position: center;
+  background-size: 50%;
+  
 }
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+.etf {
+  background: url('/box1.png') no-repeat;
+}
+.data-etf {
+  background: url('/box2.png') no-repeat;
+}
+.chart {
+  background: url('/box3.png') no-repeat;
+}
+.commission {
+  background: url('/box4.png') no-repeat;
 }
 
 @media (prefers-color-scheme: light) {

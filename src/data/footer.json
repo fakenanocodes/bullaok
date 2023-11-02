@@ -1,0 +1,40 @@
+[
+  {
+    "FAQ": {
+      "categories": [
+        "Fee Schedule",
+        "Account",
+        "Margin Trading",
+        "How To File an Inquiry",
+        "Customer Relationship Summary"
+      ]
+    }
+  },
+  {
+    "About": {
+      "categories": [
+        "Our Story",
+        "Careers",
+        "Blog",
+        "Broker Check",
+        "Our Execution Quality",
+        "Script Editor"
+      ]
+    }
+  },
+  {
+    "Terms": {
+      "categories": [
+        "Privacy Policy",
+        "Business Continuity Plan",
+        "Disclosures",
+        "Data Disclaimer"
+      ]
+    }
+  },
+  {
+    "Contact": {
+      "categories": ["Customer@mail.com", "+1 (888) 828-0618"]
+    }
+  }
+]
