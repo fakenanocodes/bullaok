@@ -130,7 +130,7 @@ const OptionsPage = () => {
         </div>
       </div>
       <div className="flex justify-around mt-20 items-center  max-lg:flex-wrap max-lg:flex-col">
-        <div className=' max-xl:ml-20'>
+        <div className='  max-xl:ml-20 max-sm:ml-auto'>
           <h1 className="text-[#2B3240] mb-5 font-extrabold text-[2.3rem]  max-sm:text-[1.5rem] max-md:text-[2rem]">
             {' '}
             Complimentary Real-Time <br /> Market Data
@@ -170,8 +170,8 @@ const OptionsPage = () => {
           </button>
         </div>
       </div>
-      <div className="text-center mt-20 leading-[20px]">
-        <h1 className="text-[#2B3240] font-extrabold text-[2.3rem] mb-8">
+      <div className="text-center my-20 leading-[20px] ">
+        <h1 className="text-[#2B3240] font-extrabold text-[2.3rem] mb-8 max-sm:text-[1.5rem] max-md:text-[2rem]">
           {' '}
           Choose Your Option <br /> Trading Strategies
         </h1>
@@ -186,7 +186,7 @@ const OptionsPage = () => {
 
       <div className="flex  justify-around items-center   max-lg:flex-col max-sm:justify-center max-sm:items-center">
         <div className=" mt-20 leading-[20px]  max-xl:ml-20 ">
-          <h1 className="text-[#2B3240] font-extrabold text-[2.3rem] mb-8">
+          <h1 className="text-[#2B3240] font-extrabold text-[2.3rem] mb-8 max-sm:text-[1.5rem] max-md:text-[2rem]">
             {' '}
             Access to Smart <br /> Trading Tools
           </h1>
@@ -202,10 +202,10 @@ const OptionsPage = () => {
       </div>
 
       <div className="flex justify-around items-center mt-10 max-lg:flex-col">
-        <img src={phones} className="w-[33rem] h-[35rem]" alt="" />
+        <img src={phones} className="w-[33rem] h-[35rem] max-lg:order-2" alt="" />
 
-        <div className=" mt-20 leading-[20px]">
-          <h1 className="text-[#2B3240] font-extrabold text-[2.3rem] mb-8">
+        <div className=" mt-20 leading-[20px] max-lg:order-1">
+          <h1 className="text-[#2B3240] font-extrabold text-[2.3rem] mb-8 max-sm:text-[1.5rem] max-md:text-[2rem]">
             {' '}
             Build Your Options <br /> Knowledge
           </h1>
@@ -221,7 +221,7 @@ const OptionsPage = () => {
 
       <div className="flex justify-around items-center mt-10 max-lg:flex-col">
         <div className=" mt-20 leading-[20px]">
-          <h1 className="text-[#2B3240] font-extrabold text-[2.3rem] mb-8">
+          <h1 className="text-[#2B3240] font-extrabold text-[2.3rem] mb-8 max-sm:text-[1.5rem] max-md:text-[2rem]">
             {' '}
             Trade On Your Own
           </h1>
@@ -235,8 +235,8 @@ const OptionsPage = () => {
         <img src={tradepics} className="w-[42rem] h-[40rem]" alt="" />
       </div>
 
-      <div className="bg-[#116AF7] min-h-[100vh] flex flex-col justify-around ">
-        <p className="text-center text-white font-extrabold text-[2.6rem]">
+      <div className="bg-[#116AF7] min-h-[100vh] flex flex-col justify-around max-md:py-5">
+        <p className="text-center text-white font-extrabold text-[2.6rem] max-sm:text-[1.5rem] max-md:text-[2rem]">
           {' '}
           Start your option trading <br /> journey in 3 easy steps
         </p>
@@ -280,6 +280,8 @@ const OptionsPage = () => {
         <button className="flex  mx-auto gap-3  cursor-pointer h-16 text-2xl text-blue-500 bg-white text-center font-open-sans-semibold font-semibold leading-16 rounded-full tracking-tight max-md:m-10 ">
           Create Account<span>&rarr;</span>
         </button>
+
+        
       </div>
 
   
