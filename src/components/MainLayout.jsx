@@ -1,3 +1,4 @@
+import Footer from './Footer';
 import Header from './Header';
 
 const MainLayout = ({ children }) => {
@@ -7,6 +8,7 @@ const MainLayout = ({ children }) => {
         <Header />
       </div>
       {children}
+      <Footer />
     </main>
   );
 };

@@ -1,4 +1,3 @@
-import React from 'react';
 import { AiOutlineInstagram } from 'react-icons/ai';
 import { BiLogoFacebook } from 'react-icons/bi';
 import { RiTwitterXLine } from 'react-icons/ri';
@@ -8,7 +7,7 @@ import FooterItem from './common/FooterItem';
 export default function Footer() {
   console.log({ data });
   return (
-    <section className="lg:w-4/6 w-full mx-auto py-9 px-3">
+    <section className="w-full mx-auto py-9 px-5 lg:px-10 xl:px-20 bg-[#41073F]">
       <div className="flex gap-4 mt-5 md:hidden text-[#fff] justify-center">
         <BiLogoFacebook
           style={{
