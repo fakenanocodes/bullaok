@@ -13,6 +13,12 @@ export default {
         '2px': '2px', // Define a custom text decoration size
       },
   
+      lineHeight: {
+        'extra': '1.3', // You can adjust the value as needed
+      },
+      lineHeight: {
+        'extralineheight': '5', // You can adjust the value as needed
+      },
     },
   },
   plugins: [],

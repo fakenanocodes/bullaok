@@ -15,7 +15,7 @@ import MainLayout from '../components/MainLayout';
 // import OptionFAQDropdown from '../Components/OptionFAQDropdown';
 // import Swiperjs from '../components/utils/reusables/Swiperjs';
 
-const OptionsPage = () => {
+const OptionsPage = (props) => {
   const items = [
     '$0 commissions for stocks, ETFs, and options',
     'Intuitive tools and support for traders',
@@ -48,8 +48,8 @@ const OptionsPage = () => {
               <li>Multiple trading strategies</li>
               <li>Easy-to-use app, web, and desktop platform</li>
             </ul>
-            <button className="flex gap-3 mt-5 text-white w-56 cursor-pointer h-16 text-2xl bg-[#41073F] text-center font-open-sans-semibold font-semibold leading-16 rounded-full tracking-tight">
-              Get Started<span>&rarr;</span>
+            <button className="flex gap-3 mt-5 text-white px-4 py-3 items-center justify-center cursor-pointer text-2xl bg-[#41073F] text-center font-open-sans-semibold font-semibold leading-16 rounded-full ">
+             <span> Get Started</span><span>&rarr;</span>
             </button>
           </div>
         </main>
@@ -185,12 +185,8 @@ const OptionsPage = () => {
                 for more information regarding eligibility.
               </p>
             </div>
-            <button
-              className="flex gap-3 mt-5  cursor-pointer h-16 text-2xl
-           text-[#8E0789] bg-white text-center font-open-sans-semibold 
-           font-semibold leading-16 rounded-full  items-center max-xl:text-[1rem]  max-xl:h-12 max-xl:w-40"
-            >
-              Get Started<span>&rarr;</span>
+            <button className="flex gap-3 mt-5 text-[#41073F] bg-white px-4 py-3 items-center justify-center cursor-pointer text-2xl text-center font-open-sans-semibold font-semibold leading-16 rounded-full ">
+             <span> Get Started</span><span>&rarr;</span>
             </button>
           </div>
         </div>
@@ -206,7 +202,7 @@ const OptionsPage = () => {
           </p>
         </div>
 
-        <StockSwiper />
+        <StockSwiper images={props.image}/>
 
         <div className="flex  justify-around items-center   max-lg:flex-col max-sm:justify-center max-sm:items-center">
           <div className=" mt-20 leading-[20px]  max-xl:ml-20 ">
@@ -309,7 +305,7 @@ const OptionsPage = () => {
             </div>
           </div>
 
-          <button className="flex  mx-auto gap-3  cursor-pointer h-16 text-2xl text-[#41073F] bg-white text-center font-open-sans-semibold font-semibold leading-16 rounded-full tracking-tight max-md:m-10 ">
+          <button className="flex  mx-auto gap-3  cursor-pointer px-4 py-3  text-2xl text-[#41073F] bg-white text-center font-open-sans-semibold font-semibold leading-16 rounded-full  max-md:m-10 ">
             Create Account<span>&rarr;</span>
           </button>
         </div>
