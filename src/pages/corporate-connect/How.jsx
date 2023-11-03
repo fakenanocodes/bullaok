@@ -1,105 +1,84 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 // Initialization for ES Users
 import { Tab, initTE } from 'tw-elements';
 
 export default function How() {
   initTE({ Tab });
-  return (
-    <section className="bg-white">
-      <ul
-        class="mr-4 flex list-none flex-col flex-wrap pl-0"
-        role="tablist"
-        data-te-nav-ref
-      >
-        <li role="presentation" class="flex-grow text-center">
-          <a
-            href="#tabs-home03"
-            class="my-2 block border-x-0 border-b-2 border-t-0 border-transparent px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500 hover:isolate hover:border-transparent hover:bg-neutral-100 focus:isolate focus:border-transparent data-[te-nav-active]:border-primary data-[te-nav-active]:text-primary dark:text-neutral-400 dark:hover:bg-transparent dark:data-[te-nav-active]:border-primary-400 dark:data-[te-nav-active]:text-primary-400"
-            data-te-toggle="pill"
-            data-te-target="#tabs-home03"
-            data-te-nav-active
-            role="tab"
-            aria-controls="tabs-home03"
-            aria-selected="true"
-          >
-            Home
-          </a>
-        </li>
-        <li role="presentation" class="flex-grow text-center">
-          <a
-            href="#tabs-profile03"
-            class="my-2 block border-x-0 border-b-2 border-t-0 border-transparent px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500 hover:isolate hover:border-transparent hover:bg-neutral-100 focus:isolate focus:border-transparent data-[te-nav-active]:border-primary data-[te-nav-active]:text-primary dark:text-neutral-400 dark:hover:bg-transparent dark:data-[te-nav-active]:border-primary-400 dark:data-[te-nav-active]:text-primary-400"
-            data-te-toggle="pill"
-            data-te-target="#tabs-profile03"
-            role="tab"
-            aria-controls="tabs-profile03"
-            aria-selected="false"
-          >
-            Profile
-          </a>
-        </li>
-        <li role="presentation" class="flex-grow text-center">
-          <a
-            href="#tabs-messages03"
-            class="my-2 block border-x-0 border-b-2 border-t-0 border-transparent px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500 hover:isolate hover:border-transparent hover:bg-neutral-100 focus:isolate focus:border-transparent data-[te-nav-active]:border-primary data-[te-nav-active]:text-primary dark:text-neutral-400 dark:hover:bg-transparent dark:data-[te-nav-active]:border-primary-400 dark:data-[te-nav-active]:text-primary-400"
-            data-te-toggle="pill"
-            data-te-target="#tabs-messages03"
-            role="tab"
-            aria-controls="tabs-messages03"
-            aria-selected="false"
-          >
-            Messages
-          </a>
-        </li>
-        <li role="presentation" class="flex-grow text-center">
-          <a
-            href="#tabs-contact03"
-            class="disabled pointer-events-none my-2 block border-x-0 border-b-2 border-t-0 border-transparent bg-transparent px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-400 hover:isolate hover:border-transparent hover:bg-neutral-100 focus:isolate focus:border-transparent dark:text-neutral-600"
-            data-te-toggle="pill"
-            data-te-target="#tabs-contact03"
-            role="tab"
-            aria-controls="tabs-contact03"
-            aria-selected="false"
-          >
-            Contact
-          </a>
-        </li>
-      </ul>
+  const [activeTabIndex, setActiveTabIndex] = useState(0);
 
-      <div class="my-2">
-        <div
-          class="hidden opacity-100 transition-opacity duration-150 ease-linear data-[te-tab-active]:block"
-          id="tabs-home03"
-          role="tabpanel"
-          aria-labelledby="tabs-home-tab03"
-          data-te-tab-active
-        >
-          Tab 1 content
+  const tabTitles = [
+    {
+      title: 'Find the company with the magnifying glass on the home page',
+      content: 'Select desired company from the list',
+      tabContent: 'findcompany.png',
+    },
+    {
+      title: 'Search for the "Corporate Connect" entrance banner',
+      content: 'Find it under the "FEEDS" or  "COMPANY" tab',
+      tabContent: 'banner.png',
+    },
+    {
+      title: 'Find the company with the magnifying glass on the home page',
+      content: 'Select desired company from the list',
+      tabContent: 'banner.png',
+    },
+  ]; // Add more tab titles as needed
+
+  const showTabContent = (index) => {
+    setActiveTabIndex(index);
+  };
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveTabIndex((prevIndex) => (prevIndex + 1) % tabTitles.length);
+    }, 8000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+  return (
+    <section className="bg-white py-7 relative">
+      <div className="conWrap  w-4/6  mt-10  mx-auto">
+        <div className="csr102 w-3/5 p-4 ">
+          <h2 className="font-bold text-4xl my-4">
+            How do you use Webull's <br /> Corporate Connect?
+          </h2>
+          <p className="text-black font-semibold text-2xl">
+            Look up participating companies to follow!
+          </p>
+          <ul id=" relative ">
+            <div className="h-2/4 bg-gray-300   absolute w-2 z-0"></div>
+            {tabTitles.map((item, index) => (
+              <li
+                key={index}
+                className={`cursor-pointer mt-8 pl-4 mb-4 px-4 h-24  ${
+                  activeTabIndex === index
+                    ? 'relative z-1 border-indigo-500 my-3 border-l-8 font-bold text-gray-800'
+                    : ''
+                }`}
+                onClick={() => showTabContent(index)}
+              >
+                <p className="my-3 text-2xl">{item.title}</p>
+                <p className="my-3 text-2xl">{item.content}</p>
+              </li>
+            ))}
+          </ul>
         </div>
-        <div
-          class="hidden opacity-0 transition-opacity duration-150 ease-linear data-[te-tab-active]:block"
-          id="tabs-profile03"
-          role="tabpanel"
-          aria-labelledby="tabs-profile-tab03"
-        >
-          Tab 2 content
-        </div>
-        <div
-          class="hidden opacity-0 transition-opacity duration-150 ease-linear data-[te-tab-active]:block"
-          id="tabs-messages03"
-          role="tabpanel"
-          aria-labelledby="tabs-profile-tab03"
-        >
-          Tab 3 content
-        </div>
-        <div
-          class="hidden opacity-0 transition-opacity duration-150 ease-linear data-[te-tab-active]:block"
-          id="tabs-contact03"
-          role="tabpanel"
-          aria-labelledby="tabs-contact-tab03"
-        >
-          Tab 4 content
-        </div>
+      </div>
+      <div className="csr103 absolute -right-5 -top-[10px] p-4 overflow-y-auto">
+        {tabTitles.map((item, index) => (
+          <div
+            key={index}
+            id={`tabContent${index}`}
+            className={`csr104 ${
+              activeTabIndex === index ? 'csr105' : ''
+            } mb-4`}
+            style={{ display: activeTabIndex === index ? 'block' : 'none' }}
+          >
+            <img src={item.tabContent} className="h-auto w-2/5" alt="" />
+            {/* <p>Content for {item.title}</p> */}
+          </div>
+        ))}
       </div>
     </section>
   );
