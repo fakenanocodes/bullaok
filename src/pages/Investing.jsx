@@ -6,6 +6,9 @@ import invest_icon_three from '../assets/invest_icon_three.svg';
 import invest_icon_two from '../assets/invest_icon_two.svg';
 import MainLayout from '../components/MainLayout';
 import InvestCard from '../components/utils/cards/InvestCard';
+import Faq from '../components/utils/reusables/Faq';
+import InvestManagement from '../components/utils/reusables/InvestManagement';
+import InvestReasons from '../components/utils/reusables/InvestReasons';
 
 const downloadData = [
   {
@@ -54,7 +57,7 @@ const Investing = () => {
               account. No need to open a new account. No fees attached. No
               minimum balance required.
             </p>
-            <button className="text-white font-bold py-4 px-6 bg-[#D4B716] rounded-lg mt-[2rem]">
+            <button className="text-white font-bold py-4 px-6 bg-[#FFD700] rounded-lg mt-[2rem]">
               Open an account
             </button>
           </div>
@@ -109,6 +112,10 @@ const Investing = () => {
           <video src={invest} controls className="rounded-xl" />
         </div>
       </section>
+
+      <InvestReasons />
+      <InvestManagement />
+      <Faq />
     </MainLayout>
   );
 };
