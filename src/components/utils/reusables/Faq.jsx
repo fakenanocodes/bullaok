@@ -4,7 +4,7 @@ const faqs = [
   {
     title: 'Who is eligible to use Cash Management?',
     answer:
-      'Cash management is currently only available to certain Cash accounts (excluding IRA accounts). You can check if you are on the current invitation list on the Webull Cash Management service activation page. If you are not on the list at the moment, please stay tuned as we will be increasing access to this offering soon!',
+      'Cash management is currently only available to certain Cash accounts (excluding IRA accounts). You can check if you are on the current invitation list on the Bulloak Cash Management service activation page. If you are not on the list at the moment, please stay tuned as we will be increasing access to this offering soon!',
   },
   {
     title: 'When will I receive my interest?',

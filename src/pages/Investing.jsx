@@ -53,7 +53,7 @@ const Investing = () => {
               </p>
             </div>
             <p className="font-normal md:text-lg">
-              Access Webull cash management to earn a 5.0% APY for your Webull
+              Access Bulloak cash management to earn a 5.0% APY for your Bulloak
               account. No need to open a new account. No fees attached. No
               minimum balance required.
             </p>

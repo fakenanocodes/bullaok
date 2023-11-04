@@ -1,16 +1,14 @@
-import React from 'react';
-
 export default function Stock() {
   const data = [
     {
       img: 'investment.png',
       title: 'Invest with as little as $5',
-      text: 'Fractional shares on Webull can be as small as 1/100000 of a share, as little as $5',
+      text: 'Fractional shares on Bulloak can be as small as 1/100000 of a share, as little as $5',
     },
     {
       img: 'pay.png',
       title: 'Pay no commissions',
-      text: 'Webull charges no commission fees, no account management fees or inactivity fees to buy and sell fractional shares',
+      text: 'Bulloak charges no commission fees, no account management fees or inactivity fees to buy and sell fractional shares',
     },
     {
       img: 'expand.png',

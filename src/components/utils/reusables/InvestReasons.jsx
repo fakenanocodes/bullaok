@@ -40,8 +40,9 @@ const InvestReasons = () => {
             BOOST YOUR SAVINGS
           </p>
           <p className="text-lg md:text-2xl lg:w-[27rem]">
-            Your savings could grow faster with Webull Cash Management than in a
-            bank. Set a recurring deposit schedule to achieve your savings goal.
+            Your savings could grow faster with Bulloak Cash Management than in
+            a bank. Set a recurring deposit schedule to achieve your savings
+            goal.
           </p>
           <button className="font-bold py-4 px-6 bg-[#fff] rounded-lg text-[#41073F] max-w-[10rem]">
             Get Started
