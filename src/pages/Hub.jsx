@@ -14,7 +14,7 @@ const cardData = [
   {
     title: 'What is an index option?',
     description:
-      'New index options are available on Webull! Lets learn more about index',
+      'New index options are available on Bulloak! Lets learn more about index',
   },
   {
     title: 'Finding a trading idea',
