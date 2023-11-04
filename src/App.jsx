@@ -8,6 +8,7 @@ import Otc from './pages/Otc';
 import Stock from './pages/Stock';
 import WhoWeAre from './pages/WhoWeAre';
 import PaperTrading from './Pages/PaperTrading';
+import SmartAdvisor from './Pages/SmartAdvisor';
 function App() {
   return (
     <div>
@@ -20,6 +21,7 @@ function App() {
         <Route path="/otc-stock-trading" element={<Otc />} />
         <Route path="/options" element={<OptionsPage />} />
         <Route path="/papertrading" element={<PaperTrading />} />
+        <Route path="smart-advisor" element={<SmartAdvisor/>} />
       </Routes>
     </div>
   );
