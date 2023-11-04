@@ -4,6 +4,7 @@ import CorporateConnect from './pages/CorporateConnect';
 import ETF from './pages/ETF';
 import FractionalShares from './pages/FractionalShares';
 import Home from './pages/Home';
+import Hub from './pages/Hub';
 import Investing from './pages/Investing';
 import Ira from './pages/Ira';
 import MarginTrading from './pages/MarginTrading';
@@ -30,6 +31,7 @@ function App() {
         <Route path="/corporate-connect" element={<CorporateConnect />} />
         <Route path="/invest" element={<Investing />} />
         <Route path="/ira" element={<Ira />} />
+        <Route path="/hub" element={<Hub />} />
       </Routes>
     </div>
   );
