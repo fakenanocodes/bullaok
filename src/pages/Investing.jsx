@@ -7,6 +7,7 @@ import invest_icon_two from '../assets/invest_icon_two.svg';
 import MainLayout from '../components/MainLayout';
 import InvestCard from '../components/utils/cards/InvestCard';
 import Faq from '../components/utils/reusables/Faq';
+import InvestDownBanner from '../components/utils/reusables/InvestDownBanner';
 import InvestManagement from '../components/utils/reusables/InvestManagement';
 import InvestReasons from '../components/utils/reusables/InvestReasons';
 
@@ -116,6 +117,7 @@ const Investing = () => {
       <InvestReasons />
       <InvestManagement />
       <Faq />
+      <InvestDownBanner />
     </MainLayout>
   );
 };
