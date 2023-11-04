@@ -1,16 +1,14 @@
-import React from 'react';
-
 export default function GetStarted() {
   const data = [
     {
       img: 'investment.png',
       title: 'Invest with as little as $5',
-      text: 'Fractional shares on Webull can be as small as 1/100000 of a share, as little as $5',
+      text: 'Fractional shares on Bulloak can be as small as 1/100000 of a share, as little as $5',
     },
     {
       img: 'pay.png',
       title: 'Pay no commissions',
-      text: 'Webull charges no commission fees, no account management fees or inactivity fees to buy and sell fractional shares',
+      text: 'Bulloak charges no commission fees, no account management fees or inactivity fees to buy and sell fractional shares',
     },
     {
       img: 'expand.png',
@@ -65,7 +63,7 @@ export default function GetStarted() {
           <br />
           <br />
           Fractional shares trade is available for equities and ETFs ONLY. The
-          list of active symbols will be maintained by Webull. Users can only
+          list of active symbols will be maintained by Bulloak. Users can only
           place fractional shares orders during market hours. The trading window
           is 9:30am-4:00pm EST. The minimum USD amount for single trade is $5
           and the minimum fractional amount of shares for a single trade is

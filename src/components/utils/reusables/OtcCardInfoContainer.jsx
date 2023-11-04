@@ -22,7 +22,7 @@ const items = [
   },
   {
     description:
-      'Trade stocks, ETFs, options, index options and more, with one Webull account.',
+      'Trade stocks, ETFs, options, index options and more, with one Bulloak account.',
   },
   {
     description:
