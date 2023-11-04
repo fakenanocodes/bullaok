@@ -15,7 +15,11 @@ const FaqCard = ({ faq }) => {
           </div>
         </div>
       </div>
-      {show && <span className="w-full">{faq?.answer}</span>}
+      {show && (
+        <p className="w-full lg:text-lg leading-7 mx-2 md:mx-3">
+          {faq?.answer}
+        </p>
+      )}
     </>
   );
 };
