@@ -13,7 +13,7 @@ const StockStepsCard = ({ image, step, title, description }) => {
       }}
     >
       <div className="flex items-center justify-between">
-        <div className="p-3 rounded-[50%] bg-[#41073F] shadow-sm">
+        <div className="p-3 rounded-[50%] bg-[#8E0789] shadow-sm">
           <img src={image} alt="" />
         </div>
         <p className="font-extrabold text-7xl text-[#41073F] opacity-30">

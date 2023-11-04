@@ -1,7 +1,7 @@
 function IraOptionsIcon() {
   return (
     <svg
-      fill="#41073F"
+      fill="#8E0789"
       width="50px"
       height="50px"
       viewBox="0 0 512 512"
