@@ -5,6 +5,7 @@ import ETF from './pages/ETF';
 import FractionalShares from './pages/FractionalShares';
 import Home from './pages/Home';
 import Investing from './pages/Investing';
+import Ira from './pages/Ira';
 import MarginTrading from './pages/MarginTrading';
 import Otc from './pages/Otc';
 import RecurringInvestments from './pages/RecurringInvestments';
@@ -28,6 +29,7 @@ function App() {
         <Route path="/fractional-shares" element={<FractionalShares />} />
         <Route path="/corporate-connect" element={<CorporateConnect />} />
         <Route path="/invest" element={<Investing />} />
+        <Route path="/ira" element={<Ira />} />
       </Routes>
     </div>
   );
