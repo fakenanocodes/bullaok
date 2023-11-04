@@ -28,16 +28,18 @@ export default function Why() {
     },
   ];
   return (
-    <section className='bg-white py-8'>
-      <h2 className='font-bold text-center my-5 text-4xl'>WHY WEBULL CORPORATE CONNECT?</h2>
+    <section className="bg-white py-8">
+      <h2 className="font-bold text-center my-5 uppercase text-xl px-4 lg:px-0 lg:text-4xl">
+        WHY Bulloak CORPORATE CONNECT?
+      </h2>
 
-      <div className='grid grid-cols-2  w-2/3 mx-auto mt-8 gap-8'>
+      <div className="grid lg:grid-cols-2  grid-cols-1 px-4 lg:px-0 w-full lg:w-2/3 mx-auto mt-8 gap-8">
         {data.map((item, index) => (
-          <div key={index} className='flex gap-4 lg:w-2/3 w-full'>
-            <img src={item.img} className='w-20 h-16' alt="" />
+          <div key={index} className="flex gap-4 lg:w-2/3 w-full">
+            <img src={item.img} className="w-20 h-16" alt="" />
             <div>
-              <h3 className='font-bold'>{item.title}</h3>
-              <p className='text-gray-500'>{item.content}</p>
+              <h3 className="font-bold">{item.title}</h3>
+              <p className="text-gray-500">{item.content}</p>
             </div>
           </div>
         ))}
