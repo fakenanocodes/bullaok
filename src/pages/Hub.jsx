@@ -58,7 +58,7 @@ const Hub = () => {
             </div>
           </div>
 
-          <section className="my-[3rem]">
+          <section className="my-[3rem] flex flex-col items-center">
             <p className="text-lg lg:text-2xl font-bold capitalize text-[#2B3240] text-center">
               What’s Popular This Week
             </p>
@@ -80,7 +80,7 @@ const Hub = () => {
             </div>
           </section>
 
-          <section className="my-[5rem]">
+          <section className="my-[5rem] flex flex-col items-center">
             <p className="text-lg lg:text-2xl font-bold capitalize text-[#2B3240] text-center">
               Explore All Products
             </p>
@@ -90,7 +90,7 @@ const Hub = () => {
               and Others
             </p>
 
-            <div className="my-[1rem]">
+            <div className="my-[1rem] md:w-[90%] xl:w-[95%]">
               <HubOptions />
             </div>
 

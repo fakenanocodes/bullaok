@@ -8,13 +8,13 @@ const HubCard = ({ data }) => {
     <div
       onMouseOver={() => setIsHover(true)}
       onMouseOut={() => setIsHover(false)}
-      className="w-[14rem] lg:w-[12rem] xl:w-[16rem] flex flex-col gap-3 cursor-pointer mt-[1rem]"
+      className="w-[80vw] md:w-[14rem] lg:w-[12rem] xl:w-[16rem] flex flex-col gap-3 cursor-pointer mt-[1rem]"
     >
       <img
         src={hub_card_img2}
         alt=""
         className={
-          'min-h-[9rem] max-h-[9rem] min-w-[14rem] lg:min-w-[12rem] xl:min-w-[16rem] max-w-[14rem] lg:max-w-[12rem] xl:max-w-[16rem] rounded-md object-cover'
+          'min-h-[9rem] max-h-[9rem] min-w-[80vw] md:min-w-[14rem] lg:min-w-[12rem] xl:min-w-[16rem] max-w-[80vw] md:max-w-[14rem] lg:max-w-[12rem] xl:max-w-[16rem] rounded-md object-cover'
         }
       />
 
