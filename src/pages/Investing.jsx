@@ -109,7 +109,7 @@ const Investing = () => {
           Bulloak Cash Management Offer?
         </p>
 
-        <div className="mx-auto w-[60rem] h-[30rem] mt-[2rem] mb-[4rem]">
+        <div className="mx-auto w-full md:w-[30rem] lg:w-[60rem] mt-[2rem] mb-[4rem]">
           <video src={invest} controls className="rounded-xl" />
         </div>
       </section>
