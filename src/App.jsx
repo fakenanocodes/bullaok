@@ -10,6 +10,7 @@ import Otc from './pages/Otc';
 import RecurringInvestments from './pages/RecurringInvestments';
 import Stock from './pages/Stock';
 import WhoWeAre from './pages/WhoWeAre';
+import Investment from './pages/Investment';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path="/fractional-shares" element={<FractionalShares />} />
         <Route path="/corporate-connect" element={<CorporateConnect />} />
         <Route path="/invest" element={<Investing />} />
+        <Route path="/investment-Packages" element={<Investment />} />
       </Routes>
     </div>
   );
