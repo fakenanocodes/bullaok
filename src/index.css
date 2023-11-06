@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'Laviossa';
+  src: url('assets/fonts/Laviossa-Medium.otf') format('woff2');
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -20,6 +25,10 @@
 
   .no-number-arrows[type='number'] {
     -moz-appearance: textfield;
+  }
+
+  .laviossa {
+    font-family: 'Laviossa', system-ui, Avenir, Helvetica, Arial, sans-serif;
   }
 }
 
@@ -74,7 +83,6 @@ h1 {
 .commission {
   background-position: center;
   background-size: 50%;
-  
 }
 .etf {
   background: url('/box1.png') no-repeat;

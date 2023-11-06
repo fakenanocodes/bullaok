@@ -52,17 +52,17 @@ const Ira = () => {
       <section className="flex flex-col lg:flex-row justify-evenly items-center gap-[2rem] mx-5 md:mx-[5rem]">
         <div className="flex flex-col gap-5 mt-[5rem] lg:mt-0">
           <div>
-            <p className="text-4xl xl:text-5xl font-extrabold text-[#282828] mb-5 xl:leading-snug xl:w-[27rem]">
+            <p className="laviossa text-3xl xl:text-4xl font-extrabold text-[#282828] mb-5 xl:leading-snug xl:w-[27rem]">
               Take control of your <span className="relative">retirement</span>{' '}
               with a Bulloak IRA.
             </p>
           </div>
-          <p className="font-normal text-lg md:text-xl">
+          <p className="laviossa font-extralight text-base md:text-lg">
             Invest in stocks, ETFs and options in <br /> your self-directed
             retirement accounts from Bulloak.
           </p>
           <div>
-            <button className="text-white font-semibold text-lg py-5 px-6 bg-[#FFD700] rounded-lg mt-[2rem]">
+            <button className="laviossa text-white font-semibold text-lg py-5 px-6 bg-[#FFD700] rounded-lg mt-[2rem]">
               Open a Bulloak account
             </button>
           </div>
