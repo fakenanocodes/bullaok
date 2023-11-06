@@ -4,7 +4,7 @@ const StockSwiperCard = ({ image, items }) => {
       <img
         src={image}
         alt=""
-        className="-mb-[13rem] md:-mb-[20rem] z-20 h-[25rem] md:h-[35rem]"
+        className="-mb-[13rem] md:-mb-[20rem] z-20 min-h-[25rem] max-h-[25rem] md:min-h-[35rem] md:max-h-[35rem]"
       />
 
       <div className="h-[30rem] md:h-[35rem] w-full md:w-[45rem] bg-gray-100 rounded-3xl py-5 px-5 md:px-24 flex flex-col justify-center">

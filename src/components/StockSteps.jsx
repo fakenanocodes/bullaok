@@ -3,11 +3,11 @@ import fund_icon from '../assets/fund_icon.svg';
 import trade_icon from '../assets/trade_icon.svg';
 import StockStepsCard from './utils/cards/StockStepsCard';
 
-const StockSteps = () => {
+const StockSteps = ({ title }) => {
   return (
     <div className="px-5 lg:px-10 xl:px-20 py-[3rem] my-[3rem] bg-gray-100">
       <p className="text-4xl font-bold tracking-wide text-[#1A2433] text-center">
-        Ready to start trading? Get Started in 3 easy steps
+        {title ? title : 'Ready to start trading? Get Started in 3 easy steps'}
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center gap-10 my-[4rem]">

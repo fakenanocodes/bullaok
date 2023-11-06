@@ -14,7 +14,7 @@ const Stock = () => {
       <div className="bg-[#30022ECC] bg-opacity-10 relative w-full h-[90vh]">
         <img src={bg_img} alt="" className="w-full h-full object-cover" />
         <div className="absolute flex flex-col justify-center items-start gap-12 top-0 right-0 bottom-0 left-0 bg-[#30022ECC] bg-opacity-10 text-white pl-5 lg:pl-10 xl:pl-20">
-          <p className="text-5xl font-bold w-[30rem]">
+          <p className="laviossa text-[2.5rem] font-bold w-[30rem]">
             The Better Place for Traders
           </p>
           <ul className="font-medium list-disc list-inside">
