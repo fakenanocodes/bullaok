@@ -19,6 +19,7 @@ export default {
       lineHeight: {
         'extralineheight': '5', // You can adjust the value as needed
       },
+     
     },
   },
   plugins: [],
