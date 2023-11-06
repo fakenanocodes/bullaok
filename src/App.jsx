@@ -5,6 +5,7 @@ import ETF from './pages/ETF';
 import FractionalShares from './pages/FractionalShares';
 import Hub from './pages/Hub';
 import Investing from './pages/Investing';
+import Investment from './pages/Investment';
 import Ira from './pages/Ira';
 import MarginTrading from './pages/MarginTrading';
 import OptionsPage from './pages/OptionsPage';
@@ -13,8 +14,8 @@ import PaperTrading from './pages/PaperTrading';
 import RecurringInvestments from './pages/RecurringInvestments';
 import SmartAdvisor from './pages/SmartAdvisor';
 import Stock from './pages/Stock';
+import WhatWeInvest from './pages/WhatWeInvest';
 import WhoWeAre from './pages/WhoWeAre';
-import Investment from './pages/Investment';
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
         <Route path="/options" element={<OptionsPage />} />
         <Route path="/papertrading" element={<PaperTrading />} />
         <Route path="smart-advisor" element={<SmartAdvisor />} />
+        <Route path="what-we-invest" element={<WhatWeInvest />} />
       </Routes>
     </div>
   );

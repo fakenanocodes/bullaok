@@ -1,7 +1,81 @@
+import { motion } from 'framer-motion';
 import React from 'react';
 import Layout from '../components/Layout';
 
 export default function Investment() {
+  const sectionsData = [
+    {
+      title: 'Forex Trading',
+      imageUrl: 'forex.png',
+      backgroundColor: '#fff',
+      text: "Explore our diverse range of investment packages tailored to meet your financial goals. Whether you're aiming for short-term gains or long-term wealth accumulation, our expertly crafted investment packages offer a secure and strategic path to a prosperous future.",
+    },
+    {
+      title: 'Real Estate',
+      imageUrl: 'estate.png',
+      backgroundColor: '#CDA1CB/10',
+      text: "Explore our diverse range of investment packages tailored to meet your financial goals. Whether you're aiming for short-term gains or long-term wealth accumulation, our expertly crafted investment packages offer a secure and strategic path to a prosperous future.",
+    },
+    {
+      title: 'Crypto',
+      imageUrl: 'crypto.png',
+      backgroundColor: '#fff',
+      text: "Explore our diverse range of investment packages tailored to meet your financial goals. Whether you're aiming for short-term gains or long-term wealth accumulation, our expertly crafted investment packages offer a secure and strategic path to a prosperous future.",
+    },
+    {
+      title: 'ETFs',
+      imageUrl: 'nfts.png',
+      backgroundColor: '#CDA1CB/10',
+      text: "Explore our diverse range of investment packages tailored to meet your financial goals. Whether you're aiming for short-term gains or long-term wealth accumulation, our expertly crafted investment packages offer a secure and strategic path to a prosperous future.",
+    },
+    {
+      title: 'Stocks',
+      imageUrl: 'stocks.png',
+      backgroundColor: '#fff',
+      text: "Explore our diverse range of investment packages tailored to meet your financial goals. Whether you're aiming for short-term gains or long-term wealth accumulation, our expertly crafted investment packages offer a secure and strategic path to a prosperous future.",
+    },
+    {
+      title: 'Assets',
+      imageUrl: 'assets.png',
+      backgroundColor: '#CDA1CB/10',
+      text: "Explore our diverse range of investment packages tailored to meet your financial goals. Whether you're aiming for short-term gains or long-term wealth accumulation, our expertly crafted investment packages offer a secure and strategic path to a prosperous future.",
+    },
+    {
+      title: 'Cannabis',
+      imageUrl: 'cannabis.png',
+      backgroundColor: '#fff',
+      text: "Explore our diverse range of investment packages tailored to meet your financial goals. Whether you're aiming for short-term gains or long-term wealth accumulation, our expertly crafted investment packages offer a secure and strategic path to a prosperous future.",
+    },
+  ];
+
+  const sections = sectionsData.map((section, index) => (
+    <section
+      key={index}
+      className={`py-8 lg:px-[100px] px-5 bg-${
+        index % 2 === 0 ? ['#CDA1CB/10'] : ['#fff']
+      }`}
+    >
+      <div
+        className={`flex lg:flex-row justify-center flex-col items-center gap-[50px] opacity-100 ${
+          index % 2 === 0 ? 'lg:flex-row-reverse' : 'lg:flex-row'
+        }`}
+      >
+        <img src={section.imageUrl} className="lg:w-2/5 w-full h-auto" alt="" />
+        <div className="flex flex-col  lg:w-2/5 w-full gap-4 lg:items-start text-black">
+          <h2 className="lg:text-4xl font-[laviosaa] text-3xl font-bold text-center lg:text-start uppercase">
+            {section.title}
+          </h2>
+          <p className="text-2xl leading-loose font-[roboto] ">
+            {section.text}
+          </p>
+          <button className="border shadow-lg bg-transparent font-[montserrat] border-[#AC09A6] lg:text-[25px] text-xl lg:px-8 px-4 px-8 font-bold py-4 uppercase">
+            Read more
+          </button>
+        </div>
+      </div>
+    </section>
+  ));
+
   return (
     <Layout>
       <header
@@ -14,175 +88,47 @@ export default function Investment() {
           className="absolute top-0 left-0 w-full h-full bg-[#30022E] opacity-80"
           style={{ mixBlendMode: 'multiply' }}
         ></div>
-        <div className="lg:w-3/4 w-full relative z-20 flex flex-col items-center gap-7">
-          <h2 className="lg:text-6xl text-3xl text-[#fff] font-bold  text-center">
-            Our investment approach relies on facts, not guesswork.
+        <div className=" w-full relative z-20 flex flex-col items-center gap-7">
+          <h2 className="lg:text-6xl text-3xl text-[#fff] font-bold font-[laviosaa]  text-center">
+            Our investment approach relies <br /> on facts,{' '}
+            <span className="text-[#FFD700]"> not guesswork.</span>
           </h2>
-          <button className="uppercase border text-[#fff] mt-8 bg-transparent lg:px-9 px-3 font-bold py-3">
+          <button className="uppercase font-[montsserat] border text-[#fff] mt-8 bg-transparent lg:px-9 px-3 font-bold py-3">
             Get started
           </button>
         </div>
       </header>
       <main className="w-full bg-[#fff] ">
         <section className="bg-[#CDA1CB]/10 lg:px-[100px] px-5">
-          <div className="lg:w-3/4 w-full mx-auto py-8">
-            <h2 className="lg:text-3xl text-xl text-black">
-              Explore our diverse range of investment packages tailored to meet
-              your financial goals. Whether you're aiming for short-term gains
-              or long-term wealth accumulation, our expertly crafted investment
-              packages offer a secure and strategic path to a prosperous future.{' '}
-            </h2>
-          </div>
-
-          <div className="flex lg:flex-row flex-col  justify-center my-8 w-full">
-            <img src="finance.png" className="lg:w-2/4" alt="" />
-            <h2 className="lg:text-5xl text-3xl text-black font-bold ">
-              Investment Packages: <br /> Your Key to Financial <br /> Growth
-            </h2>
-          </div>
-        </section>
-
-        <section className=" py-8 bg-[#fff] w-full lg:px-[100px] px-5">
-          <div className="flex lg:flex-row flex-col-reverse items-center gap-8">
-            <div className="flex flex-col lg:w-2/5 w-full gap-4 lg:items-start text-black">
-              <h2 className="lg:text-4xl text-3xl font-bold text-center lg:text-start ">
-                Forex Trading
-              </h2>
-              <p className="text-2xl leading-loose">
+          <div className="lg:w-3/5  w-full mx-auto py-8">
+            <motion.div
+              initial={{ y: -50 }}
+              animate={{ y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+            >
+              <h2 className="lg:text-3xl leading-loose font-[roboto] text-xl text-black text-center">
                 Explore our diverse range of investment packages tailored to
-                meet your financial goals. Whether you're aiming for short- term
+                meet your financial goals. Whether you're aiming for short-term
                 gains or long-term wealth accumulation, our expertly crafted
                 investment packages offer a secure and strategic path to a
                 prosperous future.{' '}
-              </p>
-              <button className="border shadow-lg bg-transparent border-[#AC09A6] lg:text-[27px] text-xl lg:px-8 px-4 font-bold py-4 ">
-                Read more
-              </button>
-            </div>
-            <img src="forex.png" className="lg:w-2/4 w-full  h-auto" alt="" />
-          </div>
-        </section>
-
-        <section className=" bg-[#CDA1CB]/10 py-8 lg:px-[100px] px-5">
-          <div className="flex lg:flex-row flex-col items-center gap-8 opacity-100">
-            <img src="estate.png" className="lg:w-2/4 w-full h-auto" alt="" />
-            <div className="flex flex-col lg:w-2/5 w-full gap-4 lg:items-start text-black">
-              <h2 className="lg:text-4xl text-3xl font-bold  text-center lg:text-start  ">
-                REAL ESTATE
               </h2>
-              <p className="text-2xl leading-loose">
-                Explore our diverse range of investment packages tailored to
-                meet your financial goals. Whether you're aiming for short- term
-                gains or long-term wealth accumu lation, our expertly crafted
-                investment packages offer a secure and strategic path to a
-                prosperous future.{' '}
-              </p>
-              <button className="border shadow-lg bg-transparent border-[#AC09A6] lg:text-[27px] text-xl lg:px-8 px-4 px-8 font-bold py-4 ">
-                Read more
-              </button>
-            </div>
+            </motion.div>
           </div>
-        </section>
-        <section className=" py-8 lg:px-[100px] px-5">
-          <div className="flex items-center flex-col-reverse lg:flex-row gap-8 opacity-100">
-            <div className="flex flex-col gap-4 lg:w-2/5 w-full lg:items-start text-black">
-              <h2 className="lg:text-4xl text-3xl font-bold uppercase  text-center lg:text-start ">
-                Crypto
+          <motion.div
+            initial={{ y: 50 }}
+            animate={{ y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            <div className="flex lg:flex-row flex-col  justify-center my-8 w-full">
+              <img src="finance.png" className="lg:w-2/4" alt="" />
+              <h2 className="lg:text-5xl text-3xl text-black font-bold leading-loose  ">
+                Investment Packages: <br /> Your Key to Financial <br /> Growth
               </h2>
-              <p className="text-2xl leading-loose">
-                Explore our diverse range of investment packages tailored to
-                meet your financial goals. Whether you're aiming for short- term
-                gains or long-term wealth accumu lation, our expertly crafted
-                investment packages offer a secure and strategic path to a
-                prosperous future.{' '}
-              </p>
-              <button className="border shadow-lg bg-transparent border-[#AC09A6] lg:text-[27px] text-xl lg:px-8 px-4 uppercase  px-8 font-bold py-4 ">
-                Read more
-              </button>
             </div>
-            <img src="crypto.png" className="lg:w-2/4  h-auto" alt="" />
-          </div>
+          </motion.div>
         </section>
-        <section className="bg-[#CDA1CB]/10  py-8 lg:px-[100px] px-5">
-          <div className="flex flex-col lg:flex-row items-center gap-8 opacity-100">
-            <img src="nfts.png" className="lg:w-2/4  h-auto" alt="" />
-
-            <div className="flex flex-col gap-4 lg:w-2/5 w-full  lg:items-start text-black">
-              <h2 className="lg:text-4xl text-3xl  text-center lg:text-start font-bold uppercase">ETFs</h2>
-              <p className="text-2xl leading-loose">
-                Explore our diverse range of investment packages tailored to
-                meet your financial goals. Whether you're aiming for short- term
-                gains or long-term wealth accumu lation, our expertly crafted
-                investment packages offer a secure and strategic path to a
-                prosperous future.{' '}
-              </p>
-              <button className="border shadow-lg bg-transparent border-[#AC09A6] lg:text-[27px] text-xl lg:px-8 px-4 uppercase  px-8 font-bold py-4 ">
-                Read more
-              </button>
-            </div>
-          </div>
-        </section>
-        <section className="bg-[#fff]  py-8 lg:px-[100px] px-5">
-          <div className="flex lg:flex-row flex-col-reverse items-center gap-8 opacity-100">
-            <div className="flex  flex-col gap-4 lg:w-2/5 w-full  lg:items-start text-black">
-              <h2 className="lg:text-4xl text-3xl  text-center lg:text-start font-bold uppercase">
-                Stocks
-              </h2>
-              <p className="text-2xl leading-loose">
-                Explore our diverse range of investment packages tailored to
-                meet your financial goals. Whether you're aiming for short- term
-                gains or long-term wealth accumu lation, our expertly crafted
-                investment packages offer a secure and strategic path to a
-                prosperous future.{' '}
-              </p>
-              <button className="border shadow-lg bg-transparent border-[#AC09A6] lg:text-[27px] text-xl lg:px-8  uppercase  px-8 font-bold py-4 ">
-                Read more
-              </button>
-            </div>
-            <img src="stocks.png" className="lg:w-2/4  h-auto" alt="" />
-          </div>
-        </section>
-        <section className="bg-[#CDA1CB]/10  py-8 lg:px-[100px] px-5">
-          <div className="flex flex-col lg:flex-row items-center gap-8 opacity-100">
-            <img src="assets.png" className="lg:w-2/4 w-full  h-auto" alt="" />
-
-            <div className="flex flex-col gap-4 lg:w-2/5 w-full  lg:items-start text-black">
-              <h2 className="lg:text-4xl text-3xl text-center lg:text-start font-bold uppercase">
-                Assets
-              </h2>
-              <p className="text-2xl leading-loose">
-                Explore our diverse range of investment packages tailored to
-                meet your financial goals. Whether you're aiming for short- term
-                gains or long-term wealth accumu lation, our expertly crafted
-                investment packages offer a secure and strategic path to a
-                prosperous future.{' '}
-              </p>
-              <button className="border shadow-lg bg-transparent border-[#AC09A6] lg:text-[27px] text-xl lg:px-8  uppercase  px-8 font-bold py-4 ">
-                Read more
-              </button>
-            </div>
-          </div>
-        </section>
-        <section className="bg-[#fff]  py-8 lg:px-[100px] px-5">
-          <div className="flex flex-col-reverse lg:flex-row items-center gap-8 opacity-100">
-            <div className="flex flex-col gap-4 lg:w-2/5 w-full  lg:items-start text-black">
-              <h2 className="lg:text-4xl text-3xl text-center lg:text-start font-bold uppercase">
-                Cannabis
-              </h2>
-              <p className="text-2xl leading-loose">
-                Explore our diverse range of investment packages tailored to
-                meet your financial goals. Whether you're aiming for short- term
-                gains or long-term wealth accumu lation, our expertly crafted
-                investment packages offer a secure and strategic path to a
-                prosperous future.{' '}
-              </p>
-              <button className="border shadow-lg bg-transparent border-[#AC09A6] lg:text-[27px] text-xl lg:px-8  uppercase  px-8 font-bold py-4 ">
-                Read more
-              </button>
-            </div>
-            <img src="cannabis.png" className="lg:w-2/4  h-auto" alt="" />
-          </div>
-        </section>
+        {sections}
       </main>
     </Layout>
   );
