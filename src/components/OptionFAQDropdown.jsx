@@ -8,7 +8,7 @@ function OptionFAQDropdown() {
   const toggleDropdown1 = () => {
     setIsOpen1(!isOpen1);
     setIsOpen2(false); // Close other dropdowns
-    setIsOpen3(false);  
+    setIsOpen3(false);
   };
 
   const toggleDropdown2 = () => {

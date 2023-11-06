@@ -3,6 +3,7 @@ import './App.css';
 import CorporateConnect from './pages/CorporateConnect';
 import ETF from './pages/ETF';
 import FractionalShares from './pages/FractionalShares';
+import Home from './pages/Home';
 import Hub from './pages/Hub';
 import Investing from './pages/Investing';
 import Investment from './pages/Investment';
@@ -21,7 +22,7 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<Stock />} />
+        <Route path="/" element={<Home />} />
         <Route path="/about-us" element={<WhoWeAre />} />
         <Route path="/etf" element={<ETF />} />
         <Route path="/margin-trading" element={<MarginTrading />} />

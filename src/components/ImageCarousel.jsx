@@ -1,24 +1,22 @@
-import '../CSS/main.css'
-import freestock from '../assets/freestock.png';
+import '../CSS/main.css';
 
-import  { useState } from 'react';
+import { useState } from 'react';
 
-const slides = [
-  'slide1',
-  'Slide 2',
-  'Slide 3',
-  'Slide 4',
-];
+const slides = ['slide1', 'Slide 2', 'Slide 3', 'Slide 4'];
 
 const ImageCarousel = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const prevSlide = () => {
-    setCurrentSlide((prevSlide) => (prevSlide === 0 ? slides.length - 1 : prevSlide - 1));
+    setCurrentSlide((prevSlide) =>
+      prevSlide === 0 ? slides.length - 1 : prevSlide - 1
+    );
   };
 
   const nextSlide = () => {
-    setCurrentSlide((prevSlide) => (prevSlide === slides.length - 1 ? 0 : prevSlide + 1));
+    setCurrentSlide((prevSlide) =>
+      prevSlide === slides.length - 1 ? 0 : prevSlide + 1
+    );
   };
 
   return (
@@ -26,7 +24,9 @@ const ImageCarousel = () => {
       <div className="relative">
         <div className="w-full h-24 flex items-center justify-center text-4xl font-bold">
           <div
-            className={`slide-container animate-slide-${currentSlide === 0 ? 'right' : 'left'}`}
+            className={`slide-container animate-slide-${
+              currentSlide === 0 ? 'right' : 'left'
+            }`}
           >
             {slides[currentSlide]}
           </div>
