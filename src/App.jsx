@@ -1,5 +1,8 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import OptionsPage from './Pages/OptionsPage';
+import PaperTrading from './Pages/PaperTrading';
+import SmartAdvisor from './Pages/SmartAdvisor';
 import CorporateConnect from './pages/CorporateConnect';
 import ETF from './pages/ETF';
 import FractionalShares from './pages/FractionalShares';
@@ -12,7 +15,6 @@ import Otc from './pages/Otc';
 import RecurringInvestments from './pages/RecurringInvestments';
 import Stock from './pages/Stock';
 import WhoWeAre from './pages/WhoWeAre';
-
 function App() {
   return (
     <div>
@@ -32,6 +34,9 @@ function App() {
         <Route path="/invest" element={<Investing />} />
         <Route path="/ira" element={<Ira />} />
         <Route path="/hub" element={<Hub />} />
+        <Route path="/options" element={<OptionsPage />} />
+        <Route path="/papertrading" element={<PaperTrading />} />
+        <Route path="smart-advisor" element={<SmartAdvisor/>} />
       </Routes>
     </div>
   );

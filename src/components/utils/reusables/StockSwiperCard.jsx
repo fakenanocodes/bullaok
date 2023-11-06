@@ -1,3 +1,7 @@
+import slide_img1 from '../../../assets/slide1_img.png'
+import slide_img2 from '../../../assets/slide2_img.png'
+
+
 const StockSwiperCard = ({ image, items }) => {
   return (
     <div className="relative flex flex-col items-center">
