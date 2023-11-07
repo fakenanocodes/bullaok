@@ -1,11 +1,13 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import About from './pages/About';
 import CorporateConnect from './pages/CorporateConnect';
 import ETF from './pages/ETF';
 import FractionalShares from './pages/FractionalShares';
 import Home from './pages/Home';
 import Hub from './pages/Hub';
 import Investing from './pages/Investing';
+import Investment from './pages/Investment';
 import Ira from './pages/Ira';
 import MarginTrading from './pages/MarginTrading';
 import OptionsPage from './pages/OptionsPage';
@@ -15,14 +17,14 @@ import RecurringInvestments from './pages/RecurringInvestments';
 import SmartAdvisor from './pages/SmartAdvisor';
 import Stock from './pages/Stock';
 import WhoWeAre from './pages/WhoWeAre';
-import Investment from './pages/Investment';
 
 function App() {
   return (
     <div>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/about-us" element={<WhoWeAre />} />
+        <Route path="/about-us" element={<About />} />
+        <Route path="/who-we-are" element={<WhoWeAre />} />
         <Route path="/etf" element={<ETF />} />
         <Route path="/margin-trading" element={<MarginTrading />} />
         <Route path="/stocks" element={<Stock />} />
