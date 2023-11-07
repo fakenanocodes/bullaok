@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import React from 'react';
 import Layout from '../components/Layout';
 
 export default function Investment() {
@@ -89,7 +88,7 @@ export default function Investment() {
           style={{ mixBlendMode: 'multiply' }}
         ></div>
         <div className=" w-full relative z-20 flex flex-col items-center gap-7">
-          <h2 className="lg:text-6xl text-3xl text-[#fff] font-bold font-[laviosaa]  text-center">
+          <h2 className="lg:text-5xl text-3xl text-[#fff] font-bold laviossa text-center">
             Our investment approach relies <br /> on facts,{' '}
             <span className="text-[#FFD700]"> not guesswork.</span>
           </h2>
@@ -107,11 +106,11 @@ export default function Investment() {
               transition={{ duration: 0.8, delay: 0.3 }}
             >
               <h2 className="lg:text-3xl leading-loose font-[roboto] text-xl text-black text-center">
-                Explore our diverse range of investment packages tailored to
+                {`Explore our diverse range of investment packages tailored to
                 meet your financial goals. Whether you're aiming for short-term
                 gains or long-term wealth accumulation, our expertly crafted
                 investment packages offer a secure and strategic path to a
-                prosperous future.{' '}
+                prosperous future.`}
               </h2>
             </motion.div>
           </div>
