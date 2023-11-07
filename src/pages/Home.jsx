@@ -189,7 +189,7 @@ const Home = () => {
       </section>
 
       <section className="px-5 lg:px-12 xl:px-40 my-[5rem]">
-        <p className="laviossa text-3xl text-center leading-normal mb-10">
+        <p className="laviossa text-3xl text-center leading-normal">
           What Clients Say About Us
         </p>
 
