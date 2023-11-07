@@ -4,7 +4,11 @@ const ClientCard = ({ client }) => {
   return (
     <div className="flex flex-col gap-5 w-[16rem]">
       <div className="relative">
-        <img src={client?.image} alt="" className="min-w-[16rem]" />
+        <img
+          src={client?.image}
+          alt=""
+          className="min-w-[16rem] max-w-[16rem] rounded-2xl"
+        />
 
         <img
           src={customer_bg}
