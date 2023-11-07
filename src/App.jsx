@@ -3,6 +3,7 @@ import './App.css';
 import About from './pages/About';
 import CorporateConnect from './pages/CorporateConnect';
 import ETF from './pages/ETF';
+import Faq from './pages/Faq';
 import FractionalShares from './pages/FractionalShares';
 import Home from './pages/Home';
 import Hub from './pages/Hub';
@@ -16,6 +17,7 @@ import PaperTrading from './pages/PaperTrading';
 import RecurringInvestments from './pages/RecurringInvestments';
 import SmartAdvisor from './pages/SmartAdvisor';
 import Stock from './pages/Stock';
+import WhatWeInvest from './pages/WhatWeInvest';
 import WhoWeAre from './pages/WhoWeAre';
 
 function App() {
@@ -36,12 +38,14 @@ function App() {
         <Route path="/fractional-shares" element={<FractionalShares />} />
         <Route path="/corporate-connect" element={<CorporateConnect />} />
         <Route path="/invest" element={<Investing />} />
-        <Route path="/investment-Packages" element={<Investment />} />
+        <Route path="/investment-packages" element={<Investment />} />
         <Route path="/ira" element={<Ira />} />
         <Route path="/hub" element={<Hub />} />
         <Route path="/options" element={<OptionsPage />} />
         <Route path="/papertrading" element={<PaperTrading />} />
         <Route path="smart-advisor" element={<SmartAdvisor />} />
+        <Route path="what-we-invest" element={<WhatWeInvest />} />
+        <Route path="faq" element={<Faq />} />
       </Routes>
     </div>
   );
