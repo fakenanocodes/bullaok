@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import About from './pages/About';
 import CorporateConnect from './pages/CorporateConnect';
 import ETF from './pages/ETF';
 import Faq from './pages/Faq';
@@ -46,6 +47,7 @@ function App() {
         <Route path="smart-advisor" element={<SmartAdvisor />} />
         <Route path="what-we-invest" element={<WhatWeInvest />} />
         <Route path="faq" element={<Faq />} />
+        <Route path="about" element={<About />} />
       </Routes>
     </div>
   );
