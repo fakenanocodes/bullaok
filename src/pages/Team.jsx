@@ -26,9 +26,9 @@ export default function Team() {
         </div>
       </header>
 
-      <main className="bg-[#fff]">
-        <section className='p-3'>
-          <h2 className="lg:w-2/3 w-full mx-auto font-[montserrat] lg:text-3xl text-[14px] py-8">
+      <main className="bg-[#fff] lg:px-[150px]">
+        <section className="p-3">
+          <h2 className=" w-full mx-auto font-[montserrat] lg:text-3xl text-[9px] py-8">
             <span className="text-[#8E0789] font-[laviossa] lg:text-[69px] text-[21px]">
               A{' '}
             </span>{' '}
@@ -39,20 +39,26 @@ export default function Team() {
             clients like you.
           </h2>
 
-          <div className="grid grid-cols-2 lg:w-2/3 w-full mx-auto gap-5">
+          <div className="grid grid-cols-2  w-full mx-auto gap-5">
             {teamData.map((items, index) => (
-              <div className="item l:w-3/4 w-full " key={index}>
-                <img src={items.image} className="lg:ml-6 ml-2 -mb-8 w-20 " alt="" />
-                <div className="content border-2 p-2 border-[#8E0789] flex flex-col ">
-                  <div className="flex">
-                    <h3 className="mt-4 ml-4 font-[montserrat] text-[9px]">
+              <div className="item lg:w-3/4 w-full " key={index}>
+                <img
+                  src={items.image}
+                  className="lg:ml-6 ml-3 -mb-8 lg:w-auto w-2/3 "
+                  alt=""
+                />
+                <div className="content border-2 p-2  border-[#8E0789] flex flex-col ">
+                  <div className="flex px-3">
+                    <h3 className="mt-4 ml-4 font-[montserrat] lg:text-xl text-base  ">
                       {items.role}
                     </h3>
-                    <p className="ml-auto font-[laviossa] lg:text-md text-[9px] ">{items.name}</p>
+                    <p className="ml-auto font-[laviossa] -mt-3  lg:text-[25px]">
+                      {items.name}
+                    </p>
                   </div>
                   <a
                     href="#"
-                    className="ml-auto text-[#8E0789] text-[6px] font-[montserrat]"
+                    className="ml-auto px-3 text-[#8E0789] lg:text-md font-[montserrat]"
                   >
                     Read more
                   </a>

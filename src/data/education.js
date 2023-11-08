@@ -38,63 +38,62 @@ export const testimonials = [
 export const courses = [
   {
     image: images.stock,
-    title:"Stocks",
+    title: 'Stocks',
     text: 'Nam sollicitudin dignissim nunc, cursus ullamcorpe ',
   },
   {
     image: images.etf,
-    title:"ETFs",
+    title: 'ETFs',
     text: 'Nam sollicitudin dignissim nunc, cursus ullamcorpe ',
   },
   {
     image: images.estate,
-    title:"Real Estate",
+    title: 'Real Estate',
     text: 'Nam sollicitudin dignissim nunc, cursus ullamcorpe ',
   },
   {
     image: images.crypto,
-    title:"Cryptos",
+    title: 'Crypto',
     text: 'Nam sollicitudin dignissim nunc, cursus ullamcorpe ',
   },
   {
     image: images.forex,
-    title:"Forex Trading",
+    title: 'Forex Trading',
     text: 'Nam sollicitudin dignissim nunc, cursus ullamcorpe ',
   },
   {
     image: images.bond,
-    title:"Bounds",
+    title: 'Bonds',
     text: 'Nam sollicitudin dignissim nunc, cursus ullamcorpe ',
   },
   {
     image: images.chart_graph,
-    title:"Cannabis",
+    title: 'Cannabis',
     text: 'Nam sollicitudin dignissim nunc, cursus ullamcorpe ',
   },
   {
     image: images.etf,
-    title:"Agriculture",
+    title: 'Agriculture',
     text: 'Nam sollicitudin dignissim nunc, cursus ullamcorpe ',
   },
   {
     image: images.bond,
-    title:"Assets",
+    title: 'Assets',
     text: 'Nam sollicitudin dignissim nunc, cursus ullamcorpe ',
   },
   {
     image: images.etf,
-    title:"Oil and Gas",
+    title: 'Oil and Gas',
     text: 'Nam sollicitudin dignissim nunc, cursus ullamcorpe ',
   },
   {
     image: images.bond,
-    title:"Loans",
+    title: 'Loans',
     text: 'Nam sollicitudin dignissim nunc, cursus ullamcorpe ',
   },
   {
     image: images.etf,
-    title:"Gold",
+    title: 'Gold',
     text: 'Nam sollicitudin dignissim nunc, cursus ullamcorpe ',
   },
-
 ];

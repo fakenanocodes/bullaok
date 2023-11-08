@@ -1,12 +1,14 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import { courses, header, testimonials } from './data/education';
+import About from './pages/About';
 import CorporateConnect from './pages/CorporateConnect';
 import ETF from './pages/ETF';
 import Education from './pages/Education';
 import EducationCourses from './pages/EducationCourses';
 import Faq from './pages/Faq';
 import FractionalShares from './pages/FractionalShares';
+import History from './pages/History';
 import Home from './pages/Home';
 import Hub from './pages/Hub';
 import Investing from './pages/Investing';
@@ -19,16 +21,17 @@ import PaperTrading from './pages/PaperTrading';
 import RecurringInvestments from './pages/RecurringInvestments';
 import SmartAdvisor from './pages/SmartAdvisor';
 import Stock from './pages/Stock';
+import Team from './pages/Team';
 import WhatWeInvest from './pages/WhatWeInvest';
 import WhoWeAre from './pages/WhoWeAre';
-import Team from './pages/Team';
 
 function App() {
   return (
     <div>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/about-us" element={<WhoWeAre />} />
+        <Route path="/history" element={<History />} />
+        <Route path="/who-we-are" element={<WhoWeAre />} />
         <Route path="/etf" element={<ETF />} />
         <Route path="/margin-trading" element={<MarginTrading />} />
         <Route path="/stocks" element={<Stock />} />
@@ -40,7 +43,7 @@ function App() {
         <Route path="/fractional-shares" element={<FractionalShares />} />
         <Route path="/corporate-connect" element={<CorporateConnect />} />
         <Route path="/invest" element={<Investing />} />
-        <Route path="/investment-Packages" element={<Investment />} />
+        <Route path="/investment-packages" element={<Investment />} />
         <Route path="/ira" element={<Ira />} />
         <Route path="/hub" element={<Hub />} />
         <Route path="/options" element={<OptionsPage />} />
@@ -63,6 +66,7 @@ function App() {
           path="education-courses"
           element={<EducationCourses courses={courses} />}
         />
+        <Route path="about" element={<About />} />
       </Routes>
     </div>
   );
