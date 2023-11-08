@@ -13,7 +13,7 @@ const HistioryMap = () => {
       className="mx-2 lg:mx-auto mt-3 xl:mb-7 pt-[5rem] flex flex-col lg:justify-center gap-2 items-center"
     >
       <div className="grid grid-cols-3 items-center">
-        <p className="text-xs md:text-base xl:text-xl font-semibold tracking-wider">
+        <p className="text-xs md:text-base xl:text-lg font-semibold tracking-wider md:-mr-10 lg:-mr-14">
           A vision to transform the financial industry
         </p>
         <div className="flex justify-center">
@@ -33,13 +33,13 @@ const HistioryMap = () => {
             2015
           </p>
         </div>
-        <p className="text-xs md:text-base xl:text-xl font-semibold tracking-wider">
+        <p className="text-xs md:text-base xl:text-lg font-semibold tracking-wider md:-ml-20 lg:-ml-28 xl:-ml-40">
           Gained recognition for its innovative approach to financial education
         </p>
       </div>
       <div className="h-20 border-r-4 border-[#480546E5] opacity-70"></div>
       <div className="grid grid-cols-3 items-center">
-        <p className="text-xs md:text-base xl:text-xl font-semibold tracking-wider">
+        <p className="text-xs md:text-base xl:text-lg font-semibold tracking-wider md:-mr-10 lg:-mr-12">
           Leading provider of financial education
         </p>
         <div className="flex justify-center">
@@ -59,7 +59,7 @@ const HistioryMap = () => {
             2023
           </p>
         </div>
-        <p className="text-xs md:text-base xl:text-xl font-semibold tracking-wider">
+        <p className="text-xs md:text-base xl:text-lg font-semibold tracking-wider md:-ml-20 lg:-ml-28 xl:-ml-36">
           Their curriculum to reflect the changing landscape of finance
         </p>
       </div>
