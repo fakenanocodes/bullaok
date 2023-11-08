@@ -14,7 +14,7 @@ export default function Education({ courses, header, testimonials }) {
         }}
       >
         <section className="flex lg:flex-row flex-col items-center gap-8 lg:px-[100px] px-2">
-          <img src={images.chart_graph} className="w-full" alt="" />
+          <img src={images.chart_graph} className="w-full lg:w-auto" alt="" />
           <div className="  px-4  w-full lg:w-2/4 text-3xl   relative z-20 text-[#000] flex flex-col lg:items-start gap-[80px]">
             <h2 className="text-[#8E0789] font-[laviossa] lg:text-5xl text-3xl">
               Watch, Learn & Invest
