@@ -1,10 +1,10 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import About from './pages/About';
 import CorporateConnect from './pages/CorporateConnect';
 import ETF from './pages/ETF';
 import Faq from './pages/Faq';
 import FractionalShares from './pages/FractionalShares';
+import History from './pages/History';
 import Home from './pages/Home';
 import Hub from './pages/Hub';
 import Investing from './pages/Investing';
@@ -25,7 +25,7 @@ function App() {
     <div>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/about-us" element={<About />} />
+        <Route path="/history" element={<History />} />
         <Route path="/who-we-are" element={<WhoWeAre />} />
         <Route path="/etf" element={<ETF />} />
         <Route path="/margin-trading" element={<MarginTrading />} />
