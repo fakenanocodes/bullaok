@@ -1,7 +1,11 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import { courses, header, testimonials } from './data/education';
 import CorporateConnect from './pages/CorporateConnect';
 import ETF from './pages/ETF';
+import Education from './pages/Education';
+import EducationCourses from './pages/EducationCourses';
+import Faq from './pages/Faq';
 import FractionalShares from './pages/FractionalShares';
 import Home from './pages/Home';
 import Hub from './pages/Hub';
@@ -17,7 +21,7 @@ import SmartAdvisor from './pages/SmartAdvisor';
 import Stock from './pages/Stock';
 import WhatWeInvest from './pages/WhatWeInvest';
 import WhoWeAre from './pages/WhoWeAre';
-import Faq from './pages/Faq';
+import Team from './pages/Team';
 
 function App() {
   return (
@@ -43,7 +47,22 @@ function App() {
         <Route path="/papertrading" element={<PaperTrading />} />
         <Route path="smart-advisor" element={<SmartAdvisor />} />
         <Route path="what-we-invest" element={<WhatWeInvest />} />
+        <Route path="team" element={<Team />} />
         <Route path="faq" element={<Faq />} />
+        <Route
+          path="education"
+          element={
+            <Education
+              courses={courses}
+              header={header}
+              testimonials={testimonials}
+            />
+          }
+        />
+        <Route
+          path="education-courses"
+          element={<EducationCourses courses={courses} />}
+        />
       </Routes>
     </div>
   );

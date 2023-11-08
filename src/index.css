@@ -69,6 +69,11 @@ h1 {
   line-height: 1.1;
 }
 
+/* education */
+.education{
+  background-color: #fff;
+}
+
 .stocks {
   background-image: url('/bg.png');
   background-repeat: no-repeat;
