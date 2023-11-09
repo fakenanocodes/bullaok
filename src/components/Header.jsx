@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom';
 import BluetoothIcon from './utils/icons/BluetoothIcon';
-import DropdownIcon from './utils/icons/DropdownIcon';
 import EmailIcon from './utils/icons/EmailIcon';
 import PhoneIcon from './utils/icons/PhoneIcon';
 import ProfileIcon from './utils/icons/ProfileIcon';
@@ -10,8 +9,8 @@ const navItems = [
   {
     title: 'Who We Are',
     list: [
-      { name: 'History', route: '/history' },
       { name: 'About us', route: '/about' },
+      { name: 'History', route: '/history' },
       { name: 'Team', route: '/team' },
     ],
   },
@@ -34,6 +33,21 @@ const navItems = [
       { name: 'Paper Trading', route: '/papertrading' },
     ],
   },
+  {
+    title: 'Investment',
+    list: [
+      { name: 'Invest', route: '/invest' },
+      { name: 'Investment Packages', route: '/investment-packages' },
+      { name: 'Recurring Investment', route: '/recurring-investment' },
+      { name: 'IRA', route: '/ira' },
+      { name: 'Fractional Shares', route: '/fractional-shares' },
+      { name: 'Corporate Connect', route: '/corporate-connect' },
+    ],
+  },
+  {
+    title: 'Hub',
+    list: [{ name: 'Learn', route: '/education' }],
+  },
 ];
 
 // bg-[#30022ECC]
@@ -53,14 +67,6 @@ const Header = () => {
         {navItems?.map((item, idx) => (
           <DropDownMenu key={idx} item={item} />
         ))}
-        <div className="flex items-center gap-2 cursor-pointer">
-          <p className="font-semibold text-white text-sm">Investment</p>
-          <DropdownIcon />
-        </div>
-        <div className="flex items-center gap-2 cursor-pointer">
-          <p className="font-semibold text-white text-sm">Hub</p>
-          <DropdownIcon />
-        </div>
       </div>
       <div className="flex items-center gap-7">
         <div className="cursor-pointer">

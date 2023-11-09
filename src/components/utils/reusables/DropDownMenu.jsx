@@ -9,6 +9,10 @@ import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 import DropdownIcon from '../icons/DropdownIcon';
 
+const scrollToTop = () => {
+  window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+};
+
 export default function MenuListComposition({ item }) {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
@@ -92,7 +96,10 @@ export default function MenuListComposition({ item }) {
                     {item?.list?.map((list, idx) => (
                       <MenuItem
                         key={idx}
-                        onClick={() => navigate(`${list?.route}`)}
+                        onClick={() => {
+                          scrollToTop();
+                          navigate(`${list?.route}`);
+                        }}
                       >
                         {list?.name}
                       </MenuItem>
