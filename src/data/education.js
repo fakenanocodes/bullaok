@@ -79,7 +79,7 @@ export const courses = [
   {
     image: images.bond,
     title: 'Assets',
-    text: 'Nam sollicitudin dignissim nunc, cursus ullamcorpe ',
+    text: 'When it comes to assets, Bulloak Finance Management can help you make smart investment decisions. They provide expert advice on stocks, bonds, real estate, and more.    ',
   },
   {
     image: images.etf,
@@ -89,7 +89,7 @@ export const courses = [
   {
     image: images.bond,
     title: 'Loans',
-    text: 'Nam sollicitudin dignissim nunc, cursus ullamcorpe ',
+    text: "If you're looking for loans, Bulloak Finance Management offers a wide range of options to suit your needs. Whether it's a personal loan, mortgage, or business loan, they can provide expert guidance and competitive rates. ",
   },
   {
     image: images.etf,
