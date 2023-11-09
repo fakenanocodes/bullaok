@@ -1,8 +1,11 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import { courses, header, testimonials } from './data/education';
 import About from './pages/About';
 import CorporateConnect from './pages/CorporateConnect';
 import ETF from './pages/ETF';
+import Education from './pages/Education';
+import EducationCourses from './pages/EducationCourses';
 import Faq from './pages/Faq';
 import FractionalShares from './pages/FractionalShares';
 import History from './pages/History';
@@ -18,6 +21,7 @@ import PaperTrading from './pages/PaperTrading';
 import RecurringInvestments from './pages/RecurringInvestments';
 import SmartAdvisor from './pages/SmartAdvisor';
 import Stock from './pages/Stock';
+import Team from './pages/Team';
 import WhatWeInvest from './pages/WhatWeInvest';
 import WhoWeAre from './pages/WhoWeAre';
 
@@ -46,7 +50,22 @@ function App() {
         <Route path="/papertrading" element={<PaperTrading />} />
         <Route path="smart-advisor" element={<SmartAdvisor />} />
         <Route path="what-we-invest" element={<WhatWeInvest />} />
+        <Route path="team" element={<Team />} />
         <Route path="faq" element={<Faq />} />
+        <Route
+          path="education"
+          element={
+            <Education
+              courses={courses}
+              header={header}
+              testimonials={testimonials}
+            />
+          }
+        />
+        <Route
+          path="education-courses"
+          element={<EducationCourses courses={courses} />}
+        />
         <Route path="about" element={<About />} />
       </Routes>
     </div>
