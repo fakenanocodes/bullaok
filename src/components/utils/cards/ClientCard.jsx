@@ -17,7 +17,10 @@ const ClientCard = ({ client }) => {
         />
       </div>
 
-      <p className="mt-3 text-sm md:text-base">{client?.text}</p>
+      <p className="mt-3 text-sm md:text-base">{`${client?.text?.slice(
+        0,
+        100
+      )}...`}</p>
     </div>
   );
 };
