@@ -26,12 +26,12 @@ export default function Team() {
         </div>
       </header>
 
-      <main className="bg-[#fff] lg:px-[150px]">
+      <main className="bg-[#fff] xl:px-[150px] lg:px-5 px-4">
         <section className="p-3">
-          <h2 className=" w-full mx-auto font-[montserrat] lg:text-3xl text-[9px] py-8">
-            <span className="text-[#8E0789] font-[laviossa] lg:text-[69px] text-[21px]">
-              A{' '}
-            </span>{' '}
+          <h2 className=" w-full mx-auto font-[montserrat] lg:text-3xl text-[17px] text-justify lg:text-start py-8">
+            <span className="text-[#8E0789] font-[laviossa] lg:text-[69px] text-[31px]">
+              A
+            </span>
             little intro to the awesome team at Bulloak Finance Management.
             They're a group of finance experts who are passionate about helping
             people achieve their financial goals. These talented individuals
@@ -39,20 +39,20 @@ export default function Team() {
             clients like you.
           </h2>
 
-          <div className="grid grid-cols-2  w-full mx-auto gap-5">
+          <div className="grid xl:grid-cols-2 md:grid-cols-2  w-full mx-auto gap-5">
             {teamData.map((items, index) => (
-              <div className="item lg:w-3/4 w-full " key={index}>
+              <div className="item lg:w-5/6 xl:w-4/5 w-full " key={index}>
                 <img
                   src={items.image}
                   className="lg:ml-6 ml-3 -mb-8 lg:w-auto w-2/3 "
                   alt=""
                 />
-                <div className="content border-2 p-2  border-[#8E0789] flex flex-col ">
+                <div className=" border-2 p-2  border-[#8E0789] flex flex-col ">
                   <div className="flex px-3">
-                    <h3 className="mt-4 ml-4 font-[montserrat] lg:text-xl text-base  ">
+                    <h3 className="mt-4 -ml-2 font-[montserrat] xl:text-xl lg:text-sm  ">
                       {items.role}
                     </h3>
-                    <p className="ml-auto font-[laviossa] -mt-3  lg:text-[25px]">
+                    <p className="ml-auto font-[laviossa] lg:mt-3 mt-3  xl:text-xl lg:text-md">
                       {items.name}
                     </p>
                   </div>
@@ -67,13 +67,13 @@ export default function Team() {
             ))}
           </div>
         </section>
-        <section className="">
-          <div className="lg:w-2/3 w-full mx-auto mt-[90px]">
-            <h2 className="lg:text-5xl text-3xl my-6 font-bold font-[laviossa]  ">
+        <section className="  ">
+          <div className=" w-full lg:w-full mx-auto xl:mt-[90px]">
+            <h2 className="xl:text-5xl text-3xl my-6 font-bold font-[laviossa] ">
               Brokers
             </h2>
-            <h2 className=" font-[montserrat] text-3xl py-8">
-              <span className="text-[#8E0789] font-[laviossa] text-[69px]">
+            <h2 className=" font-[montserrat] lg:text-3xl text-[17px] text-justify lg:text-start xl:py-8 py-4">
+              <span className="text-[#8E0789] font-[laviossa] lg:text-[69px] text-[31px]">
                 A
               </span>{' '}
               little intro to the amazing brokers at Bulloak Finance Management.
@@ -85,9 +85,12 @@ export default function Team() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-2 w-2/3 mx-auto gap-5 py-[90px]">
+          <div className="grid xl:grid-cols-2 md:grid-cols-2 w-full w-full mx-auto gap-5 xl:py-[90px] ">
             {brokerData?.map((items, index) => (
-              <div className="item w-3/4 flex flex-col items-end " key={index}>
+              <div
+                className=" xl:w-3/4 w-full flex flex-col items-end "
+                key={index}
+              >
                 <img
                   src={items.image}
                   className="mr-6 -mb-8 w-44 relative z-10 "
