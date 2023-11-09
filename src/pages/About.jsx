@@ -26,7 +26,7 @@ const About = () => {
           work for you. We specialize in forex trading, crypto trading, real
           estate investments, ETFs, and bonds. With our team of experienced
           professionals, we provide expert guidance and strategies to help you
-          navigate the exciting world of financial markets. Whether you&apso;re
+          navigate the exciting world of financial markets. Whether you&apos;re
           interested in trading currencies, exploring the potential of
           cryptocurrencies, investing in real estate, or diversifying your
           portfolio with ETFs and bonds, we&apos;ve got you covered.
