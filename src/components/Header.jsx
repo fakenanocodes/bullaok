@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { scrollToTop } from '../actions/utils';
 import BluetoothIcon from './utils/icons/BluetoothIcon';
 import EmailIcon from './utils/icons/EmailIcon';
 import PhoneIcon from './utils/icons/PhoneIcon';
@@ -59,7 +60,10 @@ const Header = () => {
       <p className="font-semibold text-white">Logo</p>
       <div className="flex items-center gap-5">
         <p
-          onClick={() => navigate('/')}
+          onClick={() => {
+            scrollToTop();
+            navigate('/');
+          }}
           className="font-semibold text-white text-sm cursor-pointer"
         >
           Home

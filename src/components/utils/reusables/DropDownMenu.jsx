@@ -7,11 +7,8 @@ import Popper from '@mui/material/Popper';
 import Stack from '@mui/material/Stack';
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { scrollToTop } from '../../../actions/utils';
 import DropdownIcon from '../icons/DropdownIcon';
-
-const scrollToTop = () => {
-  window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-};
 
 export default function MenuListComposition({ item }) {
   const [open, setOpen] = React.useState(false);
