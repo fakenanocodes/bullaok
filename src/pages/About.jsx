@@ -70,7 +70,7 @@ const About = () => {
           <div className="hidden lg:inline-block bg-gradient-to-br from-[#8E0789] via-purple-600 to-[#8E0789] h-2 w-[30rem] -ml-44 mb-10"></div>
           <div className="xl:w-[30rem]">
             <p className="text-lg md:text-xl mt-5 lg:w-[30rem]">
-              Whether you&apso;re a seasoned investor or just starting your
+              Whether you&apos;re a seasoned investor or just starting your
               journey, we&apos;re here to provide you with the knowledge, tools,
               and resources you need to make informed decisions and achieve your
               financial objectives. Get in touch with us today to explore how
