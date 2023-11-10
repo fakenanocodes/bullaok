@@ -1,53 +1,8 @@
 import { motion } from 'framer-motion';
 import React from 'react';
 import Layout from '../components/Layout';
-
+import { sectionsData } from '../data/inevstment';
 export default function Investment() {
-  const sectionsData = [
-    {
-      title: 'Forex Trading',
-      imageUrl: 'forex.png',
-      backgroundColor: '#fff',
-      text: "Explore our diverse range of investment packages tailored to meet your financial goals. Whether you're aiming for short-term gains or long-term wealth accumulation, our expertly crafted investment packages offer a secure and strategic path to a prosperous future.",
-    },
-    {
-      title: 'Real Estate',
-      imageUrl: 'estate.png',
-      backgroundColor: '#CDA1CB/10',
-      text: "Explore our diverse range of investment packages tailored to meet your financial goals. Whether you're aiming for short-term gains or long-term wealth accumulation, our expertly crafted investment packages offer a secure and strategic path to a prosperous future.",
-    },
-    {
-      title: 'Crypto',
-      imageUrl: 'crypto.png',
-      backgroundColor: '#fff',
-      text: "Explore our diverse range of investment packages tailored to meet your financial goals. Whether you're aiming for short-term gains or long-term wealth accumulation, our expertly crafted investment packages offer a secure and strategic path to a prosperous future.",
-    },
-    {
-      title: 'ETFs',
-      imageUrl: 'nfts.png',
-      backgroundColor: '#CDA1CB/10',
-      text: "Explore our diverse range of investment packages tailored to meet your financial goals. Whether you're aiming for short-term gains or long-term wealth accumulation, our expertly crafted investment packages offer a secure and strategic path to a prosperous future.",
-    },
-    {
-      title: 'Stocks',
-      imageUrl: 'stocks.png',
-      backgroundColor: '#fff',
-      text: "Explore our diverse range of investment packages tailored to meet your financial goals. Whether you're aiming for short-term gains or long-term wealth accumulation, our expertly crafted investment packages offer a secure and strategic path to a prosperous future.",
-    },
-    {
-      title: 'Assets',
-      imageUrl: 'assets.png',
-      backgroundColor: '#CDA1CB/10',
-      text: "Explore our diverse range of investment packages tailored to meet your financial goals. Whether you're aiming for short-term gains or long-term wealth accumulation, our expertly crafted investment packages offer a secure and strategic path to a prosperous future.",
-    },
-    {
-      title: 'Cannabis',
-      imageUrl: 'cannabis.png',
-      backgroundColor: '#fff',
-      text: "Explore our diverse range of investment packages tailored to meet your financial goals. Whether you're aiming for short-term gains or long-term wealth accumulation, our expertly crafted investment packages offer a secure and strategic path to a prosperous future.",
-    },
-  ];
-
   const sections = sectionsData.map((section, index) => (
     <section
       key={index}

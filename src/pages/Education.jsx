@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { BiSolidChevronLeft } from 'react-icons/bi';
+import { FaAngleRight } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { images } from '../assets';
 import Layout from '../components/Layout';
 import TestimonialsSwiper from '../components/TestimonialsSwiper';
 import CoursesCard from '../components/utils/cards/CoursesCard';
 export default function Education({ courses, header, testimonials }) {
+  const [showMoreContent, setShowMoreContent] = useState(false);
+
+  const toggleMoreContent = () => {
+    setShowMoreContent(!showMoreContent);
+  };
   return (
     <Layout>
       <header
@@ -13,31 +20,109 @@ export default function Education({ courses, header, testimonials }) {
           backgroundImage: `url(${images.edu_bg})`,
         }}
       >
-        <section className="flex lg:flex-row flex-col items-center gap-8 xl:px-[100px]   px-2">
-          <img src={images.chart_graph} className="w-full lg:w-auto" alt="" />
-          <div className="  px-4  w-full lg:w-2/4 text-3xl   relative z-20 text-[#000] flex flex-col lg:items-start gap-[80px]">
-            <h2 className="text-[#8E0789] font-[laviossa] lg:text-5xl text-3xl">
-              Watch, Learn & Invest
-            </h2>
-            <p className="leading-loose font-[roboto]">
-              Nam sollicitudin dignissim nunc, cursus ullamcorper eros vulputate
-              sed. Vestibulum sit amet tortor sit amet libero lobortis semper at
-              et odio. In eu tellus tellus tPellentesque ullamcorper aliquet
-              ultrices.Nam sollicitudin dignissim nunc, cursus{' '}
-            </p>
-            <div className="grid xl:grid-cols-3 lg:grid-cols-3 grid-cols-3   items-center  xl:gap-8 xl:mt-8 mt-2 my-4">
-              {header.map((item, index) => (
-                <div key={index} className="flex flex-col items-center  gap-5">
-                  <img src={item.icon} className="xl:w-12  lg:w-12 h-auto  " alt="" />
-                  <p className="font-[montserrat] lg:text-2xl  ">
-                    {item.text}
-                  </p>
+        {!showMoreContent ? (
+          <>
+            <section className="flex lg:flex-row flex-col justify-between items-center gap-8 xl:px-[100px]   px-2">
+              <img
+                src={images.chart_graph}
+                className="w-full lg:w-auto"
+                alt=""
+              />
+              <div className="  px-4  w-full lg:w-2/4 text-3xl   relative z-20 text-[#000] flex flex-col lg:items-start gap-[40px]">
+                <h2 className="text-[#8E0789] font-[laviossa] lg:text-5xl text-3xl">
+                  Watch, Learn & Invest
+                </h2>
+                <p className="leading-loose font-[roboto]">
+                  Bulloak Finance Management provides a good educational system
+                  that covers various aspects of finance. Their educational
+                  programs are designed to equip individuals with the knowledge
+                  and skills needed to navigate the complex world of finance.
+                  From introductory courses to advanced topics, Bulloak Finance
+                  Management offers a wide range of learning opportunities.
+                </p>
+                <button
+                  className="ml-auto border flex items-center gap-4  border-black px-7 py-2 rounded-lg text-[#8E0789] font-[montserrat] font-semibold"
+                  onClick={() => toggleMoreContent()}
+                >
+                  <span> More </span> <FaAngleRight />
+                </button>
+                <div className="grid xl:grid-cols-3 lg:grid-cols-3 grid-cols-3   items-center  xl:gap-8 xl:mt-8 mt-2 my-4">
+                  {header.map((item, index) => (
+                    <div
+                      key={index}
+                      className="flex flex-col items-center  gap-5"
+                    >
+                      <img
+                        src={item.icon}
+                        className="xl:w-12  lg:w-12 h-auto  "
+                        alt=""
+                      />
+                      <p className="font-[montserrat] lg:text-2xl  ">
+                        {item.text}
+                      </p>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </div>
-        </section>
+              </div>
+            </section>
+          </>
+        ) : (
+          <>
+            <section className="flex lg:flex-row flex-col items-center gap-8  px-[100px]   px-2">
+              <div className="flex  gap-9 my-6">
+                <p className="leading-loose font-[roboto] text-[20px]">
+                  Bulloak Finance Management provides a good educational system
+                  that covers various aspects of finance. Their educational
+                  programs are designed to equip individuals with the knowledge
+                  and skills needed to navigate the complex world of finance.
+                  From introductory courses to advanced topics, Bulloak Finance
+                  Management offers a wide range of learning opportunities.
+                  Their educational system includes courses on personal finance,
+                  investment strategies, risk management, and financial
+                  planning. Whether you're a beginner or an experienced
+                  investor, you can find courses tailored to your needs and
+                  level of expertise. The curriculum is designed in layman's
+                  terms, making it easily understandable for individuals with
+                  varying levels of financial knowledge. In addition to
+                  traditional classroom-style courses, Bulloak Finance
+                  Management also offers online learning resources such as
+                  webinars, video tutorials, and interactive modules. These
+                  resources provide flexibility and convenience, allowing you to
+                  learn at your own pace and from the comfort of your own home.
+                </p>
+                <div className="flex flex-col gap-4">
+                  <p className="leading-loose font-[roboto] text-[20px]">
+                    Furthermore, Bulloak Finance Management believes in the
+                    power of practical learning. They provide real-world case
+                    studies, simulations, and hands-on exercises to enhance your
+                    understanding of financial concepts. This practical approach
+                    helps you apply the knowledge gained in the educational
+                    programs to real-life financial situations. By enrolling in
+                    Bulloak Finance Management's educational system, you'll have
+                    the opportunity to learn from experienced professionals in
+                    the field of finance. Their team of expert instructors and
+                    mentors are dedicated to providing guidance and support
+                    throughout your learning journey. Overall, Bulloak Finance
+                    Management's educational system aims to empower individuals
+                    with the knowledge and skills necessary to make informed
+                    financial decisions. Whether you're looking to enhance your
+                    personal finances or pursue a career in finance, their
+                    educational programs can provide you with the foundation you
+                    need to succeed.
+                  </p>
+                  <button
+                    className="mr-auto border flex items-center gap-4  border-black px-7 py-2 rounded-lg text-[#8E0789] font-[montserrat] font-semibold"
+                    onClick={() => toggleMoreContent()}
+                  >
+                    <BiSolidChevronLeft /> <span> Back</span>
+                  </button>
+                </div>
+              </div>
+            </section>
+          </>
+        )}
       </header>
+
       <main>
         <section className="bg-[#fff]">
           <h2 className="text-center font-bold font-[laviossa] lg:text-4xl text-3xl text-[#8E0789] py-6">

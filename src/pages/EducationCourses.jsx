@@ -1,12 +1,26 @@
 import React from 'react';
+import { BsSearch } from 'react-icons/bs';
 import Layout from '../components/Layout';
 import CoursesCard from '../components/utils/cards/CoursesCard';
-
 export default function EducationCourses({ courses }) {
   return (
     <Layout>
+      <section className="bg-[#fff] py-8 px-4">
+        <h2 className='text-center xl:text-5xl text-2xl  text-[#8E0789] font-[laviossa] mb-5'>One Stop For Investment</h2>
+
+        <div className="box xl:w-[80%] w-full mx-auto bg-[#F4EFF4] xl:py-9 py-4 xl:px-[70px] px-8">
+          <div className="relative">
+            <input
+              type="text"
+              className="w-full pl-8 pr-4 py-2 rounded-lg"
+              placeholder="Search Courses"
+            />
+            <BsSearch className="absolute right-5 top-3  text-gray-500" />
+          </div>
+        </div>
+      </section>
       <section className="bg-[#fff] py-[90px]">
-      <div className="grid grid-cols-1 xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 gap-4 w-full h-full xl:w-5/6  px-8 mx-auto ">
+        <div className="grid grid-cols-1 xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 gap-4 w-full h-full xl:w-5/6  px-2 mx-auto ">
           {courses?.map((item, index) => (
             <CoursesCard item={item} />
           ))}

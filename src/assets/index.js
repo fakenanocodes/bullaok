@@ -1,7 +1,10 @@
+import agric from './agric.png';
 import anthonia from './anthonia.png';
+import assets from './assets.png';
 import assistant from './assistant.png';
 import benedict from './benedict.png';
 import bond from './bond_market.png';
+import cannabis from './cannabis.png';
 import chart_graph from './chart_graph.png';
 import content from './content.png';
 import crypto from './crypto_market.png';
@@ -13,7 +16,10 @@ import edu_bg from './edu_bg.png';
 import estate from './estate_market.png';
 import etf from './etf_market.png';
 import forex from './forex_market.png';
+import gold from './gold.png';
 import leaddev from './leaddev.png';
+import loans from './loans.png';
+import oil from './oil.png';
 import operations from './operations.png';
 import president from './president.png';
 import secretary from './secretary.png';
@@ -45,4 +51,10 @@ export const images = {
   data,
   content,
   assistant,
+  agric,
+  assets,
+  cannabis,
+  oil,
+  loans,
+  gold,
 };
