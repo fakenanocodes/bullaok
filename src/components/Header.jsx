@@ -85,7 +85,13 @@ const Header = () => {
         <div className="cursor-pointer">
           <ProfileIcon />
         </div>
-        <button className="border-2 border-white outline-none p-2 text-sm rounded-sm font-semibold text-white">
+        <button
+          onClick={() => {
+            scrollToTop();
+            navigate('/login');
+          }}
+          className="border-2 border-white outline-none p-2 text-sm rounded-sm font-semibold text-white"
+        >
           Get Started
         </button>
       </div>

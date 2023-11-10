@@ -582,6 +582,13 @@
   resolved "https://registry.yarnpkg.com/@mui/core-downloads-tracker/-/core-downloads-tracker-5.14.17.tgz#68ec40ea00832fb685f09bd493648b1f68f5baf4"
   integrity sha512-eE0uxrpJAEL2ZXkeGLKg8HQDafsiXY+6eNpP4lcv3yIjFfGbU6Hj9/P7Adt8jpU+6JIhmxvILGj2r27pX+zdrQ==
 
+"@mui/icons-material@^5.14.16":
+  version "5.14.16"
+  resolved "https://registry.yarnpkg.com/@mui/icons-material/-/icons-material-5.14.16.tgz#bd394183b0cfb068d4fa48292cd8d329be8d6b16"
+  integrity sha512-wmOgslMEGvbHZjFLru8uH5E+pif/ciXAvKNw16q6joK6EWVWU5rDYWFknDaZhCvz8ZE/K8ZnJQ+lMG6GgHzXbg==
+  dependencies:
+    "@babel/runtime" "^7.23.2"
+
 "@mui/material@^5.14.17":
   version "5.14.17"
   resolved "https://registry.yarnpkg.com/@mui/material/-/material-5.14.17.tgz#8e11098e52965be3e9ed117d6c107bbe511fac46"
@@ -2583,6 +2590,11 @@ react-transition-group@^4.4.5:
     dom-helpers "^5.0.1"
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
+
+react18-input-otp@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/react18-input-otp/-/react18-input-otp-1.1.4.tgz#5991c4dae6fff9d2dd0384bfc757e183314181be"
+  integrity sha512-35xvmTeuPWIxd0Z0Opx4z3OoMaTmKN4ubirQCx1YMZiNoe+2h1hsOSUco4aKPlGXWZCtXrfOFieAh46vqiK9mA==
 
 react@^18.2.0:
   version "18.2.0"
