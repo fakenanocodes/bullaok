@@ -6,7 +6,9 @@ export default function EducationCourses({ courses }) {
   return (
     <Layout>
       <section className="bg-[#fff] py-8 px-4">
-        <h2 className='text-center xl:text-5xl text-2xl  text-[#8E0789] font-[laviossa] mb-5'>One Stop For Investment</h2>
+        <h2 className="text-center xl:text-5xl text-2xl  text-[#8E0789] font-[laviossa] mb-5">
+          One Stop For Investment
+        </h2>
 
         <div className="box xl:w-[80%] w-full mx-auto bg-[#F4EFF4] xl:py-9 py-4 xl:px-[70px] px-8">
           <div className="relative">
@@ -28,7 +30,7 @@ export default function EducationCourses({ courses }) {
       </section>
       <section className="relative ">
         <div className="box bg-[#8E0789] h-40"></div>
-        <div className="absolute bottom drop-shadow-xl flex flex-col justify-center left-1/2 mx-auto  transform -translate-y-2/4 -translate-x-2/4 bg-[#fff] h-44 w-[60%] text-center p-4">
+        <div className="absolute bottom drop-shadow-xl flex flex-col justify-center left-1/2 mx-auto  transform -translate-y-2/4 -translate-x-2/4 bg-[#fff] h-44 xl:w-[60%] w-[80%] text-center p-4">
           <h2 className="text-[#000] text-2xl font-bold mb-2">
             Stay up-to-date with insights from Bulloak Investment
           </h2>

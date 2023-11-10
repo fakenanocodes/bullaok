@@ -28,11 +28,11 @@ export default function Education({ courses, header, testimonials }) {
                 className="w-full lg:w-auto"
                 alt=""
               />
-              <div className="  px-4  w-full lg:w-2/4 text-3xl   relative z-20 text-[#000] flex flex-col lg:items-start gap-[40px]">
+              <div className="  px-4  w-full lg:w-2/4 xl:text-3xl   relative z-20 text-[#000] flex flex-col lg:items-start gap-[40px]">
                 <h2 className="text-[#8E0789] font-[laviossa] lg:text-5xl text-3xl">
                   Watch, Learn & Invest
                 </h2>
-                <p className="leading-loose font-[roboto]">
+                <p className="leading-loose font-[roboto]  ">
                   Bulloak Finance Management provides a good educational system
                   that covers various aspects of finance. Their educational
                   programs are designed to equip individuals with the knowledge
@@ -68,9 +68,9 @@ export default function Education({ courses, header, testimonials }) {
           </>
         ) : (
           <>
-            <section className="flex lg:flex-row flex-col items-center gap-8  px-[100px]   px-2">
-              <div className="flex  gap-9 my-6">
-                <p className="leading-loose font-[roboto] text-[20px]">
+            <section className="flex xl:flex-row flex-col items-center gap-8  xl:px-[100px]    px-2">
+              <div className="flex xl:flex-row flex-col xl:gap-9 gap-7 my-6">
+                <p className="leading-loose font-[roboto] text-[20px] xl:text-start text-justify">
                   Bulloak Finance Management provides a good educational system
                   that covers various aspects of finance. Their educational
                   programs are designed to equip individuals with the knowledge
@@ -91,7 +91,7 @@ export default function Education({ courses, header, testimonials }) {
                   learn at your own pace and from the comfort of your own home.
                 </p>
                 <div className="flex flex-col gap-4">
-                  <p className="leading-loose font-[roboto] text-[20px]">
+                  <p className="leading-loose font-[roboto] text-[20px] xl:text-start text-justify">
                     Furthermore, Bulloak Finance Management believes in the
                     power of practical learning. They provide real-world case
                     studies, simulations, and hands-on exercises to enhance your
@@ -134,13 +134,13 @@ export default function Education({ courses, header, testimonials }) {
           <h2 className="text-center font-bold font-[laviossa] lg:text-4xl text-3xl text-[#000] mb-8 py-6 px-4">
             Features Investment Courses
           </h2>
-          <div className="grid grid-cols-1 xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 gap-4 w-full h-full xl:w-5/6  px-8 mx-auto ">
+          <div className="grid grid-cols-1 xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 gap-4 w-full h-full xl:w-5/6  px-4 mx-auto ">
             {courses?.slice(0, 6).map((item, index) => (
               <CoursesCard item={item} />
             ))}
           </div>
           <Link to="/education-courses">
-            <button className="text-[#000] bg-[#FFB803] font-[roboto] rounded-lg shadow-xl px-4 py-5 lg:text-[48px] text-[25px] text-center my-9 font-[600]">
+            <button className="text-[#000] bg-[#FFB803] font-[roboto] rounded-lg shadow-xl px-4 py-5 lg:text-[40px] text-[25px] text-center my-9 font-[600]">
               See all courses
             </button>
           </Link>
