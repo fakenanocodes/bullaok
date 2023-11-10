@@ -14,11 +14,13 @@ import Hub from './pages/Hub';
 import Investing from './pages/Investing';
 import Investment from './pages/Investment';
 import Ira from './pages/Ira';
+import Login from './pages/Login';
 import MarginTrading from './pages/MarginTrading';
 import OptionsPage from './pages/OptionsPage';
 import Otc from './pages/Otc';
 import PaperTrading from './pages/PaperTrading';
 import RecurringInvestments from './pages/RecurringInvestments';
+import Signup from './pages/Signup';
 import SmartAdvisor from './pages/SmartAdvisor';
 import Stock from './pages/Stock';
 import Team from './pages/Team';
@@ -67,6 +69,8 @@ function App() {
           element={<EducationCourses courses={courses} />}
         />
         <Route path="about" element={<About />} />
+        <Route path="login" element={<Login />} />
+        <Route path="register" element={<Signup />} />
       </Routes>
     </div>
   );

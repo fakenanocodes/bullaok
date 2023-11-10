@@ -7,6 +7,7 @@ import Popper from '@mui/material/Popper';
 import Stack from '@mui/material/Stack';
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { scrollToTop } from '../../../actions/utils';
 import DropdownIcon from '../icons/DropdownIcon';
 
 export default function MenuListComposition({ item }) {
@@ -92,7 +93,10 @@ export default function MenuListComposition({ item }) {
                     {item?.list?.map((list, idx) => (
                       <MenuItem
                         key={idx}
-                        onClick={() => navigate(`${list?.route}`)}
+                        onClick={() => {
+                          scrollToTop();
+                          navigate(`${list?.route}`);
+                        }}
                       >
                         {list?.name}
                       </MenuItem>
