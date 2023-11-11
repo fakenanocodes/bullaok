@@ -7,6 +7,7 @@ import ETF from './pages/ETF';
 import Education from './pages/Education';
 import EducationCourses from './pages/EducationCourses';
 import Faq from './pages/Faq';
+import Forex from './pages/Forex';
 import FractionalShares from './pages/FractionalShares';
 import History from './pages/History';
 import Home from './pages/Home';
@@ -39,7 +40,7 @@ function App() {
         <Route path="/stocks" element={<Stock />} />
         <Route path="/otc-stock-trading" element={<Otc />} />
         <Route
-          path="/recurring-investment"
+          path="/services/recurring-investment"
           element={<RecurringInvestments />}
         />
         <Route path="/fractional-shares" element={<FractionalShares />} />
@@ -50,12 +51,12 @@ function App() {
         <Route path="/hub" element={<Hub />} />
         <Route path="/options" element={<OptionsPage />} />
         <Route path="/papertrading" element={<PaperTrading />} />
-        <Route path="smart-advisor" element={<SmartAdvisor />} />
-        <Route path="what-we-invest" element={<WhatWeInvest />} />
+        <Route path="/services/smart-advisor" element={<SmartAdvisor />} />
+        <Route path="/services/what-we-invest" element={<WhatWeInvest />} />
         <Route path="team" element={<Team />} />
         <Route path="faq" element={<Faq />} />
         <Route
-          path="education"
+          path="/services/education"
           element={
             <Education
               courses={courses}
@@ -71,6 +72,7 @@ function App() {
         <Route path="about" element={<About />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Signup />} />
+        <Route path="/services/forex" element={<Forex />} />
       </Routes>
     </div>
   );
