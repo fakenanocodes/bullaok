@@ -19,9 +19,7 @@ export default function MenuListComposition({ item }) {
     setOpen((prevOpen) => !prevOpen);
   };
 
-  const handleClose = (target) => {
-    navigate(`/${target}`);
-
+  const handleClose = () => {
     setOpen(false);
   };
 
@@ -50,6 +48,7 @@ export default function MenuListComposition({ item }) {
         <div
           id="composition-button"
           ref={anchorRef}
+          onClick={() => setOpen(true)}
           onMouseOver={handleToggle}
           onMouseOut={handleToggle}
           className="relative flex items-center gap-2 cursor-pointer"
