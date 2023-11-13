@@ -18,10 +18,11 @@ const navItems = [
   {
     title: 'What We Do',
     list: [
-      { name: 'We invest', route: '/what-we-invest' },
-      { name: 'We educate', route: '/education' },
-      { name: 'Smart advisor', route: '/smart-advisor' },
-      { name: 'Recurring investment', route: '/recurring-investment' },
+      { name: 'We invest', route: '/services/what-we-invest' },
+      { name: 'We educate', route: '/services/education' },
+      { name: 'Forex', route: '/services/forex' },
+      { name: 'Smart advisor', route: '/services/smart-advisor' },
+      { name: 'Recurring investment', route: '/services/recurring-investment' },
     ],
   },
   {
@@ -47,7 +48,7 @@ const navItems = [
   },
   {
     title: 'Hub',
-    list: [{ name: 'Learn', route: '/education' }],
+    list: [{ name: 'Learn', route: '/services/education' }],
   },
 ];
 
