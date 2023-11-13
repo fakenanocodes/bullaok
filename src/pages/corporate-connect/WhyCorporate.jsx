@@ -33,10 +33,10 @@ export default function WhyCorporate() {
               <p>{item.content}</p>
             </div>
           ))}
-          <button className="flex items-center text-[#550952] lg:p-4 py-2 lg:py-0 px-5 lg:px-0 rounded-xl lg:text-2xl text-xl gap-3 font-bold mt-6 ">
+          <button className="flex items-center text-[#fff] lg:p-4 py-2 lg:py-0 px-5 lg:px-0 rounded-xl lg:text-2xl text-xl gap-3 font-bold mt-6 ">
             {' '}
             <span> Get in touch today!</span>{' '}
-            <BsArrowRight style={{ color: '#550952' }} />
+            <BsArrowRight style={{ color: '#fff' }} />
           </button>{' '}
           <p className='w-2/3 lg:w-full'>Contact CCS@Bulloak-us.com to learn more</p>
         </div>
