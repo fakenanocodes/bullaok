@@ -1,21 +1,21 @@
 export default function GetStarted() {
-  const data = [
-    {
-      img: 'investment.png',
-      title: 'Invest with as little as $5',
-      text: 'Fractional shares on Bulloak can be as small as 1/100000 of a share, as little as $5',
-    },
-    {
-      img: 'pay.png',
-      title: 'Pay no commissions',
-      text: 'Bulloak charges no commission fees, no account management fees or inactivity fees to buy and sell fractional shares',
-    },
-    {
-      img: 'expand.png',
-      title: 'Expand your stock portfolio      ',
-      text: 'With fractional shares trading ability introduced, you have the opportunity to invest in even more companies',
-    },
-  ];
+  // const data = [
+  //   {
+  //     img: 'investment.png',
+  //     title: 'Invest with as little as $5',
+  //     text: 'Fractional shares on Bulloak can be as small as 1/100000 of a share, as little as $5',
+  //   },
+  //   {
+  //     img: 'pay.png',
+  //     title: 'Pay no commissions',
+  //     text: 'Bulloak charges no commission fees, no account management fees or inactivity fees to buy and sell fractional shares',
+  //   },
+  //   {
+  //     img: 'expand.png',
+  //     title: 'Expand your stock portfolio      ',
+  //     text: 'With fractional shares trading ability introduced, you have the opportunity to invest in even more companies',
+  //   },
+  // ];
   return (
     <section className="bg-[#fef3fd] py-5 px-0">
       <h2 className="font-bold text-center py-9 lg:text-4xl text-2xl text-[#550952]">

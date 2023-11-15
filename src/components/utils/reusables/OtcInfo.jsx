@@ -80,7 +80,7 @@ const OtcInfo = () => {
       </div>
 
       <div className="flex justify-center">
-        <button className="font-bold py-4 px-7 bg-white rounded-lg text-[#41073F]">
+        <button className="font-bold py-4 px-7 bg-[#D4B716] rounded-lg text-[#000]">
           View Full List
         </button>
       </div>

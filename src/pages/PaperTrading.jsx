@@ -1,9 +1,9 @@
-import MainLayout from '../components/MainLayout';
-import watchlist_img from '../assets/watchlist.png';
+import { Link } from 'react-router-dom';
+import chart_img from '../assets/chart_img.png';
 import equity_img from '../assets/equity_img.png';
 import stock_img from '../assets/stock_img2.png';
-import chart_img from '../assets/chart_img.png';
-import { Link } from 'react-router-dom';
+import watchlist_img from '../assets/watchlist.png';
+import MainLayout from '../components/MainLayout';
 
 const PaperTrading = () => {
   return (
@@ -14,7 +14,7 @@ const PaperTrading = () => {
           Investors <br /> Practice Their Trading Skills
         </h1>
         <div className="flex items-center justify-center mt-10">
-          <button className="text-[1.5rem] bg-[#41073F] text-white py-4 px-5 rounded-[0.5rem] max-lg:text-[1rem] max-lg:py-3 max-lg:px-4">
+          <button className="text-lg bg-[#D4B716] text-black py-4 px-5 rounded-[0.5rem] max-lg:py-3 max-lg:px-4">
             <span>Open an account</span> <span>&rarr;</span>
           </button>
         </div>
@@ -65,7 +65,7 @@ const PaperTrading = () => {
                 for more information regarding eligibility.
               </p>
             </div>
-            <button className="flex gap-3 mt-5 text-[#41073F] bg-white px-4 py-3 items-center justify-center cursor-pointer text-2xl text-center font-open-sans-semibold font-semibold leading-16 rounded-full  max-lg:text-[1rem] max-lg:py-3 max-lg:px-4">
+            <button className="flex gap-3 mt-5 text-[#000] bg-[#D4B716] px-4 py-3 items-center justify-center cursor-pointer text-lg text-center font-open-sans-semibold font-semibold leading-16 rounded-full  max-lg:py-3 max-lg:px-4">
               <span> Get Started</span>
               <span>&rarr;</span>
             </button>
@@ -130,7 +130,11 @@ const PaperTrading = () => {
         </div>
 
         <div className="flex items-center justify-center gap-32 mt-40 flex-wrap  max-xl:gap-12 max-xl:mx-10">
-          <img src={chart_img} alt="" className="w-[30rem] h-[22rem] max-sm:w-[100%] " />
+          <img
+            src={chart_img}
+            alt=""
+            className="w-[30rem] h-[22rem] max-sm:w-[100%] "
+          />
           <div className="">
             <p className="text-black text-[2.5rem] mb-2 font-extrabold  max-lg:text-[2rem] max-md:text-[1.5rem]">
               You can practice options <br /> trading skill on Bulloak <br />{' '}
@@ -147,20 +151,22 @@ const PaperTrading = () => {
           </div>
         </div>
 
-        <div className="h-[30rem] bg-[#181818] my-28 text-center flex flex-col justify-center">
-          <p className='text-white text-[2.5rem] font-bold max-lg:text-[2rem] max-md:text-[1.5rem]' >Practice Trading Without The Risk</p>
-          <p className='text-white text-[1.2rem] mt-8 max-sm:text-[1rem]'>
+        <div className="h-[30rem] bg-[#8E0789] my-28 text-center flex flex-col justify-center">
+          <p className="text-white text-[2.5rem] font-bold max-lg:text-[2rem] max-md:text-[1.5rem]">
+            Practice Trading Without The Risk
+          </p>
+          <p className="text-white text-[1.2rem] mt-8 max-sm:text-[1rem]">
             Simulated trading can help all levels of traders to practice their
-            trading skills and strategies. You can access <br /> Webull’s trading
-            simulator on desktop, web and mobile devices, so you can try out a
-            new idea as soon as it <br /> comes to mind. Open an account today to get
-            started.
+            trading skills and strategies. You can access <br /> Webull’s
+            trading simulator on desktop, web and mobile devices, so you can try
+            out a new idea as soon as it <br /> comes to mind. Open an account
+            today to get started.
           </p>
           <div className="flex items-center justify-center mt-20">
-          <button className="text-[1.5rem] bg-[white] text-black py-4 px-5 rounded-[0.5rem]  max-lg:text-[1rem] max-lg:py-3 max-lg:px-4">
-            <span>Open account</span>
-          </button>
-        </div>
+            <button className="text-lg bg-[#D4B716] text-black py-4 px-5 rounded-[0.5rem] max-lg:py-3 max-lg:px-4 font-semibold">
+              <span>Open account</span>
+            </button>
+          </div>
         </div>
       </MainLayout>
     </div>

@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import React from 'react';
 import Layout from '../components/Layout';
 import { sectionsData } from '../data/inevstment';
 export default function Investment() {
@@ -23,7 +22,7 @@ export default function Investment() {
           <p className="text-2xl leading-loose font-[roboto] ">
             {section.text}
           </p>
-          <button className="border shadow-lg bg-transparent font-[montserrat] border-[#AC09A6] lg:text-[25px] text-xl lg:px-8 px-4 px-8 font-bold py-4 uppercase">
+          <button className="border shadow-lg bg-transparent font-[montserrat] border-[#D4B716] text-[#D4B716] lg:text-[25px] text-xl lg:px-8 px-4 font-bold py-4 uppercase">
             Read more
           </button>
         </div>
@@ -63,10 +62,10 @@ export default function Investment() {
             >
               <h2 className="lg:text-3xl leading-loose font-[roboto] text-xl text-black text-center">
                 Explore our diverse range of investment packages tailored to
-                meet your financial goals. Whether you're aiming for short-term
-                gains or long-term wealth accumulation, our expertly crafted
-                investment packages offer a secure and strategic path to a
-                prosperous future.{' '}
+                meet your financial goals. Whether you&apos;re aiming for
+                short-term gains or long-term wealth accumulation, our expertly
+                crafted investment packages offer a secure and strategic path to
+                a prosperous future.{' '}
               </h2>
             </motion.div>
           </div>

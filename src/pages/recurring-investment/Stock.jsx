@@ -1,4 +1,3 @@
-import React from 'react';
 import { BsFillArrowRightCircleFill } from 'react-icons/bs';
 
 export default function Stock() {
@@ -20,7 +19,7 @@ export default function Stock() {
             className="w-64 h-auto lg:hidden block"
             alt=""
           />
-          <button className="bg-[#fff] lg:hidden block rounded-lg text-[#41073F] font-bold px-4 py-4 flex items-center gap-2 ">
+          <button className="bg-[#fff] lg:hidden rounded-lg text-[#41073F] font-bold px-4 py-4 items-center gap-2 ">
             <span>Get Started</span> <BsFillArrowRightCircleFill />
           </button>
           <p className="lg:text-lg mt-5 lg:mt-0 text-xs">
@@ -32,7 +31,7 @@ export default function Stock() {
             for more information regarding eligibility.
           </p>
         </div>
-        <button className="bg-[#fff] hidden lg:block rounded-lg text-[#41073F] font-bold w-1/4 py-4 flex items-center gap-2 mt-[100px] lg:mt-0">
+        <button className="bg-[#D4B716] lg:block rounded-lg text-[#000] font-bold w-1/4 py-4 items-center gap-2 mt-[100px] lg:mt-0">
           <span>Get Started</span>
         </button>
       </div>

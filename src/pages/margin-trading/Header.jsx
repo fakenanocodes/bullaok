@@ -9,12 +9,12 @@ export default function Header() {
   ];
   return (
     <section
-      className="flex flex-col lg:flex-row px-8 items-center justify-center md:gap-16 gap-8 py-9  bg-cover bg-center bg-no-repeat  w-full relative"
+      className="flex flex-col lg:flex-row px-8 items-center justify-center md:gap-16 gap-8 py-9 bg-cover bg-center bg-no-repeat w-full relative"
       style={{
         backgroundImage: `url('bg_margin.jpg')`,
       }}
     >
-      <div className="flex text-center md:text-start flex-col gap-10 text-[#fff] md:items-start items-center w-full lg:w-2/4 items-start">
+      <div className="flex text-center md:text-start flex-col gap-10 text-[#fff] md:items-start w-full lg:w-2/4">
         <h1 className="font-bold md:text-[70px] text-4xl  text-center md:text-start mt-9 ">
           Margin Trading
           <br />
@@ -25,7 +25,7 @@ export default function Header() {
           Margin trading enables you to borrow money from Bulloak and leverage
           your holdings to purchase securities. This gives you access to
           additional buying power based on the value of certain securities and
-          assets in your brokerage account.​
+          assets in your brokerage account.
         </p>
         <p className="hidden md:block">
           On Bulloak, do it all with zero commission.
@@ -41,7 +41,7 @@ export default function Header() {
           ))}
         </div>
 
-        <button className="bg-[#41073F] rounded-lg text-[#fff] px-9 py-4 flex items-center gap-2 mt-[100px] lg:mt-0">
+        <button className="bg-[#D4B716] rounded-lg text-[#000] px-9 py-4 flex items-center gap-2 mt-[100px] lg:mt-0">
           <span>Get Started</span> <BsFillArrowRightCircleFill />
         </button>
 

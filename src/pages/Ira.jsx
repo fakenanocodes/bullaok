@@ -62,13 +62,13 @@ const Ira = () => {
             retirement accounts from Bulloak.
           </p>
           <div>
-            <button className="laviossa text-white font-semibold text-lg py-5 px-6 bg-[#FFD700] rounded-lg mt-[2rem]">
+            <button className="laviossa text-white font-semibold text-lg py-5 px-6 bg-[#8E0789] rounded-lg mt-[2rem]">
               Open a Bulloak account
             </button>
           </div>
         </div>
 
-        <img src={ira_banner_img} alt="" className="h-[30rem] xl:h-[50rem]" />
+        <img src={ira_banner_img} alt="" className="h-[30rem] xl:h-[45rem]" />
       </section>
       <section className="bg-gray-50 py-[1rem]">
         <div className="flex flex-col justify-center items-center gap-4 my-[3rem] border-b mx-5 lg:mx-[5rem] xl:mx-[10rem]">

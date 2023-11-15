@@ -16,7 +16,7 @@ const InvestReasons = () => {
             Your uninvested cash will generate a 5.0% APY. Interest will be paid
             every month.
           </p>
-          <button className="font-bold py-4 px-6 bg-[#fff] rounded-lg text-[#41073F] max-w-[10rem]">
+          <button className="font-bold py-4 px-6 bg-[#D4B716] rounded-lg text-[#000] max-w-[10rem]">
             Get Started
           </button>
         </div>
@@ -44,7 +44,7 @@ const InvestReasons = () => {
             a bank. Set a recurring deposit schedule to achieve your savings
             goal.
           </p>
-          <button className="font-bold py-4 px-6 bg-[#fff] rounded-lg text-[#41073F] max-w-[10rem]">
+          <button className="font-bold py-4 px-6 bg-[#D4B716] rounded-lg text-[#000] max-w-[10rem]">
             Get Started
           </button>
         </div>

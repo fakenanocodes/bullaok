@@ -9,28 +9,19 @@ export default function OpenAccount() {
       <div className="md:w-2/3 w-full  m-auto mt-5 flex flex-col items-center">
         <hr className="w-full mt-5 hidden md:block" />
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:divide-x py-8 justify-center items-center">
-          <div
-            className="bx text-[#fff]  rounded-lg h-full w-full bg-gray-300 md:bg-transparent rounded-md bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-10 border border-gray-100 md:border-0
- backdrop-blur text-center px-6 py-4"
-          >
+          <div className="bx text-[#fff]  rounded-lg h-full w-full bg-gray-300 md:bg-transparent bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-10 border border-gray-100 md:border-0 text-center px-6 py-4">
             <h3 className="text-3xl mb-4 font-bold">Fund Profile</h3>
             <p className="text-sm md:text-lg">
               Fund profile, dvidend, split record, and net asset value record
             </p>
           </div>
-          <div
-            className="bx text-[#fff]   rounded-lg h-full w-full bg-gray-300 md:bg-transparent  bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-10 border border-gray-100 md:border-0
- backdrop-blur text-center px-6 py-4"
-          >
+          <div className="bx text-[#fff] rounded-lg h-full w-full bg-gray-300 md:bg-transparent  bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-10 border border-gray-100 md:border-0 text-center px-6 py-4">
             <h3 className="text-3xl mb-4 font-bold">Asset Allocation</h3>
             <p className="text-sm md:text-lg">
               Fund profile, dvidend, split record, and net asset value record
             </p>
           </div>
-          <div
-            className="bx text-[#fff]  rounded-lg h-full w-full bg-gray-300  md:bg-transparent bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-10 border md:border-0 border-gray-100
- backdrop-blur text-center px-6 py-4"
-          >
+          <div className="bx text-[#fff]  rounded-lg h-full w-full bg-gray-300  md:bg-transparent bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-10 border md:border-0 border-gray-100 text-center px-6 py-4">
             <h3 className="text-3xl mb-4 font-bold">Fund Profile</h3>
             <p className="text-sm md:text-lg">
               Fund profile, dvidend, split record, and net asset value record
@@ -38,7 +29,7 @@ export default function OpenAccount() {
           </div>
         </div>
         <hr className="w-full hidden md:block " />
-        <button className="bg-[#fff] py-3 rounded-lg font-bold mt-7 px-6">
+        <button className="bg-[#D4B716] text-black py-3 rounded-lg font-bold mt-7 px-6">
           Open an account
         </button>
       </div>

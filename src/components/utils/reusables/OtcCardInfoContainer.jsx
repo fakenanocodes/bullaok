@@ -11,22 +11,27 @@ const items = [
   {
     description:
       'Buy and sell large-cap ADRs, and small or micro-cap growth companies.',
+    image: trade_icon,
   },
   {
     description:
       'Get instant market access and customize your trading with our free trading tools.',
+    image: trade_icon,
   },
   {
     description:
       'OTC Markets: Real-time best bid & offer pricing for OTCQX, OTCQB, and Pink securities.',
+    image: trade_icon,
   },
   {
     description:
       'Trade stocks, ETFs, options, index options and more, with one Bulloak account.',
+    image: trade_icon,
   },
   {
     description:
       'Level up your market knowledge and learn about investing with free online courses on Trading.',
+    image: trade_icon,
   },
 ];
 

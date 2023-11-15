@@ -1,6 +1,6 @@
 export default function Stocks() {
   return (
-    <section className="flex justify-center stocks py-8">
+    <section className="flex justify-center bg-[#CDA1CB26] py-8">
       <div className="flex flex-col items-center text-[#fff] gap-3">
         <h2 className="md:text-3xl text-xl md:text-justify text-center">
           Get up to 12 free stocks today
@@ -12,10 +12,10 @@ export default function Stocks() {
             free stock is valued from $3 to $3000.
           </p>
           <button className="text-[#000] bg-transparent">
-            Learn more {'>'}{' '}
+            Learn more {'>'}
           </button>
         </div>
-        <button className="mt-3 bg-[#41073f] rounded-lg p-3 px-9">
+        <button className="mt-3 bg-[#D4B716] text-black rounded-lg p-3 px-9">
           Open an account
         </button>
       </div>

@@ -12,7 +12,7 @@ const InvestDownBanner = () => {
           APY NOW!
         </p>
 
-        <button className="text-white font-bold py-4 px-6 bg-[#D4B716] rounded-lg">
+        <button className="text-black font-bold py-4 px-6 bg-[#D4B716] rounded-lg">
           Get Started
         </button>
       </div>

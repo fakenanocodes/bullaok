@@ -40,7 +40,7 @@ const navItems = [
     list: [
       { name: 'Invest', route: '/invest' },
       { name: 'Investment Packages', route: '/investment-packages' },
-      { name: 'Recurring Investment', route: '/recurring-investment' },
+      { name: 'Recurring Investment', route: '/services/recurring-investment' },
       { name: 'IRA', route: '/ira' },
       { name: 'Fractional Shares', route: '/fractional-shares' },
       { name: 'Corporate Connect', route: '/corporate-connect' },
@@ -72,6 +72,12 @@ const Header = () => {
         {navItems?.map((item, idx) => (
           <DropDownMenu key={idx} item={item} />
         ))}
+        <p
+          onClick={() => window.open('https://news.bulloak.org', '_blank')}
+          className="font-semibold text-white text-sm cursor-pointer"
+        >
+          News
+        </p>
       </div>
       <div className="flex items-center gap-7">
         <div className="cursor-pointer">

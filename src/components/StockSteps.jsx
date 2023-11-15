@@ -34,7 +34,7 @@ const StockSteps = ({ title }) => {
       </div>
 
       <div className="flex justify-center">
-        <button className="text-white font-bold text-xl py-5 px-7 bg-[#D4B716] rounded-lg">
+        <button className="text-white font-bold text-xl py-5 px-7 bg-[#8E0789] rounded-lg">
           Open An Account
         </button>
       </div>

@@ -36,7 +36,7 @@ const Otc = () => {
           <p className="font-medium text-xl">
             Elevate your OTC trading experience with Bulloak.
           </p>
-          <button className="text-white font-bold py-4 px-6 bg-[#D4B716] rounded-lg">
+          <button className="text-black font-bold py-4 px-6 bg-[#D4B716] rounded-lg">
             Open an account
           </button>
         </div>

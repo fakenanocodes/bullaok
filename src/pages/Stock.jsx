@@ -22,7 +22,7 @@ const Stock = () => {
             <li>Intuitive tools and support for traders</li>
             <li>Discuss market trends with other investors</li>
           </ul>
-          <button className="text-white font-bold py-3 px-5 bg-[#D4B716] rounded-lg">
+          <button className="font-bold py-3 px-5 bg-[#D4B716] rounded-lg text-black">
             Get Started
           </button>
         </div>
@@ -89,7 +89,7 @@ const Stock = () => {
                 See more about the free stock bonus
               </p>
             </div>
-            <button className="text-white font-bold text-xl py-5 px-7 bg-[#D4B716] rounded-lg mt-[4rem]">
+            <button className="text-black font-bold text-xl py-5 px-7 bg-[#D4B716] rounded-lg mt-[4rem]">
               Get your free stocks
             </button>
           </div>

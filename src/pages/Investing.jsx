@@ -58,7 +58,7 @@ const Investing = () => {
               account. No need to open a new account. No fees attached. No
               minimum balance required.
             </p>
-            <button className="text-white font-bold py-4 px-6 bg-[#FFD700] rounded-lg mt-[2rem]">
+            <button className="text-black font-bold py-4 px-6 bg-[#D4B716] rounded-lg mt-[2rem]">
               Open an account
             </button>
           </div>

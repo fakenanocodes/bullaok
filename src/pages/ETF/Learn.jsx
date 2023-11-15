@@ -1,5 +1,3 @@
-import React from 'react';
-import { BsArrowRight } from 'react-icons/bs';
 export default function Learn() {
   return (
     <section className="bg-[#a53aa1] ">
@@ -62,12 +60,12 @@ export default function Learn() {
             *Regulatory and other fees may apply
           </p>
         </div>
-        <button className="bg-[#000] mx-auto hidden lg:block w-full lg:w-2/5 rounded-[30px] py-4 text-3xl  mt-5">
+        <button className="bg-[#D4B716] text-black mx-auto hidden lg:block w-full lg:w-2/5 rounded-[30px] py-4 text-xl mt-5">
           Open an account
         </button>
-        <button className="bg-[#000] mx-auto  flex items-center px-6  gap-3    rounded-[30px] py-2 text-xl  mt-5">
+        {/* <button className="bg-[#000] mx-auto flex items-center px-6 gap-3 rounded-[30px] py-2 text-xl mt-5">
           <span> Open an account</span> <BsArrowRight />
-        </button>
+        </button> */}
       </div>
       <div className="bg-[#021333] md:hidden block">
         <img src="/mobile2.png" alt="" />

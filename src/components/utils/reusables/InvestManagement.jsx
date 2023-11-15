@@ -7,7 +7,7 @@ const InvestManagement = () => {
       <p className="text-3xl md:text-4xl font-extrabold tracking-wide text-center text-[#181C2F]">
         What Is Cash Management?
       </p>
-      <button className="text-white font-semibold text-lg py-4 px-6 bg-[#FFD700] rounded-lg w-[12rem]">
+      <button className="text-black font-semibold text-lg py-4 px-6 bg-[#D4B716] rounded-lg w-[12rem]">
         Learn More
       </button>
     </section>

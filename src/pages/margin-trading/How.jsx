@@ -1,4 +1,3 @@
-import React from 'react';
 import { BsChevronDown, BsFillArrowRightCircleFill } from 'react-icons/bs';
 export default function How() {
   const data = [
@@ -27,7 +26,7 @@ export default function How() {
     <section className=" bg-[#fff] py-9 mt-9  ">
       <div className="mx-auto text-[#000] mt-8 w-full lg:w-2/3 flex flex-col justify-center items-center ">
         <h2 className="font-bold lg:text-4xl text-2xl text-center my-4">
-          How trading securities on margin works​
+          How trading securities on margin works
         </h2>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 items-center justify-between  mx-auto">
@@ -60,11 +59,9 @@ export default function How() {
             className="lg:w-4/6 w-auto h-auto hidden lg:block"
             alt=""
           />
-          {/* <div className="block">
-</div> */}
         </div>
 
-        <button className="bg-[#41073F] rounded-lg text-[#fff] px-9 py-4 flex items-center gap-2 mt-6 ">
+        <button className="bg-[#D4B716] rounded-lg text-[#000] px-9 py-4 flex items-center gap-2 mt-6 ">
           <span>Get Started</span> <BsFillArrowRightCircleFill />
         </button>
       </div>
