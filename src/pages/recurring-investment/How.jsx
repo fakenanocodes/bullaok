@@ -1,4 +1,3 @@
-import React from 'react';
 export default function How() {
   const data = [
     {
@@ -43,7 +42,7 @@ export default function How() {
           {data.map((item, index) => (
             <div
               key={index}
-              className="bg-[#F7FAFC] px-4 lg:w-1/4 w-full px-9 py-4 text-center gap-3 flex flex-col justify-center items-center"
+              className="bg-[#F7FAFC] lg:w-1/4 w-full px-9 py-4 text-center gap-3 flex flex-col justify-center items-center"
             >
               <img src={item.img} className="h-auto w-24" alt="" />
               <h3 className="font-bold lg:text-2xl text-xl ">{item.title}</h3>

@@ -10,7 +10,7 @@ export default function Header() {
   return (
     <section className="flex flex-col lg:flex-row px-8 items-center justify-center md:gap-16 gap-8 py-9  bg-contain bg-center bg-[#F7FAFC]  bg-no-repeat  w-full relative">
       <div className="lg:w-2/3 w-full  flex lg:flex-row flex-col">
-        <div className="flex text-center md:text-start flex-col gap-10 text-[#000] md:items-start items-center w-full lg:w-2/4 items-start">
+        <div className="flex text-center md:text-start flex-col gap-10 text-[#000] md:items-start w-full lg:w-2/4 items-start">
           <h1 className="font-bold md:text-7xl text-4xl  text-center md:text-start mt-9 ">
             Recurring <br /> Investments in <br /> Stock/ETF
           </h1>
