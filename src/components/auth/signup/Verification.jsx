@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import OtpInput from 'react18-input-otp';
+import { scrollToTop } from '../../../actions/utils';
 import Button from '../../utils/reusables/Button';
 
 const Verification = ({ setSignupComponent }) => {
@@ -69,7 +70,14 @@ const Verification = ({ setSignupComponent }) => {
         </div>
       </div>
       <div className="flex justify-between mb-5 mx-0 gap-3">
-        <Button>Verify</Button>
+        <Button
+          eventHandler={() => {
+            scrollToTop();
+            setSignupComponent(2);
+          }}
+        >
+          Verify
+        </Button>
       </div>
     </form>
   );

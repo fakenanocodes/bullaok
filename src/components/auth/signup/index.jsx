@@ -1,16 +1,17 @@
 import { useState } from 'react';
 import login_bg from '../../../assets/login_bg.png';
+import SelectBroker from './SelectBroker';
 import SignupForm from './SignupForm';
 import Verification from './Verification';
 
 const SignupComponent = () => {
   const [signupComponent, setSignupComponent] = useState(0);
 
-  const pageComponents = [SignupForm, Verification];
+  const pageComponents = [SignupForm, Verification, SelectBroker];
   const Page = pageComponents[signupComponent];
 
   return (
-    <div className="flex flex-col-reverse lg:flex-row justify-between h-[90vh]">
+    <div className="flex flex-col-reverse lg:flex-row justify-between lg:h-[90vh]">
       <Page setSignupComponent={setSignupComponent} />
 
       <div
