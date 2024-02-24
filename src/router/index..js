@@ -26,91 +26,93 @@ import Stock from '../pages/Stock';
 import Team from '../pages/Team';
 import WhatWeInvest from '../pages/WhatWeInvest';
 import WhoWeAre from '../pages/WhoWeAre';
+import DashboardLayout from '../layouts/dashboardLayout';
+import DashboardHome from '../pages/dashboard/DashboardHome';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    component: Home,
+    Component: Home
   },
   {
     path: '/history',
-    component: History,
+    Component: History,
   },
   {
     path: '/who-we-are',
-    component: WhoWeAre,
+    Component: WhoWeAre,
   },
   {
     path: '/etf',
-    component: ETF,
+    Component: ETF,
   },
   {
     path: '/margin-trading',
-    component: MarginTrading,
+    Component: MarginTrading,
   },
   {
     path: '/stocks',
-    component: Stock,
+    Component: Stock,
   },
   {
     path: '/otc-stock-trading',
-    component: Otc,
+    Component: Otc,
   },
   {
     path: '/services/recurring-investment',
-    component: RecurringInvestments,
+    Component: RecurringInvestments,
   },
   {
     path: '/fractional-shares',
-    component: FractionalShares,
+    Component: FractionalShares,
   },
   {
     path: '/corporate-connect',
-    component: CorporateConnect,
+    Component: CorporateConnect,
   },
   {
     path: '/invest',
-    component: Investment,
+    Component: Investment,
   },
   {
     path: '/investment-packages',
-    component: Investing,
+    Component: Investing,
   },
   {
     path: '/ira',
-    component: Ira,
+    Component: Ira,
   },
   {
     path: '/hub',
-    component: Hub,
+    Component: Hub,
   },
   {
     path: '/options',
-    component: OptionsPage,
+    Component: OptionsPage,
   },
   {
     path: '/papertrading',
-    component: PaperTrading,
+    Component: PaperTrading,
   },
   {
     path: '/services/smart-advisor',
-    component: SmartAdvisor,
+    Component: SmartAdvisor,
   },
   {
     path: '/services/what-we-invest',
-    component: WhatWeInvest,
+    Component: WhatWeInvest,
   },
   {
     path: 'team',
-    component: Team,
+    Component: Team,
   },
   {
     path: 'faq',
-    component: Faq,
+    Component: Faq,
   },
   {
     path: '/services/education',
-    component: Education,
+    Component: Education,
     loader: () => {
       return {
         courses,
@@ -121,27 +123,37 @@ const router = createBrowserRouter([
   },
   {
     path: 'education-courses',
-    component: EducationCourses,
+    Component: EducationCourses,
     loader: () => {
       return { courses };
     },
   },
   {
     path: 'about',
-    component: About,
+    Component: About,
   },
   {
     path: 'login',
-    component: Login,
+    Component: Login,
   },
   {
     path: 'register',
-    component: Signup,
+    Component: Signup,
   },
   {
     path: '/services/forex',
-    component: Forex,
+    Component: Forex,
   },
+  {
+    path: 'dashboard',
+    Component: DashboardLayout,
+    chlidren: [
+      {
+        path: '',
+        Component: DashboardHome
+      }
+    ]
+  }
 ]);
 
 export default router;
