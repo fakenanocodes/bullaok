@@ -1,6 +1,7 @@
 import { Login } from '@mui/icons-material';
 import { createBrowserRouter } from 'react-router-dom';
 import { courses, header, testimonials } from '../data/education';
+import DashboardLayout from '../layouts/dashboardLayout';
 import About from '../pages/About';
 import CorporateConnect from '../pages/CorporateConnect';
 import ETF from '../pages/ETF';
@@ -26,13 +27,12 @@ import Stock from '../pages/Stock';
 import Team from '../pages/Team';
 import WhatWeInvest from '../pages/WhatWeInvest';
 import WhoWeAre from '../pages/WhoWeAre';
-import DashboardLayout from '../layouts/dashboardLayout';
 import DashboardHome from '../pages/dashboard/DashboardHome';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    Component: Home
+    Component: Home,
   },
   {
     path: '/history',
@@ -145,15 +145,15 @@ const router = createBrowserRouter([
     Component: Forex,
   },
   {
-    path: 'dashboard',
+    path: '/dashboard',
     Component: DashboardLayout,
-    chlidren: [
+    children: [
       {
         path: '',
-        Component: DashboardHome
-      }
-    ]
-  }
+        Component: DashboardHome,
+      },
+    ],
+  },
 ]);
 
 export default router;
