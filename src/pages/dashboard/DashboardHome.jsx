@@ -5,6 +5,7 @@ import assetImage from '../../assets/dashboard/investment/assets.png';
 import cryptoImage from '../../assets/dashboard/investment/crypto.png';
 import forexImage from '../../assets/dashboard/investment/forex.png';
 import realEstateImage from '../../assets/dashboard/investment/realestate.png';
+import PackageCard from '../../components/dashboard/PackageCard';
 
 const investments = [
   {
@@ -29,7 +30,7 @@ const DashboardHome = () => {
   return (
     <div className="space-y-3">
       <div className="w-full flex gap-8">
-        <div className="border rounded-sm bg-[#0C0000] border-white border-opacity-40 w-3/5 h-72 p-5 pl-16 flex flex-col space-y-8">
+        <div className="border rounded-md bg-[#0C0000] border-white border-opacity-20  w-3/5 h-72 p-5 pl-16 flex flex-col space-y-8">
           <span className="text-[#868383] text-lg">Current Balance</span>
           <div className="flex flex-col space-y-8 relative">
             <div className="flex items-center space-x-4">
@@ -52,7 +53,7 @@ const DashboardHome = () => {
             </div>
           </div>
         </div>
-        <div className="border  flex flex-col justify-center bg-[#0C0000] items-center pb-10 border-white border-opacity-40  flex-1">
+        <div className="border rounded-md  flex flex-col justify-center bg-[#0C0000] items-center pb-10 border-white border-opacity-20  flex-1">
           <img src={Chart} alt="" className="w-44 h-44" />
           <div className="flex space-x-2">
             <div className="flex flex-col justify-center items-center">
@@ -85,15 +86,9 @@ const DashboardHome = () => {
           <span className="text-[#F5C249]">See all</span>
         </div>
         <div className="flex justify-between gap-4">
-          {investments.map((investment, index) => (
+          {investments.map((investment) => (
             // eslint-disable-next-line react/jsx-key
-            <div className="flex justify-center w-1/3 items-center flex-col border p-4 gap-3 bg-[#0C0000] border-[#0C0000]">
-              <span className="text-lg font-medium">{investment?.label}</span>
-              <img src={investment?.imgUrl} alt="" />
-              <button className="w-full border py-2 font-semibold hover:bg-[#F8DF9F] hover:text-black">
-                Invest
-              </button>
-            </div>
+            <PackageCard label={investment?.label} imgUrl={investment?.imgUrl} />
           ))}
         </div>
         <div className="flex flex-col space-y-2">
