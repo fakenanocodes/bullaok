@@ -1,16 +1,18 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { setCardStep } from '../../store/reducers/card_reducer';
 import BackArrowIcon from '../utils/icons/BackArrowIcon';
 import StepIndicator from './StepIndicator';
 
 const CardApplicationSetup = () => {
   const dispatch = useDispatch();
-  const chatStep = useSelector((state) => state.visibility.createCourseStep);
+  const cardStep = useSelector((state) => state.card.cardStep);
+  console.log("we won't", cardStep);
 
   const pageComponents = [];
-  const Page = pageComponents[chatStep];
+  const Page = pageComponents[cardStep];
 
   const handleNext = (page) => {
-    // dispatch(setCreateCourseStep(page));
+    dispatch(setCardStep(page));
   };
 
   const handleClose = () => {
@@ -24,7 +26,7 @@ const CardApplicationSetup = () => {
         <p className="text-sm font-semibold text-white">Back</p>
       </div>
       <div className="flex flex-col justify-center items-center pb-[3rem]">
-        <StepIndicator chatStep={chatStep} />
+        <StepIndicator chatStep={cardStep} />
         <Page handleNext={handleNext} handleClose={handleClose} />
       </div>
     </div>
