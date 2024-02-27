@@ -84,10 +84,10 @@ const DashboardHome = () => {
           <span className="font-semibold">All Investment</span>
           <span className="text-[#F5C249]">See all</span>
         </div>
-        <div className="flex justify-between">
+        <div className="flex justify-between gap-4">
           {investments.map((investment, index) => (
             // eslint-disable-next-line react/jsx-key
-            <div className="flex justify-center items-center flex-col border p-4 gap-3 bg-[#0C0000] border-[#0C0000]">
+            <div className="flex justify-center w-1/3 items-center flex-col border p-4 gap-3 bg-[#0C0000] border-[#0C0000]">
               <span className="text-lg font-medium">{investment?.label}</span>
               <img src={investment?.imgUrl} alt="" />
               <button className="w-full border py-2 font-semibold hover:bg-[#F8DF9F] hover:text-black">
@@ -101,23 +101,13 @@ const DashboardHome = () => {
             <span className="text-[#F5C249]">View all History</span>
           </div>
           <div className="w-full space-y-1">
-            {/* <table>
-              <thead>
-                <tr className="bg-[#924E8F] flex justify-between">
-                  <th>Name</th>
-                  <th>Detail</th>
-                  <th></th>
-                  <th>Date</th>
-                </tr>
-              </thead>
-            </table> */}
             <div className="flex justify-between px-10 py-2 bg-[#924E8F]">
               <span>Name</span>
               <span className="pr-12">Detail</span>
               <span className="pr-12">Date</span>
             </div>
             <div className="flex flex-col space-y-1">
-              <div className="flex justify-between px-10 py-4 bg-[#BB9FB3] bg-opacity-[38%]">
+              <div className="flex justify-between px-10 py-4  bg-[#BB9FB3] bg-opacity-[38%]">
                 <span className="flex items-center gap-2">
                   <span className="bg-white w-6 h-6 flex justify-center items-center rounded-full">
                     <FiberManualRecordIcon className="text-[#6B5F6B] rounded-full" />
