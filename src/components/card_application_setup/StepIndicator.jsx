@@ -3,9 +3,9 @@ import { setCardStep } from '../../store/reducers/card_reducer';
 
 const items = [0, 1, 2, 3, 4];
 const titles = [
-  'Class schedule',
-  'Class details',
-  'Add-ons',
+  'Contact information',
+  'Personal data',
+  'Currency & Card',
   'Security data',
   'Delivery options',
 ];

@@ -5,7 +5,7 @@ import ForwardArrowIcon from '../utils/reusables/ForwardArrowIcon';
 const ContactInformation = () => {
   return (
     <div className="py-3 px-14">
-      <p className="text-sm md:text-base lg:text-xl text-black">
+      <p className="text-sm md:text-base lg:text-xl text-black font-[poppins]">
         Contact Information
       </p>
 
