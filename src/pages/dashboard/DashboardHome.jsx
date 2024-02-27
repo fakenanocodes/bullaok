@@ -28,7 +28,7 @@ const investments = [
 
 const DashboardHome = () => {
   return (
-    <div className="space-y-3">
+    <div className="space-y-3 p-10">
       <div className="w-full flex gap-8">
         <div className="border rounded-md bg-[#0C0000] border-white border-opacity-20  w-3/5 h-72 p-5 pl-16 flex flex-col space-y-8">
           <span className="text-[#868383] text-lg">Current Balance</span>
@@ -37,7 +37,6 @@ const DashboardHome = () => {
               <span className="text-white text-5xl font-extrabold">
                 $ 1,474.91
               </span>
-
               <div className=" flex items-center space-x-2 p-2 px-8 font-bold rounded-md shadow-[#8E0789] bg-[#8E0789]">
                 <ArrowDropUpIcon className="text-[#52B570] bg-white rounded-full w-32 h-32" />
                 <span>25.69%</span>
@@ -88,7 +87,10 @@ const DashboardHome = () => {
         <div className="flex justify-between gap-4">
           {investments.map((investment) => (
             // eslint-disable-next-line react/jsx-key
-            <PackageCard label={investment?.label} imgUrl={investment?.imgUrl} />
+            <PackageCard
+              label={investment?.label}
+              imgUrl={investment?.imgUrl}
+            />
           ))}
         </div>
         <div className="flex flex-col space-y-2">
