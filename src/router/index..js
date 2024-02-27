@@ -28,6 +28,7 @@ import Team from '../pages/Team';
 import WhatWeInvest from '../pages/WhatWeInvest';
 import WhoWeAre from '../pages/WhoWeAre';
 import DashboardHome from '../pages/dashboard/DashboardHome';
+import Transfer from '../pages/dashboard/Transfer';
 
 const router = createBrowserRouter([
   {
@@ -151,6 +152,10 @@ const router = createBrowserRouter([
       {
         path: '',
         Component: DashboardHome,
+      },
+      {
+        path: 'transfer',
+        Component: Transfer,
       },
     ],
   },
