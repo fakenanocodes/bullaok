@@ -14,6 +14,7 @@ const CardInputComponent = ({
   accept,
   price,
   date,
+  required,
 }) => {
   const [passwordType, setPasswordType] = useState(type);
   const passwordToggle = () => {
@@ -36,7 +37,9 @@ const CardInputComponent = ({
 
   return (
     <div className="grid gap-0">
-      <p className="text-[#767474] font-normal text-sm">{label}</p>
+      <p className="text-[#000] font-normal text-sm font-[poppins]">
+        {label} {required && <span className="text-[#E56666]">*</span>}
+      </p>
       <div className="grid gap-1">
         <div
           className={
@@ -47,7 +50,7 @@ const CardInputComponent = ({
         >
           {price && <span className="ml-3">&#8358;</span>}
           <input
-            className="w-full py-1 outline-none border-none bg-inherit rounded-sm no-number-arrows focus:border-none"
+            className="w-full py-1 outline-none border-none bg-inherit no-number-arrows focus:border-none font-[poppins]"
             type={passwordType}
             placeholder={placeholder}
             {...register}

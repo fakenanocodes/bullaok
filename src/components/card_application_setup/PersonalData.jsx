@@ -42,8 +42,8 @@ const PersonalData = () => {
           </div>
         </div>
 
-        <div className="flex items-center gap-4 w-full rounded-lg bg-[#D2CDD247] py-4">
-          <img src={debit_card} alt="" />
+        <div className="flex items-center gap-4 w-full rounded-lg bg-[#D2CDD247] px-4 py-4">
+          <img src={debit_card} alt="" className="rounded-xl" />
 
           <div className="flex flex-col gap-4">
             <p className="text-sm text-black">Card type</p>
