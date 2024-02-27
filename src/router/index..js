@@ -29,6 +29,7 @@ import WhatWeInvest from '../pages/WhatWeInvest';
 import WhoWeAre from '../pages/WhoWeAre';
 import DashboardHome from '../pages/dashboard/DashboardHome';
 import InvestmentPackages from '../pages/dashboard/InvestmentPackages';
+import InvestmentPlan from '../pages/dashboard/InvestmentPlan';
 import RunningInvestment from '../pages/dashboard/RunningInvestment';
 
 const router = createBrowserRouter([
@@ -160,8 +161,12 @@ const router = createBrowserRouter([
       },
       {
         path: 'investment/running',
-        Component: RunningInvestment
-      }
+        Component: RunningInvestment,
+      },
+      {
+        path: 'investment/Plan',
+        Component: InvestmentPlan,
+      },
     ],
   },
 ]);
