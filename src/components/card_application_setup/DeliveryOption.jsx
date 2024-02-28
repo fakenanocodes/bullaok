@@ -12,12 +12,18 @@ const schema = yup.object().shape({
   area: yup.string(),
 });
 
-const DeliveryOption = () => {
-  const { control, getValues } = useForm({
+const DeliveryOption = ({ handleNext }) => {
+  const { control, getValues, handleSubmit } = useForm({
     resolver: yupResolver(schema),
+    criteriaMode: 'all',
+    reValidateMode: 'onSubmit',
+    mode: 'onChange',
   });
 
-  console.log(getValues());
+  const onSubmit = async () => {
+    console.log(getValues());
+    handleNext(5);
+  };
 
   return (
     <div className="py-3 px-14">
@@ -25,7 +31,10 @@ const DeliveryOption = () => {
         Delivery Option
       </p>
 
-      <form className="mt-[1.5rem] flex flex-col gap-3">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="mt-[1.5rem] flex flex-col gap-3"
+      >
         <div className="flex items-center gap-8">
           <Controller
             name="delivery_method"
@@ -76,12 +85,18 @@ const DeliveryOption = () => {
         </div>
 
         <div className="flex items-center gap-5 mt-10">
-          <button className="h-[2.4rem] flex items-center gap-1 px-3 py-2 text-sm text-[#5F5656] font-semibold border border-[#41073F] rounded-sm">
+          <button
+            type="button"
+            className="h-[2.4rem] flex items-center gap-1 px-3 py-2 text-sm text-[#5F5656] font-semibold border border-[#41073F] rounded-sm"
+          >
             Cancel
             <CancelIcon />
           </button>
 
-          <button className="h-[2.4rem] flex items-center gap-2 px-3 py-2 text-sm bg-[#41073F] border border-[#41073F] text-white font-semibold rounded-sm">
+          <button
+            type="submit"
+            className="h-[2.4rem] flex items-center gap-2 px-3 py-2 text-sm bg-[#41073F] border border-[#41073F] text-white font-semibold rounded-sm"
+          >
             Next
             <ForwardArrowIcon />
           </button>
