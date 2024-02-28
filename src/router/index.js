@@ -30,6 +30,8 @@ import Team from '../pages/Team';
 import WhatWeInvest from '../pages/WhatWeInvest';
 import WhoWeAre from '../pages/WhoWeAre';
 import DashboardHome from '../pages/dashboard/DashboardHome';
+import Profile from '../pages/dashboard/Profile';
+import ReferralContainer from '../pages/dashboard/Referral';
 
 const router = createBrowserRouter([
   {
@@ -161,6 +163,14 @@ const router = createBrowserRouter([
       {
         path: 'bonus',
         Component: BonusContainer,
+      },
+      {
+        path: 'referral',
+        Component: ReferralContainer,
+      },
+      {
+        path: 'profile',
+        Component: Profile,
       },
     ],
   },

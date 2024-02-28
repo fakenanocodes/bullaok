@@ -27,6 +27,7 @@ import social from './social.png';
 import stock from './stock_market.png';
 import team_bg from './team_bg.png';
 import vc from './vc.png';
+import profile from './img1.png';
 export const images = {
   edu_bg,
   cynthia,
@@ -57,4 +58,5 @@ export const images = {
   oil,
   loans,
   gold,
+  profile
 };
