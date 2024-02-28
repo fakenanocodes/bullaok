@@ -1,10 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom';
-import BonusContainer from '../components/BonusContainer';
 import UserLogin from '../components/auth/login';
 import CardApplicationSetup from '../components/card_application_setup';
 import { courses, header, testimonials } from '../data/education';
 import DashboardLayout from '../layouts/dashboardLayout';
 import About from '../pages/About';
+import Bonus from '../pages/Bonus';
 import CorporateConnect from '../pages/CorporateConnect';
 import ETF from '../pages/ETF';
 import Education from '../pages/Education';
@@ -22,6 +22,7 @@ import MarginTrading from '../pages/MarginTrading';
 import OptionsPage from '../pages/OptionsPage';
 import Otc from '../pages/Otc';
 import PaperTrading from '../pages/PaperTrading';
+import Penalty from '../pages/Penalty';
 import RecurringInvestments from '../pages/RecurringInvestments';
 import Signup from '../pages/Signup';
 import SmartAdvisor from '../pages/SmartAdvisor';
@@ -159,8 +160,12 @@ const router = createBrowserRouter([
         Component: CardApplicationSetup,
       },
       {
-        path: 'bonus',
-        Component: BonusContainer,
+        path: 'bonuses',
+        Component: Bonus,
+      },
+      {
+        path: 'penalties',
+        Component: Penalty,
       },
     ],
   },
