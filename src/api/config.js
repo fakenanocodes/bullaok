@@ -4,7 +4,7 @@ import { Cookies } from 'react-cookie';
 const cookies = new Cookies();
 const token = cookies.get('access_token');
 
-export const API_URL = 'https://api.andromedia.cc/api/v1/';
+export const API_URL = 'https://api.bulloak.org/docs/';
 
 // console.log(token)
 export default function init() {
