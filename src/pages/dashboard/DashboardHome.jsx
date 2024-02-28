@@ -27,7 +27,7 @@ const investments = [
 
 const DashboardHome = () => {
   return (
-    <div className="space-y-3">
+    <div className="space-y-3 h-full overflow-auto p-5">
       <div className="w-full flex gap-8">
         <div className="border rounded-sm bg-[#0C0000] border-white border-opacity-40 w-3/5 h-72 p-5 pl-16 flex flex-col space-y-8">
           <span className="text-[#868383] text-lg">Current Balance</span>
@@ -86,8 +86,10 @@ const DashboardHome = () => {
         </div>
         <div className="flex justify-between gap-4">
           {investments.map((investment, index) => (
-            // eslint-disable-next-line react/jsx-key
-            <div className="flex justify-center w-1/3 items-center flex-col border p-4 gap-3 bg-[#0C0000] border-[#0C0000]">
+            <div
+              key={index}
+              className="flex justify-center w-1/3 items-center flex-col border p-4 gap-3 bg-[#0C0000] border-[#0C0000]"
+            >
               <span className="text-lg font-medium">{investment?.label}</span>
               <img src={investment?.imgUrl} alt="" />
               <button className="w-full border py-2 font-semibold hover:bg-[#F8DF9F] hover:text-black">
