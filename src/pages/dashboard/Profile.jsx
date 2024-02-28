@@ -1,4 +1,3 @@
-import HelpOutlinedIcon from '@mui/icons-material/HelpOutlined';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
 import profilepic from '../../assets/dashboard/profilepic.png';

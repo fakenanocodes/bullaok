@@ -33,8 +33,8 @@ import DashboardHome from '../pages/dashboard/DashboardHome';
 import InvestmentHistory from '../pages/dashboard/InvestmentHistory';
 import InvestmentPackages from '../pages/dashboard/InvestmentPackages';
 import InvestmentPlan from '../pages/dashboard/InvestmentPlan';
-import RunningInvestment from '../pages/dashboard/RunningInvestment';
 import Profile from '../pages/dashboard/Profile';
+import RunningInvestment from '../pages/dashboard/RunningInvestment';
 
 const router = createBrowserRouter([
   {
@@ -161,7 +161,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'profile',
-        Component: Profile
+        Component: Profile,
       },
       {
         path: 'investment/packages',
@@ -178,6 +178,8 @@ const router = createBrowserRouter([
       {
         path: 'investment/history',
         Component: InvestmentHistory,
+      },
+      {
         path: 'card-application',
         Component: CardApplicationSetup,
       },
