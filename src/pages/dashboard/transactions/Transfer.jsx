@@ -1,33 +1,54 @@
-import DirectArrowIcon from '../../components/utils/icons/directArrowIcon';
+import DirectArrowIcon from '../../../components/utils/icons/directArrowIcon';
 
 let trans = [
   {
     Date: '10-02-2024 12:38:42',
     Amount: '200.00',
-    'Email address': 'bulloakfinance@gmail.com',
+    Email: 'helenmaike@gmail.com',
     Asset: '$',
     Status: 'Succeed',
   },
   {
     Date: '10-02-2024 12:38:42',
     Amount: '200.00',
-    'Email address': 'bulloakfinance@gmail.com',
+    Email: 'ndubes@gmail.com',
     Asset: '$',
     Status: 'Pending ...',
   },
   {
     Date: '10-02-2024 12:38:42',
     Amount: '200.00',
-    'Email address': 'bulloakfinance@gmail.com',
+    Email: 'bulloakfoxfinance@gmail.com',
+    Asset: '$',
+    Status: 'Failed',
+  },
+  {
+    Date: '10-02-2024 12:38:42',
+    Amount: '200.00',
+    Email: 'helenmaike@gmail.com',
+    Asset: '$',
+    Status: 'Succeed',
+  },
+  {
+    Date: '10-02-2024 12:38:42',
+    Amount: '200.00',
+    Email: 'ndubes@gmail.com',
+    Asset: '$',
+    Status: 'Pending ...',
+  },
+  {
+    Date: '10-02-2024 12:38:42',
+    Amount: '200.00',
+    Email: 'bulloakfoxfinance@gmail.com',
     Asset: '$',
     Status: 'Failed',
   },
 ];
 
-const Transaction = () => {
+const Transfer = () => {
   return (
     <div className=" h-[100%] bg-white rounded-xl p-4 text-gray-700 overflow-scroll">
-      <div className=" text-xl font-bold my-3 mb-5">Transfer</div>
+      <div className=" text-2xl font-bold my-3 mb-5">Transfer</div>
       <form>
         <div className="flex flex-col gap-10 pb-24">
           <div className="flex gap-10  font-semibold">
@@ -35,12 +56,14 @@ const Transaction = () => {
               <label>Source wallet</label>
               <select type="text" className="rounded-lg px-6 border-2 py-4">
                 <option>main</option>
+                <option>BTC</option>
               </select>
             </div>
             <div className="flex flex-col w-[50%]">
               <label>Asset destination</label>
               <select type="text" className="rounded-lg px-6 border-2 py-4">
                 <option>$1,474.91</option>
+                <option>BTC</option>
               </select>
             </div>
           </div>
@@ -79,7 +102,7 @@ const Transaction = () => {
           </div>
         </div>
       </form>
-      <div>
+      <div className="border shadow-md">
         <div className="bg-[#8E0789] text-white p-3 text-2xl font-semibold">
           Transfer History
         </div>
@@ -94,19 +117,20 @@ const Transaction = () => {
             Email address
           </div>
           <div className="m-2 p-2 px-10 bg-[#F9F9FA] shadow drop-shadow-sm">
-            Asset
-          </div>
-          <div className="m-2 p-2 px-10 bg-[#F9F9FA] shadow drop-shadow-sm">
             Status
           </div>
-          <select className="m-2 p-2 bg-[#F9F9FA] shadow drop-shadow-lg border-none px-7">
+          <select className="m-2 p-2 bg-[rgb(249,249,250)] shadow drop-shadow-lg border-none px-7">
             <option className="">sort</option>
           </select>
         </div>
-        <div className="">
+        <div>
           {trans.map((tran, idx) => (
-            <div>
-              <div>{tran.Date}</div>
+            <div className="flex justify-between w-[90%] text-xs ">
+              <div className="font-bold mx-12 py-3 ">{tran.Date}</div>
+              <div className="py-3 w-5 -mx-5 ">{tran.Amount}</div>
+              <div className="py-3  mx-24 w-24">{tran.Email}</div>
+              <div className="py-3 w-16 -mx-10">{tran.Status}</div>
+              <div className="w-36"></div>
             </div>
           ))}
         </div>
@@ -114,4 +138,4 @@ const Transaction = () => {
     </div>
   );
 };
-export default Transaction;
+export default Transfer;

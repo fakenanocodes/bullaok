@@ -30,7 +30,7 @@ import Team from '../pages/Team';
 import WhatWeInvest from '../pages/WhatWeInvest';
 import WhoWeAre from '../pages/WhoWeAre';
 import DashboardHome from '../pages/dashboard/DashboardHome';
-import Transaction from '../pages/dashboard/Transaction';
+import Transaction from '../pages/dashboard/transactions/Transactions';
 
 const router = createBrowserRouter([
   {
