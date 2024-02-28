@@ -93,7 +93,6 @@ export default function Faqs() {
             <div
               id="collapseTwo5"
               //   class="!visible hidden"
-              className="!visible "
               className={`${
                 isCollapsed ? '!visible' : ''
               } hidden bg-[#EFF3F694] my-5 rounded-[20px] text-gray-500  font-bold`}
