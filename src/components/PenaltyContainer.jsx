@@ -41,10 +41,12 @@ const PenaltyContainer = () => {
 
         <div className="px-3 md:px-7 mt-[3rem]">
           <div>
-            <p className="text-[#E8C4E6] font-semibold text-sm py-3">
+            <p className="text-[#E8C4E6] font-semibold text-xs md:text-sm py-3">
               Penalized details
             </p>
-            <p className="">Referral Bonus -Jane Doe</p>
+            <p className="text-sm md:text-base">
+              Defaulted penalty - Violated transfer rules
+            </p>
           </div>
           <div className="mt-[1rem]">
             <p className="text-[#E8C4E6] font-semibold text-sm py-3">
