@@ -28,7 +28,11 @@ const investments = [
 
 const DashboardHome = () => {
   return (
+<<<<<<< HEAD
     <div className="space-y-3 p-10">
+=======
+    <div className="space-y-3 h-full overflow-auto p-5">
+>>>>>>> main
       <div className="w-full flex gap-8">
         <div className="border rounded-md bg-[#0C0000] border-white border-opacity-20  w-3/5 h-72 p-5 pl-16 flex flex-col space-y-8">
           <span className="text-[#868383] text-lg">Current Balance</span>
