@@ -1,5 +1,7 @@
 import { Login } from '@mui/icons-material';
 import { createBrowserRouter } from 'react-router-dom';
+import BonusContainer from '../components/BonusContainer';
+import CardApplicationSetup from '../components/card_application_setup';
 import { courses, header, testimonials } from '../data/education';
 import DashboardLayout from '../layouts/dashboardLayout';
 import About from '../pages/About';
@@ -151,6 +153,14 @@ const router = createBrowserRouter([
       {
         path: '',
         Component: DashboardHome,
+      },
+      {
+        path: 'card-application',
+        Component: CardApplicationSetup,
+      },
+      {
+        path: 'bonus',
+        Component: BonusContainer,
       },
     ],
   },
