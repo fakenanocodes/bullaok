@@ -36,6 +36,9 @@ import InvestmentPackages from '../pages/dashboard/InvestmentPackages';
 import InvestmentPlan from '../pages/dashboard/InvestmentPlan';
 import Profile from '../pages/dashboard/Profile';
 import RunningInvestment from '../pages/dashboard/RunningInvestment';
+import Deposit from '../pages/dashboard/transactions/Deposit';
+import Transfer from '../pages/dashboard/transactions/Transfer';
+import Withdrawal from '../pages/dashboard/transactions/Withdrawal';
 
 const router = createBrowserRouter([
   {
@@ -191,6 +194,18 @@ const router = createBrowserRouter([
       {
         path: 'penalties',
         Component: Penalty,
+      },
+      {
+        path: 'transfer',
+        Component: Transfer,
+      },
+      {
+        path: 'withdraw',
+        Component: Withdrawal,
+      },
+      {
+        path: 'deposit',
+        Component: Deposit,
       },
     ],
   },
