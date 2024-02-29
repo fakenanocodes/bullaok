@@ -30,7 +30,9 @@ import Team from '../pages/Team';
 import WhatWeInvest from '../pages/WhatWeInvest';
 import WhoWeAre from '../pages/WhoWeAre';
 import DashboardHome from '../pages/dashboard/DashboardHome';
+import Deposit from '../pages/dashboard/transactions/Deposit';
 import Transaction from '../pages/dashboard/transactions/Transactions';
+import Withdrawal from '../pages/dashboard/transactions/Withdrawal';
 
 const router = createBrowserRouter([
   {
@@ -164,8 +166,16 @@ const router = createBrowserRouter([
         Component: BonusContainer,
       },
       {
-        path: 'transaction',
+        path: 'transfer',
         Component: Transaction,
+      },
+      {
+        path: 'withdraw',
+        Component: Withdrawal,
+      },
+      {
+        path: 'deposit',
+        Component: Deposit,
       },
     ],
   },
