@@ -1,3 +1,4 @@
+import { ClickAwayListener } from '@mui/material';
 import { useState } from 'react';
 import CancelIcon from '../../../components/utils/icons/CancelIcon';
 import DepositIcon from '../../../components/utils/icons/DepositIcon';
@@ -57,8 +58,6 @@ const Deposit = () => {
     <div className=" h-[100%] bg-white rounded-xl p-4 text-gray-700 overflow-scroll">
       <div className=" text-2xl font-bold my-3 mb-5">Deposit</div>
       <div>
-        {/* <img src="/build.png" />
-        <img src="/shares.png" /> */}
         <div className="flex flex-col gap-10 pb-24">
           <div className="flex gap-10  font-semibold">
             <div className="flex flex-col w-[50%]">
@@ -158,41 +157,45 @@ const Deposit = () => {
       {/* model for depositing */}
       {openModel && (
         <div className=" fixed top-0 left-0 w-full h-full flex  justify-center items-center bg-[#000000b3]">
-          <div className="bg-white h-3/5 w-3/5 max-w-[500px] p-4 my-6 relative">
-            <div className="flex justify-between">
-              <p className="text-lg text-gray-600 font-semibold">Deposit</p>
-              <div
-                className="cursor-pointer"
-                onClick={() => setOpenModel(false)}
-              >
-                <CancelIcon />
+          <ClickAwayListener onClickAway={() => setOpenModel(false)}>
+            <div className="bg-white h-3/5 w-3/5 max-w-[500px] p-4 my-6 relative z-40">
+              <div className="flex justify-between">
+                <p className="text-lg text-gray-600 font-semibold">Deposit</p>
+                <div
+                  className="cursor-pointer"
+                  onClick={() => setOpenModel(false)}
+                >
+                  <CancelIcon />
+                </div>
+              </div>
+              <div className="py-5">
+                <label>Asset destination</label>
+                <select className="flex gap-3 border-2 w-full rounded-md p-2 px-4">
+                  <option>
+                    <DollaIcon />
+                    <p>$1,474.91</p>
+                  </option>
+                </select>
+              </div>
+              <div>
+                <p>Amount</p>
+                <div className="mb-32 w-full border-2 p-2 px-4 rounded-md">
+                  <p>$0.00</p>
+                </div>
+              </div>
+              <div className="flex gap-5 absolute right-4">
+                <button
+                  className="p-2 px-4 rounded-md border"
+                  onClick={() => setOpenModel(false)}
+                >
+                  Cancel
+                </button>
+                <button className="bg-[#352F84] text-white p-2 px-4 rounded-md">
+                  Confirm deposit
+                </button>
               </div>
             </div>
-            <div className="py-5">
-              <label>Asset destination</label>
-              <div className="flex gap-3 border-2 w-full rounded-md p-2 px-4">
-                <DollaIcon />
-                <p>$1,474.91</p>
-              </div>
-            </div>
-            <div>
-              <p>Amount</p>
-              <div className="mb-32 w-full border-2 p-2 px-4 rounded-md">
-                <p>$0.00</p>
-              </div>
-            </div>
-            <div className="flex gap-5 absolute right-4">
-              <button
-                className="p-2 px-4 rounded-md border"
-                onClick={() => setOpenModel(false)}
-              >
-                Cancel
-              </button>
-              <button className="bg-[#352F84] text-white p-2 px-4 rounded-md">
-                Confirm deposit
-              </button>
-            </div>
-          </div>
+          </ClickAwayListener>
         </div>
       )}
     </div>
