@@ -1,4 +1,7 @@
+import { useState } from 'react';
+import CancelIcon from '../../../components/utils/icons/CancelIcon';
 import DepositIcon from '../../../components/utils/icons/DepositIcon';
+import DollaIcon from '../../../components/utils/icons/DollaIcon';
 
 let trans = [
   {
@@ -46,10 +49,16 @@ let trans = [
 ];
 
 const Deposit = () => {
+  const [openModel, setOpenModel] = useState(false);
+
+  // const handleSubmit = () => {};
+
   return (
     <div className=" h-[100%] bg-white rounded-xl p-4 text-gray-700 overflow-scroll">
       <div className=" text-2xl font-bold my-3 mb-5">Deposit</div>
-      <form>
+      <div>
+        {/* <img src="/build.png" />
+        <img src="/shares.png" /> */}
         <div className="flex flex-col gap-10 pb-24">
           <div className="flex gap-10  font-semibold">
             <div className="flex flex-col w-[50%]">
@@ -59,11 +68,19 @@ const Deposit = () => {
                 <option>BTC</option>
               </select>
             </div>
+
             <div className="flex flex-col w-[50%]">
               <label>Asset destination</label>
+
               <select type="text" className="rounded-lg px-6 border-2 py-4">
-                <option>$1,474.91</option>
-                <option>BTC</option>
+                <DollaIcon />
+                <option>
+                  <img src="/build.png" width={20} />
+                  $1,474.91
+                </option>
+                <option>
+                  <img src="/btc" /> BTC
+                </option>
               </select>
             </div>
           </div>
@@ -94,14 +111,17 @@ const Deposit = () => {
           </div>
           <div className="flex justify-between w-[48%] text-xl items-center">
             <div className=" text-red-600 font-semibold">
-              You are transferring $0.00
+              You are depositing $0.00
             </div>
-            <button className="bg-[#352F84] py-2 text-white px-4 rounded-[5px]">
+            <button
+              onClick={() => setOpenModel(true)}
+              className="bg-[#352F84] py-2 text-white px-4 rounded-[5px]"
+            >
               Send payment
             </button>
           </div>
         </div>
-      </form>
+      </div>
       <div className="border shadow-md">
         <div className="bg-[#8E0789] text-white p-3 text-2xl font-semibold">
           Deposit History
@@ -135,6 +155,46 @@ const Deposit = () => {
           ))}
         </div>
       </div>
+      {/* model for depositing */}
+      {openModel && (
+        <div className=" fixed top-0 left-0 w-full h-full flex  justify-center items-center bg-[#000000b3]">
+          <div className="bg-white h-3/5 w-3/5 max-w-[500px] p-4 my-6 relative">
+            <div className="flex justify-between">
+              <p className="text-lg text-gray-600 font-semibold">Deposit</p>
+              <div
+                className="cursor-pointer"
+                onClick={() => setOpenModel(false)}
+              >
+                <CancelIcon />
+              </div>
+            </div>
+            <div className="py-5">
+              <label>Asset destination</label>
+              <div className="flex gap-3 border-2 w-full rounded-md p-2 px-4">
+                <DollaIcon />
+                <p>$1,474.91</p>
+              </div>
+            </div>
+            <div>
+              <p>Amount</p>
+              <div className="mb-32 w-full border-2 p-2 px-4 rounded-md">
+                <p>$0.00</p>
+              </div>
+            </div>
+            <div className="flex gap-5 absolute right-4">
+              <button
+                className="p-2 px-4 rounded-md border"
+                onClick={() => setOpenModel(false)}
+              >
+                Cancel
+              </button>
+              <button className="bg-[#352F84] text-white p-2 px-4 rounded-md">
+                Confirm deposit
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
