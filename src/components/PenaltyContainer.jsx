@@ -1,13 +1,9 @@
 import { useNavigate } from 'react-router-dom';
-import useSWR from 'swr';
 import BackArrowIcon from './utils/icons/BackArrowIcon';
 import NewProfileIcon from './utils/icons/NewProfileIcon';
 
-const BonusContainer = () => {
+const PenaltyContainer = () => {
   const navigate = useNavigate();
-
-  const { data: bonuses, error } = useSWR('bonus/');
-  console.log(bonuses, error);
 
   return (
     <div className="p-5 h-full">
@@ -16,27 +12,26 @@ const BonusContainer = () => {
           <BackArrowIcon color={'white'} />
         </div>
         <div>
-          <p className="font-semibold text-xl">Bonus Notifications</p>
-          <p className="text-[#AAAAAA] text-sm">Total added bonuses</p>
+          <p className="font-semibold text-xl">Penalty Notifications</p>
+          <p className="text-[#AAAAAA] text-sm">Total penalized activity</p>
         </div>
       </div>
 
       <div className="flex w-full min-h-[90%]">
         <div className="md:w-[30%] lg:w-[25%] border-r border-[#8E0789]">
           <p className="mt-[3rem] py-3 px-2 font-semibold text-lg border-b border-[#8E0789]">
-            Bonus History
+            Penalty History
           </p>
 
-          <div className="flex flex-col gap-3 py-3 cursor-pointer">
-            <div className="flex gap-2">
+          <div className="flex flex-col gap-3 py-3">
+            <div className="flex gap-2 cursor-pointer">
               <div className="mt-1">
                 <NewProfileIcon />
               </div>
 
               <div>
                 <p className="text-sm lg:text-base text-[#AAAAAA]">
-                  Referral Bonus -{' '}
-                  <span className="font-semibold">Jane Doe</span>
+                  Defaulted penalty
                 </p>
                 <p className="text-xs lg:text-sm">$0.0</p>
               </div>
@@ -47,13 +42,15 @@ const BonusContainer = () => {
         <div className="px-3 md:px-7 mt-[3rem]">
           <div>
             <p className="text-[#E8C4E6] font-semibold text-xs md:text-sm py-3">
-              Bonus detail
+              Penalized details
             </p>
-            <p className="text-sm md:text-base">Referral Bonus -Jane Doe</p>
+            <p className="text-sm md:text-base">
+              Defaulted penalty - Violated transfer rules
+            </p>
           </div>
           <div className="mt-[1rem]">
             <p className="text-[#E8C4E6] font-semibold text-sm py-3">
-              Total amount gifted
+              Total amount penalized
             </p>
             <p className="">$10.0</p>
           </div>
@@ -63,4 +60,4 @@ const BonusContainer = () => {
   );
 };
 
-export default BonusContainer;
+export default PenaltyContainer;

@@ -10,12 +10,20 @@
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
-
+  .bg-referral {
+    background-image: url('./assets/dashboard/referral.png'); /* Replace 'your-image-url.jpg' with the actual path to your image */
+    background-size: cover; /* Adjust the sizing based on your preference */
+    background-position: center; /* Adjust the positioning based on your preference */
+  }
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-
+  .gradient-div {
+    width: 100%; /* Set the width as per your requirement */
+    height: 100%; /* Set the height as per your requirement */
+    background: linear-gradient(90deg, #41073f 0%, #8e0789 100%);
+  }
   .no-number-arrows::-webkit-outer-spin-button,
   .no-number-arrows::-webkit-inner-spin-button {
     -webkit-appearance: none;

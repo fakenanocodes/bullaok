@@ -9,6 +9,10 @@ import chart_graph from './chart_graph.png';
 import content from './content.png';
 import crypto from './crypto_market.png';
 import cynthia from './cynthia.png';
+import referral from './dashboard/referral.png';
+import share from './dashboard/share.png';
+import signin from './dashboard/signin.png';
+import transaction from './dashboard/transaction.png';
 import data from './data.png';
 import design from './design.png';
 import diagon from './diagon.png';
@@ -17,6 +21,7 @@ import estate from './estate_market.png';
 import etf from './etf_market.png';
 import forex from './forex_market.png';
 import gold from './gold.png';
+import profile from './img1.png';
 import leaddev from './leaddev.png';
 import loans from './loans.png';
 import oil from './oil.png';
@@ -27,7 +32,6 @@ import social from './social.png';
 import stock from './stock_market.png';
 import team_bg from './team_bg.png';
 import vc from './vc.png';
-import profile from './img1.png';
 export const images = {
   edu_bg,
   cynthia,
@@ -58,5 +62,9 @@ export const images = {
   oil,
   loans,
   gold,
-  profile
+  profile,
+  referral,
+  transaction,
+  signin,
+  share,
 };

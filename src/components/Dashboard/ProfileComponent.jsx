@@ -5,13 +5,27 @@ import { images } from '../../assets';
 
 export default function ProfileComponent() {
   const { data, isLoading } = useSWR('user/');
-  console.log(data);
+
+  const user = data?.profile?.user;
+  const profile = data?.profile;
+  console.log(user?.first_name);
   return (
-    <div className="grid grid-cols-1 w-4/5 mx-auto text-black pb-8">
-      <div className="flex justify-between p-8 ml-8">
-        <div className="flex flex-col items-center justify-center gap-3 text-[#7E577D]">
+    <div className="grid grid-cols-1 xl:w-4/5 w-full mx-auto text-black pb-8">
+      <div className="flex xl:flex-row lg:flex-row flex-col  justify-between p-8 ml-8">
+        <div className="flex xl:flex-row flex-col  items-center justify-center gap-3 text-[#7E577D]">
+          {/* <img
+            src={
+              profile?.image !== null
+                ? `${API_URL}${profile?.image}`
+                : images.profile
+            }
+            alt=""
+          /> */}
           <img src={images.profile} alt="" />
-          <h2 className="text-3xl font-semibold">Omeje Sky</h2>
+
+          <h2 className="text-3xl font-semibold">
+            {user?.first_name} {user?.last_name}
+          </h2>
           <p>Marketing Manager</p>
           <div className="flex mt-4 text-[30px] gap-10 text-[#8E0789]">
             <FaFacebook />
@@ -20,13 +34,19 @@ export default function ProfileComponent() {
           </div>
         </div>
 
-        <div className="border flex gap-9 flex-col w-2/4  gap-1 border-[#8E0789]/20 rounded-lg p-8">
+        <div className="border flex gap-9 flex-col xl:w-2/4 w-full  gap-1 border-[#8E0789]/20 rounded-lg p-8">
           <div className="flex items-center justify-between">
             <div className="text-[#222222]/90">
               <h2 className="font-bold text-xl text-[#222222]/90 mb-3">
                 Your Name
               </h2>
-              <h2>Sky</h2>
+              {!user?.first_name ? (
+                <h2 className="text-black">No information</h2>
+              ) : (
+                <h2>
+                  {user?.first_name} {user?.last_name}
+                </h2>
+              )}
             </div>
             <button className="px-7 p-2 bg-[#F0EFFA] rounded-[20px]">
               Edit
@@ -37,7 +57,11 @@ export default function ProfileComponent() {
               <h2 className="font-bold text-xl text-[#222222]/90 mb-3">
                 Email{' '}
               </h2>
-              <h2>siddxd@growthx.com</h2>
+              {!user?.email ? (
+                <h2 className="text-black">No information</h2>
+              ) : (
+                <h2>{user?.email}</h2>
+              )}
             </div>
             <button className="px-7 p-2 bg-[#F0EFFA] rounded-[20px]">
               Edit
@@ -48,7 +72,11 @@ export default function ProfileComponent() {
               <h2 className="font-bold text-xl text-[#222222]/90 mb-3">
                 Phone Number
               </h2>
-              <h2>+91 49652845732</h2>
+              {!user?.phone_number ? (
+                <h2 className="text-black">No information</h2>
+              ) : (
+                <h2>{user?.phone_number}</h2>
+              )}{' '}
             </div>
             <button className="px-7 p-2 bg-[#F0EFFA] rounded-[20px]">
               Edit
@@ -57,7 +85,11 @@ export default function ProfileComponent() {
           <div className="flex justify-between items-center">
             <div className="text-[#222222]/90">
               <h2 className="font-bold text-xl mb-3 ">Address</h2>
-              <h2>Johnson Avenue, New York</h2>
+              {!user?.address ? (
+                <h2 className="text-black">No information</h2>
+              ) : (
+                <h2>{user?.address}</h2>
+              )}{' '}
             </div>
             <button className="px-7 p-2 bg-[#F0EFFA] rounded-[20px]">
               Edit
