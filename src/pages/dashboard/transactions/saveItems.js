@@ -24,3 +24,17 @@ const handleWitTransfer = () => {
   dispatch(setDeposite(false));
   dispatch(setTransfer(true));
 };
+
+// let hello = {{
+//         path: 'transfer',
+//         Component: Transaction,
+//       },
+//       {
+//         path: 'withdraw',
+//         Component: Withdrawal,
+//       },
+//       {
+//         path: 'deposit',
+//         Component: Deposit,
+//       },
+//     }
