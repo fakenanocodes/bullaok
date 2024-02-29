@@ -23,8 +23,8 @@ const ContactInformation = ({ handleNext }) => {
   };
 
   return (
-    <div className="py-3 px-14">
-      <p className="text-sm md:text-base lg:text-xl text-black font-[poppins]">
+    <div className="py-3 px-1 lg:px-14">
+      <p className="text-base lg:text-xl text-black font-[poppins]">
         Contact Information
       </p>
 
@@ -36,7 +36,7 @@ const ContactInformation = ({ handleNext }) => {
         <CardInputComponent label={'Last Name'} />
         <CardInputComponent label={'Phone Number'} />
 
-        <div className="flex items-center gap-5">
+        <div className="flex justify-center lg:justify-start items-center md:mt-[7rem] lg:mt-0 gap-5">
           <button
             type="button"
             className="h-[2.4rem] flex items-center gap-1 px-3 py-2 text-sm text-[#5F5656] font-semibold border border-[#41073F] rounded-sm"

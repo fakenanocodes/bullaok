@@ -15,8 +15,8 @@ const SecurityData = ({ handleNext }) => {
     handleNext(4);
   };
   return (
-    <div className="py-3 px-14">
-      <p className="text-sm md:text-base lg:text-xl text-black font-[poppins]">
+    <div className="py-3 px-1 lg:px-14">
+      <p className="text-base lg:text-xl text-black font-[poppins]">
         Security Data
       </p>
 
@@ -29,7 +29,7 @@ const SecurityData = ({ handleNext }) => {
         <CardInputComponent label={'Control answer'} />
         <CardInputComponent label={'Secret word'} />
 
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-5 justify-center lg:justify-start md:mt-[7rem] lg:mt-0">
           <button
             type="button"
             className="h-[2.4rem] flex items-center gap-1 px-3 py-2 text-sm text-[#5F5656] font-semibold border border-[#41073F] rounded-sm"

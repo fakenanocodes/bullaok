@@ -2,10 +2,10 @@ import CheckIcon from '../utils/icons/CheckIcon';
 
 const SuccessPage = () => {
   return (
-    <div className="h-full flex flex-col justify-center items-center gap-10">
+    <div className="h-full flex flex-col justify-center items-center gap-5 md:gap-10">
       <CheckIcon />
       <p className="text-black font-[poppins] text-3xl font-bold">Thank you!</p>
-      <p className="text-black text-sm md:text-base">
+      <p className="text-black text-sm md:text-base text-center">
         Your application has been successfully sent out. Our Consultant will
         contact you shortly
       </p>
