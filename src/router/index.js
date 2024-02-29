@@ -28,6 +28,7 @@ import Team from '../pages/Team';
 import WhatWeInvest from '../pages/WhatWeInvest';
 import WhoWeAre from '../pages/WhoWeAre';
 import DashboardHome from '../pages/dashboard/DashboardHome';
+import Kyc from '../pages/dashboard/Kyc';
 import Transfer from '../pages/dashboard/Transfer';
 
 const router = createBrowserRouter([
@@ -156,6 +157,10 @@ const router = createBrowserRouter([
       {
         path: 'transfer',
         Component: Transfer,
+      },
+      {
+        path: 'kyc',
+        Component: Kyc,
       },
     ],
   },

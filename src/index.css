@@ -29,6 +29,10 @@
   .laviossa {
     font-family: 'Laviossa', system-ui, Avenir, Helvetica, Arial, sans-serif;
   }
+  /* #kyc{
+    outline: none;
+    border: none;
+  } */
 }
 
 :root {
