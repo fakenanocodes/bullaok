@@ -1,9 +1,13 @@
 import { useNavigate } from 'react-router-dom';
+import useSWR from 'swr';
 import BackArrowIcon from './utils/icons/BackArrowIcon';
 import NewProfileIcon from './utils/icons/NewProfileIcon';
 
 const PenaltyContainer = () => {
   const navigate = useNavigate();
+
+  const { data: penalties, error } = useSWR('penalty/');
+  console.log('Penalty', penalties, error);
 
   return (
     <div className="p-5 h-full">

@@ -7,7 +7,7 @@ const BonusContainer = () => {
   const navigate = useNavigate();
 
   const { data: bonuses, error } = useSWR('bonus/');
-  console.log(bonuses, error);
+  console.log('Bonus', bonuses, error);
 
   return (
     <div className="p-5 h-full">
