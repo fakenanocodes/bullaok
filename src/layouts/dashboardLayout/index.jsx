@@ -54,7 +54,7 @@ const DashboardLayout = () => {
               />
             </div>
           </div>
-          <div className="lg:mx-7 h-[100vh] lg:h-[80vh] relative lg:border lg:bg-black bg-opacity-[62%] rounded-r-xl">
+          <div className="lg:mx-7 h-[100vh] lg:h-[80vh] relative overflow-auto lg:bg-black bg-opacity-[62%] ">
             <Outlet />
           </div>
         </div>

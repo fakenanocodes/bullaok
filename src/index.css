@@ -10,11 +10,7 @@
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
-  .bg-referral {
-    background-image: url('./assets/dashboard/referral.png'); /* Replace 'your-image-url.jpg' with the actual path to your image */
-    background-size: cover; /* Adjust the sizing based on your preference */
-    background-position: center; /* Adjust the positioning based on your preference */
-  }
+
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -36,6 +32,11 @@
 
   .laviossa {
     font-family: 'Laviossa', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  }
+  @media only screen and (max-width: 768px) {
+    .gradient-div {
+      background: white;
+    }
   }
 }
 

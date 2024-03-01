@@ -1,13 +1,16 @@
 import React from 'react';
 
 import Box from '@mui/material/Box';
-import CircularProgress, {
-  circularProgressClasses,
-} from '@mui/material/CircularProgress';
 import LinearProgress, {
   linearProgressClasses,
 } from '@mui/material/LinearProgress';
 import { styled } from '@mui/material/styles';
+import { AiOutlineQuestion } from 'react-icons/ai';
+import { FaEdit } from 'react-icons/fa';
+import { MdOutlineArrowBackIos } from 'react-icons/md';
+import { PiMedalMilitaryFill } from 'react-icons/pi';
+
+import useSWR from 'swr';
 import { images } from '../../assets';
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
@@ -24,42 +27,6 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   },
 }));
 
-// Inspired by the former Facebook spinners.
-function FacebookCircularProgress(props) {
-  return (
-    <Box sx={{ position: 'relative' }}>
-      <CircularProgress
-        variant="determinate"
-        sx={{
-          color: (theme) =>
-            theme.palette.grey[theme.palette.mode === 'light' ? 200 : 800],
-        }}
-        size={40}
-        thickness={4}
-        {...props}
-        value={100}
-      />
-      <CircularProgress
-        variant="indeterminate"
-        disableShrink
-        sx={{
-          color: (theme) =>
-            theme.palette.mode === 'light' ? '#1a90ff' : '#308fe8',
-          animationDuration: '550ms',
-          position: 'absolute',
-          left: 0,
-          [`& .${circularProgressClasses.circle}`]: {
-            strokeLinecap: 'round',
-          },
-        }}
-        size={40}
-        thickness={4}
-        {...props}
-      />
-    </Box>
-  );
-}
-
 function CustomizedProgressBars() {
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -68,49 +35,101 @@ function CustomizedProgressBars() {
   );
 }
 
+const descriptionArray = [
+  {
+    text: 'Invite your friends using your referral code',
+    icon: <AiOutlineQuestion />,
+  },
+  {
+    text: 'Your code will be entered on registration',
+    icon: <FaEdit />,
+  },
+  {
+    text: 'You receive reward points for every successful referral',
+    icon: <PiMedalMilitaryFill />,
+  },
+  // { text: 'Share your code', icon: <FaShare /> },
+];
+
+const boxesData = [
+  { icon: images.share, text: 'Share your invitation code/link' },
+  { icon: images.signin, text: 'Friends sign in with your invitation codes' },
+  { icon: images.transaction, text: 'Friends make the first transaction' },
+];
 export default function ReferralComponent() {
+  const { data: referral, isLoading } = useSWR('referral/');
+  console.log(referral);
   return (
-    <div className="px-8">
-      <div className="flex items-center justify-around space-around ">
-        <img src={images.referral} alt="" className="xl:w-2/5 w-full" />
-        <div className="flex flex-col w-2/5 p-4 gap-8">
-          <CustomizedProgressBars />
-          <div className="bg-white h-[300px] rounded-xl w-full px-6 p-3 ">
+    <div className="xl:px-8 px-2">
+      {/* <div className="flex items-center gap-7 xl:hidden block"> */}
+      <div className="flex items-center gap-7 py-7 text-black text-2xl xl:hidden block">
+        <MdOutlineArrowBackIos />
+        <h2>Referral</h2>
+      </div>
+      <div className="flex items-center justify-around xl:flex-row flex-col ">
+        <img src={images.referral} alt="" className="xl:w-2/6 w-full" />
+        <div className="flex flex-col xl:w-2/5 w-full p-4 gap-8">
+          <div className="bg-[#41073F] w-full  px-6 p-3">
+            <CustomizedProgressBars />
+          </div>
+          <button className="bg-[#FFB803] w-full xl:hidden block text-black text-xl rounded-xl p-4">
+            Invite now
+          </button>
+          <div className="bg-white h-[300px] rounded-xl w-full xl:px-6 xl:p-3 ">
             <h2 className="text-black text-center my-4">How do you get?</h2>
             <hr />
             <div className="flex  justify-around mt-9 ">
-              <div className="box  w-[90px] text-[#925C90]">
-                <div className="border flex items-center justify-center rounded-lg p-4 border-[#925C90] mb-2">
-                  <img src={images.share} alt="" />
+              {boxesData.map((box, index) => (
+                <div key={index} className="box w-[90px] text-[#925C90]">
+                  <div className="border flex items-center justify-center rounded-lg xl:p-4 p-2 border-[#925C90] mb-2">
+                    <img src={box.icon} alt="" />
+                  </div>
+                  <p>{box.text}</p>
                 </div>
-                <p>Share your invitation code/link</p>
-              </div>
-              <div className="box text-[#925C90] w-[90px]">
-                <div className="border rounded-lg p-4 flex items-center border-[#925C90] justify-center mb-2">
-                  <img src={images.signin} alt="" />
-                </div>
-                <p>Friends sign in with your invitation codes</p>
-              </div>
-              <div className="box text-[#925C90]  w-[90px]">
-                <div className="border rounded-lg border-[#925C90] p-4 flex items-center justify-center  mb-2">
-                  <img src={images.transaction} alt="" />
-                </div>
-                <p>Friends make the first transaction</p>
-              </div>
+              ))}
             </div>
           </div>
         </div>
       </div>
-      <hr className="border-[#8E0789]" />
-      <div className="flex">
+      <hr className="border-[#8E0789] xl:block hidden" />
+      <div className="flex justify-around xl:flex-row flex-col w-full bg-[#531150] xl:bg-transparent p-4 xl:p-0 rounded-lg">
         <div className="flex flex-col items-center ">
           <h2 className="text-[#C771C4]">Your Referral Code</h2>
-          <p className="text-[70px] font-bold">FYNM1879</p>
+          <p className="xl:text-[70px] text-[30px] font-bold">FYNM1879</p>
 
           <h3 className="text-[#C771C4]">Referred Users</h3>
-          <h3 className="text-[70px]">0</h3>
+          <h3 className="xl:text-[70px] text-[30px]">0</h3>
+        </div>
+
+        <div className="flex flex-col xl:w-2/6 w-full  gap-4 mt-4">
+          {descriptionArray.map((item, index) => (
+            <div
+              key={index}
+              className="flex items-center justify-between gap-6"
+            >
+              <div className="flex items-center justify-between w-full gap-4">
+                {item.icon && (
+                  <span className="xl:text-3xl text-xl border border-[#FF9EFB] xl:p-4 p-3 rounded-[40px] flex items-center justify-center">
+                    {item.icon}
+                  </span>
+                )}
+                <p
+                  key={index}
+                  className="text-start rounded-lg  px-4 w-full xl:text-xl text-[13px] bg-[#41073F] p-2"
+                >
+                  {item?.text}
+                </p>
+              </div>
+            </div>
+          ))}
+          <button className="bg-[#FFB803] xl:block hidden  w-full rounded-xl p-4">
+            Share your code
+          </button>
         </div>
       </div>
+      <button className="bg-[#FFB803] xl:hidden block mt-4 w-full rounded-xl p-4">
+        Share your code
+      </button>
     </div>
   );
 }
