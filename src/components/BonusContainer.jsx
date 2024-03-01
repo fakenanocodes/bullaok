@@ -7,7 +7,7 @@ const BonusContainer = () => {
   const navigate = useNavigate();
 
   const { data: bonuses, error } = useSWR('bonus/');
-  console.log(bonuses, error);
+  console.log('Bonus', bonuses, error);
 
   return (
     <div className="p-5 h-full">
@@ -16,14 +16,18 @@ const BonusContainer = () => {
           <BackArrowIcon color={'white'} />
         </div>
         <div>
-          <p className="font-semibold text-xl">Bonus Notifications</p>
-          <p className="text-[#AAAAAA] text-sm">Total added bonuses</p>
+          <p className="font-semibold text-lg md:text-xl">
+            Bonus Notifications
+          </p>
+          <p className="text-[#AAAAAA] text-xs md:text-sm">
+            Total added bonuses
+          </p>
         </div>
       </div>
 
       <div className="flex w-full min-h-[90%]">
-        <div className="md:w-[30%] lg:w-[25%] border-r border-[#8E0789]">
-          <p className="mt-[3rem] py-3 px-2 font-semibold text-lg border-b border-[#8E0789]">
+        <div className="w-[40%] md:w-[30%] lg:w-[25%] border-r border-[#8E0789]">
+          <p className="md:mt-[3rem] py-3 px-2 font-semibold text-base md:text-lg border-b border-[#8E0789]">
             Bonus History
           </p>
 
@@ -34,7 +38,7 @@ const BonusContainer = () => {
               </div>
 
               <div>
-                <p className="text-sm lg:text-base text-[#AAAAAA]">
+                <p className="text-xs md:text-sm lg:text-base text-[#AAAAAA]">
                   Referral Bonus -{' '}
                   <span className="font-semibold">Jane Doe</span>
                 </p>
@@ -44,7 +48,7 @@ const BonusContainer = () => {
           </div>
         </div>
 
-        <div className="px-3 md:px-7 mt-[3rem]">
+        <div className="px-3 md:px-7 md:mt-[3rem]">
           <div>
             <p className="text-[#E8C4E6] font-semibold text-xs md:text-sm py-3">
               Bonus detail

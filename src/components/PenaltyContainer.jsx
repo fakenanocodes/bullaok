@@ -1,9 +1,13 @@
 import { useNavigate } from 'react-router-dom';
+import useSWR from 'swr';
 import BackArrowIcon from './utils/icons/BackArrowIcon';
 import NewProfileIcon from './utils/icons/NewProfileIcon';
 
 const PenaltyContainer = () => {
   const navigate = useNavigate();
+
+  const { data: penalties, error } = useSWR('penalty/');
+  console.log('Penalty', penalties, error);
 
   return (
     <div className="p-5 h-full">
@@ -12,14 +16,18 @@ const PenaltyContainer = () => {
           <BackArrowIcon color={'white'} />
         </div>
         <div>
-          <p className="font-semibold text-xl">Penalty Notifications</p>
-          <p className="text-[#AAAAAA] text-sm">Total penalized activity</p>
+          <p className="font-semibold text-lg md:text-xl">
+            Penalty Notifications
+          </p>
+          <p className="text-[#AAAAAA] text-xs md:text-sm">
+            Total penalized activity
+          </p>
         </div>
       </div>
 
       <div className="flex w-full min-h-[90%]">
-        <div className="md:w-[30%] lg:w-[25%] border-r border-[#8E0789]">
-          <p className="mt-[3rem] py-3 px-2 font-semibold text-lg border-b border-[#8E0789]">
+        <div className="w-[40%] md:w-[30%] lg:w-[25%] border-r border-[#8E0789]">
+          <p className="md:mt-[3rem] py-3 md:px-2 font-semibold text-base md:text-lg border-b border-[#8E0789] min-w-max">
             Penalty History
           </p>
 
@@ -30,7 +38,7 @@ const PenaltyContainer = () => {
               </div>
 
               <div>
-                <p className="text-sm lg:text-base text-[#AAAAAA]">
+                <p className="text-xs md:text-sm lg:text-base text-[#AAAAAA]">
                   Defaulted penalty
                 </p>
                 <p className="text-xs lg:text-sm">$0.0</p>
@@ -39,7 +47,7 @@ const PenaltyContainer = () => {
           </div>
         </div>
 
-        <div className="px-3 md:px-7 mt-[3rem]">
+        <div className="px-3 md:px-7 md:mt-[3rem]">
           <div>
             <p className="text-[#E8C4E6] font-semibold text-xs md:text-sm py-3">
               Penalized details

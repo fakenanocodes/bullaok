@@ -10,9 +10,9 @@ export default function ProfileComponent() {
   const profile = data?.profile;
   console.log(user?.first_name);
   return (
-    <div className="grid grid-cols-1 xl:w-4/5 w-full mx-auto text-black pb-8">
-      <div className="flex xl:flex-row lg:flex-row flex-col  justify-between p-8 ml-8">
-        <div className="flex xl:flex-row flex-col  items-center justify-center gap-3 text-[#7E577D]">
+    <div className="grid grid-cols-1 xl:w-4/5 w-full mx-auto text-black xl:pb-8 p-3">
+      <div className="flex xl:flex-row lg:flex-row flex-col gap-3 justify-between xl:p-8 p-4 xl:ml-8 m-0">
+        <div className="flex  flex-col  items-center justify-center gap-3 text-[#7E577D]">
           {/* <img
             src={
               profile?.image !== null
@@ -34,7 +34,7 @@ export default function ProfileComponent() {
           </div>
         </div>
 
-        <div className="border flex gap-9 flex-col xl:w-2/4 w-full  gap-1 border-[#8E0789]/20 rounded-lg p-8">
+        <div className="border flex gap-9 flex-col xl:w-2/4 w-full  gap-1 border-[#8E0789]/20 rounded-lg xl:p-8 p-3">
           <div className="flex items-center justify-between">
             <div className="text-[#222222]/90">
               <h2 className="font-bold text-xl text-[#222222]/90 mb-3">
@@ -99,22 +99,22 @@ export default function ProfileComponent() {
       </div>
 
       <div className="flex flex-col gap-2">
-        <div className="border border-[#8E0789]/20 p-4 px-[70px]">
-          <h2 className="font-bold text-2xl">Total Assets</h2>
-          <h2 className="text-[#49454F] text-xl">
+        <div className="border border-[#8E0789]/20 p-4 x:px-[70px] px-8">
+          <h2 className="font-bold xl:text-2xl text-sm">Total Assets</h2>
+          <h2 className="text-[#49454F] xl:text-xl text-[10px]">
             View your total assets and earning.
           </h2>
         </div>
-        <div className="border border-[#8E0789]/20 p-4 px-[70px]">
+        <div className="border border-[#8E0789]/20 p-4 x:px-[70px] px-8">
           <h2 className="font-bold text-2xl">Transaction History</h2>
         </div>
-        <div className="border border-[#8E0789]/20 p-4 px-[70px]">
+        <div className="border border-[#8E0789]/20 p-4 x:px-[70px] px-8">
           <h2 className="font-bold text-2xl">Account Limits</h2>
           <h2 className="text-[#49454F] text-xl">
             View your transaction limits.{' '}
           </h2>
         </div>
-        <div className="border border-[#8E0789]/20 p-4 px-[70px]">
+        <div className="border border-[#8E0789]/20 p-4 x:px-[70px] px-8">
           <h2 className="font-bold text-2xl">Support</h2>
         </div>
       </div>

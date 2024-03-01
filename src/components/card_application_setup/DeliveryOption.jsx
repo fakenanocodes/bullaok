@@ -26,8 +26,8 @@ const DeliveryOption = ({ handleNext }) => {
   };
 
   return (
-    <div className="py-3 px-14">
-      <p className="text-sm md:text-base lg:text-xl text-black font-[poppins]">
+    <div className="py-3 px-1 lg:px-14">
+      <p className="text-base lg:text-xl text-black font-[poppins]">
         Delivery Option
       </p>
 
@@ -49,7 +49,9 @@ const DeliveryOption = ({ handleNext }) => {
                   value="courierDelivery"
                 />
 
-                <p className="text-black font-[poppins]">Courier delivery</p>
+                <p className="text-black font-[poppins] text-sm md:text-base">
+                  Courier delivery
+                </p>
               </div>
             )}
           />
@@ -65,7 +67,9 @@ const DeliveryOption = ({ handleNext }) => {
                   id="officeDelivery"
                   value="officeDelivery"
                 />
-                <p className="text-black font-[poppins]">Deliver at office</p>
+                <p className="text-black font-[poppins] text-sm md:text-base">
+                  Deliver at office
+                </p>
               </div>
             )}
           />
@@ -84,7 +88,7 @@ const DeliveryOption = ({ handleNext }) => {
           </div>
         </div>
 
-        <div className="flex items-center gap-5 mt-10">
+        <div className="flex items-center gap-5 mt-10 justify-center lg:justify-start md:mt-[7rem] lg:mt-0">
           <button
             type="button"
             className="h-[2.4rem] flex items-center gap-1 px-3 py-2 text-sm text-[#5F5656] font-semibold border border-[#41073F] rounded-sm"

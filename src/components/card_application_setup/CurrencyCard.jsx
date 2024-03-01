@@ -19,8 +19,8 @@ const CurrencyCard = ({ handleNext }) => {
   };
 
   return (
-    <div className="py-3 px-14 h-full">
-      <p className="text-sm md:text-base lg:text-xl text-black font-[poppins]">
+    <div className="py-3 px-1 lg:px-14 h-full">
+      <p className="text-base lg:text-xl text-black font-[poppins]">
         Select the type and design of the card
       </p>
 
@@ -47,7 +47,7 @@ const CurrencyCard = ({ handleNext }) => {
           </div>
         </div>
 
-        <div className="flex items-center gap-5 mt-3">
+        <div className="flex items-center justify-center lg:justify-start md:mt-[7rem] lg:mt-0 gap-5 mt-3">
           <button
             type="button"
             className="h-[2.4rem] flex items-center gap-1 px-3 py-2 text-sm text-[#5F5656] font-semibold border border-[#41073F] rounded-sm"
