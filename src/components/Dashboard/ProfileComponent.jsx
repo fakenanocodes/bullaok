@@ -11,8 +11,8 @@ export default function ProfileComponent() {
   console.log(user?.first_name);
   return (
     <div className="grid grid-cols-1 xl:w-4/5 w-full mx-auto text-black xl:pb-8 p-3">
-      <div className="flex xl:flex-row lg:flex-row flex-col gap-3 justify-between xl:p-8 p-4 xl:ml-8 m-0">
-        <div className="flex  flex-col  items-center justify-center gap-3 text-[#7E577D]">
+      <div className="flex xl:flex-row lg:flex-row flex-col gap-3 justify-between xl:p-8  xl:ml-8 ml-0">
+        <div className="flex flex-col  items-center justify-center gap-3 text-[#7E577D]">
           {/* <img
             src={
               profile?.image !== null
@@ -98,7 +98,7 @@ export default function ProfileComponent() {
         </div>
       </div>
 
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 mt-4 ">
         <div className="border border-[#8E0789]/20 p-4 x:px-[70px] px-8">
           <h2 className="font-bold xl:text-2xl text-sm">Total Assets</h2>
           <h2 className="text-[#49454F] xl:text-xl text-[10px]">
@@ -106,16 +106,16 @@ export default function ProfileComponent() {
           </h2>
         </div>
         <div className="border border-[#8E0789]/20 p-4 x:px-[70px] px-8">
-          <h2 className="font-bold text-2xl">Transaction History</h2>
+          <h2 className="font-bold xl:text-2xl text-sm">Transaction History</h2>
         </div>
         <div className="border border-[#8E0789]/20 p-4 x:px-[70px] px-8">
-          <h2 className="font-bold text-2xl">Account Limits</h2>
-          <h2 className="text-[#49454F] text-xl">
+          <h2 className="font-bold xl:text-2xl text-sm">Account Limits</h2>
+          <h2 className="text-[#49454F] xl:text-xl text-sm">
             View your transaction limits.{' '}
           </h2>
         </div>
         <div className="border border-[#8E0789]/20 p-4 x:px-[70px] px-8">
-          <h2 className="font-bold text-2xl">Support</h2>
+          <h2 className="font-bold xl:text-2xl text-sm">Support</h2>
         </div>
       </div>
     </div>
