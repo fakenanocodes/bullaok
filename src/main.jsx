@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import { SWRConfig } from 'swr';
+import { SWRConfig, mutate } from 'swr';
 import App from './App.jsx';
 import init from './api/config.js';
 import './index.css';
@@ -13,16 +13,24 @@ const fetcher = async (...args) => {
   const res = await axios(...args);
   return res.data;
 };
+const mutation = async (key, newData) => {
+  await mutate(key);
+  console.log(`Mutating ${key} with data:`, newData);
+  await axios.put(key, newData);
 
+  mutate(key, newData, false);
+};
 init();
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <SWRConfig value={{ fetcher }}>
-          <App />
-        </SWRConfig>
-      </PersistGate>
+      <SWRConfig value={{ fetcher, mutations: { mutation } }}>
+        <PersistGate loading={null} persistor={persistor}>
+          <SWRConfig value={{ fetcher }}>
+            <App />
+          </SWRConfig>
+        </PersistGate>
+      </SWRConfig>
     </Provider>
   </React.StrictMode>
 );
