@@ -15,13 +15,14 @@ export const handleGenericError = (error) => {
   if (error?.response) {
     // The request was made, but the server responded with an error
     const { data, message } = error.response;
-    console.log(data);
+    // console.log(data.username?.replace('custom ', ''));
     return (
       data?.data?.message ||
       data?.message ||
       data?.detail ||
+      data?.username?.join(',')?.replace('custom ', '') ||
       data?.Error?.join(',') ||
-      data?.email?.join(',') ||
+      data?.email?.join(',')?.replace('custom ', '') ||
       data?.error?.join(',') ||
       data?.verification_code?.join(',') ||
       message
