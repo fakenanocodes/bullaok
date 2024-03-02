@@ -15,7 +15,11 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-
+  .gradient-div {
+    width: 100%; /* Set the width as per your requirement */
+    height: 100%; /* Set the height as per your requirement */
+    background: linear-gradient(90deg, #41073f 0%, #8e0789 100%);
+  }
   .no-number-arrows::-webkit-outer-spin-button,
   .no-number-arrows::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -28,6 +32,11 @@
 
   .laviossa {
     font-family: 'Laviossa', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  }
+  @media only screen and (max-width: 768px) {
+    .gradient-div {
+      background: white;
+    }
   }
 }
 

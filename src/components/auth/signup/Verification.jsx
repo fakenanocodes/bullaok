@@ -1,24 +1,82 @@
+import axios from 'axios';
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
 import OtpInput from 'react18-input-otp';
 import { scrollToTop } from '../../../actions/utils';
+import { handleGenericError } from '../../../config/mixin';
 import Button from '../../utils/reusables/Button';
 
 const Verification = ({ setSignupComponent }) => {
   const [state, setState] = useState({ otp: '' });
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+  const [resendingOtp, setResendingOtp] = useState(false);
+
+  const currentUserEmail = useSelector(
+    (state) => state.auth.currentSignupEmail
+  );
+  const { handleSubmit } = useForm();
 
   const handleChange = (otp) => {
     setError('');
     setState({ otp });
+    // setSignupComponent(0);
   };
 
+  const onSubmit = async () => {
+    if (state?.otp !== '') {
+      const data = {
+        verification_code: state?.otp,
+      };
+
+      try {
+        setIsLoading(true);
+        await axios.post('auth/verify-email/', data);
+        setIsLoading(false);
+        setSuccess('Your account has been verified');
+        navigate('/login');
+      } catch (error) {
+        setIsLoading(false);
+        const err = handleGenericError(error);
+        setError(err);
+        console.log(err);
+      }
+    } else {
+      setError('Input field cannot be empty');
+    }
+  };
+
+  const resendOtp = async () => {
+    setResendingOtp(true);
+    try {
+      await axios.post('user/auth/password-reset/', {
+        email: currentUserEmail,
+      });
+
+      setSuccess('We have resent a code to your email');
+
+      setResendingOtp(false);
+    } catch (error) {
+      setResendingOtp(false);
+      const errMsg = handleGenericError(error);
+      setError(errMsg);
+    }
+  };
+  setTimeout(() => {
+    setError(null);
+    setSuccess(null);
+  }, 20000);
   return (
-    <form className="w-[100%] max-[640px]:flex-1 flex flex-col justify-around p-5 lg:p-14 h-[50vh] lg:h-[90vh]">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="w-[100%] max-[640px]:flex-1 flex flex-col justify-around p-5 lg:p-14 h-[50vh] lg:h-[90vh]"
+    >
       <div>
-        <p className="laviossa text-3xl font-semibold">Email Verification</p>
+        <p className="text-3xl font-semibold">Email Verification</p>
         <p className="tracking-wide mt-1">
           We have sent an OTP to{' '}
-          <span className="text-[#8E0789]">info@bulloak.com</span>
+          <span className="text-[#8E0789]">{currentUserEmail}</span>
         </p>
       </div>
 
@@ -61,7 +119,7 @@ const Verification = ({ setSignupComponent }) => {
           <p className="text-[#0000004D] text-center mt-[2rem]">
             Didn&apos;t receive an email?{' '}
             <span
-              onClick={() => setSignupComponent(0)}
+              onClick={resendOtp}
               className="text-[#8E0789] cursor-pointer font-medium"
             >
               Resend OTP

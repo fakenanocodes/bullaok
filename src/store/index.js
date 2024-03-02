@@ -10,17 +10,19 @@ import {
   persistStore,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import auth_reducer from './auth_reducer';
 import card_reducer from './reducers/card_reducer';
 
 const persistConfig = {
   key: 'root',
   version: 1,
   storage,
-  whitelist: ['card'],
+  whitelist: ['card', 'auth'],
 };
 
 const reducers = combineReducers({
   card: card_reducer,
+  auth: auth_reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);
