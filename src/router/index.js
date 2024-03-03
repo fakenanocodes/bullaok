@@ -36,6 +36,8 @@ import InvestmentPackages from '../pages/dashboard/InvestmentPackages';
 import InvestmentPlan from '../pages/dashboard/InvestmentPlan';
 import Profile from '../pages/dashboard/Profile';
 import RunningInvestment from '../pages/dashboard/RunningInvestment';
+import Kyc from '../pages/dashboard/Kyc';
+import Transfer from '../pages/dashboard/Transfer';
 
 const router = createBrowserRouter([
   {
@@ -159,6 +161,14 @@ const router = createBrowserRouter([
       {
         path: '',
         Component: DashboardHome,
+      },
+      {
+        path: 'transfer',
+        Component: Transfer,
+      },
+      {
+        path: 'kyc',
+        Component: Kyc,
       },
       {
         path: 'profile',
