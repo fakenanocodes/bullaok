@@ -55,7 +55,7 @@ let trans = [
 const Withdrawal = () => {
   const [openModel, setOpenModel] = useState(false);
   const [showMobileTable, setShowMobileTable] = useState(false);
-  const { data } = useSWR(`/transfer/`);
+  const { data } = useSWR(`/withdraw/`);
   console.log(data);
 
   return (
