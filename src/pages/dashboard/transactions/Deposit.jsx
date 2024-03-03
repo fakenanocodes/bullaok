@@ -221,17 +221,21 @@ const Deposit = () => {
           </select>
         </div>
         <div>
-          {deposits.map((deposit, idx) => (
+          {deposits?.map((deposit, idx) => (
             <div className="flex justify-between md:w-[90%] text-xs ">
               <div className="py-3 font-bold md:ml-11  w-36 ">
                 {deposit?.created?.split('T')[0] + ' '}
                 {deposit?.created?.split('T')[1].split('.')[0]}
               </div>
-              <div className="py-3 w-10 pl-8 -mx-5 ">{deposit?.amount}</div>
-              <div className="py-3 pl-10  mx-24 w-24">
+              <div className="py-3 w-10 pl-5 -mx-5 text-center ">
+                {deposit?.amount.split('.')[0]}
+              </div>
+              <div className="py-3 pl-10  ml-24 w-36 text-center">
                 {deposit?.profile?.user?.email}
               </div>
-              <div className="py-3  mx-24 w-14">{deposit?.wallet_type}</div>
+              <div className="py-3  mx-24 w-14 text-center">
+                {deposit?.wallet_type}
+              </div>
               <div className="py-3 w-16 md:-mx-10 -mr-24">
                 {deposit?.verified
                   ? 'Success'
