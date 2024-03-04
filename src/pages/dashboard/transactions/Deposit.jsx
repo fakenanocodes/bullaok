@@ -1,10 +1,11 @@
 import { ClickAwayListener } from '@mui/material';
 import axios from 'axios';
 import { useState } from 'react';
+// import { Cookies } from 'react-cookie';
+import { toast } from 'react-toastify';
 import useSWR from 'swr';
 import CancelIcon from '../../../components/utils/icons/CancelIcon';
 import DepositIcon from '../../../components/utils/icons/DepositIcon';
-
 import LeftMoveIcon from '../../../components/utils/icons/LeftMoveIcon';
 
 let trans = [
@@ -52,6 +53,11 @@ let trans = [
   },
 ];
 
+// const cookie = new Cookies();
+// cookie.set(
+//   'access_token',
+//   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA5NjI2NTE3LCJpYXQiOjE3MDk1MTg1MTcsImp0aSI6ImU2MDMyY2IyNWRjMjRkYjk4YzgyOWE2NTJmZTlmZTM1IiwidXNlcl9pZCI6MTE2LCJmaXJzdF9uYW1lIjoiIiwiZW1haWwiOiJhc2RAYXNkLmNvbSIsInVzZXJfbmFtZSI6ImFzZDEiLCJpZCI6MTE2fQ.5uuFnO_1ppzyRPlWYzPxgqZisd92AyKTAMtoJWaHDDs'
+// );
 const Deposit = () => {
   const [openModel, setOpenModel] = useState(false);
   const [showMobileTable, setShowMobileTable] = useState(false);
@@ -84,6 +90,9 @@ const Deposit = () => {
     try {
       const response = await axios.post('/deposit/', userData);
       console.log('RESPONSE', response.data);
+      toast.success('success');
+      setOpenModel(false);
+      reset();
     } catch (error) {
       console.log(error);
     }
@@ -216,34 +225,34 @@ const Deposit = () => {
           <div className="m-2 p-2 md:px-10 bg-[#F9F9FA] shadow drop-shadow-sm">
             STATUS
           </div>
-          <select className="m-2 md:p-2 bg-[rgb(249,249,250)] shadow drop-shadow-lg border-none px-7 hidden md:block">
+          {/* <select className="m-2 md:p-2 bg-[rgb(249,249,250)] shadow drop-shadow-lg border-none px-7 hidden md:block">
             <option className="">Sort</option>
-          </select>
+          </select> */}
         </div>
         <div>
           {deposits?.map((deposit, idx) => (
-            <div className="flex justify-between md:w-[90%] text-xs ">
-              <div className="py-3 font-bold md:ml-11  w-36 ">
-                {deposit?.created?.split('T')[0] + ' '}
-                {deposit?.created?.split('T')[1].split('.')[0]}
+            <div className="flex justify-between md:w-[90%]  md:ml-10 text-xs ">
+              <div className="py-3 font-bold my-2   ">
+                <div className="md:flex gap-2">
+                  <p>{deposit?.created?.split('T')[0]}</p>
+                  <p>{deposit?.created?.split('T')[1].split('.')[0]}</p>
+                </div>
               </div>
-              <div className="py-3 w-10 pl-5 -mx-5 text-center ">
+              <div className="py-3 my-2 md:px-10 ">
                 {deposit?.amount.split('.')[0]}
               </div>
-              <div className="py-3 pl-10  ml-24 w-36 text-center">
+              <div className="py-3 my-2 md:px-10">
                 {deposit?.profile?.user?.email}
               </div>
-              <div className="py-3  mx-24 w-14 text-center">
-                {deposit?.wallet_type}
-              </div>
-              <div className="py-3 w-16 md:-mx-10 -mr-24">
+              <div className="py-3  my-2 md:px-10">{deposit?.wallet_type}</div>
+              <div className="py-3 my-2  md:px-10">
                 {deposit?.verified
                   ? 'Success'
                   : !deposit?.verified
                   ? 'Pending...'
                   : 'Failed'}
               </div>
-              <div className="w-36"></div>
+              {/* <div className="w-36"></div> */}
             </div>
           ))}
         </div>
@@ -251,7 +260,10 @@ const Deposit = () => {
       {openModel && (
         <div className=" fixed top-0 left-0 w-full h-full flex  justify-center items-center bg-[#000000b3]">
           <ClickAwayListener onClickAway={() => setOpenModel(false)}>
-            <div className="bg-white h-3/5 w-[90%] md:w-3/5 max-w-[500px] p-4 my-6 relative">
+            <div
+              onSubmit={handleSubmit}
+              className="bg-white h-3/5 w-[90%] md:w-3/5 max-w-[500px] p-4 my-6 relative"
+            >
               <div className="flex justify-between">
                 <p className="text-lg text-gray-600 font-semibold">Deposit</p>
                 <div

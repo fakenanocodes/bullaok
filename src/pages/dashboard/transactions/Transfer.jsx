@@ -1,5 +1,7 @@
 import { ClickAwayListener } from '@mui/material';
+import axios from 'axios';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 import useSWR from 'swr';
 import CancelIcon from '../../../components/utils/icons/CancelIcon';
 import DollaIcon from '../../../components/utils/icons/DollaIcon';
@@ -54,8 +56,45 @@ let trans = [
 const Transfer = () => {
   const [openModel, setOpenModel] = useState(false);
   const [showMobileTable, setShowMobileTable] = useState(false);
-  const { data } = useSWR(`/transfer/`);
-  console.log(data);
+  const { data: transfers } = useSWR(`/transfer/`);
+
+  console.log('transfer', transfers);
+  const { data: user } = useSWR(`/user/`);
+  console.log('User', user);
+
+  const [amount, setAmount] = useState('');
+  const [emailAddress, setEmailAdress] = useState('');
+  // const [usdtAmount, setUsdtAmount] = useState(user.profile.available_balance);
+
+  // console.log('CHECKER', usdtAmount);
+
+  const walletType = ['USDT', 'LTC', 'BTC', 'XRP', 'ETH'];
+
+  let userData = {
+    amount,
+    email: emailAddress,
+    usdt_amount: amount,
+  };
+
+  console.log(userData);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('/transfer/', userData);
+      console.log('RESPONSE', response);
+      toast.success('success');
+      setOpenModel(false);
+      reset();
+    } catch (error) {
+      console.log(error);
+      // console.log(error?.response?.data?.UsdtAmount);
+      // if (error.response?.data?.UsdtAmount == 'ou have insufficient funds') {
+      //   toast.error('You have insufficient funds');
+      // }
+      setOpenModel(false);
+    }
+  };
 
   return (
     <div className=" h-[100%] bg-white p-4 text-gray-700 overflow-scroll relative">
@@ -68,19 +107,38 @@ const Transfer = () => {
       <div>
         <div className="flex flex-col gap-10 pb-24">
           <div className="md:flex gap-10  font-semibold">
-            <div className="flex flex-col md:w-[50%] mb-10 md:mb-0">
+            {/* <div className="flex flex-col md:w-[50%] mb-10 md:mb-0">
               <label>Source wallet</label>
-              <select type="text" className="rounded-lg px-6 border-2 py-4">
-                <option>main</option>
-                <option>BTC</option>
+              <select
+                value={wallet}
+                onChange={(e) => setWallet(e.target.value)}
+                type="text"
+                className="rounded-lg px-6 border-2 py-4"
+              >
+                {walletType.map((type, idx) => (
+                  <option
+                    key={idx}
+                    value={type}
+                    className="cursor-pointer flex gap-3"
+                  >
+                    {type}
+                  </option>
+                ))}
               </select>
-            </div>
-            <div className="flex flex-col md:w-[50%]">
-              <label>Asset destination</label>
-              <select type="text" className="rounded-lg px-6 border-2 py-4">
-                <option>$1,474.91</option>
-                <option>BTC</option>
-              </select>
+            </div> */}
+            <div className="flex flex-col md:w-full relative">
+              <label>Asset</label>
+              <div className="flex ">
+                <input
+                  type="text"
+                  value={user?.profile?.available_balance}
+                  // onChange={(e) => setUsdtAmount(e.target.value)}
+                  className="rounded-lg p-14 border-2 py-4 w-full"
+                />
+                <div className="absolute top-10 left-4">
+                  <DollaIcon />
+                </div>
+              </div>
             </div>
           </div>
           <div className="hidden md:w-[48%] items-center gap-5 relative md:grid grid-flow-col ">
@@ -94,6 +152,8 @@ const Transfer = () => {
             <div className="flex flex-col md:w-[50%] mb-12 md:mb-0">
               <label>Transfer amount</label>
               <input
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
                 type="text"
                 className="rounded-lg px-6 border-2 py-4"
                 placeholder="0.00 $"
@@ -105,9 +165,11 @@ const Transfer = () => {
             <div className="flex flex-col md:w-[50%] ">
               <label>Recipient email address</label>
               <input
+                value={emailAddress}
+                onChange={(e) => setEmailAdress(e.target.value)}
                 type="text"
                 className="rounded-lg px-6 border-2 py-4"
-                placeholder="yourmail@gmail.com"
+                // placeholder="lkjhyiu878yfs44rs"
               />
             </div>
           </div>
@@ -119,16 +181,19 @@ const Transfer = () => {
               onClick={() => setOpenModel(true)}
               className="hidden md:flex bg-[#352F84] py-2 text-white px-4 rounded-[5px]"
             >
-              Send payment
+              Make Transfer
             </button>
             <div className="md:hidden flex justify-between text-sm">
               <button
                 onClick={() => setShowMobileTable(!showMobileTable)}
                 className="border-2 border-red-700 px-6 rounded-md py-4"
               >
-                Transfer history
+                Transfer History
               </button>
-              <button className="bg-[#352F84] text-white rounded-md px-6 py-4">
+              <button
+                onClick={() => setOpenModel(true)}
+                className="bg-[#352F84] text-white rounded-md px-6 py-4"
+              >
                 Send payment
               </button>
             </div>
@@ -143,31 +208,42 @@ const Transfer = () => {
         <div className="bg-[#8E0789] text-white p-3 md:text-2xl font-semibold">
           Transfer History
         </div>
-        <div className="flex justify-between md:w-[90%] md:ml-10 text-sm md:text-lg">
-          <div className="m-2 p-2 md:px-10 bg-[#F9F9FA] shadow drop-shadow-sm">
-            Date
+        <div className="flex justify-between md:w-[90%] md:ml-10 text-sm ">
+          <div className="m-2 p-2 md:px-10 bg-[#F9F9FA] shadow drop-shadow-sm ">
+            DATE
           </div>
           <div className="m-2 p-2 md:px-10 bg-[#F9F9FA] shadow drop-shadow-sm">
-            Amount
+            AMOUNT
           </div>
           <div className="m-2 p-2 md:px-10 bg-[#F9F9FA] shadow drop-shadow-sm">
-            Email address
+            EMAIL ADDRESS
           </div>
           <div className="m-2 p-2 md:px-10 bg-[#F9F9FA] shadow drop-shadow-sm">
-            Status
+            ASSET
           </div>
-          <select className="m-2 md:p-2 bg-[rgb(249,249,250)] shadow drop-shadow-lg border-none px-7 hidden md:block">
+          <div className="m-2 p-2 md:px-10 bg-[#F9F9FA] shadow drop-shadow-sm">
+            STATUS
+          </div>
+          {/* <select className="m-2 md:p-2 bg-[rgb(249,249,250)] shadow drop-shadow-lg border-none px-7 hidden md:block">
             <option className="">Sort</option>
-          </select>
+          </select> */}
         </div>
         <div>
-          {trans.map((tran, idx) => (
-            <div className="flex justify-between md:w-[90%] text-xs ">
-              <div className="font-bold md:mx-12 mr-14 py-3 ">{tran.Date}</div>
-              <div className="py-3 w-5 -mx-5 ">{tran.Amount}</div>
-              <div className="py-3  mx-24 w-24">{tran.Email}</div>
-              <div className="py-3 w-16 md:-mx-10 -mr-24">{tran.Status}</div>
-              <div className="w-36"></div>
+          {transfers?.map((transfer, idx) => (
+            <div className="flex justify-between md:w-[90%]  md:ml-10 text-xs ">
+              <div className="py-3 font-bold my-2   ">
+                <div className="md:flex gap-2">
+                  <p>{transfer?.created?.split('T')[0]}</p>
+                  <p>{transfer?.created?.split('T')[1]?.split('.')[0]}</p>
+                </div>
+              </div>
+              <div className="py-3 my-2 md:px-10 ">{transfer?.usdt_amount}</div>
+              <div className="py-3 my-2 md:px-10">{transfer?.email}</div>
+              <div className="py-3  my-2 md:px-10">{'USD'}</div>
+              <div className="py-3 my-2  md:px-10">
+                {transfer?.usdt_amount ? 'Success' : 'Failed'}
+              </div>
+              {/* <div className="w-36"></div> */}
             </div>
           ))}
         </div>
@@ -175,7 +251,7 @@ const Transfer = () => {
       {openModel && (
         <div className=" fixed top-0 left-0 w-full h-full flex  justify-center items-center bg-[#000000b3]">
           <ClickAwayListener onClickAway={() => setOpenModel(false)}>
-            <div className="bg-white h-3/5 w-3/5 max-w-[500px] p-4 my-6 relative">
+            <div className="bg-white h-3/5 w-[90%] md:w-3/5 max-w-[500px] p-4 my-6 relative">
               <div className="flex justify-between">
                 <p className="text-lg text-gray-600 font-semibold">Transfer</p>
                 <div
@@ -186,16 +262,26 @@ const Transfer = () => {
                 </div>
               </div>
               <div className="py-5">
-                <label>Asset destination</label>
-                <div className="flex gap-3 border-2 w-full rounded-md p-2 px-4">
-                  <DollaIcon />
-                  <p>$1,474.91</p>
+                <label htmlFor="asset">Recipient email</label>
+                <div>
+                  {/* <DollaIcon /> */}
+                  <input
+                    value={emailAddress}
+                    placeholder="$1,474.91"
+                    className="border-2 w-full rounded-md p-2 px-4"
+                    id="asset"
+                  />
                 </div>
               </div>
               <div>
-                <p>Amount</p>
-                <div className="mb-32 w-full border-2 p-2 px-4 rounded-md">
-                  <p>$0.00</p>
+                <label htmlFor="amount">Amount</label>
+                <div className="">
+                  <input
+                    value={amount}
+                    className="mb-32 w-full border-2 p-2 px-4 rounded-md"
+                    placeholder="0.00"
+                    id="amount"
+                  />
                 </div>
               </div>
               <div className="flex gap-5 absolute right-4">
@@ -205,7 +291,10 @@ const Transfer = () => {
                 >
                   Cancel
                 </button>
-                <button className="bg-[#352F84] text-white p-2 px-4 rounded-md">
+                <button
+                  onClick={handleSubmit}
+                  className="bg-[#352F84] text-white p-2 px-4 rounded-md"
+                >
                   Confirm transfer
                 </button>
               </div>
