@@ -42,7 +42,7 @@ const InvestmentPackages = () => {
     <div>
       <div className="flex justify-between items-center">
         <KeyboardBackspaceIcon fontSize="large" />
-        <img src={RunningInvestmentIcon} alt="" className="pr-16" />
+        <img src={RunningInvestmentIcon} alt="" className="pr-15" />
       </div>
       <div className="p-10 space-y-5">
         <span className="font-bold text-lg">All Investments</span>

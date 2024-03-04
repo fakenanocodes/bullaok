@@ -16,7 +16,7 @@ const InvestmentPlan = () => {
     <div className="p-10">
       <div className="flex items-center space-x-5">
         <KeyboardBackspaceIcon fontSize="large" />
-        <span className="font-semibold textlg">CRYPTO CURRENCY</span>
+        <span className="font-semibold text-lg">CRYPTO CURRENCY</span>
       </div>
       <div className="p-8 space-x-5 flex justify-center items-center">
         {plans?.map((plan, index) => (
