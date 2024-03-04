@@ -30,14 +30,15 @@ import Team from '../pages/Team';
 import WhatWeInvest from '../pages/WhatWeInvest';
 import WhoWeAre from '../pages/WhoWeAre';
 import DashboardHome from '../pages/dashboard/DashboardHome';
-import InvestmentHistory from '../pages/dashboard/InvestmentHistory';
-import InvestmentPackages from '../pages/dashboard/InvestmentPackages';
-import InvestmentPlan from '../pages/dashboard/InvestmentPlan';
+// import InvestmentHistory from '../pages/dashboard/InvestmentHistory';
+// import InvestmentPackages from '../pages/dashboard/InvestmentPackages';
+// import InvestmentPlan from '../pages/dashboard/InvestmentPlan';
 import Profile from '../pages/dashboard/Profile';
 import ReferralContainer from '../pages/dashboard/Referral';
-import RunningInvestment from '../pages/dashboard/RunningInvestment';
+// import RunningInvestment from '../pages/dashboard/RunningInvestment';
 import Deposit from '../pages/dashboard/transactions/Deposit';
 import Transaction from '../pages/dashboard/transactions/Transactions';
+import Transfer from '../pages/dashboard/transactions/Transfer';
 import Withdrawal from '../pages/dashboard/transactions/Withdrawal';
 
 const router = createBrowserRouter([
@@ -190,6 +191,18 @@ const router = createBrowserRouter([
       {
         path: 'profile',
         Component: Profile,
+      },
+      {
+        path: 'transfer',
+        Component: Transfer,
+      },
+      {
+        path: 'withdraw',
+        Component: Withdrawal,
+      },
+      {
+        path: 'deposit',
+        Component: Deposit,
       },
     ],
   },

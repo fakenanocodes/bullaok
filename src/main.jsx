@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { SWRConfig, mutate } from 'swr';
 import App from './App.jsx';
+import init from './api/config.js';
 import './index.css';
 import store, { persistor } from './store/index.js';
 

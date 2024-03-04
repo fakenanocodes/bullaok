@@ -2,7 +2,6 @@ import React from 'react';
 import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa';
 import useSWR from 'swr';
 import { images } from '../../assets';
-import { MdOutlineArrowBackIos } from 'react-icons/md';
 
 export default function ProfileComponent() {
   const { data, isLoading } = useSWR('user/');
@@ -12,10 +11,6 @@ export default function ProfileComponent() {
   console.log(user?.first_name);
   return (
     <div className="grid grid-cols-1 xl:w-4/5 w-full mx-auto text-black xl:pb-8 p-3">
-      <div className="flex items-center gap-7 py-7 text-black text-2xl xl:hidden block">
-        <MdOutlineArrowBackIos />
-        <h2>Profile</h2>
-      </div>
       <div className="flex xl:flex-row lg:flex-row flex-col gap-3 justify-between xl:p-8  xl:ml-8 ml-0">
         <div className="flex flex-col  items-center justify-center gap-3 text-[#7E577D]">
           {/* <img
