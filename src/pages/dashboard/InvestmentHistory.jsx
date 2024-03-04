@@ -1,0 +1,111 @@
+import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
+
+const history = {
+  today: [
+    {
+      label: 'Real Estate',
+      detail: 'You invested $578,600 on real estate plan',
+      Month: 'January 25th...',
+      time: '15:03PM',
+    },
+    {
+      label: 'Real Estate',
+      detail: 'You invested $578,600 on real estate plan',
+      Month: 'January 25th...',
+      time: '15:03PM',
+    },
+    {
+      label: 'Real Estate',
+      detail: 'You invested $578,600 on real estate plan',
+      Month: 'January 25th...',
+      time: '15:03PM',
+    },
+    {
+      label: 'Real Estate',
+      detail: 'You invested $578,600 on real estate plan',
+      Month: 'January 25th...',
+      time: '15:03PM',
+    },
+  ],
+  '2nd Jan': [
+    {
+      label: 'Real Estate',
+      detail: 'You invested $578,600 on real estate plan',
+      Month: 'January 25th...',
+      time: '15:03PM',
+    },
+    {
+      label: 'Real Estate',
+      detail: 'You invested $578,600 on real estate plan',
+      Month: 'January 25th...',
+      time: '15:03PM',
+    },
+
+    {
+      label: 'Real Estate',
+      detail: 'You invested $578,600 on real estate plan',
+      Month: 'January 25th...',
+      time: '15:03PM',
+    },
+
+    {
+      label: 'Real Estate',
+      detail: 'You invested $578,600 on real estate plan',
+      Month: 'January 25th...',
+      time: '15:03PM',
+    },
+  ],
+};
+
+const historyTime = Object.keys(history);
+
+const InvestmentHistory = () => {
+  return (
+    <div className="p-10 space-y-5">
+      <div className="flex items-center space-x-5">
+        <KeyboardBackspaceIcon fontSize="large" />
+        <span className="font-semibold text-lg">HISTORY</span>
+      </div>
+      <div className="w-full">
+        <table className="w-full border-separate border-spacing-y-2">
+          <thead>
+            <tr className=" flex justify-between bg-[#E5C8E4] text-black px-10">
+              <th>Name</th>
+              <th>Detail</th>
+              <th></th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody className="flex space-y-2 flex-col">
+            {historyTime?.map((time, index) => (
+              <>
+                <tr key={index}>
+                  <td>{time}</td>
+                </tr>
+                {history[time]?.map((item, itemIndex) => (
+                  <tr
+                    key={`${index}-${itemIndex}`}
+                    className="flex justify-between px-10 bg-[#BB9FB3] bg-opacity-[38%]"
+                  >
+                    <td className="py-4 flex items-center space-x-3">
+                      <span className="bg-white w-6 h-6 flex justify-center items-center rounded-full">
+                        <FiberManualRecordIcon className="text-[#FFB803] rounded-full" />
+                      </span>
+                      <span>{item?.label}</span>
+                    </td>
+                    <td className="py-4">{item?.detail}</td>
+                    <td className="py-4">{item?.Month}</td>
+                    <td className="py-4">{item?.time}</td>
+                  </tr>
+                ))}
+              </>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+};
+
+export default InvestmentHistory;
