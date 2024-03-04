@@ -165,22 +165,7 @@ const router = createBrowserRouter([
         path: 'profile',
         Component: Profile,
       },
-      {
-        path: 'investment/packages',
-        Component: InvestmentPackages,
-      },
-      {
-        path: 'investment/running',
-        Component: RunningInvestment,
-      },
-      {
-        path: 'investment/plan',
-        Component: InvestmentPlan,
-      },
-      {
-        path: 'investment/history',
-        Component: InvestmentHistory,
-      },
+
       {
         path: 'card-application',
         Component: CardApplicationSetup,
@@ -200,6 +185,22 @@ const router = createBrowserRouter([
       {
         path: 'profile',
         Component: Profile,
+      },
+      {
+        path: 'investment/packages',
+        Component: InvestmentPackages,
+      },
+      {
+        path: 'investment/running',
+        Component: RunningInvestment,
+      },
+      {
+        path: 'investment/plan',
+        Component: InvestmentPlan,
+      },
+      {
+        path: 'investment/history',
+        Component: InvestmentHistory,
       },
     ],
   },
