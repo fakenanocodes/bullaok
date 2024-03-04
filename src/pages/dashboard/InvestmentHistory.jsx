@@ -41,12 +41,14 @@ const history = {
       Month: 'January 25th...',
       time: '15:03PM',
     },
+
     {
       label: 'Real Estate',
       detail: 'You invested $578,600 on real estate plan',
       Month: 'January 25th...',
       time: '15:03PM',
     },
+
     {
       label: 'Real Estate',
       detail: 'You invested $578,600 on real estate plan',
@@ -63,7 +65,7 @@ const InvestmentHistory = () => {
     <div className="p-10 space-y-5">
       <div className="flex items-center space-x-5">
         <KeyboardBackspaceIcon fontSize="large" />
-        <span className="font-semibold textlg">HISTORY</span>
+        <span className="font-semibold text-lg">HISTORY</span>
       </div>
       <div className="w-full">
         <table className="w-full border-separate border-spacing-y-2">
