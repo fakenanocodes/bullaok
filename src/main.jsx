@@ -1,11 +1,9 @@
-import axios from 'axios';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { SWRConfig, mutate } from 'swr';
 import App from './App.jsx';
-import init from './api/config.js';
 import './index.css';
 import store, { persistor } from './store/index.js';
 
@@ -26,9 +24,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <Provider store={store}>
       <SWRConfig value={{ fetcher, mutations: { mutation } }}>
         <PersistGate loading={null} persistor={persistor}>
-          <SWRConfig value={{ fetcher }}>
-            <App />
-          </SWRConfig>
+          <App />
         </PersistGate>
       </SWRConfig>
     </Provider>
