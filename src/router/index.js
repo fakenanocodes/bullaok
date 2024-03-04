@@ -1,10 +1,10 @@
+import { Login } from '@mui/icons-material';
 import { createBrowserRouter } from 'react-router-dom';
-import UserLogin from '../components/auth/login';
+import BonusContainer from '../components/BonusContainer';
 import CardApplicationSetup from '../components/card_application_setup';
 import { courses, header, testimonials } from '../data/education';
 import DashboardLayout from '../layouts/dashboardLayout';
 import About from '../pages/About';
-import Bonus from '../pages/Bonus';
 import CorporateConnect from '../pages/CorporateConnect';
 import ETF from '../pages/ETF';
 import Education from '../pages/Education';
@@ -22,7 +22,6 @@ import MarginTrading from '../pages/MarginTrading';
 import OptionsPage from '../pages/OptionsPage';
 import Otc from '../pages/Otc';
 import PaperTrading from '../pages/PaperTrading';
-import Penalty from '../pages/Penalty';
 import RecurringInvestments from '../pages/RecurringInvestments';
 import Signup from '../pages/Signup';
 import SmartAdvisor from '../pages/SmartAdvisor';
@@ -31,12 +30,16 @@ import Team from '../pages/Team';
 import WhatWeInvest from '../pages/WhatWeInvest';
 import WhoWeAre from '../pages/WhoWeAre';
 import DashboardHome from '../pages/dashboard/DashboardHome';
-import InvestmentHistory from '../pages/dashboard/InvestmentHistory';
-import InvestmentPackages from '../pages/dashboard/InvestmentPackages';
-import InvestmentPlan from '../pages/dashboard/InvestmentPlan';
+// import InvestmentHistory from '../pages/dashboard/InvestmentHistory';
+// import InvestmentPackages from '../pages/dashboard/InvestmentPackages';
+// import InvestmentPlan from '../pages/dashboard/InvestmentPlan';
 import Profile from '../pages/dashboard/Profile';
 import ReferralContainer from '../pages/dashboard/Referral';
-import RunningInvestment from '../pages/dashboard/RunningInvestment';
+// import RunningInvestment from '../pages/dashboard/RunningInvestment';
+import Deposit from '../pages/dashboard/transactions/Deposit';
+import Transaction from '../pages/dashboard/transactions/Transactions';
+import Transfer from '../pages/dashboard/transactions/Transfer';
+import Withdrawal from '../pages/dashboard/transactions/Withdrawal';
 
 const router = createBrowserRouter([
   {
@@ -143,7 +146,7 @@ const router = createBrowserRouter([
   },
   {
     path: 'login',
-    Component: UserLogin,
+    Component: Login,
   },
   {
     path: 'register',
@@ -162,36 +165,24 @@ const router = createBrowserRouter([
         Component: DashboardHome,
       },
       {
-        path: 'profile',
-        Component: Profile,
-      },
-      {
-        path: 'investment/packages',
-        Component: InvestmentPackages,
-      },
-      {
-        path: 'investment/running',
-        Component: RunningInvestment,
-      },
-      {
-        path: 'investment/plan',
-        Component: InvestmentPlan,
-      },
-      {
-        path: 'investment/history',
-        Component: InvestmentHistory,
-      },
-      {
         path: 'card-application',
         Component: CardApplicationSetup,
       },
       {
-        path: 'bonuses',
-        Component: Bonus,
+        path: 'bonus',
+        Component: BonusContainer,
       },
       {
-        path: 'penalties',
-        Component: Penalty,
+        path: 'transfer',
+        Component: Transaction,
+      },
+      {
+        path: 'withdraw',
+        Component: Withdrawal,
+      },
+      {
+        path: 'deposit',
+        Component: Deposit,
       },
       {
         path: 'referral',
@@ -200,6 +191,18 @@ const router = createBrowserRouter([
       {
         path: 'profile',
         Component: Profile,
+      },
+      {
+        path: 'transfer',
+        Component: Transfer,
+      },
+      {
+        path: 'withdraw',
+        Component: Withdrawal,
+      },
+      {
+        path: 'deposit',
+        Component: Deposit,
       },
     ],
   },

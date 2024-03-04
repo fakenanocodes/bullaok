@@ -1,7 +1,7 @@
 import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import logo from '../../assets/dashboard/logo.svg';
 import profilepic from '../../assets/dashboard/profilepic.png';
 import HomeIcon from '../../assets/icons/dashboard/HomeIcon';
@@ -9,9 +9,13 @@ import InvestmentIcon from '../../assets/icons/dashboard/InvestmentIcon';
 import PlantIcon from '../../assets/icons/dashboard/PlantIcon';
 import DashboardSidebar from './components/Sidebar';
 
+const options = ['Withdraw', 'Deposit', 'Transfer'];
+
 const DashboardLayout = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
+  const [activeOption, setActiveOption] = useState(null);
 
+  const navigate = useNavigate();
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
   };
@@ -36,16 +40,23 @@ const DashboardLayout = () => {
         <div className="lg:flex-1 flex-col lg:space-y-4 ">
           <div className="lg:p-5 hidden lg:flex">
             <div className="flex w-full p-3 pr-10 space-x-24 rounded-[30px] bg-black bg-opacity-[34%] justify-end items-center">
-              <div className="flex space-x-6 items-center text-[#41073F] font-semibold">
-                <span className="bg-white px-6 rounded-[4px] py-1">
-                  Withdraw
-                </span>
-                <span className="bg-white px-6 rounded-[4px] py-1">
-                  Deposit
-                </span>
-                <span className="bg-white px-6 rounded-[4px] py-1">
-                  Transfer
-                </span>
+              <div className="flex space-x-3 items-center text-[#41073F] font-semibold">
+                {options?.map((option, index) => (
+                  <span
+                    key={index}
+                    className={` cursor-pointer ${
+                      activeOption === index
+                        ? 'border-white p-3 rounded-lg border'
+                        : ''
+                    }`}
+                    onClick={() => {
+                      setActiveOption(index);
+                      navigate(`/dashboard/${option.toLowerCase()}`);
+                    }}
+                  >
+                    <p className="bg-white px-6 rounded-[4px] py-1">{option}</p>
+                  </span>
+                ))}
               </div>
               <img
                 src={profilepic}
@@ -54,7 +65,7 @@ const DashboardLayout = () => {
               />
             </div>
           </div>
-          <div className="lg:mx-7 h-[100vh] lg:h-[80vh] relative overflow-auto lg:bg-black bg-opacity-[62%] ">
+          <div className="lg:mx-7 h-[100vh] no-scrollbar lg:h-[80vh] relative overflow-auto lg:bg-black bg-opacity-[62%] ">
             <Outlet />
           </div>
         </div>
