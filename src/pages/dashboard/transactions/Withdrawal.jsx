@@ -1,7 +1,6 @@
 import { ClickAwayListener } from '@mui/material';
 import { useState } from 'react';
 import useSWR from 'swr';
-import CancelIcon from '../../../components/utils/icons/CancelIcon';
 import DollaIcon from '../../../components/utils/icons/DollaIcon';
 import WithdrawIcon from '../../../components/utils/icons/WithdrawIcon';
 
@@ -59,7 +58,7 @@ const Withdrawal = () => {
   console.log(data);
 
   return (
-    <div className=" h-[100%] bg-white p-4 text-gray-700 overflow-scroll relative">
+    <div className=" h-[100%] no-scrollbar bg-white p-4 text-gray-700 overflow-scroll relative">
       <div className=" text-2xl font-bold my-3 mb-10 grid grid-cols-3 gap-12 items-center ">
         <div className="md:hidden ">
           <LeftMoveIcon />
@@ -183,7 +182,7 @@ const Withdrawal = () => {
               <div className="flex justify-between">
                 <p className="text-lg text-gray-600 font-semibold">
                   Withdrawal
-                  </p>
+                </p>
               </div>
               <div className="py-5">
                 <label>Asset destination</label>

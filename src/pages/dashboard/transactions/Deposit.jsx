@@ -90,7 +90,7 @@ const Deposit = () => {
   };
 
   return (
-    <div className=" h-[100%] bg-white p-4 text-gray-700 overflow-scroll relative">
+    <div className=" h-[100%] no-scrollbar bg-white p-4 text-gray-700 overflow-scroll relative">
       <div className=" text-2xl font-bold my-3 mb-10 grid grid-cols-3 gap-12 items-center ">
         <div className="md:hidden ">
           <LeftMoveIcon />

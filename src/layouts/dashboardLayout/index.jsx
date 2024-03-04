@@ -40,19 +40,21 @@ const DashboardLayout = () => {
         <div className="lg:flex-1 flex-col lg:space-y-4 ">
           <div className="lg:p-5 hidden lg:flex">
             <div className="flex w-full p-3 pr-10 space-x-24 rounded-[30px] bg-black bg-opacity-[34%] justify-end items-center">
-              <div className="flex space-x-6 items-center text-[#41073F] font-semibold">
+              <div className="flex space-x-3 items-center text-[#41073F] font-semibold">
                 {options?.map((option, index) => (
                   <span
                     key={index}
-                    className={`bg-white px-6 rounded-[4px] py-1 cursor-pointer ${
-                      activeOption === index ? 'border-black' : ''
+                    className={` cursor-pointer ${
+                      activeOption === index
+                        ? 'border-white p-3 rounded-lg border'
+                        : ''
                     }`}
                     onClick={() => {
                       setActiveOption(index);
                       navigate(`/dashboard/${option.toLowerCase()}`);
                     }}
                   >
-                    {option}
+                    <p className="bg-white px-6 rounded-[4px] py-1">{option}</p>
                   </span>
                 ))}
               </div>
@@ -63,7 +65,7 @@ const DashboardLayout = () => {
               />
             </div>
           </div>
-          <div className="lg:mx-7 h-[100vh] lg:h-[80vh] relative overflow-auto lg:bg-black bg-opacity-[62%] ">
+          <div className="lg:mx-7 h-[100vh] no-scrollbar lg:h-[80vh] relative overflow-auto lg:bg-black bg-opacity-[62%] ">
             <Outlet />
           </div>
         </div>
