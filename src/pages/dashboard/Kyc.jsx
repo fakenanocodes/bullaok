@@ -1,6 +1,7 @@
 import IdVerification from "../../components/kycPages/IdVerification";
 import Personalinfo from "../../components/kycPages/Personalinfo";
 import Selfie from "../../components/kycPages/Selfie";
+import SuccessPage from "../../components/kycPages/SuccessPage";
 import KycPreview from "../../components/kycPages/kycPreview";
 import { useState,createContext } from "react";
 
@@ -8,15 +9,17 @@ export const KycContext = createContext()
 
 const Kyc = () => {
   const [kyc,setKyc] = useState('personalInfo')
+  const [sup,setSup] = useState('')
   return (
-    <KycContext.Provider value={{kyc,setKyc}}>
-      <div className="w-full h-full px-[50px] py-[20px]">
+    <div className="w-full h-full px-[50px] py-[20px]">
+      <KycContext.Provider value={{ kyc, setKyc,sup,setSup }}>
         <Personalinfo />
         <IdVerification />
         <Selfie />
         <KycPreview />
-      </div>
-    </KycContext.Provider>
+        <SuccessPage/>
+      </KycContext.Provider>
+    </div>
   );
 };
 

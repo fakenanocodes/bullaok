@@ -3,7 +3,7 @@ import { KycContext } from '../../pages/dashboard/Kyc';
 import EditIcon from '../utils/icons/EditIcon';
 
 const KycPreview = () => {
-  const { kyc, setKyc } = useContext(KycContext);
+  const { kyc, setKyc,setSup } = useContext(KycContext);
   return (
     <div
       className={kyc === 'review' ? 'w-full h-full' : 'w-full h-full hidden'}
@@ -205,7 +205,10 @@ const KycPreview = () => {
           Back
         </button>
 
-        <button className="bg-[#FFB803] w-[80px] rounded-[5px] text-center text-[black] font-[Poppins] text-[12px] py-[2px] font-[600]">
+        <button
+          className="bg-[#FFB803] w-[80px] rounded-[5px] text-center text-[black] font-[Poppins] text-[12px] py-[2px] font-[600]"
+          onClick={() => setSup('success')}
+        >
           Finish
         </button>
       </div>

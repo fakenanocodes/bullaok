@@ -3,7 +3,7 @@ import { KycContext } from '../../pages/dashboard/Kyc';
 import PersonIcon from '../utils/icons/PersonIcon';
 
 const Selfie = () => {
-  const { kyc, setKyc } = useContext(KycContext);
+  const { kyc, setKyc,} = useContext(KycContext);
   return (
     <div
       className={kyc === 'selfie' ? 'w-full h-full' : 'w-full h-full hidden'}
