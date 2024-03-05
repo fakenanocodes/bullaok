@@ -86,6 +86,7 @@ const DashboardHome = () => {
         <div className="flex items-center gap-4">
           {data?.map((investmentPackage, index) => (
             <PackageCard
+              id={investmentPackage.id}
               label={investmentPackage?.name}
               imgUrl={imageUrls[investmentPackage?.name]}
               key={index}
