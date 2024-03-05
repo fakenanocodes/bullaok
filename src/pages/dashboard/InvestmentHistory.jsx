@@ -1,5 +1,6 @@
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
+import { useNavigate } from 'react-router-dom';
 
 const history = {
   today: [
@@ -61,10 +62,16 @@ const history = {
 const historyTime = Object.keys(history);
 
 const InvestmentHistory = () => {
+  const navigate = useNavigate();
   return (
     <div className="p-10 space-y-5">
-      <div className="flex items-center space-x-5">
-        <KeyboardBackspaceIcon fontSize="large" />
+      <div className="flex items-center space-x-5 cursor-pointer">
+        <KeyboardBackspaceIcon
+          fontSize="large"
+          onClick={() => {
+            navigate(-1);
+          }}
+        />
         <span className="font-semibold text-lg">HISTORY</span>
       </div>
       <div className="w-full">

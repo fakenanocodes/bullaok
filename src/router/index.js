@@ -1,4 +1,4 @@
-import { Login } from '@mui/icons-material';
+// import { Login } from '@mui/icons-material';
 import { createBrowserRouter } from 'react-router-dom';
 import BonusContainer from '../components/BonusContainer';
 import CardApplicationSetup from '../components/card_application_setup';
@@ -30,12 +30,15 @@ import Team from '../pages/Team';
 import WhatWeInvest from '../pages/WhatWeInvest';
 import WhoWeAre from '../pages/WhoWeAre';
 import DashboardHome from '../pages/dashboard/DashboardHome';
-// import InvestmentHistory from '../pages/dashboard/InvestmentHistory';
-// import InvestmentPackages from '../pages/dashboard/InvestmentPackages';
-// import InvestmentPlan from '../pages/dashboard/InvestmentPlan';
+
+import InvestmentHistory from '../pages/dashboard/InvestmentHistory';
 import Profile from '../pages/dashboard/Profile';
 import ReferralContainer from '../pages/dashboard/Referral';
-// import RunningInvestment from '../pages/dashboard/RunningInvestment';
+// import InvestmentPackages from '../pages/dashboard/InvestmentPackages';
+import UserLogin from '../components/auth/login';
+import InvestmentPackages from '../pages/dashboard/InvestmentPackages';
+import InvestmentPlan from '../pages/dashboard/InvestmentPlan';
+import RunningInvestment from '../pages/dashboard/RunningInvestment';
 import Deposit from '../pages/dashboard/transactions/Deposit';
 import Transaction from '../pages/dashboard/transactions/Transactions';
 import Transfer from '../pages/dashboard/transactions/Transfer';
@@ -146,7 +149,7 @@ const router = createBrowserRouter([
   },
   {
     path: 'login',
-    Component: Login,
+    Component: UserLogin,
   },
   {
     path: 'register',
@@ -164,6 +167,11 @@ const router = createBrowserRouter([
         path: '',
         Component: DashboardHome,
       },
+      {
+        path: 'profile',
+        Component: Profile,
+      },
+
       {
         path: 'card-application',
         Component: CardApplicationSetup,
@@ -203,6 +211,22 @@ const router = createBrowserRouter([
       {
         path: 'deposit',
         Component: Deposit,
+      },
+      {
+        path: 'investment/packages',
+        Component: InvestmentPackages,
+      },
+      {
+        path: 'investment/running',
+        Component: RunningInvestment,
+      },
+      {
+        path: 'investment/plan',
+        Component: InvestmentPlan,
+      },
+      {
+        path: 'investment/history',
+        Component: InvestmentHistory,
       },
     ],
   },
