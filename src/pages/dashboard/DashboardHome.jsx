@@ -1,33 +1,25 @@
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
+import { useNavigate } from 'react-router-dom';
+import useSWR from 'swr';
+import { images } from '../../assets';
 import Chart from '../../assets/dashboard/chart.svg';
-import assetImage from '../../assets/dashboard/investment/assets.png';
-import cryptoImage from '../../assets/dashboard/investment/crypto.png';
-import forexImage from '../../assets/dashboard/investment/forex.png';
-import realEstateImage from '../../assets/dashboard/investment/realestate.png';
+import PackageCard from '../../components/Dashboard/PackageCard';
 
-const investments = [
-  {
-    label: 'Assets',
-    imgUrl: assetImage,
-  },
-  {
-    label: 'Real Estate',
-    imgUrl: realEstateImage,
-  },
-  {
-    label: 'Crypto',
-    imgUrl: cryptoImage,
-  },
-  {
-    label: 'Forex',
-    imgUrl: forexImage,
-  },
-];
+const imageUrls = {
+  Assets: images.assets,
+  'Real Estate': images.estate,
+  Crypto: images.crypto,
+  Forex: images.forex,
+  Cannabis: images.cannabis,
+};
 
 const DashboardHome = () => {
+  const { data, isLoading } = useSWR('/plans/categories/');
+  const navigate = useNavigate();
+  console.log(data);
   return (
-    <div className="space-y-3 h-full overflow-auto p-5">
+    <div className="space-y-3 h-full no-scrollbar overflow-auto p-5">
       <div className="w-full flex gap-8">
         <div className="border rounded-sm bg-[#0C0000] border-white border-opacity-40 w-3/5 h-72 p-5 pl-16 flex flex-col space-y-8">
           <span className="text-[#868383] text-lg">Current Balance</span>
@@ -37,7 +29,7 @@ const DashboardHome = () => {
                 $ 1,474.91
               </span>
 
-              <div className=" flex items-center space-x-2 p-2 px-8 font-bold rounded-md shadow-[#8E0789] bg-[#8E0789]">
+              <div className=" shadow-xl   shadow-[#8E0789]/50 flex items-center space-x-2 p-2 px-8 font-bold rounded-md shadow-[#8E0789] bg-[#8E0789]">
                 <ArrowDropUpIcon className="text-[#52B570] bg-white rounded-full w-32 h-32" />
                 <span>25.69%</span>
               </div>
@@ -82,25 +74,34 @@ const DashboardHome = () => {
       <div className="space-y-3">
         <div className="w-full flex px-3 justify-between">
           <span className="font-semibold">All Investment</span>
-          <span className="text-[#F5C249]">See all</span>
+          <span
+            className="text-[#F5C249] cursor-pointer"
+            onClick={() => {
+              navigate('/dashboard/investment/packages');
+            }}
+          >
+            See all
+          </span>
         </div>
-        <div className="flex justify-between gap-4">
-          {investments.map((investment, index) => (
-            <div
+        <div className="flex items-center gap-4">
+          {data?.map((investmentPackage, index) => (
+            <PackageCard
+              label={investmentPackage?.name}
+              imgUrl={imageUrls[investmentPackage?.name]}
               key={index}
-              className="flex justify-center w-1/3 items-center flex-col border p-4 gap-3 bg-[#0C0000] border-[#0C0000]"
-            >
-              <span className="text-lg font-medium">{investment?.label}</span>
-              <img src={investment?.imgUrl} alt="" />
-              <button className="w-full border py-2 font-semibold hover:bg-[#F8DF9F] hover:text-black">
-                Invest
-              </button>
-            </div>
+            />
           ))}
         </div>
         <div className="flex flex-col space-y-2">
           <div className="flex justify-end">
-            <span className="text-[#F5C249]">View all History</span>
+            <span
+              className="text-[#F5C249] cursor-pointer"
+              onClick={() => {
+                navigate('/dashboard/investment/history');
+              }}
+            >
+              View all History
+            </span>
           </div>
           <div className="w-full space-y-1">
             <div className="flex justify-between px-10 py-2 bg-[#924E8F]">

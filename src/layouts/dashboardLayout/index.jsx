@@ -23,7 +23,7 @@ const DashboardLayout = () => {
   return (
     <div className="relative bg-custom-bg bg-opacity-20 bg-cover bg-center bg-no-repeat min-h-screen">
       {/** Layout */}
-      <div className="text-white bg-[#30022ECC] lg:flex lg:flex-row flex flex-col lg:mr-10 w-full bg-opacity-95 min-h-screen">
+      <div className="text-white  lg:flex lg:flex-row flex flex-col lg:mr-10 w-full bg-opacity-95 min-h-screen">
         <div className="lg:w-1/12 lg:p-5 lg:flex-col flex relative ">
           {/** Mobile Header */}
           <div className="lg:hidden bg-white w-full py-4 left-0 flex justify-between items-center px-5">
@@ -65,7 +65,7 @@ const DashboardLayout = () => {
               />
             </div>
           </div>
-          <div className="lg:mx-7 h-[100vh] no-scrollbar lg:h-[80vh] relative overflow-auto lg:bg-black bg-opacity-[62%] ">
+          <div className="lg:mx-7 h-[100vh] no-scrollbar lg:h-[80vh] relative overflow-auto bg-[#000]/60 rounded-lg ">
             <Outlet />
           </div>
         </div>

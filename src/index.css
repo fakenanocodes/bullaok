@@ -25,7 +25,10 @@
     -webkit-appearance: none;
     margin: 0;
   }
-
+  .bg-custom-bg {
+    background: url('./assets/dashboard/mainbg.png') no-repeat;
+    background-size: cover;
+  }
   .no-number-arrows[type='number'] {
     -moz-appearance: textfield;
   }
