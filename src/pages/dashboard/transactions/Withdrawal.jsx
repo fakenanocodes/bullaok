@@ -10,56 +10,11 @@ import WithdrawIcon from '../../../components/utils/icons/WithdrawIcon';
 
 import LeftMoveIcon from '../../../components/utils/icons/LeftMoveIcon';
 
-let trans = [
-  {
-    Date: '10-02-2024 12:38:42',
-    Amount: '200.00',
-    Email: 'helenmaike@gmail.com',
-    Asset: '$',
-    Status: 'Succeed',
-  },
-  {
-    Date: '10-02-2024 12:38:42',
-    Amount: '200.00',
-    Email: 'ndubes@gmail.com',
-    Asset: '$',
-    Status: 'Pending ...',
-  },
-  {
-    Date: '10-02-2024 12:38:42',
-    Amount: '200.00',
-    Email: 'bulloakfoxfinance@gmail.com',
-    Asset: '$',
-    Status: 'Failed',
-  },
-  {
-    Date: '10-02-2024 12:38:42',
-    Amount: '200.00',
-    Email: 'helenmaike@gmail.com',
-    Asset: '$',
-    Status: 'Succeed',
-  },
-  {
-    Date: '10-02-2024 12:38:42',
-    Amount: '200.00',
-    Email: 'ndubes@gmail.com',
-    Asset: '$',
-    Status: 'Pending ...',
-  },
-  {
-    Date: '10-02-2024 12:38:42',
-    Amount: '200.00',
-    Email: 'bulloakfoxfinance@gmail.com',
-    Asset: '$',
-    Status: 'Failed',
-  },
-];
-
 const Withdrawal = () => {
   const [openModel, setOpenModel] = useState(false);
   const [showMobileTable, setShowMobileTable] = useState(false);
   const { data: withdraws } = useSWR(`/withdraw/`);
-  console.log('WITHDRAW', withdraws);
+  console.log('WITHDRAW ==> ', withdraws);
 
   const [wallet, setWallet] = useState('');
   const [amount, setAmount] = useState('');
@@ -251,14 +206,14 @@ const Withdrawal = () => {
           Withdrawal History
         </div>
         <div className="flex justify-between md:w-[90%] md:ml-10 text-sm ">
-          <div className="m-2 p-2 md:px-10 bg-[#F9F9FA] shadow drop-shadow-sm ">
+          <div className="m-2 p-2  md:px-10 bg-[#F9F9FA] shadow drop-shadow-sm ">
             DATE
           </div>
           <div className="m-2 p-2 md:px-10 bg-[#F9F9FA] shadow drop-shadow-sm">
             AMOUNT
           </div>
           <div className="m-2 p-2 md:px-10 bg-[#F9F9FA] shadow drop-shadow-sm">
-            EMAIL ADDRESS
+            WALLET
           </div>
           <div className="m-2 p-2 md:px-10 bg-[#F9F9FA] shadow drop-shadow-sm">
             ASSET
@@ -271,22 +226,26 @@ const Withdrawal = () => {
           </select> */}
         </div>
         <div>
-          {withdraws?.map((withdraw, idx) => (
-            <div className="flex justify-between md:w-[90%]  md:ml-10 text-xs ">
-              <div className="py-3 font-bold my-2   ">
-                <div className="md:flex gap-2">
-                  <p>{withdraw?.created?.split('T')[0]}</p>
-                  <p>{withdraw?.created?.split('T')[1]?.split('.')[0]}</p>
+          {withdraws[0]?.map((withdraw, idx) => (
+            <div
+              key={idx}
+              className="flex justify-between md:w-[90%]  md:ml-10 text-xs "
+            >
+              {console.log('Inside component', withdraw)}
+              <div className="py-3 font-bold ">
+                <div className="md:flex gap-2 ml-2">
+                  {/* <p>{withdraw?.created?.split('T')[0]}</p>
+                  <p>{withdraw?.created?.split('T')[1]?.split('.')[0]}</p> */}
+                  <p>20-04-2000</p>
+                  <p>10:26</p>
                 </div>
               </div>
-              <div className="py-3 my-2 md:px-10 ">
-                {withdraw?.amount?.split('.')[0]}
+              <div className="py-3  md:px-10 ">{withdraw?.amount}</div>
+              <div className="py-3  md:px-2 w-[100px] md:w-[150px] text-ellipsis overflow-hidden whitespace-nowrap">
+                {withdraw?.wallet_address}
               </div>
-              <div className="py-3 my-2 md:px-10">
-                {withdraw?.profile?.user?.email}
-              </div>
-              <div className="py-3  my-2 md:px-10">{withdraw?.wallet_type}</div>
-              <div className="py-3 my-2  md:px-10">
+              <div className="py-3   md:px-10">{withdraw?.wallet_type}</div>
+              <div className="py-3   md:px-10">
                 {withdraw?.verified
                   ? 'Success'
                   : !withdraw?.verified
@@ -321,7 +280,7 @@ const Withdrawal = () => {
                 <div>
                   {/* <DollaIcon /> */}
                   <input
-                    value={usdtAmount}
+                    value={wallet}
                     placeholder="$1,474.91"
                     className="border-2 w-full rounded-md p-2 px-4"
                     id="asset"
