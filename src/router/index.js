@@ -35,6 +35,7 @@ import InvestmentHistory from '../pages/dashboard/InvestmentHistory';
 import Profile from '../pages/dashboard/Profile';
 import ReferralContainer from '../pages/dashboard/Referral';
 // import InvestmentPackages from '../pages/dashboard/InvestmentPackages';
+import ForgotPassword from '../components/auth/forgot-password';
 import UserLogin from '../components/auth/login';
 import InvestmentPackages from '../pages/dashboard/InvestmentPackages';
 import InvestmentPlan from '../pages/dashboard/InvestmentPlan';
@@ -154,6 +155,10 @@ const router = createBrowserRouter([
   {
     path: 'register',
     Component: Signup,
+  },
+  {
+    path: 'forgot-password',
+    Component: ForgotPassword,
   },
   {
     path: '/services/forex',
