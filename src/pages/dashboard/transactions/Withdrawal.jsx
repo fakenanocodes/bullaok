@@ -4,7 +4,6 @@ import { useState } from 'react';
 // import { Cookies } from 'react-cookie';
 import { toast } from 'react-toastify';
 import useSWR from 'swr';
-import CancelIcon from '../../../components/utils/icons/CancelIcon';
 import DollaIcon from '../../../components/utils/icons/DollaIcon';
 import WithdrawIcon from '../../../components/utils/icons/WithdrawIcon';
 
@@ -24,11 +23,6 @@ const Withdrawal = () => {
   console.log('User', user);
 
   const walletType = ['USDT', 'LTC', 'BTC', 'XRP', 'ETH'];
-
-  // console.log(wallet);
-  // console.log(amount);
-  // console.log(walletAddress);
-  // console.log(usdtAmount);
 
   let userData = {
     amount,
@@ -57,7 +51,7 @@ const Withdrawal = () => {
   };
 
   return (
-    <div className=" h-[100%] bg-white p-4 text-gray-700 overflow-scroll relative">
+    <div className=" h-[100%] no-scrollbar bg-white p-4 text-gray-700 overflow-scroll relative">
       <div className=" text-2xl font-bold my-3 mb-10 grid grid-cols-3 gap-12 items-center ">
         <div className="md:hidden ">
           <LeftMoveIcon />
@@ -226,12 +220,12 @@ const Withdrawal = () => {
           </select> */}
         </div>
         <div>
-          {withdraws[0]?.map((withdraw, idx) => (
+          {withdraws?.[0].map((withdraw, idx) => (
             <div
               key={idx}
               className="flex justify-between md:w-[90%]  md:ml-10 text-xs "
             >
-              {console.log('Inside component', withdraw)}
+              {/* {console.log('Inside component', withdraw)} */}
               <div className="py-3 font-bold ">
                 <div className="md:flex gap-2 ml-2">
                   {/* <p>{withdraw?.created?.split('T')[0]}</p>
@@ -268,12 +262,6 @@ const Withdrawal = () => {
                 <p className="text-lg text-gray-600 font-semibold">
                   Withdrawal
                 </p>
-                <div
-                  className="cursor-pointer"
-                  onClick={() => setOpenModel(false)}
-                >
-                  <CancelIcon />
-                </div>
               </div>
               <div className="py-5">
                 <label htmlFor="asset">Asset destination</label>

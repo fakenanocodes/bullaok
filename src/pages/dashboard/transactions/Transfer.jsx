@@ -88,16 +88,13 @@ const Transfer = () => {
       reset();
     } catch (error) {
       console.log(error);
-      // console.log(error?.response?.data?.UsdtAmount);
-      // if (error.response?.data?.UsdtAmount == 'ou have insufficient funds') {
-      //   toast.error('You have insufficient funds');
-      // }
+      toast.error('failed, check your details and try again');
       setOpenModel(false);
     }
   };
 
   return (
-    <div className=" h-[100%] bg-white p-4 text-gray-700 overflow-scroll relative">
+    <div className=" h-[100%] bg-white no-scrollbar p-4 text-gray-700 overflow-scroll relative">
       <div className=" text-2xl font-bold my-3 mb-10 grid grid-cols-3 gap-12 items-center ">
         <div className="md:hidden ">
           <LeftMoveIcon />

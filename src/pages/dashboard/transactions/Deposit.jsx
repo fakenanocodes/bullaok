@@ -61,7 +61,7 @@ const Deposit = () => {
   const [selectedCoin, setSelectedCoin] = useState('');
   const [walletAddress, setWalletAdress] = useState('');
   const [walletTypes, setWalletTypes] = useState('');
-  const [usdtAmount, setUsdtAmount] = useState('');
+  const [usdtAmount, setUsdtAmount] = useState(4);
   const { data: deposits } = useSWR(`/deposit/`);
   const { data: depositWallet } = useSWR('/walletaddress/');
   console.log('DEPOSIT', deposits);
@@ -186,10 +186,11 @@ const Deposit = () => {
   //items to send
   let userData = {
     amount,
-    wallet_type: walletTypes,
-    wallet_address: wallet,
-    usdt_amount: usdtAmount,
+    wallet_type: walletTypes || 'USDT',
+    wallet_address: wallet || walletMock.usdt_address,
+    usdt_amount: 100,
   };
+  //usdtAmount
 
   console.log(userData);
 
@@ -207,7 +208,7 @@ const Deposit = () => {
   };
 
   return (
-    <div className=" h-[100%] bg-white p-4 text-gray-700 overflow-scroll relative">
+    <div className=" h-[100%] no-scrollbar bg-white p-4 text-gray-700 overflow-scroll relative">
       <div className=" text-2xl font-bold my-3 mb-10 grid grid-cols-3 gap-12 items-center ">
         <div className="md:hidden ">
           <LeftMoveIcon />
@@ -264,11 +265,10 @@ const Deposit = () => {
             <div className=" hidden md:flex flex-col md:w-[50%] ">
               <label>Deposit wallet address</label>
               <input
-                value={wallet}
+                value={wallet || walletMock.usdt_address}
                 // onChange={(e) => setWalletAdress(e.target.value)}
                 type="text"
                 className="rounded-lg px-6 border-2 py-4"
-                placeholder="lkjhyiu878yfs44r42323sccdf"
               />
             </div>
 
@@ -298,7 +298,7 @@ const Deposit = () => {
             <div className="md:hidden flex flex-col ">
               <label>Deposit wallet address</label>
               <input
-                value={wallet}
+                value={wallet || walletMock.usdt_address}
                 //onChange={(e) => setWalletAdress(e.target.value)}
                 type="text"
                 className="rounded-lg px-6 border-2 py-4"
@@ -410,8 +410,8 @@ const Deposit = () => {
                 <div>
                   {/* <DollaIcon /> */}
                   <input
-                    value={selectedCoin}
-                    placeholder="$1,474.91"
+                    value={selectedCoin || 'USDT'}
+                    placeholder="USDT"
                     className="border-2 w-full rounded-md p-2 px-4"
                     id="asset"
                   />

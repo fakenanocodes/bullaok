@@ -1,4 +1,4 @@
-function BackArrowIcon({ color }) {
+function BackArrowIcon() {
   return (
     <svg
       width="26"
@@ -11,11 +11,11 @@ function BackArrowIcon({ color }) {
         fillRule="evenodd"
         clipRule="evenodd"
         d="M29 13L2 13L29 13Z"
-        fill={color ? color : 'black'}
+        fill="black"
       />
       <path
         d="M29 13L2 13M2 13L12.8 24M2 13L12.8 2"
-        stroke={color ? color : 'black'}
+        stroke="black"
         strokeWidth="4"
         strokeLinecap="round"
         strokeLinejoin="round"
