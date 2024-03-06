@@ -45,7 +45,6 @@ import Kyc from '../pages/dashboard/Kyc';
 import Transfer from '../pages/dashboard/Transfer';
 =======
 import Deposit from '../pages/dashboard/transactions/Deposit';
-import Transaction from '../pages/dashboard/transactions/Transactions';
 import Transfer from '../pages/dashboard/transactions/Transfer';
 import Withdrawal from '../pages/dashboard/transactions/Withdrawal';
 >>>>>>> origin
@@ -198,10 +197,10 @@ const router = createBrowserRouter([
         path: 'bonus',
         Component: BonusContainer,
       },
-      {
-        path: 'transfer',
-        Component: Transaction,
-      },
+      // {
+      //   path: 'transfer',
+      //   Component: Transaction,
+      // },
       {
         path: 'withdraw',
         Component: Withdrawal,
