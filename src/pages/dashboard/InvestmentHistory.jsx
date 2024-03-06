@@ -1,8 +1,10 @@
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
 import DashboardEmptyContainer from '../../components/empty/DashboardEmptyContainer';
+import useDateSeparator from '../../hooks/useDateSeparator';
 
 const history = {
   today: [
@@ -66,6 +68,8 @@ const historyTime = Object.keys(history);
 const InvestmentHistory = () => {
   const navigate = useNavigate();
   const { data, isLoading } = useSWR('plans/history');
+  const [prevDate, setPrevDate] = useState(null);
+
   console.log(data);
   return (
     <div className="p-10 space-y-5">
@@ -104,22 +108,34 @@ const InvestmentHistory = () => {
                 {/* <tr key={index}>
                       <td>{time}</td>
                     </tr> */}
-                {data?.map((item, itemIndex) => (
-                  <tr
-                    key={`${itemIndex}`}
-                    className="flex justify-between px-10 bg-[#BB9FB3] bg-opacity-[38%]"
-                  >
-                    <td className="py-4 flex items-center space-x-3">
-                      <span className="bg-white w-6 h-6 flex justify-center items-center rounded-full">
-                        <FiberManualRecordIcon className="text-[#FFB803] rounded-full" />
-                      </span>
-                      <span>{item?.name}</span>
-                    </td>
-                    <td className="py-4">{item?.detail}</td>
-                    <td className="py-4">{item?.amount}</td>
-                    <td className="py-4">{item?.created}</td>
-                  </tr>
-                ))}
+                {data?.map((item, itemIndex) => {
+                  const messageDate = new Date(item.created);
+                  const dateSeparator = useDateSeparator(messageDate);
+
+                  return (
+                    <>
+                      {/* {dateSeparator  && (
+                        <div className="px-10 text-center font-semibold mt-4">
+                          {dateSeparator}
+                        </div>
+                      )} */}
+                      <tr
+                        key={`${itemIndex}`}
+                        className="flex justify-between px-10 bg-[#BB9FB3] bg-opacity-[38%]"
+                      >
+                        <td className="py-4 flex items-center space-x-3">
+                          <span className="bg-white w-6 h-6 flex justify-center items-center rounded-full">
+                            <FiberManualRecordIcon className="text-[#FFB803] rounded-full" />
+                          </span>
+                          <span>{item?.name}</span>
+                        </td>
+                        <td className="py-4">{item?.detail}</td>
+                        <td className="py-4">{item?.amount}</td>
+                        <td className="py-4">{item?.created}</td>
+                      </tr>
+                    </>
+                  );
+                })}
               </tbody>
             </table>
           </>
