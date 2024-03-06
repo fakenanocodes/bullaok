@@ -133,7 +133,7 @@ const Transfer = () => {
                   type="text"
                   value={user?.profile?.available_balance}
                   // onChange={(e) => setUsdtAmount(e.target.value)}
-                  className="rounded-lg p-14 border-2 py-4 w-full"
+                  className="rounded-lg p-14 border-2 py-4 md:w-[48%] w-full"
                 />
                 <div className="absolute top-10 left-4">
                   <DollaIcon />
@@ -169,7 +169,7 @@ const Transfer = () => {
                 onChange={(e) => setEmailAdress(e.target.value)}
                 type="text"
                 className="rounded-lg px-6 border-2 py-4"
-                // placeholder="lkjhyiu878yfs44rs"
+                placeholder="youremail@email.com"
               />
             </div>
           </div>
@@ -179,9 +179,9 @@ const Transfer = () => {
             </div>
             <button
               onClick={() => setOpenModel(true)}
-              className="hidden md:flex bg-[#352F84] py-2 text-white px-4 rounded-[5px]"
+              className="hidden md:flex bg-[#352F84] py-2 text-white text-[18px] px-4 rounded-[5px]"
             >
-              Make Transfer
+              Send payment
             </button>
             <div className="md:hidden flex justify-between text-sm">
               <button
@@ -239,7 +239,7 @@ const Transfer = () => {
               </div>
               <div className="py-3 my-2 md:px-10 ">{transfer?.usdt_amount}</div>
               <div className="py-3 my-2 md:px-10">{transfer?.email}</div>
-              <div className="py-3  my-2 md:px-10">{'USD'}</div>
+              <div className="py-3  my-2 md:px-10">{'USDT'}</div>
               <div className="py-3 my-2  md:px-10">
                 {transfer?.usdt_amount ? 'Success' : 'Failed'}
               </div>
@@ -267,7 +267,7 @@ const Transfer = () => {
                   {/* <DollaIcon /> */}
                   <input
                     value={emailAddress}
-                    placeholder="$1,474.91"
+                    placeholder="youremail@email.com"
                     className="border-2 w-full rounded-md p-2 px-4"
                     id="asset"
                   />

@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import useSWR from 'swr';
 import CancelIcon from '../../../components/utils/icons/CancelIcon';
-// import DollaIcon from '../../../components/utils/icons/DollaIcon';
+import DollaIcon from '../../../components/utils/icons/DollaIcon';
 import WithdrawIcon from '../../../components/utils/icons/WithdrawIcon';
 
 import LeftMoveIcon from '../../../components/utils/icons/LeftMoveIcon';
@@ -64,7 +64,9 @@ const Withdrawal = () => {
   const [wallet, setWallet] = useState('');
   const [amount, setAmount] = useState('');
   const [walletAddress, setWalletAdress] = useState('');
-  const [usdtAmount, setUsdtAmount] = useState('');
+  const [usdtAmount, setUsdtAmount] = useState(6);
+  const { data: user } = useSWR(`/user/`);
+  console.log('User', user);
 
   const walletType = ['USDT', 'LTC', 'BTC', 'XRP', 'ETH'];
 
@@ -110,8 +112,37 @@ const Withdrawal = () => {
       <div>
         <div className="flex flex-col gap-10 pb-24">
           <div className="md:flex gap-10  font-semibold">
-            <div className="flex flex-col md:w-[50%] mb-10 md:mb-0">
+            <div className="flex flex-col md:w-[50%] mb-10 md:mb-0 relative">
               <label>Source wallet</label>
+              <input
+                type="text"
+                value={user?.profile?.available_balance}
+                className="rounded-lg px-12 border-2 py-4"
+              />
+              <div className="absolute top-10 left-3">
+                <DollaIcon />
+              </div>
+
+              {/* <select
+                value={wallet}
+                onChange={(e) => setWallet(e.target.value)}
+                type="text"
+                className="rounded-lg px-6 border-2 py-4"
+              >
+                {walletType.map((type, idx) => (
+                  <option
+                    key={idx}
+                    value={type}
+                    className="cursor-pointer flex gap-3"
+                  >
+                    {type}
+                  </option>
+                ))}
+              </select> */}
+            </div>
+            <div className="flex flex-col md:w-[50%]">
+              <label>Asset destination</label>
+
               <select
                 value={wallet}
                 onChange={(e) => setWallet(e.target.value)}
@@ -129,19 +160,6 @@ const Withdrawal = () => {
                 ))}
               </select>
             </div>
-            <div className="flex flex-col md:w-[50%]">
-              <label>Asset destination</label>
-              <input
-                type="text"
-                value={usdtAmount}
-                onChange={(e) => setUsdtAmount(e.target.value)}
-                className="rounded-lg px-6 border-2 py-4"
-              />
-              {/* <select type="text" className="rounded-lg px-6 border-2 py-4">
-                <option>$1,474.91</option>
-                <option>BTC</option>
-              </select> */}
-            </div>
           </div>
           <div className="hidden md:w-[48%] items-center gap-5 relative md:grid grid-flow-col ">
             <div className="w-auto bg-black h-[1.3px] col-span-4 "></div>
@@ -151,7 +169,18 @@ const Withdrawal = () => {
             <div className="w-auto bg-black h-[1.3px]  col-span-3 -ml-16 "></div>
           </div>
           <div className="md:flex gap-10 font-semibold">
-            <div className="flex flex-col md:w-[50%] mb-12 md:mb-0">
+            {/* FIRST PART */}
+            <div className="hidden md:flex flex-col md:w-[50%] ">
+              <label>Withdrawal wallet address</label>
+              <input
+                value={walletAddress}
+                onChange={(e) => setWalletAdress(e.target.value)}
+                type="text"
+                className="rounded-lg px-6 border-2 py-4"
+                placeholder="reciever_wallet_address$lkjhyiu878yfs44rs"
+              />
+            </div>
+            <div className="md:hidden flex flex-col md:w-[50%] mb-12 md:mb-0">
               <label>Withdrawal amount</label>
               <input
                 value={amount}
@@ -164,14 +193,25 @@ const Withdrawal = () => {
             <div className="md:hidden flex justify-center m-12 ">
               <WithdrawIcon />
             </div>
-            <div className="flex flex-col md:w-[50%] ">
+            {/* SECOND PART */}
+            <div className="md:hidden flex flex-col md:w-[50%] ">
               <label>Withdrawal wallet address</label>
               <input
                 value={walletAddress}
                 onChange={(e) => setWalletAdress(e.target.value)}
                 type="text"
                 className="rounded-lg px-6 border-2 py-4"
-                // placeholder="lkjhyiu878yfs44rs"
+                placeholder="reciever_wallet_address$lkjhyiu878yfs44rs"
+              />
+            </div>
+            <div className="hidden md:flex flex-col md:w-[50%] mb-12 md:mb-0">
+              <label>Withdrawal amount</label>
+              <input
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+                type="text"
+                className="rounded-lg px-6 border-2 py-4"
+                placeholder="0.00 $"
               />
             </div>
           </div>

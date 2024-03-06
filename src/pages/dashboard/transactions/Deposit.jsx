@@ -1,6 +1,6 @@
 import { ClickAwayListener } from '@mui/material';
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 // import { Cookies } from 'react-cookie';
 import { toast } from 'react-toastify';
 import useSWR from 'swr';
@@ -53,33 +53,141 @@ let trans = [
   },
 ];
 
-// const cookie = new Cookies();
-// cookie.set(
-//   'access_token',
-//   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA5NjI2NTE3LCJpYXQiOjE3MDk1MTg1MTcsImp0aSI6ImU2MDMyY2IyNWRjMjRkYjk4YzgyOWE2NTJmZTlmZTM1IiwidXNlcl9pZCI6MTE2LCJmaXJzdF9uYW1lIjoiIiwiZW1haWwiOiJhc2RAYXNkLmNvbSIsInVzZXJfbmFtZSI6ImFzZDEiLCJpZCI6MTE2fQ.5uuFnO_1ppzyRPlWYzPxgqZisd92AyKTAMtoJWaHDDs'
-// );
 const Deposit = () => {
   const [openModel, setOpenModel] = useState(false);
   const [showMobileTable, setShowMobileTable] = useState(false);
-  const { data: deposits } = useSWR(`/deposit/`);
-  console.log('DEPOSIT', deposits);
-
   const [wallet, setWallet] = useState('');
   const [amount, setAmount] = useState('');
+  const [selectedCoin, setSelectedCoin] = useState('');
   const [walletAddress, setWalletAdress] = useState('');
+  const [walletTypes, setWalletTypes] = useState('');
   const [usdtAmount, setUsdtAmount] = useState('');
+  const { data: deposits } = useSWR(`/deposit/`);
+  const { data: depositWallet } = useSWR('/walletaddress/');
+  console.log('DEPOSIT', deposits);
+  console.log('DEPOSIT WALLET', depositWallet);
 
-  const walletType = ['USDT', 'LTC', 'BTC', 'XRP', 'ETH'];
+  const walletType = ['litecoin', 'ripple', 'ethereum', 'bitcoin', 'tether'];
 
-  // console.log(wallet);
-  // console.log(amount);
-  // console.log(walletAddress);
-  // console.log(usdtAmount);
+  let walletMock = {
+    bitcoin_address: 'BTCwrtewt3ertrwert',
+    litecoin_address: 'LTCdfgerty4565tetert',
+    xrp_address: 'XRPrterytrjyukgkhjl',
+    etherum_address: 'ETHytertdgyuthftdhr',
+    usdt_address: 'USDTdfhfyufdhdfydrhfhhg',
+  };
 
+  useEffect(() => {
+    if (wallet == walletMock.litecoin_address) {
+      setSelectedCoin(walletType[0]);
+      setWalletTypes('LTC');
+    } else if (wallet == walletMock.xrp_address) {
+      setSelectedCoin(walletType[1]);
+      setWalletTypes('XRP');
+    } else if (wallet == walletMock.etherum_address) {
+      setSelectedCoin(walletType[2]);
+      setWalletTypes('ETH');
+    } else if (wallet == walletMock.bitcoin_address) {
+      setSelectedCoin(walletType[3]);
+      setWalletTypes('BTC');
+    } else if (wallet == walletMock.usdt_address) {
+      setSelectedCoin(walletType[4]);
+      setWalletTypes('USDT');
+    }
+  }, [wallet]);
+
+  console.log('SELECTED COIN', selectedCoin);
+
+  //code to get USDT_AMOUNT
+  //these are the coins will need to pass depending on the coin you selected
+  //[litecoin, ripple, ethereum, bitcoin, tether]
+  // Function to convert a coin amount to USD using CoinGecko API
+  useEffect(() => {
+    async function convertToUSD(coin, amount) {
+      console.log('SELECTED COIN', coin, 'AMOUNT', amount);
+      const url = `https://api.coingecko.com/api/v3/simple/price?ids=${coin}&vs_currencies=usd`;
+      const response = await fetch(url);
+      const data = await response.json();
+
+      // Check if coin exists in the data
+      if (!data[coin]) {
+        throw new Error(`Coin ${coin} not found in API response`);
+      }
+
+      const price = data[coin]?.usd; // Get USD price per coin
+      const usdEquivalent = amount * price; // Calculate USD equivalent
+
+      return `${usdEquivalent.toFixed(2)} USD`; // Return formatted USD amount
+    }
+    setUsdtAmount(convertToUSD(selectedCoin, amount));
+  }, [wallet, amount]);
+
+  // Function to convert USD amount to a coin equivalent
+  async function convertToCoin(coin, usdAmount) {
+    // First convert USD to BTC to use existing 'convertToUSD' function
+    const btcEquivalent = await convertToUSD(coin, usdAmount);
+
+    // Extract BTC amount from the formatted string
+    const btcAmount = parseFloat(btcEquivalent.split(' ')[0]);
+
+    // Calculate coin equivalent based on the USD price of the coin
+    const url = `https://api.coingecko.com/api/v3/simple/price?ids=${coin}&vs_currencies=usd`;
+    const response = await fetch(url);
+    const data = await response.json();
+
+    // Check if coin exists in the data
+    if (!data[coin]) {
+      throw new Error(`Coin ${coin} not found in API response`);
+    }
+    console.log(data);
+    const price = data[coin]?.usd; // Get USD price per coin
+    const coinEquivalent = usdAmount / price; // Calculate coin equivalent
+
+    return `${coinEquivalent.toFixed(8)} ${coin}`; // Return formatted coin amount with 8 decimal places
+  }
+
+  async function convertCoinToCoin(fromCoin, toCoin, amount) {
+    const url = `https://api.coingecko.com/api/v3/simple/price?ids=${fromCoin},${toCoin}&vs_currencies=usd`;
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log(data);
+    // Check if coins exist in the data
+    if (!data[fromCoin] || !data[toCoin]) {
+      throw new Error(
+        `Coins ${fromCoin} or ${toCoin} not found in API response`
+      );
+    }
+
+    // Get USD prices per coin
+    const fromCoinPrice = data[fromCoin].usd;
+    const toCoinPrice = data[toCoin].usd;
+
+    // Calculate conversion rate (toCoin price per 1 unit of fromCoin)
+    const conversionRate = toCoinPrice / fromCoinPrice;
+
+    // Calculate equivalent amount in the target coin
+    const targetAmount = amount * conversionRate;
+
+    return `${targetAmount.toFixed(8)} ${toCoin}`; // Return formatted target coin amount with 8 decimal places
+  }
+  // Example usage
+  // (async () => {
+  //   try {
+  //     const usdEquivalent = await convertToUSD('tether', 1);
+  //     console.log(usdEquivalent); // Output: 1999250.00 USD
+
+  //     const btcEquivalent = await convertToCoin('tether', 1000);
+  //     console.log(btcEquivalent);
+  //   } catch (error) {
+  //     console.error(error.message);
+  //   }
+  // })();
+
+  //items to send
   let userData = {
     amount,
-    wallet_type: wallet,
-    wallet_address: walletAddress,
+    wallet_type: walletTypes,
+    wallet_address: wallet,
     usdt_amount: usdtAmount,
   };
 
@@ -110,14 +218,15 @@ const Deposit = () => {
         <div className="flex flex-col gap-10 pb-24">
           <div className="md:flex gap-10  font-semibold">
             <div className="flex flex-col md:w-[50%] mb-10 md:mb-0">
-              <label>Source wallet</label>
+              <label>Deposit wallet</label>
               <select
                 value={wallet}
                 onChange={(e) => setWallet(e.target.value)}
                 type="text"
                 className="rounded-lg px-6 border-2 py-4"
               >
-                {walletType.map((type, idx) => (
+                {/* const walletType = ['USDT', 'LTC', 'BTC', 'XRP', 'ETH']; */}
+                {/* {walletType.map((type, idx) => (
                   <option
                     key={idx}
                     value={type}
@@ -125,10 +234,15 @@ const Deposit = () => {
                   >
                     {type}
                   </option>
-                ))}
+                ))} */}
+                <option value={walletMock.usdt_address}>USDT</option>
+                <option value={walletMock.litecoin_address}>LTC</option>
+                <option value={walletMock.bitcoin_address}>BTC</option>
+                <option value={walletMock.xrp_address}>XRP</option>
+                <option value={walletMock.etherum_address}>ETH</option>
               </select>
             </div>
-            <div className="flex flex-col md:w-[50%]">
+            {/* <div className="flex flex-col md:w-[50%]">
               <label>Asset destination</label>
               <input
                 type="text"
@@ -136,11 +250,7 @@ const Deposit = () => {
                 onChange={(e) => setUsdtAmount(e.target.value)}
                 className="rounded-lg px-6 border-2 py-4"
               />
-              {/* <select type="text" className="rounded-lg px-6 border-2 py-4">
-                <option>$1,474.91</option>
-                <option>BTC</option>
-              </select> */}
-            </div>
+            </div> */}
           </div>
           <div className="hidden md:w-[48%] items-center gap-5 relative md:grid grid-flow-col ">
             <div className="w-auto bg-black h-[1.3px] col-span-4 "></div>
@@ -149,8 +259,20 @@ const Deposit = () => {
             </div>
             <div className="w-auto bg-black h-[1.3px]  col-span-3 -ml-16 "></div>
           </div>
-          <div className="md:flex gap-10 font-semibold">
-            <div className="flex flex-col md:w-[50%] mb-12 md:mb-0">
+          {/* for destop view */}
+          <div className=" md:flex gap-10 font-semibold ">
+            <div className=" hidden md:flex flex-col md:w-[50%] ">
+              <label>Deposit wallet address</label>
+              <input
+                value={wallet}
+                // onChange={(e) => setWalletAdress(e.target.value)}
+                type="text"
+                className="rounded-lg px-6 border-2 py-4"
+                placeholder="lkjhyiu878yfs44r42323sccdf"
+              />
+            </div>
+
+            <div className="flex flex-col md:hidden mb-12 md:mb-0">
               <label>Deposit amount</label>
               <input
                 value={amount}
@@ -163,11 +285,21 @@ const Deposit = () => {
             <div className="md:hidden flex justify-center m-12 ">
               <DepositIcon />
             </div>
-            <div className="flex flex-col md:w-[50%] ">
+            <div className="hidden md:flex flex-col md:w-[50%] mb-12 md:mb-0">
+              <label>Deposit amount</label>
+              <input
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+                type="text"
+                className="rounded-lg px-6 border-2 py-4"
+                placeholder="0.00 $"
+              />
+            </div>
+            <div className="md:hidden flex flex-col ">
               <label>Deposit wallet address</label>
               <input
-                value={walletAddress}
-                onChange={(e) => setWalletAdress(e.target.value)}
+                value={wallet}
+                //onChange={(e) => setWalletAdress(e.target.value)}
                 type="text"
                 className="rounded-lg px-6 border-2 py-4"
                 // placeholder="lkjhyiu878yfs44rs"
@@ -239,7 +371,7 @@ const Deposit = () => {
                 </div>
               </div>
               <div className="py-3 my-2 md:px-10 ">
-                {deposit?.amount.split('.')[0]}
+                {deposit?.amount?.split('.')[0]}
               </div>
               <div className="py-3 my-2 md:px-10">
                 {deposit?.profile?.user?.email}
@@ -274,11 +406,11 @@ const Deposit = () => {
                 </div>
               </div>
               <div className="py-5">
-                <label htmlFor="asset">Asset destination</label>
+                <label htmlFor="asset">Asset</label>
                 <div>
                   {/* <DollaIcon /> */}
                   <input
-                    value={usdtAmount}
+                    value={selectedCoin}
                     placeholder="$1,474.91"
                     className="border-2 w-full rounded-md p-2 px-4"
                     id="asset"
