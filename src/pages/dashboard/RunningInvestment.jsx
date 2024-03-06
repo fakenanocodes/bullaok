@@ -1,14 +1,10 @@
 import FilterListIcon from '@mui/icons-material/FilterList';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
-import Image1 from '../../assets/dashboard/runningInvestment/image1.png';
-import Image2 from '../../assets/dashboard/runningInvestment/image2.png';
-import Image3 from '../../assets/dashboard/runningInvestment/image3.png';
-import Image4 from '../../assets/dashboard/runningInvestment/image4.png';
-import Image5 from '../../assets/dashboard/runningInvestment/image5.png';
+import { useNavigate } from 'react-router-dom';
 
 const packages = [
   {
-    imageUrl: Image1,
+    imageUrl: '',
     label: 'Assets',
     date: '22nd',
     month: 'January',
@@ -20,7 +16,7 @@ const packages = [
     profitpercent: 3.67,
   },
   {
-    imageUrl: Image2,
+    imageUrl: '',
     label: 'Real Estate',
     date: '22nd',
     month: 'January',
@@ -32,7 +28,7 @@ const packages = [
     profitpercent: 3.67,
   },
   {
-    imageUrl: Image3,
+    imageUrl: '',
     label: 'Crypto',
     date: '22nd',
     month: 'January',
@@ -44,7 +40,7 @@ const packages = [
     profitpercent: 3.67,
   },
   {
-    imageUrl: Image4,
+    imageUrl: '',
     label: 'Forex',
     date: '22nd',
     month: 'January',
@@ -56,7 +52,7 @@ const packages = [
     profitpercent: 3.67,
   },
   {
-    imageUrl: Image5,
+    imageUrl: '',
     label: 'Ganja',
     date: '22nd',
     month: 'January',
@@ -70,10 +66,18 @@ const packages = [
 ];
 
 const RunningInvestment = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="flex space-y-4 flex-col p-10 ">
       <div>
-        <KeyboardBackspaceIcon fontSize="large" />
+        <KeyboardBackspaceIcon fontSize="large"
+
+onClick={() => {
+  navigate(-1);
+}}
+className="cursor-pointer"
+         />
       </div>
       <div className="flex justify-between items-center">
         <span className="font-bold text-lg">Running Investments</span>

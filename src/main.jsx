@@ -13,16 +13,22 @@ const fetcher = async (...args) => {
   const res = await axios(...args);
   return res.data;
 };
+const mutation = async (key, newData) => {
+  await mutate(key);
+  console.log(`Mutating ${key} with data:`, newData);
+  await axios.put(key, newData);
 
+  mutate(key, newData, false);
+};
 init();
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <SWRConfig value={{ fetcher }}>
+      <SWRConfig value={{ fetcher, mutations: { mutation } }}>
+        <PersistGate loading={null} persistor={persistor}>
           <App />
-        </SWRConfig>
-      </PersistGate>
+        </PersistGate>
+      </SWRConfig>
     </Provider>
   </React.StrictMode>
 );

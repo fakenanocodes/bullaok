@@ -15,13 +15,20 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-
+  .gradient-div {
+    width: 100%; /* Set the width as per your requirement */
+    height: 100%; /* Set the height as per your requirement */
+    background: linear-gradient(90deg, #41073f 0%, #8e0789 100%);
+  }
   .no-number-arrows::-webkit-outer-spin-button,
   .no-number-arrows::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
-
+  .bg-custom-bg {
+    background: url('./assets/dashboard/mainbg.png') no-repeat;
+    background-size: cover;
+  }
   .no-number-arrows[type='number'] {
     -moz-appearance: textfield;
   }
@@ -29,10 +36,18 @@
   .laviossa {
     font-family: 'Laviossa', system-ui, Avenir, Helvetica, Arial, sans-serif;
   }
+<<<<<<< HEAD
   /* #kyc{
     outline: none;
     border: none;
   } */
+=======
+  @media only screen and (max-width: 768px) {
+    .gradient-div {
+      background: white;
+    }
+  }
+>>>>>>> origin
 }
 
 :root {

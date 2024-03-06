@@ -25,7 +25,7 @@ const StepIndicator = ({ chatStep }) => {
           key={item}
           className="w-full flex flex-col justify-center items-center"
         >
-          <p className="hidden md:inline-block text-black text-xs lg:text-sm font-normal min-w-max mb-2">
+          <p className="text-black text-xs lg:text-sm font-normal min-w-max mb-2">
             {titles[item]}
           </p>
           <div
@@ -48,7 +48,7 @@ const StepIndicator = ({ chatStep }) => {
         </div>
       ))}
 
-      <div className="absolute border border-[#7676763D] w-[81%] left-10 sm:left-20 md:left-16 lg:left-24 xl:left-28 top-[1rem] md:top-[2.6rem]"></div>
+      <div className="absolute border border-[#7676763D] w-[81%] left-10 sm:left-20 md:left-16 lg:left-24 xl:left-28 top-[2.6rem]"></div>
     </div>
   );
 };
