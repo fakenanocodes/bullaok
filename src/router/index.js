@@ -39,10 +39,15 @@ import UserLogin from '../components/auth/login';
 import InvestmentPackages from '../pages/dashboard/InvestmentPackages';
 import InvestmentPlan from '../pages/dashboard/InvestmentPlan';
 import RunningInvestment from '../pages/dashboard/RunningInvestment';
+<<<<<<< HEAD
+import Kyc from '../pages/dashboard/Kyc';
+import Transfer from '../pages/dashboard/Transfer';
+=======
 import Deposit from '../pages/dashboard/transactions/Deposit';
 import Transaction from '../pages/dashboard/transactions/Transactions';
 import Transfer from '../pages/dashboard/transactions/Transfer';
 import Withdrawal from '../pages/dashboard/transactions/Withdrawal';
+>>>>>>> origin
 
 const router = createBrowserRouter([
   {
@@ -166,6 +171,14 @@ const router = createBrowserRouter([
       {
         path: '',
         Component: DashboardHome,
+      },
+      {
+        path: 'transfer',
+        Component: Transfer,
+      },
+      {
+        path: 'kyc',
+        Component: Kyc,
       },
       {
         path: 'profile',

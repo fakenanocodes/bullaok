@@ -36,11 +36,18 @@
   .laviossa {
     font-family: 'Laviossa', system-ui, Avenir, Helvetica, Arial, sans-serif;
   }
+<<<<<<< HEAD
+  /* #kyc{
+    outline: none;
+    border: none;
+  } */
+=======
   @media only screen and (max-width: 768px) {
     .gradient-div {
       background: white;
     }
   }
+>>>>>>> origin
 }
 
 :root {
