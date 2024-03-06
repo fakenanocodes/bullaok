@@ -40,14 +40,10 @@ import UserLogin from '../components/auth/login';
 import InvestmentPackages from '../pages/dashboard/InvestmentPackages';
 import InvestmentPlan from '../pages/dashboard/InvestmentPlan';
 import RunningInvestment from '../pages/dashboard/RunningInvestment';
-<<<<<<< HEAD
 import Kyc from '../pages/dashboard/Kyc';
-import Transfer from '../pages/dashboard/Transfer';
-=======
 import Deposit from '../pages/dashboard/transactions/Deposit';
-import Transfer from '../pages/dashboard/transactions/Transfer';
 import Withdrawal from '../pages/dashboard/transactions/Withdrawal';
->>>>>>> origin
+import Transfer from '../pages/dashboard/Transfer';
 
 const router = createBrowserRouter([
   {
@@ -176,10 +172,7 @@ const router = createBrowserRouter([
         path: '',
         Component: DashboardHome,
       },
-      {
-        path: 'transfer',
-        Component: Transfer,
-      },
+    
       {
         path: 'kyc',
         Component: Kyc,
@@ -197,10 +190,7 @@ const router = createBrowserRouter([
         path: 'bonus',
         Component: BonusContainer,
       },
-      // {
-      //   path: 'transfer',
-      //   Component: Transaction,
-      // },
+   
       {
         path: 'withdraw',
         Component: Withdrawal,
