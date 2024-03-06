@@ -11,7 +11,7 @@ const Kyc = () => {
   const [kyc,setKyc] = useState('personalInfo')
   const [sup,setSup] = useState('')
   return (
-    <div className="w-full h-full px-[50px] py-[20px]">
+    <div className="w-full h-full px-[50px] pt-[50px] pb-[30px]">
       <KycContext.Provider value={{ kyc, setKyc,sup,setSup }}>
         <Personalinfo />
         <IdVerification />

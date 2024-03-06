@@ -1,19 +1,18 @@
 import { useContext } from 'react';
 import { KycContext } from '../../pages/dashboard/Kyc';
-import EditIcon from '../utils/icons/EditIcon';
 
 const KycPreview = () => {
-  const { kyc, setKyc,setSup } = useContext(KycContext);
+  const { kyc, setKyc, setSup } = useContext(KycContext);
   return (
     <div
       className={kyc === 'review' ? 'w-full h-full' : 'w-full h-full hidden'}
     >
       {/* the header description */}
-      <div className="w-full h-[30px] border-b-[1px] border-b-[#8E0789] flex flex-col justify-center pb-[10px]">
-        <h2 className="font-[Poppins] font-[600] text-[15px] leading-[15px] text-[#FFFFFF]">
+      <div className="w-full h-[30px] border-b-[1px] border-b-[#8E0789] flex flex-col justify-center pb-[20px]">
+        <h2 className="font-[Poppins] font-[600] text-[18px] leading-[12px] text-[#FFFFFF]">
           KYC Verification
         </h2>
-        <span className="font-[poppins] font-[400] text-[13px] leading-[10px] text-[#AAAAAA]">
+        <span className="font-[poppins] font-[400] text-[15px] text-[#AAAAAA]">
           Browse and upload
         </span>
       </div>
@@ -21,7 +20,7 @@ const KycPreview = () => {
       {/* body of the message */}
       <div className="w-full h-[calc(100%-60px)] flex">
         {/* side navigation bar */}
-        <div className="w-[calc(100%/3)] border-r-[1px] border-r-[#8E0789] flex justify-center pt-[10px] gap-[10px] ">
+        <div className="w-[calc(100%/3)] border-r-[1px] border-r-[#8E0789] flex justify-center pt-[30px] gap-[10px] ">
           <div className="flex flex-col gap-[10px] items-end justify-between">
             <div className="w-fit flex flex-col">
               <p className="font-[Inter] font-[500] text-[13px] leading-[15px] text-[#FFFFFF] text-right">
@@ -58,49 +57,49 @@ const KycPreview = () => {
           </div>
 
           {/* the pagination circle */}
-          <div className="w-fit h-full flex flex-col items-center">
-            <div
-              className={
-                kyc === 'personalInfo'
-                  ? 'w-[10px] h-[10px] rounded-[50%] bg-[#8E0789] cursor-pointer'
-                  : 'w-[10px] h-[10px] rounded-[50%] bg-white cursor-pointer'
-              }
-              onClick={() => setKyc('personalInfo')}
-            ></div>
-            <div className="w-[1px] h-[calc((100%/3)-13px)] bg-[grey]"></div>
-            <div
-              className={
-                kyc === 'cardVerification'
-                  ? 'w-[10px] h-[10px] rounded-[50%] bg-[#8E0789] cursor-pointer'
-                  : 'w-[10px] h-[10px] rounded-[50%] bg-white cursor-pointer'
-              }
-              onClick={() => setKyc('cardVerification')}
-            ></div>
-            <div className="w-[1px] h-[calc((100%/3)-13px)] bg-[grey]"></div>
-            <div
-              className={
-                kyc === 'selfie'
-                  ? 'w-[10px] h-[10px] rounded-[50%] bg-[#8E0789] cursor-pointer'
-                  : 'w-[10px] h-[10px] rounded-[50%] bg-white cursor-pointer'
-              }
-              onClick={() => setKyc('selfie')}
-            ></div>
-            <div className="w-[1px] h-[calc((100%/3)-13px)] bg-[grey]"></div>
-            <div
-              className={
-                kyc === 'review'
-                  ? 'w-[10px] h-[10px] rounded-[50%] bg-[#8E0789] cursor-pointer'
-                  : 'w-[10px] h-[10px] rounded-[50%] bg-white cursor-pointer'
-              }
-              onClick={() => setKyc('review')}
-            ></div>
+          <div className="w-fit h-full flex flex-col items-center relative">
+            <div className="w-fit h-full flex flex-col justify-between items-center z-20">
+              <div
+                className={
+                  kyc === 'personalInfo'
+                    ? 'w-[13px] h-[13px] rounded-[50%] bg-[#8E0789] cursor-pointer'
+                    : 'w-[13px] h-[13px] rounded-[50%] bg-white cursor-pointer'
+                }
+                onClick={() => setKyc('personalInfo')}
+              ></div>
+              <div
+                className={
+                  kyc === 'cardVerification'
+                    ? 'w-[13px] h-[13px] rounded-[50%] bg-[#8E0789] cursor-pointer'
+                    : 'w-[13px] h-[13px] rounded-[50%] bg-white cursor-pointer'
+                }
+                onClick={() => setKyc('cardVerification')}
+              ></div>
+              <div
+                className={
+                  kyc === 'selfie'
+                    ? 'w-[13px] h-[13px] rounded-[50%] bg-[#8E0789] cursor-pointer'
+                    : 'w-[13px] h-[13px] rounded-[50%] bg-white cursor-pointer'
+                }
+                onClick={() => setKyc('selfie')}
+              ></div>
+              <div
+                className={
+                  kyc === 'review'
+                    ? 'w-[13px] h-[13px] rounded-[50%] bg-[#8E0789] cursor-pointer'
+                    : 'w-[13px] h-[13px] rounded-[50%] bg-white cursor-pointer'
+                }
+                onClick={() => setKyc('review')}
+              ></div>
+            </div>
+            <div className="w-[1px] h-full bg-[grey] absolute z-10"></div>
           </div>
         </div>
 
         {/* main body */}
 
-        <div className="w-full pl-[30px] flex flex-col gap-[5px]">
-          <div className="border-b-[1px] border-b-[#8E0789] flex flex-col py-[10px]">
+        <div className="w-full pl-[30px] flex flex-col gap-[5px] overflow-auto pt-[30px]">
+          <div className="border-b-[1px] border-b-[#8E0789] flex flex-col pb-[10px]">
             <h2 className="font-[Poppins] font-[500] text-[15px] text-[#FFFFFF] leading-[15px] ">
               Review
             </h2>
@@ -117,12 +116,12 @@ const KycPreview = () => {
               <label className="font-[Poppins] font-[400] text-[12px] text-[#FFFFFF] whitespace-nowrap">
                 Information review
               </label>
-              <div className="flex items-center mr-[15px] gap-[5px]">
+              {/* <div className="flex items-center mr-[15px] gap-[5px]">
                 <EditIcon />
                 <span className="font-[Poppins] font-[600] text-[12px] text-[#FFB803]">
                   Edit
                 </span>
-              </div>
+              </div> */}
             </div>
 
             {/* review */}
@@ -137,6 +136,7 @@ const KycPreview = () => {
                 <input
                   type="text"
                   className="w-full h-full bg-[inherit] outline-none p-[5px] font-[Poppins] font-[400] text-[12px] text-[#AAAAAA] text-right border-none"
+                  disabled
                 />
               </div>
 
@@ -150,6 +150,7 @@ const KycPreview = () => {
                 <input
                   type="text"
                   className="w-full h-full bg-[inherit] outline-none p-[5px] font-[Poppins] font-[400] text-[12px] text-[#AAAAAA] text-right border-none"
+                  disabled
                 />
               </div>
 
@@ -163,6 +164,7 @@ const KycPreview = () => {
                 <input
                   type="text"
                   className="w-full h-full bg-[inherit] outline-none p-[5px] font-[Poppins] font-[400] text-[12px] text-[#AAAAAA] text-right border-none"
+                  disabled
                 />
               </div>
 
@@ -176,6 +178,7 @@ const KycPreview = () => {
                 <input
                   type="text"
                   className="w-full h-full bg-[inherit] outline-none p-[5px] font-[Poppins] font-[400] text-[12px] text-[#AAAAAA] text-right border-none"
+                  disabled
                 />
               </div>
 
@@ -189,6 +192,7 @@ const KycPreview = () => {
                 <input
                   type="text"
                   className="w-full h-full bg-[inherit] outline-none p-[5px] font-[Poppins] font-[400] text-[12px] text-[#AAAAAA] text-right border-none"
+                  disabled
                 />
               </div>
             </div>
