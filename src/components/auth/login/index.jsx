@@ -118,7 +118,7 @@ const UserLogin = () => {
               label={'Password'}
               password
             />
-            <p className="text-[#8E0789] text-right cursor-pointer font-medium -mt-3">
+            <p onClick={() => navigate('/forgot-password')} className="text-[#8E0789] text-right cursor-pointer font-medium -mt-3">
               Forgot password?
             </p>
           </div>
