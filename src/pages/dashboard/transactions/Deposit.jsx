@@ -98,10 +98,6 @@ const Deposit = () => {
 
   console.log('SELECTED COIN', selectedCoin);
 
-  //code to get USDT_AMOUNT
-  //these are the coins will need to pass depending on the coin you selected
-  //[litecoin, ripple, ethereum, bitcoin, tether]
-  // Function to convert a coin amount to USD using CoinGecko API
   useEffect(() => {
     async function convertToUSD(coin, amount) {
       console.log('SELECTED COIN', coin, 'AMOUNT', amount);
