@@ -14,10 +14,11 @@ const IdVerification = () => {
 
   const handleCountryChange = (e) => {
     setSelectedCountry(e.target.value);
+    console.log(e.target.value);
   };
 
   const getFlagUrl = (countryCode) => {
-    const country = countries?.find((c) => c.cca3 === countryCode);
+    const country = countries?.find((c) => c?.name?.common === countryCode);
     return country ? country?.flags.svg : '';
   };
   return (
@@ -134,7 +135,6 @@ const IdVerification = () => {
                 className="w-full h-[30px] rounded-[8px] border border-[#8E0789] bg-[inherit] outline-none leading-[2px] pl-[5px] font-[Poppins] font-[400] text-[15px] text-[#939191] flex items-center gap-[5px]"
                 id="kyc"
               >
-                
                 <img
                   src={getFlagUrl(selectedCountry)}
                   alt={`${selectedCountry} flag`}
@@ -145,15 +145,19 @@ const IdVerification = () => {
                   value={selectedCountry}
                   onChange={handleCountryChange}
                 >
-                  {countries?.map((country) => (
-                    <option
-                      key={country?.cca3}
-                      value={country?.cca3}
-                      className="text-[purple]"
-                    >
-                      {country?.name?.common}
-                    </option>
-                  ))}
+                  {countries
+                    ?.sort((a, b) =>
+                      a?.name?.common.localeCompare(b?.name?.common)
+                    )
+                    .map((country) => (
+                      <option
+                        key={country?.cca3}
+                        value={country?.name?.common}
+                        className="text-[purple]"
+                      >
+                        {country?.name?.common}
+                      </option>
+                    ))}
                 </select>
               </div>
             </div>

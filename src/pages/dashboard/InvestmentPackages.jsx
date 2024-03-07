@@ -40,7 +40,7 @@ const InvestmentPackages = () => {
       <div className="p-10 space-y-5">
         <span className="font-bold text-lg">All Investments</span>
         <div className="flex gap-10 flex-wrap">
-          {data !== 0 ? (
+          {data.length === 0 ? (
             <>
               <DashboardEmptyContainer message="No investment packages found" />
             </>

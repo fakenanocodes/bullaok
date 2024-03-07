@@ -1,83 +1,30 @@
 import FilterListIcon from '@mui/icons-material/FilterList';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import { useNavigate } from 'react-router-dom';
+import useSWR from 'swr';
+import { images } from '../../assets';
 
-const packages = [
-  {
-    imageUrl: '',
-    label: 'Assets',
-    date: '22nd',
-    month: 'January',
-    year: '2024',
-    time: '6:00pm',
-    amount: 426.67,
-    maturity: '3rd July',
-    profit: 7.14,
-    profitpercent: 3.67,
-  },
-  {
-    imageUrl: '',
-    label: 'Real Estate',
-    date: '22nd',
-    month: 'January',
-    year: '2024',
-    time: '6:00pm',
-    amount: 426.67,
-    maturity: '3rd July',
-    profit: 7.14,
-    profitpercent: 3.67,
-  },
-  {
-    imageUrl: '',
-    label: 'Crypto',
-    date: '22nd',
-    month: 'January',
-    year: '2024',
-    time: '6:00pm',
-    amount: 426.67,
-    maturity: '3rd July',
-    profit: 7.14,
-    profitpercent: 3.67,
-  },
-  {
-    imageUrl: '',
-    label: 'Forex',
-    date: '22nd',
-    month: 'January',
-    year: '2024',
-    time: '6:00pm',
-    amount: 426.67,
-    maturity: '3rd July',
-    profit: 7.14,
-    profitpercent: 3.67,
-  },
-  {
-    imageUrl: '',
-    label: 'Ganja',
-    date: '22nd',
-    month: 'January',
-    year: '2024',
-    time: '6:00pm',
-    amount: 426.67,
-    maturity: '3rd July',
-    profit: 7.14,
-    profitpercent: 3.67,
-  },
-];
-
+const imageUrls = {
+  Assets: images.assets,
+  'Real Estate': images.estate,
+  Crypto: images.crypto,
+  Forex: images.forex,
+  Cannabis: images.cannabis,
+};
 const RunningInvestment = () => {
   const navigate = useNavigate();
+  const { data, isLoading } = useSWR('/plans/all');
 
   return (
     <div className="flex space-y-4 flex-col p-10 ">
       <div>
-        <KeyboardBackspaceIcon fontSize="large"
-
-onClick={() => {
-  navigate(-1);
-}}
-className="cursor-pointer"
-         />
+        <KeyboardBackspaceIcon
+          fontSize="large"
+          onClick={() => {
+            navigate(-1);
+          }}
+          className="cursor-pointer"
+        />
       </div>
       <div className="flex justify-between items-center">
         <span className="font-bold text-lg">Running Investments</span>
@@ -106,19 +53,16 @@ className="cursor-pointer"
           </tr>
         </thead>
         <tbody className="">
-          {packages?.map(
+          {data?.map(
             (
               {
-                imageUrl,
-                label,
-                date,
-                month,
-                year,
-                time,
-                amount,
-                maturity,
-                profit,
-                profitpercent,
+                category,
+                created,
+                investment_profit_percent,
+                maximum_amount,
+                minimum_amount,
+                number_of_days,
+                referral_profit_percent,
               },
               index
             ) => (
@@ -127,35 +71,33 @@ className="cursor-pointer"
                   <div className="flex items-center justify-center text-center ">
                     <div className="flex justify-start items-center gap-4 w-[180px] ">
                       <img
-                        src={imageUrl}
+                        src={imageUrls[category?.name]}
                         alt=""
                         className="w-16 h-16 rounded-full"
                       />
-                      <span>{label}</span>
+                      <span>{category?.name}</span>
                     </div>
                   </div>
                 </td>
                 <td className="gap-2 py-4 text-center">
                   <div className="flex flex-col">
-                    <span>
-                      {date} {month}
-                    </span>
-                    <span>
-                      {year} {time}
-                    </span>
+                    <span>{created}</span>
+                    <span>{/* {year} {time} */}</span>
                   </div>
                 </td>
                 <td className="text-center  py-4">
-                  <span className="font-bold text-xl">$ {amount}</span>
+                  {/* <span className="font-bold text-xl">$ {amount}</span> */}
                 </td>
                 <td className="text-center  py-4">
-                  <span>{maturity}</span>
+                  <span>{number_of_days}</span>
                 </td>
                 <td className="text-center py-4 ">
                   <div className="flex flex-col">
-                    <span className="font-bold">+ ${profit}</span>
+                    <span className="font-bold">
+                      + ${investment_profit_percent}
+                    </span>
                     <span className="text-[#47A663] font-semibold">
-                      {profitpercent}%
+                      {referral_profit_percent}%
                     </span>
                   </div>
                 </td>

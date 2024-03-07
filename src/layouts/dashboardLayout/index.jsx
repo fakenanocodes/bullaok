@@ -1,12 +1,14 @@
 import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useState } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import logo from '../../assets/dashboard/logo.svg';
 import profilepic from '../../assets/dashboard/profilepic.png';
 import HomeIcon from '../../assets/icons/dashboard/HomeIcon';
 import InvestmentIcon from '../../assets/icons/dashboard/InvestmentIcon';
 import PlantIcon from '../../assets/icons/dashboard/PlantIcon';
+import SettingsIcon from '../../assets/icons/dashboard/SettingsIcon';
+import TransactionIcon from '../../assets/icons/dashboard/TransactionIcon';
 import DashboardSidebar from './components/Sidebar';
 
 const options = ['Withdraw', 'Deposit', 'Transfer'];
@@ -19,7 +21,21 @@ const DashboardLayout = () => {
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
   };
-
+  const icons = [
+    { icon: <HomeIcon />, name: 'Home', path: '' },
+    { icon: <InvestmentIcon />, name: 'Investment Packages', path: 'kyc' },
+    {
+      icon: <PlantIcon />,
+      name: 'Investment Plans',
+      path: 'investment/packages',
+    },
+    {
+      icon: <TransactionIcon />,
+      name: 'Transactions',
+      path: 'investment/running',
+    },
+    { icon: <SettingsIcon />, name: 'Settings', path: 'settings' },
+  ];
   return (
     <div className="relative bg-custom-bg bg-opacity-20 bg-cover bg-center bg-no-repeat min-h-screen">
       {/** Layout */}
@@ -86,22 +102,16 @@ const DashboardLayout = () => {
                   <CloseIcon fontSize="large" />
                 </button>
                 <div className="flex space-y-8 flex-col">
-                  <div className="flex space-x-4 items-center hover:bg-white hover:text-[#575757] p-2">
-                    <HomeIcon />
-                    <span className="text-lg font-semibold ">Home</span>
-                  </div>
-                  <div className="flex space-x-4 items-center  hover:bg-white hover:text-[#575757] p-2">
-                    <InvestmentIcon />
-                    <span className="text-lg font-semibold">
-                      Investment Packages
-                    </span>
-                  </div>
-                  <div className="flex space-x-4 items-center  hover:bg-white hover:text-[#575757] p-2">
-                    <PlantIcon />
-                    <span className="text-lg font-semibold">
-                      Investment Plans
-                    </span>
-                  </div>
+                  {icons?.map((item, idx) => (
+                    <Link to={item?.path} key={idx} className="text-white">
+                      <div className="flex space-x-4 items-center hover:bg-white hover:text-[#575757] p-2">
+                        {item?.icon}
+                        <span className="text-lg font-semibold ">
+                          {item?.name}
+                        </span>
+                      </div>
+                    </Link>
+                  ))}
                 </div>
               </div>
             </div>

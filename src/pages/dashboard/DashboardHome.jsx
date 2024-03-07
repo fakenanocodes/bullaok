@@ -4,7 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
 import { images } from '../../assets';
 import Chart from '../../assets/dashboard/chart.svg';
+import HistoryRow from '../../components/Dashboard/HistoryRow';
 import PackageCard from '../../components/Dashboard/PackageCard';
+import DashboardEmptyContainer from '../../components/empty/DashboardEmptyContainer';
 
 const imageUrls = {
   Assets: images.assets,
@@ -14,15 +16,20 @@ const imageUrls = {
   Cannabis: images.cannabis,
 };
 
+const colors = ['#6B5F6B', '#33FF57', '#5733FF']; // Add more colors as needed
+
 const DashboardHome = () => {
   const { data, isLoading } = useSWR('/plans/categories/');
+  const { data: history, isLoading: historyLoading } = useSWR('plans/history');
+
   const navigate = useNavigate();
   console.log(data);
   return (
     <div className="space-y-3 h-full no-scrollbar overflow-auto p-5">
-      <div className="w-full flex gap-8">
-        <div className="border rounded-sm bg-[#0C0000] border-white border-opacity-40 w-3/5 h-72 p-5 pl-16 flex flex-col space-y-8">
+      <div className="w-full flex xl:flex-row flex-col gap-8">
+        <div className="border rounded-sm bg-[#0C0000] border-white border-opacity-40 xl:w-3/5 w-full h-72 p-5 pl-16 flex flex-col space-y-8">
           <span className="text-[#868383] text-lg">Current Balance</span>
+          
           <div className="flex flex-col space-y-8 relative">
             <div className="flex items-center space-x-4">
               <span className="text-white text-5xl font-extrabold">
@@ -104,45 +111,33 @@ const DashboardHome = () => {
               View all History
             </span>
           </div>
-          <div className="w-full space-y-1">
-            <div className="flex justify-between px-10 py-2 bg-[#924E8F]">
-              <span>Name</span>
-              <span className="pr-12">Detail</span>
-              <span className="pr-12">Date</span>
-            </div>
-            <div className="flex flex-col space-y-1">
-              <div className="flex justify-between px-10 py-4  bg-[#BB9FB3] bg-opacity-[38%]">
-                <span className="flex items-center gap-2">
-                  <span className="bg-white w-6 h-6 flex justify-center items-center rounded-full">
-                    <FiberManualRecordIcon className="text-[#6B5F6B] rounded-full" />
-                  </span>
-                  Real estate
-                </span>
-                <span>You invested $578,8933 on real estate plan</span>
-                <span>January 25th... 15:03PM</span>
+          {history?.length === 0 ? (
+            <>
+              <DashboardEmptyContainer
+                message={'Your investment history is empty'}
+              />
+            </>
+          ) : (
+            <>
+              <div className="w-full space-y-1">
+                <div className="flex justify-between px-10 py-2 bg-[#924E8F]">
+                  <span>Name</span>
+                  <span className="pr-12">Detail</span>
+                  <span className="pr-12">Date</span>
+                </div>
+                <div className="flex flex-col space-y-1">
+                  {history?.slice(0, 3).map((item, idx) => (
+                    <HistoryRow
+                      key={idx}
+                      item={item}
+                      idx={idx}
+                      colors={colors}
+                    />
+                  ))}
+                </div>
               </div>
-              <div className="flex justify-between px-10 py-4 bg-[#BB9FB3] bg-opacity-[38%]">
-                <span className="flex items-center gap-2">
-                  <span className="bg-white w-6 h-6 flex justify-center items-center rounded-full">
-                    <FiberManualRecordIcon className="text-[#732220] rounded-full" />
-                  </span>
-                  Real estate
-                </span>
-                <span>You invested $578,8933 on real estate plan</span>
-                <span>January 25th... 15:03PM</span>
-              </div>
-              <div className="flex justify-between px-10 py-4 bg-[#BB9FB3] bg-opacity-[38%]">
-                <span className="flex items-center gap-2">
-                  <span className="bg-white w-6 h-6 flex justify-center items-center rounded-full">
-                    <FiberManualRecordIcon className="text-[#FFB803] rounded-full" />
-                  </span>
-                  Real estate
-                </span>
-                <span>You invested $578,8933 on real estate plan</span>
-                <span>January 25th... 15:03PM</span>
-              </div>
-            </div>
-          </div>
+            </>
+          )}
         </div>
       </div>
     </div>
