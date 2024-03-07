@@ -1,74 +1,15 @@
-import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
-import { useState } from 'react';
+import { CircularProgress } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
+import HistoryTableRow from '../../components/Dashboard/HistoryTableRow';
 import DashboardEmptyContainer from '../../components/empty/DashboardEmptyContainer';
 import useDateSeparator from '../../hooks/useDateSeparator';
 
-const history = {
-  today: [
-    {
-      label: 'Real Estate',
-      detail: 'You invested $578,600 on real estate plan',
-      Month: 'January 25th...',
-      time: '15:03PM',
-    },
-    {
-      label: 'Real Estate',
-      detail: 'You invested $578,600 on real estate plan',
-      Month: 'January 25th...',
-      time: '15:03PM',
-    },
-    {
-      label: 'Real Estate',
-      detail: 'You invested $578,600 on real estate plan',
-      Month: 'January 25th...',
-      time: '15:03PM',
-    },
-    {
-      label: 'Real Estate',
-      detail: 'You invested $578,600 on real estate plan',
-      Month: 'January 25th...',
-      time: '15:03PM',
-    },
-  ],
-  '2nd Jan': [
-    {
-      label: 'Real Estate',
-      detail: 'You invested $578,600 on real estate plan',
-      Month: 'January 25th...',
-      time: '15:03PM',
-    },
-    {
-      label: 'Real Estate',
-      detail: 'You invested $578,600 on real estate plan',
-      Month: 'January 25th...',
-      time: '15:03PM',
-    },
-
-    {
-      label: 'Real Estate',
-      detail: 'You invested $578,600 on real estate plan',
-      Month: 'January 25th...',
-      time: '15:03PM',
-    },
-
-    {
-      label: 'Real Estate',
-      detail: 'You invested $578,600 on real estate plan',
-      Month: 'January 25th...',
-      time: '15:03PM',
-    },
-  ],
-};
-
-const historyTime = Object.keys(history);
 
 const InvestmentHistory = () => {
   const navigate = useNavigate();
   const { data, isLoading } = useSWR('plans/history');
-  const [prevDate, setPrevDate] = useState(null);
 
   console.log(data);
   return (
@@ -83,61 +24,54 @@ const InvestmentHistory = () => {
         <span className="font-semibold text-lg">HISTORY</span>
       </div>
       <div className="w-full">
-        {data?.length === 0 ? (
-          <>
-            <DashboardEmptyContainer
-              message={'Your investment history is empty'}
-            />
-          </>
+        {isLoading ? (
+          <div className="w-full justify-center">
+            <CircularProgress size={30} style={{ color: '#fff' }} />
+          </div>
         ) : (
           <>
-            <table className="w-full border-separate border-spacing-y-2">
-              <thead>
-                <tr className=" flex justify-between bg-[#E5C8E4] text-black px-10">
-                  <th>Name</th>
-                  <th>Detail</th>
-                  <th>Amount</th>
-                  <th>Date</th>
-                </tr>
-              </thead>
-              <tbody className="flex space-y-2 flex-col">
-                {/* {historyTime?.map((time, index) => (
-                  <>
-                  </>
-                ))} */}
-                {/* <tr key={index}>
-                      <td>{time}</td>
-                    </tr> */}
-                {data?.map((item, itemIndex) => {
-                  const messageDate = new Date(item.created);
-                  const dateSeparator = useDateSeparator(messageDate);
+            {data?.length === 0 ? (
+              <>
+                <DashboardEmptyContainer
+                  message={'Your investment history is empty'}
+                />
+              </>
+            ) : (
+              <>
+                <table className="w-full border-separate border-spacing-y-2">
+                  <thead>
+                    <tr className=" flex justify-between bg-[#E5C8E4] text-black px-10">
+                      <th>Name</th>
+                      <th>Detail</th>
+                      <th>Amount</th>
+                      <th>Date</th>
+                    </tr>
+                  </thead>
+                  <tbody className="flex space-y-2 flex-col">
+                    {data?.map((item, itemIndex) => {
+                      const messageDate = new Date(item?.created);
+                      const dateSeparator = useDateSeparator(messageDate);
 
-                  return (
-                    <>
-                      {/* {dateSeparator  && (
-                        <div className="px-10 text-center font-semibold mt-4">
-                          {dateSeparator}
-                        </div>
-                      )} */}
-                      <tr
-                        key={`${itemIndex}`}
-                        className="flex justify-between px-10 bg-[#BB9FB3] bg-opacity-[38%]"
-                      >
-                        <td className="py-4 flex items-center space-x-3">
-                          <span className="bg-white w-6 h-6 flex justify-center items-center rounded-full">
-                            <FiberManualRecordIcon className="text-[#FFB803] rounded-full" />
-                          </span>
-                          <span>{item?.name}</span>
-                        </td>
-                        <td className="py-4">{item?.detail}</td>
-                        <td className="py-4">{item?.amount}</td>
-                        <td className="py-4">{item?.created}</td>
-                      </tr>
-                    </>
-                  );
-                })}
-              </tbody>
-            </table>
+                      return (
+                        <>
+                          {/* {dateSeparator  && (
+                          <div className="px-10 text-center font-semibold mt-4">
+                            {dateSeparator}
+                          </div>
+                        )} */}
+                          <HistoryTableRow
+                            key={itemIndex}
+                            idx={itemIndex}
+                            item={item}
+                            // color={colors}
+                          />
+                        </>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </>
+            )}
           </>
         )}
       </div>
