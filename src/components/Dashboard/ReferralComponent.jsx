@@ -60,7 +60,7 @@ export default function ReferralComponent() {
   const { data: referral, isLoading } = useSWR('referral/');
   console.log(referral);
   return (
-    <div className="xl:px-8 px-2">
+    <div className="xl:px-8 px-2 ">
       {/* <div className="flex items-center gap-7 xl:hidden block"> */}
       <div className="flex items-center gap-7 py-7 text-black text-2xl xl:hidden block">
         <MdOutlineArrowBackIos />

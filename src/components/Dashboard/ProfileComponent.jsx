@@ -1,11 +1,38 @@
 import React from 'react';
 import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
 import { images } from '../../assets';
+import { icons } from '../../assets/icons';
 
+const features = [
+  {
+    title: 'Notifications',
+    icon: icons.notification,
+    link: 'notification',
+  },
+  {
+    title: 'KYC Verification',
+    description: 'Verify your identity with KYC',
+    icon: icons.kyc,
+    link: 'kyc',
+  },
+  {
+    title: 'Help & Support',
+    icon: icons.support,
+    link: 'support',
+  },
+  {
+    title: 'Refer & Get Bonus',
+    description:
+      'Share your referral link and get a bonus for every friend who signs up',
+    icon: icons.refer,
+    link: 'referral',
+  },
+];
 export default function ProfileComponent() {
   const { data, isLoading } = useSWR('user/');
-
+  const navigate = useNavigate();
   const user = data?.profile?.user;
   const profile = data?.profile;
   console.log(user?.first_name);
@@ -99,24 +126,23 @@ export default function ProfileComponent() {
       </div>
 
       <div className="flex flex-col gap-2 mt-4 ">
-        <div className="border border-[#8E0789]/20 p-4 x:px-[70px] px-8">
-          <h2 className="font-bold xl:text-2xl text-sm">Total Assets</h2>
-          <h2 className="text-[#49454F] xl:text-xl text-[10px]">
-            View your total assets and earning.
-          </h2>
-        </div>
-        <div className="border border-[#8E0789]/20 p-4 x:px-[70px] px-8">
-          <h2 className="font-bold xl:text-2xl text-sm">Transaction History</h2>
-        </div>
-        <div className="border border-[#8E0789]/20 p-4 x:px-[70px] px-8">
-          <h2 className="font-bold xl:text-2xl text-sm">Account Limits</h2>
-          <h2 className="text-[#49454F] xl:text-xl text-sm">
-            View your transaction limits.{' '}
-          </h2>
-        </div>
-        <div className="border border-[#8E0789]/20 p-4 x:px-[70px] px-8">
-          <h2 className="font-bold xl:text-2xl text-sm">Support</h2>
-        </div>
+        {features?.map((feature, index) => (
+          <div
+            key={index}
+            onClick={() => navigate(`/dashboard/${feature.link}`)}
+            className="border flex justify-between items-center gap-2 border-[#8E0789]/20 p-4 x:px-[70px] cursor-pointer px-8"
+          >
+            <img src={feature.icon} alt="" />
+            <div className=" w-[95%] ">
+              <h2 className="font-bold xl:text-2xl text-sm">{feature.title}</h2>
+              {feature.description && (
+                <h2 className="text-[#49454F] xl:text-xl text-sm">
+                  {feature.description}
+                </h2>
+              )}
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
