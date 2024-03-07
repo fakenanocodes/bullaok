@@ -60,7 +60,7 @@ const Personalinfo = () => {
 
           {/* the pagination circle */}
           <div className="w-fit h-full flex flex-col items-center relative">
-            <div className='w-fit h-full flex flex-col justify-between items-center z-20'>
+            <div className="w-fit h-full flex flex-col justify-between items-center z-20">
               <div
                 className={
                   kyc === 'personalInfo'

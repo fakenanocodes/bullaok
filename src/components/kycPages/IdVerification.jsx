@@ -1,13 +1,25 @@
-import { useState, useContext } from 'react';
+import { useContext, useState } from 'react';
+import useSWR from 'swr';
 import { KycContext } from '../../pages/dashboard/Kyc';
 import DriveLicence from '../utils/icons/DriveLicence';
 import Idcard from '../utils/icons/Idcard';
-import NijaFlag from '../utils/icons/NijaFlag';
 import PassportIcon from '../utils/icons/PassportIcon';
 
 const IdVerification = () => {
   const [idCard, setIdcard] = useState('');
   const { kyc, setKyc } = useContext(KycContext);
+  const [selectedCountry, setSelectedCountry] = useState('Nigeria');
+
+  const { data: countries } = useSWR('https://restcountries.com/v3.1/all');
+
+  const handleCountryChange = (e) => {
+    setSelectedCountry(e.target.value);
+  };
+
+  const getFlagUrl = (countryCode) => {
+    const country = countries.find((c) => c.cca3 === countryCode);
+    return country ? country.flags.svg : '';
+  };
   return (
     <div
       className={
@@ -116,32 +128,31 @@ const IdVerification = () => {
           <form className="flex flex-col gap-[5px]">
             <div className="flex flex-col">
               <label className="font-[Poppins] font-[400] text-[12px] leading-[20px] text-[#FFFFFF]">
-                Select yor preferred country
+                Select your preferred country
               </label>
               <div
                 className="w-full h-[30px] rounded-[8px] border border-[#8E0789] bg-[inherit] outline-none leading-[2px] pl-[5px] font-[Poppins] font-[400] text-[15px] text-[#939191] flex items-center gap-[5px]"
                 id="kyc"
               >
-                <NijaFlag />
-                <select className="w-full h-full border-none outline-none rounded-r-[8px] bg-[inherit] flex items-center text-[13px] p-0">
-                  <option value="Nigeria" className="text-[purple">
-                    Nigeria
-                  </option>
-                  <option value="America" className="text-[purple">
-                    America
-                  </option>
-                  <option value="Australia" className="text-[purple">
-                    Australia
-                  </option>
-                  <option value="Ghana" className="text-[purple">
-                    Ghana
-                  </option>
-                  <option value="Cape Vade" className="text-[purple">
-                    Cape Vade
-                  </option>
-                  <option value="Mali" className="text-[purple">
-                    Mali
-                  </option>
+                <img
+                  src={getFlagUrl(selectedCountry)}
+                  alt={`${selectedCountry} flag`}
+                  className="w-8 rounded-lg"
+                />
+                <select
+                  className="w-full h-full border-none outline-none rounded-r-[8px] bg-[inherit] flex items-center text-[13px] p-0"
+                  value={selectedCountry}
+                  onChange={handleCountryChange}
+                >
+                  {countries?.map((country) => (
+                    <option
+                      key={country?.cca3}
+                      value={country?.cca3}
+                      className="text-[purple]"
+                    >
+                      {country?.name?.common}
+                    </option>
+                  ))}
                 </select>
               </div>
             </div>
@@ -218,7 +229,7 @@ const IdVerification = () => {
                 id="kyc"
               />
             </fieldset>
-            
+
             <fieldset className="flex flex-col">
               <label className="font-[Poppins] font-[400] text-[12px] leading-[20px] text-[#FFFFFF]">
                 Date of Birth
