@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { KycContext } from '../../pages/dashboard/Kyc';
-import { setUserDetails } from '../../store/reducers/kyc_reducer';
+import { setUserDetails } from '../../store/reducers/transact_reducer';
 
 const Personalinfo = () => {
   const { kyc, setKyc } = useContext(KycContext);
@@ -11,7 +11,7 @@ const Personalinfo = () => {
   const dispatch = useDispatch();
   // const { data: items } = useSWR(/kyc/);
   // console.log('KYC', items);
-  // const { userDetails } = useSelector((state) => state.kyc);
+  // const { userDetails } = useSelector((state) => state.transact);
   // console.log(`USERDETAILS`, userDetails);
 
   let userDetail = {
