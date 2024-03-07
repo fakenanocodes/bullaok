@@ -19,12 +19,13 @@ const IdVerification = () => {
 
   const handleCountryChange = (e) => {
     setSelectedCountry(e.target.value);
+    console.log(e.target.value);
   };
 
   console.log(`SELECTED`, selectedCountry, idCard);
 
   const getFlagUrl = (countryCode) => {
-    const country = countries?.find((c) => c.cca3 === countryCode);
+    const country = countries?.find((c) => c?.name?.common === countryCode);
     return country ? country?.flags.svg : '';
   };
 
@@ -156,15 +157,19 @@ const IdVerification = () => {
                   value={selectedCountry}
                   onChange={handleCountryChange}
                 >
-                  {countries?.map((country) => (
-                    <option
-                      key={country?.cca3}
-                      value={country?.cca3}
-                      className="text-[purple]"
-                    >
-                      {country?.name?.common}
-                    </option>
-                  ))}
+                  {countries
+                    ?.sort((a, b) =>
+                      a?.name?.common.localeCompare(b?.name?.common)
+                    )
+                    .map((country) => (
+                      <option
+                        key={country?.cca3}
+                        value={country?.name?.common}
+                        className="text-[purple]"
+                      >
+                        {country?.name?.common}
+                      </option>
+                    ))}
                 </select>
               </div>
             </div>
