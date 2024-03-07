@@ -5,11 +5,15 @@ export const authSlice = createSlice({
   initialState: {
     currentSignupEmail: null,
     userData: {},
+    otp:null
   },
 
   reducers: {
     setCurrentSignupEmail: (state, action) => {
       state.currentSignupEmail = action.payload;
+    },
+    setOtp: (state, action) => {
+      state.otp = action.payload;
     },
 
     setUserData: (state, action) => {
@@ -20,7 +24,7 @@ export const authSlice = createSlice({
 
 export const {
   setCurrentSignupEmail,
- 
+  setOtp,
   setUserData,
 } = authSlice.actions;
 
