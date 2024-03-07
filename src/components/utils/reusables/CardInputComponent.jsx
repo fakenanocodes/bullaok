@@ -15,6 +15,9 @@ const CardInputComponent = ({
   price,
   date,
   required,
+  handleChange,
+  value,
+  name
 }) => {
   const [passwordType, setPasswordType] = useState(type);
   const passwordToggle = () => {
@@ -56,6 +59,9 @@ const CardInputComponent = ({
             {...register}
             disabled={disabled}
             accept={accept}
+            onChange={handleChange}
+            value={value}
+            name={name}
           />
           {password && passwordToggle()}
           {date && (
