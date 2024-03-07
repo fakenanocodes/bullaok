@@ -35,13 +35,15 @@ import InvestmentHistory from '../pages/dashboard/InvestmentHistory';
 import Profile from '../pages/dashboard/Profile';
 import ReferralContainer from '../pages/dashboard/Referral';
 // import InvestmentPackages from '../pages/dashboard/InvestmentPackages';
+import ForgotPassword from '../components/auth/forgot-password';
 import UserLogin from '../components/auth/login';
 import InvestmentPackages from '../pages/dashboard/InvestmentPackages';
 import InvestmentPlan from '../pages/dashboard/InvestmentPlan';
 import RunningInvestment from '../pages/dashboard/RunningInvestment';
+import Kyc from '../pages/dashboard/Kyc';
 import Deposit from '../pages/dashboard/transactions/Deposit';
-import Transfer from '../pages/dashboard/transactions/Transfer';
 import Withdrawal from '../pages/dashboard/transactions/Withdrawal';
+import Transfer from '../pages/dashboard/Transfer';
 
 const router = createBrowserRouter([
   {
@@ -155,6 +157,10 @@ const router = createBrowserRouter([
     Component: Signup,
   },
   {
+    path: 'forgot-password',
+    Component: ForgotPassword,
+  },
+  {
     path: '/services/forex',
     Component: Forex,
   },
@@ -165,6 +171,11 @@ const router = createBrowserRouter([
       {
         path: '',
         Component: DashboardHome,
+      },
+    
+      {
+        path: 'kyc',
+        Component: Kyc,
       },
       {
         path: 'profile',
@@ -179,10 +190,7 @@ const router = createBrowserRouter([
         path: 'bonus',
         Component: BonusContainer,
       },
-      // {
-      //   path: 'transfer',
-      //   Component: Transaction,
-      // },
+   
       {
         path: 'withdraw',
         Component: Withdrawal,

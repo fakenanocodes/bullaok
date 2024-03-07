@@ -39,7 +39,7 @@ module.exports = {
         'wip',
         'develop',
         'perf',
-        'refactor',
+        'refactor', 
         'revert',
         'style',
         'test',
