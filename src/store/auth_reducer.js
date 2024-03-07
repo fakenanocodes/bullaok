@@ -20,7 +20,7 @@ export const authSlice = createSlice({
 
 export const {
   setCurrentSignupEmail,
- 
+
   setUserData,
 } = authSlice.actions;
 

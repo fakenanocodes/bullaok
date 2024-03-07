@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useContext, useState } from 'react';
 import { KycContext } from '../../pages/dashboard/Kyc';
 import DriveLicence from '../utils/icons/DriveLicence';
 import Idcard from '../utils/icons/Idcard';
@@ -218,7 +218,7 @@ const IdVerification = () => {
                 id="kyc"
               />
             </fieldset>
-            
+
             <fieldset className="flex flex-col">
               <label className="font-[Poppins] font-[400] text-[12px] leading-[20px] text-[#FFFFFF]">
                 Date of Birth

@@ -39,11 +39,11 @@ import ForgotPassword from '../components/auth/forgot-password';
 import UserLogin from '../components/auth/login';
 import InvestmentPackages from '../pages/dashboard/InvestmentPackages';
 import InvestmentPlan from '../pages/dashboard/InvestmentPlan';
-import RunningInvestment from '../pages/dashboard/RunningInvestment';
 import Kyc from '../pages/dashboard/Kyc';
+import RunningInvestment from '../pages/dashboard/RunningInvestment';
 import Deposit from '../pages/dashboard/transactions/Deposit';
+import Transfer from '../pages/dashboard/transactions/Transfer';
 import Withdrawal from '../pages/dashboard/transactions/Withdrawal';
-import Transfer from '../pages/dashboard/Transfer';
 
 const router = createBrowserRouter([
   {
@@ -172,7 +172,7 @@ const router = createBrowserRouter([
         path: '',
         Component: DashboardHome,
       },
-    
+
       {
         path: 'kyc',
         Component: Kyc,
@@ -190,7 +190,7 @@ const router = createBrowserRouter([
         path: 'bonus',
         Component: BonusContainer,
       },
-   
+
       {
         path: 'withdraw',
         Component: Withdrawal,
