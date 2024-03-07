@@ -17,8 +17,8 @@ const IdVerification = () => {
   };
 
   const getFlagUrl = (countryCode) => {
-    const country = countries.find((c) => c.cca3 === countryCode);
-    return country ? country.flags.svg : '';
+    const country = countries?.find((c) => c.cca3 === countryCode);
+    return country ? country?.flags.svg : '';
   };
   return (
     <div
@@ -134,6 +134,7 @@ const IdVerification = () => {
                 className="w-full h-[30px] rounded-[8px] border border-[#8E0789] bg-[inherit] outline-none leading-[2px] pl-[5px] font-[Poppins] font-[400] text-[15px] text-[#939191] flex items-center gap-[5px]"
                 id="kyc"
               >
+                
                 <img
                   src={getFlagUrl(selectedCountry)}
                   alt={`${selectedCountry} flag`}
