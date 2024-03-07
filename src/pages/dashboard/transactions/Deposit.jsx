@@ -2,6 +2,7 @@ import { ClickAwayListener } from '@mui/material';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 // import { Cookies } from 'react-cookie';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import useSWR from 'swr';
 import CancelIcon from '../../../components/utils/icons/CancelIcon';
@@ -64,9 +65,7 @@ const Deposit = () => {
   const [usdtAmount, setUsdtAmount] = useState(4);
   const { data: deposits } = useSWR(`/deposit/`);
   const { data: depositWallet } = useSWR('/walletaddress/');
-  console.log('DEPOSIT', deposits);
-  console.log('DEPOSIT WALLET', depositWallet);
-
+  const navigate = useNavigate();
   const walletType = ['litecoin', 'ripple', 'ethereum', 'bitcoin', 'tether'];
 
   let walletMock = {
@@ -170,20 +169,7 @@ const Deposit = () => {
 
     return `${targetAmount.toFixed(8)} ${toCoin}`; // Return formatted target coin amount with 8 decimal places
   }
-  // Example usage
-  // (async () => {
-  //   try {
-  //     const usdEquivalent = await convertToUSD('tether', 1);
-  //     console.log(usdEquivalent); // Output: 1999250.00 USD
 
-  //     const btcEquivalent = await convertToCoin('tether', 1000);
-  //     console.log(btcEquivalent);
-  //   } catch (error) {
-  //     console.error(error.message);
-  //   }
-  // })();
-
-  //items to send
   let userData = {
     amount,
     wallet_type: walletTypes || 'USDT',
@@ -210,7 +196,7 @@ const Deposit = () => {
   return (
     <div className=" h-[100%] no-scrollbar bg-white p-4 text-gray-700 overflow-scroll relative">
       <div className=" text-2xl font-bold my-3 mb-10 grid grid-cols-3 gap-12 items-center ">
-        <div className="md:hidden ">
+        <div className="md:hidden cursor-pointer " onClick={() => navigate(-1)}>
           <LeftMoveIcon />
         </div>
         Deposit

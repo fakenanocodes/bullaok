@@ -78,10 +78,12 @@ const DashboardLayout = () => {
                 src={profilepic}
                 alt=""
                 className="w-14 h-14 rounded-full object-contain"
+                onClick={()=> navigate('/dashboard/profile')}
               />
             </div>
           </div>
           <div className="lg:mx-7 h-[100vh] no-scrollbar lg:h-[80vh] relative overflow-auto bg-[#000]/60 rounded-lg ">
+            
             <Outlet />
           </div>
         </div>

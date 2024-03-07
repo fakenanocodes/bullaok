@@ -1,6 +1,7 @@
 import { ClickAwayListener } from '@mui/material';
 import axios from 'axios';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import useSWR from 'swr';
 import CancelIcon from '../../../components/utils/icons/CancelIcon';
@@ -58,14 +59,12 @@ const Transfer = () => {
   const [showMobileTable, setShowMobileTable] = useState(false);
   const { data: transfers } = useSWR(`/transfer/`);
 
-  console.log('transfer', transfers);
   const { data: user } = useSWR(`/user/`);
-  console.log('User', user);
 
   const [amount, setAmount] = useState('');
   const [emailAddress, setEmailAdress] = useState('');
   // const [usdtAmount, setUsdtAmount] = useState(user.profile.available_balance);
-
+  const navigate = useNavigate();
   // console.log('CHECKER', usdtAmount);
 
   const walletType = ['USDT', 'LTC', 'BTC', 'XRP', 'ETH'];
@@ -96,7 +95,7 @@ const Transfer = () => {
   return (
     <div className=" h-[100%] bg-white no-scrollbar p-4 text-gray-700 overflow-scroll relative">
       <div className=" text-2xl font-bold my-3 mb-10 grid grid-cols-3 gap-12 items-center ">
-        <div className="md:hidden ">
+        <div className="md:hidden " onClick={() => navigate(-1)}>
           <LeftMoveIcon />
         </div>
         Transfer
