@@ -51,7 +51,7 @@ const UserLogin = () => {
       setIsLoading(false);
       setSuccess('Login Successful');
 
-      cookies.set('access_token', response?.data?.token?.access, {
+      cookies.set('bk_access', response?.data?.token?.access, {
         path: '/',
         secure: false,
         sameSite: 'Lax',
@@ -72,7 +72,7 @@ const UserLogin = () => {
         expires: expiringDate,
       });
 
-      cookies.set('user', response?.data?.user, {
+      cookies.set('bk_user', response?.data?.user, {
         path: '/',
         secure: false,
         sameSite: 'Lax',
@@ -118,7 +118,10 @@ const UserLogin = () => {
               label={'Password'}
               password
             />
-            <p onClick={() => navigate('/forgot-password')} className="text-[#8E0789] text-right cursor-pointer font-medium -mt-3">
+            <p
+              onClick={() => navigate('/forgot-password')}
+              className="text-[#8E0789] text-right cursor-pointer font-medium -mt-3"
+            >
               Forgot password?
             </p>
           </div>

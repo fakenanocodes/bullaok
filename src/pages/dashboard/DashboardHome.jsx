@@ -132,7 +132,7 @@ const DashboardHome = () => {
             See all
           </span>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex xl:flex-row flex-col items-center gap-4">
           {data?.map((investmentPackage, index) => (
             <PackageCard
               id={investmentPackage.id}

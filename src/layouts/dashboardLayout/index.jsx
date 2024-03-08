@@ -9,6 +9,8 @@ import InvestmentIcon from '../../assets/icons/dashboard/InvestmentIcon';
 import PlantIcon from '../../assets/icons/dashboard/PlantIcon';
 import SettingsIcon from '../../assets/icons/dashboard/SettingsIcon';
 import TransactionIcon from '../../assets/icons/dashboard/TransactionIcon';
+// import { AuthProvider } from '../../context/AuthCOntext';
+import useAuthentication from '../../hooks/useAuthentication';
 import DashboardSidebar from './components/Sidebar';
 
 const options = ['Withdraw', 'Deposit', 'Transfer'];
@@ -21,6 +23,12 @@ const DashboardLayout = () => {
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
   };
+  const isLoggedIn = useAuthentication();
+  console.log(isLoggedIn);
+  if (!isLoggedIn) {
+    return navigate('/login');
+  }
+
   const icons = [
     { icon: <HomeIcon />, name: 'Home', path: '' },
     { icon: <InvestmentIcon />, name: 'Investment Packages', path: 'kyc' },
@@ -37,6 +45,8 @@ const DashboardLayout = () => {
     { icon: <SettingsIcon />, name: 'Settings', path: 'settings' },
   ];
   return (
+    // <AuthProvider>
+    // </AuthProvider>
     <div className="relative bg-custom-bg bg-opacity-20 bg-cover bg-center bg-no-repeat min-h-screen">
       {/** Layout */}
       <div className="text-white  lg:flex lg:flex-row flex flex-col lg:mr-10 w-full bg-opacity-95 min-h-screen">
@@ -78,12 +88,11 @@ const DashboardLayout = () => {
                 src={profilepic}
                 alt=""
                 className="w-14 h-14 rounded-full object-contain"
-                onClick={()=> navigate('/dashboard/profile')}
+                onClick={() => navigate('/dashboard/profile')}
               />
             </div>
           </div>
           <div className="lg:mx-7 h-[100vh] no-scrollbar lg:h-[80vh] relative overflow-auto bg-[#000]/60 rounded-lg ">
-            
             <Outlet />
           </div>
         </div>
