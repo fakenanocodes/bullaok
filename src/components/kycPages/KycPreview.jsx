@@ -22,7 +22,7 @@ const KycPreview = () => {
     formData.append('country', userDetails?.country);
     formData.append('address', userDetails?.address);
     formData.append('birth_date', userDetails?.birth_date);
-    formData.append('profile', '');
+    // formData.append('profile', `/media/${userDetails.profile}`);
 
     // formData.get('first_name');
     // formData.get('last_name');

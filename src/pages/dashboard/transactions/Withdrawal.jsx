@@ -1,6 +1,6 @@
 import { ClickAwayListener } from '@mui/material';
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 // import { Cookies } from 'react-cookie';
 import { toast } from 'react-toastify';
 import useSWR from 'swr';
@@ -13,16 +13,123 @@ import LeftMoveIcon from '../../../components/utils/icons/LeftMoveIcon';
 const Withdrawal = () => {
   const [openModel, setOpenModel] = useState(false);
   const [showMobileTable, setShowMobileTable] = useState(false);
-  const { data: withdraws } = useSWR(`/withdraw/`);
+
   const navigate = useNavigate();
   const [wallet, setWallet] = useState('');
-  const [amount, setAmount] = useState('');
+  const [amount, setAmount] = useState(0);
   const [walletAddress, setWalletAdress] = useState('');
-  const [usdtAmount, setUsdtAmount] = useState(6);
+  const [usdtAmount, setUsdtAmount] = useState(0);
+  const [convertWallet, setconvertWallet] = useState('');
+  const { data: withdraws } = useSWR(`/withdraw/`);
   const { data: user } = useSWR(`/user/`);
-  console.log('User', user);
+  // console.log('User', user);
+
+  const newWallet = ['tether', 'litecoin', 'bitcoin', 'ripple', 'ethereum'];
 
   const walletType = ['USDT', 'LTC', 'BTC', 'XRP', 'ETH'];
+
+  useEffect(() => {
+    if (wallet == walletType[0]) {
+      setconvertWallet(newWallet[0]);
+    } else if (wallet == walletType[1]) {
+      setconvertWallet(newWallet[1]);
+    } else if (wallet == walletType[2]) {
+      setconvertWallet(newWallet[2]);
+    } else if (wallet == walletType[3]) {
+      setconvertWallet(newWallet[3]);
+    } else if (wallet == walletType[4]) {
+      setconvertWallet(newWallet[4]);
+    }
+  }, [wallet]);
+
+  // console.log('SET WALLET', convertWallet);
+
+  //   these are the coins will need to pass depending on the coin you selected [litecoin,ripple,ethereum,bitcoin,tether]
+
+  // Function to convert a coin amount to USD using CoinGecko API
+
+  // Function to convert USD amount to a coin equivalent
+  // async function convertToCoin(coin, usdAmount) {
+  //   // First convert USD to BTC to use existing 'convertToUSD' function
+  //   const btcEquivalent = await convertToUSD(coin, usdAmount);
+
+  //   // Extract BTC amount from the formatted string
+  //   const btcAmount = parseFloat(btcEquivalent.split(' ')[0]);
+
+  //   // Calculate coin equivalent based on the USD price of the coin
+  //   const url = `https://api.coingecko.com/api/v3/simple/price?ids=${coin}&vs_currencies=usd`;
+  //   const response = await fetch(url);
+  //   const data = await response.json();
+
+  //   // Check if coin exists in the data
+  //   if (!data[coin]) {
+  //     throw new Error(`Coin ${coin} not found in API response`);
+  //   }
+  //   // console.log(data);
+  //   const price = data[coin].usd; // Get USD price per coin
+  //   const coinEquivalent = usdAmount / price; // Calculate coin equivalent
+
+  //   return `${coinEquivalent.toFixed(8)} ${coin}`; // Return formatted coin amount with 8 decimal places
+  // }
+
+  // async function convertCoinToCoin(fromCoin, toCoin, amount) {
+  //   const url = `https://api.coingecko.com/api/v3/simple/price?ids=${fromCoin},${toCoin}&vs_currencies=usd`;
+  //   const response = await fetch(url);
+  //   const data = await response.json();
+  //   console.log(data);
+  //   // Check if coins exist in the data
+  //   if (!data[fromCoin] || !data[toCoin]) {
+  //     throw new Error(
+  //       `Coins '${fromCoin}' or '${toCoin}' not found in API response`
+  //     );
+  //   }
+
+  // Get USD prices per coin
+  // const fromCoinPrice = data[fromCoin].usd;
+  // const toCoinPrice = data[toCoin].usd;
+
+  // Calculate conversion rate (toCoin price per 1 unit of fromCoin)
+  //   const conversionRate = toCoinPrice / fromCoinPrice;
+
+  //   // Calculate equivalent amount in the target coin
+  //   const targetAmount = amount * conversionRate;
+
+  //   return `${targetAmount.toFixed(8)} ${toCoin}`; // Return formatted target coin amount with 8 decimal places
+  // }
+  // Example usage
+  // (async () => {
+  //   try {
+  //     const usdEquivalent = await convertToUSD('tether', 1);
+  //     console.log(usdEquivalent); // Output: 1999250.00 USD
+
+  //     const btcEquivalent = await convertToCoin('tether', 1000);
+  //     console.log(btcEquivalent);
+  //   } catch (error) {
+  //     console.error(error.message);
+  //   }
+  // })();
+
+  useEffect(() => {
+    const convertToUSD = async (coin, amount) => {
+      const url = `https://api.coingecko.com/api/v3/simple/price?ids=${coin}&vs_currencies=usd`;
+      const { data } = await axios.get(url);
+
+      // Check if coin exists in the data
+      if (!data[coin]) {
+        throw new Error(`Coin ${coin} not found in API response`);
+      }
+
+      const price = await data[coin].usd; // Get USD price per coin
+      console.log('Coin Data', price, data);
+      const usdEquivalent = amount * price; // Calculate USD equivalent
+
+      return usdEquivalent; // Return formatted USD amount
+    };
+
+    let converted = convertToUSD(convertWallet, amount);
+    console.log('CONVERTED', converted, convertWallet);
+    setUsdtAmount(converted);
+  }, [convertWallet]);
 
   let userData = {
     amount,
@@ -31,7 +138,7 @@ const Withdrawal = () => {
     usdt_amount: usdtAmount,
   };
 
-  console.log(userData);
+  console.log(`User Data`, userData);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -132,7 +239,7 @@ const Withdrawal = () => {
             <div className="md:hidden flex flex-col md:w-[50%] mb-12 md:mb-0">
               <label>Withdrawal amount</label>
               <input
-                value={amount}
+                value={parseInt(amount)}
                 onChange={(e) => setAmount(e.target.value)}
                 type="text"
                 className="rounded-lg px-6 border-2 py-4"
@@ -156,7 +263,7 @@ const Withdrawal = () => {
             <div className="hidden md:flex flex-col md:w-[50%] mb-12 md:mb-0">
               <label>Withdrawal amount</label>
               <input
-                value={amount}
+                value={parseInt(amount)}
                 onChange={(e) => setAmount(e.target.value)}
                 type="text"
                 className="rounded-lg px-6 border-2 py-4"
