@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; // Import Link from React Router
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom'; // Import Link from React Router
 import HomeIcon from '../../../../assets/icons/dashboard/HomeIcon';
 import InvestmentIcon from '../../../../assets/icons/dashboard/InvestmentIcon';
 import PlantIcon from '../../../../assets/icons/dashboard/PlantIcon';
 import SettingsIcon from '../../../../assets/icons/dashboard/SettingsIcon';
 import TransactionIcon from '../../../../assets/icons/dashboard/TransactionIcon';
+import { useAuth } from '../../../../context/AuthCOntext';
 
 const DashboardSidebar = () => {
   const [activeIcon, setActiveIcon] = useState(null);
+
+
 
   const icons = [
     { icon: <HomeIcon />, id: 'home', path: '' },

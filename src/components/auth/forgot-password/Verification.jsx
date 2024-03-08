@@ -9,6 +9,8 @@ import { scrollToTop } from '../../../actions/utils';
 import { handleGenericError } from '../../../config/mixin';
 import { setOtp } from '../../../store/auth_reducer';
 import Button from '../../utils/reusables/Button';
+import { MdOutlineArrowBack } from 'react-icons/md';
+import { toast } from 'react-toastify';
 
 const Verification = ({ setForgotPasswordComponent }) => {
   const [state, setState] = useState({ otp: '' });
@@ -37,28 +39,6 @@ const Verification = ({ setForgotPasswordComponent }) => {
       };
       dispatch(setOtp(state?.otp));
       setForgotPasswordComponent(2);
-
-      //   try {
-      //     setIsLoading(true);
-      //     await axios.post('auth/verify-email/', data);
-      //     setIsLoading(false);
-      //     toast.success('Your account has been verified', {
-      //       position: 'top-right',
-      //       autoClose: 5000,
-      //       hideProgressBar: true,
-      //     });
-      //     setForgotPasswordComponent(2);
-      //   } catch (error) {
-      //     setIsLoading(false);
-      //     const err = handleGenericError(error);
-      //     setError(err);
-      //     toast.error(err, {
-      //       position: 'top-right',
-      //       autoClose: 5000,
-      //       hideProgressBar: true,
-      //     });
-      //     console.log(err);
-      //   }
     } else {
       setError('Input field cannot be empty');
     }
@@ -67,11 +47,20 @@ const Verification = ({ setForgotPasswordComponent }) => {
   const resendOtp = async () => {
     setResendingOtp(true);
     try {
-      await axios.post('user/auth/password-reset/', {
-        email: currentUserEmail.email,
-      });
+      await axios
+        .post('user/auth/password-reset/', {
+          email: currentUserEmail.email,
+        })
+        .then((res) => {
+          setResendingOtp(false);
 
-      setSuccess('We have resent a code to your email');
+          console.log(res);
+          toast.success('We have resent a code to your email', {
+            position: 'top-right',
+            autoClose: 5000,
+            hideProgressBar: true,
+          });
+        });
 
       setResendingOtp(false);
     } catch (error) {
@@ -88,7 +77,7 @@ const Verification = ({ setForgotPasswordComponent }) => {
     <div className="w-[100%] max-[640px]:flex-1  flex flex-col justify-center gap-y-12 p-5 lg:p-14 h-[50vh] lg:h-[100vh]">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="w-[100%] max-[640px]:flex-1 flex flex-col justify-around p-5 lg:p-14 h-[50vh] lg:h-[90vh]"
+        className="w-[100%]  flex flex-col justify-around p-5 lg:p-14 gap-7"
       >
         <div>
           <p className="text-3xl font-semibold">Email Verification</p>
@@ -142,7 +131,7 @@ const Verification = ({ setForgotPasswordComponent }) => {
               >
                 {resendingOtp ? (
                   <>
-                    <CircularProgress size={18} style={{ color: '#fff' }} />
+                    <CircularProgress size={18} style={{ color: '#8E0789' }} />
                   </>
                 ) : (
                   'Resend Otp '
@@ -169,12 +158,12 @@ const Verification = ({ setForgotPasswordComponent }) => {
           </Button>
         </div>
       </form>
-
       <div
-        className="flex items-center justify-start w-full gap-5 text-[#8E0789]"
+        className="flex items-center justify-start w-full gap-5 text-[#8E0789] "
         onClick={() => navigate(-1)}
       >
-        <h2>Back</h2>
+        <MdOutlineArrowBack />
+        <h2 className="font-bold">Back</h2>
       </div>
     </div>
   );

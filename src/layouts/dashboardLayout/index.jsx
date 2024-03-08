@@ -9,6 +9,8 @@ import InvestmentIcon from '../../assets/icons/dashboard/InvestmentIcon';
 import PlantIcon from '../../assets/icons/dashboard/PlantIcon';
 import SettingsIcon from '../../assets/icons/dashboard/SettingsIcon';
 import TransactionIcon from '../../assets/icons/dashboard/TransactionIcon';
+// import { AuthProvider } from '../../context/AuthCOntext';
+import useAuthentication from '../../hooks/useAuthentication';
 import DashboardSidebar from './components/Sidebar';
 
 const options = ['Withdraw', 'Deposit', 'Transfer'];
@@ -21,6 +23,12 @@ const DashboardLayout = () => {
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
   };
+  const isLoggedIn = useAuthentication();
+  console.log(isLoggedIn);
+  if (!isLoggedIn) {
+    return navigate('/login');
+  }
+
   const icons = [
     { icon: <HomeIcon />, name: 'Home', path: '' },
     { icon: <InvestmentIcon />, name: 'Investment Packages', path: 'kyc' },
@@ -48,7 +56,7 @@ const DashboardLayout = () => {
               <MenuIcon className="text-black" fontSize="large" />
             </button>
           </div>
-          <div className="pt-4 hidden lg:flex">
+          <div className="pt-4 hidden lg:flex cursor-pointer">
             <img src={logo} alt="" className="bg-white p-2 w-14 h-14" />
           </div>
           <DashboardSidebar />
@@ -77,7 +85,8 @@ const DashboardLayout = () => {
               <img
                 src={profilepic}
                 alt=""
-                className="w-14 h-14 rounded-full object-contain"
+                className="w-14 h-14 rounded-full object-contain cursor-pointer"
+                onClick={() => navigate('/dashboard/profile')}
               />
             </div>
           </div>

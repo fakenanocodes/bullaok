@@ -22,7 +22,7 @@ const InvestmentPlan = () => {
         />
         <span className="font-semibold text-lg">CRYPTO CURRENCY</span>
       </div>
-      <div className="p-8 space-x-5 flex justify-center items-center">
+      <div className="p-8 xl:space-x-5 space-y-9 xl:space-y-0 flex xl:flex-row flex-col justify-center items-center">
         {data?.map((plan, index) => (
           <InvestmentPlanCard plan={plan} key={index} />
         ))}

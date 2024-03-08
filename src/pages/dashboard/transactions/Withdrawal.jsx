@@ -7,14 +7,14 @@ import useSWR from 'swr';
 import DollaIcon from '../../../components/utils/icons/DollaIcon';
 import WithdrawIcon from '../../../components/utils/icons/WithdrawIcon';
 
+import { useNavigate } from 'react-router-dom';
 import LeftMoveIcon from '../../../components/utils/icons/LeftMoveIcon';
 
 const Withdrawal = () => {
   const [openModel, setOpenModel] = useState(false);
   const [showMobileTable, setShowMobileTable] = useState(false);
   const { data: withdraws } = useSWR(`/withdraw/`);
-  console.log('WITHDRAW ==> ', withdraws);
-
+  const navigate = useNavigate();
   const [wallet, setWallet] = useState('');
   const [amount, setAmount] = useState('');
   const [walletAddress, setWalletAdress] = useState('');
@@ -53,7 +53,7 @@ const Withdrawal = () => {
   return (
     <div className=" h-[100%] no-scrollbar bg-white p-4 text-gray-700 overflow-scroll relative">
       <div className=" text-2xl font-bold my-3 mb-10 grid grid-cols-3 gap-12 items-center ">
-        <div className="md:hidden ">
+        <div className="md:hidden cursor-pointer" onClick={() => navigate(-1)}>
           <LeftMoveIcon />
         </div>
         Withdrawal

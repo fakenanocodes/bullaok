@@ -1,72 +1,25 @@
-import { ClickAwayListener } from '@mui/material';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 // import { Cookies } from 'react-cookie';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import useSWR from 'swr';
-import CancelIcon from '../../../components/utils/icons/CancelIcon';
+import DepositModal from '../../../components/modal/DepositModal';
 import DepositIcon from '../../../components/utils/icons/DepositIcon';
 import LeftMoveIcon from '../../../components/utils/icons/LeftMoveIcon';
 
-let trans = [
-  {
-    Date: '10-02-2024 12:38:42',
-    Amount: '200.00',
-    Email: 'helenmaike@gmail.com',
-    Asset: '$',
-    Status: 'Succeed',
-  },
-  {
-    Date: '10-02-2024 12:38:42',
-    Amount: '200.00',
-    Email: 'ndubes@gmail.com',
-    Asset: '$',
-    Status: 'Pending...',
-  },
-  {
-    Date: '10-02-2024 12:38:42',
-    Amount: '200.00',
-    Email: 'bulloakfoxfinance@gmail.com',
-    Asset: '$',
-    Status: 'Failed',
-  },
-  {
-    Date: '10-02-2024 12:38:42',
-    Amount: '200.00',
-    Email: 'helenmaike@gmail.com',
-    Asset: '$',
-    Status: 'Succeed',
-  },
-  {
-    Date: '10-02-2024 12:38:42',
-    Amount: '200.00',
-    Email: 'ndubes@gmail.com',
-    Asset: '$',
-    Status: 'Pending...',
-  },
-  {
-    Date: '10-02-2024 12:38:42',
-    Amount: '200.00',
-    Email: 'bulloakfoxfinance@gmail.com',
-    Asset: '$',
-    Status: 'Failed',
-  },
-];
-
 const Deposit = () => {
   const [openModel, setOpenModel] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [showMobileTable, setShowMobileTable] = useState(false);
   const [wallet, setWallet] = useState('');
   const [amount, setAmount] = useState('');
   const [selectedCoin, setSelectedCoin] = useState('');
-  const [walletAddress, setWalletAdress] = useState('');
   const [walletTypes, setWalletTypes] = useState('');
   const [usdtAmount, setUsdtAmount] = useState(4);
   const { data: deposits } = useSWR(`/deposit/`);
   const { data: depositWallet } = useSWR('/walletaddress/');
-  console.log('DEPOSIT', deposits);
-  console.log('DEPOSIT WALLET', depositWallet);
-
+  const navigate = useNavigate();
   const walletType = ['litecoin', 'ripple', 'ethereum', 'bitcoin', 'tether'];
 
   let walletMock = {
@@ -166,20 +119,7 @@ const Deposit = () => {
 
     return `${targetAmount.toFixed(8)} ${toCoin}`; // Return formatted target coin amount with 8 decimal places
   }
-  // Example usage
-  // (async () => {
-  //   try {
-  //     const usdEquivalent = await convertToUSD('tether', 1);
-  //     console.log(usdEquivalent); // Output: 1999250.00 USD
 
-  //     const btcEquivalent = await convertToCoin('tether', 1000);
-  //     console.log(btcEquivalent);
-  //   } catch (error) {
-  //     console.error(error.message);
-  //   }
-  // })();
-
-  //items to send
   let userData = {
     amount,
     wallet_type: walletTypes || 'USDT',
@@ -191,14 +131,17 @@ const Deposit = () => {
   console.log(userData);
 
   const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
     try {
       const response = await axios.post('/deposit/', userData);
       console.log('RESPONSE', response.data);
+      setLoading(false);
       toast.success('success');
       setOpenModel(false);
       reset();
     } catch (error) {
+      setLoading(false);
       console.log(error);
     }
   };
@@ -206,7 +149,7 @@ const Deposit = () => {
   return (
     <div className=" h-[100%] no-scrollbar bg-white p-4 text-gray-700 overflow-scroll relative">
       <div className=" text-2xl font-bold my-3 mb-10 grid grid-cols-3 gap-12 items-center ">
-        <div className="md:hidden ">
+        <div className="md:hidden cursor-pointer " onClick={() => navigate(-1)}>
           <LeftMoveIcon />
         </div>
         Deposit
@@ -222,16 +165,6 @@ const Deposit = () => {
                 type="text"
                 className="rounded-lg px-6 border-2 py-4"
               >
-                {/* const walletType = ['USDT', 'LTC', 'BTC', 'XRP', 'ETH']; */}
-                {/* {walletType.map((type, idx) => (
-                  <option
-                    key={idx}
-                    value={type}
-                    className="cursor-pointer flex gap-3"
-                  >
-                    {type}
-                  </option>
-                ))} */}
                 <option value={walletMock.usdt_address}>USDT</option>
                 <option value={walletMock.litecoin_address}>LTC</option>
                 <option value={walletMock.bitcoin_address}>BTC</option>
@@ -239,15 +172,6 @@ const Deposit = () => {
                 <option value={walletMock.etherum_address}>ETH</option>
               </select>
             </div>
-            {/* <div className="flex flex-col md:w-[50%]">
-              <label>Asset destination</label>
-              <input
-                type="text"
-                value={usdtAmount}
-                onChange={(e) => setUsdtAmount(e.target.value)}
-                className="rounded-lg px-6 border-2 py-4"
-              />
-            </div> */}
           </div>
           <div className="hidden md:w-[48%] items-center gap-5 relative md:grid grid-flow-col ">
             <div className="w-auto bg-black h-[1.3px] col-span-4 "></div>
@@ -386,61 +310,13 @@ const Deposit = () => {
         </div>
       </div>
       {openModel && (
-        <div className=" fixed top-0 left-0 w-full h-full flex  justify-center items-center bg-[#000000b3]">
-          <ClickAwayListener onClickAway={() => setOpenModel(false)}>
-            <div
-              onSubmit={handleSubmit}
-              className="bg-white h-3/5 w-[90%] md:w-3/5 max-w-[500px] p-4 my-6 relative"
-            >
-              <div className="flex justify-between">
-                <p className="text-lg text-gray-600 font-semibold">Deposit</p>
-                <div
-                  className="cursor-pointer"
-                  onClick={() => setOpenModel(false)}
-                >
-                  <CancelIcon />
-                </div>
-              </div>
-              <div className="py-5">
-                <label htmlFor="asset">Asset</label>
-                <div>
-                  {/* <DollaIcon /> */}
-                  <input
-                    value={selectedCoin || 'USDT'}
-                    placeholder="USDT"
-                    className="border-2 w-full rounded-md p-2 px-4"
-                    id="asset"
-                  />
-                </div>
-              </div>
-              <div>
-                <label htmlFor="amount">Amount</label>
-                <div className="">
-                  <input
-                    value={amount}
-                    className="mb-32 w-full border-2 p-2 px-4 rounded-md"
-                    placeholder="0.00"
-                    id="amount"
-                  />
-                </div>
-              </div>
-              <div className="flex gap-5 absolute right-4">
-                <button
-                  className="p-2 px-4 rounded-md border"
-                  onClick={() => setOpenModel(false)}
-                >
-                  Cancel
-                </button>
-                <button
-                  onClick={handleSubmit}
-                  className="bg-[#352F84] text-white p-2 px-4 rounded-md"
-                >
-                  Confirm deposit
-                </button>
-              </div>
-            </div>
-          </ClickAwayListener>
-        </div>
+        <DepositModal
+          amount={amount}
+          loading={loading}
+          selectedCoin={selectedCoin}
+          setOpenModel={setOpenModel}
+          handleSubmit={handleSubmit}
+        />
       )}
     </div>
   );

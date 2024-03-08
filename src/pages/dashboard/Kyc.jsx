@@ -2,7 +2,7 @@ import IdVerification from "../../components/kycPages/IdVerification";
 import Personalinfo from "../../components/kycPages/Personalinfo";
 import Selfie from "../../components/kycPages/Selfie";
 import SuccessPage from "../../components/kycPages/SuccessPage";
-import KycPreview from "../../components/kycPages/kycPreview";
+import KycPreview from '../../components/kycPages/KycPreview'
 import { useState,createContext } from "react";
 
 export const KycContext = createContext()

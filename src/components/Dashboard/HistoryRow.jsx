@@ -6,7 +6,7 @@ import formatDateWithSuffix from '../../hooks/useDateFormatter';
 export default function HistoryRow({ colors, idx, item }) {
   const originalDate = new Date(item?.created);
   const formattedDate = formatDateWithSuffix(originalDate);
-
+  console.log(item);
   return (
     <div
       key={idx}
@@ -14,10 +14,11 @@ export default function HistoryRow({ colors, idx, item }) {
     >
       <span className="flex items-center gap-2">
         <span className="bg-white w-6 h-6 flex justify-center items-center rounded-full">
-        <FiberManualRecordIcon style={{ color: colors[idx], borderRadius: '50%' }} />
-
+          <FiberManualRecordIcon
+            style={{ color: colors[idx], borderRadius: '50%' }}
+          />
         </span>
-        {item?.name}
+        {item?.investmentplan?.name}
       </span>
       <span>{item?.detail}</span>
       <span>{formattedDate}</span>

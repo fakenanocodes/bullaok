@@ -18,7 +18,12 @@
   .gradient-div {
     width: 100%; /* Set the width as per your requirement */
     height: 100%; /* Set the height as per your requirement */
-    background: linear-gradient(90deg, #41073f 0%, #8e0789 100%);
+    background: linear-gradient(180deg, #41073f 20%, #8e0789 100%);
+  }
+  .gradient-referral {
+    width: 100%; /* Set the width as per your requirement */
+    height: 100%; /* Set the height as per your requirement */
+    background: linear-gradient(90deg, #41073f);
   }
   .no-number-arrows::-webkit-outer-spin-button,
   .no-number-arrows::-webkit-inner-spin-button {

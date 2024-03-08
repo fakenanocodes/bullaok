@@ -5,7 +5,7 @@ export const authSlice = createSlice({
   initialState: {
     currentSignupEmail: null,
     userData: {},
-    otp:null
+    otp: null,
   },
 
   reducers: {
@@ -22,10 +22,6 @@ export const authSlice = createSlice({
   },
 });
 
-export const {
-  setCurrentSignupEmail,
-  setOtp,
-  setUserData,
-} = authSlice.actions;
+export const { setCurrentSignupEmail, setOtp, setUserData } = authSlice.actions;
 
 export default authSlice.reducer;

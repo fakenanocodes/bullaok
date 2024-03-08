@@ -10,6 +10,8 @@ import { scrollToTop } from '../../../actions/utils';
 import { handleGenericError } from '../../../config/mixin';
 import Button from '../../utils/reusables/Button';
 import InputComponent from '../../utils/reusables/InputComponent';
+import { toast } from 'react-toastify';
+import { MdOutlineArrowBack } from 'react-icons/md';
 
 const schema = yup.object().shape({
   password: yup.string().required('Password field cannot be empty'),
@@ -48,10 +50,17 @@ const ResetPasswordForm = ({ setSignupComponent }) => {
           '/user/auth/password-confirmation/',
           apiData
         );
-        console.log(response);
+        toast.success('Password changed successfully', {
+          position: 'top-right',
+          autoClose:4000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
         setIsLoading(false);
+
         navigate('/login');
-        //   setSignupComponent(1);
         reset();
       } catch (err) {
         setIsLoading(false);
@@ -68,7 +77,7 @@ const ResetPasswordForm = ({ setSignupComponent }) => {
   }, 20000);
   return (
     <form
-      className="w-[100%] max-[640px]:flex-1  flex flex-col justify-around p-5 lg:p-14 h-[50vh] lg:h-[90vh]"
+      className="w-[100%] max-[640px]:flex-1  flex flex-col gap-9 justify-around p-5 lg:p-14"
       onSubmit={handleSubmit(onSubmit)}
     >
       <p className="laviossa text-3xl font-semibold">Reset your password</p>
@@ -115,6 +124,13 @@ const ResetPasswordForm = ({ setSignupComponent }) => {
             Sign in
           </span>{' '}
         </p>
+      </div>
+      <div
+        className="flex items-center justify-start w-full gap-5 text-[#8E0789] "
+        onClick={() => navigate(-1)}
+      >
+        <MdOutlineArrowBack />
+        <h2 className="font-bold">Back</h2>
       </div>
     </form>
   );
