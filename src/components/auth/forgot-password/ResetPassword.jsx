@@ -10,6 +10,7 @@ import { scrollToTop } from '../../../actions/utils';
 import { handleGenericError } from '../../../config/mixin';
 import Button from '../../utils/reusables/Button';
 import InputComponent from '../../utils/reusables/InputComponent';
+import { toast } from 'react-toastify';
 
 const schema = yup.object().shape({
   password: yup.string().required('Password field cannot be empty'),
@@ -48,8 +49,12 @@ const ResetPasswordForm = ({ setSignupComponent }) => {
           '/user/auth/password-confirmation/',
           apiData
         );
-        console.log(response);
+        toast.success("Password changed successfully", {
+            position:"top-right",
+            
+        })
         setIsLoading(false);
+
         navigate('/login');
         //   setSignupComponent(1);
         reset();
