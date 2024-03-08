@@ -48,7 +48,6 @@ const descriptionArray = [
     text: 'You receive reward points for every successful referral',
     icon: <PiMedalMilitaryFill />,
   },
-  // { text: 'Share your code', icon: <FaShare /> },
 ];
 
 const boxesData = [
@@ -69,8 +68,17 @@ export default function ReferralComponent() {
       <div className="flex items-center justify-around xl:flex-row flex-col ">
         <img src={images.referral} alt="" className="xl:w-2/6 w-full" />
         <div className="flex flex-col xl:w-2/5 w-full p-4 gap-8">
-          <div className="bg-[#41073F] w-full  px-6 p-3">
+          <div className="gradient-referral w-full relative px-6 p-3 flex justify-between items-center">
             <CustomizedProgressBars />
+            <div className="absolute top-0 rounded-lg left-[100px] h-12 w-20 bg-[#FFB803] text-[#41073F] flex font-bold text-lg items-center font-bold justify-center">
+              $20.00
+            </div>
+            <div className="absolute top-0 rounded-lg left-[300px] h-12 w-20 bg-[#FFB803] flex items-center font-bold justify-center">
+              $40.00
+            </div>
+            <div className="absolute top-0 rounded-lg h-12 w-20  left-[500px] bg-[#FFB803] flex items-center font-bold justify-center">
+              $60.00
+            </div>
           </div>
           <button className="bg-[#FFB803] w-full xl:hidden block text-black text-xl rounded-xl p-4">
             Invite now

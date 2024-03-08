@@ -40,7 +40,7 @@ const InvestmentPackages = () => {
       <div className="p-10 space-y-5">
         <span className="font-bold text-lg">All Investments</span>
         <div className="flex gap-10 flex-wrap">
-          {data.length === 0 ? (
+          {data && data?.length === 0 ? (
             <>
               <DashboardEmptyContainer message="No investment packages found" />
             </>
@@ -51,6 +51,7 @@ const InvestmentPackages = () => {
                   label={investmentPackage?.name}
                   imgUrl={imageUrls[investmentPackage?.name]}
                   key={index}
+                  id={investmentPackage?.id}
                 />
               ))}
             </>
