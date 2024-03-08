@@ -68,11 +68,10 @@ const DashboardHome = () => {
               <input
                 type={showAmount ? 'text' : 'password'}
                 value="$ 1,474.91"
-                className="text-white text-5xl xl:w-2/5 w-full font-extrabold border-none bg-transparent focus:outline-none"
+                className="text-white text-5xl 2xl:w-2/6 xl:w-2/4  w-full font-extrabold border-none bg-transparent focus:outline-none"
                 readOnly
               />
-
-              <div className="shadow-xl xl:block hidden mt-auto shadow-[#8E0789]/50 flex items-center space-x-2 p-2 px-8 font-bold rounded-md shadow-[#8E0789] bg-[#8E0789]">
+              <div className="shadow-xl xl:block hidden  shadow-[#8E0789]/50 flex items-center space-x-2 p-2 px-8 font-bold rounded-md shadow-[#8E0789] bg-[#8E0789]">
                 <ArrowDropUpIcon className="text-[#52B570] bg-white rounded-full w-32 h-32" />
                 <span>25.69%</span>
               </div>

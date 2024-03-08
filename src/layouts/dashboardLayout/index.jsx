@@ -45,8 +45,6 @@ const DashboardLayout = () => {
     { icon: <SettingsIcon />, name: 'Settings', path: 'settings' },
   ];
   return (
-    // <AuthProvider>
-    // </AuthProvider>
     <div className="relative bg-custom-bg bg-opacity-20 bg-cover bg-center bg-no-repeat min-h-screen">
       {/** Layout */}
       <div className="text-white  lg:flex lg:flex-row flex flex-col lg:mr-10 w-full bg-opacity-95 min-h-screen">
@@ -58,7 +56,7 @@ const DashboardLayout = () => {
               <MenuIcon className="text-black" fontSize="large" />
             </button>
           </div>
-          <div className="pt-4 hidden lg:flex">
+          <div className="pt-4 hidden lg:flex cursor-pointer">
             <img src={logo} alt="" className="bg-white p-2 w-14 h-14" />
           </div>
           <DashboardSidebar />
@@ -87,7 +85,7 @@ const DashboardLayout = () => {
               <img
                 src={profilepic}
                 alt=""
-                className="w-14 h-14 rounded-full object-contain"
+                className="w-14 h-14 rounded-full object-contain cursor-pointer"
                 onClick={() => navigate('/dashboard/profile')}
               />
             </div>

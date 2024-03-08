@@ -16,7 +16,7 @@ export default function HistoryTableRow({ idx, item }) {
             style={{ color: colors[idx], borderRadius: '50%' }}
           />
         </span>
-        <span>{item?.name}</span>
+        <span>{item?.investmentplan?.name}</span>
       </td>
       <td className="py-4">{item?.detail}</td>
       <td className="py-4">{item?.amount}</td>
