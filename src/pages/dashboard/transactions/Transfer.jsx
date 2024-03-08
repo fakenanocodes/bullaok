@@ -85,10 +85,9 @@ const Transfer = () => {
       console.log('RESPONSE', response);
       toast.success('success');
       setOpenModel(false);
-      reset();
     } catch (error) {
-      console.log(error);
-      toast.error('failed, check your details and try again');
+      console.log('ERROR', error);
+      if (error) toast.error('failed, check your details and try again');
       setOpenModel(false);
     }
   };
@@ -164,7 +163,7 @@ const Transfer = () => {
               <input
                 value={emailAddress}
                 onChange={(e) => setEmailAdress(e.target.value)}
-                type="text"
+                type="email"
                 className="rounded-lg px-6 border-2 py-4"
                 placeholder="youremail@email.com"
               />
@@ -172,7 +171,7 @@ const Transfer = () => {
           </div>
           <div className="md:flex md:justify-between md:w-[48%] text-xl items-center">
             <div className=" text-red-600 font-semibold mb-28 md:mb-0">
-              You are transferring $0.00
+              You are transferring ${amount}
             </div>
             <button
               onClick={() => setOpenModel(true)}
