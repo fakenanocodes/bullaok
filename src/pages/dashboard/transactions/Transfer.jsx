@@ -9,50 +9,7 @@ import DollaIcon from '../../../components/utils/icons/DollaIcon';
 import LeftMoveIcon from '../../../components/utils/icons/LeftMoveIcon';
 import DirectArrowIcon from '../../../components/utils/icons/directArrowIcon';
 
-let trans = [
-  {
-    Date: '10-02-2024 12:38:42',
-    Amount: '200.00',
-    Email: 'helenmaike@gmail.com',
-    Asset: '$',
-    Status: 'Succeed',
-  },
-  {
-    Date: '10-02-2024 12:38:42',
-    Amount: '200.00',
-    Email: 'ndubes@gmail.com',
-    Asset: '$',
-    Status: 'Pending ...',
-  },
-  {
-    Date: '10-02-2024 12:38:42',
-    Amount: '200.00',
-    Email: 'bulloakfoxfinance@gmail.com',
-    Asset: '$',
-    Status: 'Failed',
-  },
-  {
-    Date: '10-02-2024 12:38:42',
-    Amount: '200.00',
-    Email: 'helenmaike@gmail.com',
-    Asset: '$',
-    Status: 'Succeed',
-  },
-  {
-    Date: '10-02-2024 12:38:42',
-    Amount: '200.00',
-    Email: 'ndubes@gmail.com',
-    Asset: '$',
-    Status: 'Pending ...',
-  },
-  {
-    Date: '10-02-2024 12:38:42',
-    Amount: '200.00',
-    Email: 'bulloakfoxfinance@gmail.com',
-    Asset: '$',
-    Status: 'Failed',
-  },
-];
+
 
 const Transfer = () => {
   const [openModel, setOpenModel] = useState(false);

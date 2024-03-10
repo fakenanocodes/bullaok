@@ -49,65 +49,65 @@ const Withdrawal = () => {
   // Function to convert a coin amount to USD using CoinGecko API
 
   // Function to convert USD amount to a coin equivalent
-  // async function convertToCoin(coin, usdAmount) {
-  //   // First convert USD to BTC to use existing 'convertToUSD' function
-  //   const btcEquivalent = await convertToUSD(coin, usdAmount);
+  async function convertToCoin(coin, usdAmount) {
+    // First convert USD to BTC to use existing 'convertToUSD' function
+    const btcEquivalent = await convertToUSD(coin, usdAmount);
 
-  //   // Extract BTC amount from the formatted string
-  //   const btcAmount = parseFloat(btcEquivalent.split(' ')[0]);
+    // Extract BTC amount from the formatted string
+    const btcAmount = parseFloat(btcEquivalent.split(' ')[0]);
 
-  //   // Calculate coin equivalent based on the USD price of the coin
-  //   const url = `https://api.coingecko.com/api/v3/simple/price?ids=${coin}&vs_currencies=usd`;
-  //   const response = await fetch(url);
-  //   const data = await response.json();
+    // Calculate coin equivalent based on the USD price of the coin
+    const url = `https://api.coingecko.com/api/v3/simple/price?ids=${coin}&vs_currencies=usd`;
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log(data);
+    // Check if coin exists in the data
+    if (!data[coin]) {
+      throw new Error(`Coin ${coin} not found in API response`);
+    }
+    // console.log(data);
+    const price = data[coin].usd; // Get USD price per coin
+    const coinEquivalent = usdAmount / price; // Calculate coin equivalent
 
-  //   // Check if coin exists in the data
-  //   if (!data[coin]) {
-  //     throw new Error(`Coin ${coin} not found in API response`);
-  //   }
-  //   // console.log(data);
-  //   const price = data[coin].usd; // Get USD price per coin
-  //   const coinEquivalent = usdAmount / price; // Calculate coin equivalent
+    return `${coinEquivalent.toFixed(8)} ${coin}`; // Return formatted coin amount with 8 decimal places
+  }
 
-  //   return `${coinEquivalent.toFixed(8)} ${coin}`; // Return formatted coin amount with 8 decimal places
-  // }
+  async function convertCoinToCoin(fromCoin, toCoin, amount) {
+    const url = `https://api.coingecko.com/api/v3/simple/price?ids=${fromCoin},${toCoin}&vs_currencies=usd`;
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log(data);
+    // Check if coins exist in the data
+    if (!data[fromCoin] || !data[toCoin]) {
+      throw new Error(
+        `Coins '${fromCoin}' or '${toCoin}' not found in API response`
+      );
+    }
 
-  // async function convertCoinToCoin(fromCoin, toCoin, amount) {
-  //   const url = `https://api.coingecko.com/api/v3/simple/price?ids=${fromCoin},${toCoin}&vs_currencies=usd`;
-  //   const response = await fetch(url);
-  //   const data = await response.json();
-  //   console.log(data);
-  //   // Check if coins exist in the data
-  //   if (!data[fromCoin] || !data[toCoin]) {
-  //     throw new Error(
-  //       `Coins '${fromCoin}' or '${toCoin}' not found in API response`
-  //     );
-  //   }
+    // Get USD prices per coin
+    const fromCoinPrice = data[fromCoin].usd;
+    const toCoinPrice = data[toCoin].usd;
 
-  // Get USD prices per coin
-  // const fromCoinPrice = data[fromCoin].usd;
-  // const toCoinPrice = data[toCoin].usd;
+    // Calculate conversion rate (toCoin price per 1 unit of fromCoin)
+    const conversionRate = toCoinPrice / fromCoinPrice;
 
-  // Calculate conversion rate (toCoin price per 1 unit of fromCoin)
-  //   const conversionRate = toCoinPrice / fromCoinPrice;
+    // Calculate equivalent amount in the target coin
+    const targetAmount = amount * conversionRate;
 
-  //   // Calculate equivalent amount in the target coin
-  //   const targetAmount = amount * conversionRate;
-
-  //   return `${targetAmount.toFixed(8)} ${toCoin}`; // Return formatted target coin amount with 8 decimal places
-  // }
+    return `${targetAmount.toFixed(8)} ${toCoin}`; // Return formatted target coin amount with 8 decimal places
+  }
   // Example usage
-  // (async () => {
-  //   try {
-  //     const usdEquivalent = await convertToUSD('tether', 1);
-  //     console.log(usdEquivalent); // Output: 1999250.00 USD
+  (async () => {
+    try {
+      const usdEquivalent = await convertToUSD('tether', 1);
+      console.log(usdEquivalent); // Output: 1999250.00 USD
 
-  //     const btcEquivalent = await convertToCoin('tether', 1000);
-  //     console.log(btcEquivalent);
-  //   } catch (error) {
-  //     console.error(error.message);
-  //   }
-  // })();
+      const btcEquivalent = await convertToCoin('tether', 1000);
+      console.log(btcEquivalent);
+    } catch (error) {
+      console.error(error.message);
+    }
+  })();
 
   useEffect(() => {
     const convertToUSD = async (coin, amount) => {
@@ -126,9 +126,18 @@ const Withdrawal = () => {
       return usdEquivalent; // Return formatted USD amount
     };
 
-    let converted = convertToUSD(convertWallet, amount);
-    console.log('CONVERTED', converted, convertWallet);
-    setUsdtAmount(converted);
+    const fetchData = async () => {
+      try {
+        let converted = await convertToUSD('tether', amount);
+        console.log('CONVERTED', converted, convertWallet);
+        setUsdtAmount(converted);
+      } catch (error) {
+        // Handle errors if needed
+        console.error('Error in fetchData:', error.message);
+      }
+    };
+
+    fetchData();
   }, [convertWallet]);
 
   let userData = {
