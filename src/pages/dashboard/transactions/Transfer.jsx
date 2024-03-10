@@ -9,51 +9,6 @@ import DollaIcon from '../../../components/utils/icons/DollaIcon';
 import LeftMoveIcon from '../../../components/utils/icons/LeftMoveIcon';
 import DirectArrowIcon from '../../../components/utils/icons/directArrowIcon';
 
-let trans = [
-  {
-    Date: '10-02-2024 12:38:42',
-    Amount: '200.00',
-    Email: 'helenmaike@gmail.com',
-    Asset: '$',
-    Status: 'Succeed',
-  },
-  {
-    Date: '10-02-2024 12:38:42',
-    Amount: '200.00',
-    Email: 'ndubes@gmail.com',
-    Asset: '$',
-    Status: 'Pending ...',
-  },
-  {
-    Date: '10-02-2024 12:38:42',
-    Amount: '200.00',
-    Email: 'bulloakfoxfinance@gmail.com',
-    Asset: '$',
-    Status: 'Failed',
-  },
-  {
-    Date: '10-02-2024 12:38:42',
-    Amount: '200.00',
-    Email: 'helenmaike@gmail.com',
-    Asset: '$',
-    Status: 'Succeed',
-  },
-  {
-    Date: '10-02-2024 12:38:42',
-    Amount: '200.00',
-    Email: 'ndubes@gmail.com',
-    Asset: '$',
-    Status: 'Pending ...',
-  },
-  {
-    Date: '10-02-2024 12:38:42',
-    Amount: '200.00',
-    Email: 'bulloakfoxfinance@gmail.com',
-    Asset: '$',
-    Status: 'Failed',
-  },
-];
-
 const Transfer = () => {
   const [openModel, setOpenModel] = useState(false);
   const [showMobileTable, setShowMobileTable] = useState(false);
@@ -92,9 +47,9 @@ const Transfer = () => {
   };
 
   return (
-    <div className=" h-[100%] bg-white no-scrollbar p-4 text-gray-700 overflow-scroll relative">
+    <div className=" h-[100%] bg-white no-scrollbar p-4 text-gray-700 relative overflow-y-scroll">
       <div className=" text-2xl font-bold my-3 mb-10 grid grid-cols-3 gap-12 items-center ">
-        <div className="md:hidden " onClick={() => navigate(-1)}>
+        <div className="md:hidden cursor-pointer " onClick={() => navigate(-1)}>
           <LeftMoveIcon />
         </div>
         Transfer
@@ -102,25 +57,6 @@ const Transfer = () => {
       <div>
         <div className="flex flex-col gap-10 pb-24">
           <div className="md:flex gap-10  font-semibold">
-            {/* <div className="flex flex-col md:w-[50%] mb-10 md:mb-0">
-              <label>Source wallet</label>
-              <select
-                value={wallet}
-                onChange={(e) => setWallet(e.target.value)}
-                type="text"
-                className="rounded-lg px-6 border-2 py-4"
-              >
-                {walletType.map((type, idx) => (
-                  <option
-                    key={idx}
-                    value={type}
-                    className="cursor-pointer flex gap-3"
-                  >
-                    {type}
-                  </option>
-                ))}
-              </select>
-            </div> */}
             <div className="flex flex-col md:w-full relative">
               <label>Asset</label>
               <div className="flex ">
@@ -149,7 +85,7 @@ const Transfer = () => {
               <input
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
-                type="text"
+                type="number"
                 className="rounded-lg px-6 border-2 py-4"
                 placeholder="0.00 $"
               />
@@ -170,7 +106,7 @@ const Transfer = () => {
           </div>
           <div className="md:flex md:justify-between md:w-[48%] text-xl items-center">
             <div className=" text-red-600 font-semibold mb-28 md:mb-0">
-              You are transferring ${amount}
+              You are transferring ${amount || '0.00'}
             </div>
             <button
               onClick={() => setOpenModel(true)}
@@ -195,12 +131,56 @@ const Transfer = () => {
           </div>
         </div>
       </div>
-      <div
-        className={` ${
-          showMobileTable ? `block` : `hidden`
-        } md:block border shadow-md`}
-      >
-        <div className="bg-[#8E0789] text-white p-3 md:text-2xl font-semibold">
+      {/* mobile table */}
+      <table className="w-[100%] overflow-x-scroll ">
+        <div
+          className={` ${
+            showMobileTable
+              ? `block border shadow-md -mx-4 md:hidden`
+              : `hidden`
+          }`}
+        >
+          <div className="bg-[#8E0789] text-white p-3 md:text-2xl font-semibold w-full ">
+            Transfer History
+          </div>
+          <tr className="text-sm ">
+            <td className="  bg-[#F9F9FA]  py-2 text-center p-5 border-r-8 border-white">
+              DATE
+            </td>
+            <td className="px-2 text-center bg-[#F9F9FA]  border-r-8 border-white ">
+              AMOUNT
+            </td>
+            <td className="px-2  text-center bg-[#F9F9FA]  border-r-8 border-white">
+              EMAIL&nbsp;ADDRESS
+            </td>
+            <td className="px-2  text-center bg-[#F9F9FA]  border-r-8 border-white">
+              ASSET
+            </td>
+            <td className="px-2  text-center bg-[#F9F9FA]  border-r-8 border-white">
+              STATUS
+            </td>
+          </tr>
+          {transfers?.map((transfer, idx) => (
+            <tr className="text-xs w-full">
+              <td className="font-bold py-3 md:py-5 ">
+                <div className="md:flex gap-2 text-center md:ml-10">
+                  <span>{transfer?.created?.split('T')[0]}</span>
+                  <p>{transfer?.created?.split('T')[1]?.split('.')[0]}</p>
+                </div>
+              </td>
+              <td className="px-2 text-center">{transfer?.usdt_amount}</td>
+              <td className="px-2 text-center">{transfer?.email}</td>
+              <td className="px-2 text-center">{'USDT'}</td>
+              <td className="px-2 text-center ">
+                {transfer?.usdt_amount ? 'Success' : 'Failed'}
+              </td>
+            </tr>
+          ))}
+        </div>
+      </table>
+
+      <div className={`hidden md:block border shadow-md`}>
+        <div className="bg-[#8E0789] text-white p-3 md:text-2xl font-semibold w-full">
           Transfer History
         </div>
         <div className="flex justify-between md:w-[90%] md:ml-10 text-sm ">
@@ -219,9 +199,6 @@ const Transfer = () => {
           <div className="m-2 p-2 md:px-10 bg-[#F9F9FA] shadow drop-shadow-sm">
             STATUS
           </div>
-          {/* <select className="m-2 md:p-2 bg-[rgb(249,249,250)] shadow drop-shadow-lg border-none px-7 hidden md:block">
-            <option className="">Sort</option>
-          </select> */}
         </div>
         <div>
           {transfers?.map((transfer, idx) => (
@@ -243,6 +220,7 @@ const Transfer = () => {
           ))}
         </div>
       </div>
+
       {openModel && (
         <div className=" fixed top-0 left-0 w-full h-full flex  justify-center items-center bg-[#000000b3]">
           <ClickAwayListener onClickAway={() => setOpenModel(false)}>

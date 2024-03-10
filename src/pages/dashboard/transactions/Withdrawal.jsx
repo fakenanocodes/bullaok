@@ -16,9 +16,9 @@ const Withdrawal = () => {
 
   const navigate = useNavigate();
   const [wallet, setWallet] = useState('');
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState('');
   const [walletAddress, setWalletAdress] = useState('');
-  const [usdtAmount, setUsdtAmount] = useState(0);
+  const [usdtAmount, setUsdtAmount] = useState('');
   const [convertWallet, setconvertWallet] = useState('');
   const { data: withdraws } = useSWR(`/withdraw/`);
   const { data: user } = useSWR(`/user/`);
@@ -49,65 +49,6 @@ const Withdrawal = () => {
   // Function to convert a coin amount to USD using CoinGecko API
 
   // Function to convert USD amount to a coin equivalent
-  // async function convertToCoin(coin, usdAmount) {
-  //   // First convert USD to BTC to use existing 'convertToUSD' function
-  //   const btcEquivalent = await convertToUSD(coin, usdAmount);
-
-  //   // Extract BTC amount from the formatted string
-  //   const btcAmount = parseFloat(btcEquivalent.split(' ')[0]);
-
-  //   // Calculate coin equivalent based on the USD price of the coin
-  //   const url = `https://api.coingecko.com/api/v3/simple/price?ids=${coin}&vs_currencies=usd`;
-  //   const response = await fetch(url);
-  //   const data = await response.json();
-
-  //   // Check if coin exists in the data
-  //   if (!data[coin]) {
-  //     throw new Error(`Coin ${coin} not found in API response`);
-  //   }
-  //   // console.log(data);
-  //   const price = data[coin].usd; // Get USD price per coin
-  //   const coinEquivalent = usdAmount / price; // Calculate coin equivalent
-
-  //   return `${coinEquivalent.toFixed(8)} ${coin}`; // Return formatted coin amount with 8 decimal places
-  // }
-
-  // async function convertCoinToCoin(fromCoin, toCoin, amount) {
-  //   const url = `https://api.coingecko.com/api/v3/simple/price?ids=${fromCoin},${toCoin}&vs_currencies=usd`;
-  //   const response = await fetch(url);
-  //   const data = await response.json();
-  //   console.log(data);
-  //   // Check if coins exist in the data
-  //   if (!data[fromCoin] || !data[toCoin]) {
-  //     throw new Error(
-  //       `Coins '${fromCoin}' or '${toCoin}' not found in API response`
-  //     );
-  //   }
-
-  // Get USD prices per coin
-  // const fromCoinPrice = data[fromCoin].usd;
-  // const toCoinPrice = data[toCoin].usd;
-
-  // Calculate conversion rate (toCoin price per 1 unit of fromCoin)
-  //   const conversionRate = toCoinPrice / fromCoinPrice;
-
-  //   // Calculate equivalent amount in the target coin
-  //   const targetAmount = amount * conversionRate;
-
-  //   return `${targetAmount.toFixed(8)} ${toCoin}`; // Return formatted target coin amount with 8 decimal places
-  // }
-  // Example usage
-  // (async () => {
-  //   try {
-  //     const usdEquivalent = await convertToUSD('tether', 1);
-  //     console.log(usdEquivalent); // Output: 1999250.00 USD
-
-  //     const btcEquivalent = await convertToCoin('tether', 1000);
-  //     console.log(btcEquivalent);
-  //   } catch (error) {
-  //     console.error(error.message);
-  //   }
-  // })();
 
   useEffect(() => {
     const convertToUSD = async (coin, amount) => {
@@ -178,23 +119,6 @@ const Withdrawal = () => {
               <div className="absolute top-10 left-3">
                 <DollaIcon />
               </div>
-
-              {/* <select
-                value={wallet}
-                onChange={(e) => setWallet(e.target.value)}
-                type="text"
-                className="rounded-lg px-6 border-2 py-4"
-              >
-                {walletType.map((type, idx) => (
-                  <option
-                    key={idx}
-                    value={type}
-                    className="cursor-pointer flex gap-3"
-                  >
-                    {type}
-                  </option>
-                ))}
-              </select> */}
             </div>
             <div className="flex flex-col md:w-[50%]">
               <label>Asset destination</label>
@@ -239,9 +163,9 @@ const Withdrawal = () => {
             <div className="md:hidden flex flex-col md:w-[50%] mb-12 md:mb-0">
               <label>Withdrawal amount</label>
               <input
-                value={parseInt(amount)}
+                value={amount}
                 onChange={(e) => setAmount(e.target.value)}
-                type="text"
+                type="number"
                 className="rounded-lg px-6 border-2 py-4"
                 placeholder="0.00 $"
               />
@@ -263,9 +187,9 @@ const Withdrawal = () => {
             <div className="hidden md:flex flex-col md:w-[50%] mb-12 md:mb-0">
               <label>Withdrawal amount</label>
               <input
-                value={parseInt(amount)}
+                value={amount}
                 onChange={(e) => setAmount(e.target.value)}
-                type="text"
+                type="number"
                 className="rounded-lg px-6 border-2 py-4"
                 placeholder="0.00 $"
               />
@@ -273,7 +197,7 @@ const Withdrawal = () => {
           </div>
           <div className="md:flex md:justify-between md:w-[48%] text-xl items-center">
             <div className=" text-red-600 font-semibold mb-28 md:mb-0">
-              You are withdrawing $0.00
+              You are withdrawing {amount || '0.00'}
             </div>
             <button
               onClick={() => setOpenModel(true)}
@@ -298,14 +222,68 @@ const Withdrawal = () => {
           </div>
         </div>
       </div>
-      <div
-        className={` ${
-          showMobileTable ? `block` : `hidden`
-        } md:block border shadow-md`}
-      >
+      {/* Mobile table */}
+      <table className="w-[100%] overflow-x-scroll">
+        <div
+          className={` ${
+            showMobileTable
+              ? `block border shadow-md -mx-4 md:hidden`
+              : `hidden`
+          }`}
+        >
+          <div className="bg-[#8E0789] text-white p-3 md:text-2xl font-semibold">
+            Withdrawal History
+          </div>
+          <thead>
+            <tr className="text-xs rounded-sm">
+              <td className="bg-[#F9F9FA] border-r-8 border-solid border-white px-6 py-2 text-center">
+                DATE
+              </td>
+              <td className="bg-[#F9F9FA] border-r-8 border-solid border-white px-6 py-2 text-center">
+                AMOUNT
+              </td>
+              <td className="bg-[#F9F9FA] border-r-8 border-solid border-white  py-2 text-center ">
+                WALLET
+              </td>
+              <td className="bg-[#F9F9FA] border-r-8 border-solid border-white px-6 py-2 text-center">
+                ASSET
+              </td>
+              <td className="bg-[#F9F9FA] border-r-8 border-solid border-white px-6 py-2 text-center">
+                STATUS
+              </td>
+            </tr>
+          </thead>
+          <tbody>
+            {withdraws?.[0].map((withdraw, idx) => (
+              <tr className="text-xs">
+                <td className="pl-2 font-bold py-3">
+                  <p>20-04-2024</p>
+                  <p>10:26</p>
+                </td>
+                <td className="text-center">{withdraw?.amount}</td>
+                <td className="text-center ">
+                  <div className="w-[100px] text-ellipsis overflow-hidden whitespace-nowrap">
+                    {withdraw?.wallet_address}
+                  </div>
+                </td>
+                <td className="text-center">{withdraw?.wallet_type}</td>
+                <td className="text-center">
+                  {withdraw?.verified
+                    ? 'Success'
+                    : !withdraw?.verified
+                    ? 'Pending...'
+                    : 'Failed'}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </div>
+      </table>
+      <div className={`hidden md:block border shadow-md`}>
         <div className="bg-[#8E0789] text-white p-3 md:text-2xl font-semibold">
           Withdrawal History
         </div>
+
         <div className="flex justify-between md:w-[90%] md:ml-10 text-sm ">
           <div className="m-2 p-2  md:px-10 bg-[#F9F9FA] shadow drop-shadow-sm ">
             DATE

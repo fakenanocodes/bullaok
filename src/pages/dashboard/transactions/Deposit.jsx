@@ -228,7 +228,7 @@ const Deposit = () => {
           </div>
           <div className="md:flex md:justify-between md:w-[48%] text-xl items-center">
             <div className=" text-red-600 font-semibold mb-28 md:mb-0">
-              You are depositing $0.00
+              You are depositing ${amount || '0.00'}
             </div>
             <button
               onClick={() => setOpenModel(true)}
@@ -253,6 +253,26 @@ const Deposit = () => {
           </div>
         </div>
       </div>
+      <table>
+        <thead>
+          <td>DATE</td>
+          <td>AMOUNT</td>
+          <td>EMAIL&nbsp;ADDRESS</td>
+          <td>ASSET</td>
+          <td>STATUS</td>
+        </thead>
+        <tbody>
+          {deposits?.map((deposit, idex) => (
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
       <div
         className={` ${
           showMobileTable ? `block` : `hidden`
