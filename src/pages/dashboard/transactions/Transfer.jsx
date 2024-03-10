@@ -9,50 +9,7 @@ import DollaIcon from '../../../components/utils/icons/DollaIcon';
 import LeftMoveIcon from '../../../components/utils/icons/LeftMoveIcon';
 import DirectArrowIcon from '../../../components/utils/icons/directArrowIcon';
 
-let trans = [
-  {
-    Date: '10-02-2024 12:38:42',
-    Amount: '200.00',
-    Email: 'helenmaike@gmail.com',
-    Asset: '$',
-    Status: 'Succeed',
-  },
-  {
-    Date: '10-02-2024 12:38:42',
-    Amount: '200.00',
-    Email: 'ndubes@gmail.com',
-    Asset: '$',
-    Status: 'Pending ...',
-  },
-  {
-    Date: '10-02-2024 12:38:42',
-    Amount: '200.00',
-    Email: 'bulloakfoxfinance@gmail.com',
-    Asset: '$',
-    Status: 'Failed',
-  },
-  {
-    Date: '10-02-2024 12:38:42',
-    Amount: '200.00',
-    Email: 'helenmaike@gmail.com',
-    Asset: '$',
-    Status: 'Succeed',
-  },
-  {
-    Date: '10-02-2024 12:38:42',
-    Amount: '200.00',
-    Email: 'ndubes@gmail.com',
-    Asset: '$',
-    Status: 'Pending ...',
-  },
-  {
-    Date: '10-02-2024 12:38:42',
-    Amount: '200.00',
-    Email: 'bulloakfoxfinance@gmail.com',
-    Asset: '$',
-    Status: 'Failed',
-  },
-];
+
 
 const Transfer = () => {
   const [openModel, setOpenModel] = useState(false);
@@ -84,10 +41,9 @@ const Transfer = () => {
       console.log('RESPONSE', response);
       toast.success('success');
       setOpenModel(false);
-      reset();
     } catch (error) {
-      console.log(error);
-      toast.error('failed, check your details and try again');
+      console.log('ERROR', error);
+      if (error) toast.error('failed, check your details and try again');
       setOpenModel(false);
     }
   };
@@ -163,7 +119,7 @@ const Transfer = () => {
               <input
                 value={emailAddress}
                 onChange={(e) => setEmailAdress(e.target.value)}
-                type="text"
+                type="email"
                 className="rounded-lg px-6 border-2 py-4"
                 placeholder="youremail@email.com"
               />
@@ -171,7 +127,7 @@ const Transfer = () => {
           </div>
           <div className="md:flex md:justify-between md:w-[48%] text-xl items-center">
             <div className=" text-red-600 font-semibold mb-28 md:mb-0">
-              You are transferring $0.00
+              You are transferring ${amount}
             </div>
             <button
               onClick={() => setOpenModel(true)}

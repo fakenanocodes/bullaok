@@ -1,14 +1,21 @@
 import { useContext, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import useSWR from 'swr';
 import { KycContext } from '../../pages/dashboard/Kyc';
+import { setUserDetails } from '../../store/reducers/transact_reducer';
 import DriveLicence from '../utils/icons/DriveLicence';
 import Idcard from '../utils/icons/Idcard';
 import PassportIcon from '../utils/icons/PassportIcon';
 
 const IdVerification = () => {
   const [idCard, setIdcard] = useState('');
+  const [homeAddress, setHomeAddress] = useState('');
+  const [birthDate, setBirthDate] = useState('');
   const { kyc, setKyc } = useContext(KycContext);
   const [selectedCountry, setSelectedCountry] = useState('Nigeria');
+  const { userDetails } = useSelector((state) => state.transact);
+  const dispatch = useDispatch();
+  console.log(`USERDETAILS`, userDetails);
 
   const { data: countries } = useSWR('https://restcountries.com/v3.1/all');
 
@@ -17,9 +24,23 @@ const IdVerification = () => {
     console.log(e.target.value);
   };
 
+  console.log(`SELECTED`, selectedCountry, idCard);
+
   const getFlagUrl = (countryCode) => {
     const country = countries?.find((c) => c?.name?.common === countryCode);
     return country ? country?.flags.svg : '';
+  };
+
+  const handleNextPage = () => {
+    setKyc('selfie');
+    const moreDetails = {
+      ...userDetails,
+      country: selectedCountry,
+      address: homeAddress,
+      birth_date: birthDate,
+    };
+    dispatch(setUserDetails(moreDetails));
+    console.log(`More User Detail`, userDetails);
   };
   return (
     <div
@@ -232,6 +253,8 @@ const IdVerification = () => {
                 type="text"
                 className="w-full h-[30px] rounded-[8px] border border-[#8E0789] bg-[inherit] outline-none leading-[2px] p-[5px] font-[Poppins] font-[300] text-[12px] text-[#AAAAAA] pl-[10px]"
                 id="kyc"
+                value={homeAddress}
+                onChange={(e) => setHomeAddress(e.target.value)}
               />
             </fieldset>
 
@@ -243,6 +266,8 @@ const IdVerification = () => {
                 type="date"
                 className="w-full h-[30px] rounded-[8px] border bg-[#533054] outline-none  font-[Poppins] font-[400] text-[12px] text-[#AAAAAA] pl-[5px]"
                 id="kyc"
+                value={birthDate}
+                onChange={(e) => setBirthDate(e.target.value)}
               />
             </fieldset>
           </form>
@@ -260,7 +285,7 @@ const IdVerification = () => {
 
         <button
           className="bg-[#FFB803] w-[80px] rounded-[5px] text-center text-[black] font-[Poppins] text-[12px] py-[2px] font-[600]"
-          onClick={() => setKyc('selfie')}
+          onClick={handleNextPage}
         >
           Next
         </button>

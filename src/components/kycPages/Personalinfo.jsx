@@ -1,8 +1,29 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { KycContext } from '../../pages/dashboard/Kyc';
+import { setUserDetails } from '../../store/reducers/transact_reducer';
 
 const Personalinfo = () => {
   const { kyc, setKyc } = useContext(KycContext);
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [userEmail, setUserEmail] = useState('');
+  const dispatch = useDispatch();
+  // const { data: items } = useSWR(/kyc/);
+  // console.log('KYC', items);
+
+  let userDetail = {
+    first_name: firstName,
+    last_name: lastName,
+    email: userEmail,
+  };
+
+  const handleNextPage = (e) => {
+    e.preventDefault();
+    dispatch(setUserDetails(userDetail));
+    setKyc('cardVerification');
+  };
+
   return (
     <div
       className={
@@ -116,6 +137,8 @@ const Personalinfo = () => {
               </label>
               <input
                 type="text"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
                 className="w-full h-[30px] rounded-[8px] border border-[#8E0789] bg-[inherit] outline-none leading-[2px] p-[5px] font-[Poppins] font-[300] text-[12px] text-[#AAAAAA] pl-[10px]"
                 id="kyc"
               />
@@ -126,6 +149,8 @@ const Personalinfo = () => {
               </label>
               <input
                 type="text"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
                 className="w-full h-[30px] rounded-[8px] border border-[#8E0789] bg-[inherit] outline-none leading-[2px] p-[5px] font-[Poppins] font-[300] text-[12px] text-[#AAAAAA] pl-[10px]"
                 id="kyc"
               />
@@ -136,6 +161,8 @@ const Personalinfo = () => {
               </label>
               <input
                 type="email"
+                value={userEmail}
+                onChange={(e) => setUserEmail(e.target.value)}
                 className="w-full h-[30px] rounded-[8px] border border-[#8E0789] bg-[inherit] outline-none leading-[2px] p-[5px] font-[Poppins] font-[300] text-[13px] text-[#AAAAAA] pl-[10px]"
                 id="kyc"
               />
@@ -148,7 +175,7 @@ const Personalinfo = () => {
       <div className="w-full h-[30px] flex gap-[5px] p-[2px] justify-end">
         <button
           className="bg-[#FFB803] w-[80px] rounded-[5px] text-center text-[black] font-[Poppins] text-[12px] py-[2px] font-[600]"
-          onClick={() => setKyc('cardVerification')}
+          onClick={handleNextPage}
         >
           Next
         </button>

@@ -49,6 +49,8 @@ const Deposit = () => {
     }
   }, [wallet]);
 
+  console.log('SELECTED COIN', selectedCoin);
+
   useEffect(() => {
     async function convertToUSD(coin, amount) {
       console.log('SELECTED COIN', coin, 'AMOUNT', amount);
@@ -129,17 +131,17 @@ const Deposit = () => {
   console.log(userData);
 
   const handleSubmit = async (e) => {
-    setLoading(true)
+    setLoading(true);
     e.preventDefault();
     try {
       const response = await axios.post('/deposit/', userData);
       console.log('RESPONSE', response.data);
-      setLoading(false)
+      setLoading(false);
       toast.success('success');
       setOpenModel(false);
       reset();
     } catch (error) {
-      setLoading(false)
+      setLoading(false);
       console.log(error);
     }
   };
