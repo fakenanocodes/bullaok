@@ -2,6 +2,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
 import { CircularProgress } from '@mui/material';
 import { useState } from 'react';
+import { Cookies } from 'react-cookie';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import logo from '../../assets/dashboard/logo.svg';
 import profilepic from '../../assets/dashboard/profilepic.png';
@@ -30,6 +31,8 @@ const icons = [
   { icon: <LogoutIcon />, name: 'Logout' },
 ];
 const DashboardLayout = () => {
+  const cookie = new Cookies();
+
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [activeOption, setActiveOption] = useState(null);
 
@@ -49,6 +52,13 @@ const DashboardLayout = () => {
   if (!isLoggedIn) {
     return null; //Create a prompt here
   }
+
+  const logoutOption = () => {
+    navigate('/');
+    cookie.remove(`bk_access`);
+    cookie.remove(`bk_user`);
+    window.location.reload();
+  };
 
   return (
     <div className="relative bg-custom-bg bg-opacity-20 bg-cover bg-center bg-no-repeat min-h-screen">
@@ -120,7 +130,10 @@ const DashboardLayout = () => {
                   {icons?.map((item, idx) => (
                     <>
                       {item.name === 'Logout' ? (
-                        <div className="flex space-x-4 items-center hover:bg-white hover:text-[#575757] p-2">
+                        <div
+                          onClick={logoutOption}
+                          className="flex space-x-4 items-center hover:bg-white hover:text-[#575757] p-2"
+                        >
                           {item?.icon}
                           <span className="text-lg font-semibold ">
                             {item?.name}

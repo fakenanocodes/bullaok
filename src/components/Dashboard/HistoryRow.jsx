@@ -20,7 +20,7 @@ export default function HistoryRow({ colors, idx, item }) {
         </span>
         {item?.investmentplan?.name}
       </span>
-      <span>{item?.detail}</span>
+      <span>{item?.details}</span>
       <span>{formattedDate}</span>
     </div>
   );

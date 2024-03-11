@@ -92,7 +92,7 @@ const DashboardHome = () => {
             </div>
           </div>
         </div>
-        <div className="xl:border  flex xl:flex-col flex-row-reverse justify-center items-center xl:bg-[#0C0000]  items-center  border-white border-opacity-40  flex-1">
+        <div className="xl:border p-4  flex xl:flex-col flex-row-reverse justify-center items-center xl:bg-[#0C0000]  items-center  border-white border-opacity-40  flex-1">
           <img src={Chart} alt="" className="xl:w-44 xl:h-44 w-full" />
           <div className="flex  justify-center w-full   xl:flex-row flex-col xl:items-center items-start xl:space-x-2 xl:space-y-0 space-y-2">
             <div className="flex flex-col xl:space-x-2">
@@ -131,7 +131,7 @@ const DashboardHome = () => {
             See all
           </span>
         </div>
-        <div className="flex xl:flex-row flex-col items-center gap-4">
+        <div className="flex xl:flex-row md:flex-row flex-col items-center gap-4">
           {data?.map((investmentPackage, index) => (
             <PackageCard
               id={investmentPackage.id}
