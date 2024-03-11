@@ -9,11 +9,12 @@ import WithdrawIcon from '../../../components/utils/icons/WithdrawIcon';
 
 import { useNavigate } from 'react-router-dom';
 import LeftMoveIcon from '../../../components/utils/icons/LeftMoveIcon';
+import MobileTable from './MobileTable';
 
 const Withdrawal = () => {
   const [openModel, setOpenModel] = useState(false);
   const [showMobileTable, setShowMobileTable] = useState(false);
-
+  const [inputWarning, setInputWarning] = useState(false);
   const navigate = useNavigate();
   const [wallet, setWallet] = useState('');
   const [amount, setAmount] = useState('');
@@ -48,8 +49,6 @@ const Withdrawal = () => {
 
   // Function to convert a coin amount to USD using CoinGecko API
 
-  // Function to convert USD amount to a coin equivalent
-
   useEffect(() => {
     const convertToUSD = async (coin, amount) => {
       const url = `https://api.coingecko.com/api/v3/simple/price?ids=${coin}&vs_currencies=usd`;
@@ -64,17 +63,26 @@ const Withdrawal = () => {
       console.log('Coin Data', price, data);
       const usdEquivalent = amount * price; // Calculate USD equivalent
 
-      return usdEquivalent; // Return formatted USD amount
+      return usdEquivalent.toFixed(2); // Return formatted USD amount
     };
 
-    let converted = convertToUSD(convertWallet, amount);
-    console.log('CONVERTED', converted, convertWallet);
-    setUsdtAmount(converted);
-  }, [convertWallet]);
+    const fetchData = async () => {
+      try {
+        let converted = await convertToUSD(convertWallet, amount);
+        // console.log('CONVERTED', converted, convertWallet);
+        setUsdtAmount(converted);
+      } catch (error) {
+        // Handle errors if needed
+        console.error('Error in fetchData:', error.message);
+      }
+    };
+
+    fetchData();
+  }, [convertWallet, amount]);
 
   let userData = {
     amount,
-    wallet_type: wallet,
+    wallet_type: wallet || walletType[0],
     wallet_address: walletAddress,
     usdt_amount: usdtAmount,
   };
@@ -88,13 +96,20 @@ const Withdrawal = () => {
       console.log('RESPONSE', response.data);
       toast.success('success');
       setOpenModel(false);
-      reset();
     } catch (error) {
       console.log(error?.response?.data?.UsdtAmount);
       if (error?.response?.data?.UsdtAmount == 'ou have insufficient funds') {
         toast.error('You have insufficient funds');
         setOpenModel(false);
       }
+    }
+  };
+
+  const handleOpenModal = () => {
+    if (walletAddress) {
+      setOpenModel(true);
+    } else {
+      setInputWarning(true);
     }
   };
 
@@ -156,7 +171,10 @@ const Withdrawal = () => {
                 value={walletAddress}
                 onChange={(e) => setWalletAdress(e.target.value)}
                 type="text"
-                className="rounded-lg px-6 border-2 py-4"
+                required
+                className={`rounded-lg px-6 border-2  py-4 ${
+                  inputWarning && 'border-red-600'
+                }`}
                 placeholder="reciever_wallet_address$lkjhyiu878yfs44rs"
               />
             </div>
@@ -180,7 +198,9 @@ const Withdrawal = () => {
                 value={walletAddress}
                 onChange={(e) => setWalletAdress(e.target.value)}
                 type="text"
-                className="rounded-lg px-6 border-2 py-4"
+                className={`rounded-lg px-6 border-2 py-4 ${
+                  inputWarning && 'border-red-600'
+                }`}
                 placeholder="reciever_wallet_address$lkjhyiu878yfs44rs"
               />
             </div>
@@ -197,10 +217,10 @@ const Withdrawal = () => {
           </div>
           <div className="md:flex md:justify-between md:w-[48%] text-xl items-center">
             <div className=" text-red-600 font-semibold mb-28 md:mb-0">
-              You are withdrawing {amount || '0.00'}
+              You are withdrawing {usdtAmount || '0.00'} USDT
             </div>
             <button
-              onClick={() => setOpenModel(true)}
+              onClick={handleOpenModal}
               className="hidden md:flex bg-[#352F84] py-2 text-white px-4 rounded-[5px]"
             >
               Make withdrawal
@@ -213,7 +233,7 @@ const Withdrawal = () => {
                 Withdrawal History
               </button>
               <button
-                onClick={() => setOpenModel(true)}
+                onClick={handleOpenModal}
                 className="bg-[#352F84] text-white rounded-md px-6 py-4"
               >
                 Make withdrawal
@@ -223,62 +243,11 @@ const Withdrawal = () => {
         </div>
       </div>
       {/* Mobile table */}
-      <table className="w-[100%] overflow-x-scroll">
-        <div
-          className={` ${
-            showMobileTable
-              ? `block border shadow-md -mx-4 md:hidden`
-              : `hidden`
-          }`}
-        >
-          <div className="bg-[#8E0789] text-white p-3 md:text-2xl font-semibold">
-            Withdrawal History
-          </div>
-          <thead>
-            <tr className="text-xs rounded-sm">
-              <td className="bg-[#F9F9FA] border-r-8 border-solid border-white px-6 py-2 text-center">
-                DATE
-              </td>
-              <td className="bg-[#F9F9FA] border-r-8 border-solid border-white px-6 py-2 text-center">
-                AMOUNT
-              </td>
-              <td className="bg-[#F9F9FA] border-r-8 border-solid border-white  py-2 text-center ">
-                WALLET
-              </td>
-              <td className="bg-[#F9F9FA] border-r-8 border-solid border-white px-6 py-2 text-center">
-                ASSET
-              </td>
-              <td className="bg-[#F9F9FA] border-r-8 border-solid border-white px-6 py-2 text-center">
-                STATUS
-              </td>
-            </tr>
-          </thead>
-          <tbody>
-            {withdraws?.[0].map((withdraw, idx) => (
-              <tr className="text-xs">
-                <td className="pl-2 font-bold py-3">
-                  <p>20-04-2024</p>
-                  <p>10:26</p>
-                </td>
-                <td className="text-center">{withdraw?.amount}</td>
-                <td className="text-center ">
-                  <div className="w-[100px] text-ellipsis overflow-hidden whitespace-nowrap">
-                    {withdraw?.wallet_address}
-                  </div>
-                </td>
-                <td className="text-center">{withdraw?.wallet_type}</td>
-                <td className="text-center">
-                  {withdraw?.verified
-                    ? 'Success'
-                    : !withdraw?.verified
-                    ? 'Pending...'
-                    : 'Failed'}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </div>
-      </table>
+      <MobileTable
+        withdraws={withdraws}
+        showMobileTable={showMobileTable}
+        address={'WALLET'}
+      />
       <div className={`hidden md:block border shadow-md`}>
         <div className="bg-[#8E0789] text-white p-3 md:text-2xl font-semibold">
           Withdrawal History
@@ -353,7 +322,7 @@ const Withdrawal = () => {
                 <div>
                   {/* <DollaIcon /> */}
                   <input
-                    value={wallet}
+                    value={wallet || walletType[0]}
                     placeholder="$1,474.91"
                     className="border-2 w-full rounded-md p-2 px-4"
                     id="asset"

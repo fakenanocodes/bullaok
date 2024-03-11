@@ -8,10 +8,12 @@ import CancelIcon from '../../../components/utils/icons/CancelIcon';
 import DollaIcon from '../../../components/utils/icons/DollaIcon';
 import LeftMoveIcon from '../../../components/utils/icons/LeftMoveIcon';
 import DirectArrowIcon from '../../../components/utils/icons/directArrowIcon';
+import MobileTransferTable from './MobileTransferTab';
 
 const Transfer = () => {
   const [openModel, setOpenModel] = useState(false);
   const [showMobileTable, setShowMobileTable] = useState(false);
+  const [checkInputEmail, setCheckInputEmail] = useState(false);
   const { data: transfers } = useSWR(`/transfer/`);
 
   const { data: user } = useSWR(`/user/`);
@@ -43,6 +45,14 @@ const Transfer = () => {
       console.log('ERROR', error);
       if (error) toast.error('failed, check your details and try again');
       setOpenModel(false);
+    }
+  };
+
+  const handleValidEmail = () => {
+    if (emailAddress) {
+      setOpenModel(true);
+    } else {
+      setCheckInputEmail(true);
     }
   };
 
@@ -99,7 +109,9 @@ const Transfer = () => {
                 value={emailAddress}
                 onChange={(e) => setEmailAdress(e.target.value)}
                 type="email"
-                className="rounded-lg px-6 border-2 py-4"
+                className={`rounded-lg px-6 border-2 py-4 ${
+                  checkInputEmail && 'border-red-600'
+                }`}
                 placeholder="youremail@email.com"
               />
             </div>
@@ -109,7 +121,7 @@ const Transfer = () => {
               You are transferring ${amount || '0.00'}
             </div>
             <button
-              onClick={() => setOpenModel(true)}
+              onClick={handleValidEmail}
               className="hidden md:flex bg-[#352F84] py-2 text-white text-[18px] px-4 rounded-[5px]"
             >
               Send payment
@@ -122,7 +134,7 @@ const Transfer = () => {
                 Transfer History
               </button>
               <button
-                onClick={() => setOpenModel(true)}
+                onClick={handleValidEmail}
                 className="bg-[#352F84] text-white rounded-md px-6 py-4"
               >
                 Send payment
@@ -132,52 +144,10 @@ const Transfer = () => {
         </div>
       </div>
       {/* mobile table */}
-      <table className="w-[100%] overflow-x-scroll ">
-        <div
-          className={` ${
-            showMobileTable
-              ? `block border shadow-md -mx-4 md:hidden`
-              : `hidden`
-          }`}
-        >
-          <div className="bg-[#8E0789] text-white p-3 md:text-2xl font-semibold w-full ">
-            Transfer History
-          </div>
-          <tr className="text-sm ">
-            <td className="  bg-[#F9F9FA]  py-2 text-center p-5 border-r-8 border-white">
-              DATE
-            </td>
-            <td className="px-2 text-center bg-[#F9F9FA]  border-r-8 border-white ">
-              AMOUNT
-            </td>
-            <td className="px-2  text-center bg-[#F9F9FA]  border-r-8 border-white">
-              EMAIL&nbsp;ADDRESS
-            </td>
-            <td className="px-2  text-center bg-[#F9F9FA]  border-r-8 border-white">
-              ASSET
-            </td>
-            <td className="px-2  text-center bg-[#F9F9FA]  border-r-8 border-white">
-              STATUS
-            </td>
-          </tr>
-          {transfers?.map((transfer, idx) => (
-            <tr className="text-xs w-full">
-              <td className="font-bold py-3 md:py-5 ">
-                <div className="md:flex gap-2 text-center md:ml-10">
-                  <span>{transfer?.created?.split('T')[0]}</span>
-                  <p>{transfer?.created?.split('T')[1]?.split('.')[0]}</p>
-                </div>
-              </td>
-              <td className="px-2 text-center">{transfer?.usdt_amount}</td>
-              <td className="px-2 text-center">{transfer?.email}</td>
-              <td className="px-2 text-center">{'USDT'}</td>
-              <td className="px-2 text-center ">
-                {transfer?.usdt_amount ? 'Success' : 'Failed'}
-              </td>
-            </tr>
-          ))}
-        </div>
-      </table>
+      <MobileTransferTable
+        transfers={transfers}
+        showMobileTable={showMobileTable}
+      />
 
       <div className={`hidden md:block border shadow-md`}>
         <div className="bg-[#8E0789] text-white p-3 md:text-2xl font-semibold w-full">
