@@ -56,7 +56,10 @@ const DashboardLayout = () => {
               <MenuIcon className="text-black" fontSize="large" />
             </button>
           </div>
-          <div className="pt-4 hidden lg:flex cursor-pointer">
+          <div
+            onClick={() => navigate('/')}
+            className="pt-4 hidden lg:flex cursor-pointer"
+          >
             <img src={logo} alt="" className="bg-white p-2 w-14 h-14" />
           </div>
           <DashboardSidebar />
