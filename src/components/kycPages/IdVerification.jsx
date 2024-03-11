@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import useSWR from 'swr';
 import { KycContext } from '../../pages/dashboard/Kyc';
 import { setUserDetails } from '../../store/reducers/transact_reducer';
@@ -15,7 +16,7 @@ const IdVerification = () => {
   const [selectedCountry, setSelectedCountry] = useState('Nigeria');
   const { userDetails } = useSelector((state) => state.transact);
   const dispatch = useDispatch();
-  console.log(`USERDETAILS`, userDetails);
+  // console.log(`USERDETAILS`, userDetails);
 
   const { data: countries } = useSWR('https://restcountries.com/v3.1/all');
 
@@ -24,7 +25,7 @@ const IdVerification = () => {
     console.log(e.target.value);
   };
 
-  console.log(`SELECTED`, selectedCountry, idCard);
+  // console.log(`SELECTED`, selectedCountry, idCard);
 
   const getFlagUrl = (countryCode) => {
     const country = countries?.find((c) => c?.name?.common === countryCode);
@@ -32,6 +33,10 @@ const IdVerification = () => {
   };
 
   const handleNextPage = () => {
+    if (!idCard || !homeAddress || !birthDate) {
+      toast.error('Please complete the required information');
+      return;
+    }
     setKyc('selfie');
     const moreDetails = {
       ...userDetails,
@@ -40,7 +45,7 @@ const IdVerification = () => {
       birth_date: birthDate,
     };
     dispatch(setUserDetails(moreDetails));
-    console.log(`More User Detail`, userDetails);
+    // console.log(`More User Detail`, userDetails);
   };
   return (
     <div

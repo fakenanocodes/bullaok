@@ -2,6 +2,7 @@ import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import { useState } from 'react';
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
 import { images } from '../../assets';
@@ -9,6 +10,7 @@ import Chart from '../../assets/dashboard/chart.svg';
 import HistoryRow from '../../components/Dashboard/HistoryRow';
 import PackageCard from '../../components/Dashboard/PackageCard';
 import DashboardEmptyContainer from '../../components/empty/DashboardEmptyContainer';
+import { setUserKyc } from '../../store/reducers/transact_reducer';
 
 const imageUrls = {
   Assets: images.assets,
@@ -25,10 +27,13 @@ const DashboardHome = () => {
   const { data, isLoading } = useSWR('/plans/categories/');
   const { data: history, isLoading: historyLoading } = useSWR('plans/history');
   const [activeOption, setActiveOption] = useState(null);
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
   console.log(data);
   const [showAmount, setShowAmount] = useState(true);
+  const { data: userKyc } = useSWR('/kyc/');
+  dispatch(setUserKyc(userKyc));
 
   const handleVisibilityToggle = () => {
     setShowAmount(!showAmount);

@@ -13,16 +13,19 @@ const SuccessThanks = () => {
 
       <div className="w-full grid items-center justify-center text-center">
         <div>
-          <div className="mx-24 mb-10">
+          <div className="mx-28 mb-10">
             <ThankyouIcon />
           </div>
           <div className="text-black">
             <h2 className="text-4xl font-bold mb-10">Congratulations</h2>
-            <p className="text-xl ">
+            <p className="md:text-xl ">
               Your KYC data has been successfully recorded.
             </p>
           </div>
-          <div className="">
+          <div
+            onClick={() => navigate('/dashboard')}
+            className=" cursor-pointer"
+          >
             <button className="bg-[#41073F] px-14 py-3 mt-10">OK!</button>
           </div>
         </div>

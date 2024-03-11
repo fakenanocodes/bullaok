@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useContext } from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import useSWR from 'swr';
 import { KycContext } from '../../pages/dashboard/Kyc';
@@ -10,13 +11,14 @@ const KycPreview = () => {
   const { userDetails } = useSelector((state) => state.transact);
   const { data: userData } = useSWR('/kyc/');
   const { data: user } = useSWR('/user/');
+  const navigate = useNavigate();
   // console.log('KYC', userData);
   // console.log('PREVIEW PAGE', userDetails);
-  console.log('USER', user);
+  // console.log('USER', user);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setSup('success');
+    // setSup('success');
 
     const formData = new FormData();
     formData.append('first_name', userDetails?.first_name);
@@ -30,9 +32,9 @@ const KycPreview = () => {
     try {
       const response = await axios.post('/kyc/', formData);
       toast.success(response.data.message);
-      console.log(response);
+      navigate('/dashboard/kyc/success');
     } catch (error) {
-      console.log(error);
+      toast.error();
     }
   };
   return (
