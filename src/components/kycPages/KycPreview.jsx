@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useContext } from 'react';
 import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import useSWR from 'swr';
 import { KycContext } from '../../pages/dashboard/Kyc';
 
@@ -8,10 +9,12 @@ const KycPreview = () => {
   const { kyc, setKyc, setSup } = useContext(KycContext);
   const { userDetails } = useSelector((state) => state.transact);
   const { data: userData } = useSWR('/kyc/');
-  console.log('KYC', userData);
+  const { data: user } = useSWR('/user/');
+  // console.log('KYC', userData);
   // console.log('PREVIEW PAGE', userDetails);
+  console.log('USER', user);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setSup('success');
 
@@ -22,20 +25,15 @@ const KycPreview = () => {
     formData.append('country', userDetails?.country);
     formData.append('address', userDetails?.address);
     formData.append('birth_date', userDetails?.birth_date);
-    // formData.append('profile', `/media/${userDetails.profile}`);
+    formData.append('profile', user?.profile?.id);
 
-    // formData.get('first_name');
-    // formData.get('last_name');
-    // formData.get('email');
-    // formData.get('country');
-    // formData.get('address');
-    // formData.get('birth_date');
-    // formData.get('profile');
-
-    console.log('FORDATA', formData.email);
-
-    const response = axios.post('/kyc/', formData);
-    console.log(response);
+    try {
+      const response = await axios.post('/kyc/', formData);
+      toast.success(response.data.message);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div

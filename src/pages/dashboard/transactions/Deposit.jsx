@@ -7,6 +7,7 @@ import useSWR from 'swr';
 import DepositModal from '../../../components/modal/DepositModal';
 import DepositIcon from '../../../components/utils/icons/DepositIcon';
 import LeftMoveIcon from '../../../components/utils/icons/LeftMoveIcon';
+import MobileDepostTable from './MobileDepositeTab';
 
 const Deposit = () => {
   const [openModel, setOpenModel] = useState(false);
@@ -16,7 +17,7 @@ const Deposit = () => {
   const [amount, setAmount] = useState('');
   const [selectedCoin, setSelectedCoin] = useState('');
   const [walletTypes, setWalletTypes] = useState('');
-  const [usdtAmount, setUsdtAmount] = useState(4);
+  const [usdtAmount, setUsdtAmount] = useState('');
   const { data: deposits } = useSWR(`/deposit/`);
   const { data: depositWallet } = useSWR('/walletaddress/');
   const navigate = useNavigate();
@@ -51,6 +52,29 @@ const Deposit = () => {
 
   console.log('SELECTED COIN', selectedCoin);
 
+  // // Function to convert USD amount to a coin equivalent
+  // async function convertToCoin(coin, usdAmount) {
+  //   // First convert USD to BTC to use existing 'convertToUSD' function
+  //   const btcEquivalent = await convertToUSD(coin, usdAmount);
+
+  //   // Extract BTC amount from the formatted string
+  //   const btcAmount = parseFloat(btcEquivalent.split(' ')[0]);
+
+  //   // Calculate coin equivalent based on the USD price of the coin
+  //   const url = `https://api.coingecko.com/api/v3/simple/price?ids=${coin}&vs_currencies=usd`;
+  //   const response = await fetch(url);
+  //   const data = await response.json();
+
+  //   // Check if coin exists in the data
+  //   if (!data[coin]) {
+  //     throw new Error(`Coin ${coin} not found in API response`);
+  //   }
+  //   console.log(data);
+  //   const price = data[coin]?.usd; // Get USD price per coin
+  //   const coinEquivalent = usdAmount / price; // Calculate coin equivalent
+
+  //   return `${coinEquivalent.toFixed(8)} ${coin}`; // Return formatted coin amount with 8 decimal places
+  // }
   useEffect(() => {
     async function convertToUSD(coin, amount) {
       console.log('SELECTED COIN', coin, 'AMOUNT', amount);
@@ -66,65 +90,20 @@ const Deposit = () => {
       const price = data[coin]?.usd; // Get USD price per coin
       const usdEquivalent = amount * price; // Calculate USD equivalent
 
-      return `${usdEquivalent.toFixed(2)} USD`; // Return formatted USD amount
+      return usdEquivalent.toFixed(2); // Return formatted USD amount
     }
-    setUsdtAmount(convertToUSD(selectedCoin, amount));
-  }, [wallet, amount]);
-
-  // Function to convert USD amount to a coin equivalent
-  async function convertToCoin(coin, usdAmount) {
-    // First convert USD to BTC to use existing 'convertToUSD' function
-    const btcEquivalent = await convertToUSD(coin, usdAmount);
-
-    // Extract BTC amount from the formatted string
-    const btcAmount = parseFloat(btcEquivalent.split(' ')[0]);
-
-    // Calculate coin equivalent based on the USD price of the coin
-    const url = `https://api.coingecko.com/api/v3/simple/price?ids=${coin}&vs_currencies=usd`;
-    const response = await fetch(url);
-    const data = await response.json();
-
-    // Check if coin exists in the data
-    if (!data[coin]) {
-      throw new Error(`Coin ${coin} not found in API response`);
-    }
-    console.log(data);
-    const price = data[coin]?.usd; // Get USD price per coin
-    const coinEquivalent = usdAmount / price; // Calculate coin equivalent
-
-    return `${coinEquivalent.toFixed(8)} ${coin}`; // Return formatted coin amount with 8 decimal places
-  }
-
-  async function convertCoinToCoin(fromCoin, toCoin, amount) {
-    const url = `https://api.coingecko.com/api/v3/simple/price?ids=${fromCoin},${toCoin}&vs_currencies=usd`;
-    const response = await fetch(url);
-    const data = await response.json();
-    console.log(data);
-    // Check if coins exist in the data
-    if (!data[fromCoin] || !data[toCoin]) {
-      throw new Error(
-        `Coins ${fromCoin} or ${toCoin} not found in API response`
-      );
-    }
-
-    // Get USD prices per coin
-    const fromCoinPrice = data[fromCoin].usd;
-    const toCoinPrice = data[toCoin].usd;
-
-    // Calculate conversion rate (toCoin price per 1 unit of fromCoin)
-    const conversionRate = toCoinPrice / fromCoinPrice;
-
-    // Calculate equivalent amount in the target coin
-    const targetAmount = amount * conversionRate;
-
-    return `${targetAmount.toFixed(8)} ${toCoin}`; // Return formatted target coin amount with 8 decimal places
-  }
+    const fetcher = async () => {
+      let converted = await convertToUSD(selectedCoin, amount);
+      setUsdtAmount(converted);
+    };
+    fetcher();
+  }, [walletTypes, amount]);
 
   let userData = {
     amount,
     wallet_type: walletTypes || 'USDT',
     wallet_address: wallet || walletMock.usdt_address,
-    usdt_amount: 100,
+    usdt_amount: usdtAmount,
   };
   //usdtAmount
 
@@ -197,7 +176,7 @@ const Deposit = () => {
               <input
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
-                type="text"
+                type="number"
                 className="rounded-lg px-6 border-2 py-4"
                 placeholder="0.00 $"
               />
@@ -210,7 +189,7 @@ const Deposit = () => {
               <input
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
-                type="text"
+                type="number"
                 className="rounded-lg px-6 border-2 py-4"
                 placeholder="0.00 $"
               />
@@ -228,7 +207,7 @@ const Deposit = () => {
           </div>
           <div className="md:flex md:justify-between md:w-[48%] text-xl items-center">
             <div className=" text-red-600 font-semibold mb-28 md:mb-0">
-              You are depositing $0.00
+              You are depositing {usdtAmount || '0.00'} USDT
             </div>
             <button
               onClick={() => setOpenModel(true)}
@@ -253,11 +232,11 @@ const Deposit = () => {
           </div>
         </div>
       </div>
-      <div
-        className={` ${
-          showMobileTable ? `block` : `hidden`
-        } md:block border shadow-md`}
-      >
+      <MobileDepostTable
+        deposits={deposits}
+        showMobileTable={showMobileTable}
+      />
+      <div className={` hidden md:block border shadow-md`}>
         <div className="bg-[#8E0789] text-white p-3 md:text-2xl font-semibold">
           Deposit History
         </div>

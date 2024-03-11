@@ -1,19 +1,27 @@
 import { useEffect, useState } from 'react';
 import { Cookies } from 'react-cookie';
+import { useNavigate } from 'react-router-dom';
 
 const useAuthentication = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const cookies = new Cookies();
+  const [isLoading, setIsLoading] = useState(true);
 
+  const navigate = useNavigate();
   useEffect(() => {
-    // Check if the token exists in the cookie
     const token = cookies.get('bk_access');
 
-    // Update the login status based on the presence of the token
-    setIsLoggedIn(!!token);
-  }, []); // Empty dependency array ensures that this effect runs only once on component mount
+    if (token) {
+      setIsLoggedIn(true);
+      setIsLoading(false);
 
-  return isLoggedIn;
+    } else {
+      // Redirect to login if user information is not available in the cookie
+      navigate('/login');
+    }
+  }, [cookies, navigate]);
+
+  return { isLoggedIn, isLoading };
 };
 
 export default useAuthentication;

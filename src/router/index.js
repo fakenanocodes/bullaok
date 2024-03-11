@@ -44,6 +44,8 @@ import RunningInvestment from '../pages/dashboard/RunningInvestment';
 import Deposit from '../pages/dashboard/transactions/Deposit';
 import Transfer from '../pages/dashboard/transactions/Transfer';
 import Withdrawal from '../pages/dashboard/transactions/Withdrawal';
+import Notifications from '../pages/dashboard/Notifications';
+import Support from '../pages/dashboard/Support';
 
 const router = createBrowserRouter([
   {
@@ -180,6 +182,14 @@ const router = createBrowserRouter([
       {
         path: 'profile',
         Component: Profile,
+      },
+      {
+        path: 'support',
+        Component: Support,
+      },
+      {
+        path: 'notification',
+        Component: Notifications,
       },
 
       {
