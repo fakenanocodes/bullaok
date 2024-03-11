@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
 import { images } from '../../assets';
 import { icons } from '../../assets/icons';
+import EditProfileModal from '../modal/EditProfileModal';
 
 const features = [
   {
@@ -36,18 +37,12 @@ export default function ProfileComponent() {
   const user = data?.profile?.user;
   const profile = data?.profile;
   console.log(user?.first_name);
+  const [open, setOpen] = useState(false);
+
   return (
     <div className="grid grid-cols-1 xl:w-4/5 w-full mx-auto text-black xl:pb-8 p-3">
       <div className="flex xl:flex-row lg:flex-row flex-col gap-3 justify-between xl:p-8  xl:ml-8 ml-0">
         <div className="flex flex-col  items-center justify-center gap-3 text-[#7E577D]">
-          {/* <img
-            src={
-              profile?.image !== null
-                ? `${API_URL}${profile?.image}`
-                : images.profile
-            }
-            alt=""
-          /> */}
           <img src={images.profile} alt="" />
 
           <h2 className="text-3xl font-semibold">
@@ -75,7 +70,10 @@ export default function ProfileComponent() {
                 </h2>
               )}
             </div>
-            <button className="px-7 p-2 bg-[#F0EFFA] rounded-[20px]">
+            <button
+              onClick={() => setOpen(true)}
+              className="px-7 p-2 bg-[#8E0789] text-white rounded-[20px]"
+            >
               Edit
             </button>
           </div>
@@ -90,9 +88,6 @@ export default function ProfileComponent() {
                 <h2>{user?.email}</h2>
               )}
             </div>
-            <button className="px-7 p-2 bg-[#F0EFFA] rounded-[20px]">
-              Edit
-            </button>
           </div>
           <div className="flex justify-between items-center">
             <div className="text-[#222222]/90">
@@ -105,9 +100,6 @@ export default function ProfileComponent() {
                 <h2>{user?.phone_number}</h2>
               )}{' '}
             </div>
-            <button className="px-7 p-2 bg-[#F0EFFA] rounded-[20px]">
-              Edit
-            </button>
           </div>
           <div className="flex justify-between items-center">
             <div className="text-[#222222]/90">
@@ -118,9 +110,6 @@ export default function ProfileComponent() {
                 <h2>{user?.address}</h2>
               )}{' '}
             </div>
-            <button className="px-7 p-2 bg-[#F0EFFA] rounded-[20px]">
-              Edit
-            </button>
           </div>
         </div>
       </div>
@@ -144,6 +133,7 @@ export default function ProfileComponent() {
           </div>
         ))}
       </div>
+      {open && <EditProfileModal open={open} setOpen={setOpen} />}
     </div>
   );
 }

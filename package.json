@@ -8,16 +8,12 @@
     "yarn": ">=1.22.0",
     "npm": "please-use-yarn"
   },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
-  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
+    "prettier": "prettier --write .",
     "prepare": "husky install"
   },
   "dependencies": {

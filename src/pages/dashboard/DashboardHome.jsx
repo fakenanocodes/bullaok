@@ -1,4 +1,3 @@
-import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import { useState } from 'react';
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
@@ -9,6 +8,7 @@ import Chart from '../../assets/dashboard/chart.svg';
 import HistoryRow from '../../components/Dashboard/HistoryRow';
 import PackageCard from '../../components/Dashboard/PackageCard';
 import DashboardEmptyContainer from '../../components/empty/DashboardEmptyContainer';
+import useCurrencyFormatter from '../../hooks/useCurrencyFormatter';
 
 const imageUrls = {
   Assets: images.assets,
@@ -23,20 +23,23 @@ const options = ['Withdraw', 'Deposit', 'Transfer'];
 
 const DashboardHome = () => {
   const { data, isLoading } = useSWR('/plans/categories/');
+  const { data: user } = useSWR('/user/');
   const { data: history, isLoading: historyLoading } = useSWR('plans/history');
   const [activeOption, setActiveOption] = useState(null);
 
   const navigate = useNavigate();
-  console.log(data);
+  console.log(user);
   const [showAmount, setShowAmount] = useState(true);
 
   const handleVisibilityToggle = () => {
     setShowAmount(!showAmount);
   };
-
+  const formattedAmount = useCurrencyFormatter(
+    user?.profile?.available_balance
+  );
   return (
     <div className="space-y-3 h-full no-scrollbar overflow-auto p-5">
-      <div className="flex space-x-3 items-center justify-center w-full xl:hidden py-7 text-[#41073F] font-semibold">
+      <div className="flex space-x-3 items-center justify-center w-full xl:hidden lg:hidden md:hidden py-7 text-[#41073F] font-semibold">
         {options?.map((option, index) => (
           <span
             key={index}
@@ -53,7 +56,7 @@ const DashboardHome = () => {
         ))}
       </div>
       <div className="w-full flex xl:flex-row flex-col gap-8">
-        <div className="border xl:rounded-sm rounded-[40px] bg-[#0C0000] border-white border-opacity-40 xl:w-3/5 w-full xl:h-72 p-5 xl:pl-16  flex flex-col xl:space-y-8 ">
+        <div className="border xl:rounded-sm rounded-[40px] bg-[#0C0000] border-white border-opacity-40 xl:w-3/5 w-full xl:h-86 p-5 xl:pl-16  flex flex-col xl:space-y-8 ">
           <div className="flex items-center gap-4">
             <span className="text-gray-300 text-lg">Current Balance</span>
             <div
@@ -67,28 +70,24 @@ const DashboardHome = () => {
             <div className="flex items-center space-x-4">
               <input
                 type={showAmount ? 'text' : 'password'}
-                value="$ 1,474.91"
-                className="text-white text-5xl 2xl:w-2/6 xl:w-2/4  w-full font-extrabold border-none bg-transparent focus:outline-none"
+                value={formattedAmount}
+                className="text-white text-5xl   w-full font-extrabold border-none bg-transparent focus:outline-none"
                 readOnly
               />
-              <div className="shadow-xl xl:block hidden  shadow-[#8E0789]/50 flex items-center space-x-2 p-2 px-8 font-bold rounded-md shadow-[#8E0789] bg-[#8E0789]">
-                <ArrowDropUpIcon className="text-[#52B570] bg-white rounded-full w-32 h-32" />
-                <span>25.69%</span>
-              </div>
             </div>
-            <div className="flex items-center justify-between  w-full">
-              <div className="flex items-center space-x-4">
-                <span className="font-bold text-[#52B570] text-xl">
-                  + $ 301.93
-                </span>
-                <span className="font-bold -top-2 ml-4 bg-transparent rounded-md border border-white border-opacity-20 shadow-xl drop-shadow-xl p-1 px-2 text-xs">
-                  24h
-                </span>
-              </div>
-              <div className="shadow-xl xl:hidden    shadow-[#8E0789]/50 flex text-xs  items-center space-x-2 p-2  font-bold rounded-md shadow-[#8E0789] bg-[#8E0789]">
-                <ArrowDropUpIcon className="text-[#52B570] bg-white rounded-full w-4 h-4 text-sm " />
-                <span>25.69%</span>
-              </div>
+            <div className="flex items-center space-x-4">
+              <span className="font-bold text-[#52B570] text-xl">
+                {user?.profile?.live_profit}
+              </span>
+              <span className="font-bold -top-2 ml-4 bg-transparent rounded-md border border-white border-opacity-20 shadow-xl drop-shadow-xl p-1 px-2 text-xs">
+                live profit
+              </span>
+            </div>
+            <div className="flex border border-red-500 justify-start w-full flex-col space-x-4">
+              <span className="text-gray-300 text-lg">Book Balance</span>
+              <span className="font-bold  bg-transparent rounded-md border border-white border-opacity-20 shadow-xl drop-shadow-xl p-1 px-2 text-xs">
+                book balance
+              </span>
             </div>
           </div>
         </div>

@@ -106,7 +106,7 @@ const DashboardLayout = () => {
               />
             </div>
           </div>
-          <div className="lg:mx-7 h-[100vh] no-scrollbar lg:h-[80vh] relative overflow-auto bg-[#000]/60 rounded-lg ">
+          <div className="lg:mx-7 h-[100vh] no-scrollbar lg:h-[80vh] relative overflow-auto bg-[#000]/60  ">
             <Outlet />
           </div>
         </div>

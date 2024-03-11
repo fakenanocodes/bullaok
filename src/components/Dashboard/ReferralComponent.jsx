@@ -10,6 +10,7 @@ import { FaEdit } from 'react-icons/fa';
 import { MdOutlineArrowBackIos } from 'react-icons/md';
 import { PiMedalMilitaryFill } from 'react-icons/pi';
 
+import { useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
 import { images } from '../../assets';
 
@@ -57,10 +58,14 @@ const boxesData = [
 ];
 export default function ReferralComponent() {
   const { data: referral, isLoading } = useSWR('referral/');
-  console.log(referral);
+  console.log('referral ==>', referral);
+  const navigate = useNavigate();
   return (
     <div className="xl:px-8 px-2 ">
-      <div className="flex items-center gap-7 py-7 text-black text-2xl xl:hidden block">
+      <div
+        onClick={() => navigate(-1)}
+        className="flex items-center gap-7 py-7 text-black text-2xl xl:hidden block"
+      >
         <MdOutlineArrowBackIos />
         <h2>Referral</h2>
       </div>
