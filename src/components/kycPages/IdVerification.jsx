@@ -169,8 +169,7 @@ const IdVerification = () => {
                   {countries
                     ?.sort((a, b) =>
                       a?.name?.common.localeCompare(b?.name?.common)
-                    )
-                    .map((country) => (
+                    )?.map((country) => (
                       <option
                         key={country?.cca3}
                         value={country?.name?.common}

@@ -30,7 +30,7 @@ const navigate = useNavigate()
   };
   return (
     <div className="p-7 bg-black bg-opacity-[34%] absolute top-[30%] flex-col hidden lg:flex items-center space-y-5 justify-center border rounded-xl ">
-      {icons.map((item) => (
+      {icons?.map((item) => (
         <>
           {item.name === 'Logout' ? (
             <div

@@ -91,7 +91,7 @@ export default function ReferralComponent() {
             <h2 className="text-black text-center my-4">How do you get?</h2>
             <hr />
             <div className="flex  justify-around mt-9 ">
-              {boxesData.map((box, index) => (
+              {boxesData?.map((box, index) => (
                 <div key={index} className="box w-[90px] text-[#925C90]">
                   <div className="border flex items-center justify-center rounded-lg xl:p-4 p-2 border-[#925C90] mb-2">
                     <img src={box.icon} alt="" />
