@@ -35,7 +35,7 @@ export default function Footer() {
         />
       </div>
       <div className="   grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-        {data.map((item, index) => (
+        {data?.map((item, index) => (
           <FooterItem
             key={index}
             faq={item.FAQ}

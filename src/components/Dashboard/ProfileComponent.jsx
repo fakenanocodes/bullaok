@@ -1,26 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
 import { images } from '../../assets';
+import { icons } from '../../assets/icons';
+import EditProfileModal from '../modal/EditProfileModal';
 
+const features = [
+  {
+    title: 'Notifications',
+    icon: icons.notification,
+    link: 'notification',
+  },
+  {
+    title: 'KYC Verification',
+    description: 'Verify your identity with KYC',
+    icon: icons.kyc,
+    link: 'kyc',
+  },
+  {
+    title: 'Help & Support',
+    icon: icons.support,
+    link: 'support',
+  },
+  {
+    title: 'Refer & Get Bonus',
+    description:
+      'Share your referral link and get a bonus for every friend who signs up',
+    icon: icons.refer,
+    link: 'referral',
+  },
+];
 export default function ProfileComponent() {
   const { data, isLoading } = useSWR('user/');
-
+  const navigate = useNavigate();
   const user = data?.profile?.user;
   const profile = data?.profile;
   console.log(user?.first_name);
+  const [open, setOpen] = useState(false);
+
   return (
     <div className="grid grid-cols-1 xl:w-4/5 w-full mx-auto text-black xl:pb-8 p-3">
       <div className="flex xl:flex-row lg:flex-row flex-col gap-3 justify-between xl:p-8  xl:ml-8 ml-0">
         <div className="flex flex-col  items-center justify-center gap-3 text-[#7E577D]">
-          {/* <img
-            src={
-              profile?.image !== null
-                ? `${API_URL}${profile?.image}`
-                : images.profile
-            }
-            alt=""
-          /> */}
           <img src={images.profile} alt="" />
 
           <h2 className="text-3xl font-semibold">
@@ -48,7 +70,10 @@ export default function ProfileComponent() {
                 </h2>
               )}
             </div>
-            <button className="px-7 p-2 bg-[#F0EFFA] rounded-[20px]">
+            <button
+              onClick={() => setOpen(true)}
+              className="px-7 p-2 bg-[#8E0789] text-white rounded-[20px]"
+            >
               Edit
             </button>
           </div>
@@ -63,9 +88,6 @@ export default function ProfileComponent() {
                 <h2>{user?.email}</h2>
               )}
             </div>
-            <button className="px-7 p-2 bg-[#F0EFFA] rounded-[20px]">
-              Edit
-            </button>
           </div>
           <div className="flex justify-between items-center">
             <div className="text-[#222222]/90">
@@ -78,9 +100,6 @@ export default function ProfileComponent() {
                 <h2>{user?.phone_number}</h2>
               )}{' '}
             </div>
-            <button className="px-7 p-2 bg-[#F0EFFA] rounded-[20px]">
-              Edit
-            </button>
           </div>
           <div className="flex justify-between items-center">
             <div className="text-[#222222]/90">
@@ -91,33 +110,30 @@ export default function ProfileComponent() {
                 <h2>{user?.address}</h2>
               )}{' '}
             </div>
-            <button className="px-7 p-2 bg-[#F0EFFA] rounded-[20px]">
-              Edit
-            </button>
           </div>
         </div>
       </div>
 
       <div className="flex flex-col gap-2 mt-4 ">
-        <div className="border border-[#8E0789]/20 p-4 x:px-[70px] px-8">
-          <h2 className="font-bold xl:text-2xl text-sm">Total Assets</h2>
-          <h2 className="text-[#49454F] xl:text-xl text-[10px]">
-            View your total assets and earning.
-          </h2>
-        </div>
-        <div className="border border-[#8E0789]/20 p-4 x:px-[70px] px-8">
-          <h2 className="font-bold xl:text-2xl text-sm">Transaction History</h2>
-        </div>
-        <div className="border border-[#8E0789]/20 p-4 x:px-[70px] px-8">
-          <h2 className="font-bold xl:text-2xl text-sm">Account Limits</h2>
-          <h2 className="text-[#49454F] xl:text-xl text-sm">
-            View your transaction limits.{' '}
-          </h2>
-        </div>
-        <div className="border border-[#8E0789]/20 p-4 x:px-[70px] px-8">
-          <h2 className="font-bold xl:text-2xl text-sm">Support</h2>
-        </div>
+        {features?.map((feature, index) => (
+          <div
+            key={index}
+            onClick={() => navigate(`/dashboard/${feature.link}`)}
+            className="border flex justify-between items-center gap-2 border-[#8E0789]/20 p-4 x:px-[70px] cursor-pointer px-8"
+          >
+            <img src={feature.icon} alt="" />
+            <div className=" w-[95%] ">
+              <h2 className="font-bold xl:text-2xl text-sm">{feature.title}</h2>
+              {feature.description && (
+                <h2 className="text-[#49454F] xl:text-xl text-sm">
+                  {feature.description}
+                </h2>
+              )}
+            </div>
+          </div>
+        ))}
       </div>
+      {open && <EditProfileModal open={open} setOpen={setOpen} />}
     </div>
   );
 }

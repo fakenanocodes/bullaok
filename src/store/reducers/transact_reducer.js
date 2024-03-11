@@ -6,6 +6,8 @@ export const transactionSlice = createSlice({
     withdrawal: false,
     deposit: false,
     transfer: false,
+    userDetails: {},
+    // allUserDetails: {},
   },
 
   reducers: {
@@ -18,10 +20,21 @@ export const transactionSlice = createSlice({
     setTransfer: (state, action) => {
       state.transfer = action.payload;
     },
+    setUserDetails: (state, action) => {
+      state.userDetails = action.payload;
+    },
+    // setAllUserDetails: (state, action) => {
+    //   state.allUserDetails = action.payload;
+    // },
   },
 });
 
-export const { setWithDrawal, setDeposite, setTransfer } =
-  transactionSlice.actions;
+export const {
+  setWithDrawal,
+  setDeposite,
+  setTransfer,
+  setUserDetails,
+  // setAllUserDetails,
+} = transactionSlice.actions;
 
 export default transactionSlice.reducer;

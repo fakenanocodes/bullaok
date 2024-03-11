@@ -1,71 +1,27 @@
 import { ClickAwayListener } from '@mui/material';
 import axios from 'axios';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import useSWR from 'swr';
 import CancelIcon from '../../../components/utils/icons/CancelIcon';
 import DollaIcon from '../../../components/utils/icons/DollaIcon';
 import LeftMoveIcon from '../../../components/utils/icons/LeftMoveIcon';
 import DirectArrowIcon from '../../../components/utils/icons/directArrowIcon';
-
-let trans = [
-  {
-    Date: '10-02-2024 12:38:42',
-    Amount: '200.00',
-    Email: 'helenmaike@gmail.com',
-    Asset: '$',
-    Status: 'Succeed',
-  },
-  {
-    Date: '10-02-2024 12:38:42',
-    Amount: '200.00',
-    Email: 'ndubes@gmail.com',
-    Asset: '$',
-    Status: 'Pending ...',
-  },
-  {
-    Date: '10-02-2024 12:38:42',
-    Amount: '200.00',
-    Email: 'bulloakfoxfinance@gmail.com',
-    Asset: '$',
-    Status: 'Failed',
-  },
-  {
-    Date: '10-02-2024 12:38:42',
-    Amount: '200.00',
-    Email: 'helenmaike@gmail.com',
-    Asset: '$',
-    Status: 'Succeed',
-  },
-  {
-    Date: '10-02-2024 12:38:42',
-    Amount: '200.00',
-    Email: 'ndubes@gmail.com',
-    Asset: '$',
-    Status: 'Pending ...',
-  },
-  {
-    Date: '10-02-2024 12:38:42',
-    Amount: '200.00',
-    Email: 'bulloakfoxfinance@gmail.com',
-    Asset: '$',
-    Status: 'Failed',
-  },
-];
+import MobileTransferTable from './MobileTransferTab';
 
 const Transfer = () => {
   const [openModel, setOpenModel] = useState(false);
   const [showMobileTable, setShowMobileTable] = useState(false);
+  const [checkInputEmail, setCheckInputEmail] = useState(false);
   const { data: transfers } = useSWR(`/transfer/`);
 
-  console.log('transfer', transfers);
   const { data: user } = useSWR(`/user/`);
-  console.log('User', user);
 
   const [amount, setAmount] = useState('');
   const [emailAddress, setEmailAdress] = useState('');
   // const [usdtAmount, setUsdtAmount] = useState(user.profile.available_balance);
-
+  const navigate = useNavigate();
   // console.log('CHECKER', usdtAmount);
 
   const walletType = ['USDT', 'LTC', 'BTC', 'XRP', 'ETH'];
@@ -85,18 +41,25 @@ const Transfer = () => {
       console.log('RESPONSE', response);
       toast.success('success');
       setOpenModel(false);
-      reset();
     } catch (error) {
-      console.log(error);
-      toast.error('failed, check your details and try again');
+      console.log('ERROR', error);
+      if (error) toast.error('failed, check your details and try again');
       setOpenModel(false);
     }
   };
 
+  const handleValidEmail = () => {
+    if (emailAddress) {
+      setOpenModel(true);
+    } else {
+      setCheckInputEmail(true);
+    }
+  };
+
   return (
-    <div className=" h-[100%] bg-white no-scrollbar p-4 text-gray-700 overflow-scroll relative">
+    <div className=" h-[100%] bg-white no-scrollbar p-4 text-gray-700 relative overflow-y-scroll">
       <div className=" text-2xl font-bold my-3 mb-10 grid grid-cols-3 gap-12 items-center ">
-        <div className="md:hidden ">
+        <div className="md:hidden cursor-pointer " onClick={() => navigate(-1)}>
           <LeftMoveIcon />
         </div>
         Transfer
@@ -104,25 +67,6 @@ const Transfer = () => {
       <div>
         <div className="flex flex-col gap-10 pb-24">
           <div className="md:flex gap-10  font-semibold">
-            {/* <div className="flex flex-col md:w-[50%] mb-10 md:mb-0">
-              <label>Source wallet</label>
-              <select
-                value={wallet}
-                onChange={(e) => setWallet(e.target.value)}
-                type="text"
-                className="rounded-lg px-6 border-2 py-4"
-              >
-                {walletType.map((type, idx) => (
-                  <option
-                    key={idx}
-                    value={type}
-                    className="cursor-pointer flex gap-3"
-                  >
-                    {type}
-                  </option>
-                ))}
-              </select>
-            </div> */}
             <div className="flex flex-col md:w-full relative">
               <label>Asset</label>
               <div className="flex ">
@@ -151,7 +95,7 @@ const Transfer = () => {
               <input
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
-                type="text"
+                type="number"
                 className="rounded-lg px-6 border-2 py-4"
                 placeholder="0.00 $"
               />
@@ -164,18 +108,20 @@ const Transfer = () => {
               <input
                 value={emailAddress}
                 onChange={(e) => setEmailAdress(e.target.value)}
-                type="text"
-                className="rounded-lg px-6 border-2 py-4"
+                type="email"
+                className={`rounded-lg px-6 border-2 py-4 ${
+                  checkInputEmail && 'border-red-600'
+                }`}
                 placeholder="youremail@email.com"
               />
             </div>
           </div>
           <div className="md:flex md:justify-between md:w-[48%] text-xl items-center">
             <div className=" text-red-600 font-semibold mb-28 md:mb-0">
-              You are transferring $0.00
+              You are transferring ${amount || '0.00'}
             </div>
             <button
-              onClick={() => setOpenModel(true)}
+              onClick={handleValidEmail}
               className="hidden md:flex bg-[#352F84] py-2 text-white text-[18px] px-4 rounded-[5px]"
             >
               Send payment
@@ -188,7 +134,7 @@ const Transfer = () => {
                 Transfer History
               </button>
               <button
-                onClick={() => setOpenModel(true)}
+                onClick={handleValidEmail}
                 className="bg-[#352F84] text-white rounded-md px-6 py-4"
               >
                 Send payment
@@ -197,12 +143,14 @@ const Transfer = () => {
           </div>
         </div>
       </div>
-      <div
-        className={` ${
-          showMobileTable ? `block` : `hidden`
-        } md:block border shadow-md`}
-      >
-        <div className="bg-[#8E0789] text-white p-3 md:text-2xl font-semibold">
+      {/* mobile table */}
+      <MobileTransferTable
+        transfers={transfers}
+        showMobileTable={showMobileTable}
+      />
+
+      <div className={`hidden md:block border shadow-md`}>
+        <div className="bg-[#8E0789] text-white p-3 md:text-2xl font-semibold w-full">
           Transfer History
         </div>
         <div className="flex justify-between md:w-[90%] md:ml-10 text-sm ">
@@ -221,9 +169,6 @@ const Transfer = () => {
           <div className="m-2 p-2 md:px-10 bg-[#F9F9FA] shadow drop-shadow-sm">
             STATUS
           </div>
-          {/* <select className="m-2 md:p-2 bg-[rgb(249,249,250)] shadow drop-shadow-lg border-none px-7 hidden md:block">
-            <option className="">Sort</option>
-          </select> */}
         </div>
         <div>
           {transfers?.map((transfer, idx) => (
@@ -245,6 +190,7 @@ const Transfer = () => {
           ))}
         </div>
       </div>
+
       {openModel && (
         <div className=" fixed top-0 left-0 w-full h-full flex  justify-center items-center bg-[#000000b3]">
           <ClickAwayListener onClickAway={() => setOpenModel(false)}>

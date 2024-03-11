@@ -161,7 +161,7 @@ const TransferComponent = () => {
           </select>
         </div>
         <div>
-          {trans.map((tran, idx) => (
+          {trans?.map((tran, idx) => (
             <div className="flex justify-between md:w-[90%] text-xs ">
               <div className="font-bold md:mx-12 mr-14 py-3 ">{tran.Date}</div>
               <div className="py-3 w-5 -mx-5 ">{tran.Amount}</div>

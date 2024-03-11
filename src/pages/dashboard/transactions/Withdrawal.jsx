@@ -1,37 +1,93 @@
 import { ClickAwayListener } from '@mui/material';
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 // import { Cookies } from 'react-cookie';
 import { toast } from 'react-toastify';
 import useSWR from 'swr';
 import DollaIcon from '../../../components/utils/icons/DollaIcon';
 import WithdrawIcon from '../../../components/utils/icons/WithdrawIcon';
 
+import { useNavigate } from 'react-router-dom';
 import LeftMoveIcon from '../../../components/utils/icons/LeftMoveIcon';
+import MobileTable from './MobileTable';
 
 const Withdrawal = () => {
   const [openModel, setOpenModel] = useState(false);
   const [showMobileTable, setShowMobileTable] = useState(false);
-  const { data: withdraws } = useSWR(`/withdraw/`);
-  console.log('WITHDRAW ==> ', withdraws);
-
+  const [inputWarning, setInputWarning] = useState(false);
+  const navigate = useNavigate();
   const [wallet, setWallet] = useState('');
   const [amount, setAmount] = useState('');
   const [walletAddress, setWalletAdress] = useState('');
-  const [usdtAmount, setUsdtAmount] = useState(6);
+  const [usdtAmount, setUsdtAmount] = useState('');
+  const [convertWallet, setconvertWallet] = useState('');
+  const { data: withdraws } = useSWR(`/withdraw/`);
   const { data: user } = useSWR(`/user/`);
-  console.log('User', user);
+  // console.log('User', user);
+
+  const newWallet = ['tether', 'litecoin', 'bitcoin', 'ripple', 'ethereum'];
 
   const walletType = ['USDT', 'LTC', 'BTC', 'XRP', 'ETH'];
 
+  useEffect(() => {
+    if (wallet == walletType[0]) {
+      setconvertWallet(newWallet[0]);
+    } else if (wallet == walletType[1]) {
+      setconvertWallet(newWallet[1]);
+    } else if (wallet == walletType[2]) {
+      setconvertWallet(newWallet[2]);
+    } else if (wallet == walletType[3]) {
+      setconvertWallet(newWallet[3]);
+    } else if (wallet == walletType[4]) {
+      setconvertWallet(newWallet[4]);
+    }
+  }, [wallet]);
+
+  // console.log('SET WALLET', convertWallet);
+
+  //   these are the coins will need to pass depending on the coin you selected [litecoin,ripple,ethereum,bitcoin,tether]
+
+  // Function to convert a coin amount to USD using CoinGecko API
+
+  useEffect(() => {
+    const convertToUSD = async (coin, amount) => {
+      const url = `https://api.coingecko.com/api/v3/simple/price?ids=${coin}&vs_currencies=usd`;
+      const { data } = await axios.get(url);
+
+      // Check if coin exists in the data
+      if (!data[coin]) {
+        throw new Error(`Coin ${coin} not found in API response`);
+      }
+
+      const price = await data[coin].usd; // Get USD price per coin
+      console.log('Coin Data', price, data);
+      const usdEquivalent = amount * price; // Calculate USD equivalent
+
+      return usdEquivalent.toFixed(2); // Return formatted USD amount
+    };
+
+    const fetchData = async () => {
+      try {
+        let converted = await convertToUSD(convertWallet, amount);
+        // console.log('CONVERTED', converted, convertWallet);
+        setUsdtAmount(converted);
+      } catch (error) {
+        // Handle errors if needed
+        console.error('Error in fetchData:', error.message);
+      }
+    };
+
+    fetchData();
+  }, [convertWallet, amount]);
+
   let userData = {
     amount,
-    wallet_type: wallet,
+    wallet_type: wallet || walletType[0],
     wallet_address: walletAddress,
     usdt_amount: usdtAmount,
   };
 
-  console.log(userData);
+  console.log(`User Data`, userData);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -40,7 +96,6 @@ const Withdrawal = () => {
       console.log('RESPONSE', response.data);
       toast.success('success');
       setOpenModel(false);
-      reset();
     } catch (error) {
       console.log(error?.response?.data?.UsdtAmount);
       if (error?.response?.data?.UsdtAmount == 'ou have insufficient funds') {
@@ -50,10 +105,18 @@ const Withdrawal = () => {
     }
   };
 
+  const handleOpenModal = () => {
+    if (walletAddress) {
+      setOpenModel(true);
+    } else {
+      setInputWarning(true);
+    }
+  };
+
   return (
     <div className=" h-[100%] no-scrollbar bg-white p-4 text-gray-700 overflow-scroll relative">
       <div className=" text-2xl font-bold my-3 mb-10 grid grid-cols-3 gap-12 items-center ">
-        <div className="md:hidden ">
+        <div className="md:hidden cursor-pointer" onClick={() => navigate(-1)}>
           <LeftMoveIcon />
         </div>
         Withdrawal
@@ -71,23 +134,6 @@ const Withdrawal = () => {
               <div className="absolute top-10 left-3">
                 <DollaIcon />
               </div>
-
-              {/* <select
-                value={wallet}
-                onChange={(e) => setWallet(e.target.value)}
-                type="text"
-                className="rounded-lg px-6 border-2 py-4"
-              >
-                {walletType.map((type, idx) => (
-                  <option
-                    key={idx}
-                    value={type}
-                    className="cursor-pointer flex gap-3"
-                  >
-                    {type}
-                  </option>
-                ))}
-              </select> */}
             </div>
             <div className="flex flex-col md:w-[50%]">
               <label>Asset destination</label>
@@ -125,7 +171,10 @@ const Withdrawal = () => {
                 value={walletAddress}
                 onChange={(e) => setWalletAdress(e.target.value)}
                 type="text"
-                className="rounded-lg px-6 border-2 py-4"
+                required
+                className={`rounded-lg px-6 border-2  py-4 ${
+                  inputWarning && 'border-red-600'
+                }`}
                 placeholder="reciever_wallet_address$lkjhyiu878yfs44rs"
               />
             </div>
@@ -134,7 +183,7 @@ const Withdrawal = () => {
               <input
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
-                type="text"
+                type="number"
                 className="rounded-lg px-6 border-2 py-4"
                 placeholder="0.00 $"
               />
@@ -149,7 +198,9 @@ const Withdrawal = () => {
                 value={walletAddress}
                 onChange={(e) => setWalletAdress(e.target.value)}
                 type="text"
-                className="rounded-lg px-6 border-2 py-4"
+                className={`rounded-lg px-6 border-2 py-4 ${
+                  inputWarning && 'border-red-600'
+                }`}
                 placeholder="reciever_wallet_address$lkjhyiu878yfs44rs"
               />
             </div>
@@ -158,7 +209,7 @@ const Withdrawal = () => {
               <input
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
-                type="text"
+                type="number"
                 className="rounded-lg px-6 border-2 py-4"
                 placeholder="0.00 $"
               />
@@ -166,10 +217,10 @@ const Withdrawal = () => {
           </div>
           <div className="md:flex md:justify-between md:w-[48%] text-xl items-center">
             <div className=" text-red-600 font-semibold mb-28 md:mb-0">
-              You are withdrawing $0.00
+              You are withdrawing {usdtAmount || '0.00'} USDT
             </div>
             <button
-              onClick={() => setOpenModel(true)}
+              onClick={handleOpenModal}
               className="hidden md:flex bg-[#352F84] py-2 text-white px-4 rounded-[5px]"
             >
               Make withdrawal
@@ -182,7 +233,7 @@ const Withdrawal = () => {
                 Withdrawal History
               </button>
               <button
-                onClick={() => setOpenModel(true)}
+                onClick={handleOpenModal}
                 className="bg-[#352F84] text-white rounded-md px-6 py-4"
               >
                 Make withdrawal
@@ -191,14 +242,17 @@ const Withdrawal = () => {
           </div>
         </div>
       </div>
-      <div
-        className={` ${
-          showMobileTable ? `block` : `hidden`
-        } md:block border shadow-md`}
-      >
+      {/* Mobile table */}
+      <MobileTable
+        withdraws={withdraws}
+        showMobileTable={showMobileTable}
+        address={'WALLET'}
+      />
+      <div className={`hidden md:block border shadow-md`}>
         <div className="bg-[#8E0789] text-white p-3 md:text-2xl font-semibold">
           Withdrawal History
         </div>
+
         <div className="flex justify-between md:w-[90%] md:ml-10 text-sm ">
           <div className="m-2 p-2  md:px-10 bg-[#F9F9FA] shadow drop-shadow-sm ">
             DATE
@@ -268,7 +322,7 @@ const Withdrawal = () => {
                 <div>
                   {/* <DollaIcon /> */}
                   <input
-                    value={wallet}
+                    value={wallet || walletType[0]}
                     placeholder="$1,474.91"
                     className="border-2 w-full rounded-md p-2 px-4"
                     id="asset"

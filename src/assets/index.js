@@ -10,6 +10,7 @@ import content from './content.png';
 import crypto from './crypto_market.png';
 import cynthia from './cynthia.png';
 import empty from './dashboard/empty.png';
+import open from './dashboard/open.png';
 import referral from './dashboard/referral.png';
 import share from './dashboard/share.png';
 import signin from './dashboard/signin.png';
@@ -69,4 +70,5 @@ export const images = {
   signin,
   share,
   empty,
+  open,
 };

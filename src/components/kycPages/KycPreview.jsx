@@ -1,8 +1,40 @@
+import axios from 'axios';
 import { useContext } from 'react';
+import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import useSWR from 'swr';
 import { KycContext } from '../../pages/dashboard/Kyc';
 
 const KycPreview = () => {
   const { kyc, setKyc, setSup } = useContext(KycContext);
+  const { userDetails } = useSelector((state) => state.transact);
+  const { data: userData } = useSWR('/kyc/');
+  const { data: user } = useSWR('/user/');
+  // console.log('KYC', userData);
+  // console.log('PREVIEW PAGE', userDetails);
+  console.log('USER', user);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setSup('success');
+
+    const formData = new FormData();
+    formData.append('first_name', userDetails?.first_name);
+    formData.append('last_name', userDetails?.last_name);
+    formData.append('email', userDetails?.email);
+    formData.append('country', userDetails?.country);
+    formData.append('address', userDetails?.address);
+    formData.append('birth_date', userDetails?.birth_date);
+    formData.append('profile', user?.profile?.id);
+
+    try {
+      const response = await axios.post('/kyc/', formData);
+      toast.success(response.data.message);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div
       className={kyc === 'review' ? 'w-full h-full' : 'w-full h-full hidden'}
@@ -137,6 +169,7 @@ const KycPreview = () => {
                   type="text"
                   className="w-full h-full bg-[inherit] outline-none p-[5px] font-[Poppins] font-[400] text-[12px] text-[#AAAAAA] text-right border-none"
                   disabled
+                  value={userDetails?.first_name}
                 />
               </div>
 
@@ -151,6 +184,7 @@ const KycPreview = () => {
                   type="text"
                   className="w-full h-full bg-[inherit] outline-none p-[5px] font-[Poppins] font-[400] text-[12px] text-[#AAAAAA] text-right border-none"
                   disabled
+                  value={userDetails?.last_name}
                 />
               </div>
 
@@ -159,12 +193,13 @@ const KycPreview = () => {
                 id="kyc"
               >
                 <label className="font-[Poppins] font-[400] text-[12px] text-[#AAAAAA] whitespace-nowrap">
-                  Emmail address
+                  Email address
                 </label>
                 <input
                   type="text"
                   className="w-full h-full bg-[inherit] outline-none p-[5px] font-[Poppins] font-[400] text-[12px] text-[#AAAAAA] text-right border-none"
                   disabled
+                  value={userDetails?.email}
                 />
               </div>
 
@@ -179,6 +214,7 @@ const KycPreview = () => {
                   type="text"
                   className="w-full h-full bg-[inherit] outline-none p-[5px] font-[Poppins] font-[400] text-[12px] text-[#AAAAAA] text-right border-none"
                   disabled
+                  value={userDetails?.country}
                 />
               </div>
 
@@ -193,6 +229,7 @@ const KycPreview = () => {
                   type="text"
                   className="w-full h-full bg-[inherit] outline-none p-[5px] font-[Poppins] font-[400] text-[12px] text-[#AAAAAA] text-right border-none"
                   disabled
+                  value={userDetails?.birth_date}
                 />
               </div>
             </div>
@@ -211,7 +248,7 @@ const KycPreview = () => {
 
         <button
           className="bg-[#FFB803] w-[80px] rounded-[5px] text-center text-[black] font-[Poppins] text-[12px] py-[2px] font-[600]"
-          onClick={() => setSup('success')}
+          onClick={handleSubmit}
         >
           Finish
         </button>
