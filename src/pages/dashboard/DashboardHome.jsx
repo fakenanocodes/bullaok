@@ -1,10 +1,35 @@
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
+import { ArcElement, Chart as ChartJS, Legend, Tooltip } from 'chart.js';
+import { Doughnut } from 'react-chartjs-2';
+
 import { useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
 import { images } from '../../assets';
-import Chart from '../../assets/dashboard/chart.svg';
 import PackageCard from '../../components/Dashboard/PackageCard';
+
+ChartJS.register(ArcElement, Tooltip, Legend);
+
+const chartData = {
+  datasets: [
+    {
+      data: [40, 50, 10],
+      backgroundColor: ['#6699FC', '#F324EC', '#0E0C6D'],
+    },
+  ],
+};
+
+const options = {
+  legend: {
+    position: 'right', // This will position the legend on the right side of the chart
+    display: 'flex',
+    labels: {
+      boxWidth: 10, // This will set the width of the box that wraps the label text
+      fontSize: 12, // This will set the font size of the label text
+      padding: 10, // This will set the padding around the label text
+    },
+  },
+};
 
 const imageUrls = {
   Assets: images.assets,
@@ -29,7 +54,7 @@ const DashboardHome = () => {
                 $ 1,474.91
               </span>
 
-              <div className=" shadow-xl   shadow-[#8E0789]/50 flex items-center space-x-2 p-2 px-8 font-bold rounded-md shadow-[#8E0789] bg-[#8E0789]">
+              <div className=" shadow-xl  flex items-center space-x-2 p-2 px-8 font-bold rounded-md shadow-[#8E0789] bg-[#8E0789]">
                 <ArrowDropUpIcon className="text-[#52B570] bg-white rounded-full w-32 h-32" />
                 <span>25.69%</span>
               </div>
@@ -44,8 +69,10 @@ const DashboardHome = () => {
             </div>
           </div>
         </div>
-        <div className="border  flex flex-col justify-center bg-[#0C0000] items-center pb-10 border-white border-opacity-40  flex-1">
-          <img src={Chart} alt="" className="w-44 h-44" />
+        <div className="border  flex flex-col justify-center space-y-5 bg-[#0C0000] items-center pb-10 border-white border-opacity-40  flex-1">
+          <div style={{ width: '150px', height: '150px' }}>
+            <Doughnut data={chartData} option={options} />
+          </div>
           <div className="flex space-x-2">
             <div className="flex flex-col justify-center items-center">
               <span className="flex space-x-2">
