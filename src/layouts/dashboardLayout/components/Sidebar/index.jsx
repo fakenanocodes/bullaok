@@ -21,13 +21,26 @@ const icons = [
 const DashboardSidebar = () => {
   const [activeIcon, setActiveIcon] = useState(null);
   const cookie = new Cookies();
-const navigate = useNavigate()
+  const navigate = useNavigate();
   const logoutOption = () => {
     navigate('/');
     cookie.remove(`bk_token`);
     cookie.remove(`bk_user`);
     window.location.reload();
   };
+
+  const icons = [
+    { icon: <HomeIcon />, id: 'home', path: '' },
+    { icon: <InvestmentIcon />, id: 'investment', path: 'card-application' },
+    { icon: <PlantIcon />, id: 'plans', path: 'investment/packages' },
+    {
+      icon: <TransactionIcon />,
+      id: 'transaction',
+      path: 'investment/running',
+    },
+    { icon: <LogoutIcon />, id: 'logout' },
+  ];
+
   return (
     <div className="p-7 bg-black bg-opacity-[34%] absolute top-[30%] flex-col hidden lg:flex items-center space-y-5 justify-center border rounded-xl ">
       {icons?.map((item) => (

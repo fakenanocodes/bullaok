@@ -3,6 +3,7 @@ import { ArcElement, Chart as ChartJS, Legend, Tooltip } from 'chart.js';
 import { useState } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
 import { images } from '../../assets';
@@ -10,6 +11,7 @@ import HistoryRow from '../../components/Dashboard/HistoryRow';
 import PackageCard from '../../components/Dashboard/PackageCard';
 import DashboardEmptyContainer from '../../components/empty/DashboardEmptyContainer';
 import useCurrencyFormatter from '../../hooks/useCurrencyFormatter';
+import { setUserKyc } from '../../store/reducers/transact_reducer';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -50,6 +52,7 @@ const DashboardHome = () => {
   const { data: user } = useSWR('/user/');
   const { data: history, isLoading: historyLoading } = useSWR('plans/history');
   const [activeOption, setActiveOption] = useState(null);
+  const dispatch = useDispatch();
 
   const isChartDataAvailable =
     data && data.length > 0 && data.some((item) => item.value !== 0);
@@ -57,6 +60,8 @@ const DashboardHome = () => {
   const navigate = useNavigate();
   console.log(user);
   const [showAmount, setShowAmount] = useState(true);
+  const { data: userKyc } = useSWR('/kyc/');
+  dispatch(setUserKyc(userKyc));
 
   const handleVisibilityToggle = () => {
     setShowAmount(!showAmount);
