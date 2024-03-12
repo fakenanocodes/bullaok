@@ -1,4 +1,6 @@
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
+import { ArcElement, Chart as ChartJS, Legend, Tooltip } from 'chart.js';
+import { Doughnut } from 'react-chartjs-2';
 import { useState } from 'react';
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
@@ -9,6 +11,29 @@ import HistoryRow from '../../components/Dashboard/HistoryRow';
 import PackageCard from '../../components/Dashboard/PackageCard';
 import DashboardEmptyContainer from '../../components/empty/DashboardEmptyContainer';
 import useCurrencyFormatter from '../../hooks/useCurrencyFormatter';
+
+ChartJS.register(ArcElement, Tooltip, Legend);
+
+const chartData = {
+  datasets: [
+    {
+      data: [40, 50, 10],
+      backgroundColor: ['#6699FC', '#F324EC', '#0E0C6D'],
+    },
+  ],
+};
+
+const options = {
+  legend: {
+    position: 'right', // This will position the legend on the right side of the chart
+    display: 'flex',
+    labels: {
+      boxWidth: 10, // This will set the width of the box that wraps the label text
+      fontSize: 12, // This will set the font size of the label text
+      padding: 10, // This will set the padding around the label text
+    },
+  },
+};
 
 const imageUrls = {
   Assets: images.assets,
@@ -68,6 +93,7 @@ const DashboardHome = () => {
           </div>
           <div className="flex flex-col xl:space-y-8 space-y-1 relative">
             <div className="flex items-center space-x-4">
+
               <input
                 type={showAmount ? 'text' : 'password'}
                 value={formattedAmount}
@@ -91,6 +117,7 @@ const DashboardHome = () => {
             </div>
           </div>
         </div>
+
         <div className="xl:border p-4  flex xl:flex-col flex-row-reverse justify-center items-center xl:bg-[#0C0000]  items-center  border-white border-opacity-40  flex-1">
           <img src={Chart} alt="" className="xl:w-44 xl:h-44 w-full" />
           <div className="flex  justify-center w-full   xl:flex-row flex-col xl:items-center items-start xl:space-x-2 xl:space-y-0 space-y-2">
