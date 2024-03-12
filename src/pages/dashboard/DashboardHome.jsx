@@ -16,7 +16,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 const chartData = {
   datasets: [
     {
-      data: [40, 50, 10],
+      data: [0, 2, 5],
       backgroundColor: ['#6699FC', '#F324EC', '#0E0C6D'],
     },
   ],
@@ -50,6 +50,9 @@ const DashboardHome = () => {
   const { data: user } = useSWR('/user/');
   const { data: history, isLoading: historyLoading } = useSWR('plans/history');
   const [activeOption, setActiveOption] = useState(null);
+
+  const isChartDataAvailable =
+    data && data.length > 0 && data.some((item) => item.value !== 0);
 
   const navigate = useNavigate();
   console.log(user);
@@ -119,9 +122,15 @@ const DashboardHome = () => {
           </div>
         </div>
         <div className="border  flex flex-col justify-center space-y-5 bg-[#0C0000] items-center pb-10 border-white border-opacity-40  flex-1">
-          <div style={{ width: '150px', height: '150px' }}>
-            <Doughnut data={chartData} option={options} />
-          </div>
+          {!isChartDataAvailable ? (
+            <div style={{ width: '150px', height: '150px' }}>
+              <Doughnut data={chartData} option={options} />
+            </div>
+          ) : (
+            <div>
+              <p>No data available for the chart.</p>
+            </div>
+          )}
           <div className="flex space-x-2">
             <div className="flex flex-col justify-center items-center">
               <span className="flex space-x-2">
