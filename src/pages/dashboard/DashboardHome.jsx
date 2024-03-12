@@ -1,6 +1,5 @@
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import { ArcElement, Chart as ChartJS, Legend, Tooltip } from 'chart.js';
-import { Doughnut } from 'react-chartjs-2';
 import { useState } from 'react';
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
@@ -44,7 +43,7 @@ const imageUrls = {
 };
 
 const colors = ['#6B5F6B', '#33FF57', '#5733FF']; // Add more colors as needed
-const options = ['Withdraw', 'Deposit', 'Transfer'];
+const navOptions = ['Withdraw', 'Deposit', 'Transfer'];
 
 const DashboardHome = () => {
   const { data, isLoading } = useSWR('/plans/categories/');
@@ -62,10 +61,13 @@ const DashboardHome = () => {
   const formattedAmount = useCurrencyFormatter(
     user?.profile?.available_balance
   );
+  const formattedBookBalance = useCurrencyFormatter(
+    user?.profile?.book_balance
+  );
   return (
     <div className="space-y-3 h-full no-scrollbar overflow-auto p-5">
       <div className="flex space-x-3 items-center justify-center w-full xl:hidden lg:hidden md:hidden py-7 text-[#41073F] font-semibold">
-        {options?.map((option, index) => (
+        {navOptions?.map((option, index) => (
           <span
             key={index}
             className={` cursor-pointer ${
@@ -93,7 +95,6 @@ const DashboardHome = () => {
           </div>
           <div className="flex flex-col xl:space-y-8 space-y-1 relative">
             <div className="flex items-center space-x-4">
-
               <input
                 type={showAmount ? 'text' : 'password'}
                 value={formattedAmount}
@@ -109,10 +110,10 @@ const DashboardHome = () => {
                 live profit
               </span>
             </div>
-            <div className="flex border border-red-500 justify-start w-full flex-col space-x-4">
+            <div className="flex  justify-start w-full flex-col ">
               <span className="text-gray-300 text-lg">Book Balance</span>
-              <span className="font-bold  bg-transparent rounded-md border border-white border-opacity-20 shadow-xl drop-shadow-xl p-1 px-2 text-xs">
-                book balance
+              <span className="font-bold  bg-transparent  shadow-xl drop-shadow-xl  text-xl">
+                {formattedBookBalance}
               </span>
             </div>
           </div>
