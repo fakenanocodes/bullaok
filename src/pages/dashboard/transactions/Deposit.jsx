@@ -18,6 +18,7 @@ const Deposit = () => {
   const [selectedCoin, setSelectedCoin] = useState('');
   const [walletTypes, setWalletTypes] = useState('');
   const [usdtAmount, setUsdtAmount] = useState('');
+  const [showNotify, setShowNotify] = useState(false);
   const { data: deposits } = useSWR(`/deposit/`);
   const { data: depositWallet } = useSWR('/walletaddress/');
   const navigate = useNavigate();
@@ -52,29 +53,6 @@ const Deposit = () => {
 
   console.log('SELECTED COIN', selectedCoin);
 
-  // // Function to convert USD amount to a coin equivalent
-  // async function convertToCoin(coin, usdAmount) {
-  //   // First convert USD to BTC to use existing 'convertToUSD' function
-  //   const btcEquivalent = await convertToUSD(coin, usdAmount);
-
-  //   // Extract BTC amount from the formatted string
-  //   const btcAmount = parseFloat(btcEquivalent.split(' ')[0]);
-
-  //   // Calculate coin equivalent based on the USD price of the coin
-  //   const url = `https://api.coingecko.com/api/v3/simple/price?ids=${coin}&vs_currencies=usd`;
-  //   const response = await fetch(url);
-  //   const data = await response.json();
-
-  //   // Check if coin exists in the data
-  //   if (!data[coin]) {
-  //     throw new Error(`Coin ${coin} not found in API response`);
-  //   }
-  //   console.log(data);
-  //   const price = data[coin]?.usd; // Get USD price per coin
-  //   const coinEquivalent = usdAmount / price; // Calculate coin equivalent
-
-  //   return `${coinEquivalent.toFixed(8)} ${coin}`; // Return formatted coin amount with 8 decimal places
-  // }
   useEffect(() => {
     async function convertToUSD(coin, amount) {
       console.log('SELECTED COIN', coin, 'AMOUNT', amount);
@@ -110,8 +88,8 @@ const Deposit = () => {
   console.log(userData);
 
   const handleSubmit = async (e) => {
-    setLoading(true);
     e.preventDefault();
+    setLoading(true);
     try {
       const response = await axios.post('/deposit/', userData);
       console.log('RESPONSE', response.data);
@@ -125,8 +103,16 @@ const Deposit = () => {
     }
   };
 
+  const handleOpenModel = () => {
+    if (amount) {
+      setOpenModel(true);
+    } else {
+      setShowNotify(true);
+    }
+  };
+
   return (
-    <div className=" h-[100%] no-scrollbar bg-white p-4 text-gray-700 overflow-scroll relative">
+    <div className=" h-[100%] no-scrollbar bg-white p-4 text-gray-700 overflow-scroll relative 00">
       <div className=" text-2xl font-bold my-3 mb-10 grid grid-cols-3 gap-12 items-center ">
         <div className="md:hidden cursor-pointer " onClick={() => navigate(-1)}>
           <LeftMoveIcon />
@@ -177,7 +163,9 @@ const Deposit = () => {
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
                 type="number"
-                className="rounded-lg px-6 border-2 py-4"
+                className={`rounded-lg px-6 border-2 ${
+                  showNotify && 'border-red-500'
+                } py-4`}
                 placeholder="0.00 $"
               />
             </div>
@@ -190,7 +178,9 @@ const Deposit = () => {
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
                 type="number"
-                className="rounded-lg px-6 border-2 py-4"
+                className={`rounded-lg px-6 border-2 ${
+                  showNotify && 'border-red-500'
+                } py-4`}
                 placeholder="0.00 $"
               />
             </div>
@@ -198,19 +188,17 @@ const Deposit = () => {
               <label>Deposit wallet address</label>
               <input
                 value={wallet || walletMock.usdt_address}
-                //onChange={(e) => setWalletAdress(e.target.value)}
                 type="text"
                 className="rounded-lg px-6 border-2 py-4"
-                // placeholder="lkjhyiu878yfs44rs"
               />
             </div>
           </div>
           <div className="md:flex md:justify-between md:w-[48%] text-xl items-center">
             <div className=" text-red-600 font-semibold mb-28 md:mb-0">
-              You are depositing {usdtAmount || '0.00'} USDT
+              You are depositing ${usdtAmount || '0.00'}
             </div>
             <button
-              onClick={() => setOpenModel(true)}
+              onClick={handleOpenModel}
               className="hidden md:flex bg-[#352F84] py-2 text-white px-4 rounded-[5px]"
             >
               Make deposit
@@ -223,7 +211,7 @@ const Deposit = () => {
                 Deposit History
               </button>
               <button
-                onClick={() => setOpenModel(true)}
+                onClick={handleOpenModel}
                 className="bg-[#352F84] text-white rounded-md px-6 py-4"
               >
                 Make deposit

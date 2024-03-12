@@ -1,9 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import { scrollToTop } from '../actions/utils';
-import BluetoothIcon from './utils/icons/BluetoothIcon';
 import EmailIcon from './utils/icons/EmailIcon';
+import HomePageIcon from './utils/icons/HomePageIcon.png';
+// import HomePageIcon from './utils/icons/HomePageIcon';
+import { Cookies } from 'react-cookie';
+import BluetoothIcon from './utils/icons/BluetoothIcon';
 import PhoneIcon from './utils/icons/PhoneIcon';
-import ProfileIcon from './utils/icons/ProfileIcon';
 import DropDownMenu from './utils/reusables/DropDownMenu';
 
 const navItems = [
@@ -53,12 +55,21 @@ const navItems = [
 ];
 
 // bg-[#30022ECC]
+
 const Header = () => {
   const navigate = useNavigate();
+  const cookie = new Cookies();
+  const userDetails = cookie.get('bk_user');
+  console.log('USer', userDetails);
 
   return (
     <div className="w-full flex justify-between items-center py-5 px-5 lg:px-10 xl:px-20 bg-[#41073F] shadow-md fixed z-40 top-0 left-0">
-      <p className="font-semibold text-white">Logo</p>
+      <div
+        onClick={() => navigate('/')}
+        className="font-semibold text-white z-40 "
+      >
+        <img src={HomePageIcon} className="w-14 bg-white py-1" />
+      </div>
       <div className="flex items-center gap-5">
         <p
           onClick={() => {
@@ -73,33 +84,34 @@ const Header = () => {
           <DropDownMenu key={idx} item={item} />
         ))}
         <p
-          onClick={() => window.open('https://news.bulloak.org', '_blank')}
+          onClick={() => navigate('/')}
+          // onClick={() => window.open('https://news.bulloak.org', '_blank')}
           className="font-semibold text-white text-sm cursor-pointer"
         >
           News
         </p>
       </div>
       <div className="flex items-center gap-7">
-        <div className="cursor-pointer">
+        <div onClick={() => navigate('/history')} className="cursor-pointer">
           <BluetoothIcon />
         </div>
-        <div className="cursor-pointer">
+        <div onClick={() => navigate('/about')} className="cursor-pointer">
           <PhoneIcon />
         </div>
-        <div className="cursor-pointer">
+        <div onClick={() => navigate('/about')} className="cursor-pointer">
           <EmailIcon />
         </div>
-        <div className="cursor-pointer">
+        {/* <div className="cursor-pointer">
           <ProfileIcon />
-        </div>
+        </div> */}
         <button
           onClick={() => {
             scrollToTop();
-            navigate('/login');
+            userDetails ? navigate('/dashboard') : navigate('/login');
           }}
           className="border-2 border-white outline-none p-2 text-sm rounded-sm font-semibold text-white"
         >
-          Get Started
+          {userDetails ? 'Dashboard' : 'Get Started'}
         </button>
       </div>
     </div>

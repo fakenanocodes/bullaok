@@ -14,6 +14,7 @@ const InputComponent = ({
   accept,
   price,
   date,
+  value,
 }) => {
   const [passwordType, setPasswordType] = useState(type);
   const passwordToggle = () => {
@@ -53,6 +54,7 @@ const InputComponent = ({
             {...register}
             disabled={disabled}
             accept={accept}
+            defaultValue={value}
           />
           {password && passwordToggle()}
           {date && (

@@ -21,6 +21,9 @@ const schema = yup.object().shape({
   referral_code: yup.string().required('referral code field cannot be empty'),
 });
 const SignupForm = ({ setSignupComponent }) => {
+  const urlSearchParams = new URLSearchParams(window.location.search);
+  const referral = urlSearchParams.get('referral');
+
   const navigate = useNavigate();
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -119,6 +122,7 @@ const SignupForm = ({ setSignupComponent }) => {
             error={errors?.referral_code?.message}
             register={register('referral_code')}
             type={'text'}
+            value={referral}
             label={'Referral Code'}
             placeholder={'Referral Code'}
           />

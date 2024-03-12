@@ -8,20 +8,17 @@ export default function HistoryRow({ colors, idx, item }) {
   const formattedDate = formatDateWithSuffix(originalDate);
   console.log(item);
   return (
-    <div
-      key={idx}
-      className="flex justify-between px-10 py-4  bg-[#BB9FB3] bg-opacity-[38%]"
-    >
-      <span className="flex items-center gap-2">
+    <tr key={idx} className=" mt-5 px-10 py-4  bg-[#BB9FB3] bg-opacity-[38%]">
+      <td className="flex items-center gap-2">
         <span className="bg-white w-6 h-6 flex justify-center items-center rounded-full">
           <FiberManualRecordIcon
             style={{ color: colors[idx], borderRadius: '50%' }}
           />
         </span>
         {item?.investmentplan?.name}
-      </span>
-      <span>{item?.details}</span>
-      <span>{formattedDate}</span>
-    </div>
+      </td>
+      <td>{item?.details}</td>
+      <td>{formattedDate}</td>
+    </tr>
   );
 }
