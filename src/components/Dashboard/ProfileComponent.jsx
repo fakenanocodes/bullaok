@@ -45,14 +45,19 @@ export default function ProfileComponent() {
         <div className="flex flex-col  items-center justify-center gap-3 text-[#7E577D]">
           <img src={images.profile} alt="" />
 
-          <h2 className="text-3xl font-semibold">
-            {user?.first_name} {user?.last_name}
-          </h2>
-          <p>Marketing Manager</p>
+          <h2 className="text-3xl font-semibold">{profile?.full_name}</h2>
+          {/* <p>Marketing Manager</p> */}
           <div className="flex mt-4 text-[30px] gap-10 text-[#8E0789]">
-            <FaFacebook />
-            <FaInstagram />
-            <FaTwitter />
+            <FaFacebook
+              onClick={() => window.open(profile?.facebook, '_blank')}
+            />
+            <FaInstagram
+              className="cursor-pointer"
+              onClick={() => window.open(profile?.instagram, '_blank')}
+            />
+            <FaTwitter
+              onClick={() => window.open(profile?.twitter, '_blank')}
+            />
           </div>
         </div>
 
@@ -62,12 +67,10 @@ export default function ProfileComponent() {
               <h2 className="font-bold text-xl text-[#222222]/90 mb-3">
                 Your Name
               </h2>
-              {!user?.first_name ? (
+              {!profile?.full_name ? (
                 <h2 className="text-black">No information</h2>
               ) : (
-                <h2>
-                  {user?.first_name} {user?.last_name}
-                </h2>
+                <h2>{profile?.full_name}</h2>
               )}
             </div>
             <button
@@ -94,20 +97,20 @@ export default function ProfileComponent() {
               <h2 className="font-bold text-xl text-[#222222]/90 mb-3">
                 Phone Number
               </h2>
-              {!user?.phone_number ? (
+              {!profile?.phone_number ? (
                 <h2 className="text-black">No information</h2>
               ) : (
-                <h2>{user?.phone_number}</h2>
+                <h2>{profile?.phone_number}</h2>
               )}{' '}
             </div>
           </div>
           <div className="flex justify-between items-center">
             <div className="text-[#222222]/90">
               <h2 className="font-bold text-xl mb-3 ">Address</h2>
-              {!user?.address ? (
+              {!profile?.address ? (
                 <h2 className="text-black">No information</h2>
               ) : (
-                <h2>{user?.address}</h2>
+                <h2>{profile?.address}</h2>
               )}{' '}
             </div>
           </div>
@@ -133,7 +136,7 @@ export default function ProfileComponent() {
           </div>
         ))}
       </div>
-      {open && <EditProfileModal open={open} setOpen={setOpen} />}
+      {open && <EditProfileModal profile={profile} setOpen={setOpen} />}
     </div>
   );
 }

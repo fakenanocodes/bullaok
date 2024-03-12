@@ -1,4 +1,3 @@
-import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import { ArcElement, Chart as ChartJS, Legend, Tooltip } from 'chart.js';
 import { useState } from 'react';
 import { Doughnut } from 'react-chartjs-2';
@@ -14,15 +13,6 @@ import useCurrencyFormatter from '../../hooks/useCurrencyFormatter';
 import { setUserKyc } from '../../store/reducers/transact_reducer';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
-
-const chartData = {
-  datasets: [
-    {
-      data: [0, 2, 5],
-      backgroundColor: ['#6699FC', '#F324EC', '#0E0C6D'],
-    },
-  ],
-};
 
 const options = {
   legend: {
@@ -51,11 +41,23 @@ const DashboardHome = () => {
   const { data, isLoading } = useSWR('/plans/categories/');
   const { data: user } = useSWR('/user/');
   const { data: history, isLoading: historyLoading } = useSWR('plans/history');
+  const { data: chartDatas } = useSWR(
+    'plans/get-user-investment-amount-by-category/'
+  );
+
+  const chartData = {
+    datasets: [
+      {
+        data: chartDatas?.map((item) => item?.total_investment_amount),
+        backgroundColor: ['#6699FC', '#F324EC', '#0E0C6D'],
+      },
+    ],
+  };
+
   const [activeOption, setActiveOption] = useState(null);
   const dispatch = useDispatch();
 
-  const isChartDataAvailable =
-    data && data.length > 0 && data.some((item) => item.value !== 0);
+  const isChartDataAvailable = chartDatas && chartDatas.length === 0;
 
   const navigate = useNavigate();
   console.log(user);
@@ -72,6 +74,9 @@ const DashboardHome = () => {
   const formattedBookBalance = useCurrencyFormatter(
     user?.profile?.book_balance
   );
+
+  const colors = ['#6699FC', '#F324EC', '#0E0C6D'];
+
   return (
     <div className="space-y-3 h-full no-scrollbar overflow-auto p-5">
       <div className="flex space-x-3 items-center justify-center w-full xl:hidden lg:hidden md:hidden py-7 text-[#41073F] font-semibold">
@@ -105,8 +110,8 @@ const DashboardHome = () => {
             <div className="flex items-center space-x-4">
               <input
                 type={showAmount ? 'text' : 'password'}
-                value={formattedAmount}
-                className="text-white text-5xl   w-full font-extrabold border-none bg-transparent focus:outline-none"
+                value={formattedAmount ? formattedAmount : 0.0}
+                className="text-white xl:text-5xl  text-3xl w-full font-extrabold border-none bg-transparent focus:outline-none"
                 readOnly
               />
             </div>
@@ -137,27 +142,23 @@ const DashboardHome = () => {
             </div>
           )}
           <div className="flex space-x-2">
-            <div className="flex flex-col justify-center items-center">
-              <span className="flex space-x-2">
-                <FiberManualRecordIcon className="text-[#6699FC]" />
-                <span>Crypto</span>
-              </span>
-              <span className="text-[#868383]">$7,886</span>
-            </div>
-            <div className="flex flex-col xl:space-x-2">
-              <span className="flex ">
-                <FiberManualRecordIcon className="text-[#F324EC]" />
-                <span>Real estate</span>
-              </span>
-              <span className="text-[#868383]">$7,886</span>
-            </div>
-            <div className="flex flex-col  xl:space-x-2">
-              <span className="flex ">
-                <FiberManualRecordIcon className="text-[#0E0C6D]" />
-                <span>Cannabis</span>
-              </span>
-              <span className="text-[#868383]">$7,886</span>
-            </div>
+            {chartDatas?.map((item, index) => (
+              <div key={index} className="flex flex-col xl:space-x-2">
+                <span className="flex ">
+                  {/* <FiberManualRecordIcon style={{ color: colors[index] }} /> */}
+                  <span>{item.category_name}</span>
+                </span>
+                <span className="text-[#868383]">
+                  {Number(item?.total_investment_amount).toLocaleString(
+                    'en-US',
+                    {
+                      style: 'currency',
+                      currency: 'USD', // Change to your desired currency
+                    }
+                  )}{' '}
+                </span>
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -203,21 +204,25 @@ const DashboardHome = () => {
           ) : (
             <>
               <div className="w-full space-y-1">
-                <div className="flex justify-between px-10 py-2 bg-[#924E8F]">
-                  <span>Name</span>
-                  <span className="pr-12">Detail</span>
-                  <span className="pr-12">Date</span>
-                </div>
-                <div className="flex flex-col space-y-1">
-                  {history?.slice(0, 3).map((item, idx) => (
-                    <HistoryRow
-                      key={idx}
-                      item={item}
-                      idx={idx}
-                      colors={colors}
-                    />
-                  ))}
-                </div>
+                <table className="w-full overflow-auto ">
+                  <thead>
+                    <tr className="bg-[#924E8F] text-white">
+                      <th>Name</th>
+                      <th>Detail</th>
+                      <th>Date</th>
+                    </tr>
+                  </thead>
+                  <tbody className=" overflow-x-auto space-y-1">
+                    {history?.slice(0, 3).map((item, idx) => (
+                      <HistoryRow
+                        key={idx}
+                        item={item}
+                        idx={idx}
+                        colors={colors}
+                      />
+                    ))}
+                  </tbody>
+                </table>
               </div>
             </>
           )}
