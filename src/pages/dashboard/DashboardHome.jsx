@@ -1,11 +1,11 @@
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import { ArcElement, Chart as ChartJS, Legend, Tooltip } from 'chart.js';
 import { useState } from 'react';
+import { Doughnut } from 'react-chartjs-2';
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
 import { images } from '../../assets';
-import Chart from '../../assets/dashboard/chart.svg';
 import HistoryRow from '../../components/Dashboard/HistoryRow';
 import PackageCard from '../../components/Dashboard/PackageCard';
 import DashboardEmptyContainer from '../../components/empty/DashboardEmptyContainer';
@@ -118,12 +118,13 @@ const DashboardHome = () => {
             </div>
           </div>
         </div>
-
-        <div className="xl:border p-4  flex xl:flex-col flex-row-reverse justify-center items-center xl:bg-[#0C0000]  items-center  border-white border-opacity-40  flex-1">
-          <img src={Chart} alt="" className="xl:w-44 xl:h-44 w-full" />
-          <div className="flex  justify-center w-full   xl:flex-row flex-col xl:items-center items-start xl:space-x-2 xl:space-y-0 space-y-2">
-            <div className="flex flex-col xl:space-x-2">
-              <span className="flex">
+        <div className="border  flex flex-col justify-center space-y-5 bg-[#0C0000] items-center pb-10 border-white border-opacity-40  flex-1">
+          <div style={{ width: '150px', height: '150px' }}>
+            <Doughnut data={chartData} option={options} />
+          </div>
+          <div className="flex space-x-2">
+            <div className="flex flex-col justify-center items-center">
+              <span className="flex space-x-2">
                 <FiberManualRecordIcon className="text-[#6699FC]" />
                 <span>Crypto</span>
               </span>
