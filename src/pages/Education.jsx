@@ -17,14 +17,14 @@ export default function Education({ courses, header, testimonials }) {
       <header
         className="education flex flex-col xl:flex-row px-8 items-center bg-[#fff]  justify-center xl:gap-16 gap-8 bg-transparent py-6  bg-cover bg-center bg-no-repeat  w-full relative"
         style={{
-          backgroundImage: `url(${images.edu_bg})`,
+          backgroundImage: `url(${images?.edu_bg})`,
         }}
       >
         {!showMoreContent ? (
           <>
             <section className="flex lg:flex-row flex-col justify-between items-center gap-8 xl:px-[100px]   px-2">
               <img
-                src={images.chart_graph}
+                src={images?.chart_graph}
                 className="w-full lg:w-auto"
                 alt=""
               />
@@ -47,18 +47,18 @@ export default function Education({ courses, header, testimonials }) {
                   <span> More </span> <FaAngleRight />
                 </button>
                 <div className="grid xl:grid-cols-3 lg:grid-cols-3 grid-cols-3   items-center  xl:gap-8 xl:mt-8 mt-2 my-4">
-                  {header.map((item, index) => (
+                  {header?.map((item, index) => (
                     <div
                       key={index}
                       className="flex flex-col items-center  gap-5"
                     >
                       <img
-                        src={item.icon}
+                        src={item?.icon}
                         className="xl:w-12  lg:w-12 h-auto  "
                         alt=""
                       />
                       <p className="font-[montserrat] lg:text-2xl  ">
-                        {item.text}
+                        {item?.text}
                       </p>
                     </div>
                   ))}
@@ -135,7 +135,7 @@ export default function Education({ courses, header, testimonials }) {
             Features Investment Courses
           </h2>
           <div className="grid grid-cols-1 xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 gap-4 w-full h-full xl:w-5/6  px-4 mx-auto ">
-            {courses?.slice(0, 6).map((item, index) => (
+            {courses?.slice(0, 6)?.map((item, index) => (
               <CoursesCard item={item} />
             ))}
           </div>
