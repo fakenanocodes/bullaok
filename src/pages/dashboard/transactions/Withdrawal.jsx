@@ -106,7 +106,7 @@ const Withdrawal = () => {
   };
 
   const handleOpenModal = () => {
-    if (walletAddress) {
+    if (walletAddress && amount) {
       setOpenModel(true);
     } else {
       setInputWarning(true);
@@ -184,7 +184,9 @@ const Withdrawal = () => {
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
                 type="number"
-                className="rounded-lg px-6 border-2 py-4"
+                className={`rounded-lg px-6 border-2 py-4 ${
+                  inputWarning && 'border-red-600'
+                }`}
                 placeholder="0.00 $"
               />
             </div>
@@ -210,7 +212,9 @@ const Withdrawal = () => {
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
                 type="number"
-                className="rounded-lg px-6 border-2 py-4"
+                className={`rounded-lg px-6 border-2 py-4 ${
+                  inputWarning && 'border-red-600'
+                }`}
                 placeholder="0.00 $"
               />
             </div>

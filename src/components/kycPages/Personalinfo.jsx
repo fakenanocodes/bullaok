@@ -11,7 +11,7 @@ const Personalinfo = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [userEmail, setUserEmail] = useState('');
-  const [notify, setNotify] = useState(false);
+  const [notify, setNotify] = useState('border-[#8E0789]');
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -29,7 +29,7 @@ const Personalinfo = () => {
 
   const handleNextPage = (e) => {
     if (!firstName || !lastName || !userEmail) {
-      setNotify(true);
+      setNotify('border-[red]');
       toast.error('Please complete your personal details');
       return;
     }
@@ -157,7 +157,7 @@ const Personalinfo = () => {
                 type="text"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
-                className="w-full h-[30px] rounded-[8px] border border-[#8E0789] bg-[inherit] outline-none leading-[2px] p-[5px] font-[Poppins] font-[300] text-[12px] text-[#AAAAAA] pl-[10px]"
+                className={`w-full h-[30px] rounded-[8px] border ${notify} bg-[inherit] outline-none leading-[2px] p-[5px] font-[Poppins] font-[300] text-[12px] text-[#AAAAAA] pl-[10px]`}
                 id="kyc"
                 required
               />
@@ -170,7 +170,7 @@ const Personalinfo = () => {
                 type="text"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
-                className="w-full h-[30px] rounded-[8px] border border-[#8E0789] bg-[inherit] outline-none leading-[2px] p-[5px] font-[Poppins] font-[300] text-[12px] text-[#AAAAAA] pl-[10px]"
+                className={`w-full h-[30px] rounded-[8px] border ${notify} bg-[inherit] outline-none leading-[2px] p-[5px] font-[Poppins] font-[300] text-[12px] text-[#AAAAAA] pl-[10px]`}
                 id="kyc"
               />
             </fieldset>
@@ -182,7 +182,7 @@ const Personalinfo = () => {
                 type="email"
                 value={userEmail}
                 onChange={(e) => setUserEmail(e.target.value)}
-                className="w-full h-[30px] rounded-[8px] border border-[#8E0789] bg-[inherit] outline-none leading-[2px] p-[5px] font-[Poppins] font-[300] text-[13px] text-[#AAAAAA] pl-[10px]"
+                className={`w-full h-[30px] rounded-[8px] border ${notify} bg-[inherit] outline-none leading-[2px] p-[5px] font-[Poppins] font-[300] text-[12px] text-[#AAAAAA] pl-[10px]`}
                 id="kyc"
               />
             </fieldset>
