@@ -11,6 +11,7 @@ const Personalinfo = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [userEmail, setUserEmail] = useState('');
+  const [notify, setNotify] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -28,6 +29,7 @@ const Personalinfo = () => {
 
   const handleNextPage = (e) => {
     if (!firstName || !lastName || !userEmail) {
+      setNotify(true);
       toast.error('Please complete your personal details');
       return;
     }

@@ -31,7 +31,11 @@ const DashboardLayout = () => {
 
   const icons = [
     { icon: <HomeIcon />, name: 'Home', path: '' },
-    { icon: <InvestmentIcon />, name: 'Investment Packages', path: 'kyc' },
+    {
+      icon: <InvestmentIcon />,
+      name: 'Investment Packages',
+      path: 'card-application',
+    },
     {
       icon: <PlantIcon />,
       name: 'Investment Plans',

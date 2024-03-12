@@ -34,7 +34,7 @@ const KycPreview = () => {
       toast.success(response.data.message);
       navigate('/dashboard/kyc/success');
     } catch (error) {
-      toast.error();
+      toast.error('Check your input and try again');
     }
   };
   return (
