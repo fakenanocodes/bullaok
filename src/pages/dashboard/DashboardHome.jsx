@@ -1,14 +1,11 @@
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import { ArcElement, Chart as ChartJS, Legend, Tooltip } from 'chart.js';
-import { Doughnut } from 'react-chartjs-2';
-
-import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { Doughnut } from 'react-chartjs-2';
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
 import { images } from '../../assets';
-import Chart from '../../assets/dashboard/chart.svg';
 import HistoryRow from '../../components/Dashboard/HistoryRow';
 import PackageCard from '../../components/Dashboard/PackageCard';
 import DashboardEmptyContainer from '../../components/empty/DashboardEmptyContainer';
@@ -95,7 +92,6 @@ const DashboardHome = () => {
           </div>
           <div className="flex flex-col xl:space-y-8 space-y-1 relative">
             <div className="flex items-center space-x-4">
-
               <input
                 type={showAmount ? 'text' : 'password'}
                 value={formattedAmount}
