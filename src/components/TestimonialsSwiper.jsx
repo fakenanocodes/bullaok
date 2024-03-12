@@ -12,7 +12,7 @@ const TestimonialsSwiper = ({ testimonials }) => {
   return (
     <>
       <Swiperjs>
-        {testimonials.map((items, index) => (
+        {testimonials?.map((items, index) => (
           <SwiperSlide key={index}>
             <TestimonialSwiperCard items={items} />
           </SwiperSlide>

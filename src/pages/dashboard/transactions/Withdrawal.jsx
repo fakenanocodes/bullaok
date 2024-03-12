@@ -41,7 +41,7 @@ const Withdrawal = () => {
     } else if (wallet == walletType[4]) {
       setconvertWallet(newWallet[4]);
     }
-  }, [wallet]);
+  }, [wallet, amount]);
 
   // console.log('SET WALLET', convertWallet);
 
@@ -139,7 +139,7 @@ const Withdrawal = () => {
               <label>Asset destination</label>
 
               <select
-                value={wallet}
+                value={wallet || walletType[0]}
                 onChange={(e) => setWallet(e.target.value)}
                 type="text"
                 className="rounded-lg px-6 border-2 py-4"
@@ -221,7 +221,7 @@ const Withdrawal = () => {
           </div>
           <div className="md:flex md:justify-between md:w-[48%] text-xl items-center">
             <div className=" text-red-600 font-semibold mb-28 md:mb-0">
-              You are withdrawing {usdtAmount || '0.00'} USDT
+              You are withdrawing ${usdtAmount || '0.00'}
             </div>
             <button
               onClick={handleOpenModal}
