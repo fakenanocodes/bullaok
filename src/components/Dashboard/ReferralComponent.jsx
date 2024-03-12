@@ -10,6 +10,7 @@ import { FaEdit } from 'react-icons/fa';
 import { MdOutlineArrowBackIos } from 'react-icons/md';
 import { PiMedalMilitaryFill } from 'react-icons/pi';
 
+import { useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
 import { images } from '../../assets';
 
@@ -48,7 +49,6 @@ const descriptionArray = [
     text: 'You receive reward points for every successful referral',
     icon: <PiMedalMilitaryFill />,
   },
-  // { text: 'Share your code', icon: <FaShare /> },
 ];
 
 const boxesData = [
@@ -58,19 +58,31 @@ const boxesData = [
 ];
 export default function ReferralComponent() {
   const { data: referral, isLoading } = useSWR('referral/');
-  console.log(referral);
+  console.log('referral ==>', referral);
+  const navigate = useNavigate();
   return (
-    <div className="xl:px-8 px-2">
-      {/* <div className="flex items-center gap-7 xl:hidden block"> */}
-      <div className="flex items-center gap-7 py-7 text-black text-2xl xl:hidden block">
+    <div className="xl:px-8 px-2 ">
+      <div
+        onClick={() => navigate(-1)}
+        className="flex items-center gap-7 py-7 text-black text-2xl xl:hidden block"
+      >
         <MdOutlineArrowBackIos />
         <h2>Referral</h2>
       </div>
       <div className="flex items-center justify-around xl:flex-row flex-col ">
         <img src={images.referral} alt="" className="xl:w-2/6 w-full" />
         <div className="flex flex-col xl:w-2/5 w-full p-4 gap-8">
-          <div className="bg-[#41073F] w-full  px-6 p-3">
+          <div className="gradient-referral w-full relative px-6 p-3 flex justify-between items-center">
             <CustomizedProgressBars />
+            <div className="absolute top-0 rounded-lg left-[100px] h-12 w-20 bg-[#FFB803] text-[#41073F] flex text-lg items-center font-bold justify-center">
+              $20.00
+            </div>
+            <div className="absolute top-0 rounded-lg left-[310px] h-12 w-20 bg-[#FFB803] text-[#41073F] flex items-center font-bold justify-center">
+              $40.00
+            </div>
+            <div className="absolute top-0 rounded-lg h-12 w-20  right-0 bg-[#FFB803] text-[#41073F] flex items-center font-bold justify-center">
+              $60.00
+            </div>
           </div>
           <button className="bg-[#FFB803] w-full xl:hidden block text-black text-xl rounded-xl p-4">
             Invite now
@@ -79,7 +91,7 @@ export default function ReferralComponent() {
             <h2 className="text-black text-center my-4">How do you get?</h2>
             <hr />
             <div className="flex  justify-around mt-9 ">
-              {boxesData.map((box, index) => (
+              {boxesData?.map((box, index) => (
                 <div key={index} className="box w-[90px] text-[#925C90]">
                   <div className="border flex items-center justify-center rounded-lg xl:p-4 p-2 border-[#925C90] mb-2">
                     <img src={box.icon} alt="" />
@@ -102,15 +114,15 @@ export default function ReferralComponent() {
         </div>
 
         <div className="flex flex-col xl:w-2/6 w-full  gap-4 mt-4">
-          {descriptionArray.map((item, index) => (
+          {descriptionArray?.map((item, index) => (
             <div
               key={index}
               className="flex items-center justify-between gap-6"
             >
               <div className="flex items-center justify-between w-full gap-4">
-                {item.icon && (
+                {item?.icon && (
                   <span className="xl:text-3xl text-xl border border-[#FF9EFB] xl:p-4 p-3 rounded-[40px] flex items-center justify-center">
-                    {item.icon}
+                    {item?.icon}
                   </span>
                 )}
                 <p

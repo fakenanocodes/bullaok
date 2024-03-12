@@ -1,23 +1,63 @@
 import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
+import { CircularProgress } from '@mui/material';
 import { useState } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Cookies } from 'react-cookie';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import logo from '../../assets/dashboard/logo.svg';
 import profilepic from '../../assets/dashboard/profilepic.png';
 import HomeIcon from '../../assets/icons/dashboard/HomeIcon';
 import InvestmentIcon from '../../assets/icons/dashboard/InvestmentIcon';
 import PlantIcon from '../../assets/icons/dashboard/PlantIcon';
+import TransactionIcon from '../../assets/icons/dashboard/TransactionIcon';
+import LogoutIcon from '../../components/utils/icons/LogoutIcon';
+import useAuthentication from '../../hooks/useAuthentication';
 import DashboardSidebar from './components/Sidebar';
 
 const options = ['Withdraw', 'Deposit', 'Transfer'];
-
+const icons = [
+  { icon: <HomeIcon />, name: 'Home', path: '' },
+  { icon: <InvestmentIcon />, name: 'Investment Packages', path: 'kyc' },
+  {
+    icon: <PlantIcon />,
+    name: 'Investment Plans',
+    path: 'investment/packages',
+  },
+  {
+    icon: <TransactionIcon />,
+    name: 'Transactions',
+    path: 'investment/running',
+  },
+  { icon: <LogoutIcon />, name: 'Logout' },
+];
 const DashboardLayout = () => {
+  const cookie = new Cookies();
+
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [activeOption, setActiveOption] = useState(null);
 
   const navigate = useNavigate();
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
+  };
+  const { isLoggedIn, isLoading } = useAuthentication();
+  if (isLoading) {
+    return (
+      <div className="flex justify-center ">
+        <CircularProgress color="secondary" thickness={10} size={18} />
+      </div>
+    );
+  }
+
+  if (!isLoggedIn) {
+    return null; //Create a prompt here
+  }
+
+  const logoutOption = () => {
+    navigate('/');
+    cookie.remove(`bk_access`);
+    cookie.remove(`bk_user`);
+    window.location.reload();
   };
 
   return (
@@ -32,7 +72,7 @@ const DashboardLayout = () => {
               <MenuIcon className="text-black" fontSize="large" />
             </button>
           </div>
-          <div className="pt-4 hidden lg:flex">
+          <div className="pt-4 hidden lg:flex cursor-pointer">
             <img src={logo} alt="" className="bg-white p-2 w-14 h-14" />
           </div>
           <DashboardSidebar />
@@ -61,11 +101,12 @@ const DashboardLayout = () => {
               <img
                 src={profilepic}
                 alt=""
-                className="w-14 h-14 rounded-full object-contain"
+                className="w-14 h-14 rounded-full object-contain cursor-pointer"
+                onClick={() => navigate('/dashboard/profile')}
               />
             </div>
           </div>
-          <div className="lg:mx-7 h-[100vh] no-scrollbar lg:h-[80vh] relative overflow-auto bg-[#000]/60 rounded-lg ">
+          <div className="lg:mx-7 h-[100vh] no-scrollbar lg:h-[80vh] relative overflow-auto bg-[#000]/60  ">
             <Outlet />
           </div>
         </div>
@@ -86,22 +127,30 @@ const DashboardLayout = () => {
                   <CloseIcon fontSize="large" />
                 </button>
                 <div className="flex space-y-8 flex-col">
-                  <div className="flex space-x-4 items-center hover:bg-white hover:text-[#575757] p-2">
-                    <HomeIcon />
-                    <span className="text-lg font-semibold ">Home</span>
-                  </div>
-                  <div className="flex space-x-4 items-center  hover:bg-white hover:text-[#575757] p-2">
-                    <InvestmentIcon />
-                    <span className="text-lg font-semibold">
-                      Investment Packages
-                    </span>
-                  </div>
-                  <div className="flex space-x-4 items-center  hover:bg-white hover:text-[#575757] p-2">
-                    <PlantIcon />
-                    <span className="text-lg font-semibold">
-                      Investment Plans
-                    </span>
-                  </div>
+                  {icons?.map((item, idx) => (
+                    <>
+                      {item.name === 'Logout' ? (
+                        <div
+                          onClick={logoutOption}
+                          className="flex space-x-4 items-center hover:bg-white hover:text-[#575757] p-2"
+                        >
+                          {item?.icon}
+                          <span className="text-lg font-semibold ">
+                            {item?.name}
+                          </span>
+                        </div>
+                      ) : (
+                        <Link to={item?.path} key={idx} className="text-white">
+                          <div className="flex space-x-4 items-center hover:bg-white hover:text-[#575757] p-2">
+                            {item?.icon}
+                            <span className="text-lg font-semibold ">
+                              {item?.name}
+                            </span>
+                          </div>
+                        </Link>
+                      )}
+                    </>
+                  ))}
                 </div>
               </div>
             </div>

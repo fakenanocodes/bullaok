@@ -1,12 +1,18 @@
-import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import { ArcElement, Chart as ChartJS, Legend, Tooltip } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
+import { useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
 import { images } from '../../assets';
+import Chart from '../../assets/dashboard/chart.svg';
+import HistoryRow from '../../components/Dashboard/HistoryRow';
 import PackageCard from '../../components/Dashboard/PackageCard';
+import DashboardEmptyContainer from '../../components/empty/DashboardEmptyContainer';
+import useCurrencyFormatter from '../../hooks/useCurrencyFormatter';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -39,32 +45,76 @@ const imageUrls = {
   Cannabis: images.cannabis,
 };
 
+const colors = ['#6B5F6B', '#33FF57', '#5733FF']; // Add more colors as needed
+const options = ['Withdraw', 'Deposit', 'Transfer'];
+
 const DashboardHome = () => {
   const { data, isLoading } = useSWR('/plans/categories/');
+  const { data: user } = useSWR('/user/');
+  const { data: history, isLoading: historyLoading } = useSWR('plans/history');
+  const [activeOption, setActiveOption] = useState(null);
+
   const navigate = useNavigate();
-  console.log(data);
+  console.log(user);
+  const [showAmount, setShowAmount] = useState(true);
+
+  const handleVisibilityToggle = () => {
+    setShowAmount(!showAmount);
+  };
+  const formattedAmount = useCurrencyFormatter(
+    user?.profile?.available_balance
+  );
   return (
     <div className="space-y-3 h-full no-scrollbar overflow-auto p-5">
-      <div className="w-full flex gap-8">
-        <div className="border rounded-sm bg-[#0C0000] border-white border-opacity-40 w-3/5 h-72 p-5 pl-16 flex flex-col space-y-8">
-          <span className="text-[#868383] text-lg">Current Balance</span>
-          <div className="flex flex-col space-y-8 relative">
+      <div className="flex space-x-3 items-center justify-center w-full xl:hidden lg:hidden md:hidden py-7 text-[#41073F] font-semibold">
+        {options?.map((option, index) => (
+          <span
+            key={index}
+            className={` cursor-pointer ${
+              activeOption === index ? 'border-white p-3 rounded-lg border' : ''
+            }`}
+            onClick={() => {
+              setActiveOption(index);
+              navigate(`/dashboard/${option.toLowerCase()}`);
+            }}
+          >
+            <p className="bg-white px-6 rounded-[4px] py-1">{option}</p>
+          </span>
+        ))}
+      </div>
+      <div className="w-full flex xl:flex-row flex-col gap-8">
+        <div className="border xl:rounded-sm rounded-[40px] bg-[#0C0000] border-white border-opacity-40 xl:w-3/5 w-full xl:h-86 p-5 xl:pl-16  flex flex-col xl:space-y-8 ">
+          <div className="flex items-center gap-4">
+            <span className="text-gray-300 text-lg">Current Balance</span>
+            <div
+              className="cursor-pointer text-2xl"
+              onClick={handleVisibilityToggle}
+            >
+              {showAmount ? <IoEyeOffOutline /> : <IoEyeOutline />}
+            </div>
+          </div>
+          <div className="flex flex-col xl:space-y-8 space-y-1 relative">
             <div className="flex items-center space-x-4">
-              <span className="text-white text-5xl font-extrabold">
-                $ 1,474.91
-              </span>
 
-              <div className=" shadow-xl  flex items-center space-x-2 p-2 px-8 font-bold rounded-md shadow-[#8E0789] bg-[#8E0789]">
-                <ArrowDropUpIcon className="text-[#52B570] bg-white rounded-full w-32 h-32" />
-                <span>25.69%</span>
-              </div>
+              <input
+                type={showAmount ? 'text' : 'password'}
+                value={formattedAmount}
+                className="text-white text-5xl   w-full font-extrabold border-none bg-transparent focus:outline-none"
+                readOnly
+              />
             </div>
             <div className="flex items-center space-x-4">
               <span className="font-bold text-[#52B570] text-xl">
-                + $ 301.93
+                {user?.profile?.live_profit}
               </span>
               <span className="font-bold -top-2 ml-4 bg-transparent rounded-md border border-white border-opacity-20 shadow-xl drop-shadow-xl p-1 px-2 text-xs">
-                24h
+                live profit
+              </span>
+            </div>
+            <div className="flex border border-red-500 justify-start w-full flex-col space-x-4">
+              <span className="text-gray-300 text-lg">Book Balance</span>
+              <span className="font-bold  bg-transparent rounded-md border border-white border-opacity-20 shadow-xl drop-shadow-xl p-1 px-2 text-xs">
+                book balance
               </span>
             </div>
           </div>
@@ -81,15 +131,15 @@ const DashboardHome = () => {
               </span>
               <span className="text-[#868383]">$7,886</span>
             </div>
-            <div className="flex flex-col justify-center items-center">
-              <span className="flex space-x-2">
+            <div className="flex flex-col xl:space-x-2">
+              <span className="flex ">
                 <FiberManualRecordIcon className="text-[#F324EC]" />
                 <span>Real estate</span>
               </span>
               <span className="text-[#868383]">$7,886</span>
             </div>
-            <div className="flex flex-col justify-center items-center">
-              <span className="flex space-x-2">
+            <div className="flex flex-col  xl:space-x-2">
+              <span className="flex ">
                 <FiberManualRecordIcon className="text-[#0E0C6D]" />
                 <span>Cannabis</span>
               </span>
@@ -110,7 +160,7 @@ const DashboardHome = () => {
             See all
           </span>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex xl:flex-row md:flex-row flex-col items-center gap-4">
           {data?.map((investmentPackage, index) => (
             <PackageCard
               id={investmentPackage.id}
@@ -131,45 +181,33 @@ const DashboardHome = () => {
               View all History
             </span>
           </div>
-          <div className="w-full space-y-1">
-            <div className="flex justify-between px-10 py-2 bg-[#924E8F]">
-              <span>Name</span>
-              <span className="pr-12">Detail</span>
-              <span className="pr-12">Date</span>
-            </div>
-            <div className="flex flex-col space-y-1">
-              <div className="flex justify-between px-10 py-4  bg-[#BB9FB3] bg-opacity-[38%]">
-                <span className="flex items-center gap-2">
-                  <span className="bg-white w-6 h-6 flex justify-center items-center rounded-full">
-                    <FiberManualRecordIcon className="text-[#6B5F6B] rounded-full" />
-                  </span>
-                  Real estate
-                </span>
-                <span>You invested $578,8933 on real estate plan</span>
-                <span>January 25th... 15:03PM</span>
+          {history?.length === 0 ? (
+            <>
+              <DashboardEmptyContainer
+                message={'Your investment history is empty'}
+              />
+            </>
+          ) : (
+            <>
+              <div className="w-full space-y-1">
+                <div className="flex justify-between px-10 py-2 bg-[#924E8F]">
+                  <span>Name</span>
+                  <span className="pr-12">Detail</span>
+                  <span className="pr-12">Date</span>
+                </div>
+                <div className="flex flex-col space-y-1">
+                  {history?.slice(0, 3).map((item, idx) => (
+                    <HistoryRow
+                      key={idx}
+                      item={item}
+                      idx={idx}
+                      colors={colors}
+                    />
+                  ))}
+                </div>
               </div>
-              <div className="flex justify-between px-10 py-4 bg-[#BB9FB3] bg-opacity-[38%]">
-                <span className="flex items-center gap-2">
-                  <span className="bg-white w-6 h-6 flex justify-center items-center rounded-full">
-                    <FiberManualRecordIcon className="text-[#732220] rounded-full" />
-                  </span>
-                  Real estate
-                </span>
-                <span>You invested $578,8933 on real estate plan</span>
-                <span>January 25th... 15:03PM</span>
-              </div>
-              <div className="flex justify-between px-10 py-4 bg-[#BB9FB3] bg-opacity-[38%]">
-                <span className="flex items-center gap-2">
-                  <span className="bg-white w-6 h-6 flex justify-center items-center rounded-full">
-                    <FiberManualRecordIcon className="text-[#FFB803] rounded-full" />
-                  </span>
-                  Real estate
-                </span>
-                <span>You invested $578,8933 on real estate plan</span>
-                <span>January 25th... 15:03PM</span>
-              </div>
-            </div>
-          </div>
+            </>
+          )}
         </div>
       </div>
     </div>
