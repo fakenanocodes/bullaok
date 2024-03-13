@@ -10,6 +10,7 @@ import { ArcElement, Chart as ChartJS, Legend, Tooltip } from 'chart.js';
 import { useState } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
+import { MdFiberManualRecord } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
@@ -83,7 +84,7 @@ const DashboardHome = () => {
     user?.profile?.book_balance
   );
 
-  const colors = ['#6699FC', '#F324EC', '#0E0C6D'];
+  const colors = ['#6699FC', '#F324EC', '#0E0C6D', '#FF5733', '#33FF57', '#5733FF', '#FFC249'];
 
   return (
     <div className="space-y-3 h-full no-scrollbar overflow-auto p-5">
@@ -141,33 +142,35 @@ const DashboardHome = () => {
         </div>
         <div className="border  flex flex-col justify-center space-y-5 bg-[#0C0000] items-center pb-10 border-white border-opacity-40  flex-1">
           {!isChartDataAvailable ? (
-            <div style={{ width: '150px', height: '150px' }}>
-              <Doughnut data={chartData} option={options} />
-            </div>
+            <>
+              <div style={{ width: '150px', height: '150px' }}>
+                <Doughnut data={chartData} option={options} />
+              </div>
+              <div className="flex space-x-2">
+                {chartDatas?.map((item, index) => (
+                  <div key={index} className="flex flex-col xl:space-x-2">
+                    <span className="flex items-center gap-1">
+                      <MdFiberManualRecord style={{ color: colors[index] }} />
+                      <span>{item?.category_name}</span>
+                    </span>
+                    <span className="text-[#868383]">
+                      {Number(item?.total_investment_amount).toLocaleString(
+                        'en-US',
+                        {
+                          style: 'currency',
+                          currency: 'USD', // Change to your desired currency
+                        }
+                      )}{' '}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </>
           ) : (
             <div>
-              <p>No data available for the chart.</p>
+              <DashboardEmptyContainer message={'No Data Available'} />
             </div>
           )}
-          <div className="flex space-x-2">
-            {chartDatas?.map((item, index) => (
-              <div key={index} className="flex flex-col xl:space-x-2">
-                <span className="flex ">
-                  {/* <FiberManualRecordIcon style={{ color: colors[index] }} /> */}
-                  <span>{item.category_name}</span>
-                </span>
-                <span className="text-[#868383]">
-                  {Number(item?.total_investment_amount).toLocaleString(
-                    'en-US',
-                    {
-                      style: 'currency',
-                      currency: 'USD', // Change to your desired currency
-                    }
-                  )}{' '}
-                </span>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
       <div className="space-y-3">
@@ -240,25 +243,6 @@ const DashboardHome = () => {
                     </TableBody>
                   </Table>
                 </TableContainer>
-                {/* <table className="w-full border-separate min-w-[900px] overflow-x-auto border-spacing-y-2 sm:overflow-visible">
-                  <thead>
-                    <tr className="bg-[#924E8F]  grid grid-cols-3  text-white">
-                      <th>Name</th>
-                      <th>Detail</th>
-                      <th>Date</th>
-                    </tr>
-                  </thead>
-                  <tbody className="  space-y-1">
-                    {history?.slice(0, 3).map((item, idx) => (
-                      <HistoryRow
-                        key={idx}
-                        item={item}
-                        idx={idx}
-                        colors={colors}
-                      />
-                    ))}
-                  </tbody>
-                </table> */}
               </div>
             </>
           )}
