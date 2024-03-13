@@ -144,7 +144,12 @@ const Selfie = () => {
 
           <div className="relative flex flex-col justify-around border border-[#8E0789] w-full h-[calc(100%-45px)] rounded-[8px] bg-[#AA8EA8] px-[30px] pt-[15px]">
             <label className="w-full h-[70%] bg-[#413640] rounded-[8px] flex justify-center items-center cursor-pointer relative">
-              <input type="file" className="hidden" onChange={handlePhoto} />
+              <input
+                type="file"
+                accept=".jpeg, .jpg, .png"
+                className="hidden"
+                onChange={handlePhoto}
+              />
               {uploadPoto && (
                 <img src={uploadPoto} className="w-1/4 rounded-md " />
               )}
@@ -170,6 +175,7 @@ const Selfie = () => {
                 <input
                   type="file"
                   name=""
+                  accept=".jpeg, .jpg, .png"
                   className="hidden"
                   onChange={handlePhoto}
                 />

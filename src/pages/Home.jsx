@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { SwiperSlide } from 'swiper/react';
 import bg_img from '../assets/bg_img.png';
 import card_img from '../assets/home/card_img.png';
@@ -23,7 +24,7 @@ const cardData = [
     image: card_img,
   },
   {
-    location: 'Lagos, Nigeria',
+    location: 'California, USA',
     views: '5.0 (55,890 views)',
     price: '$564,897',
     image: card_img2,
@@ -37,6 +38,7 @@ const cardData = [
 ];
 
 const Home = () => {
+  const navigate = useNavigate();
   return (
     <MainLayout>
       <div className="bg-[#30022ECC] bg-opacity-10 relative w-full h-[90vh]">
@@ -48,7 +50,10 @@ const Home = () => {
           <p className="laviossa text-xl md:w-[30rem]">
             An investment company with a proficient digital presence
           </p>
-          <button className="text-black font-semibold py-4 px-5 bg-[#D4B716] rounded-sm uppercase">
+          <button
+            onClick={() => navigate('/services/what-we-invest')}
+            className="text-black font-semibold py-4 px-5 bg-[#D4B716] rounded-sm uppercase"
+          >
             Uncover more
           </button>
         </div>
@@ -140,7 +145,10 @@ const Home = () => {
               traders.
             </p>
 
-            <button className="text-black font-semibold py-4 px-5 bg-transparent rounded-sm border-2 mt-7 border-[#41073F] uppercase">
+            <button
+              onClick={() => navigate('/services/what-we-invest')}
+              className="text-black font-semibold py-4 px-5 bg-transparent rounded-sm border-2 mt-7 border-[#41073F] uppercase"
+            >
               Uncover more
             </button>
           </div>
@@ -175,7 +183,10 @@ const Home = () => {
           </p>
 
           <div>
-            <button className="text-black font-semibold py-4 px-5 bg-[#FFB803] rounded-sm capitalize shadow-md shadow-gray-100">
+            <button
+              onClick={() => navigate('/team')}
+              className="text-black font-semibold py-4 px-5 bg-[#FFB803] rounded-sm capitalize shadow-md shadow-gray-100"
+            >
               Meet the team
             </button>
           </div>

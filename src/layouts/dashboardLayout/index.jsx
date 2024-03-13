@@ -60,6 +60,25 @@ const DashboardLayout = () => {
     window.location.reload();
   };
 
+  const icons = [
+    { icon: <HomeIcon />, name: 'Home', path: '' },
+    {
+      icon: <InvestmentIcon />,
+      name: 'Investment Packages',
+      path: 'card-application',
+    },
+    {
+      icon: <PlantIcon />,
+      name: 'Investment Plans',
+      path: 'investment/packages',
+    },
+    {
+      icon: <TransactionIcon />,
+      name: 'Transactions',
+      path: 'investment/running',
+    },
+    { icon: <LogoutIcon />, name: 'Logout' },
+  ];
   return (
     <div className="relative bg-custom-bg bg-opacity-20 bg-cover bg-center bg-no-repeat min-h-screen">
       {/** Layout */}
@@ -72,7 +91,10 @@ const DashboardLayout = () => {
               <MenuIcon className="text-black" fontSize="large" />
             </button>
           </div>
-          <div className="pt-4 hidden lg:flex cursor-pointer">
+          <div
+            onClick={() => navigate('/')}
+            className="pt-4 hidden lg:flex cursor-pointer"
+          >
             <img src={logo} alt="" className="bg-white p-2 w-14 h-14" />
           </div>
           <DashboardSidebar />

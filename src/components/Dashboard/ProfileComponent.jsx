@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import { Alert, CircularProgress } from '@mui/material';
+import axios from 'axios';
+import React, { useRef, useState } from 'react';
 import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
@@ -36,23 +38,103 @@ export default function ProfileComponent() {
   const navigate = useNavigate();
   const user = data?.profile?.user;
   const profile = data?.profile;
-  console.log(user?.first_name);
+  console.log(user, profile);
   const [open, setOpen] = useState(false);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(null);
+  const [success, setSuccess] = useState(null);
+  const fileInputRef = useRef(null);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedFile, setSelectedFIle] = useState(null);
 
+  const handleImageClick = () => {
+    // Trigger the hidden file input when the image is clicked
+    fileInputRef.current.click();
+  };
+
+  const handleFileChange = (e) => {
+    // Handle the selected file
+    const selectedFile = e.target.files[0];
+    setSelectedFIle(selectedFile);
+    // Read the selected file as a data URL and set it in the state
+    const reader = new FileReader();
+    reader.onload = () => {
+      setSelectedImage(reader.result);
+    };
+    reader.readAsDataURL(selectedFile);
+  };
+  const handleImageUpload = (e) => {
+    e.preventDefault();
+    console.log(selectedImage);
+    const formData = new FormData();
+    if (selectedFile) {
+      formData.append('image', selectedFile);
+    }
+    setLoading(true);
+
+    axios
+      .put('user/profile/update-profile-image/', formData)
+      .then((response) => {
+        console.log(response);
+        setSuccess('Image Upload successful');
+        setLoading(false);
+      })
+      .catch((error) => {
+        setError('Upload failed');
+        setLoading(false);
+        // Handle the error
+      });
+  };
+
+  setTimeout(() => {
+    setError(null);
+    setSuccess(null);
+  }, 5000);
   return (
     <div className="grid grid-cols-1 xl:w-4/5 w-full mx-auto text-black xl:pb-8 p-3">
       <div className="flex xl:flex-row lg:flex-row flex-col gap-3 justify-between xl:p-8  xl:ml-8 ml-0">
         <div className="flex flex-col  items-center justify-center gap-3 text-[#7E577D]">
-          <img src={images.profile} alt="" />
-
-          <h2 className="text-3xl font-semibold">
-            {user?.first_name} {user?.last_name}
-          </h2>
-          <p>Marketing Manager</p>
+          {success && <Alert severity="success">{success}</Alert>}
+          {error && <Alert severity="error">{error}</Alert>}
+          <img
+            src={selectedImage || images.profile}
+            alt="Profile"
+            style={{ cursor: 'pointer' }}
+            onClick={handleImageClick}
+            className="w-[180px] h-[180px] rounded-full"
+          />
+          {/* Hidden file input */}
+          <input
+            type="file"
+            accept=".jpeg, .png, .jpg"
+            ref={fileInputRef}
+            style={{ display: 'none' }}
+            onChange={handleFileChange}
+          />
+          <button
+            onClick={handleImageUpload}
+            className="bg-[#8E0789] text-white px-4 py-2 rounded"
+          >
+            {loading ? (
+              <>
+                <CircularProgress size={18} color="inherit" />
+              </>
+            ) : (
+              <>{'Upload Profile'}</>
+            )}
+          </button>
+          <h2 className="text-3xl font-semibold">{profile?.full_name}</h2>
           <div className="flex mt-4 text-[30px] gap-10 text-[#8E0789]">
-            <FaFacebook />
-            <FaInstagram />
-            <FaTwitter />
+            <FaFacebook
+              onClick={() => window.open(profile?.facebook, '_blank')}
+            />
+            <FaInstagram
+              className="cursor-pointer"
+              onClick={() => window.open(profile?.instagram, '_blank')}
+            />
+            <FaTwitter
+              onClick={() => window.open(profile?.twitter, '_blank')}
+            />
           </div>
         </div>
 
@@ -62,12 +144,10 @@ export default function ProfileComponent() {
               <h2 className="font-bold text-xl text-[#222222]/90 mb-3">
                 Your Name
               </h2>
-              {!user?.first_name ? (
+              {!profile?.full_name ? (
                 <h2 className="text-black">No information</h2>
               ) : (
-                <h2>
-                  {user?.first_name} {user?.last_name}
-                </h2>
+                <h2>{profile?.full_name}</h2>
               )}
             </div>
             <button
@@ -94,20 +174,20 @@ export default function ProfileComponent() {
               <h2 className="font-bold text-xl text-[#222222]/90 mb-3">
                 Phone Number
               </h2>
-              {!user?.phone_number ? (
+              {!profile?.phone_number ? (
                 <h2 className="text-black">No information</h2>
               ) : (
-                <h2>{user?.phone_number}</h2>
+                <h2>{profile?.phone_number}</h2>
               )}{' '}
             </div>
           </div>
           <div className="flex justify-between items-center">
             <div className="text-[#222222]/90">
               <h2 className="font-bold text-xl mb-3 ">Address</h2>
-              {!user?.address ? (
+              {!profile?.address ? (
                 <h2 className="text-black">No information</h2>
               ) : (
-                <h2>{user?.address}</h2>
+                <h2>{profile?.address}</h2>
               )}{' '}
             </div>
           </div>
@@ -133,7 +213,7 @@ export default function ProfileComponent() {
           </div>
         ))}
       </div>
-      {open && <EditProfileModal open={open} setOpen={setOpen} />}
+      {open && <EditProfileModal profile={profile} setOpen={setOpen} />}
     </div>
   );
 }

@@ -1,4 +1,8 @@
+import { useNavigate } from 'react-router-dom';
+import { scrollToTop } from '../../actions/utils';
+
 export default function Stocks() {
+  const navigate = useNavigate();
   return (
     <section className="flex justify-center bg-[#CDA1CB26] py-8">
       <div className="flex flex-col items-center text-[#fff] gap-3">
@@ -15,7 +19,13 @@ export default function Stocks() {
             Learn more {'>'}
           </button>
         </div>
-        <button className="mt-3 bg-[#D4B716] text-black rounded-lg p-3 px-9">
+        <button
+          onClick={() => {
+            navigate('/register');
+            scrollToTop();
+          }}
+          className="mt-3 bg-[#D4B716] text-black rounded-lg p-3 px-9"
+        >
           Open an account
         </button>
       </div>

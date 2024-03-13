@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { scrollToTop } from '../actions/utils';
 import chart_img from '../assets/chart_img.png';
 import equity_img from '../assets/equity_img.png';
 import stock_img from '../assets/stock_img2.png';
@@ -6,6 +7,7 @@ import watchlist_img from '../assets/watchlist.png';
 import MainLayout from '../components/MainLayout';
 
 const PaperTrading = () => {
+  const navigate = useNavigate();
   return (
     <div>
       <MainLayout>
@@ -14,7 +16,11 @@ const PaperTrading = () => {
           Investors <br /> Practice Their Trading Skills
         </h1>
         <div className="flex items-center justify-center mt-10">
-          <button className="text-lg bg-[#D4B716] text-black py-4 px-5 rounded-[0.5rem] max-lg:py-3 max-lg:px-4">
+          <button
+           onClick={() => {
+            navigate('/register');
+            scrollToTop();
+          }} className="text-lg bg-[#D4B716] text-black py-4 px-5 rounded-[0.5rem] max-lg:py-3 max-lg:px-4">
             <span>Open an account</span> <span>&rarr;</span>
           </button>
         </div>
@@ -26,7 +32,7 @@ const PaperTrading = () => {
         <div className="flex items-center justify-center gap-32 mt-40 flex-wrap max-xl:gap-12 max-xl:mx-10">
           <div className="">
             <p className="text-black text-[2.5rem] mb-2 font-extrabold leading-[52px] max-lg:text-[2rem] max-md:text-[1.5rem]">
-              Why use <br /> Webull Paper Trading?
+              Why use <br /> Bulloak Paper Trading?
             </p>
             <p className="text-[#909090] my-28 mt-0 mb-5 text-[1.2rem] font-opensans-semibold leading-[1.5rem] ">
               A stock trading simulator is a great way for anyone to hone <br />{' '}
@@ -65,7 +71,13 @@ const PaperTrading = () => {
                 for more information regarding eligibility.
               </p>
             </div>
-            <button className="flex gap-3 mt-5 text-[#000] bg-[#D4B716] px-4 py-3 items-center justify-center cursor-pointer text-lg text-center font-open-sans-semibold font-semibold leading-16 rounded-full  max-lg:py-3 max-lg:px-4">
+            <button
+              onClick={() => {
+                navigate('/register');
+                scrollToTop();
+              }}
+              className="flex gap-3 mt-5 text-[#000] bg-[#D4B716] px-4 py-3 items-center justify-center cursor-pointer text-lg text-center font-open-sans-semibold font-semibold leading-16 rounded-full  max-lg:py-3 max-lg:px-4"
+            >
               <span> Get Started</span>
               <span>&rarr;</span>
             </button>
@@ -74,10 +86,10 @@ const PaperTrading = () => {
 
         <div className="text-center my-28">
           <p className="text-black text-[2.5rem] mb-5 font-extrabold max-lg:text-[2rem] max-md:text-[1.5rem]">
-            What does Webull Paper Trading offer ?
+            What does Bulloak Paper Trading offer ?
           </p>
           <p className="leading-[1.5rem] text-[1.2rem] max-sm:text-[1rem]">
-            Webull Paper Trading offers a virtual trading experience that lets
+            Bulloak Paper Trading offers a virtual trading experience that lets
             you test your trading strategies just as you <br /> would in a real,
             live situation but without risking a penny on an actual stock
             exchange.
@@ -144,7 +156,7 @@ const PaperTrading = () => {
               Standard U.S. equity options are American-style options, <br />{' '}
               meaning they can be exercised any time before <br /> expiration.
               In contrast, you’ll never be assigned a short <br /> option before
-              expiration in the Webull Paper Trading. <br /> Before you switch
+              expiration in the Bulloak Paper Trading. <br /> Before you switch
               over to live options trading, make sure <br /> you understand the
               ins and outs of expiration.
             </p>
@@ -157,13 +169,19 @@ const PaperTrading = () => {
           </p>
           <p className="text-white text-[1.2rem] mt-8 max-sm:text-[1rem]">
             Simulated trading can help all levels of traders to practice their
-            trading skills and strategies. You can access <br /> Webull’s
+            trading skills and strategies. You can access <br /> Bulloak's
             trading simulator on desktop, web and mobile devices, so you can try
             out a new idea as soon as it <br /> comes to mind. Open an account
             today to get started.
           </p>
           <div className="flex items-center justify-center mt-20">
-            <button className="text-lg bg-[#D4B716] text-black py-4 px-5 rounded-[0.5rem] max-lg:py-3 max-lg:px-4 font-semibold">
+            <button
+              onClick={() => {
+                navigate('/register');
+                scrollToTop();
+              }}
+              className="text-lg bg-[#D4B716] text-black py-4 px-5 rounded-[0.5rem] max-lg:py-3 max-lg:px-4 font-semibold"
+            >
               <span>Open account</span>
             </button>
           </div>

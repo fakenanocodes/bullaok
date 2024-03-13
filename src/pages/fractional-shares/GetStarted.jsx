@@ -1,21 +1,8 @@
+import { useNavigate } from 'react-router-dom';
+import { scrollToTop } from '../../actions/utils';
+
 export default function GetStarted() {
-  // const data = [
-  //   {
-  //     img: 'investment.png',
-  //     title: 'Invest with as little as $5',
-  //     text: 'Fractional shares on Bulloak can be as small as 1/100000 of a share, as little as $5',
-  //   },
-  //   {
-  //     img: 'pay.png',
-  //     title: 'Pay no commissions',
-  //     text: 'Bulloak charges no commission fees, no account management fees or inactivity fees to buy and sell fractional shares',
-  //   },
-  //   {
-  //     img: 'expand.png',
-  //     title: 'Expand your stock portfolio      ',
-  //     text: 'With fractional shares trading ability introduced, you have the opportunity to invest in even more companies',
-  //   },
-  // ];
+  const navigate = useNavigate();
   return (
     <section className="bg-[#fef3fd] py-5 px-0">
       <h2 className="font-bold text-center py-9 lg:text-4xl text-2xl text-[#550952]">
@@ -45,7 +32,13 @@ export default function GetStarted() {
           </h3>
         </div>
       </div>
-      <button className="bg-[#550952] w-64  mx-auto text-center  font-bold lg:text-2xl text-xl rounded-lg text-[#fff]  py-4 flex items-center justify-center gap-2 lg:mt-9">
+      <button
+        onClick={() => {
+          navigate('/register');
+          scrollToTop();
+        }}
+        className="bg-[#550952] w-64  mx-auto text-center  font-bold lg:text-2xl text-xl rounded-lg text-[#fff]  py-4 flex items-center justify-center gap-2 lg:mt-9"
+      >
         <span>Open an account</span>
       </button>
       <div className="flex flex-col mt-9 lg:w-2/3 px-3 lg:px-0 w-full mx-auto">

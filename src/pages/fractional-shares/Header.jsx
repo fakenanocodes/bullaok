@@ -1,10 +1,9 @@
+import { useNavigate } from "react-router-dom";
+import { scrollToTop } from "../../actions/utils";
+
 export default function Header() {
-  const data = [
-    'Why choose Bulloak for margin trading.',
-    'The benefit of a margin trading account.',
-    'Understand the risks of margin trading.',
-    'How trading securities on margin works.',
-  ];
+ 
+  const navigate = useNavigate()
   return (
     <section className="flex flex-col lg:flex-row px-8 items-center justify-center md:gap-16 gap-8 py-9  bg-contain bg-center bg-[#fbdbfa]  bg-no-repeat  w-full relative">
       <div className="lg:w-3/4 w-full px-4  flex lg:flex-row flex-col justify-center gap-9 items-center py-6">
@@ -18,7 +17,11 @@ export default function Header() {
             committing to a whole share.
           </p>
 
-          <button className="bg-[#550952] w-2/4 text-center font-bold lg:text-2xl text-xl rounded-lg text-[#fff]  py-4 flex items-center justify-center gap-2 mt-3 lg:mt-8">
+          <button 
+           onClick={() => {
+            navigate('/register');
+            scrollToTop();
+          }} className="bg-[#550952] w-2/4 text-center font-bold lg:text-2xl text-xl rounded-lg text-[#fff]  py-4 flex items-center justify-center gap-2 mt-3 lg:mt-8">
             <span>Get Started</span>
           </button>
           <p className="text-md text-gray-500 hidden md:block">

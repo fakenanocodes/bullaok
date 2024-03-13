@@ -1,8 +1,17 @@
-import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from '@mui/material';
 import { ArcElement, Chart as ChartJS, Legend, Tooltip } from 'chart.js';
 import { useState } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
+import { MdFiberManualRecord } from 'react-icons/md';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
 import { images } from '../../assets';
@@ -10,17 +19,10 @@ import HistoryRow from '../../components/Dashboard/HistoryRow';
 import PackageCard from '../../components/Dashboard/PackageCard';
 import DashboardEmptyContainer from '../../components/empty/DashboardEmptyContainer';
 import useCurrencyFormatter from '../../hooks/useCurrencyFormatter';
+import { setUserKyc } from '../../store/reducers/transact_reducer';
+import React from 'react'
 
 ChartJS.register(ArcElement, Tooltip, Legend);
-
-const chartData = {
-  datasets: [
-    {
-      data: [40, 50, 10],
-      backgroundColor: ['#6699FC', '#F324EC', '#0E0C6D'],
-    },
-  ],
-};
 
 const options = {
   legend: {
@@ -44,15 +46,35 @@ const imageUrls = {
 
 const colors = ['#6B5F6B', '#33FF57', '#5733FF']; // Add more colors as needed
 
+const navOptions = ['Withdraw', 'Deposit', 'Transfer'];
+
 const DashboardHome = () => {
   const { data, isLoading } = useSWR('/plans/categories/');
   const { data: user } = useSWR('/user/');
   const { data: history, isLoading: historyLoading } = useSWR('plans/history');
+  const { data: chartDatas } = useSWR(
+    'plans/get-user-investment-amount-by-category/'
+  );
+
+  const chartData = {
+    datasets: [
+      {
+        data: chartDatas?.map((item) => item?.total_investment_amount),
+        backgroundColor: ['#6699FC', '#F324EC', '#0E0C6D'],
+      },
+    ],
+  };
+
   const [activeOption, setActiveOption] = useState(null);
+  const dispatch = useDispatch();
+
+  const isChartDataAvailable = chartDatas && chartDatas.length === 0;
 
   const navigate = useNavigate();
   console.log(user);
   const [showAmount, setShowAmount] = useState(true);
+  const { data: userKyc } = useSWR('/kyc/');
+  dispatch(setUserKyc(userKyc));
 
   const handleVisibilityToggle = () => {
     setShowAmount(!showAmount);
@@ -60,10 +82,16 @@ const DashboardHome = () => {
   const formattedAmount = useCurrencyFormatter(
     user?.profile?.available_balance
   );
+  const formattedBookBalance = useCurrencyFormatter(
+    user?.profile?.book_balance
+  );
+
+  const colors = ['#6699FC', '#F324EC', '#0E0C6D', '#FF5733', '#33FF57', '#5733FF', '#FFC249'];
+
   return (
     <div className="space-y-3 h-full no-scrollbar overflow-auto p-5">
       <div className="flex space-x-3 items-center justify-center w-full xl:hidden lg:hidden md:hidden py-7 text-[#41073F] font-semibold">
-        {options?.map((option, index) => (
+        {navOptions?.map((option, index) => (
           <span
             key={index}
             className={` cursor-pointer ${
@@ -93,8 +121,8 @@ const DashboardHome = () => {
             <div className="flex items-center space-x-4">
               <input
                 type={showAmount ? 'text' : 'password'}
-                value={formattedAmount}
-                className="text-white text-5xl   w-full font-extrabold border-none bg-transparent focus:outline-none"
+                value={formattedAmount ? formattedAmount : 0.0}
+                className="text-white xl:text-5xl  text-3xl w-full font-extrabold border-none bg-transparent focus:outline-none"
                 readOnly
               />
             </div>
@@ -106,41 +134,45 @@ const DashboardHome = () => {
                 live profit
               </span>
             </div>
-            <div className="flex border border-red-500 justify-start w-full flex-col space-x-4">
+            <div className="flex  justify-start w-full flex-col ">
               <span className="text-gray-300 text-lg">Book Balance</span>
-              <span className="font-bold  bg-transparent rounded-md border border-white border-opacity-20 shadow-xl drop-shadow-xl p-1 px-2 text-xs">
-                book balance
+              <span className="font-bold  bg-transparent  shadow-xl drop-shadow-xl  text-xl">
+                {formattedBookBalance}
               </span>
             </div>
           </div>
         </div>
         <div className="border  flex flex-col justify-center space-y-5 bg-[#0C0000] items-center pb-10 border-white border-opacity-40  flex-1">
-          <div style={{ width: '150px', height: '150px' }}>
-            <Doughnut data={chartData} option={options} />
-          </div>
-          <div className="flex space-x-2">
-            <div className="flex flex-col justify-center items-center">
-              <span className="flex space-x-2">
-                <FiberManualRecordIcon className="text-[#6699FC]" />
-                <span>Crypto</span>
-              </span>
-              <span className="text-[#868383]">$7,886</span>
+          {!isChartDataAvailable ? (
+            <>
+              <div style={{ width: '150px', height: '150px' }}>
+                <Doughnut data={chartData} option={options} />
+              </div>
+              <div className="flex space-x-2">
+                {chartDatas?.map((item, index) => (
+                  <div key={index} className="flex flex-col xl:space-x-2">
+                    <span className="flex items-center gap-1">
+                      <MdFiberManualRecord style={{ color: colors[index] }} />
+                      <span>{item?.category_name}</span>
+                    </span>
+                    <span className="text-[#868383]">
+                      {Number(item?.total_investment_amount).toLocaleString(
+                        'en-US',
+                        {
+                          style: 'currency',
+                          currency: 'USD', // Change to your desired currency
+                        }
+                      )}{' '}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </>
+          ) : (
+            <div>
+              <DashboardEmptyContainer message={'No Data Available'} />
             </div>
-            <div className="flex flex-col xl:space-x-2">
-              <span className="flex ">
-                <FiberManualRecordIcon className="text-[#F324EC]" />
-                <span>Real estate</span>
-              </span>
-              <span className="text-[#868383]">$7,886</span>
-            </div>
-            <div className="flex flex-col  xl:space-x-2">
-              <span className="flex ">
-                <FiberManualRecordIcon className="text-[#0E0C6D]" />
-                <span>Cannabis</span>
-              </span>
-              <span className="text-[#868383]">$7,886</span>
-            </div>
-          </div>
+          )}
         </div>
       </div>
       <div className="space-y-3">
@@ -184,22 +216,35 @@ const DashboardHome = () => {
             </>
           ) : (
             <>
-              <div className="w-full space-y-1">
-                <div className="flex justify-between px-10 py-2 bg-[#924E8F]">
-                  <span>Name</span>
-                  <span className="pr-12">Detail</span>
-                  <span className="pr-12">Date</span>
-                </div>
-                <div className="flex flex-col space-y-1">
-                  {history?.slice(0, 3).map((item, idx) => (
-                    <HistoryRow
-                      key={idx}
-                      item={item}
-                      idx={idx}
-                      colors={colors}
-                    />
-                  ))}
-                </div>
+              <div className=" space-y-1 text-white">
+                <TableContainer>
+                  <Table
+                    sx={{ minWidth: 650, color: 'white' }}
+                    aria-label="simple table"
+                  >
+                    <TableHead sx={{ background: '#924E8F', color: 'white' }}>
+                      <TableRow>
+                        <TableCell sx={{ color: 'white' }}>Name</TableCell>
+                        <TableCell align="left" sx={{ color: 'white' }}>
+                          Details
+                        </TableCell>
+                        <TableCell align="center" sx={{ color: 'white' }}>
+                          Date
+                        </TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody sx={{ mt: 4 }}>
+                      {history?.slice(0, 3)?.map((row, idx) => (
+                        <HistoryRow
+                          key={idx}
+                          row={row}
+                          idx={idx}
+                          colors={colors}
+                        />
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
               </div>
             </>
           )}

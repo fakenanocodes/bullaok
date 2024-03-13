@@ -13,7 +13,7 @@ import MobileTransferTable from './MobileTransferTab';
 const Transfer = () => {
   const [openModel, setOpenModel] = useState(false);
   const [showMobileTable, setShowMobileTable] = useState(false);
-  const [checkInputEmail, setCheckInputEmail] = useState(false);
+  const [checkInput, setCheckInput] = useState(false);
   const { data: transfers } = useSWR(`/transfer/`);
 
   const { data: user } = useSWR(`/user/`);
@@ -49,10 +49,10 @@ const Transfer = () => {
   };
 
   const handleValidEmail = () => {
-    if (emailAddress) {
+    if (emailAddress && amount) {
       setOpenModel(true);
     } else {
-      setCheckInputEmail(true);
+      setCheckInput(true);
     }
   };
 
@@ -96,7 +96,9 @@ const Transfer = () => {
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
                 type="number"
-                className="rounded-lg px-6 border-2 py-4"
+                className={`rounded-lg px-6 border-2 py-4 ${
+                  checkInput && 'border-red-600'
+                }`}
                 placeholder="0.00 $"
               />
             </div>
@@ -110,7 +112,7 @@ const Transfer = () => {
                 onChange={(e) => setEmailAdress(e.target.value)}
                 type="email"
                 className={`rounded-lg px-6 border-2 py-4 ${
-                  checkInputEmail && 'border-red-600'
+                  checkInput && 'border-red-600'
                 }`}
                 placeholder="youremail@email.com"
               />
