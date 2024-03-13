@@ -24,7 +24,7 @@ const cardData = [
     image: card_img,
   },
   {
-    location: 'Lagos, Nigeria',
+    location: 'California, USA',
     views: '5.0 (55,890 views)',
     price: '$564,897',
     image: card_img2,
