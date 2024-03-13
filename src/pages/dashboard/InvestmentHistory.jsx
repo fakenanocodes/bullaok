@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
 import HistoryTableRow from '../../components/Dashboard/HistoryTableRow';
 import DashboardEmptyContainer from '../../components/empty/DashboardEmptyContainer';
-import useDateSeparator from '../../hooks/useDateSeparator';
 
 const InvestmentHistory = () => {
   const navigate = useNavigate();
@@ -48,16 +47,8 @@ const InvestmentHistory = () => {
                   </thead>
                   <tbody className=" space-y-2 ">
                     {data?.map((item, itemIndex) => {
-                      const messageDate = new Date(item?.created);
-                      const dateSeparator = useDateSeparator(messageDate);
-
                       return (
                         <>
-                          {/* {dateSeparator  && (
-                          <div className="px-10 text-center font-semibold mt-4">
-                            {dateSeparator}
-                          </div>
-                        )} */}
                           <HistoryTableRow
                             key={itemIndex}
                             idx={itemIndex}
