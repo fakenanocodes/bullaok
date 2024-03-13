@@ -43,7 +43,6 @@ const imageUrls = {
 };
 
 const colors = ['#6B5F6B', '#33FF57', '#5733FF']; // Add more colors as needed
-const options = ['Withdraw', 'Deposit', 'Transfer'];
 
 const DashboardHome = () => {
   const { data, isLoading } = useSWR('/plans/categories/');
