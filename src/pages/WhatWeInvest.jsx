@@ -3,11 +3,7 @@ import Layout from '../components/Layout';
 
 export default function WhatWeInvest() {
   const chartData = [
-    {
-      bg_color: '#8E0789',
-      title: 'Crypto',
-      rate: '30%',
-    },
+ 
     {
       bg_color: '#FFB803',
       title: 'Stock',
@@ -20,7 +16,7 @@ export default function WhatWeInvest() {
     },
     {
       bg_color: '#B3B3CB',
-      title: 'Forest',
+      title: 'Forestry',
       rate: '30%',
     },
     {
