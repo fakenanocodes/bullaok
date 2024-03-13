@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion';
 import Layout from '../components/Layout';
 import { sectionsData } from '../data/inevstment';
+import { scrollToTop } from '../actions/utils';
+import { useNavigate } from 'react-router-dom';
 export default function Investment() {
   const sections = sectionsData.map((section, index) => (
     <section
@@ -29,7 +31,7 @@ export default function Investment() {
       </div>
     </section>
   ));
-
+  const navigate = useNavigate();
   return (
     <Layout>
       <header
@@ -47,7 +49,13 @@ export default function Investment() {
             Our investment approach relies <br /> on facts,{' '}
             <span className="text-[#FFD700]"> not guesswork.</span>
           </h2>
-          <button className="uppercase font-[montsserat] border text-[#fff] mt-8 bg-transparent lg:px-9 px-3 font-bold py-3">
+          <button
+            onClick={() => {
+              navigate('/register');
+              scrollToTop();
+            }}
+            className="uppercase font-[montsserat] border text-[#fff] mt-8 bg-transparent lg:px-9 px-3 font-bold py-3"
+          >
             Get started
           </button>
         </div>

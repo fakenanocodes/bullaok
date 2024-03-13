@@ -1,4 +1,8 @@
+import { useNavigate } from "react-router-dom";
+import { scrollToTop } from "../../actions/utils";
+
 export default function Learn() {
+  const navigate = useNavigate()
   return (
     <section className="bg-[#a53aa1] ">
       <div className="text-[#fff] py-9 px-6 lg:px-3 lg:w-2/4 w-full m-auto  flex flex-col gap-5">
@@ -60,7 +64,10 @@ export default function Learn() {
             *Regulatory and other fees may apply
           </p>
         </div>
-        <button className="bg-[#D4B716] text-black mx-auto hidden lg:block w-full lg:w-2/5 rounded-[30px] py-4 text-xl mt-5">
+        <button onClick={() => {
+            navigate('/register');
+            scrollToTop();
+          }} className="bg-[#D4B716] text-black mx-auto hidden lg:block w-full lg:w-2/5 rounded-[30px] py-4 text-xl mt-5">
           Open an account
         </button>
         {/* <button className="bg-[#000] mx-auto flex items-center px-6 gap-3 rounded-[30px] py-2 text-xl mt-5">

@@ -39,6 +39,7 @@ export default function EditProfileModal({ setOpen, profile }) {
     try {
       setIsLoading(true);
       const response = await axios.put('/user/profile/', data);
+      console.log(response);
       setIsLoading(false);
       setSuccess('Profile update Successful');
 
@@ -51,15 +52,19 @@ export default function EditProfileModal({ setOpen, profile }) {
     }
   };
 
+  setTimeout(() => {
+    setError(null);
+    setSuccess(null);
+  }, 4000);
   return (
     <div className=" fixed top-0 rounded-lg left-0 w-full h-full flex  justify-center items-center bg-[#000000b3]">
-        {success && <Alert severity="success">{success}</Alert>}
-        {error && <Alert severity="error">{error}</Alert>}
       <ClickAwayListener onClickAway={() => setOpen(false)}>
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="bg-white  w-[90%] p-9 md:w-5/6 max-w-[700px] p-4 my-6  rounded-lg relative"
         >
+          {success && <Alert severity="success">{success}</Alert>}
+          {error && <Alert severity="error">{error}</Alert>}
           <div className="border-[#8E0789]/25 flex flex-col gap-4 border p-7 rounded-lg">
             <div className="">
               <label htmlFor="fullname">Full name</label>

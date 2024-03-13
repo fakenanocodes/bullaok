@@ -1,6 +1,9 @@
 import { BsFillArrowRightCircleFill } from 'react-icons/bs';
+import { useNavigate } from 'react-router-dom';
+import { scrollToTop } from '../../actions/utils';
 
 export default function Stock() {
+  const navigate = useNavigate();
   return (
     <section className="py-5">
       <div className="flex items-center lg:w-3/5 w-full  lg:flex-row flex-col justify-center mx-auto gap-9 text-[#fff] ">
@@ -19,7 +22,13 @@ export default function Stock() {
             className="w-64 h-auto lg:hidden block"
             alt=""
           />
-          <button className="bg-[#fff] lg:hidden rounded-lg text-[#41073F] font-bold px-4 py-4 items-center gap-2 ">
+          <button
+            onClick={() => {
+              navigate('/register');
+              scrollToTop();
+            }}
+            className="bg-[#fff] lg:hidden rounded-lg text-[#41073F] font-bold px-4 py-4 items-center gap-2 "
+          >
             <span>Get Started</span> <BsFillArrowRightCircleFill />
           </button>
           <p className="lg:text-lg mt-5 lg:mt-0 text-xs">

@@ -1,4 +1,8 @@
+import { useNavigate } from 'react-router-dom';
+import { scrollToTop } from '../../actions/utils';
+
 export default function OpenAccount() {
+  const navigate = useNavigate();
   return (
     <section className="py-9 px-5 flex flex-col items-center gap-9">
       <div>
@@ -29,7 +33,13 @@ export default function OpenAccount() {
           </div>
         </div>
         <hr className="w-full hidden md:block " />
-        <button className="bg-[#D4B716] text-black py-3 rounded-lg font-bold mt-7 px-6">
+        <button
+          onClick={() => {
+            navigate('/register');
+            scrollToTop();
+          }}
+          className="bg-[#D4B716] text-black py-3 rounded-lg font-bold mt-7 px-6"
+        >
           Open an account
         </button>
       </div>

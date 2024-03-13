@@ -1,24 +1,37 @@
-import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
+import { TableCell, TableRow } from '@mui/material';
 import React from 'react';
+import { MdFiberManualRecord } from 'react-icons/md';
 import formatDateWithSuffix from '../../hooks/useDateFormatter';
 
 // const colors = ['#6B5F6B', '#33FF57', '#5733FF']; // Add more colors as needed
-export default function HistoryRow({ colors, idx, item }) {
-  const originalDate = new Date(item?.created);
+export default function HistoryRow({ colors, idx, row }) {
+  const originalDate = new Date(row?.created);
   const formattedDate = formatDateWithSuffix(originalDate);
-  console.log(item);
   return (
-    <tr key={idx} className=" mt-5 px-10 py-4  bg-[#BB9FB3] bg-opacity-[38%]">
-      <td className="flex items-center gap-2">
+    <TableRow
+      sx={{
+        background: '#BB9FB3',
+        mt: 4,
+      }}
+    >
+      <TableCell
+        component="th"
+        scope="row"
+        sx={{ display: 'flex', gap: 2, alignItems: 'center', color: 'white' }}
+      >
         <span className="bg-white w-6 h-6 flex justify-center items-center rounded-full">
-          <FiberManualRecordIcon
+          <MdFiberManualRecord
             style={{ color: colors[idx], borderRadius: '50%' }}
           />
         </span>
-        {item?.investmentplan?.name}
-      </td>
-      <td>{item?.details}</td>
-      <td>{formattedDate}</td>
-    </tr>
+        {row?.investment_plan_name}
+      </TableCell>
+      <TableCell align="left" sx={{ color: 'white' }}>
+        {row.details}
+      </TableCell>
+      <TableCell align="center" sx={{ color: 'white' }}>
+        {formattedDate}
+      </TableCell>
+    </TableRow>
   );
 }

@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+import { scrollToTop } from '../actions/utils';
 import bg_img from '../assets/bg_img.png';
 import chart_sys from '../assets/chart_sys.png';
 import stock_img from '../assets/stock_img.png';
@@ -9,6 +11,7 @@ import StockSwiper from '../components/StockSwiper';
 import StockCardsContainer from '../components/utils/StockCardsContainer';
 
 const Stock = () => {
+  const navigate = useNavigate()
   return (
     <MainLayout>
       <div className="bg-[#30022ECC] bg-opacity-10 relative w-full h-[90vh]">
@@ -22,7 +25,11 @@ const Stock = () => {
             <li>Intuitive tools and support for traders</li>
             <li>Discuss market trends with other investors</li>
           </ul>
-          <button className="font-bold py-3 px-5 bg-[#D4B716] rounded-lg text-black">
+          <button 
+           onClick={() => {
+            navigate('/register');
+            scrollToTop();
+          }}className="font-bold py-3 px-5 bg-[#D4B716] rounded-lg text-black">
             Get Started
           </button>
         </div>
@@ -89,7 +96,11 @@ const Stock = () => {
                 See more about the free stock bonus
               </p>
             </div>
-            <button className="text-black font-bold text-xl py-5 px-7 bg-[#D4B716] rounded-lg mt-[4rem]">
+            <button 
+             onClick={() => {
+              navigate('/register');
+              scrollToTop();
+            }}className="text-black font-bold text-xl py-5 px-7 bg-[#D4B716] rounded-lg mt-[4rem]">
               Get your free stocks
             </button>
           </div>

@@ -1,4 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
+import { Alert, CircularProgress } from '@mui/material';
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -15,6 +16,7 @@ const schema = yup.object().shape({
 export default function Support() {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const {
     getValues,
@@ -34,11 +36,10 @@ export default function Support() {
 
     try {
       setIsLoading(true);
-      const response = await axios.post('/user/auth/create/', data);
-      dispatch(setCurrentSignupEmail(data?.email));
+      const response = await axios.post('/contact/', data);
+      setSuccess(response?.data?.message);
       console.log(response);
       setIsLoading(false);
-      setSignupComponent(1);
       reset();
     } catch (err) {
       setIsLoading(false);
@@ -46,6 +47,11 @@ export default function Support() {
       setError(errMsg);
     }
   };
+
+  setTimeout(() => {
+    setError(null);
+    setSuccess(null);
+  }, 4000);
   return (
     <div className="bg-white h-full flex-col flex justify-center items-start">
       <div
@@ -53,8 +59,11 @@ export default function Support() {
         className="flex items-center gap-7 py-7 p-6 text-black text-3xl cursor-pointer block"
       >
         <IoMdArrowBack />
+        <p>Support</p>
       </div>
       <div className="flex flex-col text-black w-inherit m-auto -mt-[20px] gap-5 w-full">
+        {error && <Alert severity="error">{error}</Alert>}
+        {success && <Alert severity="success">{success}</Alert>}
         <h2 className="text-center xl:text-4xl text-2xl font-semibold">
           Need some help?
         </h2>
@@ -66,14 +75,15 @@ export default function Support() {
           <label htmlFor="subject font-bold">Subject</label>
 
           <InputComponent
-            error={errors?.first_name?.message}
-            register={register('first_name')}
+            error={errors?.subject?.message}
+            register={register('subject')}
             type={'text'}
             placeholder={'I can not change profile picture'}
           />
           <div className="flex flex-col text-black">
             <label htmlFor="body">Body</label>
             <textarea
+              // {errors?.subject?.message}
               className="outline-[#41073F] focus:border-[#41073F] border-1 border-[#41073F] border-2 rounded-xl p-2"
               placeholder="Message"
               {...register('body')}
@@ -82,8 +92,15 @@ export default function Support() {
             ></textarea>
           </div>
           <div className="flex items-center justify-center mt-7 w-full">
-            <button className="bg-[#41073F] rounded-xl px-6 p-2 flex justify-center text-white">
-              Send
+            <button
+              type="submit"
+              className="bg-[#41073F] rounded-xl px-6 p-2 flex justify-center text-white"
+            >
+              {isLoading ? (
+                <CircularProgress size={20} sx={{ color: 'white' }} />
+              ) : (
+                'Send'
+              )}
             </button>
           </div>
         </form>
