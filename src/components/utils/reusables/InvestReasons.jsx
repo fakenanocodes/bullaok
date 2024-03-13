@@ -1,7 +1,10 @@
+import { useNavigate } from 'react-router-dom';
+import { scrollToTop } from '../../../actions/utils';
 import invest_save from '../../../assets/invest_save.png';
 import invest_save2 from '../../../assets/invest_save2.png';
 
 const InvestReasons = () => {
+  const navigate = useNavigate()
   return (
     <section className="bg-gradient-to-b from-purple-300 to-[#41073F] bg-opacity-40 w-full flex flex-col justify-between px-5 xl:px-20 mb-5 py-[5rem] gap-[5rem]">
       <div className="place-items-center flex flex-col-reverse md:flex-row items-center justify-between lg:justify-around">
@@ -16,7 +19,11 @@ const InvestReasons = () => {
             Your uninvested cash will generate a 5.0% APY. Interest will be paid
             every month.
           </p>
-          <button className="font-bold py-4 px-6 bg-[#D4B716] rounded-lg text-[#000] max-w-[10rem]">
+          <button 
+           onClick={() => {
+            navigate('/register');
+            scrollToTop();
+          }} className="font-bold py-4 px-6 bg-[#D4B716] rounded-lg text-[#000] max-w-[10rem]">
             Get Started
           </button>
         </div>
@@ -44,7 +51,11 @@ const InvestReasons = () => {
             a bank. Set a recurring deposit schedule to achieve your savings
             goal.
           </p>
-          <button className="font-bold py-4 px-6 bg-[#D4B716] rounded-lg text-[#000] max-w-[10rem]">
+          <button 
+           onClick={() => {
+            navigate('/register');
+            scrollToTop();
+          }} className="font-bold py-4 px-6 bg-[#D4B716] rounded-lg text-[#000] max-w-[10rem]">
             Get Started
           </button>
         </div>

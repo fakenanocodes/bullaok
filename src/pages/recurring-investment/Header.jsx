@@ -1,12 +1,9 @@
 import { BsFillArrowRightCircleFill } from 'react-icons/bs';
+import { useNavigate } from 'react-router-dom';
+import { scrollToTop } from '../../actions/utils';
 
 export default function Header() {
-  // const data = [
-  //   'Why choose Bulloak for margin trading.',
-  //   'The benefit of a margin trading account.',
-  //   'Understand the risks of margin trading.',
-  //   'How trading securities on margin works.',
-  // ];
+  const navigate = useNavigate();
   return (
     <section className="flex flex-col lg:flex-row px-8 items-center justify-center md:gap-16 gap-8 py-9  bg-contain bg-center bg-[#F7FAFC]  bg-no-repeat  w-full relative">
       <div className="lg:w-2/3 w-full  flex lg:flex-row flex-col">
@@ -19,7 +16,13 @@ export default function Header() {
             market fluctuations.
           </p>
 
-          <button className="bg-[#8E0789] font-bold lg:text-lg text-base rounded-lg text-[#fff] lg:px-9 px-4 py-4 flex items-center gap-2 mt-3 lg:mt-0">
+          <button
+            onClick={() => {
+              navigate('/register');
+              scrollToTop();
+            }}
+            className="bg-[#8E0789] font-bold lg:text-lg text-base rounded-lg text-[#fff] lg:px-9 px-4 py-4 flex items-center gap-2 mt-3 lg:mt-0"
+          >
             <span>Get Started</span> <BsFillArrowRightCircleFill />
           </button>
         </div>

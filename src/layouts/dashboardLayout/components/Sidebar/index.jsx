@@ -42,7 +42,7 @@ const DashboardSidebar = () => {
   ];
 
   return (
-    <div className="p-7 bg-black bg-opacity-[34%] absolute top-[30%] flex-col hidden lg:flex items-center space-y-5 justify-center border rounded-xl ">
+    <div className="p-7 bg-black bg-opacity-[34%] absolute top-[30%] flex-col hidden lg:flex items-center space-y-9 justify-center border rounded-xl ">
       {icons?.map((item) => (
         <>
           {item.name === 'Logout' ? (

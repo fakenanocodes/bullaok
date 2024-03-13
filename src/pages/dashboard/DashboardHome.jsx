@@ -1,3 +1,11 @@
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from '@mui/material';
 import { ArcElement, Chart as ChartJS, Legend, Tooltip } from 'chart.js';
 import { useState } from 'react';
 import { Doughnut } from 'react-chartjs-2';
@@ -203,16 +211,44 @@ const DashboardHome = () => {
             </>
           ) : (
             <>
-              <div className="w-full space-y-1">
-                <table className="w-full overflow-auto ">
+              <div className=" space-y-1 text-white">
+                <TableContainer>
+                  <Table
+                    sx={{ minWidth: 650, color: 'white' }}
+                    aria-label="simple table"
+                  >
+                    <TableHead sx={{ background: '#924E8F', color: 'white' }}>
+                      <TableRow>
+                        <TableCell sx={{ color: 'white' }}>Name</TableCell>
+                        <TableCell align="left" sx={{ color: 'white' }}>
+                          Details
+                        </TableCell>
+                        <TableCell align="center" sx={{ color: 'white' }}>
+                          Date
+                        </TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody sx={{ mt: 4 }}>
+                      {history?.slice(0, 3)?.map((row, idx) => (
+                        <HistoryRow
+                          key={idx}
+                          row={row}
+                          idx={idx}
+                          colors={colors}
+                        />
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+                {/* <table className="w-full border-separate min-w-[900px] overflow-x-auto border-spacing-y-2 sm:overflow-visible">
                   <thead>
-                    <tr className="bg-[#924E8F] text-white">
+                    <tr className="bg-[#924E8F]  grid grid-cols-3  text-white">
                       <th>Name</th>
                       <th>Detail</th>
                       <th>Date</th>
                     </tr>
                   </thead>
-                  <tbody className=" overflow-x-auto space-y-1">
+                  <tbody className="  space-y-1">
                     {history?.slice(0, 3).map((item, idx) => (
                       <HistoryRow
                         key={idx}
@@ -222,7 +258,7 @@ const DashboardHome = () => {
                       />
                     ))}
                   </tbody>
-                </table>
+                </table> */}
               </div>
             </>
           )}

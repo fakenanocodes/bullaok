@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import invest from '../assets/invest.mp4';
 import banner_img from '../assets/invest_banner_page.png';
 import invest_icon_four from '../assets/invest_icon_four.svg';
@@ -10,6 +11,7 @@ import Faq from '../components/utils/reusables/Faq';
 import InvestDownBanner from '../components/utils/reusables/InvestDownBanner';
 import InvestManagement from '../components/utils/reusables/InvestManagement';
 import InvestReasons from '../components/utils/reusables/InvestReasons';
+import { scrollToTop } from '../actions/utils';
 
 const downloadData = [
   {
@@ -39,6 +41,7 @@ const downloadData = [
 ];
 
 const Investing = () => {
+  const navigate = useNavigate()
   return (
     <MainLayout>
       <div className="bg-gradient-to-b from-[#41073F] to-purple-400 bg-opacity-90 w-full h-[90vh] flex flex-col justify-between">
@@ -58,7 +61,11 @@ const Investing = () => {
               account. No need to open a new account. No fees attached. No
               minimum balance required.
             </p>
-            <button className="text-black font-bold py-4 px-6 bg-[#D4B716] rounded-lg mt-[2rem]">
+            <button
+             onClick={() => {
+              navigate('/register');
+              scrollToTop();
+            }} className="text-black font-bold py-4 px-6 bg-[#D4B716] rounded-lg mt-[2rem]">
               Open an account
             </button>
           </div>

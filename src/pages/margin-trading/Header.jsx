@@ -1,4 +1,6 @@
 import { BsFillArrowRightCircleFill } from 'react-icons/bs';
+import { scrollToTop } from '../../actions/utils';
+import { useNavigate } from 'react-router-dom';
 
 export default function Header() {
   const data = [
@@ -7,6 +9,7 @@ export default function Header() {
     'Understand the risks of margin trading.',
     'How trading securities on margin works.',
   ];
+  const navigate = useNavigate()
   return (
     <section
       className="flex flex-col lg:flex-row px-8 items-center justify-center md:gap-16 gap-8 py-9 bg-cover bg-center bg-no-repeat w-full relative"
@@ -41,7 +44,11 @@ export default function Header() {
           ))}
         </div>
 
-        <button className="bg-[#D4B716] rounded-lg text-[#000] px-9 py-4 flex items-center gap-2 mt-[100px] lg:mt-0">
+        <button 
+         onClick={() => {
+          navigate('/register');
+          scrollToTop();
+        }} className="bg-[#D4B716] rounded-lg text-[#000] px-9 py-4 flex items-center gap-2 mt-[100px] lg:mt-0">
           <span>Get Started</span> <BsFillArrowRightCircleFill />
         </button>
 

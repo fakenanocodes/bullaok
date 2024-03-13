@@ -1,5 +1,7 @@
 import React from 'react';
 import { BsArrowRight } from 'react-icons/bs';
+import { useNavigate } from 'react-router-dom';
+import { scrollToTop } from '../../actions/utils';
 
 export default function WhyCorporate() {
   const data = [
@@ -20,6 +22,8 @@ export default function WhyCorporate() {
         'By understanding their needs, providing valuable resources, and fostering meaningful connections, you can effectively cater to the interests of retail investors.            ',
     },
   ]; // Add m
+
+  const navigate = useNavigate();
   return (
     <section className="text-white flex py-7">
       <div className="flex flex-col lg:flex-row w-full lg:w-2/3 gap-5 px-7 mx-auto mt-[80px] ">
@@ -29,16 +33,26 @@ export default function WhyCorporate() {
         <div className="flex flex-col gap-9 items-start  w-full items-center  text-center lg:text-start lg:w-2/4">
           {data.map((item, index) => (
             <div key={index}>
-              <h3 className="font-bold lg:text-3xl mb-4      text-xl">{item.title}</h3>
+              <h3 className="font-bold lg:text-3xl mb-4      text-xl">
+                {item.title}
+              </h3>
               <p>{item.content}</p>
             </div>
           ))}
-          <button className="flex items-center text-[#fff] lg:p-4 py-2 lg:py-0 px-5 lg:px-0 rounded-xl lg:text-2xl text-xl gap-3 font-bold mt-6 ">
+          <button
+            onClick={() => {
+              navigate('/contact');
+              scrollToTop();
+            }}
+            className="flex items-center text-[#fff] lg:p-4 py-2 lg:py-0 px-5 lg:px-0 rounded-xl lg:text-2xl text-xl gap-3 font-bold mt-6 "
+          >
             {' '}
             <span> Get in touch today!</span>{' '}
             <BsArrowRight style={{ color: '#fff' }} />
           </button>{' '}
-          <p className='w-2/3 lg:w-full'>Contact CCS@Bulloak-us.com to learn more</p>
+          <p className="w-2/3 lg:w-full">
+            Contact CCS@Bulloak-us.com to learn more
+          </p>
         </div>
       </div>
     </section>

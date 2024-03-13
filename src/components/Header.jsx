@@ -66,7 +66,7 @@ const Header = () => {
     <div className="w-full flex justify-between items-center py-5 px-5 lg:px-10 xl:px-20 bg-[#41073F] shadow-md fixed z-40 top-0 left-0">
       <div
         onClick={() => navigate('/')}
-        className="font-semibold text-white z-40 "
+        className="font-semibold text-white z-40 cursor-pointer "
       >
         <img src={HomePageIcon} className="w-14 bg-white py-1" />
       </div>
