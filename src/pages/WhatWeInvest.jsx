@@ -3,7 +3,6 @@ import Layout from '../components/Layout';
 
 export default function WhatWeInvest() {
   const chartData = [
- 
     {
       bg_color: '#FFB803',
       title: 'Stock',

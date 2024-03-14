@@ -15,11 +15,15 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
 import { images } from '../../assets';
+import CryptoCharts from '../../components/Dashboard/CryptoCharts';
 import HistoryRow from '../../components/Dashboard/HistoryRow';
+import LiteCoinWidget from '../../components/Dashboard/LiteCoinWIdget';
 import PackageCard from '../../components/Dashboard/PackageCard';
 import DashboardEmptyContainer from '../../components/empty/DashboardEmptyContainer';
 import useCurrencyFormatter from '../../hooks/useCurrencyFormatter';
 import { setUserKyc } from '../../store/reducers/transact_reducer';
+import BtcCoinWidget from '../../components/Dashboard/BtcCoinWidget';
+import EthCoinWidget from '../../components/Dashboard/EthCoinWidget';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -84,7 +88,15 @@ const DashboardHome = () => {
     user?.profile?.book_balance
   );
 
-  const colors = ['#6699FC', '#F324EC', '#0E0C6D', '#FF5733', '#33FF57', '#5733FF', '#FFC249'];
+  const colors = [
+    '#6699FC',
+    '#F324EC',
+    '#0E0C6D',
+    '#FF5733',
+    '#33FF57',
+    '#5733FF',
+    '#FFC249',
+  ];
 
   return (
     <div className="space-y-3 h-full no-scrollbar overflow-auto p-5">
@@ -171,6 +183,17 @@ const DashboardHome = () => {
               <DashboardEmptyContainer message={'No Data Available'} />
             </div>
           )}
+        </div>
+      </div>
+      <div className="grid grid-cols-3  w-full ">
+        <div className="col-span-2">
+          <CryptoCharts />
+        </div>
+
+        <div className="grid grid-cols-2 gap-5">
+          <LiteCoinWidget />
+          <BtcCoinWidget />
+          <EthCoinWidget />
         </div>
       </div>
       <div className="space-y-3">
