@@ -7,21 +7,21 @@ const TeamMember = () => {
   return (
     <div>
       <MainLayout>
-        <div className="bg-[#30022ECC] bg-opacity-10 relative w-full h-[60vh]">
+        <div className="bg-[#30022ECC] bg-opacity-10 relative w-full md:h-[60vh]">
           <img
             src={services_banner_img}
             alt=""
             className="w-full h-full object-cover"
           />
-          <div className="absolute flex flex-col justify-center items-start gap-12 lg:gap-20 top-0 right-0 bottom-0 left-0 bg-[#30022ECC] bg-opacity-10 text-white pl-5 lg:pl-16 xl:pl-48">
-            <p className="laviossa text-[3rem] font-bold md:w-[30rem]">
+          <div className="absolute flex flex-col justify-center items-start gap-2 lg:gap-20 top-0 right-0 bottom-0 left-0 bg-[#30022ECC] bg-opacity-10 text-white pl-5 lg:pl-16">
+            <p className="laviossa text-2xl mt-7 md:mt-10 md:text-[3rem] font-bold md:w-[30rem]">
               Detailed Page
             </p>
-            <p className="laviossa text-xl md:w-[30rem]">Mr. Sum-Ting Wong</p>
+            <p className="laviossa  md:w-[30rem]">Mr. Sum-Ting Wong</p>
           </div>
         </div>
-        <div className="p-1 md:p-16">
-          <p className="laviossa text-[2rem] font-bold md:w-[30rem] mb-10">
+        <div className="mt-[15px] p-1 md:p-16">
+          <p className="laviossa md:text-[2rem] font-bold md:w-[30rem] mb-2 md:mb-10">
             Mr. Sum-Ting Wong
           </p>
           <div>
@@ -57,9 +57,9 @@ const TeamMember = () => {
                 es
               </p>
             </div>
-            <div className="mt-20 w-[60%]">
+            <div className="mt-5 md:mt-20 w-[60%]">
               <p className="laviossa md:text-[30px] mb-4">Certifications</p>
-              <div className="flex gap-5 md:gap-16 text-[8px]">
+              <div className="flex gap-5 md:gap-16 text-[8px] md:text-[16px]">
                 <div>
                   <img src={cert} />
                   <p>Nobel prize for innovation</p>
@@ -75,6 +75,19 @@ const TeamMember = () => {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+        <div className="bg-[#ddaadb] w-full glow flex flex-col items-center justify-around md:py-14 py-5 mt-[150px] md:mt-[20px]">
+          <p className="text-[#8E0789] mb-5 md:text-xl text-xs font-bold">
+            Trusted by some of the biggest companies
+          </p>
+          <div className="flex md:gap-7 gap-4">
+            <div className="md:w-14 md:h-14 w-7 h-7 rounded-full bg-[#8E0789]"></div>
+            <div className="md:w-14 md:h-14 w-7 h-7 rounded-full bg-[#8E0789]"></div>
+            <div className="md:w-14 md:h-14 w-7 h-7 rounded-full bg-[#8E0789]"></div>
+            <div className="md:w-14 md:h-14 w-7 h-7 rounded-full bg-[#8E0789]"></div>
+            <div className="md:w-14 md:h-14 w-7 h-7 rounded-full bg-[#8E0789]"></div>
+            <div className="md:w-14 md:h-14 w-7 h-7 rounded-full bg-[#8E0789]"></div>
           </div>
         </div>
       </MainLayout>
