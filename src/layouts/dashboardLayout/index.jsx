@@ -14,7 +14,7 @@ import LogoutIcon from '../../components/utils/icons/LogoutIcon';
 import useAuthentication from '../../hooks/useAuthentication';
 import DashboardSidebar from './components/Sidebar';
 
-const options = ['Withdraw', 'Deposit', 'Transfer'];
+const options = ['Withdraw', 'Deposit', 'Transfer', 'Plan'];
 const icons = [
   { icon: <HomeIcon />, name: 'Home', path: '' },
   { icon: <InvestmentIcon />, name: 'Investment Packages', path: 'kyc' },
