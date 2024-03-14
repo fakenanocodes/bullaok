@@ -125,8 +125,8 @@ export default function Footer() {
       </p>
       <hr />
       <p className="ml-auto w-fit text-sm text-[#fff] mt-8">
-        © 2023 Bulloak Financial LLC, All rights reserved. Member{' '}
-        <a href="#">FINRA/SIPC/NYSE/NASDAQ/CBOE EDGX</a>
+        © {new Date().getFullYear()} Bulloak Financial LLC, All rights
+        reserved. Member <a href="#">FINRA/SIPC/NYSE/NASDAQ/CBOE EDGX</a>
       </p>
     </section>
   );

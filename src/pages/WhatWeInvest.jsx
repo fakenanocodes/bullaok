@@ -20,7 +20,7 @@ export default function WhatWeInvest() {
     },
     {
       bg_color: '#41073F',
-      title: 'REAL ESTATE Forest',
+      title: 'REAL ESTATE',
       rate: '30%',
     },
     {

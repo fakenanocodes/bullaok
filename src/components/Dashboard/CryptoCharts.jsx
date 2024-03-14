@@ -7,7 +7,7 @@ const CryptoChart = () => {
       chart_id: 'roichart',
       cryptocompare_tickers: ['BTC', 'ETH'],
       iconomi_tickers: ['BLX', 'CAR'],
-      last_days: 30,
+      last_days: 90,
       options: {
         colors: ['#88AA24', '#EF1273', '#122673', '#000000'],
         title: true,
@@ -18,7 +18,7 @@ const CryptoChart = () => {
     });
   }, []);
 
-  return <div id="roichart" className="w-full bg-white"></div>;
+  return <div id="roichart"></div>;
 };
 
 export default CryptoChart;

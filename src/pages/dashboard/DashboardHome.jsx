@@ -6,8 +6,9 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
+import axios from 'axios';
 import { ArcElement, Chart as ChartJS, Legend, Tooltip } from 'chart.js';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
 import { MdFiberManualRecord } from 'react-icons/md';
@@ -15,15 +16,15 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
 import { images } from '../../assets';
+import BtcCoinWidget from '../../components/Dashboard/BtcCoinWidget';
 import CryptoCharts from '../../components/Dashboard/CryptoCharts';
+import EthCoinWidget from '../../components/Dashboard/EthCoinWidget';
 import HistoryRow from '../../components/Dashboard/HistoryRow';
 import LiteCoinWidget from '../../components/Dashboard/LiteCoinWIdget';
-import PackageCard from '../../components/Dashboard/PackageCard';
+import InvestmentPlanCard from '../../components/cards/InvestmentPlanCard';
 import DashboardEmptyContainer from '../../components/empty/DashboardEmptyContainer';
 import useCurrencyFormatter from '../../hooks/useCurrencyFormatter';
 import { setUserKyc } from '../../store/reducers/transact_reducer';
-import BtcCoinWidget from '../../components/Dashboard/BtcCoinWidget';
-import EthCoinWidget from '../../components/Dashboard/EthCoinWidget';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -51,7 +52,7 @@ const colors = ['#6B5F6B', '#33FF57', '#5733FF']; // Add more colors as needed
 const navOptions = ['Withdraw', 'Deposit', 'Transfer'];
 
 const DashboardHome = () => {
-  const { data, isLoading } = useSWR('/plans/categories/');
+  const { data, isLoading } = useSWR('/plans/all');
   const { data: user } = useSWR('/user/');
   const { data: history, isLoading: historyLoading } = useSWR('plans/history');
   const { data: chartDatas } = useSWR(
@@ -185,39 +186,16 @@ const DashboardHome = () => {
           )}
         </div>
       </div>
-      <div className="grid grid-cols-3  w-full ">
-        <div className="col-span-2">
+      <div className="grid xl:grid-cols-3 grid-cols-1  w-full ">
+        <div className="col-span-2 bg-[#fff]/70">
           <CryptoCharts />
         </div>
 
         <div className="grid grid-cols-2 gap-5">
-          <LiteCoinWidget />
-          <BtcCoinWidget />
           <EthCoinWidget />
         </div>
       </div>
       <div className="space-y-3">
-        <div className="w-full flex px-3 justify-between">
-          <span className="font-semibold">All Investment</span>
-          <span
-            className="text-[#F5C249] cursor-pointer"
-            onClick={() => {
-              navigate('/dashboard/investment/packages');
-            }}
-          >
-            See all
-          </span>
-        </div>
-        <div className="flex xl:flex-row md:flex-row flex-col items-center gap-4">
-          {data?.map((investmentPackage, index) => (
-            <PackageCard
-              id={investmentPackage.id}
-              label={investmentPackage?.name}
-              imgUrl={imageUrls[investmentPackage?.name]}
-              key={index}
-            />
-          ))}
-        </div>
         <div className="flex flex-col space-y-2">
           <div className="flex justify-end">
             <span
