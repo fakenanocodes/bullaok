@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { SwiperSlide } from 'swiper/react';
+import { images } from '../assets';
 import bg_img from '../assets/bg_img.png';
 import card_img from '../assets/home/card_img.png';
 import card_img2 from '../assets/home/card_img2.png';
@@ -36,6 +37,27 @@ const cardData = [
     image: card_img3,
   },
 ];
+const assets = [
+  {
+    location: 'Luxus',
+    views: '5.0 (55,890 views)',
+    price: '$453,897',
+    image: images.asset1,
+  },
+  {
+    location: '4g Cushion',
+    views: '5.0 (55,890 views)',
+    price: '$453,897',
+    image: images.asset2,
+  },
+  {
+    location: 'Duplex',
+    views: '5.0 (55,890 views)',
+    price: '$453,897',
+    image: images.asset3,
+  },
+];
+const stocks = [images.stock_home1, images.stock_home2];
 
 const Home = () => {
   const navigate = useNavigate();
@@ -162,6 +184,88 @@ const Home = () => {
 
         <div className="mt-[4rem] mb-[2rem] flex flex-col md:flex-row items-center justify-center gap-5">
           {cardData?.map((data, idx) => (
+            <HomeCard key={idx} data={data} />
+          ))}
+        </div>
+      </section>
+      <section className="bg-[#CDA1CB26] py-7 px-5 lg:px-12 xl:px-40 my-[5rem]">
+        <div className="flex flex-col-reverse gap-3 md:gap-0 md:flex-row items-center justify-between">
+          <div className="xl:w-[35rem]">
+            <p className="laviossa text-3xl xl:w-[25rem] leading-normal">
+              Stocks
+            </p>
+
+            <p className="uppercase text-[1.3rem] lg:w-[25rem] leading-normal mt-5">
+              TRUST, EXPERIENCE, EXPERTISE AND KNOWLEDGE{' '}
+            </p>
+
+            <p className="text-lg md:text-xl mt-5 xl:w-[30rem]">
+              We are an international financial company engaged in investment
+              activities, which are related to trading on financial markets and
+              cryptocurrency exchanges performed by qualified professional
+              traders.
+            </p>
+
+            <button
+              onClick={() => navigate('/services/what-we-invest')}
+              className="text-black font-semibold py-4 px-5 bg-transparent rounded-sm border-2 mt-7 border-[#41073F] uppercase"
+            >
+              Uncover more
+            </button>
+          </div>
+
+          <img
+            src={images.stock_home}
+            alt=""
+            className="min-h-[17rem] max-h-[17rem] xl:min-h-[30rem] lg:max-h-[30rem]"
+          />
+        </div>
+        <h2 className="laviossa font-bold xl:text-4xl text-2xl text-center my-9">
+          Make the most of our online trading platform with no commissions and
+          zero per-contract fees.
+        </h2>
+
+        <div className="mt-[4rem] mb-[2rem] flex flex-col md:flex-row items-center justify-center gap-5">
+          {stocks?.map((image) => (
+            <img src={image} className="w-full" alt="" />
+          ))}
+        </div>
+      </section>
+      <section className="bg-[#CDA1CB26] py-7 px-5 lg:px-12 xl:px-40 my-[5rem]">
+        <div className="flex flex-col-reverse gap-3 md:gap-0 md:flex-row items-center justify-between">
+          <div className="xl:w-[35rem]">
+            <p className="laviossa text-3xl xl:w-[25rem] leading-normal">
+              Assets
+            </p>
+
+            <p className="uppercase text-[1.3rem] lg:w-[25rem] leading-normal mt-5">
+              TRUST, EXPERIENCE, EXPERTISE AND KNOWLEDGE{' '}
+            </p>
+
+            <p className="text-lg md:text-xl mt-5 xl:w-[30rem]">
+              We are an international financial company engaged in investment
+              activities, which are related to trading on financial markets and
+              cryptocurrency exchanges performed by qualified professional
+              traders.
+            </p>
+
+            <button
+              onClick={() => navigate('/services/what-we-invest')}
+              className="text-black font-semibold py-4 px-5 bg-transparent rounded-sm border-2 mt-7 border-[#41073F] uppercase"
+            >
+              Uncover more
+            </button>
+          </div>
+
+          <img
+            src={images.assetMain}
+            alt=""
+            className="min-h-[17rem] max-h-[17rem] xl:min-h-[30rem] lg:max-h-[30rem]"
+          />
+        </div>
+
+        <div className="mt-[4rem] mb-[2rem] flex flex-col md:flex-row items-center justify-center gap-5">
+          {assets?.map((data, idx) => (
             <HomeCard key={idx} data={data} />
           ))}
         </div>

@@ -25,6 +25,7 @@
     "@reduxjs/toolkit": "^2.2.1",
     "axios": "^1.6.7",
     "chart.js": "^4.4.2",
+    "cryptocharts": "^1.1.2",
     "eslint-formatter-pretty": "^6.0.1",
     "flowbite": "^2.0.0",
     "framer-motion": "^10.16.4",
