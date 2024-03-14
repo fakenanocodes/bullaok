@@ -225,7 +225,7 @@ const Home = () => {
           in-person, or online.
         </p>
 
-        <button className="laviossa text-black font-semibold py-4 px-5 bg-[#FFB803] rounded-md">
+        <button onClick={() => navigate('/contact b   ')} className="laviossa text-black font-semibold py-4 px-5 bg-[#FFB803] rounded-md">
           Schedule a consultation
         </button>
       </section>
