@@ -28,6 +28,7 @@ import loans from './loans.png';
 import oil from './oil.png';
 import operations from './operations.png';
 import president from './president.png';
+import presido from './presido.png';
 import secretary from './secretary.png';
 import social from './social.png';
 import stock from './stock_market.png';
@@ -48,6 +49,7 @@ export const images = {
   crypto,
   team_bg,
   president,
+  presido,
   vc,
   social,
   secretary,

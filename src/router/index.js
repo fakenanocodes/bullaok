@@ -6,9 +6,10 @@ import { courses, header, testimonials } from '../data/education';
 import DashboardLayout from '../layouts/dashboardLayout';
 import About from '../pages/About';
 import CorporateConnect from '../pages/CorporateConnect';
-import ETF from '../pages/ETF';
+import DashboardHome from '../pages/dashboard/DashboardHome';
 import Education from '../pages/Education';
 import EducationCourses from '../pages/EducationCourses';
+import ETF from '../pages/ETF';
 import Faq from '../pages/Faq';
 import Forex from '../pages/Forex';
 import FractionalShares from '../pages/FractionalShares';
@@ -29,7 +30,6 @@ import Stock from '../pages/Stock';
 import Team from '../pages/Team';
 import WhatWeInvest from '../pages/WhatWeInvest';
 import WhoWeAre from '../pages/WhoWeAre';
-import DashboardHome from '../pages/dashboard/DashboardHome';
 
 import InvestmentHistory from '../pages/dashboard/InvestmentHistory';
 import Profile from '../pages/dashboard/Profile';
@@ -45,6 +45,7 @@ import RunningInvestment from '../pages/dashboard/RunningInvestment';
 import Deposit from '../pages/dashboard/transactions/Deposit';
 import Transfer from '../pages/dashboard/transactions/Transfer';
 import Withdrawal from '../pages/dashboard/transactions/Withdrawal';
+import TeamMember from '../pages/TeamMember';
 
 const router = createBrowserRouter([
   {
@@ -122,6 +123,10 @@ const router = createBrowserRouter([
   {
     path: 'team',
     Component: Team,
+  },
+  {
+    path: '/team/member',
+    Component: TeamMember,
   },
   {
     path: 'faq',
