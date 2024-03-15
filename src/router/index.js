@@ -253,7 +253,7 @@ const router = createBrowserRouter([
         Component: RunningInvestment,
       },
       {
-        path: 'investment/plan',
+        path: 'plan',
         Component: InvestmentPlan,
       },
       {

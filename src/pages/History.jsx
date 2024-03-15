@@ -73,7 +73,7 @@ const History = () => {
           <br />
           <br />
           In conclusion, Bulloak Finance Management&apos;s journey from its
-          founding in 2022 to its current position as a respected financial
+          founding in 2006 to its current position as a respected financial
           education provider is a testament to their vision, dedication, and
           commitment to empowering individuals with the knowledge and skills
           they need to thrive in the financial world.
