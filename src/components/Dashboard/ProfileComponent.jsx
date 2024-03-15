@@ -4,7 +4,6 @@ import React, { useRef, useState } from 'react';
 import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
-import { images } from '../../assets';
 import { icons } from '../../assets/icons';
 import EditProfileModal from '../modal/EditProfileModal';
 
@@ -90,14 +89,17 @@ export default function ProfileComponent() {
     setError(null);
     setSuccess(null);
   }, 5000);
+  const Api = 'https://django-bulloak-finance-production.up.railway.app';
+  console.log(profile?.image);
   return (
     <div className="grid grid-cols-1 xl:w-4/5 w-full mx-auto text-black xl:pb-8 p-3">
       <div className="flex xl:flex-row lg:flex-row flex-col gap-3 justify-between xl:p-8  xl:ml-8 ml-0">
         <div className="flex flex-col  items-center justify-center gap-3 text-[#7E577D]">
           {success && <Alert severity="success">{success}</Alert>}
           {error && <Alert severity="error">{error}</Alert>}
+
           <img
-            src={selectedImage || images.profile}
+            src={selectedImage || (profile && profile?.image)}
             alt="Profile"
             style={{ cursor: 'pointer' }}
             onClick={handleImageClick}
