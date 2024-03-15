@@ -24,6 +24,8 @@ const Deposit = () => {
   const navigate = useNavigate();
   const walletType = ['litecoin', 'ripple', 'ethereum', 'bitcoin', 'tether'];
 
+  console.log('WALLET ADD', depositWallet);
+
   let walletMock = {
     bitcoin_address: 'BTCwrtewt3ertrwert',
     litecoin_address: 'LTCdfgerty4565tetert',
@@ -268,8 +270,8 @@ const Deposit = () => {
                 {deposit?.verified
                   ? 'Success'
                   : !deposit?.verified
-                  ? 'Pending...'
-                  : 'Failed'}
+                    ? 'Pending...'
+                    : 'Failed'}
               </div>
               {/* <div className="w-36"></div> */}
             </div>

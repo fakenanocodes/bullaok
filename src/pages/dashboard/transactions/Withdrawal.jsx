@@ -91,6 +91,7 @@ const Withdrawal = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
     try {
       const response = await axios.post('/withdraw/', userData);
       console.log('RESPONSE', response.data);
