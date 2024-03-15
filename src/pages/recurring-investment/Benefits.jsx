@@ -19,7 +19,7 @@ export default function Benefits() {
     },
   ];
   return (
-    <section className="bg-[#fff] py-9">
+    <section className="bg-[#fff] p-9">
       <h2 className="font-bold my-9 text-center lg:text-4xl">
         {' '}
         <span className="text-[#41073F]">Main Benefits</span> of Recurring

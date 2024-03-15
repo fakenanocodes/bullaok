@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import addfund_img from '../assets/addfund_img.png';
 import advisorservice_img from '../assets/advisorservice_img.png';
 import bg_features from '../assets/bg_features.png';
@@ -14,6 +15,7 @@ import MainLayout from '../components/MainLayout';
 import '../CSS/main.css';
 
 const SmartAdvisor = () => {
+  const navigate = useNavigate();
   return (
     <div>
       <MainLayout>
@@ -87,7 +89,10 @@ const SmartAdvisor = () => {
               <li>Personalized risk distribution</li>
               <li>Hands-off Portfolio Monitoring</li>
             </ul>
-            <button className="flex gap-3 mt-5 bg-[#D4B716] text-black px-4 py-3 items-center justify-center cursor-pointer text-lg text-center font-open-sans-semibold font-semibold leading-16 rounded-[0.5rem] max-sm:text-[1.2rem]">
+            <button
+              onClick={() => navigate('/register')}
+              className="flex gap-3 mt-5 bg-[#D4B716] text-black px-4 py-3 items-center justify-center cursor-pointer text-lg text-center font-open-sans-semibold font-semibold leading-16 rounded-[0.5rem] max-sm:text-[1.2rem]"
+            >
               <span>Get Started</span>
               <span>&rarr;</span>
             </button>
@@ -102,7 +107,7 @@ const SmartAdvisor = () => {
               <p className="text-[#FFFFFF80] text-[1.2rem] max-sm:text-[1rem]">
                 (Optional) I agree to receive promotional and marketing text{' '}
                 <br />
-                messages from Webull. Message and data rates may apply.
+                messages from Bulloak . Message and data rates may apply.
               </p>
             </div>
           </div>

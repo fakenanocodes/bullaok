@@ -1,53 +1,64 @@
-import { images } from '../assets';
+// import { images } from '../assets';
+import { image } from '../assets/team/teams';
 
 export const teamData = [
   {
-    image: images.president,
+    id: 1,
+    image: image.aaa,
     role: 'President',
     name: 'Mr Sum-ting wong ',
   },
   {
-    image: images.vc,
+    id: 2,
+    image: image.bbb,
     role: 'Vice-President',
     name: 'Mr Chin-tu fat',
   },
   {
-    image: images.secretary,
+    id: 3,
+    image: image.ccc,
     role: 'Secretary',
     name: 'Tyrone Wilson',
   },
   {
-    image: images.operations,
+    id: 4,
+    image: image.ddd,
     role: 'Head of operations',
     name: 'Trey Taeshawn',
   },
   {
-    image: images.leaddev,
+    id: 5,
+    image: image.kkk,
     role: 'Lead developer',
-    name: 'Ngozi Ezeonu',
+    name: 'Wilson White',
   },
   {
-    image: images.assistant,
+    id: 6,
+    image: image.fff,
     role: 'Assistant developer',
-    name: 'Angela Fanghel',
+    name: 'Micha Fanghel',
   },
   {
-    image: images.data,
+    id: 7,
+    image: image.ggg,
     role: 'Data expert',
     name: 'Sophia Laravel',
   },
   {
-    image: images.design,
+    id: 8,
+    image: image.hhh,
     role: 'Design expert',
-    name: 'Aaron Okafor',
+    name: 'Ella Gift',
   },
   {
-    image: images.social,
+    id: 9,
+    image: image.iii,
     role: 'Social expert',
     name: 'Erling Haaland',
   },
   {
-    image: images.content,
+    id: 10,
+    image: image.jjj,
     role: 'Head of content',
     name: 'Lady Dimitrescu',
   },
@@ -55,22 +66,26 @@ export const teamData = [
 
 export const brokerData = [
   {
-    image: images.cynthia,
+    id: 0,
+    image: image.lll,
     role: 'Cannabis Broker',
     name: 'Cynthia Turner ',
   },
   {
-    image: images.benedict,
+    id: 1,
+    image: image.mmm,
     role: 'Real estate Broker',
     name: 'Benedict Benjamin',
   },
   {
-    image: images.diagon,
+    id: 2,
+    image: image.nnn,
     role: 'Forex Broker',
     name: 'Diagon Alley',
   },
   {
-    image: images.operations,
+    id: 3,
+    image: image.ooo,
     role: 'Crypto Broker',
     name: 'Anthonia Patricia',
   },

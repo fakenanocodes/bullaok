@@ -1,21 +1,38 @@
 import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
+import { CircularProgress } from '@mui/material';
 import { useState } from 'react';
+import { Cookies } from 'react-cookie';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import logo from '../../assets/dashboard/logo.svg';
 import profilepic from '../../assets/dashboard/profilepic.png';
 import HomeIcon from '../../assets/icons/dashboard/HomeIcon';
 import InvestmentIcon from '../../assets/icons/dashboard/InvestmentIcon';
 import PlantIcon from '../../assets/icons/dashboard/PlantIcon';
-import SettingsIcon from '../../assets/icons/dashboard/SettingsIcon';
 import TransactionIcon from '../../assets/icons/dashboard/TransactionIcon';
-// import { AuthProvider } from '../../context/AuthCOntext';
+import LogoutIcon from '../../components/utils/icons/LogoutIcon';
 import useAuthentication from '../../hooks/useAuthentication';
 import DashboardSidebar from './components/Sidebar';
 
 const options = ['Withdraw', 'Deposit', 'Transfer'];
-
+const icons = [
+  { icon: <HomeIcon />, name: 'Home', path: '' },
+  { icon: <InvestmentIcon />, name: 'Investment Packages', path: 'kyc' },
+  {
+    icon: <PlantIcon />,
+    name: 'Investment Plans',
+    path: 'investment/packages',
+  },
+  {
+    icon: <TransactionIcon />,
+    name: 'Transactions',
+    path: 'investment/running',
+  },
+  { icon: <LogoutIcon />, name: 'Logout' },
+];
 const DashboardLayout = () => {
+  const cookie = new Cookies();
+
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [activeOption, setActiveOption] = useState(null);
 
@@ -23,11 +40,25 @@ const DashboardLayout = () => {
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
   };
-  const isLoggedIn = useAuthentication();
-  console.log(isLoggedIn);
-  if (!isLoggedIn) {
-    return navigate('/login');
+  const { isLoggedIn, isLoading } = useAuthentication();
+  if (isLoading) {
+    return (
+      <div className="flex justify-center ">
+        <CircularProgress color="secondary" thickness={10} size={18} />
+      </div>
+    );
   }
+
+  if (!isLoggedIn) {
+    return null; //Create a prompt here
+  }
+
+  const logoutOption = () => {
+    navigate('/');
+    cookie.remove(`bk_access`);
+    cookie.remove(`bk_user`);
+    window.location.reload();
+  };
 
   const icons = [
     { icon: <HomeIcon />, name: 'Home', path: '' },
@@ -46,7 +77,7 @@ const DashboardLayout = () => {
       name: 'Transactions',
       path: 'investment/running',
     },
-    { icon: <SettingsIcon />, name: 'Settings', path: 'settings' },
+    { icon: <LogoutIcon />, name: 'Logout' },
   ];
   return (
     <div className="relative bg-custom-bg bg-opacity-20 bg-cover bg-center bg-no-repeat min-h-screen">
@@ -97,7 +128,7 @@ const DashboardLayout = () => {
               />
             </div>
           </div>
-          <div className="lg:mx-7 h-[100vh] no-scrollbar lg:h-[80vh] relative overflow-auto bg-[#000]/60 rounded-lg ">
+          <div className="lg:mx-7 h-[100vh] no-scrollbar lg:h-[80vh] relative overflow-auto bg-[#000]/60  ">
             <Outlet />
           </div>
         </div>
@@ -119,14 +150,28 @@ const DashboardLayout = () => {
                 </button>
                 <div className="flex space-y-8 flex-col">
                   {icons?.map((item, idx) => (
-                    <Link to={item?.path} key={idx} className="text-white">
-                      <div className="flex space-x-4 items-center hover:bg-white hover:text-[#575757] p-2">
-                        {item?.icon}
-                        <span className="text-lg font-semibold ">
-                          {item?.name}
-                        </span>
-                      </div>
-                    </Link>
+                    <>
+                      {item.name === 'Logout' ? (
+                        <div
+                          onClick={logoutOption}
+                          className="flex space-x-4 items-center hover:bg-white hover:text-[#575757] p-2"
+                        >
+                          {item?.icon}
+                          <span className="text-lg font-semibold ">
+                            {item?.name}
+                          </span>
+                        </div>
+                      ) : (
+                        <Link to={item?.path} key={idx} className="text-white">
+                          <div className="flex space-x-4 items-center hover:bg-white hover:text-[#575757] p-2">
+                            {item?.icon}
+                            <span className="text-lg font-semibold ">
+                              {item?.name}
+                            </span>
+                          </div>
+                        </Link>
+                      )}
+                    </>
                   ))}
                 </div>
               </div>

@@ -1,14 +1,19 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { images } from '../assets';
+// import { image } from '../assets/team/teams';
 import Layout from '../components/Layout';
 import { brokerData, teamData } from '../data/team';
 
 export default function Team() {
   const navigate = useNavigate();
 
-  const handleTeamMember = () => {
-    navigate('/team/member');
+  const handleTeam = (id) => {
+    navigate(`/team/member/${id}`);
+  };
+
+  const handleBroker = (id) => {
+    navigate(`/team/broker/${id}`);
   };
 
   return (
@@ -64,7 +69,7 @@ export default function Team() {
                     </p>
                   </div>
                   <button
-                    onClick={handleTeamMember}
+                    onClick={() => handleTeam(items?.id)}
                     href="#"
                     className="ml-auto px-3 text-[#8E0789] lg:text-md font-[montserrat]"
                   >
@@ -110,8 +115,7 @@ export default function Team() {
                     <p className="font-[laviossa]">{items.name}</p>
                   </div>
                   <button
-                    onClick={handleTeamMember}
-                    href="#"
+                    onClick={() => handleBroker(items?.id)}
                     className="ml-auto text-[#8E0789] font-[montserrat] font-bold"
                   >
                     Read more

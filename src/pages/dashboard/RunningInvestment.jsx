@@ -4,11 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
 import RunningInvestmentRow from '../../components/Dashboard/RunningInvestmentRow';
 
-
 const RunningInvestment = () => {
   const navigate = useNavigate();
   const { data, isLoading } = useSWR('/plans/all');
-
+  console.log('running investments ==>', data);
   return (
     <div className="flex space-y-4 flex-col p-10 ">
       <div>
@@ -53,8 +52,7 @@ const RunningInvestment = () => {
                 category,
                 created,
                 investment_profit_percent,
-                maximum_amount,
-                minimum_amount,
+                amount,
                 number_of_days,
                 referral_profit_percent,
               },
@@ -67,6 +65,7 @@ const RunningInvestment = () => {
                 referral_profit_percent={referral_profit_percent}
                 number_of_days={number_of_days}
                 investment_profit_percent={investment_profit_percent}
+                amount={amount}
               />
             )
           )}

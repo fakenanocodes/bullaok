@@ -1,6 +1,9 @@
+import { useNavigate } from 'react-router-dom';
+import { scrollToTop } from '../../../actions/utils';
 import invest_per from '../../../assets/invest_per.png';
 
 const InvestDownBanner = () => {
+  const navigate = useNavigate()
   return (
     <div className="bg-gradient-to-b from-[#590a56] to-purple-400 bg-opacity-90 relative w-full flex flex-col lg:flex-row justify-between items-center mb-[5rem]">
       <div className="flex flex-col justify-center items-start gap-12  text-white pl-3 md:pl-5 lg:pl-10 xl:pl-20 my-[2rem] lg:my-[5rem]">
@@ -12,7 +15,11 @@ const InvestDownBanner = () => {
           APY NOW!
         </p>
 
-        <button className="text-black font-bold py-4 px-6 bg-[#D4B716] rounded-lg">
+        <button
+         onClick={() => {
+          navigate('/register');
+          scrollToTop();
+        }} className="text-black font-bold py-4 px-6 bg-[#D4B716] rounded-lg">
           Get Started
         </button>
       </div>

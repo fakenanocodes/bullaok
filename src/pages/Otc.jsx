@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+import { scrollToTop } from '../actions/utils';
 import chart_sys from '../assets/chart_sys.png';
 import otc_bg_img from '../assets/otc_bg_img.png';
 import otc_img1 from '../assets/otc_img1.png';
@@ -21,6 +23,7 @@ const downloadData = [
 ];
 
 const Otc = () => {
+  const navigate = useNavigate();
   return (
     <MainLayout>
       <div className="bg-[#41073F] bg-opacity-90 relative w-full h-[90vh] lg:h-[78vh] flex flex-col lg:flex-row justify-between items-center pt-[5rem] pd:mt-0">
@@ -36,7 +39,13 @@ const Otc = () => {
           <p className="font-medium text-xl">
             Elevate your OTC trading experience with Bulloak.
           </p>
-          <button className="text-black font-bold py-4 px-6 bg-[#D4B716] rounded-lg">
+          <button
+            onClick={() => {
+              navigate('/register');
+              scrollToTop();
+            }}
+            className="text-black font-bold py-4 px-6 bg-[#D4B716] rounded-lg"
+          >
             Open an account
           </button>
         </div>

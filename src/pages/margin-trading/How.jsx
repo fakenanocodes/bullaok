@@ -1,4 +1,6 @@
 import { BsChevronDown, BsFillArrowRightCircleFill } from 'react-icons/bs';
+import { useNavigate } from 'react-router-dom';
+import { scrollToTop } from '../../actions/utils';
 export default function How() {
   const data = [
     {
@@ -22,6 +24,7 @@ export default function How() {
       text: 'Keep a minimum of 25% of your total account value as equity at all times.​',
     },
   ];
+  const navigate = useNavigate();
   return (
     <section className=" bg-[#fff] py-9 mt-9  ">
       <div className="mx-auto text-[#000] mt-8 w-full lg:w-2/3 flex flex-col justify-center items-center ">
@@ -61,7 +64,13 @@ export default function How() {
           />
         </div>
 
-        <button className="bg-[#D4B716] rounded-lg text-[#000] px-9 py-4 flex items-center gap-2 mt-6 ">
+        <button
+          onClick={() => {
+            navigate('/register');
+            scrollToTop();
+          }}
+          className="bg-[#D4B716] rounded-lg text-[#000] px-9 py-4 flex items-center gap-2 mt-6 "
+        >
           <span>Get Started</span> <BsFillArrowRightCircleFill />
         </button>
       </div>

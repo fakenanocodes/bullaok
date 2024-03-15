@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+import { scrollToTop } from '../actions/utils';
 import account_icon from '../assets/account_icon.svg';
 import fund_icon from '../assets/fund_icon.svg';
 import ira_banner_img from '../assets/ira_banner_img.png';
@@ -47,6 +49,7 @@ const mediumCardData = [
 ];
 
 const Ira = () => {
+  const navigate = useNavigate()
   return (
     <MainLayout>
       <section className="flex flex-col lg:flex-row justify-evenly items-center gap-[2rem] mx-5 md:mx-[5rem]">
@@ -62,7 +65,11 @@ const Ira = () => {
             retirement accounts from Bulloak.
           </p>
           <div>
-            <button className="laviossa text-white font-semibold text-lg py-5 px-6 bg-[#8E0789] rounded-lg mt-[2rem]">
+            <button
+             onClick={() => {
+              navigate('/register');
+              scrollToTop();
+            }} className="laviossa text-white font-semibold text-lg py-5 px-6 bg-[#8E0789] rounded-lg mt-[2rem]">
               Open a Bulloak account
             </button>
           </div>

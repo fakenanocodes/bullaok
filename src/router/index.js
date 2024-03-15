@@ -6,10 +6,9 @@ import { courses, header, testimonials } from '../data/education';
 import DashboardLayout from '../layouts/dashboardLayout';
 import About from '../pages/About';
 import CorporateConnect from '../pages/CorporateConnect';
-import DashboardHome from '../pages/dashboard/DashboardHome';
+import ETF from '../pages/ETF';
 import Education from '../pages/Education';
 import EducationCourses from '../pages/EducationCourses';
-import ETF from '../pages/ETF';
 import Faq from '../pages/Faq';
 import Forex from '../pages/Forex';
 import FractionalShares from '../pages/FractionalShares';
@@ -30,6 +29,7 @@ import Stock from '../pages/Stock';
 import Team from '../pages/Team';
 import WhatWeInvest from '../pages/WhatWeInvest';
 import WhoWeAre from '../pages/WhoWeAre';
+import DashboardHome from '../pages/dashboard/DashboardHome';
 
 import InvestmentHistory from '../pages/dashboard/InvestmentHistory';
 import Profile from '../pages/dashboard/Profile';
@@ -38,14 +38,17 @@ import ReferralContainer from '../pages/dashboard/Referral';
 import ForgotPassword from '../components/auth/forgot-password';
 import UserLogin from '../components/auth/login';
 import SuccessThanks from '../components/kycPages/SuccessThanks';
+import TeamBroker from '../pages/TeamBroker';
+import TeamMember from '../pages/TeamMember';
 import InvestmentPackages from '../pages/dashboard/InvestmentPackages';
 import InvestmentPlan from '../pages/dashboard/InvestmentPlan';
 import Kyc from '../pages/dashboard/Kyc';
+import Notifications from '../pages/dashboard/Notifications';
 import RunningInvestment from '../pages/dashboard/RunningInvestment';
+import Support from '../pages/dashboard/Support';
 import Deposit from '../pages/dashboard/transactions/Deposit';
 import Transfer from '../pages/dashboard/transactions/Transfer';
 import Withdrawal from '../pages/dashboard/transactions/Withdrawal';
-import TeamMember from '../pages/TeamMember';
 
 const router = createBrowserRouter([
   {
@@ -125,8 +128,12 @@ const router = createBrowserRouter([
     Component: Team,
   },
   {
-    path: '/team/member',
+    path: '/team/member/:subpage',
     Component: TeamMember,
+  },
+  {
+    path: '/team/broker/:subpage',
+    Component: TeamBroker,
   },
   {
     path: 'faq',
@@ -186,6 +193,14 @@ const router = createBrowserRouter([
       {
         path: 'profile',
         Component: Profile,
+      },
+      {
+        path: 'support',
+        Component: Support,
+      },
+      {
+        path: 'notification',
+        Component: Notifications,
       },
 
       {

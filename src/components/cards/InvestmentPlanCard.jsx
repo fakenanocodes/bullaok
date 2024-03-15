@@ -106,7 +106,7 @@ const InvestmentPlanCard = ({ plan, onSubmit }) => {
         </label>
         <input
           type="number"
-          name=""
+          name="amount"
           {...register('amount', {
             min: plan?.minimum_amount,
             max: plan?.maximum_amount,

@@ -1,9 +1,12 @@
+import { useNavigate } from 'react-router-dom';
+import { scrollToTop } from '../actions/utils';
 import account_icon from '../assets/account_icon.svg';
 import fund_icon from '../assets/fund_icon.svg';
 import trade_icon from '../assets/trade_icon.svg';
 import StockStepsCard from './utils/cards/StockStepsCard';
 
 const StockSteps = ({ title }) => {
+  const navigate = useNavigate();
   return (
     <div className="px-5 lg:px-10 xl:px-20 py-[3rem] my-[3rem] bg-gray-100">
       <p className="text-4xl font-bold tracking-wide text-[#1A2433] text-center">
@@ -34,7 +37,13 @@ const StockSteps = ({ title }) => {
       </div>
 
       <div className="flex justify-center">
-        <button className="text-white font-bold text-xl py-5 px-7 bg-[#8E0789] rounded-lg">
+        <button
+          onClick={() => {
+            navigate('/register');
+            scrollToTop();
+          }}
+          className="text-white font-bold text-xl py-5 px-7 bg-[#8E0789] rounded-lg"
+        >
           Open An Account
         </button>
       </div>

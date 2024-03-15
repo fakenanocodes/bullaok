@@ -4,8 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
 import HistoryTableRow from '../../components/Dashboard/HistoryTableRow';
 import DashboardEmptyContainer from '../../components/empty/DashboardEmptyContainer';
-import useDateSeparator from '../../hooks/useDateSeparator';
-
 
 const InvestmentHistory = () => {
   const navigate = useNavigate();
@@ -13,7 +11,7 @@ const InvestmentHistory = () => {
 
   console.log(data);
   return (
-    <div className="p-10 space-y-5">
+    <div className="xl:p-10 p-5 space-y-5">
       <div className="flex items-center space-x-5 cursor-pointer">
         <KeyboardBackspaceIcon
           fontSize="large"
@@ -23,7 +21,7 @@ const InvestmentHistory = () => {
         />
         <span className="font-semibold text-lg">HISTORY</span>
       </div>
-      <div className="w-full">
+      <div className="w-full ">
         {isLoading ? (
           <div className="w-full justify-center">
             <CircularProgress size={30} style={{ color: '#fff' }} />
@@ -38,27 +36,19 @@ const InvestmentHistory = () => {
               </>
             ) : (
               <>
-                <table className="w-full border-separate border-spacing-y-2">
+                <table className="w-full border-separate overflow-auto border-spacing-y-2 sm:overflow-visible">
                   <thead>
-                    <tr className=" flex justify-between bg-[#E5C8E4] text-black px-10">
-                      <th>Name</th>
+                    <tr className=" grid grid-cols-4  bg-[#E5C8E4] text-black px-10 min-w-[900px]">
+                      <th className="text-start">Name</th>
                       <th>Detail</th>
-                      <th>Amount</th>
-                      <th>Date</th>
+                      <th className="text-end">Amount</th>
+                      <th className="text-end">Date</th>
                     </tr>
                   </thead>
-                  <tbody className="flex space-y-2 flex-col">
+                  <tbody className=" space-y-2 ">
                     {data?.map((item, itemIndex) => {
-                      const messageDate = new Date(item?.created);
-                      const dateSeparator = useDateSeparator(messageDate);
-
                       return (
                         <>
-                          {/* {dateSeparator  && (
-                          <div className="px-10 text-center font-semibold mt-4">
-                            {dateSeparator}
-                          </div>
-                        )} */}
                           <HistoryTableRow
                             key={itemIndex}
                             idx={itemIndex}

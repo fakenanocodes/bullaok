@@ -1,5 +1,6 @@
 import React from 'react';
 import { images } from '../../assets';
+import useCurrencyFormatter from '../../hooks/useCurrencyFormatter';
 import formatDateWithSuffix from '../../hooks/useDateFormatter';
 
 const imageUrls = {
@@ -15,9 +16,11 @@ export default function RunningInvestmentRow({
   number_of_days,
   investment_profit_percent,
   referral_profit_percent,
+  amount,
 }) {
   const originalDate = new Date(created);
   const formattedDate = formatDateWithSuffix(originalDate);
+  const validateAmount = amount !== null ? useCurrencyFormatter(amount) : 0;
   return (
     <tr className=" bg-[#2F2525] my-5 rounded-xl">
       <td className=" gap-2 text-center">
@@ -35,14 +38,13 @@ export default function RunningInvestmentRow({
       <td className="gap-2 py-4 text-center">
         <div className="flex flex-col">
           <span>{formattedDate}</span>
-          <span>{/* {year} {time} */}</span>
         </div>
       </td>
       <td className="text-center  py-4">
-        {/* <span className="font-bold text-xl">$ {amount}</span> */}
+        <span className="font-bold text-xl"> {validateAmount}</span>
       </td>
       <td className="text-center  py-4">
-        <span>{number_of_days}</span>
+        <span>{number_of_days} days</span>
       </td>
       <td className="text-center py-4 ">
         <div className="flex flex-col">
