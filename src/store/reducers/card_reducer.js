@@ -12,7 +12,6 @@ export const cardSlice = createSlice({
       type: '',
     },
   },
-
   reducers: {
     setCardStep: (state, action) => {
       state.cardStep = action.payload;
@@ -20,9 +19,18 @@ export const cardSlice = createSlice({
     setCardInformation: (state, action) => {
       state.cardInformation = action.payload;
     },
+    resetCardInformation: (state) => {
+      state.cardInformation = {
+        firstName: '',
+        lastName: '',
+        phoneNumber: '',
+        currency: '',
+        type: '',
+      };
+    },
   },
 });
 
-export const { setCardStep, setCardInformation } = cardSlice.actions;
+export const { setCardStep, setCardInformation, resetCardInformation } = cardSlice.actions;
 
 export default cardSlice.reducer;
