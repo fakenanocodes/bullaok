@@ -18,7 +18,7 @@ const HistioryMap = () => {
         </p>
         <div className="flex justify-center">
           <p className="p-2 bg-[#D2C2D2] font-semibold text-xl text-center w-20 text-[#41073F] rounded-sm">
-            2013
+            2006
           </p>
         </div>
         <div></div>

@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { SwiperSlide } from 'swiper/react';
+import { images } from '../assets';
 import bg_img from '../assets/bg_img.png';
 import card_img from '../assets/home/card_img.png';
 import card_img2 from '../assets/home/card_img2.png';
@@ -14,7 +15,9 @@ import MainLayout from '../components/MainLayout';
 import ClientCard from '../components/utils/cards/ClientCard';
 import HomeCard from '../components/utils/cards/HomeCard';
 import ClientSwiperjs from '../components/utils/reusables/ClientSwiperjs';
+import MarqueeWidget from '../components/widget/MarqueeWidget';
 import { clientData } from '../data/client';
+import { assets, stocks } from '../data/home';
 
 const cardData = [
   {
@@ -126,7 +129,64 @@ const Home = () => {
 
         <img src={group} alt="" className="" />
       </div>
-
+      <section className="w-full">
+        <div
+          style={{
+            height: '433px',
+            backgroundColor: '#FFFFFF',
+            overflow: 'hidden',
+            boxSizing: 'border-box',
+            border: '1px solid #56667F',
+            borderRadius: '4px',
+            textAlign: 'right',
+            lineHeight: '14px',
+            fontSize: '12px',
+            fontFeatureSettings: 'normal',
+            textSizeAdjust: '100%',
+            boxShadow: 'inset 0 -20px 0 0 #56667F',
+            padding: '0px',
+            margin: '0px',
+            width: '100%',
+          }}
+        >
+          <div
+            style={{
+              height: '413px',
+              padding: '0px',
+              margin: '0px',
+              width: '100%',
+            }}
+          >
+            <iframe
+              src="https://widget.coinlib.io/widget?type=full_v2&theme=light&cnt=6&pref_coin_id=1505&graph=yes"
+              width="100%"
+              height="409px"
+              scrolling="auto"
+              marginWidth="0"
+              marginHeight="0"
+              frameBorder="0"
+              border="0"
+              style={{
+                border: '0',
+                margin: '0',
+                padding: '0',
+              }}
+            ></iframe>
+          </div>
+          <div
+            style={{
+              color: '#FFFFFF',
+              lineHeight: '14px',
+              fontWeight: '400',
+              fontSize: '11px',
+              boxSizing: 'border-box',
+              padding: '2px 6px',
+              width: '100%',
+              fontFamily: 'Verdana, Tahoma, Arial, sans-serif',
+            }}
+          ></div>
+        </div>
+      </section>
       <section className="bg-[#CDA1CB26] py-7 px-5 lg:px-12 xl:px-40 my-[5rem]">
         <div className="flex flex-col-reverse gap-3 md:gap-0 md:flex-row items-center justify-between">
           <div className="xl:w-[35rem]">
@@ -162,6 +222,88 @@ const Home = () => {
 
         <div className="mt-[4rem] mb-[2rem] flex flex-col md:flex-row items-center justify-center gap-5">
           {cardData?.map((data, idx) => (
+            <HomeCard key={idx} data={data} />
+          ))}
+        </div>
+      </section>
+      <section className="bg-[#CDA1CB26] py-7 px-5 lg:px-12 xl:px-40 my-[5rem]">
+        <div className="flex flex-col-reverse gap-3 md:gap-0 md:flex-row items-center justify-between">
+          <div className="xl:w-[35rem]">
+            <p className="laviossa text-3xl xl:w-[25rem] leading-normal">
+              Stocks
+            </p>
+
+            <p className="uppercase text-[1.3rem] lg:w-[25rem] leading-normal mt-5">
+              TRUST, EXPERIENCE, EXPERTISE AND KNOWLEDGE{' '}
+            </p>
+
+            <p className="text-lg md:text-xl mt-5 xl:w-[30rem]">
+              We are an international financial company engaged in investment
+              activities, which are related to trading on financial markets and
+              cryptocurrency exchanges performed by qualified professional
+              traders.
+            </p>
+
+            <button
+              onClick={() => navigate('/services/what-we-invest')}
+              className="text-black font-semibold py-4 px-5 bg-transparent rounded-sm border-2 mt-7 border-[#41073F] uppercase"
+            >
+              Uncover more
+            </button>
+          </div>
+
+          <img
+            src={images.stock_home}
+            alt=""
+            className="min-h-[17rem] max-h-[17rem] xl:min-h-[30rem] lg:max-h-[30rem]"
+          />
+        </div>
+        <h2 className="laviossa font-bold xl:text-4xl text-2xl text-center my-9">
+          Make the most of our online trading platform with no commissions and
+          zero per-contract fees.
+        </h2>
+
+        <div className="mt-[4rem] mb-[2rem] flex flex-col md:flex-row items-center justify-center gap-5">
+          {stocks?.map((image) => (
+            <img src={image} className="w-full" alt="" />
+          ))}
+        </div>
+      </section>
+      <section className="bg-[#CDA1CB26] py-7 px-5 lg:px-12 xl:px-40 my-[5rem]">
+        <div className="flex flex-col-reverse gap-3 md:gap-0 md:flex-row items-center justify-between">
+          <div className="xl:w-[35rem]">
+            <p className="laviossa text-3xl xl:w-[25rem] leading-normal">
+              Assets
+            </p>
+
+            <p className="uppercase text-[1.3rem] lg:w-[25rem] leading-normal mt-5">
+              TRUST, EXPERIENCE, EXPERTISE AND KNOWLEDGE{' '}
+            </p>
+
+            <p className="text-lg md:text-xl mt-5 xl:w-[30rem]">
+              We are an international financial company engaged in investment
+              activities, which are related to trading on financial markets and
+              cryptocurrency exchanges performed by qualified professional
+              traders.
+            </p>
+
+            <button
+              onClick={() => navigate('/services/what-we-invest')}
+              className="text-black font-semibold py-4 px-5 bg-transparent rounded-sm border-2 mt-7 border-[#41073F] uppercase"
+            >
+              Uncover more
+            </button>
+          </div>
+
+          <img
+            src={images.assetMain}
+            alt=""
+            className="min-h-[17rem] max-h-[17rem] xl:min-h-[30rem] lg:max-h-[30rem]"
+          />
+        </div>
+
+        <div className="mt-[4rem] mb-[2rem] flex flex-col md:flex-row items-center justify-center gap-5">
+          {assets?.map((data, idx) => (
             <HomeCard key={idx} data={data} />
           ))}
         </div>
@@ -213,6 +355,12 @@ const Home = () => {
         </ClientSwiperjs>
       </section>
 
+      <section>
+        <p className="laviossa text-3xl text-center leading-normal text-black">
+          Market Analysis{' '}
+        </p>
+      </section>
+
       <section className="px-5 lg:px-12 xl:px-40 py-10 my-[5rem] flex flex-col items-center gap-7 bg-[#41073F]">
         <p className="laviossa text-3xl text-center leading-normal text-white">
           Are we right for you?
@@ -228,6 +376,8 @@ const Home = () => {
         <button className="laviossa text-black font-semibold py-4 px-5 bg-[#FFB803] rounded-md">
           Schedule a consultation
         </button>
+
+        <MarqueeWidget />
       </section>
     </MainLayout>
   );
