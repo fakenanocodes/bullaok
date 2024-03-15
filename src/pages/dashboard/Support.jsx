@@ -1,7 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Alert, CircularProgress } from '@mui/material';
 import axios from 'axios';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { IoMdArrowBack } from 'react-icons/io';
 import { IoCallOutline, IoMailOutline } from 'react-icons/io5';

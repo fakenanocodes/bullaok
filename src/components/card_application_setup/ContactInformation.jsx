@@ -1,16 +1,20 @@
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { resetCardInformation, setCardInformation } from '../../store/reducers/card_reducer';
 import CancelIcon from '../utils/reusables/CancelIcon';
 import CardInputComponent from '../utils/reusables/CardInputComponent';
 import ForwardArrowIcon from '../utils/reusables/ForwardArrowIcon';
-import { useSelector, useDispatch } from 'react-redux';
-import { setCardInformation } from '../../store/reducers/card_reducer';
 
-const ContactInformation = () => {
+const ContactInformation = ({ handleNext }) => {
+  const navigate = useNavigate()
+  const [error, setError] = useState(false);
   const cardInformation = useSelector((state) => state.card.cardInformation);
   const [inputValue, setInputValue] = useState({
-    firstName: '',
-    lastName: '',
-    phoneNumber: '',
+    firstName: cardInformation?.firstName || '',
+    lastName: cardInformation?.lastName || '',
+    phoneNumber: cardInformation?.phoneNumber || '',
   });
   const dispatch = useDispatch();
 
@@ -24,9 +28,25 @@ const ContactInformation = () => {
   const storeCardInfo = () => {
     console.log('done');
     dispatch(setCardInformation(inputValue));
+    if (
+      !inputValue?.firstName ||
+      !inputValue?.lastName ||
+      !inputValue?.phoneNumber
+    ) {
+      setError(true);
+      toast.error('Please complete your personal details', {
+        autoClose: 2000,
+      });
+      return;
+    }
+    handleNext(1);
   };
-
   console.log('🙂', cardInformation);
+  const handleCancel = () => {
+    navigate(-1)
+    dispatch(resetCardInformation())
+    handleNext(0)
+  }
 
   return (
     <div className="py-3 px-14">
@@ -39,31 +59,26 @@ const ContactInformation = () => {
         label={'First Name'}
         handleChange={handleChange}
         name="firstName"
-        value={
-          cardInformation ? cardInformation?.firstName : inputValue.firstName
-        }
+        value={inputValue.firstName}
+        error={error}
       />
       <CardInputComponent
         label={'Last Name'}
         handleChange={handleChange}
         name="lastName"
-        value={
-          cardInformation ? cardInformation?.lastName : inputValue.lastName
-        }
+        value={inputValue.lastName}
+        error={error}
       />
       <CardInputComponent
         label={'Phone Number'}
         handleChange={handleChange}
         name="phoneNumber"
-        value={
-          cardInformation
-            ? cardInformation?.phoneNumber
-            : inputValue.phoneNumber
-        }
+        value={inputValue.phoneNumber}
+        error={error}
       />
 
       <div className="flex items-center gap-5">
-        <button className="h-[2.4rem] flex items-center gap-1 px-3 py-2 text-sm text-[#5F5656] font-semibold border border-[#41073F] rounded-sm">
+        <button onClick={handleCancel} className="h-[2.4rem] flex items-center gap-1 px-3 py-2 text-sm text-[#5F5656] font-semibold border border-[#41073F] rounded-sm">
           Cancel
           <CancelIcon />
         </button>

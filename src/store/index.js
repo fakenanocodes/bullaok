@@ -12,8 +12,8 @@ import {
 import storage from 'redux-persist/lib/storage';
 import auth_reducer from './auth_reducer';
 import card_reducer from './reducers/card_reducer';
-import transact_reducer from './reducers/transact_reducer';
 import kyc_reducer from './reducers/kyc_reducer';
+import transact_reducer from './reducers/transact_reducer';
 
 const persistConfig = {
   key: 'root',
