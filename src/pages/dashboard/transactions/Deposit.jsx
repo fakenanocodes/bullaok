@@ -252,7 +252,10 @@ const Deposit = () => {
         </div>
         <div>
           {deposits?.map((deposit, idx) => (
-            <div className="flex justify-between md:w-[90%]  md:ml-10 text-xs ">
+            <div
+              key={idx}
+              className="flex justify-between md:w-[90%]  md:ml-10 text-xs "
+            >
               <div className="py-3 font-bold my-2   ">
                 <div className="md:flex gap-2">
                   <p>{deposit?.created?.split('T')[0]}</p>
