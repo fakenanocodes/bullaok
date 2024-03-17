@@ -20,7 +20,7 @@ const Withdrawal = () => {
   const [amount, setAmount] = useState('');
   const [walletAddress, setWalletAdress] = useState('');
   const [usdtAmount, setUsdtAmount] = useState('');
-  const [convertWallet, setconvertWallet] = useState('');
+  const [convertWallet, setconvertWallet] = useState('tether');
   const { data: withdraws } = useSWR(`/withdraw/`);
   const { data: user } = useSWR(`/user/`);
   // console.log('User', user);
@@ -49,23 +49,32 @@ const Withdrawal = () => {
 
   // Function to convert a coin amount to USD using CoinGecko API
 
-  useEffect(() => {
+  // useEffect(() => {}, [convertWallet, amount]);
+
+  let userData = {
+    amount,
+    wallet_type: wallet || walletType[0],
+    wallet_address: walletAddress,
+    usdt_amount: usdtAmount,
+  };
+
+  console.log(`User Data`, userData);
+  console.log(`ConvertWallet`, convertWallet);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
     const convertToUSD = async (coin, amount) => {
       const url = `https://api.coingecko.com/api/v3/simple/price?ids=${coin}&vs_currencies=usd`;
       const { data } = await axios.get(url);
-
       // Check if coin exists in the data
       if (!data[coin]) {
         throw new Error(`Coin ${coin} not found in API response`);
       }
-
       const price = await data[coin].usd; // Get USD price per coin
       console.log('Coin Data', price, data);
       const usdEquivalent = amount * price; // Calculate USD equivalent
-
       return usdEquivalent.toFixed(2); // Return formatted USD amount
     };
-
     const fetchData = async () => {
       try {
         let converted = await convertToUSD(convertWallet, amount);
@@ -76,34 +85,25 @@ const Withdrawal = () => {
         console.error('Error in fetchData:', error.message);
       }
     };
-
     fetchData();
-  }, [convertWallet, amount]);
-
-  let userData = {
-    amount,
-    wallet_type: wallet || walletType[0],
-    wallet_address: walletAddress,
-    usdt_amount: usdtAmount,
-  };
-
-  console.log(`User Data`, userData);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    
-    try {
-      const response = await axios.post('/withdraw/', userData);
-      console.log('RESPONSE', response.data);
-      toast.success('success');
-      setOpenModel(false);
-    } catch (error) {
-      console.log(error?.response?.data?.UsdtAmount);
-      if (error?.response?.data?.UsdtAmount == 'ou have insufficient funds') {
-        toast.error('You have insufficient funds');
-        setOpenModel(false);
+    setTimeout(async () => {
+      try {
+        const response = await axios.post('/withdraw/', userData);
+        if (response) {
+          console.log('RESPONSE', response);
+          toast.success('success');
+          setOpenModel(false);
+        }
+      } catch (error) {
+        console.log(error);
+        if (error?.response?.data?.UsdtAmount == 'ou have insufficient funds') {
+          toast.error('You have insufficient funds');
+          setOpenModel(false);
+        } else {
+          toast.error('An error occured, try again');
+        }
       }
-    }
+    }, 2000);
   };
 
   const handleOpenModal = () => {
@@ -179,7 +179,10 @@ const Withdrawal = () => {
                 placeholder="reciever_wallet_address$lkjhyiu878yfs44rs"
               />
             </div>
-            <div className="md:hidden flex flex-col md:w-[50%] mb-12 md:mb-0">
+            <div
+              data-tooltip="We are Pennstate!"
+              className="md:hidden flex flex-col md:w-[50%] mb-12 md:mb-0"
+            >
               <label>Withdrawal amount</label>
               <input
                 value={amount}
@@ -207,7 +210,10 @@ const Withdrawal = () => {
                 placeholder="reciever_wallet_address$lkjhyiu878yfs44rs"
               />
             </div>
-            <div className="hidden md:flex flex-col md:w-[50%] mb-12 md:mb-0">
+            <div
+              title="enter the amount to withdraw here"
+              className="hidden md:flex flex-col md:w-[50%] mb-12 md:mb-0"
+            >
               <label>Withdrawal amount</label>
               <input
                 value={amount}
@@ -221,10 +227,11 @@ const Withdrawal = () => {
             </div>
           </div>
           <div className="md:flex md:justify-between md:w-[48%] text-xl items-center">
-            <div className=" text-red-600 font-semibold mb-28 md:mb-0">
+            {/* <div className=" text-red-600 font-semibold mb-28 md:mb-0">
               You are withdrawing ${usdtAmount || '0.00'}
-            </div>
+            </div> */}
             <button
+              title="Click here to proceed"
               onClick={handleOpenModal}
               className="hidden md:flex bg-[#352F84] py-2 text-white px-4 rounded-[5px]"
             >
@@ -302,8 +309,8 @@ const Withdrawal = () => {
                 {withdraw?.verified
                   ? 'Success'
                   : !withdraw?.verified
-                  ? 'Pending...'
-                  : 'Failed'}
+                    ? 'Pending...'
+                    : 'Failed'}
               </div>
               {/* <div className="w-36"></div> */}
             </div>
