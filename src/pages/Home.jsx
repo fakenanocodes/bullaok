@@ -2,9 +2,6 @@ import { useNavigate } from 'react-router-dom';
 import { SwiperSlide } from 'swiper/react';
 import { images } from '../assets';
 import bg_img from '../assets/bg_img.png';
-import card_img from '../assets/home/card_img.png';
-import card_img2 from '../assets/home/card_img2.png';
-import card_img3 from '../assets/home/card_img3.png';
 import group from '../assets/home/group.png';
 import home_bg from '../assets/home/home_bg.png';
 import main_card_img from '../assets/home/main_card_img.png';
@@ -18,27 +15,6 @@ import MarqueeWidget from '../components/widget/MarqueeWidget';
 import { clientData } from '../data/client';
 import { stocks } from '../data/home';
 import { scrollToTop } from '../store/actions/utils';
-
-const cardData = [
-  {
-    location: 'Crev, Dubai',
-    views: '5.0 (55,890 views)',
-    price: '$453,897',
-    image: card_img,
-  },
-  {
-    location: 'California, USA',
-    views: '5.0 (55,890 views)',
-    price: '$564,897',
-    image: card_img2,
-  },
-  {
-    location: 'Aviana, Canada',
-    views: '5.0 (55,890 views)',
-    price: '$94,444',
-    image: card_img3,
-  },
-];
 
 const Home = () => {
   const navigate = useNavigate();
@@ -301,12 +277,6 @@ const Home = () => {
             className="min-h-[17rem] max-h-[17rem] xl:min-h-[30rem] lg:max-h-[30rem]"
           />
         </div>
-
-        {/* <div className="mt-[4rem] mb-[2rem] flex flex-col md:flex-row items-center justify-center gap-5">
-          {assets?.map((data, idx) => (
-            <HomeCard key={idx} data={data} />
-          ))}
-        </div> */}
       </section>
 
       <section className="px-5 lg:px-12 xl:px-40 my-[5rem] flex flex-col-reverse gap-7 md:gap-0 md:flex-row items-center justify-between">
