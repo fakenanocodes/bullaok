@@ -38,6 +38,7 @@ import ReferralContainer from '../pages/dashboard/Referral';
 import ForgotPassword from '../components/auth/forgot-password';
 import UserLogin from '../components/auth/login';
 import SuccessThanks from '../components/kycPages/SuccessThanks';
+import Broker from '../pages/Broker';
 import TeamBroker from '../pages/TeamBroker';
 import TeamMember from '../pages/TeamMember';
 import InvestmentPackages from '../pages/dashboard/InvestmentPackages';
@@ -160,6 +161,10 @@ const router = createBrowserRouter([
   {
     path: 'about',
     Component: About,
+  },
+  {
+    path: 'brokers',
+    Component: Broker,
   },
   {
     path: 'login',

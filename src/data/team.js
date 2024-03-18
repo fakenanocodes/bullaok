@@ -1,66 +1,64 @@
-// import { images } from '../assets';
+import { images } from '../assets';
 import { image } from '../assets/team/teams';
 
 export const teamData = [
   {
-    id: 1,
-    image: image.aaa,
-    role: 'President',
-    name: 'Mr Sum-ting wong ',
+    id:1,
+    image: images.president,
+    role: 'President/CEO',
+    name: 'ANTHONY R HUGHES  ',
   },
   {
     id: 2,
     image: image.bbb,
     role: 'Vice-President',
-    name: 'Mr Chin-tu fat',
+    name: 'MICHELLE H POWERS',
   },
   {
-    id: 3,
-    image: image.ccc,
-    role: 'Secretary',
-    name: 'Tyrone Wilson',
+    id:3,
+    image: images.secretary,
+    role: 'CFO',
+    name: 'THOMAS C DAVY',
   },
   {
-    id: 4,
-    image: image.ddd,
-    role: 'Head of operations',
-    name: 'Trey Taeshawn',
+    id:4,
+    image: images.operations,
+    role: 'Head of Operations',
+    name: 'THOMAS C DAVY',
   },
+  // {
+  //   image: images.leaddev,
+  //   role: 'Lead developer',
+  //   name: 'Ngozi Ezeonu',
+  // },
+  // {
+  //   image: images.assistant,
+  //   role: 'Assistant developer',
+  //   name: 'Angela Fanghel',
+  // },
   {
-    id: 5,
-    image: image.kkk,
-    role: 'Lead developer',
-    name: 'Wilson White',
-  },
-  {
-    id: 6,
-    image: image.fff,
-    role: 'Assistant developer',
-    name: 'Micha Fanghel',
-  },
-  {
-    id: 7,
-    image: image.ggg,
+    id:5,
+    image: images.assistant,
     role: 'Data expert',
-    name: 'Sophia Laravel',
+    name: 'ELVIE CHAMBERLAIN',
   },
+  // {
+  //   image: images.design,
+  //   role: 'Design expert',
+  //   name: 'Aaron Okafor',
+  // },
   {
-    id: 8,
-    image: image.hhh,
-    role: 'Design expert',
-    name: 'Ella Gift',
-  },
-  {
-    id: 9,
-    image: image.iii,
+    id:6,
+
+    image: images.leaddev,
     role: 'Social expert',
-    name: 'Erling Haaland',
+    name: 'ANNIE CURTIS NORRIS',
   },
   {
-    id: 10,
-    image: image.jjj,
+    id:7,
+    image: images.design,
     role: 'Head of content',
-    name: 'Lady Dimitrescu',
+    name: 'MICHEAL BRADLEY',
   },
 ];
 

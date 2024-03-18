@@ -25,6 +25,11 @@
     height: 100%; /* Set the height as per your requirement */
     background: linear-gradient(90deg, #41073f);
   }
+  .brokersbg {
+    background: url('./assets/home/brokersbg.png') no-repeat;
+    width: 20%;
+    background-size: cover;
+  }
   .no-number-arrows::-webkit-outer-spin-button,
   .no-number-arrows::-webkit-inner-spin-button {
     -webkit-appearance: none;
