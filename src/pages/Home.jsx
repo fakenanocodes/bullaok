@@ -13,11 +13,11 @@ import main_card_img3 from '../assets/home/main_card_img3.png';
 import main_card_img4 from '../assets/home/main_card_img4.png';
 import MainLayout from '../components/MainLayout';
 import ClientCard from '../components/utils/cards/ClientCard';
-import HomeCard from '../components/utils/cards/HomeCard';
 import ClientSwiperjs from '../components/utils/reusables/ClientSwiperjs';
 import MarqueeWidget from '../components/widget/MarqueeWidget';
 import { clientData } from '../data/client';
-import { assets, stocks } from '../data/home';
+import { stocks } from '../data/home';
+import { scrollToTop } from '../store/actions/utils';
 
 const cardData = [
   {
@@ -187,7 +187,7 @@ const Home = () => {
           ></div>
         </div>
       </section>
-      <section className="bg-[#CDA1CB26] py-7 px-5 lg:px-12 xl:px-40 xl:my-[5rem] my-0 ">
+      <section className="bg-[#CDA1CB26] py-7 px-5 lg:px-12 xl:px-40  my-0 ">
         <div className="flex flex-col-reverse gap-3 md:gap-0 md:flex-row items-center justify-between">
           <div className="xl:w-[35rem]">
             <p className="laviossa text-3xl xl:w-[25rem] leading-normal">
@@ -220,13 +220,13 @@ const Home = () => {
           />
         </div>
 
-        <div className="mt-[4rem] mb-[2rem] flex flex-col md:flex-row items-center justify-center gap-5">
+        {/* <div className="mt-[4rem] mb-[2rem] flex flex-col md:flex-row items-center justify-center gap-5">
           {cardData?.map((data, idx) => (
             <HomeCard key={idx} data={data} />
           ))}
-        </div>
+        </div> */}
       </section>
-      <section className="bg-[#CDA1CB26] py-7 px-5 lg:px-12 xl:px-40 xl:my-[5rem] my-0 ">
+      <section className="bg-[#CDA1CB26] py-7 px-5 lg:px-12 xl:px-40 my-0 ">
         <div className="flex flex-col-reverse gap-3 md:gap-0 md:flex-row items-center justify-between">
           <div className="xl:w-[35rem]">
             <p className="laviossa text-3xl xl:w-[25rem] leading-normal">
@@ -269,7 +269,7 @@ const Home = () => {
           ))}
         </div>
       </section>
-      <section className="bg-[#CDA1CB26] py-7 px-5 lg:px-12 xl:px-40 xl:my-[5rem] my-0 ">
+      <section className="bg-[#CDA1CB26] py-7 px-5 lg:px-12 xl:px-40 my-0 ">
         <div className="flex flex-col-reverse gap-3 md:gap-0 md:flex-row items-center justify-between">
           <div className="xl:w-[35rem]">
             <p className="laviossa text-3xl xl:w-[25rem] leading-normal">
@@ -302,11 +302,11 @@ const Home = () => {
           />
         </div>
 
-        <div className="mt-[4rem] mb-[2rem] flex flex-col md:flex-row items-center justify-center gap-5">
+        {/* <div className="mt-[4rem] mb-[2rem] flex flex-col md:flex-row items-center justify-center gap-5">
           {assets?.map((data, idx) => (
             <HomeCard key={idx} data={data} />
           ))}
-        </div>
+        </div> */}
       </section>
 
       <section className="px-5 lg:px-12 xl:px-40 my-[5rem] flex flex-col-reverse gap-7 md:gap-0 md:flex-row items-center justify-between">
@@ -326,7 +326,10 @@ const Home = () => {
 
           <div>
             <button
-              onClick={() => navigate('/team')}
+              onClick={() => {
+                navigate('/team');
+                scrollToTop();
+              }}
               className="text-black font-semibold py-4 px-5 bg-[#FFB803] rounded-sm capitalize shadow-md shadow-gray-100"
             >
               Meet the team
@@ -354,8 +357,6 @@ const Home = () => {
           ))}
         </ClientSwiperjs>
       </section>
-
-    
 
       <section className="px-5 lg:px-12 xl:px-40 py-10 xl:my-[5rem] my-0  flex flex-col items-center gap-7 bg-[#41073F]">
         <p className="laviossa text-3xl text-center leading-normal text-white">
