@@ -3,53 +3,53 @@ import { images } from '../assets';
 export const teamData = [
   {
     image: images.president,
-    role: 'President',
-    name: 'Mr Sum-ting wong ',
+    role: 'President/CEO',
+    name: 'ANTHONY R HUGHES  ',
   },
   {
     image: images.vc,
     role: 'Vice-President',
-    name: 'Mr Chin-tu fat',
+    name: 'MICHELLE H POWERS',
   },
   {
     image: images.secretary,
-    role: 'Secretary',
-    name: 'Tyrone Wilson',
+    role: 'CFO',
+    name: 'THOMAS C DAVY',
   },
   {
     image: images.operations,
-    role: 'Head of operations',
-    name: 'Trey Taeshawn',
+    role: 'Head of Operations',
+    name: 'THOMAS C DAVY',
   },
-  {
-    image: images.leaddev,
-    role: 'Lead developer',
-    name: 'Ngozi Ezeonu',
-  },
+  // {
+  //   image: images.leaddev,
+  //   role: 'Lead developer',
+  //   name: 'Ngozi Ezeonu',
+  // },
+  // {
+  //   image: images.assistant,
+  //   role: 'Assistant developer',
+  //   name: 'Angela Fanghel',
+  // },
   {
     image: images.assistant,
-    role: 'Assistant developer',
-    name: 'Angela Fanghel',
-  },
-  {
-    image: images.data,
     role: 'Data expert',
-    name: 'Sophia Laravel',
+    name: 'ELVIE CHAMBERLAIN',
+  },
+  // {
+  //   image: images.design,
+  //   role: 'Design expert',
+  //   name: 'Aaron Okafor',
+  // },
+  {
+    image: images.leaddev,
+    role: 'Social expert',
+    name: 'ANNIE CURTIS NORRIS',
   },
   {
     image: images.design,
-    role: 'Design expert',
-    name: 'Aaron Okafor',
-  },
-  {
-    image: images.social,
-    role: 'Social expert',
-    name: 'Erling Haaland',
-  },
-  {
-    image: images.content,
     role: 'Head of content',
-    name: 'Lady Dimitrescu',
+    name: 'MICHEAL BRADLEY',
   },
 ];
 

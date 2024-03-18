@@ -187,7 +187,7 @@ const Home = () => {
           ></div>
         </div>
       </section>
-      <section className="bg-[#CDA1CB26] py-7 px-5 lg:px-12 xl:px-40 my-[5rem]">
+      <section className="bg-[#CDA1CB26] py-7 px-5 lg:px-12 xl:px-40 xl:my-[5rem] my-0 ">
         <div className="flex flex-col-reverse gap-3 md:gap-0 md:flex-row items-center justify-between">
           <div className="xl:w-[35rem]">
             <p className="laviossa text-3xl xl:w-[25rem] leading-normal">
@@ -226,7 +226,7 @@ const Home = () => {
           ))}
         </div>
       </section>
-      <section className="bg-[#CDA1CB26] py-7 px-5 lg:px-12 xl:px-40 my-[5rem]">
+      <section className="bg-[#CDA1CB26] py-7 px-5 lg:px-12 xl:px-40 xl:my-[5rem] my-0 ">
         <div className="flex flex-col-reverse gap-3 md:gap-0 md:flex-row items-center justify-between">
           <div className="xl:w-[35rem]">
             <p className="laviossa text-3xl xl:w-[25rem] leading-normal">
@@ -269,7 +269,7 @@ const Home = () => {
           ))}
         </div>
       </section>
-      <section className="bg-[#CDA1CB26] py-7 px-5 lg:px-12 xl:px-40 my-[5rem]">
+      <section className="bg-[#CDA1CB26] py-7 px-5 lg:px-12 xl:px-40 xl:my-[5rem] my-0 ">
         <div className="flex flex-col-reverse gap-3 md:gap-0 md:flex-row items-center justify-between">
           <div className="xl:w-[35rem]">
             <p className="laviossa text-3xl xl:w-[25rem] leading-normal">
@@ -355,13 +355,9 @@ const Home = () => {
         </ClientSwiperjs>
       </section>
 
-      <section>
-        <p className="laviossa text-3xl text-center leading-normal text-black">
-          Market Analysis{' '}
-        </p>
-      </section>
+    
 
-      <section className="px-5 lg:px-12 xl:px-40 py-10 my-[5rem] flex flex-col items-center gap-7 bg-[#41073F]">
+      <section className="px-5 lg:px-12 xl:px-40 py-10 xl:my-[5rem] my-0  flex flex-col items-center gap-7 bg-[#41073F]">
         <p className="laviossa text-3xl text-center leading-normal text-white">
           Are we right for you?
         </p>
