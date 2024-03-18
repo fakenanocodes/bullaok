@@ -44,7 +44,7 @@ const DeliveryOption = ({handleNext}) => {
         !inputValue?.area
         ) {
           setError(true);
-          toast.error('Please complete your personal details', {
+          toast.error('Please complete your details', {
             autoClose: 2000,
           });
           return;
@@ -58,8 +58,8 @@ const DeliveryOption = ({handleNext}) => {
         city: '',
         area: '',
       });
-      toast.success('success');
       dispatch(resetCardInformation());
+      navigate('/dashboard/card-application/success')
     } catch (err) {
       console.error(err);
     }
