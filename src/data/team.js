@@ -1,22 +1,27 @@
 import { images } from '../assets';
+import { image } from '../assets/team/teams';
 
 export const teamData = [
   {
+    id:1,
     image: images.president,
     role: 'President/CEO',
     name: 'ANTHONY R HUGHES  ',
   },
   {
-    image: images.vc,
+    id: 2,
+    image: image.bbb,
     role: 'Vice-President',
     name: 'MICHELLE H POWERS',
   },
   {
+    id:3,
     image: images.secretary,
     role: 'CFO',
     name: 'THOMAS C DAVY',
   },
   {
+    id:4,
     image: images.operations,
     role: 'Head of Operations',
     name: 'THOMAS C DAVY',
@@ -32,6 +37,7 @@ export const teamData = [
   //   name: 'Angela Fanghel',
   // },
   {
+    id:5,
     image: images.assistant,
     role: 'Data expert',
     name: 'ELVIE CHAMBERLAIN',
@@ -42,11 +48,14 @@ export const teamData = [
   //   name: 'Aaron Okafor',
   // },
   {
+    id:6,
+
     image: images.leaddev,
     role: 'Social expert',
     name: 'ANNIE CURTIS NORRIS',
   },
   {
+    id:7,
     image: images.design,
     role: 'Head of content',
     name: 'MICHEAL BRADLEY',
@@ -55,22 +64,26 @@ export const teamData = [
 
 export const brokerData = [
   {
-    image: images.cynthia,
+    id: 0,
+    image: image.lll,
     role: 'Cannabis Broker',
     name: 'Cynthia Turner ',
   },
   {
-    image: images.benedict,
+    id: 1,
+    image: image.mmm,
     role: 'Real estate Broker',
     name: 'Benedict Benjamin',
   },
   {
-    image: images.diagon,
+    id: 2,
+    image: image.nnn,
     role: 'Forex Broker',
     name: 'Diagon Alley',
   },
   {
-    image: images.operations,
+    id: 3,
+    image: image.ooo,
     role: 'Crypto Broker',
     name: 'Anthonia Patricia',
   },

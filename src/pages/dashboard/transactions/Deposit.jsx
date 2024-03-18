@@ -7,6 +7,7 @@ import useSWR from 'swr';
 import DepositModal from '../../../components/modal/DepositModal';
 import DepositIcon from '../../../components/utils/icons/DepositIcon';
 import LeftMoveIcon from '../../../components/utils/icons/LeftMoveIcon';
+import DepositSuccess from './DepositSuccess';
 import MobileDepostTable from './MobileDepositeTab';
 
 const Deposit = () => {
@@ -15,37 +16,40 @@ const Deposit = () => {
   const [showMobileTable, setShowMobileTable] = useState(false);
   const [wallet, setWallet] = useState('');
   const [amount, setAmount] = useState('');
-  const [selectedCoin, setSelectedCoin] = useState('');
+  const [selectedCoin, setSelectedCoin] = useState('tether');
   const [walletTypes, setWalletTypes] = useState('');
   const [usdtAmount, setUsdtAmount] = useState('');
   const [showNotify, setShowNotify] = useState(false);
+  const [openSuccess, setOpenSuccess] = useState(false);
   const { data: deposits } = useSWR(`/deposit/`);
   const { data: depositWallet } = useSWR('/walletaddress/');
   const navigate = useNavigate();
   const walletType = ['litecoin', 'ripple', 'ethereum', 'bitcoin', 'tether'];
 
-  let walletMock = {
-    bitcoin_address: 'BTCwrtewt3ertrwert',
-    litecoin_address: 'LTCdfgerty4565tetert',
-    xrp_address: 'XRPrterytrjyukgkhjl',
-    etherum_address: 'ETHytertdgyuthftdhr',
-    usdt_address: 'USDTdfhfyufdhdfydrhfhhg',
-  };
+  console.log('WALLET ADD', depositWallet);
+
+  // let walletMock = {
+  //   bitcoin_address: 'BTCwrtewt3ertrwert',
+  //   litecoin_address: 'LTCdfgerty4565tetert',
+  //   xrp_address: 'XRPrterytrjyukgkhjl',
+  //   etherum_address: 'ETHytertdgyuthftdhr',
+  //   usdt_address: 'USDTdfhfyufdhdfydrhfhhg',
+  // };
 
   useEffect(() => {
-    if (wallet == walletMock.litecoin_address) {
+    if (wallet == depositWallet?.litecoin_address) {
       setSelectedCoin(walletType[0]);
       setWalletTypes('LTC');
-    } else if (wallet == walletMock.xrp_address) {
+    } else if (wallet == depositWallet?.xrp_address) {
       setSelectedCoin(walletType[1]);
       setWalletTypes('XRP');
-    } else if (wallet == walletMock.etherum_address) {
+    } else if (wallet == depositWallet?.etherum_address) {
       setSelectedCoin(walletType[2]);
       setWalletTypes('ETH');
-    } else if (wallet == walletMock.bitcoin_address) {
+    } else if (wallet == depositWallet?.bitcoin_address) {
       setSelectedCoin(walletType[3]);
       setWalletTypes('BTC');
-    } else if (wallet == walletMock.usdt_address) {
+    } else if (wallet == depositWallet?.usdt_address) {
       setSelectedCoin(walletType[4]);
       setWalletTypes('USDT');
     }
@@ -80,7 +84,7 @@ const Deposit = () => {
   let userData = {
     amount,
     wallet_type: walletTypes || 'USDT',
-    wallet_address: wallet || walletMock.usdt_address,
+    wallet_address: wallet || depositWallet?.usdt_address,
     usdt_amount: usdtAmount,
   };
   //usdtAmount
@@ -96,7 +100,7 @@ const Deposit = () => {
       setLoading(false);
       toast.success('success');
       setOpenModel(false);
-      reset();
+      setOpenSuccess(!openSuccess);
     } catch (error) {
       setLoading(false);
       console.log(error);
@@ -118,7 +122,21 @@ const Deposit = () => {
           <LeftMoveIcon />
         </div>
         Deposit
+        {/* <button
+          onClick={() => setOpenSuccess(!openSuccess)}
+          className="bg-red-500 cursor-pointer"
+        >
+          Temp
+        </button> */}
       </div>
+      {openSuccess && (
+        <DepositSuccess
+          wallet={wallet}
+          amount={amount}
+          walletTypes={walletTypes}
+          setOpenSuccess={setOpenSuccess}
+        />
+      )}
       <div>
         <div className="flex flex-col gap-10 pb-24">
           <div className="md:flex gap-10  font-semibold">
@@ -130,11 +148,21 @@ const Deposit = () => {
                 type="text"
                 className="rounded-lg px-6 border-2 py-4"
               >
-                <option value={walletMock.usdt_address}>USDT</option>
-                <option value={walletMock.litecoin_address}>LTC</option>
-                <option value={walletMock.bitcoin_address}>BTC</option>
-                <option value={walletMock.xrp_address}>XRP</option>
-                <option value={walletMock.etherum_address}>ETH</option>
+                <option value={depositWallet?.usdt_address || 'Loading...'}>
+                  USDT
+                </option>
+                <option value={depositWallet?.litecoin_address || 'Loading...'}>
+                  LTC
+                </option>
+                <option value={depositWallet?.bitcoin_address || 'Loading...'}>
+                  BTC
+                </option>
+                <option value={depositWallet?.xrp_address || 'Loading...'}>
+                  XRP
+                </option>
+                <option value={depositWallet?.etherum_address || 'Loading...'}>
+                  ETH
+                </option>
               </select>
             </div>
           </div>
@@ -150,7 +178,7 @@ const Deposit = () => {
             <div className=" hidden md:flex flex-col md:w-[50%] ">
               <label>Deposit wallet address</label>
               <input
-                value={wallet || walletMock.usdt_address}
+                value={wallet || depositWallet?.usdt_address}
                 // onChange={(e) => setWalletAdress(e.target.value)}
                 type="text"
                 className="rounded-lg px-6 border-2 py-4"
@@ -187,16 +215,16 @@ const Deposit = () => {
             <div className="md:hidden flex flex-col ">
               <label>Deposit wallet address</label>
               <input
-                value={wallet || walletMock.usdt_address}
+                value={wallet || depositWallet?.usdt_address}
                 type="text"
                 className="rounded-lg px-6 border-2 py-4"
               />
             </div>
           </div>
           <div className="md:flex md:justify-between md:w-[48%] text-xl items-center">
-            <div className=" text-red-600 font-semibold mb-28 md:mb-0">
+            {/* <div className=" text-red-600 font-semibold mb-28 md:mb-0">
               You are depositing ${usdtAmount || '0.00'}
-            </div>
+            </div> */}
             <button
               onClick={handleOpenModel}
               className="hidden md:flex bg-[#352F84] py-2 text-white px-4 rounded-[5px]"
@@ -250,7 +278,10 @@ const Deposit = () => {
         </div>
         <div>
           {deposits?.map((deposit, idx) => (
-            <div className="flex justify-between md:w-[90%]  md:ml-10 text-xs ">
+            <div
+              key={idx}
+              className="flex justify-between md:w-[90%]  md:ml-10 text-xs "
+            >
               <div className="py-3 font-bold my-2   ">
                 <div className="md:flex gap-2">
                   <p>{deposit?.created?.split('T')[0]}</p>
@@ -268,8 +299,8 @@ const Deposit = () => {
                 {deposit?.verified
                   ? 'Success'
                   : !deposit?.verified
-                  ? 'Pending...'
-                  : 'Failed'}
+                    ? 'Pending...'
+                    : 'Failed'}
               </div>
               {/* <div className="w-36"></div> */}
             </div>
