@@ -76,7 +76,14 @@ const Header = () => {
         onClick={() => navigate('/')}
         className="font-semibold text-white z-40 cursor-pointer "
       >
-        <img src={HomePageIcon} className="w-14 bg-white py-1" />
+        <img
+          onClick={() => {
+            scrollToTop();
+            navigate('/');
+          }}
+          src={HomePageIcon}
+          className="w-14 bg-white py-1"
+        />
       </div>
       <div className=" lg:flex md:hidden hidden items-center gap-5">
         <p

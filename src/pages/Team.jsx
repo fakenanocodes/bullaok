@@ -1,13 +1,25 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { images } from '../assets';
+// import { image } from '../assets/team/teams';
 import Layout from '../components/Layout';
 import { brokerData, teamData } from '../data/team';
 
 export default function Team() {
+  const navigate = useNavigate();
+
+  const handleTeam = (id) => {
+    navigate(`/team/member/${id}`);
+  };
+
+  const handleBroker = (id) => {
+    navigate(`/team/broker/${id}`);
+  };
+
   return (
     <Layout>
       <header
-        className="relative flex flex-col lg:flex-row px-8 items-center bg-[#fff]  justify-center md:gap-16 gap-8 bg-transparent lg:h-96 lg:py:0 py-8  bg-cover bg-center bg-no-repeat  w-full relative"
+        className="flex flex-col lg:flex-row px-8 items-center bg-[#fff]  justify-center md:gap-16 gap-8 bg-transparent lg:h-96 lg:py:0 py-8  bg-cover bg-center bg-no-repeat  w-full relative"
         style={{
           backgroundImage: `url(${images.team_bg})`,
         }}
@@ -56,12 +68,13 @@ export default function Team() {
                       {items.name}
                     </p>
                   </div>
-                  <a
+                  <button
+                    onClick={() => handleTeam(items?.id)}
                     href="#"
                     className="ml-auto px-3 text-[#8E0789] lg:text-md font-[montserrat]"
                   >
                     Read more
-                  </a>
+                  </button>
                 </div>
               </div>
             ))}
@@ -85,7 +98,7 @@ export default function Team() {
             </h2>
           </div>
 
-          <div className="grid xl:grid-cols-2 md:grid-cols-2 w-full w-full mx-auto gap-5 xl:py-[90px] ">
+          <div className="grid xl:grid-cols-2 md:grid-cols-2 w-full  mx-auto gap-5 xl:py-[90px] ">
             {brokerData?.map((items, index) => (
               <div
                 className=" xl:w-3/4 w-full flex flex-col items-end "
@@ -101,12 +114,12 @@ export default function Team() {
                     <h3 className="mt-4  font-[montserrat]">{items.role}</h3>
                     <p className="font-[laviossa]">{items.name}</p>
                   </div>
-                  <a
-                    href="#"
+                  <button
+                    onClick={() => handleBroker(items?.id)}
                     className="ml-auto text-[#8E0789] font-[montserrat] font-bold"
                   >
                     Read more
-                  </a>
+                  </button>
                 </div>
               </div>
             ))}

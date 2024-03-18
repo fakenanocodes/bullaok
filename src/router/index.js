@@ -38,15 +38,18 @@ import ReferralContainer from '../pages/dashboard/Referral';
 import ForgotPassword from '../components/auth/forgot-password';
 import UserLogin from '../components/auth/login';
 import SuccessThanks from '../components/kycPages/SuccessThanks';
+import Broker from '../pages/Broker';
+import TeamBroker from '../pages/TeamBroker';
+import TeamMember from '../pages/TeamMember';
 import InvestmentPackages from '../pages/dashboard/InvestmentPackages';
 import InvestmentPlan from '../pages/dashboard/InvestmentPlan';
 import Kyc from '../pages/dashboard/Kyc';
+import Notifications from '../pages/dashboard/Notifications';
 import RunningInvestment from '../pages/dashboard/RunningInvestment';
+import Support from '../pages/dashboard/Support';
 import Deposit from '../pages/dashboard/transactions/Deposit';
 import Transfer from '../pages/dashboard/transactions/Transfer';
 import Withdrawal from '../pages/dashboard/transactions/Withdrawal';
-import Notifications from '../pages/dashboard/Notifications';
-import Support from '../pages/dashboard/Support';
 
 const router = createBrowserRouter([
   {
@@ -126,6 +129,14 @@ const router = createBrowserRouter([
     Component: Team,
   },
   {
+    path: '/team/member/:subpage',
+    Component: TeamMember,
+  },
+  {
+    path: '/team/broker/:subpage',
+    Component: TeamBroker,
+  },
+  {
     path: 'faq',
     Component: Faq,
   },
@@ -150,6 +161,10 @@ const router = createBrowserRouter([
   {
     path: 'about',
     Component: About,
+  },
+  {
+    path: 'brokers',
+    Component: Broker,
   },
   {
     path: 'login',

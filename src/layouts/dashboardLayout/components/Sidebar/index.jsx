@@ -32,7 +32,7 @@ const DashboardSidebar = () => {
   const icons = [
     { icon: <HomeIcon />, id: 'home', path: '' },
     { icon: <InvestmentIcon />, id: 'investment', path: 'card-application' },
-    { icon: <PlantIcon />, id: 'plans', path: 'investment/packages' },
+    { icon: <PlantIcon />, id: 'plans', path: 'plan' },
     {
       icon: <TransactionIcon />,
       id: 'transaction',

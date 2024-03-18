@@ -25,6 +25,7 @@ import InvestmentPlanCard from '../../components/cards/InvestmentPlanCard';
 import DashboardEmptyContainer from '../../components/empty/DashboardEmptyContainer';
 import useCurrencyFormatter from '../../hooks/useCurrencyFormatter';
 import { setUserKyc } from '../../store/reducers/transact_reducer';
+import CoinBlocksMarquee from '../../components/widget/CoinBlocksMarquee';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -194,6 +195,9 @@ const DashboardHome = () => {
         <div className="grid grid-cols-2 gap-5">
           <EthCoinWidget />
         </div>
+      </div>
+      <div className="flex">
+        <CoinBlocksMarquee />
       </div>
       <div className="space-y-3">
         <div className="flex flex-col space-y-2">
