@@ -12,8 +12,6 @@ import f from './f.png';
 import fff from './fff.png';
 import g from './g.png';
 import ggg from './ggg.png';
-import h from './h.png';
-import hhh from './hhh.png';
 // import k from './k.png';
 // import kkk from './kkk.png';
 import l from './l.png';
@@ -33,7 +31,7 @@ export const image = {
   e,
   f,
   g,
-  h,
+  // h,
   // j,
   // k,
   l,
@@ -45,9 +43,9 @@ export const image = {
   ccc,
   ddd,
   eee,
-  ggg,
   fff,
-  hhh,
+  ggg,
+  // hhh,
   // jjj,
   // kkk,
   lll,

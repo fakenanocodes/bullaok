@@ -79,7 +79,7 @@ export const teamMember = [
   },
   {
     id: 8,
-    image: image.h,
+    image: image.g,
     role: 'Social expert',
     name: teamData[6].name,
     paragraph1:

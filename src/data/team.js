@@ -55,7 +55,7 @@ export const teamData = [
   },
   {
     id: 7,
-    image: image.hhh,
+    image: image.ggg,
     role: 'Head of content',
     name: 'MICHEL BRADLEY',
   },
