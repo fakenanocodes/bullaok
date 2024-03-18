@@ -1,4 +1,6 @@
-import { useDispatch } from 'react-redux';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import { setCardStep } from '../../store/reducers/card_reducer';
 
 const items = [0, 1, 2, 3, 4];
@@ -12,15 +14,61 @@ const titles = [
 
 const StepIndicator = ({ chatStep }) => {
   const dispatch = useDispatch();
+  const cardInformation = useSelector((state) => state.card.cardInformation);
+  const [error, setError] = useState(false);
 
   const navigateSteps = (step) => {
     console.log(step);
-    dispatch(setCardStep(step));
+    if (step === 0) {
+      if (cardInformation?.firstName && cardInformation?.lastName && cardInformation?.phoneNumber) {
+        dispatch(setCardStep(step));
+      } else {
+        setError(true);
+        toast.error('Please complete your personal details', {
+        autoClose: 2000,
+      });
+      }
+    } else if (step === 1) {
+      if (cardInformation?.currency) {
+        dispatch(setCardStep(step));
+      } else {
+        toast.error('Please select your currency', {
+        autoClose: 2000,
+      });
+      }
+    } else if (step === 2) {
+      if (cardInformation?.type) {
+        dispatch(setCardStep(step));
+      } else {
+        toast.error('Please select your card type', {
+        autoClose: 2000,
+      });
+      }
+    } else if (step === 3) {
+      if (cardInformation?.nameOnCard && cardInformation?.controlQuestion && cardInformation?.controlAnswer && cardInformation?.secretWord) {
+        dispatch(setCardStep(step));
+      } else {
+        setError(true);
+        toast.error('Please complete your personal details', {
+        autoClose: 2000,
+      });
+      }
+    } else if (step === 4) {
+      if (cardInformation?.zipCode && cardInformation?.city && cardInformation?.area) {
+        dispatch(setCardStep(step));
+      } else {
+        console.log(error)
+        setError(true);
+        toast.error('Please complete your details', {
+        autoClose: 2000,
+      });
+      }
+    }
   };
 
   return (
     <div className="w-full flex items-center relative gap-2 my-[2rem]">
-      {items?.map((item) => (
+      {items.map((item) => (
         <div
           key={item}
           className="w-full flex flex-col justify-center items-center"
