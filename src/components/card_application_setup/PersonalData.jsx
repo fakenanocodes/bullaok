@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import debit_card from '../../assets/dashboard/investment/debit_card.png';
 import { resetCardInformation, setCardInformation } from '../../store/reducers/card_reducer';
 import AddIcon from '../utils/icons/AddIcon';
@@ -22,6 +23,12 @@ const PersonalData = ({ handleNext }) => {
   };
 
   const storeCardInfo = () => {
+    if(!currency){
+      toast.error('Please select your currency', {
+        autoClose: 2000,
+      });
+      return;
+    }
     handleNext(2);
     dispatch(setCardInformation({ ...cardInformation, currency }));
     console.log('done');
