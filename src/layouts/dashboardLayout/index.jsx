@@ -4,8 +4,8 @@ import { CircularProgress } from '@mui/material';
 import { useState } from 'react';
 import { Cookies } from 'react-cookie';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
+import useSWR from 'swr';
 import logo from '../../assets/dashboard/logo.svg';
-import profilepic from '../../assets/dashboard/profilepic.png';
 import HomeIcon from '../../assets/icons/dashboard/HomeIcon';
 import InvestmentIcon from '../../assets/icons/dashboard/InvestmentIcon';
 import PlantIcon from '../../assets/icons/dashboard/PlantIcon';
@@ -14,14 +14,14 @@ import LogoutIcon from '../../components/utils/icons/LogoutIcon';
 import useAuthentication from '../../hooks/useAuthentication';
 import DashboardSidebar from './components/Sidebar';
 
-const options = ['Withdraw', 'Deposit', 'Transfer', 'Plan'];
+const options = ['Withdraw', 'Deposit', 'Transfer'];
 const icons = [
   { icon: <HomeIcon />, name: 'Home', path: '' },
-  { icon: <InvestmentIcon />, name: 'Investment Packages', path: 'kyc' },
+  { icon: <InvestmentIcon />, name: 'KYC', path: 'kyc' },
   {
     icon: <PlantIcon />,
     name: 'Investment Plans',
-    path: 'investment/packages',
+    path: 'plan',
   },
   {
     icon: <TransactionIcon />,
@@ -32,7 +32,8 @@ const icons = [
 ];
 const DashboardLayout = () => {
   const cookie = new Cookies();
-
+  const { data } = useSWR('user/');
+  const profile = data?.profile;
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [activeOption, setActiveOption] = useState(null);
 
@@ -52,6 +53,7 @@ const DashboardLayout = () => {
   if (!isLoggedIn) {
     return null; //Create a prompt here
   }
+  const Api = 'https://django-bulloak-finance-production.up.railway.app';
 
   const logoutOption = () => {
     navigate('/');
@@ -64,17 +66,17 @@ const DashboardLayout = () => {
     { icon: <HomeIcon />, name: 'Home', path: '' },
     {
       icon: <InvestmentIcon />,
-      name: 'Investment Packages',
+      name: 'Card Application',
       path: 'card-application',
     },
     {
       icon: <PlantIcon />,
       name: 'Investment Plans',
-      path: 'investment/packages',
+      path: 'plan',
     },
     {
       icon: <TransactionIcon />,
-      name: 'Transactions',
+      name: 'Running Investment',
       path: 'investment/running',
     },
     { icon: <LogoutIcon />, name: 'Logout' },
@@ -121,9 +123,9 @@ const DashboardLayout = () => {
                 ))}
               </div>
               <img
-                src={profilepic}
+                src={Api + profile?.image}
                 alt=""
-                className="w-14 h-14 rounded-full object-contain cursor-pointer"
+                className="w-[70px] h-[70px] rounded-[50%]  cursor-pointer"
                 onClick={() => navigate('/dashboard/profile')}
               />
             </div>

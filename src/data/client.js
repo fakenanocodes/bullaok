@@ -21,3 +21,46 @@ export const clientData = [
     text: `I can't say enough good things about Bulloak Finance Management. Their team is not only knowledgeable but also incredibly patient and supportive. They took the time to educate me about different investment options and helped me make informed decisions. Thanks to them, I've seen significant growth in my portfolio.`,
   },
 ];
+
+export const brokers = [
+  {
+    id: 1,
+    image: customer1,
+    title: 'John Doe',
+    role: 'Investment Broker',
+    experience:
+      'With over 15 years of experience in the financial industry, John is a seasoned investment broker dedicated to helping clients achieve their financial goals. Known for his expertise, integrity, and personalized approach, John is committed to providing exceptional service and guidance to investors of all levels.',
+    investment:
+      'With John, you can trust that your best interests are always his top priority. He operates with integrity and honesty, putting your needs first in every investment decision.',
+  },
+  {
+    id: 2,
+    image: customer2,
+    title: 'John Doe',
+    role: 'Investment Broker',
+    experience:
+      'With over 15 years of experience in the financial industry, John is a seasoned investment broker dedicated to helping clients achieve their financial goals. Known for his expertise, integrity, and personalized approach, John is committed to providing exceptional service and guidance to investors of all levels.',
+    investment:
+      'With John, you can trust that your best interests are always his top priority. He operates with integrity and honesty, putting your needs first in every investment decision.',
+  },
+  {
+    id: 3,
+    image: customer3,
+    title: 'John Doe',
+    role: 'Investment Broker',
+    experience:
+      'With over 15 years of experience in the financial industry, John is a seasoned investment broker dedicated to helping clients achieve their financial goals. Known for his expertise, integrity, and personalized approach, John is committed to providing exceptional service and guidance to investors of all levels.',
+    investment:
+      'With John, you can trust that your best interests are always his top priority. He operates with integrity and honesty, putting your needs first in every investment decision.',
+  },
+  {
+    id: 4,
+    image: customer4,
+    title: 'John Doe',
+    role: 'Investment Broker',
+    experience:
+      'With over 15 years of experience in the financial industry, John is a seasoned investment broker dedicated to helping clients achieve their financial goals. Known for his expertise, integrity, and personalized approach, John is committed to providing exceptional service and guidance to investors of all levels.',
+    investment:
+      'With John, you can trust that your best interests are always his top priority. He operates with integrity and honesty, putting your needs first in every investment decision.',
+  },
+];
