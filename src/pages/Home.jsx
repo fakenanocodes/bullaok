@@ -1,10 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import { SwiperSlide } from 'swiper/react';
+import useSWR from 'swr';
 import { images } from '../assets';
 import bg_img from '../assets/bg_img.png';
-import card_img from '../assets/home/card_img.png';
-import card_img2 from '../assets/home/card_img2.png';
-import card_img3 from '../assets/home/card_img3.png';
 import group from '../assets/home/group.png';
 import home_bg from '../assets/home/home_bg.png';
 import main_card_img from '../assets/home/main_card_img.png';
@@ -13,35 +11,22 @@ import main_card_img3 from '../assets/home/main_card_img3.png';
 import main_card_img4 from '../assets/home/main_card_img4.png';
 import MainLayout from '../components/MainLayout';
 import ClientCard from '../components/utils/cards/ClientCard';
-import HomeCard from '../components/utils/cards/HomeCard';
 import ClientSwiperjs from '../components/utils/reusables/ClientSwiperjs';
 import MarqueeWidget from '../components/widget/MarqueeWidget';
 import { clientData } from '../data/client';
-import { assets, stocks } from '../data/home';
+import { stocks } from '../data/home';
+import { scrollToTop } from '../store/actions/utils';
 
-const cardData = [
-  {
-    location: 'Crev, Dubai',
-    views: '5.0 (55,890 views)',
-    price: '$453,897',
-    image: card_img,
-  },
-  {
-    location: 'California, USA',
-    views: '5.0 (55,890 views)',
-    price: '$564,897',
-    image: card_img2,
-  },
-  {
-    location: 'Aviana, Canada',
-    views: '5.0 (55,890 views)',
-    price: '$94,444',
-    image: card_img3,
-  },
-];
+
+const staticColors = ['#8E0789', '#3B82F6', '#34D399', '#F59E0B']; // Define your static colors array
 
 const Home = () => {
   const navigate = useNavigate();
+  const { data } = useSWR('/broker/brokers/');
+  console.log(data);
+  const getRandomColor = () => {
+    return staticColors[Math.floor(Math.random() * staticColors.length)]; 
+  };
   return (
     <MainLayout>
       <div className="bg-[#30022ECC] bg-opacity-10 relative w-full h-[90vh]">
@@ -187,7 +172,7 @@ const Home = () => {
           ></div>
         </div>
       </section>
-      <section className="bg-[#CDA1CB26] py-7 px-5 lg:px-12 xl:px-40 xl:my-[5rem] my-0 ">
+      <section className="bg-[#CDA1CB26] py-7 px-5 lg:px-12 xl:px-40  my-0 ">
         <div className="flex flex-col-reverse gap-3 md:gap-0 md:flex-row items-center justify-between">
           <div className="xl:w-[35rem]">
             <p className="laviossa text-3xl xl:w-[25rem] leading-normal">
@@ -220,13 +205,13 @@ const Home = () => {
           />
         </div>
 
-        <div className="mt-[4rem] mb-[2rem] flex flex-col md:flex-row items-center justify-center gap-5">
+        {/* <div className="mt-[4rem] mb-[2rem] flex flex-col md:flex-row items-center justify-center gap-5">
           {cardData?.map((data, idx) => (
             <HomeCard key={idx} data={data} />
           ))}
-        </div>
+        </div> */}
       </section>
-      <section className="bg-[#CDA1CB26] py-7 px-5 lg:px-12 xl:px-40 xl:my-[5rem] my-0 ">
+      <section className="bg-[#CDA1CB26] py-7 px-5 lg:px-12 xl:px-40 my-0 ">
         <div className="flex flex-col-reverse gap-3 md:gap-0 md:flex-row items-center justify-between">
           <div className="xl:w-[35rem]">
             <p className="laviossa text-3xl xl:w-[25rem] leading-normal">
@@ -264,12 +249,12 @@ const Home = () => {
         </h2>
 
         <div className="mt-[4rem] mb-[2rem] flex flex-col md:flex-row items-center justify-center gap-5">
-          {stocks?.map((image) => (
-            <img src={image} className="w-full" alt="" />
+          {stocks?.map((image, idx) => (
+            <img key={idx} src={image} className="w-full" alt="" />
           ))}
         </div>
       </section>
-      <section className="bg-[#CDA1CB26] py-7 px-5 lg:px-12 xl:px-40 xl:my-[5rem] my-0 ">
+      <section className="bg-[#CDA1CB26] py-7 px-5 lg:px-12 xl:px-40 my-0 ">
         <div className="flex flex-col-reverse gap-3 md:gap-0 md:flex-row items-center justify-between">
           <div className="xl:w-[35rem]">
             <p className="laviossa text-3xl xl:w-[25rem] leading-normal">
@@ -301,12 +286,6 @@ const Home = () => {
             className="min-h-[17rem] max-h-[17rem] xl:min-h-[30rem] lg:max-h-[30rem]"
           />
         </div>
-
-        <div className="mt-[4rem] mb-[2rem] flex flex-col md:flex-row items-center justify-center gap-5">
-          {assets?.map((data, idx) => (
-            <HomeCard key={idx} data={data} />
-          ))}
-        </div>
       </section>
 
       <section className="px-5 lg:px-12 xl:px-40 my-[5rem] flex flex-col-reverse gap-7 md:gap-0 md:flex-row items-center justify-between">
@@ -326,7 +305,10 @@ const Home = () => {
 
           <div>
             <button
-              onClick={() => navigate('/team')}
+              onClick={() => {
+                navigate('/team');
+                scrollToTop();
+              }}
               className="text-black font-semibold py-4 px-5 bg-[#FFB803] rounded-sm capitalize shadow-md shadow-gray-100"
             >
               Meet the team
@@ -354,9 +336,36 @@ const Home = () => {
           ))}
         </ClientSwiperjs>
       </section>
+      <section className="flex flex-col items-center justify-center">
+        <p className="laviossa text-3xl text-center leading-normal text-black">
+          Brokers
+        </p>
 
-    
-
+        <div className="flex xl:flex-row flex-col gap-4 justify-center w-full my-[2rem]">
+          {data?.slice(0, 3).map((item) => (
+            <div
+              key={item.id}
+              className="p-2 text-white sentence font-bold rounded-md"
+              style={{ backgroundColor: getRandomColor() }}
+            >
+              <div className="flex items-center gap-4">
+                <p>Name:</p>
+                <h2>{item?.name}</h2>
+              </div>
+              <div className="flex items-center gap-4">
+                <p>Experience:</p>
+                <h2>{item?.years_of_experience} years</h2>
+              </div>
+            </div>
+          ))}
+        </div>
+        <a
+          href="/team"
+          className="laviossa text-xl text-center leading-normal text-black"
+        >
+          See more
+        </a>
+      </section>
       <section className="px-5 lg:px-12 xl:px-40 py-10 xl:my-[5rem] my-0  flex flex-col items-center gap-7 bg-[#41073F]">
         <p className="laviossa text-3xl text-center leading-normal text-white">
           Are we right for you?

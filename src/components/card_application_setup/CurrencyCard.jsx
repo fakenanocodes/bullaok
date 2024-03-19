@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import debit_bank from '../../assets/dashboard/investment/debit_bank.png';
 import debit_card from '../../assets/dashboard/investment/debit_card.png';
 import visa_plat from '../../assets/dashboard/investment/visa_plat.png';
@@ -22,8 +23,13 @@ const CurrencyCard = ({ handleNext }) => {
   useEffect(() => {
     cardInformation?.type && setCardType(cardInformation?.type);
   }, [cardInformation?.type]);
-
   const storeCardInfo = () => {
+    if(!cardType){
+      toast.error('Please select your card type', {
+        autoClose: 2000,
+      });
+      return;
+    }
     console.log(cardType);
     handleNext(3);
     dispatch(setCardInformation({ ...cardInformation, type: cardType }));

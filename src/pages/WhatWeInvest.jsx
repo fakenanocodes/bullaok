@@ -1,4 +1,3 @@
-import React from 'react';
 import Layout from '../components/Layout';
 
 export default function WhatWeInvest() {
@@ -32,34 +31,34 @@ export default function WhatWeInvest() {
 
   const invest = [
     {
-      icon: 'cannabis_icon.png',
+      icon: '/cannabis_icon.png',
       title: 'Cannabis',
-      link: '#',
+      link: '/invest',
     },
     {
-      icon: 'stock_icon.png',
+      icon: '/stock_icon.png',
       title: 'Stock',
-      link: '#',
+      link: '/stocks',
     },
     {
-      icon: 'estate_icon.png',
+      icon: '/estate_icon.png',
       title: 'Real Estate',
-      link: '#',
+      link: '/invest',
     },
     {
-      icon: 'crypto_icon.png',
+      icon: '/crypto_icon.png',
       title: 'Crypto',
-      link: '#',
+      link: '/invest',
     },
     {
-      icon: 'forex_icon.png',
+      icon: '/forex_icon.png',
       title: 'Forex Trading',
-      link: '#',
+      link: '/invest',
     },
     {
-      icon: 'cannabis_icon.png',
+      icon: '/cannabis_icon.png',
       title: 'ETFs',
-      link: '#',
+      link: '/etf',
     },
   ];
   return (
@@ -146,11 +145,11 @@ export default function WhatWeInvest() {
               time, the client portfolio changes according to our vision of the
               market. In this way we can protect ourselves from market
               fluctuations and volatility. The goal of portfolio management is
-              to maximize profits, but also minimize risks. It's a balancing act
-              to get the return investor's need without taking undue risk. This
-              is accomplished through careful analysis of asset allocation,
-              diversification, and regularly scheduled rebalancing in some
-              portfolio management styles.
+              to maximize profits, but also minimize risks. It&apos;s a
+              balancing act to get the return investor&apos;s need without
+              taking undue risk. This is accomplished through careful analysis
+              of asset allocation, diversification, and regularly scheduled
+              rebalancing in some portfolio management styles.
             </p>
             <img src="chart_step.png" alt="" />
           </div>
@@ -167,7 +166,7 @@ export default function WhatWeInvest() {
           <div className="grid lg:grid-cols-3 grid-cols-1 lg:w-2/3 w-full mx-auto gap-3 mt-7">
             {invest.map((item, index) => (
               <div
-                ke={index}
+                key={index}
                 className="flex flex-col items-center gap-4 w-full lg:w-2/3 "
               >
                 <div className="flex flex-col items-center gap-4   p-9 w-80 bg-[#8E0789]">

@@ -1,9 +1,11 @@
-import { CircularProgress, Rating } from '@mui/material';
+import { Alert, CircularProgress, Rating } from '@mui/material';
 import axios from 'axios';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { TbSend } from 'react-icons/tb';
+import { useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
 import BrokerModal from '../components/modal/BrokerModal';
+import { handleGenericError } from '../config/mixin';
 import useAuthentication from '../hooks/useAuthentication';
 
 export default function Broker() {
@@ -14,9 +16,9 @@ export default function Broker() {
   const [selectedBroker, setSelectedBroker] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(null);
-  const [value, setValue] = React.useState(2);
+  const navigate = useNavigate();
 
+  const value = 2;
   const onSelect = (id) => {
     const selectedBroker = data?.find((item) => item.id === id);
     selectedBrokers(selectedBroker);
@@ -32,15 +34,18 @@ export default function Broker() {
 
   async function submitBroker() {
     try {
-      setLoading(true);
       const data = {
         broker: selectBrokerList?.id,
       };
-      axios.post(`/broker/user-broker/`, data).then((res) => {
+      setLoading(true);
+      axios.post(`/broker/user-broker/`, data)
+      .then((res) => {
         console.log(res);
-        setLoading(false);
-        // setSuccess(res?.message);
+        if(res?.status === 200){
+          navigate('/dashboard');
+        }
       });
+      setLoading(false);
     } catch (err) {
       console.log(err);
       const errMsg = handleGenericError(err);
@@ -60,8 +65,9 @@ export default function Broker() {
   }
 
   if (!isLoggedIn) {
-    return null; //Create a prompt here
+    return null;
   }
+
   return (
     <div className="flex font-[poppins]">
       <div className="brokersbg bg-[#D2C2D2] h-[100vh] hidden xl:block py-8 p-4 text-center">
@@ -98,14 +104,9 @@ export default function Broker() {
               className="flex items-center space-x-5 xl:flex-row lg:flex-row flex-col "
               key={idx}
             >
-              <img
-                src={item?.image}
-                alt=""
-                className={`xl:w-[100px] xl:h-[100px] lg:w-[100px] lg:h-[100px] w-[50px] h-[50px]  rounded-[50%] ${selectBrokerList?.id === item?.id ? 'border-4 border-[#47AB18]' : ''} `}
-              />
               <div className="flex flex-col items-start space-y-1 ">
                 <div className="flex items-center gap-4">
-                  <h2 className="xl:text-2xl lg:text-2xl text-xs">
+                  <h2 className="xl:text-2xl lg:text-2xl font-bold text-xs">
                     {item?.name}
                   </h2>
                   <TbSend className="text-[#8E0789]" />
@@ -126,6 +127,7 @@ export default function Broker() {
                 >
                   {selectBrokerList.id === item.id ? 'Selected' : 'Select'}
                 </button>
+                {error && <Alert severity="error">{error}</Alert>}
               </div>
             </div>
           ))}

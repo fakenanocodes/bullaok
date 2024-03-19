@@ -6,26 +6,21 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
-import axios from 'axios';
 import { ArcElement, Chart as ChartJS, Legend, Tooltip } from 'chart.js';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
 import { MdFiberManualRecord } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
-import { images } from '../../assets';
-import BtcCoinWidget from '../../components/Dashboard/BtcCoinWidget';
 import CryptoCharts from '../../components/Dashboard/CryptoCharts';
 import EthCoinWidget from '../../components/Dashboard/EthCoinWidget';
 import HistoryRow from '../../components/Dashboard/HistoryRow';
-import LiteCoinWidget from '../../components/Dashboard/LiteCoinWIdget';
-import InvestmentPlanCard from '../../components/cards/InvestmentPlanCard';
 import DashboardEmptyContainer from '../../components/empty/DashboardEmptyContainer';
+import CoinBlocksMarquee from '../../components/widget/CoinBlocksMarquee';
 import useCurrencyFormatter from '../../hooks/useCurrencyFormatter';
 import { setUserKyc } from '../../store/reducers/transact_reducer';
-import CoinBlocksMarquee from '../../components/widget/CoinBlocksMarquee';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -41,24 +36,22 @@ const options = {
   },
 };
 
-const imageUrls = {
-  Assets: images.assets,
-  'Real Estate': images.estate,
-  Crypto: images.crypto,
-  Forex: images.forex,
-  Cannabis: images.cannabis,
-};
-
-const colors = ['#6B5F6B', '#33FF57', '#5733FF']; // Add more colors as needed
 const navOptions = ['Withdraw', 'Deposit', 'Transfer'];
 
 const DashboardHome = () => {
-  const { data, isLoading } = useSWR('/plans/all');
+  const [activeOption, setActiveOption] = useState(null);
+  const [showAmount, setShowAmount] = useState(true);
+
   const { data: user } = useSWR('/user/');
-  const { data: history, isLoading: historyLoading } = useSWR('plans/history');
+  const { data: history } = useSWR('plans/history');
+  const { data: brokers } = useSWR('broker/user-broker/');
+  const { data: userKyc } = useSWR('/kyc/');
   const { data: chartDatas } = useSWR(
     'plans/get-user-investment-amount-by-category/'
   );
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const chartData = {
     datasets: [
@@ -69,15 +62,8 @@ const DashboardHome = () => {
     ],
   };
 
-  const [activeOption, setActiveOption] = useState(null);
-  const dispatch = useDispatch();
-
   const isChartDataAvailable = chartDatas && chartDatas.length === 0;
 
-  const navigate = useNavigate();
-  console.log(user);
-  const [showAmount, setShowAmount] = useState(true);
-  const { data: userKyc } = useSWR('/kyc/');
   dispatch(setUserKyc(userKyc));
 
   const handleVisibilityToggle = () => {
@@ -99,6 +85,13 @@ const DashboardHome = () => {
     '#5733FF',
     '#FFC249',
   ];
+
+  if (!brokers && brokers?.length === 0) {
+    navigate('brokers');
+  }
+  const brokerId = brokers?.map((item) => item?.broker);
+
+  const { data: singleBroker } = useSWR(`broker/brokers/${brokerId}/`);
 
   return (
     <div className="space-y-3 h-full no-scrollbar overflow-auto p-5">
@@ -146,11 +139,17 @@ const DashboardHome = () => {
                 live profit
               </span>
             </div>
-            <div className="flex  justify-start w-full flex-col ">
-              <span className="text-gray-300 text-lg">Book Balance</span>
-              <span className="font-bold  bg-transparent  shadow-xl drop-shadow-xl  text-xl">
-                {formattedBookBalance}
-              </span>
+            <div className="flex justify-between items-center">
+              <div className="flex  justify-start w-full flex-col ">
+                <span className="text-gray-300 text-lg">Book Balance</span>
+                <span className="font-bold  bg-transparent  shadow-xl drop-shadow-xl  text-xl">
+                  {formattedBookBalance}
+                </span>
+              </div>
+              <div className="bg-white p-3 rounded-lg text-black">
+                <p className="text-[#F5C249] font-bold">Broker</p>
+                <h2>{singleBroker?.name}</h2>
+              </div>
             </div>
           </div>
         </div>

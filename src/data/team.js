@@ -26,27 +26,14 @@ export const teamData = [
     role: 'Head of Operations',
     name: 'THOMAS C DAVY',
   },
-  // {
-  //   image: images.leaddev,
-  //   role: 'Lead developer',
-  //   name: 'Ngozi Ezeonu',
-  // },
-  // {
-  //   image: images.assistant,
-  //   role: 'Assistant developer',
-  //   name: 'Angela Fanghel',
-  // },
+
   {
     id:5,
     image: images.assistant,
     role: 'Data expert',
     name: 'ELVIE CHAMBERLAIN',
   },
-  // {
-  //   image: images.design,
-  //   role: 'Design expert',
-  //   name: 'Aaron Okafor',
-  // },
+
   {
     id:6,
 

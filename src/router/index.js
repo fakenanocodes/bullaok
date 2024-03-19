@@ -37,6 +37,7 @@ import ReferralContainer from '../pages/dashboard/Referral';
 // import InvestmentPackages from '../pages/dashboard/InvestmentPackages';
 import ForgotPassword from '../components/auth/forgot-password';
 import UserLogin from '../components/auth/login';
+import CardSuccess from '../components/card_application_setup/CardSuccess';
 import SuccessThanks from '../components/kycPages/SuccessThanks';
 import Broker from '../pages/Broker';
 import TeamBroker from '../pages/TeamBroker';
@@ -50,8 +51,13 @@ import Support from '../pages/dashboard/Support';
 import Deposit from '../pages/dashboard/transactions/Deposit';
 import Transfer from '../pages/dashboard/transactions/Transfer';
 import Withdrawal from '../pages/dashboard/transactions/Withdrawal';
+import NotFound from '../pages/NotFound';
 
 const router = createBrowserRouter([
+  {
+    path: '*',
+    Component: NotFound,
+  },
   {
     path: '/',
     Component: Home,
@@ -265,6 +271,10 @@ const router = createBrowserRouter([
         path: 'investment/history',
         Component: InvestmentHistory,
       },
+      {
+        path: 'card-application/success',
+        Component: CardSuccess,
+      }
     ],
   },
 ]);

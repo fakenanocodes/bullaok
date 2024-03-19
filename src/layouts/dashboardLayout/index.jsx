@@ -15,21 +15,7 @@ import useAuthentication from '../../hooks/useAuthentication';
 import DashboardSidebar from './components/Sidebar';
 
 const options = ['Withdraw', 'Deposit', 'Transfer'];
-const icons = [
-  { icon: <HomeIcon />, name: 'Home', path: '' },
-  { icon: <InvestmentIcon />, name: 'KYC', path: 'kyc' },
-  {
-    icon: <PlantIcon />,
-    name: 'Investment Plans',
-    path: 'plan',
-  },
-  {
-    icon: <TransactionIcon />,
-    name: 'Transactions',
-    path: 'investment/running',
-  },
-  { icon: <LogoutIcon />, name: 'Logout' },
-];
+
 const DashboardLayout = () => {
   const cookie = new Cookies();
   const { data } = useSWR('user/');
@@ -99,7 +85,7 @@ const DashboardLayout = () => {
           >
             <img src={logo} alt="" className="bg-white p-2 w-14 h-14" />
           </div>
-          <DashboardSidebar />
+          <DashboardSidebar logout={logoutOption} />
         </div>
         <div className="lg:flex-1 flex-col lg:space-y-4 ">
           <div className="lg:p-5 hidden lg:flex">
