@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { SwiperSlide } from 'swiper/react';
+import useSWR from 'swr';
 import { images } from '../assets';
 import bg_img from '../assets/bg_img.png';
 import group from '../assets/home/group.png';
@@ -16,8 +17,16 @@ import { clientData } from '../data/client';
 import { stocks } from '../data/home';
 import { scrollToTop } from '../store/actions/utils';
 
+
+const staticColors = ['#8E0789', '#3B82F6', '#34D399', '#F59E0B']; // Define your static colors array
+
 const Home = () => {
   const navigate = useNavigate();
+  const { data } = useSWR('/broker/brokers/');
+  console.log(data);
+  const getRandomColor = () => {
+    return staticColors[Math.floor(Math.random() * staticColors.length)]; 
+  };
   return (
     <MainLayout>
       <div className="bg-[#30022ECC] bg-opacity-10 relative w-full h-[90vh]">
@@ -240,8 +249,8 @@ const Home = () => {
         </h2>
 
         <div className="mt-[4rem] mb-[2rem] flex flex-col md:flex-row items-center justify-center gap-5">
-          {stocks?.map((image) => (
-            <img src={image} className="w-full" alt="" />
+          {stocks?.map((image, idx) => (
+            <img key={idx} src={image} className="w-full" alt="" />
           ))}
         </div>
       </section>
@@ -327,7 +336,36 @@ const Home = () => {
           ))}
         </ClientSwiperjs>
       </section>
+      <section className="flex flex-col items-center justify-center">
+        <p className="laviossa text-3xl text-center leading-normal text-black">
+          Brokers
+        </p>
 
+        <div className="flex xl:flex-row flex-col gap-4 justify-center w-full my-[2rem]">
+          {data?.slice(0, 3).map((item) => (
+            <div
+              key={item.id}
+              className="p-2 text-white sentence font-bold rounded-md"
+              style={{ backgroundColor: getRandomColor() }}
+            >
+              <div className="flex items-center gap-4">
+                <p>Name:</p>
+                <h2>{item?.name}</h2>
+              </div>
+              <div className="flex items-center gap-4">
+                <p>Experience:</p>
+                <h2>{item?.years_of_experience} years</h2>
+              </div>
+            </div>
+          ))}
+        </div>
+        <a
+          href="/team"
+          className="laviossa text-xl text-center leading-normal text-black"
+        >
+          See more
+        </a>
+      </section>
       <section className="px-5 lg:px-12 xl:px-40 py-10 xl:my-[5rem] my-0  flex flex-col items-center gap-7 bg-[#41073F]">
         <p className="laviossa text-3xl text-center leading-normal text-white">
           Are we right for you?

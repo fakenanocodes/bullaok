@@ -8,7 +8,7 @@ import OtpInput from 'react18-input-otp';
 import { handleGenericError } from '../../../config/mixin';
 import Button from '../../utils/reusables/Button';
 
-const Verification = ({ setSignupComponent }) => {
+const Verification = () => {
   const [state, setState] = useState({ otp: '' });
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
