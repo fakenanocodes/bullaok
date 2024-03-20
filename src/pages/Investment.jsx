@@ -24,9 +24,9 @@ export default function Investment() {
           <p className="text-2xl leading-loose font-[roboto] ">
             {section.text}
           </p>
-          <button className="border shadow-lg bg-transparent font-[montserrat] border-[#D4B716] text-[#D4B716] lg:text-[25px] text-xl lg:px-8 px-4 font-bold py-4 uppercase">
+          {/* <button className="border shadow-lg bg-transparent font-[montserrat] border-[#D4B716] text-[#D4B716] lg:text-[25px] text-xl lg:px-8 px-4 font-bold py-4 uppercase">
             Read more
-          </button>
+          </button> */}
         </div>
       </div>
     </section>

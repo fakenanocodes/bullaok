@@ -1,10 +1,10 @@
-import { images } from '../assets';
 import { image } from '../assets/team/teams';
+
 
 export const teamData = [
   {
-    id:1,
-    image: images.president,
+    id: 1,
+    image: image.aaa,
     role: 'President/CEO',
     name: 'ANTHONY R HUGHES  ',
   },
@@ -15,37 +15,36 @@ export const teamData = [
     name: 'MICHELLE H POWERS',
   },
   {
-    id:3,
-    image: images.secretary,
+    id: 3,
+    image: image.ccc,
     role: 'CFO',
     name: 'THOMAS C DAVY',
   },
   {
-    id:4,
-    image: images.operations,
+    id: 4,
+    image: image.ddd,
     role: 'Head of Operations',
-    name: 'THOMAS C DAVY',
+    name: 'PETER STUART CAMPBELL',
   },
 
   {
-    id:5,
-    image: images.assistant,
+    id: 5,
+    image: image.eee,
     role: 'Data expert',
     name: 'ELVIE CHAMBERLAIN',
   },
 
   {
-    id:6,
-
-    image: images.leaddev,
+    id: 6,
+    image: image.fff,
     role: 'Social expert',
     name: 'ANNIE CURTIS NORRIS',
   },
   {
-    id:7,
-    image: images.design,
+    id: 7,
+    image: image.ggg,
     role: 'Head of content',
-    name: 'MICHEAL BRADLEY',
+    name: 'MICHEL BRADLEY',
   },
 ];
 

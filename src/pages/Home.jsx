@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { SwiperSlide } from 'swiper/react';
 import useSWR from 'swr';
 import { images } from '../assets';
@@ -17,16 +17,12 @@ import { clientData } from '../data/client';
 import { stocks } from '../data/home';
 import { scrollToTop } from '../store/actions/utils';
 
-
-const staticColors = ['#8E0789', '#3B82F6', '#34D399', '#F59E0B']; // Define your static colors array
+// const staticColors = ['#8E0789', '#3B82F6', '#34D399', '#F59E0B']; // Define your static colors array
 
 const Home = () => {
   const navigate = useNavigate();
-  const { data } = useSWR('/broker/brokers/');
-  console.log(data);
-  const getRandomColor = () => {
-    return staticColors[Math.floor(Math.random() * staticColors.length)]; 
-  };
+  const { data: brokers } = useSWR('/broker/brokers/');
+
   return (
     <MainLayout>
       <div className="bg-[#30022ECC] bg-opacity-10 relative w-full h-[90vh]">
@@ -341,20 +337,51 @@ const Home = () => {
           Brokers
         </p>
 
-        <div className="flex xl:flex-row flex-col gap-4 justify-center w-full my-[2rem]">
-          {data?.slice(0, 3).map((item) => (
+        <div className="flex xl:flex-row flex-col gap-4 justify-center w-full my-[2rem] p-6">
+          {brokers?.slice(0, 3)?.map((broker, index) => (
             <div
-              key={item.id}
-              className="p-2 text-white sentence font-bold rounded-md"
-              style={{ backgroundColor: getRandomColor() }}
+              className=" xl:w-3/5 w-full flex flex-col items-end mb-10"
+              key={index}
             >
-              <div className="flex items-center gap-4">
-                <p>Name:</p>
-                <h2>{item?.name}</h2>
-              </div>
-              <div className="flex items-center gap-4">
-                <p>Experience:</p>
-                <h2>{item?.years_of_experience} years</h2>
+              <div className="content border-2 w-full p-5 border-[#8E0789] ">
+                <p className="font-[laviossa] ">{broker.name}</p>
+                <div className="flex justify-between mt-5 ">
+                  <div className="flex flex-col ">
+                    <Link
+                      to={broker?.instagram_profile}
+                      className="text-[#a84199]"
+                    >
+                      {'Instagram profile'}
+                    </Link>
+                    <Link
+                      to={broker?.linkedin_profile}
+                      className="text-[#a84199]"
+                    >
+                      {'Linkedin profile'}
+                    </Link>
+                  </div>
+
+                  <div>
+                    <p className="flex gap-8 justify-between text-sm ">
+                      Major&nbsp;Licenses
+                      <span className=" text-[#a84199] font-semibold ">
+                        {broker?.main_state_licenses}
+                      </span>
+                    </p>
+                    <p className="flex gap-8 justify-between text-sm">
+                      Major&nbsp;Exams&nbsp;passed
+                      <span className=" text-[#a84199] font-semibold">
+                        {broker?.main_exams_passed}
+                      </span>
+                    </p>
+                    <p className="flex gap-8 justify-between text-sm">
+                      Year of experience{' '}
+                      <span className=" text-[#a84199] font-semibold">
+                        {broker?.years_of_experience}
+                      </span>
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           ))}

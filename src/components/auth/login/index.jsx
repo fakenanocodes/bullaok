@@ -82,8 +82,8 @@ const UserLogin = () => {
       reset();
       console.log(response);
       setTimeout(() => {
-        navigate('/dashboard');
-      }, 3000);
+        window.location.replace('/dashboard');
+      }, 1000);
     } catch (err) {
       setIsLoading(false);
       const errMsg = handleGenericError(err);
