@@ -14,11 +14,7 @@ export default function Team() {
     navigate(`/team/member/${id}`);
   };
 
-  const handleBroker = (id) => {
-    navigate(`/team/broker/${id}`);
-  };
 
-  console.log('BROKERS', brokers);
   return (
     <Layout>
       <header
@@ -107,22 +103,11 @@ export default function Team() {
                 className=" xl:w-3/4 w-full flex flex-col items-end mb-10"
                 key={index}
               >
-                {/* <img
-                  src={items.image}
-                  className="mr-6 -mb-8 w-44 relative z-10 "
-                  alt=""
-                /> */}
+               
                 <div className="content border-2 w-full p-5 border-[#8E0789] ">
                   <p className="font-[laviossa] ">{broker.name}</p>
                   <div className="flex justify-between mt-5 ">
-                    {/* <h3 className="mt-4  font-[montserrat]">
-                      {index == 0 && 'Real estate Broker'}
-                      {index == 1 && 'Forex Broker'}
-                      {index == 2 && 'Crypto Broker'}
-                      {index == 3 && 'Forex Broker'}
-                      {index == 4 && 'Real estate Broker'}
-                      {index == 5 && 'Forex Broker'}
-                    </h3> */}
+                  
 
                     <div className="flex flex-col ">
                       <Link
