@@ -1,11 +1,13 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import useSWR from 'swr';
 import { images } from '../assets';
 // import { image } from '../assets/team/teams';
 import Layout from '../components/Layout';
-import { brokerData, teamData } from '../data/team';
+import { teamData } from '../data/team';
+// brokerData;
 
 export default function Team() {
+  const { data: brokers } = useSWR('/broker/brokers/');
   const navigate = useNavigate();
 
   const handleTeam = (id) => {
@@ -16,6 +18,7 @@ export default function Team() {
     navigate(`/team/broker/${id}`);
   };
 
+  console.log('BROKERS', brokers);
   return (
     <Layout>
       <header
@@ -45,10 +48,10 @@ export default function Team() {
               A
             </span>
             little intro to the awesome team at Bulloak Finance Management.
-            They're a group of finance experts who are passionate about helping
-            people achieve their financial goals. These talented individuals
-            work together to provide top-notch financial services and support to
-            clients like you.
+            They&apos;re a group of finance experts who are passionate about
+            helping people achieve their financial goals. These talented
+            individuals work together to provide top-notch financial services
+            and support to clients like you.
           </h2>
 
           <div className="grid xl:grid-cols-2 md:grid-cols-2  w-full mx-auto gap-5">
@@ -83,7 +86,7 @@ export default function Team() {
         <section className="  ">
           <div className=" w-full lg:w-full mx-auto xl:mt-[90px]">
             <h2 className="xl:text-5xl text-3xl my-6 font-bold font-[laviossa] ">
-              Brokers
+              Top brokers
             </h2>
             <h2 className=" font-[montserrat] lg:text-3xl text-[17px] text-justify lg:text-start xl:py-8 py-4">
               <span className="text-[#8E0789] font-[laviossa] lg:text-[69px] text-[31px]">
@@ -98,28 +101,71 @@ export default function Team() {
             </h2>
           </div>
 
-          <div className="grid xl:grid-cols-2 md:grid-cols-2 w-full  mx-auto gap-5 xl:py-[90px] ">
-            {brokerData?.map((items, index) => (
+          <div className="grid xl:grid-cols-2 md:grid-cols-2 w-full  mx-auto gap-5 xl:py-[90px]">
+            {brokers?.map((broker, index) => (
               <div
-                className=" xl:w-3/4 w-full flex flex-col items-end "
+                className=" xl:w-3/4 w-full flex flex-col items-end mb-10"
                 key={index}
               >
-                <img
+                {/* <img
                   src={items.image}
                   className="mr-6 -mb-8 w-44 relative z-10 "
                   alt=""
-                />
-                <div className="content border-2 w-full p-2 border-[#8E0789] flex flex-col ">
-                  <div className="flex flex-col ">
-                    <h3 className="mt-4  font-[montserrat]">{items.role}</h3>
-                    <p className="font-[laviossa]">{items.name}</p>
+                /> */}
+                <div className="content border-2 w-full p-5 border-[#8E0789] ">
+                  <p className="font-[laviossa] ">{broker.name}</p>
+                  <div className="flex justify-between mt-5 ">
+                    {/* <h3 className="mt-4  font-[montserrat]">
+                      {index == 0 && 'Real estate Broker'}
+                      {index == 1 && 'Forex Broker'}
+                      {index == 2 && 'Crypto Broker'}
+                      {index == 3 && 'Forex Broker'}
+                      {index == 4 && 'Real estate Broker'}
+                      {index == 5 && 'Forex Broker'}
+                    </h3> */}
+
+                    <div className="flex flex-col ">
+                      <Link
+                        to={broker?.instagram_profile}
+                        className="text-[#a84199]"
+                      >
+                        {'Instagram profile'}
+                      </Link>
+                      <Link
+                        to={broker?.linkedin_profile}
+                        className="text-[#a84199]"
+                      >
+                        {'Linkedin profile'}
+                      </Link>
+                    </div>
+
+                    <div>
+                      <p className="flex gap-8 justify-between text-sm ">
+                        Major&nbsp;Licenses
+                        <span className=" text-[#a84199] font-semibold ">
+                          {broker?.main_state_licenses}
+                        </span>
+                      </p>
+                      <p className="flex gap-8 justify-between text-sm">
+                        Major&nbsp;Exams&nbsp;passed
+                        <span className=" text-[#a84199] font-semibold">
+                          {broker?.main_exams_passed}
+                        </span>
+                      </p>
+                      <p className="flex gap-8 justify-between text-sm">
+                        Year of experience{' '}
+                        <span className=" text-[#a84199] font-semibold">
+                          {broker?.years_of_experience}
+                        </span>
+                      </p>
+                    </div>
                   </div>
-                  <button
-                    onClick={() => handleBroker(items?.id)}
+                  {/* <button
+                    onClick={() => handleBroker(broker?.id)}
                     className="ml-auto text-[#8E0789] font-[montserrat] font-bold"
                   >
                     Read more
-                  </button>
+                  </button> */}
                 </div>
               </div>
             ))}
