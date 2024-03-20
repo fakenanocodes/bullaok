@@ -3,7 +3,7 @@ import { AiOutlineInstagram } from 'react-icons/ai';
 import { BiLogoFacebook } from 'react-icons/bi';
 import { RiTwitterXLine } from 'react-icons/ri';
 
-const FooterItem = ({ key, faq, about, terms, contact }) => {
+const FooterItem = ({ faq, about, terms, contact }) => {
   // const about =
   console.log({ faq });
   return (
@@ -49,11 +49,9 @@ const FooterItem = ({ key, faq, about, terms, contact }) => {
         {contact ? (
           <>
             <h2 className="font-bold">Contact</h2>
-            {contact.categories.map((item, index) => (
-              <li key={index} className="mt-4">
-                {item}
-              </li>
-            ))}
+
+            <li className="mt-4">{contact?.email}</li>
+            <li className="mt-4">{contact?.phone_number}</li>
             <div className="md:flex gap-4 mt-5 hidden">
               <BiLogoFacebook
                 style={{

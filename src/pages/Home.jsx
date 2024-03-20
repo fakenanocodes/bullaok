@@ -17,15 +17,13 @@ import { clientData } from '../data/client';
 import { stocks } from '../data/home';
 import { scrollToTop } from '../store/actions/utils';
 
-
 const staticColors = ['#8E0789', '#3B82F6', '#34D399', '#F59E0B']; // Define your static colors array
 
 const Home = () => {
   const navigate = useNavigate();
   const { data } = useSWR('/broker/brokers/');
-  console.log(data);
   const getRandomColor = () => {
-    return staticColors[Math.floor(Math.random() * staticColors.length)]; 
+    return staticColors[Math.floor(Math.random() * staticColors.length)];
   };
   return (
     <MainLayout>

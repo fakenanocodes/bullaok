@@ -1,6 +1,6 @@
 import { Alert, CircularProgress } from '@mui/material';
 import axios from 'axios';
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
@@ -33,7 +33,7 @@ const features = [
   },
 ];
 export default function ProfileComponent() {
-  const { data, isLoading } = useSWR('user/');
+  const { data } = useSWR('user/');
   const navigate = useNavigate();
   const user = data?.profile?.user;
   const profile = data?.profile;
@@ -78,7 +78,7 @@ export default function ProfileComponent() {
         setSuccess('Image Upload successful');
         setLoading(false);
       })
-      .catch((error) => {
+      .catch(() => {
         setError('Upload failed');
         setLoading(false);
         // Handle the error
@@ -90,6 +90,7 @@ export default function ProfileComponent() {
     setSuccess(null);
   }, 5000);
   const Api = 'https://django-bulloak-finance-production.up.railway.app';
+  const profileImage = Api+profile?.image
   console.log(profile?.image);
   return (
     <div className="grid grid-cols-1 xl:w-4/5 w-full mx-auto text-black xl:pb-8 p-3">
@@ -99,7 +100,7 @@ export default function ProfileComponent() {
           {error && <Alert severity="error">{error}</Alert>}
 
           <img
-            src={selectedImage || (profile && profile?.image)}
+            src={selectedImage || (profile && profileImage)}
             alt="Profile"
             style={{ cursor: 'pointer' }}
             onClick={handleImageClick}

@@ -1,11 +1,18 @@
 import { AiOutlineInstagram } from 'react-icons/ai';
 import { BiLogoFacebook } from 'react-icons/bi';
 import { RiTwitterXLine } from 'react-icons/ri';
+import useSWR from 'swr';
 import data from '../data/footer.json';
 import FooterItem from './common/FooterItem';
 
 export default function Footer() {
   console.log({ data });
+  const { data: footer } = useSWR('/');
+  console.log(footer);
+  const contact = [{
+    email: footer?.site?.email,
+    phone: footer?.site?.phone_number,
+  }];
   return (
     <section className="w-full mx-auto py-9 px-5 lg:px-10 xl:px-20 bg-[#41073F]">
       <div className="flex gap-4 mt-5 md:hidden text-[#fff] justify-center">
@@ -41,7 +48,7 @@ export default function Footer() {
             faq={item.FAQ}
             about={item.About}
             terms={item.Terms}
-            contact={item.Contact}
+            contact={contact}
           />
         ))}
       </div>

@@ -8,7 +8,6 @@
 //   'https://django-bulloak-finance-production.up.railway.app/';
 // console.log(token);
 
-
 // export default function init() {
 //   // Set base URL for Axios
 //   axios.defaults.baseURL = API_URL;
@@ -26,15 +25,14 @@
 //   }
 // }
 
-
-
 import axios from 'axios';
 import { Cookies } from 'react-cookie';
 
 const cookies = new Cookies();
 const token = cookies.get('bk_access');
 
-export const API_URL = 'https://django-bulloak-finance-production.up.railway.app/';
+export const API_URL =
+  'https://django-bulloak-finance-production.up.railway.app/';
 console.log(token);
 
 export default function init() {
@@ -52,14 +50,14 @@ export default function init() {
   }
 
   // Intercept responses and handle 401 errors
-  axios.interceptors.response.use(
-    response => response,
-    error => {
-      if (error.response && error.response.status === 401) {
-        // Redirect to login page
-        window.location.href = '/login';
-      }
-      return Promise.reject(error);
-    }
-  );
+  // axios.interceptors.response.use(
+  //   response => response,
+  //   error => {
+  //     if (error.response && error.response.status === 401) {
+  //       // Redirect to login page
+  //       window.location.href = '/login';
+  //     }
+  //     return Promise.reject(error);
+  //   }
+  // );
 }

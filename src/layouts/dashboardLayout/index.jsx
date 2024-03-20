@@ -67,6 +67,8 @@ const DashboardLayout = () => {
     },
     { icon: <LogoutIcon />, name: 'Logout' },
   ];
+
+  const profileImage = profile?.image !== null ? Api + profile?.image : logo;
   return (
     <div className="relative bg-custom-bg bg-opacity-20 bg-cover bg-center bg-no-repeat min-h-screen">
       {/** Layout */}
@@ -74,7 +76,12 @@ const DashboardLayout = () => {
         <div className="lg:w-1/12 lg:p-5 lg:flex-col flex relative ">
           {/** Mobile Header */}
           <div className="lg:hidden bg-white w-full py-4 left-0 flex justify-between items-center px-5">
-            <img src={logo} alt="" className="bg-white p-2 w-14 h-14" />
+            <img
+              src={logo}
+              alt=""
+              className="bg-white p-2 w-14 h-14"
+              onClick={() => navigate('/')}
+            />
             <button onClick={toggleMenu}>
               <MenuIcon className="text-black" fontSize="large" />
             </button>
@@ -109,7 +116,7 @@ const DashboardLayout = () => {
                 ))}
               </div>
               <img
-                src={Api + profile?.image}
+                src={profileImage}
                 alt=""
                 className="w-[70px] h-[70px] rounded-[50%]  cursor-pointer"
                 onClick={() => navigate('/dashboard/profile')}
