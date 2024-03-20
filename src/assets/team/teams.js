@@ -6,18 +6,14 @@ import c from './c.png';
 import ccc from './ccc.png';
 import d from './d.png';
 import ddd from './ddd.png';
+import e from './e.png';
+import eee from './eee.png';
 import f from './f.png';
 import fff from './fff.png';
 import g from './g.png';
 import ggg from './ggg.png';
-import h from './h.png';
-import hhh from './hhh.png';
-import i from './i.png';
-import iii from './iii.png';
-import j from './j.png';
-import jjj from './jjj.png';
-import k from './k.png';
-import kkk from './kkk.png';
+// import k from './k.png';
+// import kkk from './kkk.png';
 import l from './l.png';
 import lll from './lll.png';
 import m from './m.png';
@@ -32,12 +28,12 @@ export const image = {
   b,
   c,
   d,
+  e,
   f,
   g,
-  h,
-  i,
-  j,
-  k,
+  // h,
+  // j,
+  // k,
   l,
   m,
   n,
@@ -46,12 +42,12 @@ export const image = {
   bbb,
   ccc,
   ddd,
+  eee,
   fff,
   ggg,
-  hhh,
-  iii,
-  jjj,
-  kkk,
+  // hhh,
+  // jjj,
+  // kkk,
   lll,
   mmm,
   nnn,

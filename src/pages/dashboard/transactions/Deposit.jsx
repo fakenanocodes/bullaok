@@ -133,6 +133,7 @@ const Deposit = () => {
         <DepositSuccess
           wallet={wallet}
           amount={amount}
+          defaultWallet={depositWallet?.usdt_address}
           walletTypes={walletTypes}
           setOpenSuccess={setOpenSuccess}
         />

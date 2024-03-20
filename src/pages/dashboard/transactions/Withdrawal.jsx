@@ -1,4 +1,4 @@
-import { ClickAwayListener } from '@mui/material';
+import { CircularProgress, ClickAwayListener } from '@mui/material';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 // import { Cookies } from 'react-cookie';
@@ -23,6 +23,7 @@ const Withdrawal = () => {
   const [convertWallet, setconvertWallet] = useState('tether');
   const { data: withdraws } = useSWR(`/withdraw/`);
   const { data: user } = useSWR(`/user/`);
+  const [loading, setLoading] = useState(false);
   // console.log('User', user);
 
   const newWallet = ['tether', 'litecoin', 'bitcoin', 'ripple', 'ethereum'];
@@ -63,6 +64,7 @@ const Withdrawal = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
     const convertToUSD = async (coin, amount) => {
       const url = `https://api.coingecko.com/api/v3/simple/price?ids=${coin}&vs_currencies=usd`;
       const { data } = await axios.get(url);
@@ -91,6 +93,7 @@ const Withdrawal = () => {
         const response = await axios.post('/withdraw/', userData);
         if (response) {
           console.log('RESPONSE', response);
+          setLoading(false);
           toast.success('success');
           setOpenModel(false);
         }
@@ -98,9 +101,12 @@ const Withdrawal = () => {
         console.log(error);
         if (error?.response?.data?.UsdtAmount == 'ou have insufficient funds') {
           toast.error('You have insufficient funds');
+          setLoading(false);
           setOpenModel(false);
         } else {
           toast.error('An error occured, try again');
+          setLoading(false);
+          setOpenModel(false);
         }
       }
     }, 2000);
@@ -363,7 +369,11 @@ const Withdrawal = () => {
                   onClick={handleSubmit}
                   className="bg-[#352F84] text-white p-2 px-4 rounded-md"
                 >
-                  Confirm Withdrawal
+                  {loading ? (
+                    <CircularProgress sx={{ color: 'white' }} size={20} />
+                  ) : (
+                    'Confirm Withdrawal'
+                  )}
                 </button>
               </div>
             </div>
