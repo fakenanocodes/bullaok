@@ -1,14 +1,14 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Alert, CircularProgress } from '@mui/material';
 import axios from 'axios';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { MdDone } from 'react-icons/md';
 import { toast } from 'react-toastify';
 import * as yup from 'yup';
 import { handleGenericError } from '../../config/mixin';
 
-const InvestmentPlanCard = ({ plan, onSubmit }) => {
+const InvestmentPlanCard = ({ plan }) => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const schema = yup.object().shape({
@@ -66,7 +66,7 @@ const InvestmentPlanCard = ({ plan, onSubmit }) => {
     setError(null);
   }, 10000);
   return (
-    <div className="relative bg-[#D9D9D9] text-black flex flex-col w-[300px] shadow-lg items-center p-5 px-10 space-y-10 py-10">
+    <div className="relative bg-[#D9D9D9] text-black flex flex-col  shadow-lg items-center p-5 px-10 space-y-10 py-10">
       <div className="text-white bg-[#41073F] p-5 px-16 border border-opacity-20 w-[80%] rounded-full shadow-2xl shadow-[#41073F] flex justify-center items-center">
         <span>{plan?.name}</span>
       </div>

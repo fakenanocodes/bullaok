@@ -37,7 +37,6 @@ export default function ProfileComponent() {
   const navigate = useNavigate();
   const user = data?.profile?.user;
   const profile = data?.profile;
-  console.log(user, profile);
   const [open, setOpen] = useState(false);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(null);
@@ -90,12 +89,12 @@ export default function ProfileComponent() {
     setSuccess(null);
   }, 5000);
   const Api = 'https://django-bulloak-finance-production.up.railway.app';
-  const profileImage = Api+profile?.image
+  const profileImage = Api + profile?.image;
   console.log(profile?.image);
   return (
     <div className="grid grid-cols-1 xl:w-4/5 w-full mx-auto text-black xl:pb-8 p-3">
       <div className="flex xl:flex-row lg:flex-row flex-col gap-3 justify-between xl:p-8  xl:ml-8 ml-0">
-        <div className="flex flex-col  items-center justify-center gap-3 text-[#7E577D]">
+        <div className="flex flex-col    items-center justify-center gap-3 text-[#7E577D]">
           {success && <Alert severity="success">{success}</Alert>}
           {error && <Alert severity="error">{error}</Alert>}
 
@@ -141,7 +140,7 @@ export default function ProfileComponent() {
           </div>
         </div>
 
-        <div className="border flex gap-9 flex-col xl:w-2/4 w-full  gap-1 border-[#8E0789]/20 rounded-lg xl:p-8 p-3">
+        <div className="border flex gap-9 flex-col xl:w-2/4 lg:w-2/4 w-full  gap-1 border-[#8E0789]/20 rounded-lg xl:p-8 p-3">
           <div className="flex items-center justify-between">
             <div className="text-[#222222]/90">
               <h2 className="font-bold text-xl text-[#222222]/90 mb-3">

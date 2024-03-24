@@ -336,7 +336,6 @@ const Home = () => {
         <p className="laviossa text-3xl text-center leading-normal text-black">
           Brokers
         </p>
-
         <div className="flex xl:flex-row flex-col gap-4 justify-center w-full my-[2rem] p-6">
           {brokers?.slice(0, 3)?.map((broker, index) => (
             <div
