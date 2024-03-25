@@ -4,15 +4,16 @@ import { RiTwitterXLine } from 'react-icons/ri';
 import useSWR from 'swr';
 import data from '../data/footer.json';
 import FooterItem from './common/FooterItem';
-
 export default function Footer() {
   console.log({ data });
   const { data: footer } = useSWR('/');
   console.log(footer);
-  const contact = [{
-    email: footer?.site?.email,
-    phone: footer?.site?.phone_number,
-  }];
+  const contact = [
+    {
+      email: footer?.site?.email,
+      phone: footer?.site?.phone_number,
+    },
+  ];
   return (
     <section className="w-full mx-auto py-9 px-5 lg:px-10 xl:px-20 bg-[#41073F]">
       <div className="flex gap-4 mt-5 md:hidden text-[#fff] justify-center">
@@ -41,16 +42,54 @@ export default function Footer() {
           }}
         />
       </div>
-      <div className="   grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-        {data?.map((item, index) => (
-          <FooterItem
-            key={index}
-            faq={item.FAQ}
-            about={item.About}
-            terms={item.Terms}
-            contact={contact}
-          />
-        ))}
+      <div className="flex w-full items-start justify-between">
+        <div className=" w-full  grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {data?.map((item, index) => (
+            <FooterItem
+              key={index}
+              faq={item.FAQ}
+              about={item.About}
+              terms={item.Terms}
+              contact={contact}
+            />
+          ))}
+        </div>
+        <ul className="text-[#fff]">
+          {contact && (
+            <>
+              <h2 className="font-bold">Contact</h2>
+
+              <li className="mt-4">{contact?.email}</li>
+              <li className="mt-4">{contact?.phone_number}</li>
+              <div className="md:flex gap-4 mt-5 hidden">
+                <BiLogoFacebook
+                  style={{
+                    fontSize: '30px',
+                    border: '1px solid white',
+                    padding: '4px',
+                    borderRadius: '50%',
+                  }}
+                />
+                <AiOutlineInstagram
+                  style={{
+                    fontSize: '30px',
+                    border: '1px solid white',
+                    padding: '4px',
+                    borderRadius: '50%',
+                  }}
+                />
+                <RiTwitterXLine
+                  style={{
+                    fontSize: '30px',
+                    border: '1px solid white',
+                    padding: '4px',
+                    borderRadius: '50%',
+                  }}
+                />
+              </div>
+            </>
+          )}
+        </ul>
       </div>
       <hr />
       <p className="text-[#fff] my-5 ">
@@ -79,7 +118,7 @@ export default function Footer() {
         <br />
         <br />
         Advisory accounts and services are provided by Bulloak Advisors LLC
-        (also known as "Bulloak Advisors"). Bulloak Advisors is an Investment
+        (also known as &quot;Bulloak Advisors&quot;). Bulloak Advisors is an Investment
         Advisor registered with and regulated by the SEC under the Investment
         Advisors Act of 1940. Registration does not imply a level of skill or
         training. See additional information on the Disclosures webpage. Trades

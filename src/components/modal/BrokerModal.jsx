@@ -1,17 +1,12 @@
 import { ClickAwayListener, Rating } from '@mui/material';
-import React, { useState } from 'react';
 import CancelIcon from '../utils/reusables/CancelIcon';
 
 export default function BrokerModal({
   setOpenModal,
   handleSelectBroker,
-  selectedBroker,
   brokers,
 }) {
-  //   console.log(brokers);
-
-  const [value, setValue] = useState(2);
-
+  const value = 4;
   return (
     <div className=" fixed top-0 left-0 w-full h-full flex  justify-center items-center bg-[#000000b3]">
       <ClickAwayListener onClickAway={() => setOpenModal(false)}>
@@ -21,14 +16,7 @@ export default function BrokerModal({
               <CancelIcon />
             </div>
           </div>
-          <div className="flex items-center space-x-5">
-            <img
-              src={brokers.image}
-              alt=""
-              className={`w-[100px] h-[100px] object-contain rounded-[50%] ${
-                selectedBroker ? 'border-2 border-green-500' : '' // Apply border-green-500 if broker is selected
-              }`}
-            />
+          <div className="flex items-center spa ce-x-5">
             <div className=" flex flex-col items-start space-y-1 ">
               <h2 className="xl:text-3xl text-xl">{brokers?.name}</h2>
               <p className="xl:text-2xl text-xl">{brokers?.regulator}</p>
@@ -48,7 +36,7 @@ export default function BrokerModal({
           </div>
           <div className="flex flex-col gap-3 mt-5">
             <h3 className="text-xl font-semibold ">
-              Why Choose John as Your Investment Broker?
+              Choose {brokers?.name} as Your Investment Broker
             </h3>
             <p>{brokers?.investment}</p>
           </div>

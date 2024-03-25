@@ -52,6 +52,7 @@ import Deposit from '../pages/dashboard/transactions/Deposit';
 import Transfer from '../pages/dashboard/transactions/Transfer';
 import Withdrawal from '../pages/dashboard/transactions/Withdrawal';
 import NotFound from '../pages/NotFound';
+import ContactUs from '../pages/ContactUs';
 
 const router = createBrowserRouter([
   {
@@ -145,6 +146,10 @@ const router = createBrowserRouter([
   {
     path: 'faq',
     Component: Faq,
+  },
+  {
+    path: 'contact',
+    Component: ContactUs,
   },
   {
     path: '/services/education',

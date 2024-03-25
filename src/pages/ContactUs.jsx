@@ -2,7 +2,7 @@ import bg from '../assets/faq_bg.png';
 import FaqQA from '../components/FaqQA';
 import Layout from '../components/Layout';
 import { servicesData } from '../data/faq';
-export default function Faq() {
+export default function ContactUs() {
   return (
     <Layout>
       <header
