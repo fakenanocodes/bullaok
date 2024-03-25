@@ -1,17 +1,17 @@
 export default function How() {
   const data = [
     {
-      img: 'step1.png',
+      img: '/step1.png',
       title: 'Open an account',
       text: 'Sign up and fill out our application form',
     },
     {
-      img: 'step2.png',
+      img: '/step2.png',
       title: 'Make a deposit',
       text: 'Fund your account with any amount',
     },
     {
-      img: 'step3.png',
+      img: '/step3.png',
       title: 'Schedule now',
       text: 'Build your portfolio with recurring stock/ETF investments.',
     },

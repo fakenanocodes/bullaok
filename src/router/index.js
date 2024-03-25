@@ -40,8 +40,10 @@ import UserLogin from '../components/auth/login';
 import CardSuccess from '../components/card_application_setup/CardSuccess';
 import SuccessThanks from '../components/kycPages/SuccessThanks';
 import Broker from '../pages/Broker';
+import NotFound from '../pages/NotFound';
 import TeamBroker from '../pages/TeamBroker';
 import TeamMember from '../pages/TeamMember';
+import Contactus from '../pages/dashboard/Contactus';
 import InvestmentPackages from '../pages/dashboard/InvestmentPackages';
 import InvestmentPlan from '../pages/dashboard/InvestmentPlan';
 import Kyc from '../pages/dashboard/Kyc';
@@ -51,8 +53,6 @@ import Support from '../pages/dashboard/Support';
 import Deposit from '../pages/dashboard/transactions/Deposit';
 import Transfer from '../pages/dashboard/transactions/Transfer';
 import Withdrawal from '../pages/dashboard/transactions/Withdrawal';
-import NotFound from '../pages/NotFound';
-import ContactUs from '../pages/ContactUs';
 
 const router = createBrowserRouter([
   {
@@ -66,6 +66,10 @@ const router = createBrowserRouter([
   {
     path: '/history',
     Component: History,
+  },
+  {
+    path: '/contact',
+    Component: Contactus,
   },
   {
     path: '/who-we-are',
@@ -148,10 +152,6 @@ const router = createBrowserRouter([
     Component: Faq,
   },
   {
-    path: 'contact',
-    Component: ContactUs,
-  },
-  {
     path: '/services/education',
     Component: Education,
     loader: () => {
@@ -227,7 +227,6 @@ const router = createBrowserRouter([
         path: 'bonus',
         Component: BonusContainer,
       },
-
       {
         path: 'withdraw',
         Component: Withdrawal,
@@ -279,7 +278,7 @@ const router = createBrowserRouter([
       {
         path: 'card-application/success',
         Component: CardSuccess,
-      }
+      },
     ],
   },
 ]);

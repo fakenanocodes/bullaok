@@ -1,4 +1,3 @@
-import React from 'react';
 
 export default function Investment() {
   return (
@@ -18,7 +17,11 @@ export default function Investment() {
             are placed based on a set schedule.
           </p>
         </div>
-        <img src="phone_invest.png" className="lg:w-1/5 w-full h-auto " alt="" />
+        <img
+          src="/phone_invest.png"
+          className="lg:w-1/5 w-full h-auto "
+          alt=""
+        />
       </div>
     </section>
   );
