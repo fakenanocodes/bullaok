@@ -1,15 +1,18 @@
-import React from 'react';
-import { AiOutlineInstagram } from 'react-icons/ai';
-import { BiLogoFacebook } from 'react-icons/bi';
-import { RiTwitterXLine } from 'react-icons/ri';
+import useSWR from 'swr';
 
-const FooterItem = ({ faq, about, terms, contact }) => {
+const FooterItem = ({ faq, about, terms }) => {
   // const about =
   console.log({ faq });
+  const { data: footer } = useSWR('/');
+  console.log(footer);
+  // const contact = [{
+  //   email: footer?.site?.email,
+  //   phone: footer?.site?.phone_number,
+  // }];
   return (
-    <div className=" items-center text-[#fff] mt-5 py-8">
+    <div className=" items-center text-[#fff] ">
       <ul className="">
-        {faq ? (
+        {faq && (
           <>
             <h2 className="font-bold">FAQ</h2>
             {faq.categories.map((item, index) => (
@@ -18,11 +21,11 @@ const FooterItem = ({ faq, about, terms, contact }) => {
               </li>
             ))}
           </>
-        ) : null}
+        )}
       </ul>
 
       <ul>
-        {about ? (
+        {about && (
           <>
             <h2 className="font-bold">About</h2>
             {about.categories.map((item, index) => (
@@ -31,10 +34,10 @@ const FooterItem = ({ faq, about, terms, contact }) => {
               </li>
             ))}
           </>
-        ) : null}
+        )}
       </ul>
       <ul>
-        {terms ? (
+        {terms && (
           <>
             <h2 className="font-bold">Terms</h2>
             {terms.categories.map((item, index) => (
@@ -43,43 +46,7 @@ const FooterItem = ({ faq, about, terms, contact }) => {
               </li>
             ))}
           </>
-        ) : null}
-      </ul>
-      <ul>
-        {contact ? (
-          <>
-            <h2 className="font-bold">Contact</h2>
-
-            <li className="mt-4">{contact?.email}</li>
-            <li className="mt-4">{contact?.phone_number}</li>
-            <div className="md:flex gap-4 mt-5 hidden">
-              <BiLogoFacebook
-                style={{
-                  fontSize: '30px',
-                  border: '1px solid white',
-                  padding: '4px',
-                  borderRadius: '50%',
-                }}
-              />
-              <AiOutlineInstagram
-                style={{
-                  fontSize: '30px',
-                  border: '1px solid white',
-                  padding: '4px',
-                  borderRadius: '50%',
-                }}
-              />
-              <RiTwitterXLine
-                style={{
-                  fontSize: '30px',
-                  border: '1px solid white',
-                  padding: '4px',
-                  borderRadius: '50%',
-                }}
-              />
-            </div>
-          </>
-        ) : null}
+        )}
       </ul>
     </div>
   );

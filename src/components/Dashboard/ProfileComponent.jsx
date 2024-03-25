@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useRef, useState } from 'react';
 import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import useSWR from 'swr';
+import useSWR, { mutate } from 'swr';
 import { icons } from '../../assets/icons';
 import EditProfileModal from '../modal/EditProfileModal';
 
@@ -76,6 +76,7 @@ export default function ProfileComponent() {
         console.log(response);
         setSuccess('Image Upload successful');
         setLoading(false);
+        mutate("user/")
       })
       .catch(() => {
         setError('Upload failed');

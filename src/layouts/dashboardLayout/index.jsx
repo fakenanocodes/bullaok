@@ -42,9 +42,9 @@ const DashboardLayout = () => {
   const Api = 'https://django-bulloak-finance-production.up.railway.app';
 
   const logoutOption = () => {
-    navigate('/');
     cookie.remove(`bk_access`);
     cookie.remove(`bk_user`);
+    navigate('/');
     window.location.reload();
   };
 
@@ -69,9 +69,10 @@ const DashboardLayout = () => {
   ];
 
   const profileImage =
-    profile?.image !== null
-      ? Api + profile?.image
-      : 'https://via.placeholder.com/300';
+    profile?.image ===
+    'https://django-bulloak-finance-production.up.railway.app/media/r.jpg'
+      ? 'https://via.placeholder.com/300'
+      : Api + profile?.image;
   console.log(profileImage);
   return (
     <div className="relative overflow-hidden bg-custom-bg bg-opacity-20 bg-cover bg-center bg-no-repeat min-h-screen">

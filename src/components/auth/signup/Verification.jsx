@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import OtpInput from 'react18-input-otp';
 import { handleGenericError } from '../../../config/mixin';
 import Button from '../../utils/reusables/Button';
@@ -14,7 +14,7 @@ const Verification = () => {
   const [success, setSuccess] = useState('');
   const [resendingOtp, setResendingOtp] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const currentUserEmail = useSelector(
     (state) => state.auth.currentSignupEmail
   );
@@ -36,7 +36,8 @@ const Verification = () => {
         await axios.post('user/auth/verify-email/', data);
         setIsLoading(false);
         setSuccess('Your account has been verified');
-        navigate('/brokers');
+
+        window.location.replace('/login');
       } catch (error) {
         setIsLoading(false);
         const err = handleGenericError(error);

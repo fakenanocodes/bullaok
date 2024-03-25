@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { Cookies } from 'react-cookie';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 import { scrollToTop } from '../../../actions/utils';
@@ -25,6 +25,8 @@ const UserLogin = () => {
   const [success, setSuccess] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const cookies = new Cookies();
+  const broker = useSelector((state) => state.broker.broker);
+  console.log(broker);
   const dispatch = useDispatch();
   const {
     getValues,
@@ -81,9 +83,12 @@ const UserLogin = () => {
 
       reset();
       console.log(response);
-      setTimeout(() => {
+      if (broker === false) {
+        navigate('/brokers');
+        window.location.reload();
+      } else {
         window.location.replace('/dashboard');
-      }, 1000);
+      }
     } catch (err) {
       setIsLoading(false);
       const errMsg = handleGenericError(err);

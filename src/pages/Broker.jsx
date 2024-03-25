@@ -2,11 +2,13 @@ import { Alert, CircularProgress, Rating } from '@mui/material';
 import axios from 'axios';
 import { useState } from 'react';
 import { TbSend } from 'react-icons/tb';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
 import BrokerModal from '../components/modal/BrokerModal';
 import { handleGenericError } from '../config/mixin';
-import useAuthentication from '../hooks/useAuthentication';
+import { toggleBrokerStatus } from '../store/reducers/brokerReducer';
+// import useAuthentication from '../hooks/useAuthentication';
 
 export default function Broker() {
   const [openModal, setOpenModal] = useState(false);
@@ -16,9 +18,12 @@ export default function Broker() {
   const [selectedBroker, setSelectedBroker] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
   const navigate = useNavigate();
-
-  const value = 2;
+  const dispatch = useDispatch();
+  const value = 4;
+  const broker = useSelector((state) => state.broker.broker);
+  console.log(broker);
   const onSelect = (id) => {
     const selectedBroker = data?.find((item) => item.id === id);
     selectedBrokers(selectedBroker);
@@ -30,6 +35,7 @@ export default function Broker() {
       setSelectedBroker(true);
     }
     selectedBrokerList(selectedBrokerItems);
+    setOpenModal(false);
   };
 
   async function submitBroker() {
@@ -38,36 +44,39 @@ export default function Broker() {
         broker: selectBrokerList?.id,
       };
       setLoading(true);
-      axios.post(`/broker/user-broker/`, data)
-      .then((res) => {
-        console.log(res);
-        if(res?.status === 200){
+      axios.post(`/broker/user-broker/`, data).then((res) => {
+        if (res?.status === 201) {
+          setSuccess('Broker selected successfully');
           navigate('/dashboard');
         }
       });
+      dispatch(toggleBrokerStatus(true));
       setLoading(false);
     } catch (err) {
-      console.log(err);
       const errMsg = handleGenericError(err);
       setError(errMsg);
       setLoading(false);
     }
   }
 
-  const { isLoggedIn, isLoading } = useAuthentication();
-  console.log(isLoggedIn);
-  if (isLoading) {
-    return (
-      <div className="flex justify-center ">
-        <CircularProgress color="secondary" thickness={10} size={18} />
-      </div>
-    );
-  }
+  // const { isLoggedIn, isLoading } = useAuthentication();
+  // console.log(isLoggedIn);
+  // if (isLoading) {
+  //   return (
+  //     <div className="flex justify-center ">
+  //       <CircularProgress color="secondary" thickness={10} size={18} />
+  //     </div>
+  //   );
+  // }
 
-  if (!isLoggedIn) {
-    return null;
-  }
+  // if (!isLoggedIn) {
+  //   return null;
+  // }
 
+  setTimeout(() => {
+    setSuccess(null);
+    setError(null);
+  }, 4000);
   return (
     <div className="flex font-[poppins]">
       <div className="brokersbg bg-[#D2C2D2] h-[100vh] hidden xl:block py-8 p-4 text-center">
@@ -98,10 +107,10 @@ export default function Broker() {
           Brokers
         </h2>
 
-        <div className="grid xl:grid-cols-3 grid-cols-1 p-2 gap-y-8 ">
+        <div className="grid 2xl:grid-cols-3 md:grid-cols-2 justify-center grid-cols-1 p-2 gap-y-8 gap-x-6 ">
           {data?.map((item, idx) => (
             <div
-              className="flex items-center space-x-5 xl:flex-row lg:flex-row flex-col "
+              className="flex   border border-[#8E0789] p-4 rounded-lg gap-4  xl:flex-row lg:flex-row flex-col "
               key={idx}
             >
               <div className="flex flex-col items-start space-y-1 ">
@@ -145,7 +154,8 @@ export default function Broker() {
           </button>
         )}
       </div>
-
+      {error && <Alert severity="error">{error}</Alert>}
+      {success && <Alert severity="success">{success}</Alert>}
       {openModal && (
         <BrokerModal
           setOpenModal={setOpenModal}

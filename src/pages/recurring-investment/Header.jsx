@@ -27,7 +27,7 @@ export default function Header() {
           </button>
         </div>
         <img
-          src="bg_investment.png"
+          src="/bg_investment.png"
           className="lg:w-2/5 w-full h-auto lg:mt-0 mt-8"
           alt=""
         />
