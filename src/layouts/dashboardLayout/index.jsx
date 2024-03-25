@@ -68,9 +68,13 @@ const DashboardLayout = () => {
     { icon: <LogoutIcon />, name: 'Logout' },
   ];
 
-  const profileImage = profile?.image !== null ? Api + profile?.image : logo;
+  const profileImage =
+    profile?.image !== null
+      ? Api + profile?.image
+      : 'https://via.placeholder.com/300';
+  console.log(profileImage);
   return (
-    <div className="relative bg-custom-bg bg-opacity-20 bg-cover bg-center bg-no-repeat min-h-screen">
+    <div className="relative overflow-hidden bg-custom-bg bg-opacity-20 bg-cover bg-center bg-no-repeat min-h-screen">
       {/** Layout */}
       <div className="text-white  lg:flex lg:flex-row flex flex-col lg:mr-10 w-full bg-opacity-95 min-h-screen">
         <div className="lg:w-1/12 lg:p-5 lg:flex-col flex relative ">

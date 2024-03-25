@@ -10,7 +10,9 @@
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
-
+  /* * {
+    border: solid red;
+  } */
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;

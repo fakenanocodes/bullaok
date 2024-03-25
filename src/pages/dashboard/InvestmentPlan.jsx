@@ -1,17 +1,17 @@
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
-import InvestmentPlanCard from '../../components/cards/InvestmentPlanCard';
 import RunningInvestmentIcon from '../../assets/dashboard/investment/runninginvestment.png';
+import InvestmentPlanCard from '../../components/cards/InvestmentPlanCard';
 
 import { styled } from '@mui/material/styles';
 
 const InvestmentPlan = () => {
-  const { data, isLoading } = useSWR('/plans/all');
-  const [categories, setCategories] = useState([]);
+  const { data, } = useSWR('/plans/all');
+  // const [categories, setCategories] = useState([]);
 
   const navigate = useNavigate();
   const plansIds = data?.map((item) => item.id);
@@ -24,12 +24,12 @@ const InvestmentPlan = () => {
           plansIds.map((id) =>
             axios.get(`/plans/category/${id}/plans/`).then((res) => {
               categoryData.push(res?.data);
-              setCategories(res?.data);
+              // setCategories(res?.data);
             })
           )
         );
         // Merge and flatten the array
-        setCategories(categoryData.flat());
+        // setCategories(categoryData.flat());
       }
     };
 
@@ -75,7 +75,7 @@ const InvestmentPlan = () => {
           />
         </LightTooltip>
       </div>
-      <div className="p-8 xl:space-x-5 space-y-9 xl:space-y-0 flex xl:flex-row flex-col justify-center items-center">
+      <div className="p-8 xl:space-x-5 space-y-9 xl:space-y-0 grid xl:grid-cols-3 2xl:grid-cols-4 md:grid-cols-2 w-full gap-y-[50px] gap-x-[50px] overflow-auto flex-col justify-center items-center">
         {data?.map((plan, index) => (
           <InvestmentPlanCard plan={plan} key={index} />
         ))}
