@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import useSWR from 'swr';
@@ -10,13 +10,16 @@ import PassportIcon from '../utils/icons/PassportIcon';
 
 const IdVerification = () => {
   const [idCard, setIdcard] = useState('');
+  const [id, setId] = useState('ID CARD');
   const [homeAddress, setHomeAddress] = useState('');
   const [birthDate, setBirthDate] = useState('');
   const { kyc, setKyc } = useContext(KycContext);
+  const { dataFromChild, setDataFromChild } = useContext(KycContext);
   const [selectedCountry, setSelectedCountry] = useState('Nigeria');
   const { userDetails } = useSelector((state) => state.transact);
   const dispatch = useDispatch();
   // console.log(`USERDETAILS`, userDetails);
+
 
   const { data: countries } = useSWR('https://restcountries.com/v3.1/all');
 
@@ -24,6 +27,33 @@ const IdVerification = () => {
     setSelectedCountry(e.target.value);
     console.log(e.target.value);
   };
+
+
+  const handleId = async (id) => {
+    setIdcard('passport');
+    switch (id) {
+      case 'ID CARD':
+        return setId('ID CARD');
+      case 'Driving Licence':
+        return setId('Driving License');
+      case 'Passport':
+        return setId('Passport');
+      default:
+        return 'ID CARD';
+    }
+  }
+
+  useEffect(() => {
+    handleId
+    setDataFromChild(id)
+    console.log(id);
+  }
+    , [])
+
+  // setId()
+
+  // console.log(id);
+
 
   // console.log(`SELECTED`, selectedCountry, idCard);
 
@@ -201,7 +231,10 @@ const IdVerification = () => {
                       : 'w-full h-[35px] rounded-[8px] border border-[#8E0789] bg-[inherit] outline-none flex items-center gap-[5px] pl-[5px] cursor-pointer'
                   }
                   id="kyc"
-                  onClick={() => setIdcard('idCard')}
+                  onClick={() => {
+                    setIdcard('idCard')
+                    handleId('ID CARD')
+                  }}
                 >
                   <Idcard />
                   <div className="w-full h-full border-none outline-none rounded-r-[8px] bg-[inherit] flex flex-col justify-center gap-[10px]">
@@ -218,7 +251,10 @@ const IdVerification = () => {
                       : 'w-full h-[35px] rounded-[8px] border border-[#8E0789] bg-[inherit] outline-none flex items-center gap-[5px] pl-[5px] cursor-pointer'
                   }
                   id="kyc"
-                  onClick={() => setIdcard('driverLicence')}
+                  onClick={() => {
+                    setIdcard('driverLicence')
+                    handleId('Driving Licence')
+                  }}
                 >
                   <DriveLicence />
                   <div className="w-full h-full border-none outline-none rounded-r-[8px] bg-[inherit] flex flex-col justify-center gap-[10px]">
@@ -235,7 +271,10 @@ const IdVerification = () => {
                       : 'w-full h-[35px] rounded-[8px] border border-[#8E0789] bg-[inherit] outline-none flex items-center gap-[5px] pl-[5px] cursor-pointer'
                   }
                   id="kyc"
-                  onClick={() => setIdcard('passport')}
+                  onClick={() => {
+                    setIdcard('passport')
+                    handleId('Passport')
+                  }}
                 >
                   <PassportIcon />
                   <div className="w-full h-full border-none outline-none rounded-r-[8px] bg-[inherit] flex flex-col justify-center gap-[10px]">

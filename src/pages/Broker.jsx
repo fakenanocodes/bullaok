@@ -38,6 +38,8 @@ export default function Broker() {
     setOpenModal(false);
   };
 
+  console.log(data)
+
   async function submitBroker() {
     try {
       const data = {

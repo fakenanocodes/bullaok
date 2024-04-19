@@ -113,18 +113,54 @@ const boxesData = [
   { icon: images.transaction, text: 'Friends make the first transaction' },
 ];
 export default function ReferralComponent() {
-  // const { data: referral, isLoading } = useSWR('referral/');
+  const [isShareable, setIsShareable] = useState(false)
+  const [isCopied, setIsCopied] = useState(false);
   const { data: profile } = useSWR('user/');
   console.log(profile);
   const navigate = useNavigate();
+  // const { data: referral, isLoading } = useSWR('referral/');
+  const referralCode = profile?.profile?.user?.username;
+  const baseUrl = 'https://bulloakltd.com'; // Replace with your specific login URL
+
+  const referralUrl = `${baseUrl}/register?referral=${referralCode}`;
+
+  useEffect(() => {
+    if (navigator.share) {
+      setIsShareable(true)
+    } else {
+      setIsShareable(false)
+    }
+  }, [isShareable])
+
+  // This is the function we wrote earlier
+  async function copyTextToClipboard(text) {
+    if ('clipboard' in navigator) {
+      return await navigator.clipboard.writeText(text);
+    } else {
+      return document.execCommand('copy', true, text);
+    }
+  }
+
+  // onClick handler function for the copy button
+  const handleCopyClick = () => {
+    // Asynchronously call copyTextToClipboard
+    copyTextToClipboard(referralUrl)
+      .then(() => {
+        // If successful, update the isCopied state value
+        setIsCopied(true);
+        setTimeout(() => {
+          setIsCopied(false);
+        }, 1500);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   const handleShare = async () => {
     try {
       if (navigator.share) {
-        const referralCode = profile?.profile?.user?.username;
-        const baseUrl = 'https://bulloakltd.com'; // Replace with your specific login URL
 
-        const referralUrl = `${baseUrl}/register?referral=${referralCode}`;
         await navigator.share({
           title: 'Your Bulloak Referral Code',
           text: 'Invite your friends using your referral code',
@@ -253,20 +289,40 @@ export default function ReferralComponent() {
               </div>
             </div>
           ))}
-          <button
-            onClick={handleShare}
-            className="bg-[#FFB803] xl:block hidden  w-full rounded-xl p-4"
-          >
-            Share your code
-          </button>
+          {
+            isShareable
+            && (<button
+              onClick={handleShare}
+              className="bg-[#FFB803] xl:block hidden  w-full rounded-xl p-4"
+            >
+              Share your code
+            </button>)}
+          {!isShareable &&
+            (<button
+              onClick={handleCopyClick}
+              className="bg-[#FFB803] xl:block hidden  w-full rounded-xl p-4"
+            >
+              <span>{isCopied ? 'Copied!' : 'Copy your code'}</span>
+            </button>)
+          }
         </div>
       </div>
-      <button
-        onClick={handleShare}
-        className="bg-[#FFB803] xl:hidden block mt-4 w-full rounded-xl p-4"
-      >
-        Share your code
-      </button>
+      {
+        isShareable
+        && (<button
+          onClick={handleShare}
+          className="bg-[#FFB803] xl:hidden block mt-4 w-full rounded-xl p-4"
+        >
+          Share your code
+        </button>)}
+      {!isShareable &&
+        (<button
+          onClick={handleCopyClick}
+          className="bg-[#FFB803] xl:hidden block mt-4 w-full rounded-xl p-4"
+        >
+          <span>{isCopied ? 'Copied!' : 'Copy your code'}</span>
+        </button>)
+      }
     </div>
   );
 }

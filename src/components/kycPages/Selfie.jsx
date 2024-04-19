@@ -129,6 +129,7 @@ const Selfie = () => {
         </div>
 
         {/* main body */}
+        
 
         <div className="w-full pl-[50px] flex flex-col gap-[5px] pt-[30px]">
           <div className="border-b-[1px] border-b-[#8E0789] flex flex-col pb-[5px]">

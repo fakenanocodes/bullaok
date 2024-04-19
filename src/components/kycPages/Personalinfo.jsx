@@ -1,4 +1,5 @@
 import { useContext, useState } from 'react';
+import { Alert, CircularProgress } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -11,6 +12,8 @@ const Personalinfo = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [userEmail, setUserEmail] = useState('');
+  const [error, setError] = useState('');
+  const [valid, setValid] = useState(false);
   const [notify, setNotify] = useState('border-[#8E0789]');
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -27,8 +30,58 @@ const Personalinfo = () => {
     email: userEmail,
   };
 
+  
+
+
+  const isValidName = (name) => {
+    // Define a regular expression pattern for name validation.
+    const pattern = /^[a-zA-Z ]*$/;
+    return pattern.test(name);
+  }
+
+
+
+  const isValidEmail = (email) => {
+    // Define a regular expression pattern for email validation.
+    const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return pattern.test(email);
+  }
+
+
+  function handleSubmit1(event) {
+    event.preventDefault();
+    const name = event.target.value;
+
+    if (isValidName(name)) {
+      // name is valid, proceed with form submission.
+      setValid(true)
+      setError(null);
+    } else {
+      // Display an error message for invalid name.
+      const errMsg = 'error, Invalid name, Please check your name input, it should be alphabets';
+      setError(errMsg);
+    }
+  }
+
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    const email = event.target.value;
+
+    if (isValidEmail(email)) {
+      // Email is valid, proceed with form submission.
+      setValid(true)
+      setError(null);
+    } else {
+      // Display an error message for invalid email.
+      const errMsg = 'error, Invalid email, Please check your email input';
+      setError(errMsg);
+    }
+  }
+
+
   const handleNextPage = (e) => {
-    if (!firstName || !lastName || !userEmail) {
+    if (!firstName || !lastName || !userEmail || !isValidEmail) {
       setNotify('border-[red]');
       toast.error('Please complete your personal details');
       return;
@@ -48,6 +101,8 @@ const Personalinfo = () => {
         kyc === 'personalInfo' ? 'w-full h-full' : 'w-full h-full hidden'
       }
     >
+      
+      {error && <Alert severity="error">{error}</Alert>}
       {/* the header description */}
       <div className="w-full h-[30px] border-b-[1px] border-b-[#8E0789] flex flex-col justify-center pb-[20px]">
         <h2 className="font-[Poppins] font-[600] text-[18px] leading-[12px] text-[#FFFFFF]">
@@ -157,6 +212,7 @@ const Personalinfo = () => {
                 type="text"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
+                onInput={(e) => handleSubmit1(e)}
                 className={`w-full h-[30px] rounded-[8px] border ${notify} bg-[inherit] outline-none leading-[2px] p-[5px] font-[Poppins] font-[300] text-[12px] text-[#AAAAAA] pl-[10px]`}
                 id="kyc"
                 required
@@ -170,6 +226,7 @@ const Personalinfo = () => {
                 type="text"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
+                onInput={(e) => handleSubmit1(e)}
                 className={`w-full h-[30px] rounded-[8px] border ${notify} bg-[inherit] outline-none leading-[2px] p-[5px] font-[Poppins] font-[300] text-[12px] text-[#AAAAAA] pl-[10px]`}
                 id="kyc"
               />
@@ -182,6 +239,7 @@ const Personalinfo = () => {
                 type="email"
                 value={userEmail}
                 onChange={(e) => setUserEmail(e.target.value)}
+                onInput={(e) => handleSubmit(e)}
                 className={`w-full h-[30px] rounded-[8px] border ${notify} bg-[inherit] outline-none leading-[2px] p-[5px] font-[Poppins] font-[300] text-[12px] text-[#AAAAAA] pl-[10px]`}
                 id="kyc"
               />
