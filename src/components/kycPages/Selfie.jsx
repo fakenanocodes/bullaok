@@ -5,6 +5,7 @@ import { setUserDetails } from '../../store/reducers/transact_reducer';
 
 const Selfie = () => {
   const { kyc, setKyc } = useContext(KycContext);
+  const { dataFromChild, setDataFromChild } = useContext(KycContext);
   const [uploadPoto, setUploadPhoto] = useState();
   const [selectedImage, setSelectedImage] = useState('');
   const { userDetails } = useSelector((state) => state.transact);
@@ -134,7 +135,7 @@ const Selfie = () => {
         <div className="w-full pl-[50px] flex flex-col gap-[5px] pt-[30px]">
           <div className="border-b-[1px] border-b-[#8E0789] flex flex-col pb-[5px]">
             <h2 className="font-[Poppins] font-[500] text-[15px] text-[#FFFFFF] leading-[15px] ">
-              ID Card
+              {dataFromChild}
             </h2>
             <p className="font-[Outfit] font-[400] text-[13px] text-[#AAAAAA] leading-[13px] ">
               Upload a photo

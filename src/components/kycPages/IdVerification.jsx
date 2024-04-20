@@ -10,7 +10,7 @@ import PassportIcon from '../utils/icons/PassportIcon';
 
 const IdVerification = () => {
   const [idCard, setIdcard] = useState('');
-  const [id, setId] = useState('ID CARD');
+  // const [id, setId] = useState('ID CARD');
   const [homeAddress, setHomeAddress] = useState('');
   const [birthDate, setBirthDate] = useState('');
   const { kyc, setKyc } = useContext(KycContext);
@@ -30,14 +30,14 @@ const IdVerification = () => {
 
 
   const handleId = async (id) => {
-    setIdcard('passport');
+    // setIdcard('passport');
     switch (id) {
       case 'ID CARD':
-        return setId('ID CARD');
+        return setDataFromChild('ID CARD');
       case 'Driving Licence':
-        return setId('Driving License');
+        return setDataFromChild('Driving License');
       case 'Passport':
-        return setId('Passport');
+        return setDataFromChild('Passport');
       default:
         return 'ID CARD';
     }
@@ -45,14 +45,8 @@ const IdVerification = () => {
 
   useEffect(() => {
     handleId
-    setDataFromChild(id)
-    console.log(id);
   }
     , [])
-
-  // setId()
-
-  // console.log(id);
 
 
   // console.log(`SELECTED`, selectedCountry, idCard);

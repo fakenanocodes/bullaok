@@ -81,7 +81,7 @@ const Personalinfo = () => {
 
 
   const handleNextPage = (e) => {
-    if (!firstName || !lastName || !userEmail || !isValidEmail) {
+    if (!firstName || !lastName || !userEmail && !isValidEmail) {
       setNotify('border-[red]');
       toast.error('Please complete your personal details');
       return;

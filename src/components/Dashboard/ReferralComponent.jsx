@@ -154,6 +154,10 @@ export default function ReferralComponent() {
       })
       .catch((err) => {
         console.log(err);
+        toast.error('Failed to copy referral code.', {
+          position: 'top-center',
+          autoClose: 2000, // Close after 2 seconds
+        });
       });
   }
 

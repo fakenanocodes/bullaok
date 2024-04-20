@@ -15,7 +15,6 @@ const Kyc = () => {
   // function handleDataFromChild(data) {
   //   setDataFromChild(data);
   // }
-  console.log(dataFromChild);
 
 
   return (
