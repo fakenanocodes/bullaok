@@ -24,7 +24,7 @@ const Transfer = () => {
   const navigate = useNavigate();
   // console.log('CHECKER', usdtAmount);
 
-  const walletType = ['USDT', 'LTC', 'BTC', 'XRP', 'ETH'];
+  // const walletType = ['USDT', 'LTC', 'BTC', 'XRP', 'ETH'];
 
   let userData = {
     amount,
@@ -174,7 +174,10 @@ const Transfer = () => {
         </div>
         <div>
           {transfers?.map((transfer, idx) => (
-            <div className="flex justify-between md:w-[90%]  md:ml-10 text-xs ">
+            <div
+              key={idx}
+              className="flex justify-between md:w-[90%]  md:ml-10 text-xs "
+            >
               <div className="py-3 font-bold my-2   ">
                 <div className="md:flex gap-2">
                   <p>{transfer?.created?.split('T')[0]}</p>
@@ -213,7 +216,7 @@ const Transfer = () => {
                   <input
                     value={emailAddress}
                     placeholder="youremail@email.com"
-                    className="border-2 w-full rounded-md p-2 px-4"
+                    className="border-2 w-full rounded-md p-2 px-4 bg-white"
                     id="asset"
                   />
                 </div>
@@ -223,7 +226,7 @@ const Transfer = () => {
                 <div className="">
                   <input
                     value={amount}
-                    className="mb-32 w-full border-2 p-2 px-4 rounded-md"
+                    className="mb-32 w-full border-2 p-2 px-4 rounded-md bg-white"
                     placeholder="0.00"
                     id="amount"
                   />
