@@ -1,6 +1,6 @@
 import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
-import { CircularProgress } from '@mui/material';
+import { Avatar, CircularProgress } from '@mui/material';
 import { useState } from 'react';
 import { Cookies } from 'react-cookie';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
@@ -120,10 +120,16 @@ const DashboardLayout = () => {
                   </span>
                 ))}
               </div>
-              <img
+              {/* <img
                 src={profileImage}
                 alt=""
                 className="w-[70px] h-[70px] rounded-[50%]  cursor-pointer"
+                onClick={() => navigate('/dashboard/profile')}
+              /> */}
+              <Avatar
+                src={profileImage}
+                sx={{ height: 70, width: 70 }}
+                className="cursor-pointer"
                 onClick={() => navigate('/dashboard/profile')}
               />
             </div>
