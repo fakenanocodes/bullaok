@@ -54,6 +54,7 @@ const Withdrawal = () => {
     wallet_type: wallet || walletType[0],
     wallet_address: walletAddress,
     usdt_amount: usdtAmount,
+    UsdtAmount: usdtAmount,
   };
 
   const handleSubmit = (e) => {
