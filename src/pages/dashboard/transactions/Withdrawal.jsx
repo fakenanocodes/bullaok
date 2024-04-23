@@ -24,7 +24,6 @@ const Withdrawal = () => {
   const { data: withdraws } = useSWR(`/withdraw/`);
   const { data: user } = useSWR(`/user/`);
   const [loading, setLoading] = useState(false);
-  // console.log('User', user);
 
   const newWallet = ['tether', 'litecoin', 'bitcoin', 'ripple', 'ethereum'];
 
@@ -44,8 +43,6 @@ const Withdrawal = () => {
     }
   }, [wallet, amount]);
 
-  // console.log('SET WALLET', convertWallet);
-
   //   these are the coins will need to pass depending on the coin you selected [litecoin,ripple,ethereum,bitcoin,tether]
 
   // Function to convert a coin amount to USD using CoinGecko API
@@ -59,9 +56,6 @@ const Withdrawal = () => {
     usdt_amount: usdtAmount,
   };
 
-  console.log(`User Data`, userData);
-  console.log(`ConvertWallet`, convertWallet);
-
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
@@ -72,15 +66,14 @@ const Withdrawal = () => {
       if (!data[coin]) {
         throw new Error(`Coin ${coin} not found in API response`);
       }
-      const price = await data[coin].usd; // Get USD price per coin
-      console.log('Coin Data', price, data);
-      const usdEquivalent = amount * price; // Calculate USD equivalent
-      return usdEquivalent.toFixed(2); // Return formatted USD amount
+      const price = await data[coin].usd;
+
+      const usdEquivalent = amount * price;
+      return usdEquivalent.toFixed(2);
     };
     const fetchData = async () => {
       try {
         let converted = await convertToUSD(convertWallet, amount);
-        // console.log('CONVERTED', converted, convertWallet);
         setUsdtAmount(converted);
       } catch (error) {
         // Handle errors if needed
@@ -88,7 +81,7 @@ const Withdrawal = () => {
       }
     };
     fetchData();
-    setTimeout(async () => {
+    const handleWithdrawal = async () => {
       try {
         const response = await axios.post('/withdraw/', userData);
         if (response) {
@@ -98,7 +91,7 @@ const Withdrawal = () => {
           setOpenModel(false);
         }
       } catch (error) {
-        console.log(error);
+        console.log('ERR', error);
         if (error?.response?.data?.UsdtAmount == 'ou have insufficient funds') {
           toast.error('You have insufficient funds');
           setLoading(false);
@@ -109,7 +102,8 @@ const Withdrawal = () => {
           setOpenModel(false);
         }
       }
-    }, 2000);
+    };
+    handleWithdrawal();
   };
 
   const handleOpenModal = () => {
@@ -132,7 +126,7 @@ const Withdrawal = () => {
         <div className="flex flex-col gap-10 pb-24">
           <div className="md:flex gap-10  font-semibold">
             <div className="flex flex-col md:w-[50%] mb-10 md:mb-0 relative">
-              <label>Source wallet</label>
+              <label>Available Balance</label>
               <input
                 type="text"
                 value={user?.profile?.available_balance}
@@ -297,7 +291,6 @@ const Withdrawal = () => {
               key={idx}
               className="flex justify-between md:w-[90%]  md:ml-10 text-xs "
             >
-              {/* {console.log('Inside component', withdraw)} */}
               <div className="py-3 font-bold ">
                 <div className="md:flex gap-2 ml-2">
                   {/* <p>{withdraw?.created?.split('T')[0]}</p>
@@ -342,7 +335,7 @@ const Withdrawal = () => {
                   <input
                     value={wallet || walletType[0]}
                     placeholder="$1,474.91"
-                    className="border-2 w-full rounded-md p-2 px-4"
+                    className="border-2 w-full rounded-md p-2 px-4 bg-white outline-none"
                     id="asset"
                   />
                 </div>
@@ -352,7 +345,7 @@ const Withdrawal = () => {
                 <div className="">
                   <input
                     value={amount}
-                    className="mb-32 w-full border-2 p-2 px-4 rounded-md"
+                    className="mb-32 w-full border-2 p-2 px-4 rounded-md bg-white outline-none"
                     placeholder="0.00"
                     id="amount"
                   />

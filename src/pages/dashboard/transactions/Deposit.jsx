@@ -89,7 +89,7 @@ const Deposit = () => {
   };
   //usdtAmount
 
-  console.log(userData);
+  console.log('userData', depositWallet);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -144,7 +144,7 @@ const Deposit = () => {
             <div className="flex flex-col md:w-[50%] mb-10 md:mb-0">
               <label>Deposit wallet</label>
               <select
-                value={wallet}
+                value={wallet || walletType[0]}
                 onChange={(e) => setWallet(e.target.value)}
                 type="text"
                 className="rounded-lg px-6 border-2 py-4"
