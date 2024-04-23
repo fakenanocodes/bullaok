@@ -30,6 +30,7 @@ const Withdrawal = () => {
   const walletType = ['USDT', 'LTC', 'BTC', 'XRP', 'ETH'];
 
   useEffect(() => {
+    console.log(walletType);
     if (wallet == walletType[0]) {
       setconvertWallet(newWallet[0]);
     } else if (wallet == walletType[1]) {
@@ -41,25 +42,9 @@ const Withdrawal = () => {
     } else if (wallet == walletType[4]) {
       setconvertWallet(newWallet[4]);
     }
-  }, [wallet, amount]);
+  }, [wallet, walletType, amount]);
 
-  //   these are the coins will need to pass depending on the coin you selected [litecoin,ripple,ethereum,bitcoin,tether]
-
-  // Function to convert a coin amount to USD using CoinGecko API
-
-  // useEffect(() => {}, [convertWallet, amount]);
-
-  let userData = {
-    amount,
-    wallet_type: wallet || walletType[0],
-    wallet_address: walletAddress,
-    usdt_amount: usdtAmount,
-    UsdtAmount: usdtAmount,
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setLoading(true);
+  useEffect(() => {
     const convertToUSD = async (coin, amount) => {
       const url = `https://api.coingecko.com/api/v3/simple/price?ids=${coin}&vs_currencies=usd`;
       const { data } = await axios.get(url);
@@ -72,9 +57,11 @@ const Withdrawal = () => {
       const usdEquivalent = amount * price;
       return usdEquivalent.toFixed(2);
     };
+
     const fetchData = async () => {
       try {
         let converted = await convertToUSD(convertWallet, amount);
+        console.log(converted);
         setUsdtAmount(converted);
       } catch (error) {
         // Handle errors if needed
@@ -82,7 +69,21 @@ const Withdrawal = () => {
       }
     };
     fetchData();
+  }, [convertWallet, amount]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setLoading(true);
+
     const handleWithdrawal = async () => {
+      let userData = {
+        amount,
+        wallet_type: wallet || walletType[0],
+        wallet_address: walletAddress,
+        usdt_amount: usdtAmount,
+        UsdtAmount: usdtAmount,
+      };
+
       try {
         const response = await axios.post('/withdraw/', userData);
         if (response) {
