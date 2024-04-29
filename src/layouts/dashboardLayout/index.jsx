@@ -14,6 +14,8 @@ import LogoutIcon from '../../components/utils/icons/LogoutIcon';
 import useAuthentication from '../../hooks/useAuthentication';
 import DashboardSidebar from './components/Sidebar';
 
+const menu = ['Make a', 'Pending', 'Failed', 'Completed', 'All'];
+
 const options = ['Withdraw', 'Deposit', 'Transfer'];
 
 const DashboardLayout = () => {
@@ -103,7 +105,35 @@ const DashboardLayout = () => {
           <div className="lg:p-5 hidden lg:flex">
             <div className="flex w-full p-3 pr-10 space-x-24 rounded-[30px] bg-black bg-opacity-[34%] justify-end items-center">
               <div className="flex space-x-3 items-center text-[#41073F] font-semibold">
+                <span
+                  className={` cursor-pointer ${
+                    activeOption === 0
+                      ? 'border-white p-3 rounded-lg border'
+                      : ''
+                  }`}
+                  onClick={() => {
+                    setActiveOption(0);
+                    navigate(`/dashboard/history}`);
+                  }}
+                >
+                  <p className="bg-white px-6 rounded-[4px] py-1">
+                    Transaction History
+                  </p>
+                </span>
                 {options?.map((option, index) => (
+                  <select
+                    key={index}
+                    className="p-1 rounded-md px-4 gap-4 space-y-2"
+                  >
+                    {menu?.map((item, index) => (
+                      <option key={index} className="py-2 font-poppins">
+                        {item} {''} {option}
+                      </option>
+                    ))}
+                  </select>
+                ))}
+
+                {/* {options?.map((option, index) => (
                   <span
                     key={index}
                     className={` cursor-pointer ${
@@ -118,7 +148,7 @@ const DashboardLayout = () => {
                   >
                     <p className="bg-white px-6 rounded-[4px] py-1">{option}</p>
                   </span>
-                ))}
+                ))} */}
               </div>
               {/* <img
                 src={profileImage}
