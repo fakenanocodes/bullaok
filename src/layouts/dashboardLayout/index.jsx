@@ -14,7 +14,7 @@ import LogoutIcon from '../../components/utils/icons/LogoutIcon';
 import useAuthentication from '../../hooks/useAuthentication';
 import DashboardSidebar from './components/Sidebar';
 
-const menu = ['Make a', 'Pending', 'Failed', 'Completed', 'All'];
+const menus = ['Make a', 'Pending', 'Failed', 'Completed', 'All'];
 
 const options = ['Withdraw', 'Deposit', 'Transfer'];
 
@@ -37,6 +37,14 @@ const DashboardLayout = () => {
       </div>
     );
   }
+
+  const handleNavigationMenu = (option, menu) => {
+    if (menu === 'Make a') {
+      navigate(`/dashboard/${option.toLowerCase()}`);
+    } else {
+      console.log(option, menu);
+    }
+  };
 
   if (!isLoggedIn) {
     return null; //Create a prompt here
@@ -76,6 +84,7 @@ const DashboardLayout = () => {
       ? 'https://via.placeholder.com/300'
       : Api + profile?.image;
   console.log(profileImage);
+
   return (
     <div className="relative overflow-hidden bg-custom-bg bg-opacity-20 bg-cover bg-center bg-no-repeat min-h-screen">
       {/** Layout */}
@@ -124,10 +133,15 @@ const DashboardLayout = () => {
                   <select
                     key={index}
                     className="p-1 rounded-md px-4 gap-4 space-y-2"
+                    onChange={(e) => console.log(e.target.value)}
                   >
-                    {menu?.map((item, index) => (
-                      <option key={index} className="py-2 font-poppins">
-                        {item} {''} {option}
+                    {menus?.map((menu, index) => (
+                      <option
+                        key={index}
+                        className="py-2 font-poppins"
+                        value={{menu, option}}
+                      >
+                        {menu} {''} {option}
                       </option>
                     ))}
                   </select>
