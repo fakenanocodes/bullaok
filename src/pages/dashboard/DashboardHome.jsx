@@ -21,6 +21,7 @@ import DashboardEmptyContainer from '../../components/empty/DashboardEmptyContai
 import CoinBlocksMarquee from '../../components/widget/CoinBlocksMarquee';
 import useCurrencyFormatter from '../../hooks/useCurrencyFormatter';
 import { setUserKyc } from '../../store/reducers/transact_reducer';
+import NewDashboard from '../../components/NewDashboard';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -95,6 +96,7 @@ const DashboardHome = () => {
 
   return (
     <div className="space-y-3 h-full no-scrollbar overflow-auto p-5">
+      <NewDashboard />
       <div className="flex space-x-3 items-center justify-center w-full xl:hidden lg:hidden md:hidden py-7 text-[#41073F] font-semibold">
         {navOptions?.map((option, index) => (
           <span

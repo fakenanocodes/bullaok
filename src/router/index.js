@@ -53,7 +53,7 @@ import Support from '../pages/dashboard/Support';
 import Deposit from '../pages/dashboard/transactions/Deposit';
 import Transfer from '../pages/dashboard/transactions/Transfer';
 import Withdrawal from '../pages/dashboard/transactions/Withdrawal';
-
+import IndividualRetirementAccount from '../components/IndividualRetirementAccount';
 const router = createBrowserRouter([
   {
     path: '*',
@@ -278,6 +278,10 @@ const router = createBrowserRouter([
       {
         path: 'card-application/success',
         Component: CardSuccess,
+      },
+      {
+        path: 'ira',
+        Component: IndividualRetirementAccount,
       },
     ],
   },

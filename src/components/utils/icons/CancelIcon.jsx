@@ -18,7 +18,7 @@ const CancelIcon = () => {
         />
         <path
           d="M8.38867 24.6118L24.4868 8.51367M8.38867 8.51367L24.4868 24.6118"
-          stroke="#9199B1"
+          stroke="#8E0789"
           stroke-width="2.68303"
           stroke-linecap="round"
           stroke-linejoin="round"
@@ -32,7 +32,7 @@ const CancelIcon = () => {
             width="32.1963"
             height="32.1963"
             rx="8.04908"
-            fill="white"
+            fill="red"
           />
         </clipPath>
       </defs>
