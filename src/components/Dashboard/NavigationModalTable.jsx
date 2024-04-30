@@ -1,7 +1,9 @@
 import useSWR from "swr";
 
 const NavigationModalTable = ({ currentNavigationMenu }) => {
-  // const completed = useSWR(`${}`)
+  const {data: completed} = useSWR(`${currentNavigationMenu[1]}/completed`)
+  const {data: pending } = useSWR(`${currentNavigationMenu[1]}/pending`)
+
 
   return (
     <table className="">

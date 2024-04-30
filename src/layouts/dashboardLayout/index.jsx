@@ -13,14 +13,14 @@ import HomeIcon from '../../assets/icons/dashboard/HomeIcon';
 import InvestmentIcon from '../../assets/icons/dashboard/InvestmentIcon';
 import PlantIcon from '../../assets/icons/dashboard/PlantIcon';
 import TransactionIcon from '../../assets/icons/dashboard/TransactionIcon';
+import NavigationModalTable from '../../components/Dashboard/NavigationModalTable';
 import LogoutIcon from '../../components/utils/icons/LogoutIcon';
 import useAuthentication from '../../hooks/useAuthentication';
 import DashboardSidebar from './components/Sidebar';
-import NavigationModalTable from '../../components/Dashboard/NavigationModalTable';
 
-let menus = [null, 'Make a', 'Pending', 'Failed', 'Completed', 'All'];
+let menus = [null, 'Make a', 'Pending', 'Completed', 'All'];
 
-const options = ['Withdrawal', 'Deposit', 'Transfer'];
+const options = ['Withdraw', 'Deposit', 'Transfer'];
 
 const DashboardLayout = () => {
   const cookie = new Cookies();
@@ -134,7 +134,9 @@ const DashboardLayout = () => {
                   <CloseOutlined className="text-[#41073F] rounded-md shadow-lg" />
                 </button>
               </div>
-              <NavigationModalTable currentNavigationMenu={currentNavigationMenu} />
+              <NavigationModalTable
+                currentNavigationMenu={currentNavigationMenu}
+              />
             </div>
           </Box>
         </Modal>

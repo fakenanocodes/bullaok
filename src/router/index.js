@@ -228,13 +228,12 @@ const router = createBrowserRouter([
         Component: BonusContainer,
       },
       {
-        path: 'withdrawal',
+        path: 'withdraw',
         Component: Withdrawal,
       },
       {
         path: 'deposit',
         Component: Deposit,
-
       },
       {
         path: 'referral',
