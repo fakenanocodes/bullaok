@@ -147,3 +147,19 @@ h1 {
   background: #eee;
   padding: 0.25em;
 } */
+ th, td {
+ 
+  text-align: left;
+  padding: 13px;
+  padding-left: 50px;
+
+}
+.not_affected{
+  padding-left: 0px!important;
+}
+
+
+
+table {
+  width: 100%;
+}
