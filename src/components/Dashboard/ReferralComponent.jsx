@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Box from '@mui/material/Box';
 import LinearProgress, {
@@ -30,11 +30,22 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 }));
 
 function CustomizedProgressBars({ referral }) {
-  const [progressValue, setProgressValue] = useState(referral);
-
+  const [progressValue, setProgressValue] = useState(0);
+  console.log(referral);
   useEffect(() => {
-    // Update the progressValue whenever the referral prop changes
-    setProgressValue((prevValue) => prevValue + 20);
+    if (referral === null) {
+      setProgressValue(0);
+    }
+    if (referral === 1) {
+      setProgressValue(20);
+    }
+    if (referral === 2) {
+      setProgressValue(50);
+    }
+
+    if (referral === 3) {
+      setProgressValue(100);
+    }
   }, [referral]);
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -57,11 +68,22 @@ const MobileBorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 }));
 
 function MobileCustomizedProgressBars({ referral }) {
-  const [progressValue, setProgressValue] = useState(referral);
+  const [progressValue, setProgressValue] = useState(0);
 
   useEffect(() => {
-    // Update the progressValue whenever the referral prop changes
-    setProgressValue((prevValue) => prevValue + 8);
+    if (referral === null) {
+      setProgressValue(0);
+    }
+    if (referral === 1) {
+      setProgressValue(20);
+    }
+    if (referral === 2) {
+      setProgressValue(50);
+    }
+
+    if (referral === 3) {
+      setProgressValue(100);
+    }
   }, [referral]);
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -91,18 +113,58 @@ const boxesData = [
   { icon: images.transaction, text: 'Friends make the first transaction' },
 ];
 export default function ReferralComponent() {
-  const { data: referral, isLoading } = useSWR('referral/');
+  const [isShareable, setIsShareable] = useState(false)
+  const [isCopied, setIsCopied] = useState(false);
   const { data: profile } = useSWR('user/');
   console.log(profile);
   const navigate = useNavigate();
+  // const { data: referral, isLoading } = useSWR('referral/');
+  const referralCode = profile?.profile?.user?.username;
+  const baseUrl = 'https://bulloakltd.com'; // Replace with your specific login URL
+
+  const referralUrl = `${baseUrl}/register?referral=${referralCode}`;
+
+  useEffect(() => {
+    if (navigator.share) {
+      setIsShareable(true)
+    } else {
+      setIsShareable(false)
+    }
+  }, [isShareable])
+
+  // This is the function we wrote earlier
+  async function copyTextToClipboard(text) {
+    if ('clipboard' in navigator) {
+      return await navigator.clipboard.writeText(text);
+    } else {
+      return document.execCommand('copy', true, text);
+    }
+  }
+
+  // onClick handler function for the copy button
+  const handleCopyClick = () => {
+    // Asynchronously call copyTextToClipboard
+    copyTextToClipboard(referralUrl)
+      .then(() => {
+        // If successful, update the isCopied state value
+        setIsCopied(true);
+        setTimeout(() => {
+          setIsCopied(false);
+        }, 1500);
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error('Failed to copy referral code.', {
+          position: 'top-center',
+          autoClose: 2000, // Close after 2 seconds
+        });
+      });
+  }
 
   const handleShare = async () => {
     try {
       if (navigator.share) {
-        const referralCode = profile?.profile?.user?.username;
-        const baseUrl = 'https://localhost:5174'; // Replace with your specific login URL
 
-        const referralUrl = `${baseUrl}/register?referral=${referralCode}`;
         await navigator.share({
           title: 'Your Bulloak Referral Code',
           text: 'Invite your friends using your referral code',
@@ -137,26 +199,35 @@ export default function ReferralComponent() {
         <img src={images.referral} alt="" className="xl:w-2/6 w-full" />
         <div className="flex flex-col xl:w-2/5 w-full p-4 gap-8">
           <div className="gradient-referral hidden  w-full relative px-6 p-3 xl:flex justify-between items-center">
-            <CustomizedProgressBars referral={profile?.referrals_profit} />
-            <div className="absolute top-0 rounded-lg xl:left-[100px] left-8 h-12 w-20 bg-[#FFB803] text-[#41073F] flex text-lg items-center font-bold justify-center">
-              $20.00
+            <CustomizedProgressBars referral={profile?.referrals?.length} />
+            <div className="absolute top-0  2xl:left-[100px] lg:left-[70px] left-8 flex flex-col gap-2  text-[#41073F] ">
+              <div className="flex text-lg items-center font-bold rounded-lg justify-center h-12 w-20 bg-[#FFB803]">
+                $20.00
+              </div>
+              <p className="text-white ml-2">1 user</p>
             </div>
-            <div className="absolute top-0 rounded-lg xl:left-[310px] left-[100px] h-12 w-20 bg-[#FFB803] text-[#41073F] flex items-center font-bold justify-center">
-              $40.00
+            <div className="absolute top-0 2xl:left-[310px] lg:left-[210px] left-[100px] flex flex-col gap-2 ">
+              <div className="rounded-lg  h-12 w-20 bg-[#FFB803] text-[#41073F] flex items-center font-bold justify-center">
+                $40.00
+              </div>
+              <p className="text-white ml-2">2 users</p>
             </div>
-            <div className="absolute top-0 rounded-lg h-12 w-20  right-0 bg-[#FFB803] text-[#41073F] flex items-center font-bold justify-center">
-              $60.00
+            <div className="absolute top-0 right-0 flex flex-col gap-2">
+              <div className="rounded-lg h-12 w-20   bg-[#FFB803] text-[#41073F] flex items-center font-bold justify-center">
+                $60.00
+              </div>
+              <p className="text-white ml-2">3 users</p>
             </div>
           </div>
           <div className="bg-[#41073F] p-4 rounded-lg">
             <div className=" w-full relative   flex xl:hidden justify-between items-center">
               <MobileCustomizedProgressBars
-                referral={profile?.referrals_profit}
+                referral={profile?.referrals?.length}
               />
-              <div className="absolute -top-2 rounded-lg xl:left-[100px] left-8  h-8  w-12 bg-[#FFB803] text-[#41073F] flex p-3 text-xs items-center font-bold justify-center">
+              <div className="absolute -top-2 rounded-lg  left-8 md:left-[70px] h-8  w-12 bg-[#FFB803] text-[#41073F] flex p-3 text-xs items-center font-bold justify-center">
                 $20.00
               </div>
-              <div className="absolute -top-2 rounded-lg  left-[120px] h-8  w-12 bg-[#FFB803] text-[#41073F] p-3 text-xs flex items-center font-bold justify-center">
+              <div className="absolute -top-2 rounded-lg  left-[150px] md:left-[170px] h-8  w-12 bg-[#FFB803] text-[#41073F] p-3 text-xs flex items-center font-bold justify-center">
                 $40.00
               </div>
               <div className="absolute -top-2 rounded-lg h-8  w-10  right-0 bg-[#FFB803] text-[#41073F] flex items-center font-bold p-3 text-xs justify-center">
@@ -222,20 +293,40 @@ export default function ReferralComponent() {
               </div>
             </div>
           ))}
-          <button
-            onClick={handleShare}
-            className="bg-[#FFB803] xl:block hidden  w-full rounded-xl p-4"
-          >
-            Share your code
-          </button>
+          {
+            isShareable
+            && (<button
+              onClick={handleShare}
+              className="bg-[#FFB803] xl:block hidden  w-full rounded-xl p-4"
+            >
+              Share your code
+            </button>)}
+          {!isShareable &&
+            (<button
+              onClick={handleCopyClick}
+              className="bg-[#FFB803] xl:block hidden  w-full rounded-xl p-4"
+            >
+              <span>{isCopied ? 'Copied!' : 'Copy your code'}</span>
+            </button>)
+          }
         </div>
       </div>
-      <button
-        onClick={handleShare}
-        className="bg-[#FFB803] xl:hidden block mt-4 w-full rounded-xl p-4"
-      >
-        Share your code
-      </button>
+      {
+        isShareable
+        && (<button
+          onClick={handleShare}
+          className="bg-[#FFB803] xl:hidden block mt-4 w-full rounded-xl p-4"
+        >
+          Share your code
+        </button>)}
+      {!isShareable &&
+        (<button
+          onClick={handleCopyClick}
+          className="bg-[#FFB803] xl:hidden block mt-4 w-full rounded-xl p-4"
+        >
+          <span>{isCopied ? 'Copied!' : 'Copy your code'}</span>
+        </button>)
+      }
     </div>
   );
 }

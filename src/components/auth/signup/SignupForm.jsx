@@ -50,6 +50,7 @@ const SignupForm = ({ setSignupComponent }) => {
       dispatch(setCurrentSignupEmail(data?.email));
       console.log(response);
       setIsLoading(false);
+      
       setSignupComponent(1);
       reset();
     } catch (err) {

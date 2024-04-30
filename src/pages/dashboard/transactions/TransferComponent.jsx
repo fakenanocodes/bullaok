@@ -162,10 +162,10 @@ const TransferComponent = () => {
         </div>
         <div>
           {trans?.map((tran, idx) => (
-            <div className="flex justify-between md:w-[90%] text-xs ">
+            <div key={idx} className="flex justify-between md:w-[90%] text-xs ">
               <div className="font-bold md:mx-12 mr-14 py-3 ">{tran.Date}</div>
               <div className="py-3 w-5 -mx-5 ">{tran.Amount}</div>
-              <div className="py-3  mx-24 w-24">{tran.Email}</div>
+              <div className="py-3 mx-24 w-24">{tran.Email}</div>
               <div className="py-3 w-16 md:-mx-10 -mr-24">{tran.Status}</div>
               <div className="w-36"></div>
             </div>

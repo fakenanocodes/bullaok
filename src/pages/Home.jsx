@@ -1,10 +1,8 @@
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { SwiperSlide } from 'swiper/react';
+import useSWR from 'swr';
 import { images } from '../assets';
 import bg_img from '../assets/bg_img.png';
-import card_img from '../assets/home/card_img.png';
-import card_img2 from '../assets/home/card_img2.png';
-import card_img3 from '../assets/home/card_img3.png';
 import group from '../assets/home/group.png';
 import home_bg from '../assets/home/home_bg.png';
 import main_card_img from '../assets/home/main_card_img.png';
@@ -13,54 +11,18 @@ import main_card_img3 from '../assets/home/main_card_img3.png';
 import main_card_img4 from '../assets/home/main_card_img4.png';
 import MainLayout from '../components/MainLayout';
 import ClientCard from '../components/utils/cards/ClientCard';
-import HomeCard from '../components/utils/cards/HomeCard';
 import ClientSwiperjs from '../components/utils/reusables/ClientSwiperjs';
+import MarqueeWidget from '../components/widget/MarqueeWidget';
 import { clientData } from '../data/client';
+import { stocks } from '../data/home';
+import { scrollToTop } from '../store/actions/utils';
 
-const cardData = [
-  {
-    location: 'Crev, Dubai',
-    views: '5.0 (55,890 views)',
-    price: '$453,897',
-    image: card_img,
-  },
-  {
-    location: 'California, USA',
-    views: '5.0 (55,890 views)',
-    price: '$564,897',
-    image: card_img2,
-  },
-  {
-    location: 'Aviana, Canada',
-    views: '5.0 (55,890 views)',
-    price: '$94,444',
-    image: card_img3,
-  },
-];
-const assets = [
-  {
-    location: 'Luxus',
-    views: '5.0 (55,890 views)',
-    price: '$453,897',
-    image: images.asset1,
-  },
-  {
-    location: '4g Cushion',
-    views: '5.0 (55,890 views)',
-    price: '$453,897',
-    image: images.asset2,
-  },
-  {
-    location: 'Duplex',
-    views: '5.0 (55,890 views)',
-    price: '$453,897',
-    image: images.asset3,
-  },
-];
-const stocks = [images.stock_home1, images.stock_home2];
+// const staticColors = ['#8E0789', '#3B82F6', '#34D399', '#F59E0B']; // Define your static colors array
 
 const Home = () => {
   const navigate = useNavigate();
+  const { data: brokers } = useSWR('/broker/brokers/');
+
   return (
     <MainLayout>
       <div className="bg-[#30022ECC] bg-opacity-10 relative w-full h-[90vh]">
@@ -148,8 +110,65 @@ const Home = () => {
 
         <img src={group} alt="" className="" />
       </div>
-
-      <section className="bg-[#CDA1CB26] py-7 px-5 lg:px-12 xl:px-40 my-[5rem]">
+      <section className="w-full">
+        <div
+          style={{
+            height: '433px',
+            backgroundColor: '#FFFFFF',
+            overflow: 'hidden',
+            boxSizing: 'border-box',
+            border: '1px solid #56667F',
+            borderRadius: '4px',
+            textAlign: 'right',
+            lineHeight: '14px',
+            fontSize: '12px',
+            fontFeatureSettings: 'normal',
+            textSizeAdjust: '100%',
+            boxShadow: 'inset 0 -20px 0 0 #56667F',
+            padding: '0px',
+            margin: '0px',
+            width: '100%',
+          }}
+        >
+          <div
+            style={{
+              height: '413px',
+              padding: '0px',
+              margin: '0px',
+              width: '100%',
+            }}
+          >
+            <iframe
+              src="https://widget.coinlib.io/widget?type=full_v2&theme=light&cnt=6&pref_coin_id=1505&graph=yes"
+              width="100%"
+              height="409px"
+              scrolling="auto"
+              marginWidth="0"
+              marginHeight="0"
+              frameBorder="0"
+              border="0"
+              style={{
+                border: '0',
+                margin: '0',
+                padding: '0',
+              }}
+            ></iframe>
+          </div>
+          <div
+            style={{
+              color: '#FFFFFF',
+              lineHeight: '14px',
+              fontWeight: '400',
+              fontSize: '11px',
+              boxSizing: 'border-box',
+              padding: '2px 6px',
+              width: '100%',
+              fontFamily: 'Verdana, Tahoma, Arial, sans-serif',
+            }}
+          ></div>
+        </div>
+      </section>
+      <section className="bg-[#CDA1CB26] py-7 px-5 lg:px-12 xl:px-40  my-0 ">
         <div className="flex flex-col-reverse gap-3 md:gap-0 md:flex-row items-center justify-between">
           <div className="xl:w-[35rem]">
             <p className="laviossa text-3xl xl:w-[25rem] leading-normal">
@@ -182,13 +201,13 @@ const Home = () => {
           />
         </div>
 
-        <div className="mt-[4rem] mb-[2rem] flex flex-col md:flex-row items-center justify-center gap-5">
+        {/* <div className="mt-[4rem] mb-[2rem] flex flex-col md:flex-row items-center justify-center gap-5">
           {cardData?.map((data, idx) => (
             <HomeCard key={idx} data={data} />
           ))}
-        </div>
+        </div> */}
       </section>
-      <section className="bg-[#CDA1CB26] py-7 px-5 lg:px-12 xl:px-40 my-[5rem]">
+      <section className="bg-[#CDA1CB26] py-7 px-5 lg:px-12 xl:px-40 my-0 ">
         <div className="flex flex-col-reverse gap-3 md:gap-0 md:flex-row items-center justify-between">
           <div className="xl:w-[35rem]">
             <p className="laviossa text-3xl xl:w-[25rem] leading-normal">
@@ -226,12 +245,12 @@ const Home = () => {
         </h2>
 
         <div className="mt-[4rem] mb-[2rem] flex flex-col md:flex-row items-center justify-center gap-5">
-          {stocks?.map((image) => (
-            <img src={image} className="w-full" alt="" />
+          {stocks?.map((image, idx) => (
+            <img key={idx} src={image} className="w-full" alt="" />
           ))}
         </div>
       </section>
-      <section className="bg-[#CDA1CB26] py-7 px-5 lg:px-12 xl:px-40 my-[5rem]">
+      <section className="bg-[#CDA1CB26] py-7 px-5 lg:px-12 xl:px-40 my-0 ">
         <div className="flex flex-col-reverse gap-3 md:gap-0 md:flex-row items-center justify-between">
           <div className="xl:w-[35rem]">
             <p className="laviossa text-3xl xl:w-[25rem] leading-normal">
@@ -263,12 +282,6 @@ const Home = () => {
             className="min-h-[17rem] max-h-[17rem] xl:min-h-[30rem] lg:max-h-[30rem]"
           />
         </div>
-
-        <div className="mt-[4rem] mb-[2rem] flex flex-col md:flex-row items-center justify-center gap-5">
-          {assets?.map((data, idx) => (
-            <HomeCard key={idx} data={data} />
-          ))}
-        </div>
       </section>
 
       <section className="px-5 lg:px-12 xl:px-40 my-[5rem] flex flex-col-reverse gap-7 md:gap-0 md:flex-row items-center justify-between">
@@ -288,7 +301,10 @@ const Home = () => {
 
           <div>
             <button
-              onClick={() => navigate('/team')}
+              onClick={() => {
+                navigate('/team');
+                scrollToTop();
+              }}
               className="text-black font-semibold py-4 px-5 bg-[#FFB803] rounded-sm capitalize shadow-md shadow-gray-100"
             >
               Meet the team
@@ -316,8 +332,67 @@ const Home = () => {
           ))}
         </ClientSwiperjs>
       </section>
+      <section className="flex flex-col items-center justify-center">
+        <p className="laviossa text-3xl text-center leading-normal text-black">
+          Brokers
+        </p>
+        <div className="flex xl:flex-row flex-col gap-4 justify-center w-full my-[2rem] p-6">
+          {brokers?.slice(0, 3)?.map((broker, index) => (
+            <div
+              className=" xl:w-3/5 w-full flex flex-col items-end mb-10"
+              key={index}
+            >
+              <div className="content border-2 w-full p-5 border-[#8E0789] ">
+                <p className="font-[laviossa] ">{broker.name}</p>
+                <div className="flex justify-between mt-5 ">
+                  <div className="flex flex-col ">
+                    <Link
+                      to={broker?.instagram_profile}
+                      className="text-[#a84199]"
+                    >
+                      {'Instagram profile'}
+                    </Link>
+                    <Link
+                      to={broker?.linkedin_profile}
+                      className="text-[#a84199]"
+                    >
+                      {'Linkedin profile'}
+                    </Link>
+                  </div>
 
-      <section className="px-5 lg:px-12 xl:px-40 py-10 my-[5rem] flex flex-col items-center gap-7 bg-[#41073F]">
+                  <div>
+                    <p className="flex gap-8 justify-between text-sm ">
+                      Major&nbsp;Licenses
+                      <span className=" text-[#a84199] font-semibold ">
+                        {broker?.main_state_licenses}
+                      </span>
+                    </p>
+                    <p className="flex gap-8 justify-between text-sm">
+                      Major&nbsp;Exams&nbsp;passed
+                      <span className=" text-[#a84199] font-semibold">
+                        {broker?.main_exams_passed}
+                      </span>
+                    </p>
+                    <p className="flex gap-8 justify-between text-sm">
+                      Year of experience{' '}
+                      <span className=" text-[#a84199] font-semibold">
+                        {broker?.years_of_experience}
+                      </span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <a
+          href="/team"
+          className="laviossa text-xl text-center leading-normal text-black"
+        >
+          See more
+        </a>
+      </section>
+      <section className="px-5 lg:px-12 xl:px-40 py-10 xl:my-[5rem] my-0  flex flex-col items-center gap-7 bg-[#41073F]">
         <p className="laviossa text-3xl text-center leading-normal text-white">
           Are we right for you?
         </p>
@@ -329,9 +404,17 @@ const Home = () => {
           in-person, or online.
         </p>
 
-        <button onClick={() => navigate('/contact b   ')} className="laviossa text-black font-semibold py-4 px-5 bg-[#FFB803] rounded-md">
+        <button
+          onClick={() => {
+            navigate('/contact');
+            scrollToTop();
+          }}
+          className="laviossa text-black font-semibold py-4 px-5 bg-[#FFB803] rounded-md"
+        >
           Schedule a consultation
         </button>
+
+        <MarqueeWidget />
       </section>
     </MainLayout>
   );

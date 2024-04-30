@@ -1,367 +1,365 @@
-import { ClickAwayListener } from '@mui/material';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useMemo, useState } from 'react';
 // import { Cookies } from 'react-cookie';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
+import CloseIcon from '@mui/icons-material/Close';
+import { Box, Checkbox, CircularProgress, Modal } from '@mui/material';
+import axios from 'axios';
+import { FaBitcoin, FaEthereum } from 'react-icons/fa';
+import { SiLitecoin, SiTether, SiXrp } from 'react-icons/si';
 import { toast } from 'react-toastify';
 import useSWR from 'swr';
-import DollaIcon from '../../../components/utils/icons/DollaIcon';
-import WithdrawIcon from '../../../components/utils/icons/WithdrawIcon';
-
-import { useNavigate } from 'react-router-dom';
-import LeftMoveIcon from '../../../components/utils/icons/LeftMoveIcon';
-import MobileTable from './MobileTable';
 
 const Withdrawal = () => {
-  const [openModel, setOpenModel] = useState(false);
-  const [showMobileTable, setShowMobileTable] = useState(false);
-  const [inputWarning, setInputWarning] = useState(false);
-  const navigate = useNavigate();
-  const [wallet, setWallet] = useState('');
-  const [amount, setAmount] = useState('');
-  const [walletAddress, setWalletAdress] = useState('');
-  const [usdtAmount, setUsdtAmount] = useState('');
-  const [convertWallet, setconvertWallet] = useState('');
-  const { data: withdraws } = useSWR(`/withdraw/`);
+  const [openModal, setOpenModal] = useState(false);
+  // const { data: withdraws } = useSWR(`/withdraw/`);
   const { data: user } = useSWR(`/user/`);
-  // console.log('User', user);
+  const [loading, setLoading] = useState(false);
+  const [dropDown, setDropDown] = useState(false);
+  const [receiverDetail, setReceiverDetail] = useState({
+    walletAddress: '',
+    amount: 0,
+  });
+  const [withdrawalPrompt, setWithdrawalPrompt] = useState({
+    password: '',
+    sendReceiptToEmail: false,
+  });
+  const [usdtEquivalent, setUsdtEquivalent] = useState(0);
 
-  const newWallet = ['tether', 'litecoin', 'bitcoin', 'ripple', 'ethereum'];
+  console.log(user);
 
-  const walletType = ['USDT', 'LTC', 'BTC', 'XRP', 'ETH'];
+  const Wallets = [
+    {
+      name: 'bitcoin',
+      value: 'BTC',
+      icon: <FaBitcoin className="text-yellow-300" />,
+    },
+    {
+      name: 'ethereum',
+      value: 'ETH',
+      icon: <FaEthereum className="text-[#e2e2e6]" />,
+    },
+    {
+      name: 'litecoin',
+      value: 'LTC',
+      icon: <SiLitecoin className="text-[#A6A9AA]" />,
+    },
+    {
+      name: 'tether',
+      value: 'USDT',
+      icon: <SiTether className="text-[#26A17B]" />,
+    },
+    {
+      name: 'ripple',
+      value: 'XRP',
+      icon: <SiXrp className="text-[#FF6633]" />,
+    },
+  ];
+  const [withdrawalAccount, setWithdrawalAccount] = useState(Wallets[0]);
 
-  useEffect(() => {
-    if (wallet == walletType[0]) {
-      setconvertWallet(newWallet[0]);
-    } else if (wallet == walletType[1]) {
-      setconvertWallet(newWallet[1]);
-    } else if (wallet == walletType[2]) {
-      setconvertWallet(newWallet[2]);
-    } else if (wallet == walletType[3]) {
-      setconvertWallet(newWallet[3]);
-    } else if (wallet == walletType[4]) {
-      setconvertWallet(newWallet[4]);
+  const availableBalance = useMemo(
+    () => user?.profile?.available_balance,
+    [user]
+  );
+
+  const makeWithdrawal = () => {
+    if (receiverDetail?.amount === 0) {
+      toast.error('Enter an amount', {
+        hideProgressBar: false,
+        autoClose: 2000,
+        position: 'top-right',
+      });
+      return
     }
-  }, [wallet, amount]);
-
-  // console.log('SET WALLET', convertWallet);
-
-  //   these are the coins will need to pass depending on the coin you selected [litecoin,ripple,ethereum,bitcoin,tether]
-
-  // Function to convert a coin amount to USD using CoinGecko API
-
-  useEffect(() => {
-    const convertToUSD = async (coin, amount) => {
-      const url = `https://api.coingecko.com/api/v3/simple/price?ids=${coin}&vs_currencies=usd`;
-      const { data } = await axios.get(url);
-
-      // Check if coin exists in the data
-      if (!data[coin]) {
-        throw new Error(`Coin ${coin} not found in API response`);
-      }
-
-      const price = await data[coin].usd; // Get USD price per coin
-      console.log('Coin Data', price, data);
-      const usdEquivalent = amount * price; // Calculate USD equivalent
-
-      return usdEquivalent.toFixed(2); // Return formatted USD amount
-    };
-
-    const fetchData = async () => {
-      try {
-        let converted = await convertToUSD(convertWallet, amount);
-        // console.log('CONVERTED', converted, convertWallet);
-        setUsdtAmount(converted);
-      } catch (error) {
-        // Handle errors if needed
-        console.error('Error in fetchData:', error.message);
-      }
-    };
-
-    fetchData();
-  }, [convertWallet, amount]);
-
-  let userData = {
-    amount,
-    wallet_type: wallet || walletType[0],
-    wallet_address: walletAddress,
-    usdt_amount: usdtAmount,
-  };
-
-  console.log(`User Data`, userData);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post('/withdraw/', userData);
-      console.log('RESPONSE', response.data);
-      toast.success('success');
-      setOpenModel(false);
-    } catch (error) {
-      console.log(error?.response?.data?.UsdtAmount);
-      if (error?.response?.data?.UsdtAmount == 'ou have insufficient funds') {
-        toast.error('You have insufficient funds');
-        setOpenModel(false);
-      }
-    }
-  };
-
-  const handleOpenModal = () => {
-    if (walletAddress && amount) {
-      setOpenModel(true);
+    if (availableBalance < receiverDetail?.amount) {
+      toast.error('Insufficient Balance', {
+        hideProgressBar: false,
+        autoClose: 2000,
+        position: 'top-right',
+      });
+      return
     } else {
-      setInputWarning(true);
+      setOpenModal(true);
     }
+  };
+
+  const convertUsdToUsdt = async () => {
+    try {
+      const response = await axios.get(
+        'https://api.coingecko.com/api/v3/simple/price?ids=tether&vs_currencies=usd'
+      );
+
+      setUsdtEquivalent(response?.data?.tether?.usd);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const confirmWithdrawal = () => {
+    try {
+      setLoading(true);
+      convertUsdToUsdt();
+      const usdtToFiveDecimalPlace = (
+        usdtEquivalent * receiverDetail?.amount
+      ).toFixed(5);
+      axios
+        .post('/withdraw/', {
+          amount: receiverDetail?.amount?.toString(),
+          wallet_type: withdrawalAccount?.value,
+          wallet_address: receiverDetail?.walletAddress,
+          usdt_amount: usdtToFiveDecimalPlace.toString(),
+        })
+        .then(() =>
+          toast.success('Your transaction has been filled', {
+            hideProgressBar: false,
+            autoClose: 2000,
+            position: 'top-right',
+          })
+        )
+        .catch((err) => {
+          console.log(err);
+          toast.error('Your transaction has been declined', {
+            position: 'top-right',
+            hideProgressBar: false,
+            autoClose: 2000,
+          });
+        });
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+      console.log('hello');
+      toast.error('Your transaction has been declined', {
+        hideProgressBar: false,
+        autoClose: 2000,
+        position: 'top-right',
+      });
+    }
+  };
+
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '42%',
+    height: 500,
+    borderRadius: 4,
+    bgcolor: 'background.paper',
+    // border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
   };
 
   return (
-    <div className=" h-[100%] no-scrollbar bg-white p-4 text-gray-700 overflow-scroll relative">
-      <div className=" text-2xl font-bold my-3 mb-10 grid grid-cols-3 gap-12 items-center ">
-        <div className="md:hidden cursor-pointer" onClick={() => navigate(-1)}>
-          <LeftMoveIcon />
-        </div>
-        Withdrawal
+    <div className=" h-[100%] no-scrollbar bg-white p-8 text-gray-700 overflow-scroll relative rounded-xl font-poppins">
+      <div className="py-3 px-20">
+        <span className="text-3xl tracking-wider font-medium">
+          New Withdrawal
+        </span>
       </div>
+      <div className="absolute left-0 right-0 border-b-2 border-b-gray-300"></div>
       <div>
-        <div className="flex flex-col gap-10 pb-24">
-          <div className="md:flex gap-10  font-semibold">
-            <div className="flex flex-col md:w-[50%] mb-10 md:mb-0 relative">
-              <label>Source wallet</label>
-              <input
-                type="text"
-                value={user?.profile?.available_balance}
-                className="rounded-lg px-12 border-2 py-4"
-              />
-              <div className="absolute top-10 left-3">
-                <DollaIcon />
+        <div className="flex justify-between py-10 px-20 border-b-2 border-b-gray-300 items-end">
+          <div className="space-y-8">
+            <span className="font-semibold text-lg">From</span>
+            <div className="flex flex-col gap-4">
+              <span className="text-[#4A4A4A] font-medium">Select Account</span>
+              <div className="relative" onMouseLeave={() => setDropDown(false)}>
+                <button
+                  onClick={() => setDropDown(!dropDown)}
+                  className="bg-[#8E0789] p-4 w-[28vw] rounded-lg flex justify-between"
+                >
+                  <div className="flex gap-2 items-center">
+                    {withdrawalAccount?.icon}
+                    <span className="text-white">
+                      {withdrawalAccount?.value}
+                    </span>
+                  </div>
+                  {dropDown ? (
+                    <ArrowDropUpIcon className="text-white" />
+                  ) : (
+                    <ArrowDropDownIcon className="text-white" />
+                  )}
+                </button>
+                {dropDown && (
+                  <div className="absolute transition-all duration-1000 top-[58px] right-0 left-0 bg-white backdrop-filter backdrop-blur-md bg-opacity-60 border border-gray-200 shadow-lg rounded-lg space-y-2">
+                    {Wallets?.map((wallet, index) => (
+                      <button
+                        key={index}
+                        onClick={() => {
+                          setWithdrawalAccount(wallet);
+                          setDropDown(false);
+                        }}
+                        className="flex gap-2  items-center justify-start p-4 hover:bg-[#8E0789] w-full hover:rounded-lg hover:text-white"
+                      >
+                        {wallet?.icon}
+                        <span>{wallet?.value}</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
+              {/* <select className="bg-[#8E0789] text-white outline-none rounded-xl p-4 w-[30vw]">
+                <option className="text-white pl-12">
+                  <span>JTC</span>
+                </option>
+                <option>Ethereum</option>
+              </select> */}
             </div>
-            <div className="flex flex-col md:w-[50%]">
-              <label>Asset destination</label>
+          </div>
+          <div className="flex flex-col space-y-8 pb-5 w-[28vw]">
+            <span className="text-[#4A4A4A] font-medium">Account detail</span>
+            <span className="text-lg font-bold">
+              Available Balance:{' '}
+              <span className="text-xl font-bold pl-8">
+                ${availableBalance}
+              </span>
+            </span>
+          </div>
+        </div>
+        <div className="py-10 px-20 space-y-10">
+          <span className="text-lg font-bold">To</span>
+          <div className="flex justify-between items-center">
+            <div className="flex flex-col gap-2">
+              <span>Withdrawal Account Name</span>
+              <input
+                type="text"
+                className="w-[28vw] rounded-lg p-3 border-[#8E0789]"
+                value={user?.profile?.full_name}
+                disabled
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <span>Withdrawal Wallet Address</span>
+              <input
+                type="text"
+                className="w-[28vw] rounded-lg p-3  border-[#8E0789]"
+                value={receiverDetail?.walletAddress}
+                onChange={(e) =>
+                  setReceiverDetail({
+                    ...receiverDetail,
+                    walletAddress: e.target.value,
+                  })
+                }
+              />
+            </div>
+          </div>
+          <div className="flex flex-col gap-2">
+            <span>Withdrawal Amount</span>
+            <input
+              type="text"
+              className="w-[28vw] rounded-lg p-3  border-[#8E0789]"
+              value={receiverDetail?.amount}
+              onChange={(e) =>
+                setReceiverDetail({
+                  ...receiverDetail,
+                  amount: Number(e.target.value),
+                })
+              }
+            />
+          </div>
 
-              <select
-                value={wallet || walletType[0]}
-                onChange={(e) => setWallet(e.target.value)}
-                type="text"
-                className="rounded-lg px-6 border-2 py-4"
-              >
-                {walletType.map((type, idx) => (
-                  <option
-                    key={idx}
-                    value={type}
-                    className="cursor-pointer flex gap-3"
-                  >
-                    {type}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-          <div className="hidden md:w-[48%] items-center gap-5 relative md:grid grid-flow-col ">
-            <div className="w-auto bg-black h-[1.3px] col-span-4 "></div>
-            <div className="col-span-[1px] -ml-5">
-              <WithdrawIcon />
-            </div>
-            <div className="w-auto bg-black h-[1.3px]  col-span-3 -ml-16 "></div>
-          </div>
-          <div className="md:flex gap-10 font-semibold">
-            {/* FIRST PART */}
-            <div className="hidden md:flex flex-col md:w-[50%] ">
-              <label>Withdrawal wallet address</label>
-              <input
-                value={walletAddress}
-                onChange={(e) => setWalletAdress(e.target.value)}
-                type="text"
-                required
-                className={`rounded-lg px-6 border-2  py-4 ${
-                  inputWarning && 'border-red-600'
-                }`}
-                placeholder="reciever_wallet_address$lkjhyiu878yfs44rs"
-              />
-            </div>
-            <div className="md:hidden flex flex-col md:w-[50%] mb-12 md:mb-0">
-              <label>Withdrawal amount</label>
-              <input
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
-                type="number"
-                className={`rounded-lg px-6 border-2 py-4 ${
-                  inputWarning && 'border-red-600'
-                }`}
-                placeholder="0.00 $"
-              />
-            </div>
-            <div className="md:hidden flex justify-center m-12 ">
-              <WithdrawIcon />
-            </div>
-            {/* SECOND PART */}
-            <div className="md:hidden flex flex-col md:w-[50%] ">
-              <label>Withdrawal wallet address</label>
-              <input
-                value={walletAddress}
-                onChange={(e) => setWalletAdress(e.target.value)}
-                type="text"
-                className={`rounded-lg px-6 border-2 py-4 ${
-                  inputWarning && 'border-red-600'
-                }`}
-                placeholder="reciever_wallet_address$lkjhyiu878yfs44rs"
-              />
-            </div>
-            <div className="hidden md:flex flex-col md:w-[50%] mb-12 md:mb-0">
-              <label>Withdrawal amount</label>
-              <input
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
-                type="number"
-                className={`rounded-lg px-6 border-2 py-4 ${
-                  inputWarning && 'border-red-600'
-                }`}
-                placeholder="0.00 $"
-              />
-            </div>
-          </div>
-          <div className="md:flex md:justify-between md:w-[48%] text-xl items-center">
-            <div className=" text-red-600 font-semibold mb-28 md:mb-0">
-              You are withdrawing ${usdtAmount || '0.00'}
-            </div>
-            <button
-              onClick={handleOpenModal}
-              className="hidden md:flex bg-[#352F84] py-2 text-white px-4 rounded-[5px]"
-            >
-              Make withdrawal
+          <div className="w-full flex justify-center items-center gap-8 pt-5">
+            <button className="bg-[#8E0789] bg-opacity-30 px-16 font-semibold  py-3 rounded-lg">
+              Cancel
             </button>
-            <div className="md:hidden flex justify-between text-sm">
-              <button
-                onClick={() => setShowMobileTable(!showMobileTable)}
-                className="border-2 border-red-700 px-6 rounded-md py-4"
-              >
-                Withdrawal History
-              </button>
-              <button
-                onClick={handleOpenModal}
-                className="bg-[#352F84] text-white rounded-md px-6 py-4"
-              >
-                Make withdrawal
-              </button>
-            </div>
+            <button
+              onClick={makeWithdrawal}
+              className="bg-[#8E0789] py-3 text-white rounded-lg px-8 font-semibold"
+            >
+              Make Withdrawal
+            </button>
+            <Modal
+              open={openModal}
+              onClose={() => setOpenModal(false)}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box sx={style}>
+                <div className="flex-col flex space-y-5 font-poppins">
+                  <div className="w-full flex justify-between">
+                    <span className="text-xl font-semibold">Withdrawal</span>
+                    <button onClick={() => setOpenModal(false)}>
+                      <CloseIcon className="text-[#8E0789]" />
+                    </button>
+                  </div>
+                  <div className=" w-full">
+                    <div className="flex flex-col gap-5">
+                      <div className="flex flex-col gap-2">
+                        <span className="text-sm ">
+                          Withdrawal Wallet Address
+                        </span>
+                        <input
+                          type="text"
+                          className="rounded-lg p-3  border-[#8E0789]"
+                          value={receiverDetail?.walletAddress}
+                          disabled
+                        />
+                      </div>
+                      <div className="flex flex-col gap-2">
+                        <span className="text-sm ">Withdrawal amount</span>
+                        <input
+                          type="text"
+                          className="rounded-lg p-3  border-[#8E0789]"
+                          value={receiverDetail?.amount}
+                          disabled
+                        />
+                      </div>
+                      <div className="flex flex-col gap-2">
+                        <span className="text-sm ">Enter account password</span>
+                        <input
+                          type="password"
+                          className="rounded-lg p-3  border-[#8E0789]"
+                          value={withdrawalPrompt?.password}
+                          onChange={(e) =>
+                            setWithdrawalPrompt({
+                              ...withdrawalPrompt,
+                              password: e.target.value,
+                            })
+                          }
+                        />
+                      </div>
+                    </div>
+                    <div className="absolute left-5">
+                      <Checkbox
+                        checked={withdrawalPrompt?.sendReceiptToEmail}
+                        onChange={() =>
+                          setWithdrawalPrompt({
+                            ...withdrawalPrompt,
+                            sendReceiptToEmail:
+                              !withdrawalPrompt?.sendReceiptToEmail,
+                          })
+                        }
+                      />
+                      <span className="text-sm">
+                        Send receipt to email address
+                      </span>
+                    </div>
+                    <div className="absolute bottom-8 right-10 space-x-10">
+                      <button
+                        onClick={() => setOpenModal(false)}
+                        className="border-[#8E0789] border p-2 text-sm font-medium rounded-md"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        onClick={confirmWithdrawal}
+                        className="bg-[#8E0789] px-4 py-2 text-white text-sm font-medium rounded-md"
+                      >
+                        {loading ? (
+                          <CircularProgress color="inherit" size={15} />
+                        ) : (
+                          'Confirm Withdrawal'
+                        )}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </Box>
+            </Modal>
           </div>
         </div>
       </div>
-      {/* Mobile table */}
-      <MobileTable
-        withdraws={withdraws}
-        showMobileTable={showMobileTable}
-        address={'WALLET'}
-      />
-      <div className={`hidden md:block border shadow-md`}>
-        <div className="bg-[#8E0789] text-white p-3 md:text-2xl font-semibold">
-          Withdrawal History
-        </div>
-
-        <div className="flex justify-between md:w-[90%] md:ml-10 text-sm ">
-          <div className="m-2 p-2  md:px-10 bg-[#F9F9FA] shadow drop-shadow-sm ">
-            DATE
-          </div>
-          <div className="m-2 p-2 md:px-10 bg-[#F9F9FA] shadow drop-shadow-sm">
-            AMOUNT
-          </div>
-          <div className="m-2 p-2 md:px-10 bg-[#F9F9FA] shadow drop-shadow-sm">
-            WALLET
-          </div>
-          <div className="m-2 p-2 md:px-10 bg-[#F9F9FA] shadow drop-shadow-sm">
-            ASSET
-          </div>
-          <div className="m-2 p-2 md:px-10 bg-[#F9F9FA] shadow drop-shadow-sm">
-            STATUS
-          </div>
-          {/* <select className="m-2 md:p-2 bg-[rgb(249,249,250)] shadow drop-shadow-lg border-none px-7 hidden md:block">
-            <option className="">Sort</option>
-          </select> */}
-        </div>
-        <div>
-          {withdraws?.[0].map((withdraw, idx) => (
-            <div
-              key={idx}
-              className="flex justify-between md:w-[90%]  md:ml-10 text-xs "
-            >
-              {/* {console.log('Inside component', withdraw)} */}
-              <div className="py-3 font-bold ">
-                <div className="md:flex gap-2 ml-2">
-                  {/* <p>{withdraw?.created?.split('T')[0]}</p>
-                  <p>{withdraw?.created?.split('T')[1]?.split('.')[0]}</p> */}
-                  <p>20-04-2000</p>
-                  <p>10:26</p>
-                </div>
-              </div>
-              <div className="py-3  md:px-10 ">{withdraw?.amount}</div>
-              <div className="py-3  md:px-2 w-[100px] md:w-[150px] text-ellipsis overflow-hidden whitespace-nowrap">
-                {withdraw?.wallet_address}
-              </div>
-              <div className="py-3   md:px-10">{withdraw?.wallet_type}</div>
-              <div className="py-3   md:px-10">
-                {withdraw?.verified
-                  ? 'Success'
-                  : !withdraw?.verified
-                  ? 'Pending...'
-                  : 'Failed'}
-              </div>
-              {/* <div className="w-36"></div> */}
-            </div>
-          ))}
-        </div>
-      </div>
-      {openModel && (
-        <div className=" fixed top-0 left-0 w-full h-full flex  justify-center items-center bg-[#000000b3]">
-          <ClickAwayListener onClickAway={() => setOpenModel(false)}>
-            <div
-              onSubmit={handleSubmit}
-              className="bg-white h-3/5 w-[90%] md:w-3/5 max-w-[500px] p-4 my-6 relative"
-            >
-              <div className="flex justify-between">
-                <p className="text-lg text-gray-600 font-semibold">
-                  Withdrawal
-                </p>
-              </div>
-              <div className="py-5">
-                <label htmlFor="asset">Asset destination</label>
-                <div>
-                  {/* <DollaIcon /> */}
-                  <input
-                    value={wallet || walletType[0]}
-                    placeholder="$1,474.91"
-                    className="border-2 w-full rounded-md p-2 px-4"
-                    id="asset"
-                  />
-                </div>
-              </div>
-              <div>
-                <label htmlFor="amount">Amount</label>
-                <div className="">
-                  <input
-                    value={amount}
-                    className="mb-32 w-full border-2 p-2 px-4 rounded-md"
-                    placeholder="0.00"
-                    id="amount"
-                  />
-                </div>
-              </div>
-              <div className="flex gap-5 absolute right-4">
-                <button
-                  className="p-2 px-4 rounded-md border"
-                  onClick={() => setOpenModel(false)}
-                >
-                  Cancel
-                </button>
-                <button
-                  onClick={handleSubmit}
-                  className="bg-[#352F84] text-white p-2 px-4 rounded-md"
-                >
-                  Confirm Withdrawal
-                </button>
-              </div>
-            </div>
-          </ClickAwayListener>
-        </div>
-      )}
     </div>
   );
 };

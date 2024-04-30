@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import invest from '../assets/invest.mp4';
+// import invest from '../assets/invest.mp4';
 import banner_img from '../assets/invest_banner_page.png';
 import invest_icon_four from '../assets/invest_icon_four.svg';
 import invest_icon_one from '../assets/invest_icon_one.svg';
@@ -41,7 +41,7 @@ const downloadData = [
 ];
 
 const Investing = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <MainLayout>
       <div className="bg-gradient-to-b from-[#41073F] to-purple-400 bg-opacity-90 w-full h-[90vh] flex flex-col justify-between">
@@ -62,10 +62,12 @@ const Investing = () => {
               minimum balance required.
             </p>
             <button
-             onClick={() => {
-              navigate('/register');
-              scrollToTop();
-            }} className="text-black font-bold py-4 px-6 bg-[#D4B716] rounded-lg mt-[2rem]">
+              onClick={() => {
+                navigate('/register');
+                scrollToTop();
+              }}
+              className="text-black font-bold py-4 px-6 bg-[#D4B716] rounded-lg mt-[2rem]"
+            >
               Open an account
             </button>
           </div>
@@ -109,7 +111,7 @@ const Investing = () => {
         </p>
       </section>
 
-      <section className="bg-gray-50 mt-[5rem] py-[5rem]">
+      {/* <section className="bg-gray-50 mt-[5rem] py-[5rem]">
         <p className="text-center text-4xl font-bold tracking-wide leading-10 text-[#2B3240]">
           What Does
           <br />
@@ -119,7 +121,7 @@ const Investing = () => {
         <div className="mx-auto w-full md:w-[30rem] lg:w-[60rem] mt-[2rem] mb-[4rem]">
           <video src={invest} controls className="rounded-xl" />
         </div>
-      </section>
+      </section> */}
 
       <InvestReasons />
       <InvestManagement />

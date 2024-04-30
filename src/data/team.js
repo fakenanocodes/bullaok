@@ -1,76 +1,75 @@
-import { images } from '../assets';
+import { image } from '../assets/team/teams';
+
 
 export const teamData = [
   {
-    image: images.president,
-    role: 'President',
-    name: 'Mr Sum-ting wong ',
+    id: 1,
+    image: image.aaa,
+    role: 'President/CEO',
+    name: 'ANTHONY R HUGHES  ',
   },
   {
-    image: images.vc,
+    id: 2,
+    image: image.bbb,
     role: 'Vice-President',
-    name: 'Mr Chin-tu fat',
+    name: 'MICHELLE H POWERS',
   },
   {
-    image: images.secretary,
-    role: 'Secretary',
-    name: 'Tyrone Wilson',
+    id: 3,
+    image: image.ccc,
+    role: 'CFO',
+    name: 'THOMAS C DAVY',
   },
   {
-    image: images.operations,
-    role: 'Head of operations',
-    name: 'Trey Taeshawn',
+    id: 4,
+    image: image.ddd,
+    role: 'Head of Operations',
+    name: 'PETER STUART CAMPBELL',
   },
+
   {
-    image: images.leaddev,
-    role: 'Lead developer',
-    name: 'Ngozi Ezeonu',
-  },
-  {
-    image: images.assistant,
-    role: 'Assistant developer',
-    name: 'Angela Fanghel',
-  },
-  {
-    image: images.data,
+    id: 5,
+    image: image.eee,
     role: 'Data expert',
-    name: 'Sophia Laravel',
+    name: 'ELVIE CHAMBERLAIN',
   },
+
   {
-    image: images.design,
-    role: 'Design expert',
-    name: 'Aaron Okafor',
-  },
-  {
-    image: images.social,
+    id: 6,
+    image: image.fff,
     role: 'Social expert',
-    name: 'Erling Haaland',
+    name: 'ANNIE CURTIS NORRIS',
   },
   {
-    image: images.content,
+    id: 7,
+    image: image.ggg,
     role: 'Head of content',
-    name: 'Lady Dimitrescu',
+    name: 'MICHEL BRADLEY',
   },
 ];
 
 export const brokerData = [
   {
-    image: images.cynthia,
+    id: 0,
+    image: image.lll,
     role: 'Cannabis Broker',
     name: 'Cynthia Turner ',
   },
   {
-    image: images.benedict,
+    id: 1,
+    image: image.mmm,
     role: 'Real estate Broker',
     name: 'Benedict Benjamin',
   },
   {
-    image: images.diagon,
+    id: 2,
+    image: image.nnn,
     role: 'Forex Broker',
     name: 'Diagon Alley',
   },
   {
-    image: images.operations,
+    id: 3,
+    image: image.ooo,
     role: 'Crypto Broker',
     name: 'Anthonia Patricia',
   },

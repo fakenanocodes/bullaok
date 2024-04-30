@@ -37,18 +37,28 @@ import ReferralContainer from '../pages/dashboard/Referral';
 // import InvestmentPackages from '../pages/dashboard/InvestmentPackages';
 import ForgotPassword from '../components/auth/forgot-password';
 import UserLogin from '../components/auth/login';
+import CardSuccess from '../components/card_application_setup/CardSuccess';
 import SuccessThanks from '../components/kycPages/SuccessThanks';
+import Broker from '../pages/Broker';
+import NotFound from '../pages/NotFound';
+import TeamBroker from '../pages/TeamBroker';
+import TeamMember from '../pages/TeamMember';
+import Contactus from '../pages/dashboard/Contactus';
 import InvestmentPackages from '../pages/dashboard/InvestmentPackages';
 import InvestmentPlan from '../pages/dashboard/InvestmentPlan';
 import Kyc from '../pages/dashboard/Kyc';
+import Notifications from '../pages/dashboard/Notifications';
 import RunningInvestment from '../pages/dashboard/RunningInvestment';
+import Support from '../pages/dashboard/Support';
 import Deposit from '../pages/dashboard/transactions/Deposit';
 import Transfer from '../pages/dashboard/transactions/Transfer';
 import Withdrawal from '../pages/dashboard/transactions/Withdrawal';
-import Notifications from '../pages/dashboard/Notifications';
-import Support from '../pages/dashboard/Support';
-
+import IndividualRetirementAccount from '../components/IndividualRetirementAccount';
 const router = createBrowserRouter([
+  {
+    path: '*',
+    Component: NotFound,
+  },
   {
     path: '/',
     Component: Home,
@@ -56,6 +66,10 @@ const router = createBrowserRouter([
   {
     path: '/history',
     Component: History,
+  },
+  {
+    path: '/contact',
+    Component: Contactus,
   },
   {
     path: '/who-we-are',
@@ -126,6 +140,14 @@ const router = createBrowserRouter([
     Component: Team,
   },
   {
+    path: '/team/member/:subpage',
+    Component: TeamMember,
+  },
+  {
+    path: '/team/broker/:subpage',
+    Component: TeamBroker,
+  },
+  {
     path: 'faq',
     Component: Faq,
   },
@@ -150,6 +172,10 @@ const router = createBrowserRouter([
   {
     path: 'about',
     Component: About,
+  },
+  {
+    path: 'brokers',
+    Component: Broker,
   },
   {
     path: 'login',
@@ -201,7 +227,6 @@ const router = createBrowserRouter([
         path: 'bonus',
         Component: BonusContainer,
       },
-
       {
         path: 'withdraw',
         Component: Withdrawal,
@@ -243,12 +268,20 @@ const router = createBrowserRouter([
         Component: RunningInvestment,
       },
       {
-        path: 'investment/plan',
+        path: 'plan',
         Component: InvestmentPlan,
       },
       {
         path: 'investment/history',
         Component: InvestmentHistory,
+      },
+      {
+        path: 'card-application/success',
+        Component: CardSuccess,
+      },
+      {
+        path: 'ira',
+        Component: IndividualRetirementAccount,
       },
     ],
   },

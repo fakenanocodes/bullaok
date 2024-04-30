@@ -33,10 +33,7 @@ const CardApplicationSetup = () => {
 
   return (
     <div className="p-5 w-full bg-white h-full overflow-auto no-scrollbar rounded-r-xl">
-      <div
-        onClick={() => navigate(-1)}
-        className="flex items-center gap-2 cursor-pointer pb-2"
-      >
+      <div onClick={() => navigate(-1)} className="w-fit cursor-pointer">
         <BackArrowIcon />
       </div>
       <div className="flex flex-col pb-[3rem]">

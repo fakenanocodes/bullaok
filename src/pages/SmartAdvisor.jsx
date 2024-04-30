@@ -1,15 +1,15 @@
 import { useNavigate } from 'react-router-dom';
-import addfund_img from '../assets/addfund_img.png';
-import advisorservice_img from '../assets/advisorservice_img.png';
+// import addfund_img from '../assets/addfund_img.png';
+// import advisorservice_img from '../assets/advisorservice_img.png';
 import bg_features from '../assets/bg_features.png';
-import depositmethod_img from '../assets/depositmethod_img.png';
+// import depositmethod_img from '../assets/depositmethod_img.png';
 import etf_img from '../assets/etf_img.png';
-import num_1 from '../assets/num_1.png';
-import num_2 from '../assets/num_2.png';
-import num_3 from '../assets/num_3.png';
+// import num_1 from '../assets/num_1.png';
+// import num_2 from '../assets/num_2.png';
+// import num_3 from '../assets/num_3.png';
 import phonegif from '../assets/phone.gif';
 import smartbg from '../assets/smart-advisor_bg.png';
-import smartAdvisorVideo from '../assets/smartadvisorvideo.mp4';
+// import smartAdvisorVideo from '../assets/smartadvisorvideo.mp4';
 import MainLayout from '../components/MainLayout';
 
 import '../CSS/main.css';
@@ -113,7 +113,7 @@ const SmartAdvisor = () => {
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center justify-around bg-gradient-to-tl from-indigo-900 to-black  bg-opacity-80 min-h-[100vh] max-lg:flex-col max-lg:justify-evenly">
+        {/* <div className="flex flex-wrap items-center justify-around bg-gradient-to-tl from-indigo-900 to-black  bg-opacity-80 min-h-[100vh] max-lg:flex-col max-lg:justify-evenly">
           <div className="  ">
             <p className="text-transparent text-[2.5rem] font-bold bg-clip-text bg-gradient-to-r from-purple-400 via-yellow-500 to-indigo-600 mb-10  max-lg:text-[2rem] max-sm:text-[1.5rem]">
               Bulloak Smart <br /> Advisor
@@ -131,7 +131,7 @@ const SmartAdvisor = () => {
           >
             <source src={smartAdvisorVideo}></source>
           </video>
-        </div>
+        </div> */}
 
         <div
           className="min-h-[100vh] py-10 flex justify-around items-center flex-wrap bg-gradient-to-tr from-opacity-60 via-opacity-0 to-transparent max-lg:flex-col max-lg:flex-wrap"
@@ -172,7 +172,7 @@ const SmartAdvisor = () => {
           </div>
         </div>
 
-        <div className="bg-gradient-to-tl from-indigo-900 to-black  bg-opacity-80 ">
+        {/* <div className="bg-gradient-to-tl from-indigo-900 to-black  bg-opacity-80 ">
           <div className="flex items-center justify-around min-h-[100vh] max-lg:flex-col max-lg:flex-wrap">
             <div>
               <p className="text-transparent text-[2.5rem] font-bold bg-clip-text bg-gradient-to-r from-purple-400 via-yellow-500 to-indigo-600 mb-10 max-lg:text-[2rem] max-sm:text-[1.5rem]">
@@ -208,7 +208,7 @@ const SmartAdvisor = () => {
             be constructed using ETFs or other investments that do not pay fees
             to SSGA.
           </p>
-        </div>
+        </div> */}
 
         <div className="flex flex-wrap justify-around items-center  bg-gradient-to-tl  from-indigo-900 to-black  bg-opacity-90 min-h-[100vh] max-lg:flex-col max-lg:py-20">
           <div className="flex  items-center flex-wrap justify-center w-[30%] h-[80%]  flex-col rounded-md max-lg:w-[70%] max-md:w-[80%] max-sm:w-[90%]">
@@ -227,7 +227,7 @@ const SmartAdvisor = () => {
               Peace of Mind
             </p>
             <p className="text-white opacity-90 p-0  text-center font-OpenSans-Regular font-Arial font-sans font-normal leading-[25px] text-[1.1rem] tracking-normal">
-              Webull Smart Advisor helps with day-to-day management by
+              Bulloak Smart Advisor helps with day-to-day management by
               monitoring your portfolio, and it automatically rebalances it when
               necessary to keep you on track.
             </p>
@@ -257,7 +257,7 @@ const SmartAdvisor = () => {
           </div>
         </div>
 
-        <div className="bg-gradient-to-tl from-indigo-900 to-black py-20 gap-28  bg-opacity-80 min-h-[100vh] flex items-center flex-wrap flex-col justify-center ">
+        {/* <div className="bg-gradient-to-tl from-indigo-900 to-black py-20 gap-28  bg-opacity-80 min-h-[100vh] flex items-center flex-wrap flex-col justify-center ">
           <div className="flex justify-around items-center h-[100%] flex-wrap max-lg:flex-col max-lg:gap-10">
             <div className="flex flex-col  ">
               <div className="flex items-center gap-7 ">
@@ -325,7 +325,7 @@ const SmartAdvisor = () => {
               className="w-[25%] max-lg:w-[40%] max-md:w-[50%] max-sm:w-[80%]"
             />
           </div>
-        </div>
+        </div> */}
       </MainLayout>
     </div>
   );

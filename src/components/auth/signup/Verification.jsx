@@ -1,18 +1,20 @@
+import { Alert, CircularProgress } from '@mui/material';
 import axios from 'axios';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
+// import { useNavigate } from 'react-router-dom';
 import OtpInput from 'react18-input-otp';
-import { scrollToTop } from '../../../actions/utils';
 import { handleGenericError } from '../../../config/mixin';
 import Button from '../../utils/reusables/Button';
 
-const Verification = ({ setSignupComponent }) => {
+const Verification = () => {
   const [state, setState] = useState({ otp: '' });
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [resendingOtp, setResendingOtp] = useState(false);
-
+  const [isLoading, setIsLoading] = useState(false);
+  // const navigate = useNavigate();
   const currentUserEmail = useSelector(
     (state) => state.auth.currentSignupEmail
   );
@@ -29,13 +31,13 @@ const Verification = ({ setSignupComponent }) => {
       const data = {
         verification_code: state?.otp,
       };
-
       try {
         setIsLoading(true);
-        await axios.post('auth/verify-email/', data);
+        await axios.post('user/auth/verify-email/', data);
         setIsLoading(false);
         setSuccess('Your account has been verified');
-        navigate('/login');
+
+        window.location.replace('/login');
       } catch (error) {
         setIsLoading(false);
         const err = handleGenericError(error);
@@ -78,6 +80,8 @@ const Verification = ({ setSignupComponent }) => {
           We have sent an OTP to{' '}
           <span className="text-[#8E0789]">{currentUserEmail}</span>
         </p>
+        {error && <Alert severity="error">{error}</Alert>}
+        {success && <Alert severity="success">{success}</Alert>}
       </div>
 
       <div className="flex flex-col">
@@ -85,7 +89,7 @@ const Verification = ({ setSignupComponent }) => {
           <OtpInput
             value={state.otp}
             onChange={handleChange}
-            numInputs={4}
+            numInputs={6}
             inputStyle={
               error
                 ? {
@@ -122,19 +126,26 @@ const Verification = ({ setSignupComponent }) => {
               onClick={resendOtp}
               className="text-[#8E0789] cursor-pointer font-medium"
             >
-              Resend OTP
+              {resendingOtp ? (
+                <>
+                  <CircularProgress size={18} style={{ color: '#8E0789' }} />
+                </>
+              ) : (
+                'Resend Otp'
+              )}
             </span>
           </p>
         </div>
       </div>
       <div className="flex justify-between mb-5 mx-0 gap-3">
-        <Button
-          eventHandler={() => {
-            scrollToTop();
-            setSignupComponent(2);
-          }}
-        >
-          Verify
+        <Button type={'submit'}>
+          {isLoading ? (
+            <>
+              <CircularProgress size={18} style={{ color: '#fff' }} />
+            </>
+          ) : (
+            'Verify'
+          )}
         </Button>
       </div>
     </form>

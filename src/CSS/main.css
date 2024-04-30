@@ -26,4 +26,10 @@
   .custom-checkbox {
     transform: scale(1.5); /* Adjust the scaling factor as needed */
   }
+  .gridClass
+  {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    column-gap: 20px;
+  }
 

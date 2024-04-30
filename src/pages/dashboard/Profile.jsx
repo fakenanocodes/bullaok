@@ -1,4 +1,3 @@
-import React from 'react';
 import ProfileComponent from '../../components/Dashboard/ProfileComponent';
 
 export default function Profile() {

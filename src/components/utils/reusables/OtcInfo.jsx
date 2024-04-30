@@ -59,8 +59,8 @@ const OtcInfo = () => {
                   item?.change?.startsWith('-')
                     ? 'text-red-400'
                     : item?.change?.startsWith('+')
-                    ? 'text-green-400'
-                    : 'text-[#636872]'
+                      ? 'text-green-400'
+                      : 'text-[#636872]'
                 }
               >
                 {item?.change}
@@ -79,11 +79,11 @@ const OtcInfo = () => {
         </div>
       </div>
 
-      <div className="flex justify-center">
+      {/* <div className="flex justify-center">
         <button className="font-bold py-4 px-7 bg-[#D4B716] rounded-lg text-[#000]">
           View Full List
         </button>
-      </div>
+      </div> */}
     </>
   );
 };

@@ -40,7 +40,13 @@ export default function Stock() {
             for more information regarding eligibility.
           </p>
         </div>
-        <button className="bg-[#D4B716] lg:block rounded-lg text-[#000] font-bold w-1/4 py-4 items-center gap-2 mt-[100px] lg:mt-0">
+        <button
+          onClick={() => {
+            navigate('/register');
+            scrollToTop();
+          }}
+          className="bg-[#D4B716] lg:block rounded-lg text-[#000] font-bold w-1/4 py-4 items-center gap-2 mt-[100px] lg:mt-0"
+        >
           <span>Get Started</span>
         </button>
       </div>

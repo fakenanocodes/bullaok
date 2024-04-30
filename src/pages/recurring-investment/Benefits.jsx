@@ -1,19 +1,17 @@
-import React from 'react';
-
 export default function Benefits() {
   const data = [
     {
-      img: 'growth.png',
+      img: '/growth.png',
       title: 'Steady portfolio growth',
       text: 'Recurring investments ensure you spread your investments over time, allowing you to grow your portfolio with new funds consistently.',
     },
     {
-      img: 'risky.png',
+      img: '/risky.png',
       title: 'Better managed risks ',
       text: 'Recurring investments can help manage the impacts and risks of a volatile market. Spreading out your investments can potentially smooth out the ups and downs of the market.      ',
     },
     {
-      img: 'investing.png',
+      img: '/investing.png',
       title: 'More disciplined investing',
       text: 'Focus on long-term accumulation by investing with discipline regardless of market conditions. By setting up recurring investments, the amount you invest is predetermined and not based on emotion.      ',
     },

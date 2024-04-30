@@ -19,7 +19,7 @@ const SuccessPage = () => {
         }
         onClick={() => setSup('')}
       >
-        Successfull
+        Successful
       </button>
     </div>
   );

@@ -1,30 +1,45 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import debit_card from '../../assets/dashboard/investment/debit_card.png';
-import { setCardInformation } from '../../store/reducers/card_reducer';
+import { resetCardInformation, setCardInformation } from '../../store/reducers/card_reducer';
 import AddIcon from '../utils/icons/AddIcon';
 import CancelIcon from '../utils/reusables/CancelIcon';
 import ForwardArrowIcon from '../utils/reusables/ForwardArrowIcon';
 
-const PersonalData = () => {
+const PersonalData = ({ handleNext }) => {
   const [currency, setCurrency] = useState('');
   const cardInformation = useSelector((state) => state.card.cardInformation);
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   useEffect(() => {
-    cardInformation?.currency && setCurrency(cardInformation?.currency)
-  }, [cardInformation?.currency])
+    cardInformation?.currency && setCurrency(cardInformation?.currency);
+  }, [cardInformation?.currency]);
 
   const handleClick = (e) => {
     setCurrency(e.target.value);
   };
 
   const storeCardInfo = () => {
+    if(!currency){
+      toast.error('Please select your currency', {
+        autoClose: 2000,
+      });
+      return;
+    }
+    handleNext(2);
     dispatch(setCardInformation({ ...cardInformation, currency }));
     console.log('done');
   };
-
   console.log(cardInformation);
+
+  const handleCancel = () => {
+    navigate(-1)
+    dispatch(resetCardInformation())
+    handleNext(0)
+  }
   return (
     <div className="py-3 px-14 h-full overflow-y-scroll">
       <p className="text-sm md:text-base lg:text-xl text-black font-[poppins]">
@@ -80,7 +95,7 @@ const PersonalData = () => {
       </div>
 
       <div className="flex items-center gap-5 mt-5">
-        <button className="h-[2.4rem] flex items-center gap-1 px-3 py-2 text-sm text-[#5F5656] font-semibold border border-[#41073F] rounded-sm">
+        <button onClick={handleCancel} className="h-[2.4rem] flex items-center gap-1 px-3 py-2 text-sm text-[#5F5656] font-semibold border border-[#41073F] rounded-sm">
           Cancel
           <CancelIcon />
         </button>

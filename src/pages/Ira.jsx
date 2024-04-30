@@ -11,6 +11,7 @@ import IraBigCardTwo from '../components/utils/cards/IraBigCardTwo';
 import IraMediumCard from '../components/utils/cards/IraMediumCard';
 import IraSmallCard from '../components/utils/cards/IraSmallCard';
 import Faq from '../components/utils/reusables/Faq';
+import IndividualRetirementAccount from '../components/IndividualRetirementAccount';
 
 const cardData = [
   {
@@ -52,6 +53,7 @@ const Ira = () => {
   const navigate = useNavigate()
   return (
     <MainLayout>
+      <IndividualRetirementAccount />
       <section className="flex flex-col lg:flex-row justify-evenly items-center gap-[2rem] mx-5 md:mx-[5rem]">
         <div className="flex flex-col gap-5 mt-[5rem] lg:mt-0">
           <div>

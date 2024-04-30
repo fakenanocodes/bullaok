@@ -14,16 +14,14 @@ import { MdFiberManualRecord } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
-import { images } from '../../assets';
 import CryptoCharts from '../../components/Dashboard/CryptoCharts';
+import EthCoinWidget from '../../components/Dashboard/EthCoinWidget';
 import HistoryRow from '../../components/Dashboard/HistoryRow';
-import LiteCoinWidget from '../../components/Dashboard/LiteCoinWIdget';
-import PackageCard from '../../components/Dashboard/PackageCard';
 import DashboardEmptyContainer from '../../components/empty/DashboardEmptyContainer';
+import CoinBlocksMarquee from '../../components/widget/CoinBlocksMarquee';
 import useCurrencyFormatter from '../../hooks/useCurrencyFormatter';
 import { setUserKyc } from '../../store/reducers/transact_reducer';
-import BtcCoinWidget from '../../components/Dashboard/BtcCoinWidget';
-import EthCoinWidget from '../../components/Dashboard/EthCoinWidget';
+import NewDashboard from '../../components/NewDashboard';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -39,24 +37,22 @@ const options = {
   },
 };
 
-const imageUrls = {
-  Assets: images.assets,
-  'Real Estate': images.estate,
-  Crypto: images.crypto,
-  Forex: images.forex,
-  Cannabis: images.cannabis,
-};
-
-const colors = ['#6B5F6B', '#33FF57', '#5733FF']; // Add more colors as needed
 const navOptions = ['Withdraw', 'Deposit', 'Transfer'];
 
 const DashboardHome = () => {
-  const { data, isLoading } = useSWR('/plans/categories/');
+  const [activeOption, setActiveOption] = useState(null);
+  const [showAmount, setShowAmount] = useState(true);
+
   const { data: user } = useSWR('/user/');
-  const { data: history, isLoading: historyLoading } = useSWR('plans/history');
+  const { data: history } = useSWR('plans/history');
+  const { data: brokers } = useSWR('broker/user-broker/');
+  const { data: userKyc } = useSWR('/kyc/');
   const { data: chartDatas } = useSWR(
     'plans/get-user-investment-amount-by-category/'
   );
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const chartData = {
     datasets: [
@@ -67,15 +63,8 @@ const DashboardHome = () => {
     ],
   };
 
-  const [activeOption, setActiveOption] = useState(null);
-  const dispatch = useDispatch();
-
   const isChartDataAvailable = chartDatas && chartDatas.length === 0;
 
-  const navigate = useNavigate();
-  console.log(user);
-  const [showAmount, setShowAmount] = useState(true);
-  const { data: userKyc } = useSWR('/kyc/');
   dispatch(setUserKyc(userKyc));
 
   const handleVisibilityToggle = () => {
@@ -98,8 +87,16 @@ const DashboardHome = () => {
     '#FFC249',
   ];
 
+  if (!brokers && brokers?.length === 0) {
+    navigate('brokers');
+  }
+  const brokerId = brokers?.map((item) => item?.broker);
+
+  const { data: singleBroker } = useSWR(`broker/brokers/${brokerId}/`);
+
   return (
     <div className="space-y-3 h-full no-scrollbar overflow-auto p-5">
+      <NewDashboard />
       <div className="flex space-x-3 items-center justify-center w-full xl:hidden lg:hidden md:hidden py-7 text-[#41073F] font-semibold">
         {navOptions?.map((option, index) => (
           <span
@@ -144,11 +141,17 @@ const DashboardHome = () => {
                 live profit
               </span>
             </div>
-            <div className="flex  justify-start w-full flex-col ">
-              <span className="text-gray-300 text-lg">Book Balance</span>
-              <span className="font-bold  bg-transparent  shadow-xl drop-shadow-xl  text-xl">
-                {formattedBookBalance}
-              </span>
+            <div className="flex justify-between items-center">
+              <div className="flex  justify-start w-full flex-col ">
+                <span className="text-gray-300 text-lg">Book Balance</span>
+                <span className="font-bold  bg-transparent  shadow-xl drop-shadow-xl  text-xl">
+                  {formattedBookBalance}
+                </span>
+              </div>
+              <div className="bg-white p-3 rounded-lg text-black">
+                <p className="text-[#F5C249] font-bold">Broker</p>
+                <h2>{singleBroker?.name}</h2>
+              </div>
             </div>
           </div>
         </div>
@@ -185,39 +188,19 @@ const DashboardHome = () => {
           )}
         </div>
       </div>
-      <div className="grid grid-cols-3  w-full ">
-        <div className="col-span-2">
+      <div className="grid xl:grid-cols-3 grid-cols-1  w-full ">
+        <div className="col-span-2 bg-[#fff]/70">
           <CryptoCharts />
         </div>
 
         <div className="grid grid-cols-2 gap-5">
-          <LiteCoinWidget />
-          <BtcCoinWidget />
           <EthCoinWidget />
         </div>
       </div>
+      <div className="flex">
+        <CoinBlocksMarquee />
+      </div>
       <div className="space-y-3">
-        <div className="w-full flex px-3 justify-between">
-          <span className="font-semibold">All Investment</span>
-          <span
-            className="text-[#F5C249] cursor-pointer"
-            onClick={() => {
-              navigate('/dashboard/investment/packages');
-            }}
-          >
-            See all
-          </span>
-        </div>
-        <div className="flex xl:flex-row md:flex-row flex-col items-center gap-4">
-          {data?.map((investmentPackage, index) => (
-            <PackageCard
-              id={investmentPackage.id}
-              label={investmentPackage?.name}
-              imgUrl={imageUrls[investmentPackage?.name]}
-              key={index}
-            />
-          ))}
-        </div>
         <div className="flex flex-col space-y-2">
           <div className="flex justify-end">
             <span
