@@ -1,6 +1,7 @@
 import { Alert, CircularProgress, Rating } from '@mui/material';
 import axios from 'axios';
 import { useState } from 'react';
+import { RxAvatar } from 'react-icons/rx';
 import { TbSend } from 'react-icons/tb';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -38,6 +39,7 @@ export default function Broker() {
     setOpenModal(false);
   };
 
+  console.log(data);
 
   async function submitBroker() {
     try {
@@ -45,11 +47,9 @@ export default function Broker() {
         broker: selectBrokerList?.id,
       };
       setLoading(true);
-      axios.post(`/broker/user-broker/`, data).then((res) => {
-        if (res?.status === 201) {
+      axios.post(`/broker/user-broker/`, data).then(() => {
           setSuccess('Broker selected successfully');
           navigate('/dashboard');
-        }
       });
       dispatch(toggleBrokerStatus(true));
       setLoading(false);
@@ -78,6 +78,7 @@ export default function Broker() {
     setSuccess(null);
     setError(null);
   }, 4000);
+
   return (
     <div className="flex font-[poppins]">
       <div className="brokersbg bg-[#D2C2D2] h-[100vh] hidden xl:block py-8 p-4 text-center">
@@ -108,20 +109,22 @@ export default function Broker() {
           Brokers
         </h2>
 
-        <div className="grid 2xl:grid-cols-3 md:grid-cols-2 justify-center grid-cols-1 p-2 gap-y-8 gap-x-6 ">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 justify-center grid-cols-1 p-2 gap-y-8 gap-x-6 ">
           {data?.map((item, idx) => (
             <div
-              className="flex   border border-[#8E0789] p-4 rounded-lg gap-4  xl:flex-row lg:flex-row flex-col "
+              className="flex p-4 rounded-lg xl:flex-row lg:flex-row flex-col "
               key={idx}
             >
-              <div className="flex flex-col items-start space-y-1 ">
+              <div className="flex items-start space-x-3">
+                {item?.image ? <img src={item?.image} className="w-24 h-24 rounded-full"/> : <RxAvatar className="w-24 h-24 rounded-full"/>}
+                <div className="flex flex-col items-start space-y-1">
                 <div className="flex items-center gap-4">
-                  <h2 className="xl:text-2xl lg:text-2xl font-bold text-xs">
+                  <h2 className="lg:text-lg font-medium text-xs">
                     {item?.name}
                   </h2>
                   <TbSend className="text-[#8E0789]" />
                 </div>
-                <p className="xl:text-xl lg:text-xl text-xs">
+                <p className="lg:text-lg text-gray-500 text-xs">
                   {item?.regulator}
                 </p>
                 <Rating
@@ -133,12 +136,13 @@ export default function Broker() {
                 />
                 <button
                   onClick={() => onSelect(item.id)}
-                  className={`xl:text-2xl lg:text-2xl text-xs ${selectBrokerList.id === item.id ? 'text-[#47AB18]' : ''}  `}
+                  className={`lg:text-lg text-sm ${selectBrokerList.id === item.id ? 'text-[#47AB18]' : ''}  `}
                 >
                   {selectBrokerList.id === item.id ? 'Selected' : 'Select'}
                 </button>
                 {error && <Alert severity="error">{error}</Alert>}
               </div>
+                </div>
             </div>
           ))}
         </div>

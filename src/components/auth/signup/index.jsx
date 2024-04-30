@@ -1,14 +1,16 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import login_bg from '../../../assets/login_bg.png';
-import SelectBroker from './SelectBroker';
 import SignupForm from './SignupForm';
 import Verification from './Verification';
 
 const SignupComponent = () => {
   const [signupComponent, setSignupComponent] = useState(0);
 
-  const pageComponents = [SignupForm, Verification, SelectBroker];
-  const Page = pageComponents[signupComponent];
+  const pageComponents = [SignupForm, Verification];
+  const Page = useMemo(
+    () => pageComponents[signupComponent],
+    [signupComponent]
+  );
 
   return (
     <div className="flex flex-col-reverse lg:flex-row justify-between lg:h-[90vh]">

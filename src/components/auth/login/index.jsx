@@ -83,12 +83,9 @@ const UserLogin = () => {
 
       reset();
       console.log(response);
-      if (broker === false) {
-        navigate('/brokers');
-        window.location.reload();
-      } else {
-        window.location.replace('/dashboard');
-      }
+      
+      window.location.replace('/dashboard');
+      
     } catch (err) {
       setIsLoading(false);
       const errMsg = handleGenericError(err);

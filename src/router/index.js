@@ -35,6 +35,7 @@ import InvestmentHistory from '../pages/dashboard/InvestmentHistory';
 import Profile from '../pages/dashboard/Profile';
 import ReferralContainer from '../pages/dashboard/Referral';
 // import InvestmentPackages from '../pages/dashboard/InvestmentPackages';
+import IndividualRetirementAccount from '../components/IndividualRetirementAccount';
 import ForgotPassword from '../components/auth/forgot-password';
 import UserLogin from '../components/auth/login';
 import CardSuccess from '../components/card_application_setup/CardSuccess';
@@ -53,7 +54,6 @@ import Support from '../pages/dashboard/Support';
 import Deposit from '../pages/dashboard/transactions/Deposit';
 import Transfer from '../pages/dashboard/transactions/Transfer';
 import Withdrawal from '../pages/dashboard/transactions/Withdrawal';
-import IndividualRetirementAccount from '../components/IndividualRetirementAccount';
 const router = createBrowserRouter([
   {
     path: '*',
@@ -228,12 +228,13 @@ const router = createBrowserRouter([
         Component: BonusContainer,
       },
       {
-        path: 'withdraw',
+        path: 'withdrawal',
         Component: Withdrawal,
       },
       {
         path: 'deposit',
         Component: Deposit,
+
       },
       {
         path: 'referral',
@@ -246,14 +247,6 @@ const router = createBrowserRouter([
       {
         path: 'transfer',
         Component: Transfer,
-      },
-      {
-        path: 'withdraw',
-        Component: Withdrawal,
-      },
-      {
-        path: 'deposit',
-        Component: Deposit,
       },
       {
         path: 'kyc/success',
