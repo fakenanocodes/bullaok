@@ -1,6 +1,10 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 // import { Cookies } from 'react-cookie';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
+import { FaBitcoin, FaEthereum } from 'react-icons/fa';
+import { SiLitecoin, SiTether, SiXrp } from 'react-icons/si';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import useSWR from 'swr';
@@ -11,6 +15,7 @@ import DepositSuccess from './DepositSuccess';
 import MobileDepostTable from './MobileDepositeTab';
 
 const Deposit = () => {
+  const [dropDown, setDropDown] = useState(false);
   const [openModel, setOpenModel] = useState(false);
   const [loading, setLoading] = useState(false);
   const [showMobileTable, setShowMobileTable] = useState(false);
@@ -25,8 +30,9 @@ const Deposit = () => {
   const { data: depositWallet } = useSWR('/walletaddress/');
   const navigate = useNavigate();
   const walletType = ['litecoin', 'ripple', 'ethereum', 'bitcoin', 'tether'];
+  const { data: user } = useSWR(`/user/`);
 
-  console.log('WALLET ADD', depositWallet);
+  // console.log('WALLET ADD', depositWallet);
 
   // let walletMock = {
   //   bitcoin_address: 'BTCwrtewt3ertrwert',
@@ -115,21 +121,48 @@ const Deposit = () => {
     }
   };
 
+  const Wallets = [
+    {
+      name: 'bitcoin',
+      value: 'BTC',
+      icon: <FaBitcoin className="text-yellow-300" />,
+    },
+    {
+      name: 'ethereum',
+      value: 'ETH',
+      icon: <FaEthereum className="text-[#e2e2e6]" />,
+    },
+    {
+      name: 'litecoin',
+      value: 'LTC',
+      icon: <SiLitecoin className="text-[#A6A9AA]" />,
+    },
+    {
+      name: 'tether',
+      value: 'USDT',
+      icon: <SiTether className="text-[#26A17B]" />,
+    },
+    {
+      name: 'ripple',
+      value: 'XRP',
+      icon: <SiXrp className="text-[#FF6633]" />,
+    },
+  ];
+  const [depositAccount, setDepositAccount] = useState(Wallets[0]);
+  const availableBalance = useMemo(
+    () => user?.profile?.available_balance,
+    [user]
+  );
+
   return (
     <div className=" h-[100%] no-scrollbar bg-white p-4 text-gray-700 overflow-scroll relative 00">
-      <div className=" text-2xl font-bold my-3 mb-10 grid grid-cols-3 gap-12 items-center ">
-        <div className="md:hidden cursor-pointer " onClick={() => navigate(-1)}>
-          <LeftMoveIcon />
-        </div>
-        Deposit
-        {/* <button
-          onClick={() => setOpenSuccess(!openSuccess)}
-          className="bg-red-500 cursor-pointer"
-        >
-          Temp
-        </button> */}
+       <div className="py-3 px-20">
+        <span className="text-3xl tracking-wider font-medium">
+          New Deposit
+        </span>
       </div>
-      {openSuccess && (
+      <div className="absolute left-0 right-0 border-b-2 border-b-gray-300"></div>
+      {/* {openSuccess && (
         <DepositSuccess
           wallet={wallet}
           amount={amount}
@@ -137,108 +170,230 @@ const Deposit = () => {
           walletTypes={walletTypes}
           setOpenSuccess={setOpenSuccess}
         />
-      )}
-      <div>
-        <div className="flex flex-col gap-10 pb-24">
-          <div className="md:flex gap-10  font-semibold">
-            <div className="flex flex-col md:w-[50%] mb-10 md:mb-0">
-              <label>Deposit wallet</label>
-              <select
-                value={wallet || walletType[0]}
-                onChange={(e) => setWallet(e.target.value)}
-                type="text"
-                className="rounded-lg px-6 border-2 py-4"
-              >
-                <option value={depositWallet?.usdt_address || 'Loading...'}>
-                  USDT
-                </option>
-                <option value={depositWallet?.litecoin_address || 'Loading...'}>
-                  LTC
-                </option>
-                <option value={depositWallet?.bitcoin_address || 'Loading...'}>
-                  BTC
-                </option>
-                <option value={depositWallet?.xrp_address || 'Loading...'}>
-                  XRP
-                </option>
-                <option value={depositWallet?.etherum_address || 'Loading...'}>
-                  ETH
-                </option>
-              </select>
-            </div>
-          </div>
-          <div className="hidden md:w-[48%] items-center gap-5 relative md:grid grid-flow-col ">
-            <div className="w-auto bg-black h-[1.3px] col-span-4 "></div>
-            <div className="col-span-[1px] -ml-5">
-              <DepositIcon />
-            </div>
-            <div className="w-auto bg-black h-[1.3px]  col-span-3 -ml-16 "></div>
-          </div>
-          {/* for destop view */}
-          <div className=" md:flex gap-10 font-semibold ">
-            <div className=" hidden md:flex flex-col md:w-[50%] ">
-              <label>Deposit wallet address</label>
-              <input
-                value={wallet || depositWallet?.usdt_address}
-                // onChange={(e) => setWalletAdress(e.target.value)}
-                type="text"
-                className="rounded-lg px-6 border-2 py-4"
-              />
-            </div>
+      )} */}
 
-            <div className="flex flex-col md:hidden mb-12 md:mb-0">
-              <label>Deposit amount</label>
-              <input
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
-                type="number"
-                className={`rounded-lg px-6 border-2 ${
-                  showNotify && 'border-red-500'
-                } py-4`}
-                placeholder="0.00 $"
-              />
+      <div>
+
+      <div className="flex justify-between py-10 px-20 border-b-2 border-b-gray-300 items-end">
+          <div className="space-y-8">
+            <span className="font-semibold text-lg">From</span>
+            <div className="flex flex-col gap-4">
+              <span className="text-[#4A4A4A] font-medium">Select Account</span>
+              <div className="relative" onMouseLeave={() => setDropDown(false)}>
+                <button
+                  onClick={() => setDropDown(!dropDown)}
+                  className="bg-[#8E0789] p-4 w-[28vw] rounded-lg flex justify-between"
+                >
+                  <div className="flex gap-2 items-center">
+                    {depositAccount?.icon}
+                    <span className="text-white">
+                      {depositAccount?.value}
+                    </span>
+                  </div>
+                  {dropDown ? (
+                    <ArrowDropUpIcon className="text-white" />
+                  ) : (
+                    <ArrowDropDownIcon className="text-white" />
+                  )}
+                </button>
+                {dropDown && (
+                  <div className="absolute transition-all duration-1000 top-[58px] right-0 left-0 bg-white backdrop-filter backdrop-blur-md bg-opacity-60 border border-gray-200 shadow-lg rounded-lg space-y-2">
+                    {Wallets?.map((wallet, index) => (
+                      <button
+                        key={index}
+                        onClick={() => {
+                          setDepositAccount(wallet);
+                          setDropDown(false);
+                        }}
+                        className="flex gap-2  items-center justify-start p-4 hover:bg-[#8E0789] w-full hover:rounded-lg hover:text-white"
+                      >
+                        {wallet?.icon}
+                        <span onClick={(e) => setWallet(e.target.textContent)} className='w-full h-full text-left'>{wallet?.value}</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
-            <div className="md:hidden flex justify-center m-12 ">
-              <DepositIcon />
-            </div>
-            <div className="hidden md:flex flex-col md:w-[50%] mb-12 md:mb-0">
-              <label>Deposit amount</label>
+          </div>
+          <div className="flex flex-col space-y-8 pb-5 w-[28vw]">
+            <span className="text-[#4A4A4A] font-medium">Account detail</span>
+            <span className="text-lg font-bold">
+              Available Balance:{' '}
+              <span className="text-xl font-bold pl-8">
+                ${availableBalance}
+              </span>
+            </span>
+          </div>
+        </div>
+
+        <div className="py-10 px-20 space-y-10">
+          <span className="text-lg font-bold">To</span>
+          <div className="flex justify-between items-center">
+            <div className="flex flex-col gap-2">
+              <span>Deposit Account Name</span>
               <input
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
-                type="number"
-                className={`rounded-lg px-6 border-2 ${
-                  showNotify && 'border-red-500'
-                } py-4`}
-                placeholder="0.00 $"
-              />
-            </div>
-            <div className="md:hidden flex flex-col ">
-              <label>Deposit wallet address</label>
-              <input
-                value={wallet || depositWallet?.usdt_address}
                 type="text"
-                className="rounded-lg px-6 border-2 py-4"
+                className="w-[28vw] rounded-lg p-3 border-[#8E0789]"
+                value={user?.profile?.full_name}
+                disabled
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <span>Deposit Wallet Address</span>
+              <input
+                type="text"
+                className="w-[28vw] rounded-lg p-3  border-[#8E0789]"
+                value={wallet || depositWallet?.usdt_address}
+                onChange={(e) => setWalletAdress(e.target.value)}
+                // value={receiverDetail?.walletAddress}
+                // onChange={(e) =>
+                //   setReceiverDetail({
+                //     ...receiverDetail,
+                //     walletAddress: e.target.value,
+                //   })
+                // }
               />
             </div>
           </div>
+
+          <div className="flex flex-col gap-2">
+            <span>Deposit Amount</span>
+            <input
+              type="text"
+              className="w-[28vw] rounded-lg p-3  border-[#8E0789]"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+              // value={receiverDetail?.amount}
+              // onChange={(e) =>
+                // setReceiverDetail({
+                //   ...receiverDetail,
+                //   amount: Number(e.target.value),
+                // })
+              // }
+            />
+          </div>
+        </div>
+
+
+        <div className="w-full flex justify-center items-center gap-8 pt-5">
+            <button className="bg-[#8E0789] bg-opacity-30 px-16 font-semibold  py-3 rounded-lg">
+              Cancel
+            </button>
+            <button
+              onClick={handleOpenModel}
+              className="bg-[#8E0789] py-3 text-white rounded-lg px-8 font-semibold"
+            >
+              Make Deposit
+            </button>
+            {/* <Modal
+              open={openModal}
+              onClose={() => setOpenModal(false)}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box sx={style}>
+                <div className="flex-col flex space-y-5 font-poppins">
+                  <div className="w-full flex justify-between">
+                    <span className="text-xl font-semibold">Withdrawal</span>
+                    <button onClick={() => setOpenModal(false)}>
+                      <CloseIcon className="text-[#8E0789]" />
+                    </button>
+                  </div>
+                  <div className=" w-full">
+                    <div className="flex flex-col gap-5">
+                      <div className="flex flex-col gap-2">
+                        <span className="text-sm ">
+                          Withdrawal Wallet Address
+                        </span>
+                        <input
+                          type="text"
+                          className="rounded-lg p-3  border-[#8E0789]"
+                          value={receiverDetail?.walletAddress}
+                          disabled
+                        />
+                      </div>
+                      <div className="flex flex-col gap-2">
+                        <span className="text-sm ">Withdrawal amount</span>
+                        <input
+                          type="text"
+                          className="rounded-lg p-3  border-[#8E0789]"
+                          value={receiverDetail?.amount}
+                          disabled
+                        />
+                      </div>
+                      <div className="flex flex-col gap-2">
+                        <span className="text-sm ">Enter account password</span>
+                        <input
+                          type="password"
+                          className="rounded-lg p-3  border-[#8E0789]"
+                          value={withdrawalPrompt?.password}
+                          onChange={(e) =>
+                            setWithdrawalPrompt({
+                              ...withdrawalPrompt,
+                              password: e.target.value,
+                            })
+                          }
+                        />
+                      </div>
+                    </div>
+                    <div className="absolute left-5">
+                      <Checkbox
+                        checked={withdrawalPrompt?.sendReceiptToEmail}
+                        onChange={() =>
+                          setWithdrawalPrompt({
+                            ...withdrawalPrompt,
+                            sendReceiptToEmail:
+                              !withdrawalPrompt?.sendReceiptToEmail,
+                          })
+                        }
+                      />
+                      <span className="text-sm">
+                        Send receipt to email address
+                      </span>
+                    </div>
+                    <div className="absolute bottom-8 right-10 space-x-10">
+                      <button
+                        onClick={() => setOpenModal(false)}
+                        className="border-[#8E0789] border p-2 text-sm font-medium rounded-md"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        onClick={confirmWithdrawal}
+                        className="bg-[#8E0789] px-4 py-2 text-white text-sm font-medium rounded-md"
+                      >
+                        {loading ? (
+                          <CircularProgress color="inherit" size={15} />
+                        ) : (
+                          'Confirm Withdrawal'
+                        )}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </Box>
+            </Modal> */}
+          </div>
+
+
+
+
+
+
+
+
+        {/* mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm */}
+        <div className="flex flex-col gap-10 pb-24">
+          
+          
+          
           <div className="md:flex md:justify-between md:w-[48%] text-xl items-center">
             {/* <div className=" text-red-600 font-semibold mb-28 md:mb-0">
               You are depositing ${usdtAmount || '0.00'}
             </div> */}
-            <button
-              onClick={handleOpenModel}
-              className="hidden md:flex bg-[#352F84] py-2 text-white px-4 rounded-[5px]"
-            >
-              Make deposit
-            </button>
             <div className="md:hidden flex justify-between text-sm">
-              <button
-                onClick={() => setShowMobileTable(!showMobileTable)}
-                className="border-2 border-red-700 px-6 rounded-md py-4"
-              >
-                Deposit History
-              </button>
+              
               <button
                 onClick={handleOpenModel}
                 className="bg-[#352F84] text-white rounded-md px-6 py-4"

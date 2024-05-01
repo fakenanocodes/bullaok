@@ -1,7 +1,7 @@
 import about_bg from '../assets/about/about_bg.png';
 import info_img from '../assets/about/info_img.png';
 import info_img2 from '../assets/about/info_img2.png';
-import Maindashboard_layoutt from '../components/Maindashboard layoutt';
+import Maindashboard_layoutt from '../components/MainLayout';
 
 const About = () => {
   return (
