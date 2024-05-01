@@ -14,6 +14,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import useSWR from 'swr';
 import { images } from '../../assets';
+import { RWebShare } from 'react-web-share';
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   height: 20,
@@ -113,7 +114,7 @@ const boxesData = [
   { icon: images.transaction, text: 'Friends make the first transaction' },
 ];
 export default function ReferralComponent() {
-  const [isShareable, setIsShareable] = useState(false)
+  const [isShareable, setIsShareable] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
   const { data: profile } = useSWR('user/');
   console.log(profile);
@@ -126,11 +127,11 @@ export default function ReferralComponent() {
 
   useEffect(() => {
     if (navigator.share) {
-      setIsShareable(true)
+      setIsShareable(true);
     } else {
-      setIsShareable(false)
+      setIsShareable(false);
     }
-  }, [isShareable])
+  }, [isShareable]);
 
   // This is the function we wrote earlier
   async function copyTextToClipboard(text) {
@@ -159,12 +160,12 @@ export default function ReferralComponent() {
           autoClose: 2000, // Close after 2 seconds
         });
       });
-  }
+  };
 
   const handleShare = async () => {
     try {
       if (navigator.share) {
-
+        console.log('working');
         await navigator.share({
           title: 'Your Bulloak Referral Code',
           text: 'Invite your friends using your referral code',
@@ -235,23 +236,37 @@ export default function ReferralComponent() {
               </div>
             </div>
           </div>
-          <button
+          {/* <button
             onClick={handleShare}
-            className="bg-[#FFB803] w-full xl:hidden block text-black text-xl rounded-xl p-4"
+            className="bg-[#FFB803] w-full block text-black text-xl rounded-xl p-4"
           >
             Invite now
-          </button>
+          </button> */}
           <div className="bg-white h-[300px] rounded-xl w-full xl:px-6 xl:p-3 ">
             <h2 className="text-black text-center my-4">How do you get?</h2>
             <hr />
             <div className="flex  justify-around mt-9 ">
               {boxesData?.map((box, index) => (
-                <div key={index} className="box w-[90px] text-[#925C90]">
-                  <div className="border flex items-center justify-center rounded-lg xl:p-4 p-2 border-[#925C90] mb-2">
-                    <img src={box.icon} alt="" />
-                  </div>
-                  <p>{box.text}</p>
-                </div>
+                <RWebShare
+                  data={{
+                    title: 'Your Bulloak Referral Code',
+                    text: 'Invite your friends using your referral code',
+                    url: referralUrl,
+                  }}
+                  onClick={() => console.log('shared successfully!')}
+                  key={index}
+                >
+                  <button
+                    onClick={() => {}}
+                    key={index}
+                    className="box w-[90px] text-[#925C90]"
+                  >
+                    <div className="border flex items-center justify-center rounded-lg xl:p-4 p-2 border-[#925C90] mb-2">
+                      <img src={box.icon} alt="" />
+                    </div>
+                    <p>{box.text}</p>
+                  </button>
+                </RWebShare>
               ))}
             </div>
           </div>
@@ -293,40 +308,40 @@ export default function ReferralComponent() {
               </div>
             </div>
           ))}
-          {
-            isShareable
-            && (<button
+          {isShareable && (
+            <button
               onClick={handleShare}
               className="bg-[#FFB803] xl:block hidden  w-full rounded-xl p-4"
             >
               Share your code
-            </button>)}
-          {!isShareable &&
-            (<button
+            </button>
+          )}
+          {!isShareable && (
+            <button
               onClick={handleCopyClick}
               className="bg-[#FFB803] xl:block hidden  w-full rounded-xl p-4"
             >
               <span>{isCopied ? 'Copied!' : 'Copy your code'}</span>
-            </button>)
-          }
+            </button>
+          )}
         </div>
       </div>
-      {
-        isShareable
-        && (<button
+      {isShareable && (
+        <button
           onClick={handleShare}
           className="bg-[#FFB803] xl:hidden block mt-4 w-full rounded-xl p-4"
         >
           Share your code
-        </button>)}
-      {!isShareable &&
-        (<button
+        </button>
+      )}
+      {!isShareable && (
+        <button
           onClick={handleCopyClick}
           className="bg-[#FFB803] xl:hidden block mt-4 w-full rounded-xl p-4"
         >
           <span>{isCopied ? 'Copied!' : 'Copy your code'}</span>
-        </button>)
-      }
+        </button>
+      )}
     </div>
   );
 }
