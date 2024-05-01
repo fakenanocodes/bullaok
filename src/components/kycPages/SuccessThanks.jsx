@@ -7,7 +7,7 @@ const SuccessThanks = () => {
 
   return (
     <div className="bg-white w-full h-full  justify-center">
-      <div onClick={() => navigate(-1)} className="p-10">
+      <div onClick={() => navigate('/dashboard')} className="p-10">
         <BackArrowIcon />
       </div>
 

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -11,22 +11,25 @@ const KycPreview = () => {
   const { userDetails } = useSelector((state) => state.transact);
   const { data: userData } = useSWR('/kyc/');
   const { data: user } = useSWR('/user/');
+  const [kycPreview, setKycPreview] = useState(userDetails)
   const navigate = useNavigate();
   // console.log('KYC', userData);
   // console.log('PREVIEW PAGE', userDetails);
   // console.log('USER', user);
+
+  console.log(kycPreview);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     // setSup('success');
 
     const formData = new FormData();
-    formData.append('first_name', userDetails?.first_name);
-    formData.append('last_name', userDetails?.last_name);
-    formData.append('email', userDetails?.email);
-    formData.append('country', userDetails?.country);
-    formData.append('address', userDetails?.address);
-    formData.append('birth_date', userDetails?.birth_date);
+    formData.append('first_name', kycPreview?.first_name);
+    formData.append('last_name', kycPreview?.last_name);
+    formData.append('email', kycPreview?.email);
+    formData.append('country', kycPreview?.country);
+    formData.append('address', kycPreview?.address);
+    formData.append('birth_date', kycPreview?.birth_date);
     formData.append('profile', user?.profile?.id);
 
     try {
@@ -170,8 +173,10 @@ const KycPreview = () => {
                 <input
                   type="text"
                   className="w-full h-full bg-[inherit] outline-none p-[5px] font-[Poppins] font-[400] text-[12px] text-[#AAAAAA] text-right border-none"
-                  disabled
-                  value={userDetails?.first_name}
+                  value={kycPreview?.first_name}
+                  onChange={(e) =>
+                    setKycPreview({ ...kycPreview, first_name: e.target.value })
+                  }
                 />
               </div>
 
@@ -186,7 +191,10 @@ const KycPreview = () => {
                   type="text"
                   className="w-full h-full bg-[inherit] outline-none p-[5px] font-[Poppins] font-[400] text-[12px] text-[#AAAAAA] text-right border-none"
                   disabled
-                  value={userDetails?.last_name}
+                  value={kycPreview?.last_name}
+                  onChange={(e) =>
+                    setKycPreview({ ...kycPreview, last_name: e.target.value })
+                  }
                 />
               </div>
 
@@ -200,8 +208,10 @@ const KycPreview = () => {
                 <input
                   type="text"
                   className="w-full h-full bg-[inherit] outline-none p-[5px] font-[Poppins] font-[400] text-[12px] text-[#AAAAAA] text-right border-none"
-                  disabled
-                  value={userDetails?.email}
+                  value={kycPreview?.email}
+                  onChange={(e) =>
+                    setKycPreview({ ...kycPreview, email: e.target.value })
+                  }
                 />
               </div>
 
@@ -215,8 +225,10 @@ const KycPreview = () => {
                 <input
                   type="text"
                   className="w-full h-full bg-[inherit] outline-none p-[5px] font-[Poppins] font-[400] text-[12px] text-[#AAAAAA] text-right border-none"
-                  disabled
-                  value={userDetails?.country}
+                  value={kycPreview?.country}
+                  onChange={(e) =>
+                    setKycPreview({ ...kycPreview, country: e.target.value })
+                  }
                 />
               </div>
 
@@ -230,8 +242,10 @@ const KycPreview = () => {
                 <input
                   type="text"
                   className="w-full h-full bg-[inherit] outline-none p-[5px] font-[Poppins] font-[400] text-[12px] text-[#AAAAAA] text-right border-none"
-                  disabled
-                  value={userDetails?.birth_date}
+                  value={kycPreview?.birth_date}
+                  onChange={(e) =>
+                    setKycPreview({ ...kycPreview, birth_date: e.target.value })
+                  }
                 />
               </div>
             </div>

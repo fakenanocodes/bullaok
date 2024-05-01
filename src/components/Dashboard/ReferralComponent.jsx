@@ -12,9 +12,9 @@ import { PiMedalMilitaryFill } from 'react-icons/pi';
 
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { RWebShare } from 'react-web-share';
 import useSWR from 'swr';
 import { images } from '../../assets';
-import { RWebShare } from 'react-web-share';
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   height: 20,

@@ -1,5 +1,5 @@
+import { Alert } from '@mui/material';
 import { useContext, useState } from 'react';
-import { Alert, CircularProgress } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -30,23 +30,19 @@ const Personalinfo = () => {
     email: userEmail,
   };
 
-  
-
+  console.log(userDetail);
 
   const isValidName = (name) => {
     // Define a regular expression pattern for name validation.
     const pattern = /^[a-zA-Z ]*$/;
     return pattern.test(name);
-  }
-
-
+  };
 
   const isValidEmail = (email) => {
     // Define a regular expression pattern for email validation.
     const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return pattern.test(email);
-  }
-
+  };
 
   function handleSubmit1(event) {
     event.preventDefault();
@@ -54,15 +50,16 @@ const Personalinfo = () => {
 
     if (isValidName(name)) {
       // name is valid, proceed with form submission.
-      setValid(true)
+      setValid(true);
       setError(null);
     } else {
       // Display an error message for invalid name.
-      const errMsg = 'error, Invalid name, Please check your name input, it should be alphabets';
+      setValid(false);
+      const errMsg =
+        'error, Invalid name, Please check your name input, it should be alphabets';
       setError(errMsg);
     }
   }
-
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -70,23 +67,28 @@ const Personalinfo = () => {
 
     if (isValidEmail(email)) {
       // Email is valid, proceed with form submission.
-      setValid(true)
+      setValid(true);
       setError(null);
     } else {
       // Display an error message for invalid email.
+      setValid(false);
       const errMsg = 'error, Invalid email, Please check your email input';
       setError(errMsg);
     }
   }
 
-
   const handleNextPage = (e) => {
-    if (!firstName || !lastName || !userEmail && !isValidEmail) {
+    if (!firstName || !lastName || (!userEmail && !isValidEmail)) {
       setNotify('border-[red]');
       toast.error('Please complete your personal details');
       return;
     }
+
+    if (!valid) {
+      return;
+    }
     e.preventDefault();
+    setNotify('border-[#8E0789]');
     dispatch(setUserDetails(userDetail));
     setKyc('cardVerification');
   };
@@ -101,7 +103,6 @@ const Personalinfo = () => {
         kyc === 'personalInfo' ? 'w-full h-full' : 'w-full h-full hidden'
       }
     >
-      
       {error && <Alert severity="error">{error}</Alert>}
       {/* the header description */}
       <div className="w-full h-[30px] border-b-[1px] border-b-[#8E0789] flex flex-col justify-center pb-[20px]">
