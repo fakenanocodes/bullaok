@@ -235,7 +235,7 @@ const IdVerification = () => {
                     <p className=" leading-[2px] pl-[5px] font-[Poppins] font-[400] text-[11px]">
                       ID Card
                     </p>
-                  </div>
+                  </div>  
                 </div>
 
                 <div

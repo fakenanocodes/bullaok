@@ -1,6 +1,9 @@
+import { CloseOutlined } from '@mui/icons-material';
 import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Avatar, CircularProgress } from '@mui/material';
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
 import { useState } from 'react';
 import { Cookies } from 'react-cookie';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
@@ -10,11 +13,12 @@ import HomeIcon from '../../assets/icons/dashboard/HomeIcon';
 import InvestmentIcon from '../../assets/icons/dashboard/InvestmentIcon';
 import PlantIcon from '../../assets/icons/dashboard/PlantIcon';
 import TransactionIcon from '../../assets/icons/dashboard/TransactionIcon';
+import NavigationModalTable from '../../components/Dashboard/NavigationModalTable';
 import LogoutIcon from '../../components/utils/icons/LogoutIcon';
 import useAuthentication from '../../hooks/useAuthentication';
 import DashboardSidebar from './components/Sidebar';
 
-const menus = ['Make a', 'Pending', 'Failed', 'Completed', 'All'];
+let menus = [null, 'Make a', 'Pending', 'Completed', 'All'];
 
 const options = ['Withdraw', 'Deposit', 'Transfer'];
 
@@ -24,6 +28,8 @@ const DashboardLayout = () => {
   const profile = data?.profile;
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [activeOption, setActiveOption] = useState(null);
+  const [open, setOpen] = useState(false);
+  const [currentNavigationMenu, setCurrentNavigationMenu] = useState(null);
 
   const navigate = useNavigate();
   const toggleMenu = () => {
@@ -38,11 +44,19 @@ const DashboardLayout = () => {
     );
   }
 
-  const handleNavigationMenu = (option, menu) => {
-    if (menu === 'Make a') {
-      navigate(`/dashboard/${option.toLowerCase()}`);
-    } else {
-      console.log(option, menu);
+  const handleNavigationMenu = (value) => {
+    const valueArray = value?.split(',');
+
+    // if () {
+    //   menus = menus.filter((menu) => menu !== '');
+    // }
+    console.log(valueArray[0]);
+    if (valueArray[0] === 'Make a') {
+      navigate(`/dashboard/${valueArray[1].toLowerCase()}`);
+    } else if (valueArray[0] !== '') {
+      console.log(valueArray[0]);
+      setOpen(true);
+      setCurrentNavigationMenu(valueArray);
     }
   };
 
@@ -85,8 +99,49 @@ const DashboardLayout = () => {
       : Api + profile?.image;
   console.log(profileImage);
 
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '60%',
+    height: 600,
+    bgcolor: 'background.paper',
+    borderRadius: 5,
+    boxShadow: 24,
+    p: 4,
+  };
+
+  const closeModal = () => {
+    setOpen(false);
+    setCurrentNavigationMenu(null);
+  };
+
   return (
     <div className="relative overflow-hidden bg-custom-bg bg-opacity-20 bg-cover bg-center bg-no-repeat min-h-screen">
+      {currentNavigationMenu && (
+        <Modal
+          open={open}
+          onClose={closeModal}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <div className="font-poppins flex flex-col space-y-4">
+              <div className="flex justify-between font-medium">
+                {currentNavigationMenu[0]} {currentNavigationMenu[1]}
+                <button onClick={closeModal}>
+                  <CloseOutlined className="text-[#41073F] rounded-md shadow-lg" />
+                </button>
+              </div>
+              <NavigationModalTable
+                currentNavigationMenu={currentNavigationMenu}
+              />
+            </div>
+          </Box>
+        </Modal>
+      )}
+
       {/** Layout */}
       <div className="text-white  lg:flex lg:flex-row flex flex-col lg:mr-10 w-full bg-opacity-95 min-h-screen">
         <div className="lg:w-1/12 lg:p-5 lg:flex-col flex relative ">
@@ -133,13 +188,14 @@ const DashboardLayout = () => {
                   <select
                     key={index}
                     className="p-1 rounded-md px-4 gap-4 space-y-2"
-                    onChange={(e) => console.log(e.target.value)}
+                    defaultValue={JSON.stringify([menus[0], option])}
+                    onChange={(e) => handleNavigationMenu(e.target.value)}
                   >
                     {menus?.map((menu, index) => (
                       <option
                         key={index}
                         className="py-2 font-poppins"
-                        value={{menu, option}}
+                        value={[menu, option]}
                       >
                         {menu} {''} {option}
                       </option>

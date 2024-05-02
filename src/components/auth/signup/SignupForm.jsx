@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import * as yup from 'yup';
 import { scrollToTop } from '../../../actions/utils';
 import { handleGenericError } from '../../../config/mixin';
@@ -18,11 +19,11 @@ const schema = yup.object().shape({
   email: yup.string().required('Email field cannot be empty'),
   password: yup.string().required('Password field cannot be empty'),
   username: yup.string().required('username field cannot be empty'),
-  referral_code: yup.string().required('referral code field cannot be empty'),
+  referral_code: yup.string(),
 });
 const SignupForm = ({ setSignupComponent }) => {
   const urlSearchParams = new URLSearchParams(window.location.search);
-  const referral = urlSearchParams.get('referral');
+  const referral = urlSearchParams.get('referral') | null;
 
   const navigate = useNavigate();
   const [error, setError] = useState(null);
@@ -49,9 +50,14 @@ const SignupForm = ({ setSignupComponent }) => {
       const response = await axios.post('/user/auth/create/', data);
       dispatch(setCurrentSignupEmail(data?.email));
       console.log(response);
-      setIsLoading(false);
-      
       setSignupComponent(1);
+      console.log('I got to this point');
+      setIsLoading(false);
+      toast.success('Account Created Succesfully', {
+        position: 'top-right',
+        autoClose: 2000,
+        hideProgressBar: false,
+      });
       reset();
     } catch (err) {
       setIsLoading(false);
