@@ -9,6 +9,7 @@ const NavigationModalTable = ({ currentNavigationMenu }) => {
     `${currentNavigationMenu[1].toLowerCase()}/user/${currentNavigationMenu[1].toLowerCase()}/pending`
   );
 
+
   const [rowItems, setRowItems] = useState(null);
 
   useEffect(() => {
@@ -16,6 +17,11 @@ const NavigationModalTable = ({ currentNavigationMenu }) => {
       setRowItems(completed);
     } else if (currentNavigationMenu[0] === 'Pending') {
       setRowItems(pending);
+    } else if (currentNavigationMenu[0] === 'All') {
+      const temp = completed.push(pending)
+      console.log(temp)
+      // setRowItems(completed)
+      // setRowItems(pending)
     }
   }, [currentNavigationMenu]);
 

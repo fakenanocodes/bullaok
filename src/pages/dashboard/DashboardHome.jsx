@@ -7,7 +7,7 @@ import {
   TableRow,
 } from '@mui/material';
 import { ArcElement, Chart as ChartJS, Legend, Tooltip } from 'chart.js';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
 import { MdFiberManualRecord } from 'react-icons/md';
@@ -43,6 +43,7 @@ const DashboardHome = () => {
   const [activeOption, setActiveOption] = useState(null);
   const [showAmount, setShowAmount] = useState(true);
 
+  const navigate = useNavigate()
   const { data: user } = useSWR('/user/');
   const { data: history } = useSWR('plans/history');
   const { data: brokers } = useSWR('broker/user-broker/');
@@ -51,8 +52,16 @@ const DashboardHome = () => {
     'plans/get-user-investment-amount-by-category/'
   );
 
+   const value = `; ${document.cookie}`;
+   const cookie = value.split(`; bk_access=`);
+
+   useEffect(() => {
+    if(!cookie[1]) {
+      navigate('/login')
+    }
+   }, [])
+
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const chartData = {
     datasets: [
