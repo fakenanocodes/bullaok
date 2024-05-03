@@ -57,12 +57,10 @@ const Withdrawal = () => {
   ];
   const [withdrawalAccount, setWithdrawalAccount] = useState(Wallets[0]);
 
-  // const availableBalance = useMemo(
-  //   () => user?.profile?.available_balance,
-  //   [user]
-  // );
-
-  const availableBalance = 100
+  const availableBalance = useMemo(
+    () => user?.profile?.available_balance,
+    [user]
+  );
 
   const makeWithdrawal = () => {
     if (receiverDetail?.amount === 0) {
@@ -165,13 +163,12 @@ const style = {
         </span>
       </div>
       <div className="absolute left-0 right-0 border-b-2 border-b-gray-300"></div>
-      <div>
-        <div className="lg:flex-row flex-col justify-between space-y-5 lg:space-y-0 py-10 lg:px-20 border-b-2 border-b-gray-300 items-end">
-          <div className="lg:space-y-8 space-y-3">
+        <div className="lg:flex-row flex-col flex justify-between space-y-5 lg:space-y-0 py-10 lg:px-20 border-b-2 border-b-gray-300 items-end">
+          <div className="lg:space-y-8 space-y-3 flex flex-col w-full">
             <span className="font-semibold text-lg">From</span>
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 w-full">
               <span className="text-[#4A4A4A] font-medium">Select Account</span>
-              <div className="relative" onMouseLeave={() => setDropDown(false)}>
+              <div className="relative " onMouseLeave={() => setDropDown(false)}>
                 <button
                   onClick={() => setDropDown(!dropDown)}
                   className="bg-[#8E0789] p-4 lg:w-[28vw] w-full rounded-lg flex justify-between"
@@ -206,12 +203,7 @@ const style = {
                   </div>
                 )}
               </div>
-              {/* <select className="bg-[#8E0789] text-white outline-none rounded-xl p-4 w-[30vw]">
-                <option className="text-white pl-12">
-                  <span>JTC</span>
-                </option>
-                <option>Ethereum</option>
-              </select> */}
+              
             </div>
           </div>
           <div className="flex flex-col space-y-4 lg:space-y-8 pb-5 lg:w-[28vw] w-full">
@@ -369,7 +361,6 @@ const style = {
           </div>
         </div>
       </div>
-    </div>
   );
 };
 export default Withdrawal;
