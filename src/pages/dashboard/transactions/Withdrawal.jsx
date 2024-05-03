@@ -13,7 +13,7 @@ import useSWR from 'swr';
 const Withdrawal = () => {
   const [openModal, setOpenModal] = useState(false);
   // const { data: withdraws } = useSWR(`/withdraw/`);
-  const { data: user } = useSWR(`/user/`);
+  const { data: user } = useSWR(`user/`);
   const [loading, setLoading] = useState(false);
   const [dropDown, setDropDown] = useState(false);
   const [receiverDetail, setReceiverDetail] = useState({
