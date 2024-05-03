@@ -181,7 +181,7 @@ const Deposit = () => {
       )} */}
 
       <div>
-        <div className="flex justify-between py-10 px-20 border-b-2 border-b-gray-300 items-end">
+      <div className="lg:flex-row flex-col flex justify-between space-y-5 lg:space-y-0 py-10 lg:px-20 border-b-2 border-b-gray-300">
           <div className="space-y-8">
             <span className="font-semibold text-lg">From</span>
             <div className="flex flex-col gap-4">
@@ -189,12 +189,12 @@ const Deposit = () => {
               <div className="relative" onMouseLeave={() => setDropDown(false)}>
                 <button
                   onClick={() => setDropDown(!dropDown)}
-                  className="bg-[#8E0789] p-4 w-[28vw] rounded-lg flex justify-between"
+                  className="bg-[#8E0789] p-4 w-full lg:w-[28vw] rounded-lg flex justify-between"
                 >
                   <div className="flex gap-2 items-center">
                     {depositAccount?.icon}
                     <span className="text-white">{depositAccount?.value}</span>
-                  </div>
+                  </div>      
                   {dropDown ? (
                     <ArrowDropUpIcon className="text-white" />
                   ) : (
@@ -224,9 +224,9 @@ const Deposit = () => {
               </div>
             </div>
           </div>
-          <div className="flex flex-col space-y-8 pb-5 w-[28vw]">
+          <div className="flex flex-col space-y-8 pb-5 justify-center ">
             <span className="text-[#4A4A4A] font-medium">Account detail</span>
-            <span className="text-lg font-bold">
+            <span className="flex text-lg font-bold">
               Available Balance:{' '}
               <span className="text-xl font-bold pl-8">
                 ${availableBalance}
@@ -235,34 +235,34 @@ const Deposit = () => {
           </div>
         </div>
 
-        <div className="py-10 px-20 space-y-10">
+        <div className="py-10 px-0 lg:px-20 space-y-10">
           <span className="text-lg font-bold">To</span>
-          <div className="flex justify-between items-center">
-            <div className="flex flex-col gap-2">
+          <div className="flex flex-col lg:flex-row space-y-5 lg:space-y-0 justify-between items-center">
+            <div className="flex flex-col gap-2 w-full lg:w-fit">
               <span>Deposit Account Name</span>
               <input
                 type="text"
-                className="w-[28vw] rounded-lg p-3 border-[#8E0789]"
+                className="w-fuul lg:w-[28vw] rounded-lg p-3 border-[#8E0789]"
                 value={user?.profile?.full_name}
                 disabled
               />
             </div>
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 w-full lg:w-fit">
               <span>Deposit Wallet Address</span>
               <input
                 type="text"
-                className="w-[28vw] rounded-lg p-3  border-[#8E0789]"
+                className="w-full lg:w-[28vw] rounded-lg p-3  border-[#8E0789]"
                 value={wallet || walletMock?.BTC}
                 disabled
               />
             </div>
           </div>
 
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2 w-full lg:w-fit">
             <span>Deposit Amount</span>
             <input
               type="text"
-              className="w-[28vw] rounded-lg p-3  border-[#8E0789]"
+              className="w-full lg:w-[28vw] rounded-lg p-3  border-[#8E0789]"
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
               // value={receiverDetail?.amount}
@@ -276,13 +276,13 @@ const Deposit = () => {
           </div>
         </div>
 
-        <div className="w-full flex justify-center items-center gap-8 pt-5">
-          <button className="bg-[#8E0789] bg-opacity-30 px-16 font-semibold  py-3 rounded-lg">
+        <div className="w-full flex flex-col lg:flex-row justify-center items-center gap-8 pt-5">
+          <button className="bg-[#8E0789] bg-opacity-30 px-16 font-semibold  py-3 rounded-lg w-full lg:w-fit">
             Cancel
           </button>
           <button
             onClick={()=>handleDeposit()}
-            className="bg-[#8E0789] py-3 text-white rounded-lg px-8 font-semibold"
+            className="bg-[#8E0789] py-3 text-white rounded-lg px-8 font-semibold w-full lg:w-fit"
           >
             Make Deposit
           </button>
