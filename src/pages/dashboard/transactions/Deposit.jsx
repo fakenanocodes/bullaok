@@ -1,5 +1,8 @@
+import { ClickAwayListener } from '@mui/material';
 import axios from 'axios';
-import { useEffect, useState, useMemo } from 'react';
+import CancelIcon from '../../../components/utils/icons/CancelIcon';
+import { useEffect, useMemo, useState } from 'react';
+import MobileTransferTable from './MobileTransferTab';
 // import { Cookies } from 'react-cookie';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
@@ -8,11 +11,6 @@ import { SiLitecoin, SiTether, SiXrp } from 'react-icons/si';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import useSWR from 'swr';
-import DepositModal from '../../../components/modal/DepositModal';
-import DepositIcon from '../../../components/utils/icons/DepositIcon';
-import LeftMoveIcon from '../../../components/utils/icons/LeftMoveIcon';
-import DepositSuccess from './DepositSuccess';
-import MobileDepostTable from './MobileDepositeTab';
 
 const Deposit = () => {
   const [dropDown, setDropDown] = useState(false);
@@ -31,16 +29,19 @@ const Deposit = () => {
   const navigate = useNavigate();
   const walletType = ['litecoin', 'ripple', 'ethereum', 'bitcoin', 'tether'];
   const { data: user } = useSWR(`/user/`);
+  const { data: walletAddress } = useSWR('/walletaddress/');
+  const { data: depositAmount } = useSWR('/deposit/');
 
   // console.log('WALLET ADD', depositWallet);
 
-  // let walletMock = {
-  //   bitcoin_address: 'BTCwrtewt3ertrwert',
-  //   litecoin_address: 'LTCdfgerty4565tetert',
-  //   xrp_address: 'XRPrterytrjyukgkhjl',
-  //   etherum_address: 'ETHytertdgyuthftdhr',
-  //   usdt_address: 'USDTdfhfyufdhdfydrhfhhg',
-  // };
+  console.log(depositAmount);
+  let walletMock = {
+    BTC: walletAddress?.bitcoin_address,
+    LTC: walletAddress?.litecoin_address,
+    XRP: walletAddress?.xrp_address,
+    ETH: walletAddress?.etherum_address,
+    USDT: walletAddress?.usdt_address,
+  };
 
   useEffect(() => {
     if (wallet == depositWallet?.litecoin_address) {
@@ -95,20 +96,29 @@ const Deposit = () => {
   };
   //usdtAmount
 
-  console.log('userData', depositWallet);
+  // console.log('userData', depositWallet);
+
+  const handleDeposit = ()=> {
+    if(amount !== 0 && amount !== null && amount !== ''){
+      setOpenModel(true)
+    }
+    else{
+      toast.error('Deposit must not be empty');
+    }
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.post('/deposit/', userData);
-      console.log('RESPONSE', response.data);
+      const response = await axios.post('/deposit/',userData);
+      console.log('RESPONSE', response);
       setLoading(false);
       toast.success('success');
       setOpenModel(false);
       setOpenSuccess(!openSuccess);
     } catch (error) {
-      setLoading(false);
+      setLoading(true);
       console.log(error);
     }
   };
@@ -156,10 +166,8 @@ const Deposit = () => {
 
   return (
     <div className=" h-[100%] no-scrollbar bg-white p-4 text-gray-700 overflow-scroll relative 00">
-       <div className="py-3 px-20">
-        <span className="text-3xl tracking-wider font-medium">
-          New Deposit
-        </span>
+      <div className="py-3 px-20">
+        <span className="text-3xl tracking-wider font-medium">New Deposit</span>
       </div>
       <div className="absolute left-0 right-0 border-b-2 border-b-gray-300"></div>
       {/* {openSuccess && (
@@ -173,8 +181,7 @@ const Deposit = () => {
       )} */}
 
       <div>
-
-      <div className="flex justify-between py-10 px-20 border-b-2 border-b-gray-300 items-end">
+        <div className="flex justify-between py-10 px-20 border-b-2 border-b-gray-300 items-end">
           <div className="space-y-8">
             <span className="font-semibold text-lg">From</span>
             <div className="flex flex-col gap-4">
@@ -186,9 +193,7 @@ const Deposit = () => {
                 >
                   <div className="flex gap-2 items-center">
                     {depositAccount?.icon}
-                    <span className="text-white">
-                      {depositAccount?.value}
-                    </span>
+                    <span className="text-white">{depositAccount?.value}</span>
                   </div>
                   {dropDown ? (
                     <ArrowDropUpIcon className="text-white" />
@@ -203,12 +208,15 @@ const Deposit = () => {
                         key={index}
                         onClick={() => {
                           setDepositAccount(wallet);
+                          setWallet(walletMock[wallet?.value]);
                           setDropDown(false);
                         }}
                         className="flex gap-2  items-center justify-start p-4 hover:bg-[#8E0789] w-full hover:rounded-lg hover:text-white"
                       >
                         {wallet?.icon}
-                        <span onClick={(e) => setWallet(e.target.textContent)} className='w-full h-full text-left'>{wallet?.value}</span>
+                        <span className="w-full h-full text-left">
+                          {wallet?.value}
+                        </span>
                       </button>
                     ))}
                   </div>
@@ -244,15 +252,8 @@ const Deposit = () => {
               <input
                 type="text"
                 className="w-[28vw] rounded-lg p-3  border-[#8E0789]"
-                value={wallet || depositWallet?.usdt_address}
-                onChange={(e) => setWalletAdress(e.target.value)}
-                // value={receiverDetail?.walletAddress}
-                // onChange={(e) =>
-                //   setReceiverDetail({
-                //     ...receiverDetail,
-                //     walletAddress: e.target.value,
-                //   })
-                // }
+                value={wallet || walletMock?.BTC}
+                disabled
               />
             </div>
           </div>
@@ -266,204 +267,95 @@ const Deposit = () => {
               onChange={(e) => setAmount(e.target.value)}
               // value={receiverDetail?.amount}
               // onChange={(e) =>
-                // setReceiverDetail({
-                //   ...receiverDetail,
-                //   amount: Number(e.target.value),
-                // })
+              // setReceiverDetail({
+              //   ...receiverDetail,
+              //   amount: Number(e.target.value),
+              // })
               // }
             />
           </div>
         </div>
 
-
         <div className="w-full flex justify-center items-center gap-8 pt-5">
-            <button className="bg-[#8E0789] bg-opacity-30 px-16 font-semibold  py-3 rounded-lg">
-              Cancel
-            </button>
-            <button
-              onClick={handleOpenModel}
-              className="bg-[#8E0789] py-3 text-white rounded-lg px-8 font-semibold"
-            >
-              Make Deposit
-            </button>
-            {/* <Modal
-              open={openModal}
-              onClose={() => setOpenModal(false)}
-              aria-labelledby="modal-modal-title"
-              aria-describedby="modal-modal-description"
-            >
-              <Box sx={style}>
-                <div className="flex-col flex space-y-5 font-poppins">
-                  <div className="w-full flex justify-between">
-                    <span className="text-xl font-semibold">Withdrawal</span>
-                    <button onClick={() => setOpenModal(false)}>
-                      <CloseIcon className="text-[#8E0789]" />
-                    </button>
-                  </div>
-                  <div className=" w-full">
-                    <div className="flex flex-col gap-5">
-                      <div className="flex flex-col gap-2">
-                        <span className="text-sm ">
-                          Withdrawal Wallet Address
-                        </span>
-                        <input
-                          type="text"
-                          className="rounded-lg p-3  border-[#8E0789]"
-                          value={receiverDetail?.walletAddress}
-                          disabled
-                        />
-                      </div>
-                      <div className="flex flex-col gap-2">
-                        <span className="text-sm ">Withdrawal amount</span>
-                        <input
-                          type="text"
-                          className="rounded-lg p-3  border-[#8E0789]"
-                          value={receiverDetail?.amount}
-                          disabled
-                        />
-                      </div>
-                      <div className="flex flex-col gap-2">
-                        <span className="text-sm ">Enter account password</span>
-                        <input
-                          type="password"
-                          className="rounded-lg p-3  border-[#8E0789]"
-                          value={withdrawalPrompt?.password}
-                          onChange={(e) =>
-                            setWithdrawalPrompt({
-                              ...withdrawalPrompt,
-                              password: e.target.value,
-                            })
-                          }
-                        />
-                      </div>
-                    </div>
-                    <div className="absolute left-5">
-                      <Checkbox
-                        checked={withdrawalPrompt?.sendReceiptToEmail}
-                        onChange={() =>
-                          setWithdrawalPrompt({
-                            ...withdrawalPrompt,
-                            sendReceiptToEmail:
-                              !withdrawalPrompt?.sendReceiptToEmail,
-                          })
-                        }
-                      />
-                      <span className="text-sm">
-                        Send receipt to email address
-                      </span>
-                    </div>
-                    <div className="absolute bottom-8 right-10 space-x-10">
-                      <button
-                        onClick={() => setOpenModal(false)}
-                        className="border-[#8E0789] border p-2 text-sm font-medium rounded-md"
-                      >
-                        Cancel
-                      </button>
-                      <button
-                        onClick={confirmWithdrawal}
-                        className="bg-[#8E0789] px-4 py-2 text-white text-sm font-medium rounded-md"
-                      >
-                        {loading ? (
-                          <CircularProgress color="inherit" size={15} />
-                        ) : (
-                          'Confirm Withdrawal'
-                        )}
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </Box>
-            </Modal> */}
-          </div>
-
-
-
-
-
-
-
-
-        {/* mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm */}
-        <div className="flex flex-col gap-10 pb-24">
-          
-          
-          
-          <div className="md:flex md:justify-between md:w-[48%] text-xl items-center">
-            {/* <div className=" text-red-600 font-semibold mb-28 md:mb-0">
-              You are depositing ${usdtAmount || '0.00'}
-            </div> */}
-            <div className="md:hidden flex justify-between text-sm">
-              
-              <button
-                onClick={handleOpenModel}
-                className="bg-[#352F84] text-white rounded-md px-6 py-4"
-              >
-                Make deposit
-              </button>
-            </div>
-          </div>
+          <button className="bg-[#8E0789] bg-opacity-30 px-16 font-semibold  py-3 rounded-lg">
+            Cancel
+          </button>
+          <button
+            onClick={()=>handleDeposit()}
+            className="bg-[#8E0789] py-3 text-white rounded-lg px-8 font-semibold"
+          >
+            Make Deposit
+          </button>
         </div>
-      </div>
-      <MobileDepostTable
-        deposits={deposits}
-        showMobileTable={showMobileTable}
-      />
-      <div className={` hidden md:block border shadow-md`}>
-        <div className="bg-[#8E0789] text-white p-3 md:text-2xl font-semibold">
-          Deposit History
-        </div>
-        <div className="flex justify-between md:w-[90%] md:ml-10 text-sm ">
-          <div className="m-2 p-2 md:px-10 bg-[#F9F9FA] shadow drop-shadow-sm ">
-            DATE
-          </div>
-          <div className="m-2 p-2 md:px-10 bg-[#F9F9FA] shadow drop-shadow-sm">
-            AMOUNT
-          </div>
-          <div className="m-2 p-2 md:px-10 bg-[#F9F9FA] shadow drop-shadow-sm">
-            EMAIL ADDRESS
-          </div>
-          <div className="m-2 p-2 md:px-10 bg-[#F9F9FA] shadow drop-shadow-sm">
-            ASSET
-          </div>
-          <div className="m-2 p-2 md:px-10 bg-[#F9F9FA] shadow drop-shadow-sm">
-            STATUS
-          </div>
-          {/* <select className="m-2 md:p-2 bg-[rgb(249,249,250)] shadow drop-shadow-lg border-none px-7 hidden md:block">
-            <option className="">Sort</option>
-          </select> */}
-        </div>
-        <div>
-          {deposits?.map((deposit, idx) => (
-            <div
-              key={idx}
-              className="flex justify-between md:w-[90%]  md:ml-10 text-xs "
-            >
-              <div className="py-3 font-bold my-2   ">
-                <div className="md:flex gap-2">
-                  <p>{deposit?.created?.split('T')[0]}</p>
-                  <p>{deposit?.created?.split('T')[1].split('.')[0]}</p>
-                </div>
-              </div>
-              <div className="py-3 my-2 md:px-10 ">
-                {deposit?.amount?.split('.')[0]}
-              </div>
-              <div className="py-3 my-2 md:px-10">
-                {deposit?.profile?.user?.email}
-              </div>
-              <div className="py-3  my-2 md:px-10">{deposit?.wallet_type}</div>
-              <div className="py-3 my-2  md:px-10">
-                {deposit?.verified
-                  ? 'Success'
-                  : !deposit?.verified
-                    ? 'Pending...'
-                    : 'Failed'}
-              </div>
-              {/* <div className="w-36"></div> */}
-            </div>
-          ))}
-        </div>
+
+       
       </div>
       {openModel && (
+        <div className=" fixed top-0 left-0 w-full h-full flex  justify-center items-center bg-[#000000b3]">
+          <ClickAwayListener onClickAway={() => setOpenModel(false)}>
+            <div className="bg-white h-fit-content w-[90%] md:w-3/5 max-w-[500px] p-4 my-6 relative rounded-[15px]">
+              <div className="flex justify-between">
+                <p className="text-lg text-gray-600 font-semibold">Transfer</p>
+                <div
+                  className="cursor-pointer"
+                  onClick={() => setOpenModel(false)}
+                >
+                  <CancelIcon />
+                </div>
+              </div>
+              <article>
+                <label className="text-[#4A4A4A] text-sm block py-2 font-medium">
+                  Deposit wallet address
+                  <input
+                    type="text"
+                    className="block w-full border rounded-[10px] p-2 focus:border-[#8E0789] my-2 placeholder:#1C1F27 font-normal "
+                    value={wallet || walletMock?.BTC}
+                    disabled
+                  />
+                </label>
+                <label className="text-[#4A4A4A] text-sm block py-2 font-medium">
+                  Deposit Amount
+                  <input
+                    type="number"
+                    className="block w-full border rounded-[10px] p-2 focus:border-[#8E0789] my-2"
+                    min={0}
+                    value={amount}
+                    disabled
+                  />
+                </label>
+                <label className="text-[#4A4A4A] text-sm block  font-medium">
+                  Enter Account Password
+                  <input
+                    type="password"
+                    className="block w-full border rounded-[10px] focus:border-[#8E0789] my-2 placeholder:#76809D"
+                    placeholder="*****************"
+                  />
+                </label>
+                <label className="text-[#454E68] text-sm flex  font-medium cursor-pointer gap-2 items-center">
+                  <input type="checkbox" className="rounded-[4px]" />
+                  Send receipt to email address
+                </label>
+              </article>
+              <div className="flex justify-end items-end h-[6vmax]">
+                <article className="flex gap-4 font-semibold text-sm">
+                  <button className="text-[#000000]  w-[100px] h-[32px] rounded-md border border-[#8E0789] hover:bg-[#8E07894D] "
+                  onClick={() => setOpenModel(false)}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    className="text-white bg-[#8E0789]  w-[172px] h-[32px] rounded-md text-sm "
+                    onClick={(e) => handleSubmit(e)}
+                  >
+                    Confirm transfer
+                  </button>
+                </article>
+              </div>
+            </div>
+          </ClickAwayListener>
+        </div>
+      )}
+      {/* {openModel && (
         <DepositModal
           amount={amount}
           loading={loading}
@@ -471,7 +363,7 @@ const Deposit = () => {
           setOpenModel={setOpenModel}
           handleSubmit={handleSubmit}
         />
-      )}
+      )} */}
     </div>
   );
 };
