@@ -4,8 +4,8 @@ import { Cookies } from 'react-cookie';
 const cookies = new Cookies();
 const token = cookies.get('bk_access');
 
-export const API_URL =
-  'https://django-bulloak-finance-production.up.railway.app/';
+export const API_URL = 'https://api.bulloakltd.com';
+  
 console.log(token);
 
 export default function init() {
