@@ -1,11 +1,11 @@
 import about_bg from '../assets/about/about_bg.png';
 import info_img from '../assets/about/info_img.png';
 import info_img2 from '../assets/about/info_img2.png';
-import MainLayout from '../components/MainLayout';
+import Maindashboard_layoutt from '../components/MainLayout';
 
 const About = () => {
   return (
-    <MainLayout>
+    <Maindashboard_layoutt>
       <div className="bg-[#30022ECC] bg-opacity-10 relative w-full h-[90vh]">
         <img src={about_bg} alt="" className="w-full h-full object-cover" />
         <div className="absolute flex flex-col justify-center items-start gap-12 lg:gap-20 top-0 right-0 bottom-0 left-0 bg-[#30022ECC] bg-opacity-10 text-white pl-5 lg:pl-16 xl:pl-48">
@@ -93,7 +93,7 @@ const About = () => {
           <div className="h-16 w-16 rounded-[50%] bg-[#8E0789]"></div>
         </div>
       </section>
-    </MainLayout>
+    </Maindashboard_layoutt>
   );
 };
 

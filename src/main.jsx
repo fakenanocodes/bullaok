@@ -13,6 +13,7 @@ const fetcher = async (...args) => {
   const res = await axios(...args);
   return res.data;
 };
+
 const mutation = async (key, newData) => {
   await mutate(key);
   console.log(`Mutating ${key} with data:`, newData);

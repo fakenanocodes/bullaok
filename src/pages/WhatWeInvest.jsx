@@ -108,7 +108,7 @@ export default function WhatWeInvest() {
           </div>
         </section>
         <section
-          className="lg:px-[150px] px-5 py-8  w-full bg-cover py-8 bg-center bg-no-repeat"
+          className="lg:px-[150px] px-5 w-full bg-cover py-8 bg-center bg-no-repeat"
           style={{
             backgroundImage: `url('invest_bg.png')`,
           }}
