@@ -191,7 +191,7 @@ export default function ReferralComponent() {
     <div className="xl:px-8 px-2 ">
       <div
         onClick={() => navigate(-1)}
-        className="flex items-center gap-7 py-7 text-black text-2xl xl:hidden block"
+        className="flex items-center gap-7 py-7 text-black text-2xl xl:hidden "
       >
         <MdOutlineArrowBackIos />
         <h2>Referral</h2>
