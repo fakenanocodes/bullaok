@@ -6,7 +6,6 @@ const token = cookies.get('bk_access');
 
 export const API_URL = 'https://api.bulloakltd.com';
   
-console.log(token);
 
 export default function init() {
   // Set base URL for Axios
