@@ -355,15 +355,6 @@ const Deposit = () => {
           </ClickAwayListener>
         </div>
       )}
-      {/* {openModel && (
-        <DepositModal
-          amount={amount}
-          loading={loading}
-          selectedCoin={selectedCoin}
-          setOpenModel={setOpenModel}
-          handleSubmit={handleSubmit}
-        />
-      )} */}
     </div>
   );
 };

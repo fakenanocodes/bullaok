@@ -1,58 +1,178 @@
 import React from 'react';
 import dashBoard from '../assets/dashBoard.png';
 import table_icon from '../assets/table_icon.png';
+import { useState } from 'react';
+import {Bar,Doughnut,Pie} from 'react-chartjs-2'
+import {Chart as ChartJS, plugins} from 'chart.js/auto'
+// import plugin from 'tailwindcss';
 
-const NewDashboard = () => {
+const  NewDashboard = () => {
   const accountAnalyticsData = [
     {
       title: 'Total Balance',
-      amount: '$ 2,474.91',
+      amount: 2474.91,
       percentage: '50%',
       color: '#FFB803',
     },
     {
       title: 'Trading Balance',
-      amount: '$ 1,274.91',
+      amount: 1274.91,
       percentage: '30%',
       color: '#F324EC',
     },
     {
       title: 'Avaliable Balance',
-      amount: '$ 1,174.91',
+      amount: 1174.91,
       percentage: '20%',
       color: '#0E0C6D',
     },
   ];
+  const [doughnut,setDoughnut] = useState({
+    // labels: accountAnalyticsData.map(data => data.title),
+    datasets: [{
+      data: accountAnalyticsData.map(data => data.amount),
+      backgroundColor: accountAnalyticsData.map(data => data.color),
+      borderWidth:0,
+      // boxShadow: '2 2 yellow',
+    }]
+  })
+  // const tr
+  
   const transactionHistoryData = [
     {
       description: 'From main account',
-      type: 'Withdrawal',
-      amount: '-$132',
-      status: 'Completed',
-      date: '25 April at 09:30 am',
+      Withdrawal: 456,
+      Transfer: 132,
+      Deposit: 732,
+      date: 'Jan',
     },
     {
       description: 'alfredjosh@gmail.com',
-      type: 'Deposit',
-      amount: '+$986',
-      status: 'Pending',
-      date: '25 April at 09:30 am',
+      Withdrawal: 326,
+      Transfer: 986,
+      Deposit: 657,
+      date: 'Feb',
     },
     {
       description: 'fredrickleo@gmail.com',
-      type: 'Transfer',
-      amount: '+$620',
-      status: 'Failed',
-      date: '25 April at 14:30',
+      Withdrawal: 856,
+      Transfer: 620,
+      Deposit: 724,
+      date: 'March',
     },
     {
       description: 'From main account',
-      type: 'Withdrawal',
-      amount: '-$132',
-      status: 'Completed',
-      date: '25 April at 16:30',
+      Withdrawal: 264,
+      Transfer: 132,
+      Deposit: 465,
+      date: 'April',
+    },
+    {
+      description: 'From main account',
+      Withdrawal: 456,
+      Transfer: 132,
+      Deposit: 732,
+      date: 'May',
+    },
+    {
+      description: 'alfredjosh@gmail.com',
+      Withdrawal: 326,
+      Transfer: 986,
+      Deposit: 657,
+      date: 'June',
+    },
+    {
+      description: 'fredrickleo@gmail.com',
+      Withdrawal: 856,
+      Transfer: 620,
+      Deposit: 724,
+      date: 'July',
+    },
+    {
+      description: 'From main account',
+      Withdrawal: 264,
+      Transfer: 132,
+      Deposit: 465,
+      date: 'Aug',
+    },
+    {
+      description: 'From main account',
+      Withdrawal: 456,
+      Transfer: 132,
+      Deposit: 732,
+      date: 'Sep',
+    },
+    {
+      description: 'alfredjosh@gmail.com',
+      Withdrawal: 326,
+      Transfer: 986,
+      Deposit: 657,
+      date: 'Oct',
+    },
+    {
+      description: 'fredrickleo@gmail.com',
+      Withdrawal: 856,
+      Transfer: 620,
+      Deposit: 724,
+      date: 'Nov',
+    },
+    {
+      description: 'From main account',
+      Withdrawal: 264,
+      Transfer: 132,
+      Deposit: 465,
+      date: 'Dec',
     },
   ];
+
+  const [barChart, setBarChart] = useState({
+    labels: transactionHistoryData.map((data) => data.date),
+    datasets: [
+      {
+        label: "Withdrawal",
+        data: transactionHistoryData.map((data) => data.Withdrawal),
+        backgroundColor: '#F324EC',
+        borderRadius:10,
+        hoverOffset: 25,
+      },
+      {
+        label: "Deposit",
+        data: transactionHistoryData.map((data) => data.Deposit),
+        backgroundColor:'#FFB803',
+        borderRadius:10,
+        hoverOffset: 25,
+      },
+      {
+        label: "Transfer",
+        data: transactionHistoryData.map((data) => data.Transfer),
+        backgroundColor: '#0E0C6D',
+        borderRadius:10,
+        hoverOffset: 25,
+      },
+    ],
+  });
+  const [option,setOptions] = useState({
+    plugins:{
+      legend:{
+        display: false
+      }
+    },
+    scales:{
+      y:{
+        grid:{
+          color: 'white',
+          borderDash: [5,5],
+        }
+      },
+      x:{
+        grid:{
+          display: false
+        }
+      }
+    },
+  })
+  ChartJS.defaults.line='white'
+  ChartJS.defaults.color= 'white'
   return (
     <section className="">
       <article>
@@ -146,7 +266,9 @@ const NewDashboard = () => {
               </h4>
             </article>
           ))}
-          <h1 className="text-[25px] text-white">CHARTS</h1>
+          <div className='flex justify-center items-center -translate-y-[15%]  w-full'>
+            <Doughnut data={doughnut}/>
+          </div>
         </div>
       </div>
       <div className="gridClass ">
@@ -191,7 +313,7 @@ const NewDashboard = () => {
               </tr>
             </tbody>
           </table>
-          <h1 className="font-extrabold text-[30px]">CHARTS</h1>
+          <Bar data={barChart} options={option}/>
         </aside>
         <aside className="bg-[#000000] px-4 py-2 rounded-[10px]">
           <article className="flex justify-between">
