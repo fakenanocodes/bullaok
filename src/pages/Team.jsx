@@ -2,18 +2,30 @@ import { Link, useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
 import { images } from '../assets';
 // import { image } from '../assets/team/teams';
+import axios from 'axios';
+import { useEffect } from 'react';
 import Layout from '../components/Layout';
 import { teamData } from '../data/team';
+import { useState } from 'react';
 // brokerData;
 
 export default function Team() {
   const { data: brokers } = useSWR('/broker/brokers/');
   const navigate = useNavigate();
+  const[teamMembersData,setTeamMembersData]=useState([]);
+  const { data: teamMembers } = useSWR('/team/members/all/');
+
 
   const handleTeam = (id) => {
     navigate(`/team/member/${id}`);
   };
-
+  const fetcher = async () => {
+    const res = await axios('https://api.bulloakltd.com/team/members/all/');
+    setTeamMembersData(res.data);
+  };
+  useEffect(() => {
+    fetcher();
+  }, []); 
 
   return (
     <Layout>
@@ -50,18 +62,18 @@ export default function Team() {
             and support to clients like you.
           </h2>
 
-          <div className="grid xl:grid-cols-2 md:grid-cols-2  w-full mx-auto gap-5">
-            {teamData.map((items, index) => (
-              <div className="item lg:w-5/6 xl:w-4/5 w-full " key={index}>
+          <div className="grid xl:grid-cols-2 md:grid-cols-2  w-full mx-auto  gap-5">
+            {teamMembersData.map((items, index) => (
+              <div className="item  " key={index}>
                 <img
                   src={items.image}
-                  className="lg:ml-6 ml-3 -mb-8 lg:w-auto w-2/3 "
+                  className="lg:ml-6 ml-3 -mb-8 w-[200px] aspect-auto "
                   alt=""
                 />
                 <div className=" border-2 p-2  border-[#8E0789] flex flex-col ">
                   <div className="flex px-3">
-                    <h3 className="mt-4 -ml-2 font-[montserrat] xl:text-xl lg:text-sm  ">
-                      {items.role}
+                    <h3 className="mt-4 -ml-2 font-[montserrat] xl:text-xl lg:text-sm text-capitalize ">
+                      {items.position}
                     </h3>
                     <p className="ml-auto font-[laviossa] lg:mt-3 mt-3  xl:text-xl lg:text-md">
                       {items.name}
@@ -103,12 +115,9 @@ export default function Team() {
                 className=" xl:w-3/4 w-full flex flex-col items-end mb-10"
                 key={index}
               >
-               
                 <div className="content border-2 w-full p-5 border-[#8E0789] ">
                   <p className="font-[laviossa] ">{broker.name}</p>
                   <div className="flex justify-between mt-5 ">
-                  
-
                     <div className="flex flex-col ">
                       <Link
                         to={broker?.instagram_profile}

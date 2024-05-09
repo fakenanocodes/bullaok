@@ -5,12 +5,22 @@ import cert from '../assets/cert.png';
 import services_banner_img from '../assets/services_banner_img.png';
 import MainLayout from '../components/MainLayout';
 import { teamMember } from '../data/teamMember';
+import useSWR from 'swr';
+import { useState } from 'react';
+import axios from 'axios';
 
 const TeamMember = () => {
   const { subpage } = useParams();
+   const [singleTeamMember, setSingleTeamMember] = useState({});
+
+   const fetcher = async () => {
+     const res = await axios(`https://api.bulloakltd.com/team/members/${subpage}/`);
+     setSingleTeamMember(res.data);
+   };
 
   useEffect(() => {
     scrollToMid();
+    fetcher()
   }, []);
 
   return (
@@ -27,23 +37,23 @@ const TeamMember = () => {
               Detailed Page
             </p>
             <p className="laviossa  md:w-[30rem]">
-              {teamMember[subpage - 1]?.name}
+              {singleTeamMember.name}
             </p>
           </div>
         </div>
         <div className="mt-[15px] p-1 md:p-16">
           <p className="laviossa md:text-[2rem] font-bold md:w-[30rem] mb-2 md:mb-10">
-            {teamMember[subpage - 1]?.name}
+            {singleTeamMember.name}
           </p>
           <div>
             <div className="flex md:gap-12 gap-3">
               <div className="w-[60%] xl:w-[70%]">
-                <img src={teamMember[subpage - 1]?.image} alt="President" />
+                <img src={singleTeamMember.image} alt="President" />
               </div>
               <div className="w-[40%] mt-5 md:mt-14 xl:mt-28 md:text-[26px] text-xs md:leading-10">
                 <div className=" bg-[#5d1e5b] h-1 md:h-2 -ml-12  md:-ml-44 mb-3 md:mb-10 "></div>
                 <p className="md:mt-16">
-                  {teamMember[subpage - 1]?.paragraph1}
+                  {singleTeamMember.bio}
                 </p>
               </div>
             </div>

@@ -2,7 +2,21 @@ import React from 'react';
 import { BsSearch } from 'react-icons/bs';
 import Layout from '../components/Layout';
 import CoursesCard from '../components/utils/cards/CoursesCard';
-export default function EducationCourses({ courses }) {
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+export default function EducationCourses() {
+  const [courses, setCourses] = useState([{}]);
+   const fetchCourses = async () => {
+    const response = await axios.get('/course/courses/');
+    setCourses(response.data);
+    console.log('COURSES', response.data);
+  };
+
+  useEffect(() => {
+    fetchCourses();
+  },[]);
+ 
+
   return (
     <Layout>
       <section className="bg-[#fff] py-8 px-4">

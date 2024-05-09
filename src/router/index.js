@@ -54,6 +54,7 @@ import Support from '../pages/dashboard/Support';
 import Deposit from '../pages/dashboard/transactions/Deposit';
 import Transfer from '../pages/dashboard/transactions/Transfer';
 import Withdrawal from '../pages/dashboard/transactions/Withdrawal';
+import NewDashboard from '../components/NewDashboard';
 const router = createBrowserRouter([
   {
     path: '*',
@@ -199,7 +200,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '',
-        Component: DashboardHome,
+        Component: NewDashboard,
       },
 
       {
