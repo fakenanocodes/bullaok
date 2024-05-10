@@ -133,25 +133,26 @@ const  NewDashboard = () => {
         data: transactionHistoryData.map((data) => data.Withdrawal),
         backgroundColor: '#F324EC',
         borderRadius:10,
-        hoverOffset: 25,
+        borderWidth: 2
       },
       {
         label: "Deposit",
         data: transactionHistoryData.map((data) => data.Deposit),
         backgroundColor:'#FFB803',
         borderRadius:10,
-        hoverOffset: 25,
+        borderWidth: 2
       },
       {
         label: "Transfer",
         data: transactionHistoryData.map((data) => data.Transfer),
         backgroundColor: '#0E0C6D',
         borderRadius:10,
-        hoverOffset: 25,
+        borderWidth: 2
       },
     ],
   });
   const [option,setOptions] = useState({
+    responsive: true,
     plugins:{
       legend:{
         display: false
@@ -173,6 +174,11 @@ const  NewDashboard = () => {
   })
   ChartJS.defaults.line='white'
   ChartJS.defaults.color= 'white'
+
+  window.addEventListener('resize',()=>{
+    doughnut.resize()
+    barChart.resize()
+  })
   return (
     <section className="">
       <article>
@@ -271,7 +277,7 @@ const  NewDashboard = () => {
           </div>
         </div>
       </div>
-      <div className="gridClass ">
+      <div className="gridClass">
         <aside className="bg-[#000000] px-4 py-2 rounded-[10px]">
           <table className="w-full">
             <tbody>
@@ -315,12 +321,70 @@ const  NewDashboard = () => {
           </table>
           <Bar data={barChart} options={option}/>
         </aside>
-        <aside className="bg-[#000000] px-4 py-2 rounded-[10px]">
+        <aside className="bg-[#000000] px-4 py-2 rounded-[10px] flex flex-col gap-12">
           <article className="flex justify-between">
             <h4 className=" text-white text-sm">Investment Plans</h4>
             <button className=" text-sm text-[#FFB803]">More</button>
           </article>
-          <h1 className="text-[25px] text-white my-4 font-extrabold">CHARTS</h1>
+          <article className='flex flex-col gap-10 pb-5'>
+            <div className='flex gap-[15px]'>
+              <p className='bg-[#9b9bef] text-[#0a07ff] text-[15px] font-[600] w-[40px] h-[35px] rounded-[50%] flex justify-center items-center whitespace-nowrap'>A</p>
+              <div className='w-full flex flex-col gap-3'>
+                <div className='flex justify-between'>
+                  <div className='w-fit flex flex-col'>
+                    <p className='font-bold text-[14px]'>Assets</p>
+                    <span className='text-[13px] text-[rgba(255,255,255,0.7)]'>20% interest rate</span>
+                  </div>
+                  <div className='w-fit flex flex-col'>
+                    <p className='font-bold text-[14px]'>$4,000.00</p>
+                    <span className='text-[13px] text-[rgba(255,255,255,0.7)]'>April 2023</span>
+                  </div>
+                </div>
+                <div className='w-full h-[8px] rounded-[5px] bg-[#9b9bef]'>
+                  <div className='h-full rounded-[5px] w-[20%] bg-[purple]'></div>
+                </div>
+              </div>
+            </div>
+            
+            <div className='flex gap-[15px]'>
+              <p className='bg-[#989650] text-[#585500] text-[15px] font-[600] w-[40px] h-[35px] rounded-[50%] flex justify-center items-center'>R</p>
+              <div className='w-full flex flex-col gap-3'>
+                <div className='flex justify-between'>
+                  <div className='w-fit flex flex-col'>
+                    <p className='font-bold text-[14px]'>Real Estate</p>
+                    <span className='text-[13px] text-[rgba(255,255,255,0.7)]'>50% interest rate</span>
+                  </div>
+                  <div className='w-fit flex flex-col'>
+                    <p className='font-bold text-[14px]'>$4,000.00</p>
+                    <span className='text-[13px] text-[rgba(255,255,255,0.7)]'>June 2023</span>
+                  </div>
+                </div>
+                <div className='w-full h-[8px] rounded-[5px] bg-[#989650]'>
+                  <div className='h-full rounded-[5px] w-[50%] bg-[purple]'></div>
+                </div>
+              </div>
+            </div>
+            
+            <div className='flex gap-[15px]'>
+              <p className='bg-[#9feaa6] text-[#07320b] text-[15px] font-[600] w-[40px] h-[35px] rounded-[50%] flex justify-center items-center'>C</p>
+              <div className='w-full flex flex-col gap-3'>
+                <div className='flex justify-between'>
+                  <div className='w-fit flex flex-col'>
+                    <p className='font-bold text-[14px]'>Crypto</p>
+                    <span className='text-[13px] text-[rgba(255,255,255,0.7)]'>15% interest rate</span>
+                  </div>
+                  <div className='w-fit flex flex-col'>
+                    <p className='font-bold text-[14px]'>$2,000.00</p>
+                    <span className='text-[13px] text-[rgba(255,255,255,0.7)]'>July 2023</span>
+                  </div>
+                </div>
+                <div className='w-full h-[8px] rounded-[5px] bg-[#9feaa6]'>
+                  <div className='h-full rounded-[5px] w-[15%] bg-[purple]'></div>
+                </div>
+              </div>
+            </div>
+
+          </article>
         </aside>
       </div>
       <div className=" bg-[#000000] p-4  rounded-[12px] mt-4">
