@@ -1,91 +1,201 @@
 import React from 'react';
 import dashBoard from '../assets/dashBoard.png';
 import table_icon from '../assets/table_icon.png';
+import { useState } from 'react';
+import {Bar,Doughnut,Pie} from 'react-chartjs-2'
+import {Chart as ChartJS, plugins} from 'chart.js/auto'
+// import plugin from 'tailwindcss';
 
-const NewDashboard = () => {
+const  NewDashboard = () => {
   const accountAnalyticsData = [
     {
       title: 'Total Balance',
-      amount: '$ 2,474.91',
+      amount: 2474.91,
       percentage: '50%',
       color: '#FFB803',
     },
     {
       title: 'Trading Balance',
-      amount: '$ 1,274.91',
+      amount: 1274.91,
       percentage: '30%',
       color: '#F324EC',
     },
     {
       title: 'Avaliable Balance',
-      amount: '$ 1,174.91',
+      amount: 1174.91,
       percentage: '20%',
       color: '#0E0C6D',
     },
   ];
+  const [doughnut,setDoughnut] = useState({
+    // labels: accountAnalyticsData.map(data => data.title),
+    datasets: [{
+      data: accountAnalyticsData.map(data => data.amount),
+      backgroundColor: accountAnalyticsData.map(data => data.color),
+      borderWidth:0,
+      // boxShadow: '2 2 yellow',
+    }]
+  })
+  // const tr
+  
   const transactionHistoryData = [
     {
       description: 'From main account',
-      type: 'Withdrawal',
-      amount: '-$132',
-      status: 'Completed',
-      date: '25 April at 09:30 am',
+      Withdrawal: 456,
+      Transfer: 132,
+      Deposit: 732,
+      date: 'Jan',
     },
     {
       description: 'alfredjosh@gmail.com',
-      type: 'Deposit',
-      amount: '+$986',
-      status: 'Pending',
-      date: '25 April at 09:30 am',
+      Withdrawal: 326,
+      Transfer: 986,
+      Deposit: 657,
+      date: 'Feb',
     },
     {
       description: 'fredrickleo@gmail.com',
-      type: 'Transfer',
-      amount: '+$620',
-      status: 'Failed',
-      date: '25 April at 14:30',
+      Withdrawal: 856,
+      Transfer: 620,
+      Deposit: 724,
+      date: 'March',
     },
     {
       description: 'From main account',
-      type: 'Withdrawal',
-      amount: '-$132',
-      status: 'Completed',
-      date: '25 April at 16:30',
+      Withdrawal: 264,
+      Transfer: 132,
+      Deposit: 465,
+      date: 'April',
+    },
+    {
+      description: 'From main account',
+      Withdrawal: 456,
+      Transfer: 132,
+      Deposit: 732,
+      date: 'May',
+    },
+    {
+      description: 'alfredjosh@gmail.com',
+      Withdrawal: 326,
+      Transfer: 986,
+      Deposit: 657,
+      date: 'June',
+    },
+    {
+      description: 'fredrickleo@gmail.com',
+      Withdrawal: 856,
+      Transfer: 620,
+      Deposit: 724,
+      date: 'July',
+    },
+    {
+      description: 'From main account',
+      Withdrawal: 264,
+      Transfer: 132,
+      Deposit: 465,
+      date: 'Aug',
+    },
+    {
+      description: 'From main account',
+      Withdrawal: 456,
+      Transfer: 132,
+      Deposit: 732,
+      date: 'Sep',
+    },
+    {
+      description: 'alfredjosh@gmail.com',
+      Withdrawal: 326,
+      Transfer: 986,
+      Deposit: 657,
+      date: 'Oct',
+    },
+    {
+      description: 'fredrickleo@gmail.com',
+      Withdrawal: 856,
+      Transfer: 620,
+      Deposit: 724,
+      date: 'Nov',
+    },
+    {
+      description: 'From main account',
+      Withdrawal: 264,
+      Transfer: 132,
+      Deposit: 465,
+      date: 'Dec',
     },
   ];
-  const transactionAnalytics=[
-    {
-      title: 'Withdrawal',
-     
-      color: '#FFB803',
+
+  const [barChart, setBarChart] = useState({
+    labels: transactionHistoryData.map((data) => data.date),
+    datasets: [
+      {
+        label: "Withdrawal",
+        data: transactionHistoryData.map((data) => data.Withdrawal),
+        backgroundColor: '#F324EC',
+        borderRadius:10,
+        borderWidth: 2
+      },
+      {
+        label: "Deposit",
+        data: transactionHistoryData.map((data) => data.Deposit),
+        backgroundColor:'#FFB803',
+        borderRadius:10,
+        borderWidth: 2
+      },
+      {
+        label: "Transfer",
+        data: transactionHistoryData.map((data) => data.Transfer),
+        backgroundColor: '#0E0C6D',
+        borderRadius:10,
+        borderWidth: 2
+      },
+    ],
+  });
+  const [option,setOptions] = useState({
+    responsive: true,
+    plugins:{
+      legend:{
+        display: false
+      }
     },
-    {
-      title: 'Deposit',
-     
-      color: '#F324EC',
+    scales:{
+      y:{
+        grid:{
+          color: 'white',
+          borderDash: [5,5],
+        }
+      },
+      x:{
+        grid:{
+          display: false
+        }
+      }
     },
-    {
-      title: 'Transfer',
-      color: '#0E0C6D',
-    },
-  ]
+  })
+  ChartJS.defaults.line='white'
+  ChartJS.defaults.color= 'white'
+
+  window.addEventListener('resize',()=>{
+    doughnut.resize()
+    barChart.resize()
+  })
   return (
-    <section className="px-6 py-4 h-full no-scrollbar overflow-auto min-w-[450px]">
-      <article className="font-poppins">
+    <section className="">
+      <article>
         <h2 className="font-semibold text-[25px] pb-2">Dashboard</h2>
         <h5>Welcome Back, John Doe</h5>
         <p className="text-sm text-[#A6A6A6]">
           Here’s what’s happening on your account.
         </p>
       </article>
-      <div className="my-4 flex flex-wrap gap-6 font-poppins">
-        <article className="bg-[#000000CC] px-4 py-2 rounded-[10px] flex-grow">
+      <div className="my-4 grid grid-cols-3 gap-6">
+        <article className="bg-[#000000CC] px-4 py-2 rounded-[10px]">
           <p className="font-medium text-[#FFFFFF] opacity-[61%] text-sm">
             Total Balance
           </p>
-          <h2 className="font-extrabold  text-sm sm:text-[25px] flex items-center gap-5 h-[40px] justify-between ">
+          <h2 className="font-extrabold text-[25px] flex items-center gap-5 h-[40px] ">
             $2,474.91
-            <button className="bg-[#8E0789] w-[100px] h-[40px] text-[10px] text-[#000000] rounded-[3.73px] flex gap-1 items-center justify-center custom_box-shadow font-[inter] inter-font">
+            <button className="bg-[#8E0789] w-[100px] h-[40px] text-[10px] text-[#000000] rounded-[3.73px] flex gap-1 items-center justify-center">
               <span className="">
                 <img
                   src={dashBoard}
@@ -96,41 +206,17 @@ const NewDashboard = () => {
               25.69%
             </button>
           </h2>
-          <h4 className="text-[#47A663] flex gap-4 items-center text-[10px] sm:text-sm">
-            + $301.93{' '}
-            <span className="text-[10px] text-white inter-font inter-font">
-              24h
-            </span>
-          </h4>
-        </article>
-        <article className="bg-[#000000CC] px-4 py-2 rounded-[10px] flex-grow">
-          <p className="font-medium text-[#FFFFFF] opacity-[61%] text-sm">
-            Trading Balance
-          </p>
-          <h2 className="font-extrabold text-sm sm:text-[25px] flex items-center gap-6 h-[40px] justify-between ">
-            $1,274.91
-            <button className="bg-[#8E0789] w-[100px] h-[40px] text-[10px] text-[#000000] rounded-[3.73px] flex gap-1 items-center justify-center custom_box-shadow inter-font">
-              <span className="">
-                <img
-                  src={dashBoard}
-                  alt="dashBoard"
-                  className="w-[10px] h-[10px] inline"
-                />
-              </span>
-              25.69%
-            </button>
-          </h2>
-          <h4 className="text-[#47A663] flex gap-4 items-center text-[10px] sm:text-sm">
+          <h4 className="text-[#47A663] flex gap-4 items-center">
             + $301.93 <span className="text-[10px] text-white">24h</span>
           </h4>
         </article>
-        <article className="bg-[#000000CC] px-4 py-2 rounded-[10px] flex-grow">
+        <article className="bg-[#000000CC] px-4 py-2 rounded-[10px]">
           <p className="font-medium text-[#FFFFFF] opacity-[61%] text-sm">
-            Avaliable Balance
+            Total Balance
           </p>
-          <h2 className="font-extrabold text-sm sm:text-[25px] flex items-center gap-5 h-[40px] justify-between ">
-            $1,174.91
-            <button className="bg-[#8E0789] w-[100px] h-[40px] text-[10px] text-[#000000] rounded-[3.73px] flex gap-1 items-center justify-center custom_box-shadow inter-font">
+          <h2 className="font-extrabold text-[25px] flex items-center gap-5 h-[40px] ">
+            $1,274.91
+            <button className="bg-[#8E0789] w-[100px] h-[40px] text-[10px] text-[#000000] rounded-[3.73px] flex gap-1 items-center justify-center">
               <span className="">
                 <img
                   src={dashBoard}
@@ -141,53 +227,83 @@ const NewDashboard = () => {
               25.69%
             </button>
           </h2>
-          <h4 className="text-[#F42424] flex gap-4 items-center text-[10px] sm:text-sm">
-            + $301.93{' '}
-            <span className="text-[10px] text-white inter-font">24h</span>
+          <h4 className="text-[#47A663] flex gap-4 items-center">
+            + $301.93 <span className="text-[10px] text-white">24h</span>
+          </h4>
+        </article>
+        <article className="bg-[#000000CC] px-4 py-2 rounded-[10px]">
+          <p className="font-medium text-[#FFFFFF] opacity-[61%] text-sm">
+            Total Balance
+          </p>
+          <h2 className="font-extrabold text-[25px] flex items-center gap-5 h-[40px] ">
+            $1,174.91
+            <button className="bg-[#8E0789] w-[100px] h-[40px] text-[10px] text-[#000000] rounded-[3.73px] flex gap-1 items-center justify-center">
+              <span className="">
+                <img
+                  src={dashBoard}
+                  alt="dashBoard"
+                  className="w-[10px] h-[10px] inline"
+                />
+              </span>
+              25.69%
+            </button>
+          </h2>
+          <h4 className="text-[#F42424] flex gap-4 items-center">
+            + $301.93 <span className="text-[10px] text-white">24h</span>
           </h4>
         </article>
       </div>
-      <div className="bg-[#000000] rounded-[10px] font-poppins">
+      <div className="bg-[#000000] rounded-[10px]">
         <h4 className="pt-6 pl-4"> Account Analytics</h4>
-        <div className="my-4 grid grid-cols-1 sm:grid-cols-4  h-fit sm:h-[180px] place-content-center">
+        <div className="my-4 grid grid-cols-4   h-[180px] place-content-center">
           {accountAnalyticsData.map((data, index) => (
             <article key={index} className="px-10 py-2 rounded-[10px]">
-              <p className="font-medium text-[#FFFFFF] opacity-[61%] text-sm sm:text-[20px] relative">
+              <p className="font-medium text-[#FFFFFF] opacity-[61%] text-[20px] relative">
                 <span
-                  className={`inline-block w-[8px] sm:w-[16px] h-[8px] sm:h-[16px] bg-[${data.color}] rounded-[50%] absolute left-[-25px] top-2  `}
+                  className={`inline-block w-[16px] h-[16px] bg-[${data.color}] rounded-[50%] absolute left-[-25px] top-2  `}
                 ></span>
                 {data.title}
               </p>
-              <h2 className="font-bold text-sm sm:text-[18px] flex items-center gap-5 h-[40px] ">
+              <h2 className="font-bold text-[18px] flex items-center gap-5 h-[40px] ">
                 {data.amount}
               </h2>
-              <h4 className="text-[#4A4A4A] flex gap-4 items-center text-sm sm:text-[16px]">
+              <h4 className="text-[#4A4A4A] flex gap-4 items-center">
                 {data.percentage}
               </h4>
             </article>
           ))}
-          <h1 className="text-[25px] text-white">CHARTS</h1>
+          <div className='flex justify-center items-center -translate-y-[15%]  w-full'>
+            <Doughnut data={doughnut}/>
+          </div>
         </div>
       </div>
-      <div className="gridClass font-poppins ">
+      <div className="gridClass">
         <aside className="bg-[#000000] px-4 py-2 rounded-[10px]">
-          <table className="">
+          <table className="w-full">
             <tbody>
-              <tr className="">
-                <td className="not_affected text-[10px] sm:text-sm">
-                  Transaction Analytics
+              <tr className="flex justify-between ">
+                <td className=" not_affected">Transaction Analytics</td>
+                <td className="relative text-[13px] not_affected">
+                  <span
+                    className={`inline-block w-[12px] h-[12px] bg-[#F324EC] rounded-[50%] absolute left-[-15px] top-4  `}
+                  ></span>
+                  Withdrawal
                 </td>
-                {transactionAnalytics.map((data, index) => (
-                  <td className="relative not_affected text-[10px] sm:text-sm">
-                    <span
-                      className={`inline-block  w-[6px] sm:w-[12px] h-[6px] sm:h-[12px] bg-[${data.color}] rounded-[50%] absolute  left-[-10px] sm:left-[-15px]  top-8 sm:top-7 `}
-                    ></span>
-                    {data.title}
-                  </td>
-                ))}
+                <td className="relative text-[13px] not_affected ">
+                  <span
+                    className={`inline-block w-[12px] h-[12px] bg-[#0E0C6D] rounded-[50%] absolute left-[-15px] top-4   `}
+                  ></span>
+                  Deposit
+                </td>
+                <td className="relative text-[13px] not_affected">
+                  <span
+                    className={`inline-block w-[12px] h-[12px] bg-[#FFB803] rounded-[50%] absolute left-[-15px] top-4 `}
+                  ></span>
+                  Transfer
+                </td>
 
                 <td className="not_affected">
-                  <select className="text-white border-[0.96px] border-[#FFFFFF] rounded-[9.55px] bg-transparent text-[10px] sm:text-sm jakarta-font">
+                  <select className="text-white border-[0.96px] border-[#FFFFFF] rounded-[9.55px] bg-transparent text-[12px]">
                     <option value="2023" selected>
                       2023
                     </option>
@@ -203,53 +319,107 @@ const NewDashboard = () => {
               </tr>
             </tbody>
           </table>
-          <h1 className="font-extrabold text-[30px]">CHARTS</h1>
+          <Bar data={barChart} options={option}/>
         </aside>
-        <aside className="bg-[#000000] px-4 py-2 rounded-[10px]">
-          <article className="flex justify-between flex-wrap">
-            <h4 className=" text-white  text-[11px] sm:text-sm">
-              Investment Plans
-            </h4>
-            <button className=" text-[11px] sm:text-sm text-[#FFB803]">
-              More
-            </button>
+        <aside className="bg-[#000000] px-4 py-2 rounded-[10px] flex flex-col gap-12">
+          <article className="flex justify-between">
+            <h4 className=" text-white text-sm">Investment Plans</h4>
+            <button className=" text-sm text-[#FFB803]">More</button>
           </article>
-          <h1 className="text-[25px] text-white my-4 font-extrabold">CHARTS</h1>
+          <article className='flex flex-col gap-10 pb-5'>
+            <div className='flex gap-[15px]'>
+              <p className='bg-[#9b9bef] text-[#0a07ff] text-[15px] font-[600] w-[40px] h-[35px] rounded-[50%] flex justify-center items-center whitespace-nowrap'>A</p>
+              <div className='w-full flex flex-col gap-3'>
+                <div className='flex justify-between'>
+                  <div className='w-fit flex flex-col'>
+                    <p className='font-bold text-[14px]'>Assets</p>
+                    <span className='text-[13px] text-[rgba(255,255,255,0.7)]'>20% interest rate</span>
+                  </div>
+                  <div className='w-fit flex flex-col'>
+                    <p className='font-bold text-[14px]'>$4,000.00</p>
+                    <span className='text-[13px] text-[rgba(255,255,255,0.7)]'>April 2023</span>
+                  </div>
+                </div>
+                <div className='w-full h-[8px] rounded-[5px] bg-[#9b9bef]'>
+                  <div className='h-full rounded-[5px] w-[20%] bg-[purple]'></div>
+                </div>
+              </div>
+            </div>
+            
+            <div className='flex gap-[15px]'>
+              <p className='bg-[#989650] text-[#585500] text-[15px] font-[600] w-[40px] h-[35px] rounded-[50%] flex justify-center items-center'>R</p>
+              <div className='w-full flex flex-col gap-3'>
+                <div className='flex justify-between'>
+                  <div className='w-fit flex flex-col'>
+                    <p className='font-bold text-[14px]'>Real Estate</p>
+                    <span className='text-[13px] text-[rgba(255,255,255,0.7)]'>50% interest rate</span>
+                  </div>
+                  <div className='w-fit flex flex-col'>
+                    <p className='font-bold text-[14px]'>$4,000.00</p>
+                    <span className='text-[13px] text-[rgba(255,255,255,0.7)]'>June 2023</span>
+                  </div>
+                </div>
+                <div className='w-full h-[8px] rounded-[5px] bg-[#989650]'>
+                  <div className='h-full rounded-[5px] w-[50%] bg-[purple]'></div>
+                </div>
+              </div>
+            </div>
+            
+            <div className='flex gap-[15px]'>
+              <p className='bg-[#9feaa6] text-[#07320b] text-[15px] font-[600] w-[40px] h-[35px] rounded-[50%] flex justify-center items-center'>C</p>
+              <div className='w-full flex flex-col gap-3'>
+                <div className='flex justify-between'>
+                  <div className='w-fit flex flex-col'>
+                    <p className='font-bold text-[14px]'>Crypto</p>
+                    <span className='text-[13px] text-[rgba(255,255,255,0.7)]'>15% interest rate</span>
+                  </div>
+                  <div className='w-fit flex flex-col'>
+                    <p className='font-bold text-[14px]'>$2,000.00</p>
+                    <span className='text-[13px] text-[rgba(255,255,255,0.7)]'>July 2023</span>
+                  </div>
+                </div>
+                <div className='w-full h-[8px] rounded-[5px] bg-[#9feaa6]'>
+                  <div className='h-full rounded-[5px] w-[15%] bg-[purple]'></div>
+                </div>
+              </div>
+            </div>
+
+          </article>
         </aside>
       </div>
       <div className=" bg-[#000000] p-4  rounded-[12px] mt-4">
-        <article className="flex justify-between text-white gap-4 text-[11px] sm:text-sm">
+        <article className="flex justify-between text-white">
           <h4>Transaction History</h4>
 
-          <button className=" w-[60px] sm:w-[184px]  h-[30px] sm:h-[52px] rounded-md border border-[#FFB803] text-[#FFB803] hover:bg-[#FFB803] hover:text-white ">
+          <button className=" w-[184px] h-[52px] rounded-md border border-[#FFB803] text-[#FFB803] hover:bg-[#FFB803] hover:text-white text-sm ">
             More
           </button>
         </article>
 
-        <table class="table-auto my-4 font-poppins">
-          <thead className="text-[#FFB803] relative left-0 sm:left-[40px]">
-            <tr className="text-[12px] sm:text-[16px]">
+        <table class="table-auto my-4">
+          <thead className="text-[#FFB803]">
+            <tr>
               <th>Description</th>
               <th>Type</th>
               <th>Amount</th>
               <th>Status</th>
             </tr>
           </thead>
-          <tbody className="relative left-0 sm:left-[40px]">
+          <tbody>
             {transactionHistoryData.map((data, index) => (
-              <tr className="relative mt-4  text-[10px] sm:text-sm">
+              <tr className="relative mt-4 text-[12px]">
                 <td>
                   <img
                     src={table_icon}
                     alt="table_icon"
-                    className="w-[20px] h-[20px] hidden sm:inline-block absolute left-[-20px] top-3"
+                    className="w-[20px] h-[20px] inline-block absolute left-[20px] top-3"
                   />
                   {data.description}
                   <small className="block">{data.date}</small>
                 </td>
                 <td className="relative">
                   <span
-                    className={` absolute  left-[-10px] w-3 h-3 rounded-[50%] top-[25px]  ${data.type === 'Withdrawal' ? 'bg-[#F324EC]' : `${data.type === 'Deposit' ? 'bg-[#0E0C6D]' : 'bg-[#FFB803]'}`}`}
+                    className={` absolute  left-4 w-3 h-3 rounded-[50%]  ${data.type === 'Withdrawal' ? 'bg-[#F324EC]' : `${data.type === 'Deposit' ? 'bg-[#0E0C6D]' : 'bg-[#FFB803]'}`}`}
                   >
                     {' '}
                   </span>
@@ -257,7 +427,7 @@ const NewDashboard = () => {
                 </td>
                 <td>{data.amount}</td>
                 <td
-                  className={` inter-font ${data.status === 'Completed' ? 'text-[#50E01E]' : `${data.status === 'Pending' ? 'text-[#0978F2]' : 'text-[#E91616]'}`}`}
+                  className={`${data.status === 'Completed' ? 'text-[#50E01E]' : `${data.status === 'Pending' ? 'text-[#0978F2]' : 'text-[#E91616]'}`}`}
                 >
                   {data.status}
                 </td>
