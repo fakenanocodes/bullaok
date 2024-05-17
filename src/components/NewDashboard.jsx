@@ -1,9 +1,11 @@
 import React from 'react';
 import dashBoard from '../assets/dashBoard.png';
 import table_icon from '../assets/table_icon.png';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import {Bar,Doughnut,Pie} from 'react-chartjs-2'
 import {Chart as ChartJS, plugins} from 'chart.js/auto'
+import axios from 'axios';
+import { set } from 'react-hook-form';
 // import plugin from 'tailwindcss';
 
 const  NewDashboard = () => {
@@ -36,7 +38,8 @@ const  NewDashboard = () => {
       // boxShadow: '2 2 yellow',
     }]
   })
-  // const tr
+  const [userProfile, setUserProfile] = useState({});
+  console.log('USER PROFILE', userProfile);
   
   const transactionHistoryData = [
     {
@@ -180,8 +183,24 @@ const  NewDashboard = () => {
     doughnut.resize()
     barChart.resize()
   })
+  const fetchUserProfile = async () => {
+    try {
+      const response = await axios.get('/user/');
+      console.log('RESPONSE', response);
+     
+      setUserProfile(response.data.profile);
+    
+    } catch (error) {
+      console.log('ERROR', error);
+    }
+  };
+  useEffect(() => {
+    fetchUserProfile();
+  }
+  , []);
+  
   return (
-    <section className="">
+    <section className="p-4">
       <article>
         <h2 className="font-semibold text-[25px] pb-2">Dashboard</h2>
         <h5>Welcome Back, John Doe</h5>
@@ -189,12 +208,12 @@ const  NewDashboard = () => {
           Here’s what’s happening on your account.
         </p>
       </article>
-      <div className="my-4 grid grid-cols-3 gap-6">
+      <div className="my-4 grid  grid-cols-1 md:grid-cols-3 gap-6">
         <article className="bg-[#000000CC] px-4 py-2 rounded-[10px]">
           <p className="font-medium text-[#FFFFFF] opacity-[61%] text-sm">
             Total Balance
           </p>
-          <h2 className="font-extrabold text-[25px] flex items-center gap-5 h-[40px] ">
+          <h2 className="font-extrabold  text-sm sm:text-[25px] flex items-center gap-5 h-[40px]  justify-between ">
             $2,474.91
             <button className="bg-[#8E0789] w-[100px] h-[40px] text-[10px] text-[#000000] rounded-[3.73px] flex gap-1 items-center justify-center">
               <span className="">
@@ -207,15 +226,15 @@ const  NewDashboard = () => {
               25.69%
             </button>
           </h2>
-          <h4 className="text-[#47A663] flex gap-4 items-center">
+          <h4 className="text-[#47A663] flex gap-4 items-center text-[10px] sm:text-[16px]">
             + $301.93 <span className="text-[10px] text-white">24h</span>
           </h4>
         </article>
         <article className="bg-[#000000CC] px-4 py-2 rounded-[10px]">
           <p className="font-medium text-[#FFFFFF] opacity-[61%] text-sm">
-            Total Balance
+            Trading Balance
           </p>
-          <h2 className="font-extrabold text-[25px] flex items-center gap-5 h-[40px] ">
+          <h2 className="font-extrabold text-sm sm:text-[25px]  flex items-center gap-5 h-[40px]  justify-between ">
             $1,274.91
             <button className="bg-[#8E0789] w-[100px] h-[40px] text-[10px] text-[#000000] rounded-[3.73px] flex gap-1 items-center justify-center">
               <span className="">
@@ -228,16 +247,16 @@ const  NewDashboard = () => {
               25.69%
             </button>
           </h2>
-          <h4 className="text-[#47A663] flex gap-4 items-center">
+          <h4 className="text-[#47A663] flex gap-4 items-center text-[10px] sm:text-[16px]">
             + $301.93 <span className="text-[10px] text-white">24h</span>
           </h4>
         </article>
         <article className="bg-[#000000CC] px-4 py-2 rounded-[10px]">
           <p className="font-medium text-[#FFFFFF] opacity-[61%] text-sm">
-            Total Balance
+            Avaliable Balance
           </p>
-          <h2 className="font-extrabold text-[25px] flex items-center gap-5 h-[40px] ">
-            $1,174.91
+          <h2 className="font-extrabold text-sm sm:text-[25px] flex items-center gap-5 h-[40px] justify-between ">
+            ${userProfile.available_balance?userProfile.available_balance:0}
             <button className="bg-[#8E0789] w-[100px] h-[40px] text-[10px] text-[#000000] rounded-[3.73px] flex gap-1 items-center justify-center">
               <span className="">
                 <img
@@ -249,23 +268,26 @@ const  NewDashboard = () => {
               25.69%
             </button>
           </h2>
-          <h4 className="text-[#F42424] flex gap-4 items-center">
+          <h4 className="text-[#F42424] flex gap-4 items-center text-[10px] sm:text-[16px]">
             + $301.93 <span className="text-[10px] text-white">24h</span>
           </h4>
         </article>
       </div>
       <div className="bg-[#000000] rounded-[10px]">
         <h4 className="pt-6 pl-4"> Account Analytics</h4>
-        <div className="my-4 grid grid-cols-4   h-[180px] place-content-center">
+        <div className="my-4 grid grid-cols-1 sm:grid-cols-4 place-content-center gap-3">
           {accountAnalyticsData.map((data, index) => (
-            <article key={index} className="px-10 py-2 rounded-[10px]">
-              <p className="font-medium text-[#FFFFFF] opacity-[61%] text-[20px] relative">
+            <article
+              key={index}
+              className="px-10 py-2 rounded-[10px] text-[12px] sm:text-sm"
+            >
+              <p className="font-medium text-[#FFFFFF] opacity-[61%] text-sm sm:text-[20px] relative">
                 <span
-                  className={`inline-block w-[16px] h-[16px] bg-[${data.color}] rounded-[50%] absolute left-[-25px] top-2  `}
+                  className={`inline-block  w-[8px] sm:w-[16px] h-[8px] sm:h-[16px] bg-[${data.color}] rounded-[50%] absolute left-[-25px] top-2  `}
                 ></span>
                 {data.title}
               </p>
-              <h2 className="font-bold text-[18px] flex items-center gap-5 h-[40px] ">
+              <h2 className="font-bold  text-[12px] sm:text-[18px] flex items-center gap-5 h-[40px] ">
                 {data.amount}
               </h2>
               <h4 className="text-[#4A4A4A] flex gap-4 items-center">
@@ -273,8 +295,8 @@ const  NewDashboard = () => {
               </h4>
             </article>
           ))}
-          <div className='flex justify-center items-center -translate-y-[15%]  w-full'>
-            <Doughnut data={doughnut}/>
+          <div className="flex justify-center items-center -translate-y-[15%]  w-full">
+            <Doughnut data={doughnut} />
           </div>
         </div>
       </div>
@@ -282,29 +304,31 @@ const  NewDashboard = () => {
         <aside className="bg-[#000000] px-4 py-2 rounded-[10px]">
           <table className="w-full">
             <tbody>
-              <tr className="flex justify-between ">
-                <td className=" not_affected">Transaction Analytics</td>
-                <td className="relative text-[13px] not_affected">
+              <tr className="flex justify-evenly items-center gap-2 ">
+                <td className=" not_affected  text-[10px] sm:text-sm ">
+                  Transaction Analytics
+                </td>
+                <td className="relative not_affected text-[10px] sm:text-sm">
                   <span
-                    className={`inline-block w-[12px] h-[12px] bg-[#F324EC] rounded-[50%] absolute left-[-15px] top-4  `}
+                    className={`inline-block w-[6px] sm:w-[12px] h-[6px] sm:h-[12px] bg-[#F324EC] rounded-[50%] absolute left-[-15px] top-4  `}
                   ></span>
                   Withdrawal
                 </td>
-                <td className="relative text-[13px] not_affected ">
+                <td className="relative not_affected  text-[10px] sm:text-sm">
                   <span
-                    className={`inline-block w-[12px] h-[12px] bg-[#0E0C6D] rounded-[50%] absolute left-[-15px] top-4   `}
+                    className={`inline-block w-[6px] sm:w-[12px] h-[6px] sm:h-[12px] bg-[#0E0C6D] rounded-[50%] absolute left-[-15px] top-4   `}
                   ></span>
                   Deposit
                 </td>
-                <td className="relative text-[13px] not_affected">
+                <td className="relative not_affected text-[10px] sm:text-sm">
                   <span
-                    className={`inline-block w-[12px] h-[12px] bg-[#FFB803] rounded-[50%] absolute left-[-15px] top-4 `}
+                    className={`inline-block w-[6px] sm:w-[12px] h-[6px] sm:h-[12px] bg-[#FFB803] rounded-[50%] absolute left-[-15px] top-4 `}
                   ></span>
                   Transfer
                 </td>
 
                 <td className="not_affected">
-                  <select className="text-white border-[0.96px] border-[#FFFFFF] rounded-[9.55px] bg-transparent text-[12px]">
+                  <select className="text-white border-[0.96px] border-[#FFFFFF] rounded-[9.55px] bg-transparent text-[10px] sm:text-sm">
                     <option value="2023" selected>
                       2023
                     </option>
@@ -320,85 +344,102 @@ const  NewDashboard = () => {
               </tr>
             </tbody>
           </table>
-          <Bar data={barChart} options={option}/>
+          <Bar data={barChart} options={option} />
         </aside>
         <aside className="bg-[#000000] px-4 py-2 rounded-[10px] flex flex-col gap-12">
           <article className="flex justify-between">
             <h4 className=" text-white text-sm">Investment Plans</h4>
             <button className=" text-sm text-[#FFB803]">More</button>
           </article>
-          <article className='flex flex-col gap-10 pb-5'>
-            <div className='flex gap-[15px]'>
-              <p className='bg-[#9b9bef] text-[#0a07ff] text-[15px] font-[600] w-[40px] h-[35px] rounded-[50%] flex justify-center items-center whitespace-nowrap'>A</p>
-              <div className='w-full flex flex-col gap-3'>
-                <div className='flex justify-between'>
-                  <div className='w-fit flex flex-col'>
-                    <p className='font-bold text-[14px]'>Assets</p>
-                    <span className='text-[13px] text-[rgba(255,255,255,0.7)]'>20% interest rate</span>
+          <article className="flex flex-col gap-10 pb-5">
+            <div className="flex gap-[15px]">
+              <p className="bg-[#9b9bef] text-[#0a07ff] text-[15px] font-[600] w-[40px] h-[35px] rounded-[50%] flex justify-center items-center whitespace-nowrap">
+                A
+              </p>
+              <div className="w-full flex flex-col gap-3">
+                <div className="flex justify-between">
+                  <div className="w-fit flex flex-col">
+                    <p className="font-bold text-[14px]">Assets</p>
+                    <span className="text-[13px] text-[rgba(255,255,255,0.7)]">
+                      20% interest rate
+                    </span>
                   </div>
-                  <div className='w-fit flex flex-col'>
-                    <p className='font-bold text-[14px]'>$4,000.00</p>
-                    <span className='text-[13px] text-[rgba(255,255,255,0.7)]'>April 2023</span>
-                  </div>
-                </div>
-                <div className='w-full h-[8px] rounded-[5px] bg-[#9b9bef]'>
-                  <div className='h-full rounded-[5px] w-[20%] bg-[purple]'></div>
-                </div>
-              </div>
-            </div>
-            
-            <div className='flex gap-[15px]'>
-              <p className='bg-[#989650] text-[#585500] text-[15px] font-[600] w-[40px] h-[35px] rounded-[50%] flex justify-center items-center'>R</p>
-              <div className='w-full flex flex-col gap-3'>
-                <div className='flex justify-between'>
-                  <div className='w-fit flex flex-col'>
-                    <p className='font-bold text-[14px]'>Real Estate</p>
-                    <span className='text-[13px] text-[rgba(255,255,255,0.7)]'>50% interest rate</span>
-                  </div>
-                  <div className='w-fit flex flex-col'>
-                    <p className='font-bold text-[14px]'>$4,000.00</p>
-                    <span className='text-[13px] text-[rgba(255,255,255,0.7)]'>June 2023</span>
+                  <div className="w-fit flex flex-col">
+                    <p className="font-bold text-[14px]">$4,000.00</p>
+                    <span className="text-[13px] text-[rgba(255,255,255,0.7)]">
+                      April 2023
+                    </span>
                   </div>
                 </div>
-                <div className='w-full h-[8px] rounded-[5px] bg-[#989650]'>
-                  <div className='h-full rounded-[5px] w-[50%] bg-[purple]'></div>
-                </div>
-              </div>
-            </div>
-            
-            <div className='flex gap-[15px]'>
-              <p className='bg-[#9feaa6] text-[#07320b] text-[15px] font-[600] w-[40px] h-[35px] rounded-[50%] flex justify-center items-center'>C</p>
-              <div className='w-full flex flex-col gap-3'>
-                <div className='flex justify-between'>
-                  <div className='w-fit flex flex-col'>
-                    <p className='font-bold text-[14px]'>Crypto</p>
-                    <span className='text-[13px] text-[rgba(255,255,255,0.7)]'>15% interest rate</span>
-                  </div>
-                  <div className='w-fit flex flex-col'>
-                    <p className='font-bold text-[14px]'>$2,000.00</p>
-                    <span className='text-[13px] text-[rgba(255,255,255,0.7)]'>July 2023</span>
-                  </div>
-                </div>
-                <div className='w-full h-[8px] rounded-[5px] bg-[#9feaa6]'>
-                  <div className='h-full rounded-[5px] w-[15%] bg-[purple]'></div>
+                <div className="w-full h-[8px] rounded-[5px] bg-[#9b9bef]">
+                  <div className="h-full rounded-[5px] w-[20%] bg-[purple]"></div>
                 </div>
               </div>
             </div>
 
+            <div className="flex gap-[15px]">
+              <p className="bg-[#989650] text-[#585500] text-[15px] font-[600] w-[40px] h-[35px] rounded-[50%] flex justify-center items-center">
+                R
+              </p>
+              <div className="w-full flex flex-col gap-3">
+                <div className="flex justify-between">
+                  <div className="w-fit flex flex-col">
+                    <p className="font-bold text-[14px]">Real Estate</p>
+                    <span className="text-[13px] text-[rgba(255,255,255,0.7)]">
+                      50% interest rate
+                    </span>
+                  </div>
+                  <div className="w-fit flex flex-col">
+                    <p className="font-bold text-[14px]">$4,000.00</p>
+                    <span className="text-[13px] text-[rgba(255,255,255,0.7)]">
+                      June 2023
+                    </span>
+                  </div>
+                </div>
+                <div className="w-full h-[8px] rounded-[5px] bg-[#989650]">
+                  <div className="h-full rounded-[5px] w-[50%] bg-[purple]"></div>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex gap-[15px]">
+              <p className="bg-[#9feaa6] text-[#07320b] text-[15px] font-[600] w-[40px] h-[35px] rounded-[50%] flex justify-center items-center">
+                C
+              </p>
+              <div className="w-full flex flex-col gap-3">
+                <div className="flex justify-between">
+                  <div className="w-fit flex flex-col">
+                    <p className="font-bold text-[14px]">Crypto</p>
+                    <span className="text-[13px] text-[rgba(255,255,255,0.7)]">
+                      15% interest rate
+                    </span>
+                  </div>
+                  <div className="w-fit flex flex-col">
+                    <p className="font-bold text-[14px]">$2,000.00</p>
+                    <span className="text-[13px] text-[rgba(255,255,255,0.7)]">
+                      July 2023
+                    </span>
+                  </div>
+                </div>
+                <div className="w-full h-[8px] rounded-[5px] bg-[#9feaa6]">
+                  <div className="h-full rounded-[5px] w-[15%] bg-[purple]"></div>
+                </div>
+              </div>
+            </div>
           </article>
         </aside>
       </div>
       <div className=" bg-[#000000] p-4  rounded-[12px] mt-4">
-        <article className="flex justify-between text-white">
+        <article className="flex justify-between text-white text-[12px] sm:text-lg">
           <h4>Transaction History</h4>
 
-          <button className=" w-[184px] h-[52px] rounded-md border border-[#FFB803] text-[#FFB803] hover:bg-[#FFB803] hover:text-white text-sm ">
+          <button className="  w-[92px] sm:w-[184px] h-[30px] sm:h-[52px] rounded-md border border-[#FFB803] text-[#FFB803] hover:bg-[#FFB803] hover:text-white  text-[12px] sm:text-sm ">
             More
           </button>
         </article>
 
         <table class="table-auto my-4">
-          <thead className="text-[#FFB803]">
+          <thead className="relative text-[#FFB803] text-[10px] sm:text-[16px] left-0 sm:left-[40px]">
             <tr>
               <th>Description</th>
               <th>Type</th>
@@ -407,13 +448,13 @@ const  NewDashboard = () => {
             </tr>
           </thead>
           <tbody>
-            {transactionHistoryData.map((data, index) => (
-              <tr className="relative mt-4 text-[12px]">
+            {[].map((data, index) => (
+              <tr className="relative mt-4 text-[12px]  left-0 sm:left-[40px]">
                 <td>
                   <img
                     src={table_icon}
                     alt="table_icon"
-                    className="w-[20px] h-[20px] inline-block absolute left-[20px] top-3"
+                    className="w-[20px] h-[20px]  hidden sm:inline-block absolute left-[-30px] top-3"
                   />
                   {data.description}
                   <small className="block">{data.date}</small>
