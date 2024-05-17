@@ -295,8 +295,8 @@ const  NewDashboard = () => {
               </h4>
             </article>
           ))}
-          <div className="flex justify-center items-center -translate-y-[15%]  w-full">
-            <Doughnut data={doughnut} />
+          <div className="flex justify-center items-center -translate-y-[15%] w-[150px]   ">
+            <Doughnut className='' data={doughnut} />
           </div>
         </div>
       </div>
