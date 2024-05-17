@@ -156,6 +156,7 @@ const  NewDashboard = () => {
   });
   const [option,setOptions] = useState({
     responsive: true,
+    // maintainAspectRatio: false,
     plugins:{
       legend:{
         display: false

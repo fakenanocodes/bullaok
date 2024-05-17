@@ -1,4 +1,6 @@
-import React from 'react';
+import React,{ useState } from 'react';
+import {Doughnut} from 'react-chartjs-2'
+import {Chart as ChartJS, plugins} from 'chart.js/auto'
 
 const IndividualRetirementAccount = () => {
   const retirementData = [
@@ -15,6 +17,47 @@ const IndividualRetirementAccount = () => {
       amount: '$ 0.00',
     },
   ];
+
+  // data for the doughnuts
+  const doughnutData = [
+    {
+      title: 'Saving balance',
+      amount: 2474.91,
+      percentage: '55%',
+      color: '#f324ec',
+    },
+    {
+      title: 'REtirement balance',
+      amount: 1274.91,
+      percentage: '25%',
+      color: '#0e0c6d',
+    },
+  ];
+  const [doughnut,setDoughnut] = useState({
+    datasets: [{
+      data: doughnutData.map(data => data.amount),
+      backgroundColor: doughnutData.map(data => data.color),
+      borderWidth:0,
+      // boxShadow: '2 2 yellow',
+    }]
+  })
+  const [option,setOption] = useState({
+    responsive:true,
+    maintainAspectRatio: true,
+    rotation: -90,
+    circumference: 180,
+    cutoutPercentage: 70,
+    style: {
+      width: '150px'
+    },
+    legend: {
+      display: false,
+      position: 'bottom'
+    }
+  })
+  // window.addEventListener('resize',()=>{
+  //   doughnut.resize()
+  // })
   return (
     <section className=" h-full px-6 font-poppins">
       <div className="flex gap-5  my-6 flex-col sm:flex-row  ">
@@ -52,20 +95,52 @@ const IndividualRetirementAccount = () => {
         ))}
       </div>
       <div className="bg-[#000000] w-full sm:w-[67%] rounded-2xl p-4 my-4 h-[300px]">
-        <article className="flex justify-between items-center pb-10">
+        <div className="flex justify-between items-center pb-5">
           <h4>Activity</h4>
           <button className=" w-[57px] h-[20px] rounded-md border-[0.75px] border-[#8C89B480] text-[#AEABD8]  px-2 text-sm">
             Month
           </button>
-        </article>
-        <article className="flex flex-col sm:flex-row justify-between items-center">
-          <h1>CHARTS</h1>
-          <button className="  w-full sm:w-[40%] h-[47px] rounded-md border-[0.75px] border-[#8C89B480] text-[#AEABD8]  px-2 text-sm ">
-            View all activity
-          </button>
-        </article>
+        </div>
+        <div className="flex flex-col sm:flex-row justify-between items-center relative h-fit py-3 md:px-10 overflow-hidden">
+            <div className='w-fit h-fit flex flex-col items-center pb-4 justify-center transform translate-y-[-20%] md:translate-y-[-10%]relative'>
+              <div className='w-[12rem] h-[9.5rem] md:w-[12rem] md:h-44'>
+                <Doughnut data={doughnut} options={option} className='h-full'/> 
+              </div>
+
+              <div className='flex justify-between w-full absolute bottom-0'>
+                {/* {doughnutData.map((obj,index)=>{
+                  return (<div key={index}>
+                    <div className='flex gap-2 items-center'>
+                      <p className={`w-[10px] h-[10px] bg-[${obj.color}] rounded-[50%]`}></p>
+                      <p className='font-[300] text-[13px]'>{obj.title}</p>
+                    </div>
+                    <p className='font-[500] text-[13px]'>{obj.percentage}</p>
+                  </div>)
+                })} */}
+                <div>
+                  <div className='flex gap-2 items-center'>
+                    <p className='w-[10px] h-[10px] bg-[#f324ec] rounded-[50%]'></p>
+                    <p className='font-[300] text-[13px]'>Savings</p>
+                  </div>
+                  <p className='font-[500] text-[13px]'>55%</p>
+                </div>
+                <div>
+                  <div className='flex gap-2 items-center'>
+                    <p className='w-[10px] h-[10px] bg-[#0e0c6d] rounded-[50%]'></p>
+                    <p className='font-[300] text-[13px]'>Savings</p>
+                  </div>
+                  <p className='font-[500] text-[13px]'>25%</p>
+                </div>
+              </div>
+              {/* The percentage at th middle */}
+              <span className='absolute text-white font-[600] top-[60%] transform translate-x-[-40%] translate-y-[-40%] left-[40%] md:left-[50%] md:translate-x-[-50%]'>75%</span>
+            </div>
+            <button className="  w-full sm:w-[40%] h-[47px] rounded-md border-[0.75px] border-[#8C89B480] text-[#AEABD8]  px-2 text-sm">
+              View all activity
+            </button>
+        </div>
       </div>
-      <div className="w-full bg-[#000000] p-4  rounded-[12px]">
+      <div className="w-full bg-[#000000] p-4 rounded-[12px]">
         <article className="flex justify-between text-white">
           <h4>Transaction History</h4>
 
