@@ -4,22 +4,11 @@ import React, { useEffect, useState } from 'react';
 import { Bar, Doughnut } from 'react-chartjs-2';
 import dashBoard from '../assets/dashBoard.png';
 import table_icon from '../assets/table_icon.png';
-<<<<<<< HEAD
-import { useState,useEffect } from 'react';
-import {Bar,Doughnut,Pie} from 'react-chartjs-2'
-import {Chart as ChartJS, plugins} from 'chart.js/auto'
-import axios from 'axios';
 import useSWR from 'swr';
 import { set } from 'react-hook-form';
-// import plugin from 'tailwindcss';
 
 const  NewDashboard = () => {
   const { data: transaction } = useSWR('/transaction/');
-=======
-// import plugin from 'tailwindcss';
-
-const NewDashboard = () => {
->>>>>>> 0697f07b14acc9216c839df454f11e0280ad91f0
   const accountAnalyticsData = [
     {
       title: 'Total Balance',
@@ -469,7 +458,7 @@ const NewDashboard = () => {
                   <img
                     src={table_icon}
                     alt="table_icon"
-                    className="w-[20px] h-[20px] sm:inline-block absolute left-[-30px] top-3 hidden sm:block"
+                    className="w-[20px] h-[20px] sm:inline-block absolute left-[-30px] top-3 hidden"
                   />
                   <div className='flex flex-col'>
                   <span className='hidden sm:block'>
