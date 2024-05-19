@@ -1,6 +1,10 @@
-import React from 'react';
+import axios from 'axios';
+import { Chart as ChartJS } from 'chart.js/auto';
+import React, { useEffect, useState } from 'react';
+import { Bar, Doughnut } from 'react-chartjs-2';
 import dashBoard from '../assets/dashBoard.png';
 import table_icon from '../assets/table_icon.png';
+<<<<<<< HEAD
 import { useState,useEffect } from 'react';
 import {Bar,Doughnut,Pie} from 'react-chartjs-2'
 import {Chart as ChartJS, plugins} from 'chart.js/auto'
@@ -11,6 +15,11 @@ import { set } from 'react-hook-form';
 
 const  NewDashboard = () => {
   const { data: transaction } = useSWR('/transaction/');
+=======
+// import plugin from 'tailwindcss';
+
+const NewDashboard = () => {
+>>>>>>> 0697f07b14acc9216c839df454f11e0280ad91f0
   const accountAnalyticsData = [
     {
       title: 'Total Balance',
@@ -31,7 +40,7 @@ const  NewDashboard = () => {
       color: '#0E0C6D',
     },
   ];
-  const [doughnut,setDoughnut] = useState({
+  const [doughnut, setDoughnut] = useState({
     // labels: accountAnalyticsData.map(data => data.title),
     datasets: [{
       data: accountAnalyticsData.map(data => data.amount),
@@ -134,73 +143,76 @@ const  NewDashboard = () => {
     labels: transactionHistoryData.map((data) => data.date),
     datasets: [
       {
-        label: "Withdrawal",
+        label: 'Withdrawal',
         data: transactionHistoryData.map((data) => data.Withdrawal),
         backgroundColor: '#F324EC',
-        borderRadius:10,
-        borderWidth: 2
+        borderRadius: 10,
+        borderWidth: 2,
       },
       {
-        label: "Deposit",
+        label: 'Deposit',
         data: transactionHistoryData.map((data) => data.Deposit),
-        backgroundColor:'#FFB803',
-        borderRadius:10,
-        borderWidth: 2
+        backgroundColor: '#FFB803',
+        borderRadius: 10,
+        borderWidth: 2,
       },
       {
-        label: "Transfer",
+        label: 'Transfer',
         data: transactionHistoryData.map((data) => data.Transfer),
         backgroundColor: '#0E0C6D',
-        borderRadius:10,
-        borderWidth: 2
+        borderRadius: 10,
+        borderWidth: 2,
       },
     ],
   });
-  const [option,setOptions] = useState({
+  const [option, setOptions] = useState({
     responsive: true,
     // maintainAspectRatio: false,
-    plugins:{
-      legend:{
-        display: false
-      }
-    },
-    scales:{
-      y:{
-        grid:{
-          color: 'white',
-          borderDash: [5,5],
-        }
+    plugins: {
+      legend: {
+        display: false,
       },
-      x:{
-        grid:{
-          display: false
-        }
-      }
     },
-  })
-  ChartJS.defaults.line='white'
-  ChartJS.defaults.color= 'white'
+    scales: {
+      y: {
+        grid: {
+          color: 'white',
+          borderDash: [5, 5],
+        },
+      },
+      x: {
+        grid: {
+          display: false,
+        },
+      },
+    },
+  });
+  ChartJS.defaults.line = 'white';
+  ChartJS.defaults.color = 'white';
 
-  window.addEventListener('resize',()=>{
-    doughnut.resize()
-    barChart.resize()
-  })
+  window.addEventListener('resize', () => {
+    doughnut.resize();
+    barChart.resize();
+  });
   const fetchUserProfile = async () => {
     try {
       const response = await axios.get('/user/');
       console.log('RESPONSE', response);
-     
+
       setUserProfile(response.data.profile);
-    
     } catch (error) {
       console.log('ERROR', error);
     }
   };
   useEffect(() => {
     fetchUserProfile();
-  }
-  , []);
-  
+  }, []);
+
+  window.addEventListener('resize',()=>{
+    doughnut.resize()
+    barChart.resize()
+  })
+
   return (
     <section className="p-4">
       <article>
@@ -275,30 +287,32 @@ const  NewDashboard = () => {
           </h4>
         </article>
       </div>
-      <div className="bg-[#000000] rounded-[10px]">
-        <h4 className="pt-6 pl-4"> Account Analytics</h4>
-        <div className="my-4 grid grid-cols-1 sm:grid-cols-4 place-content-center gap-3">
-          {accountAnalyticsData.map((data, index) => (
-            <article
-              key={index}
-              className="px-10 py-2 rounded-[10px] text-[12px] sm:text-sm"
-            >
-              <p className="font-medium text-[#FFFFFF] opacity-[61%] text-sm sm:text-[20px] relative">
-                <span
-                  className={`inline-block  w-[8px] sm:w-[16px] h-[8px] sm:h-[16px] bg-[${data.color}] rounded-[50%] absolute left-[-25px] top-2  `}
-                ></span>
-                {data.title}
-              </p>
-              <h2 className="font-bold  text-[12px] sm:text-[18px] flex items-center gap-5 h-[40px] ">
-                {data.amount}
-              </h2>
-              <h4 className="text-[#4A4A4A] flex gap-4 items-center">
-                {data.percentage}
-              </h4>
-            </article>
-          ))}
+      <div className="bg-[#000000] rounded-[10px] px-5 lg:my-4 space-y-10 lg:pb-6">
+        <h4 className="pt-5 pl-4"> Account Analytics</h4>
+        <div className="gap-3 flex items-center justify-center">
+          <div className="lg:flex-1 lg:flex-row justify-between flex xs:flex-col">
+            {accountAnalyticsData.map((data, index) => (
+              <article
+                key={index}
+                className="px-10 py-2 rounded-[10px] text-[12px] sm:text-sm"
+              >
+                <p className="font-medium text-[#FFFFFF] opacity-[61%] text-sm sm:text-[20px] relative">
+                  <span
+                    className={`inline-block  w-[8px] sm:w-[16px] h-[8px] sm:h-[16px] bg-[${data.color}] rounded-[50%] absolute left-[-25px] top-2  `}
+                  ></span>
+                  {data.title}
+                </p>
+                <h2 className="font-bold  text-[12px] sm:text-[18px] flex items-center gap-5 h-[40px] ">
+                  {data.amount}
+                </h2>
+                <h4 className="text-[#4A4A4A] flex gap-4 items-center">
+                  {data.percentage}
+                </h4>
+              </article>
+            ))}
+          </div>
           <div className="flex justify-center items-center -translate-y-[15%] w-[150px]   ">
-            <Doughnut className='' data={doughnut} />
+            <Doughnut className="" data={doughnut} />
           </div>
         </div>
       </div>
@@ -434,7 +448,6 @@ const  NewDashboard = () => {
       <div className=" bg-[#000000] p-4  rounded-[12px] mt-4">
         <article className="flex justify-between text-white text-[12px] sm:text-lg">
           <h4>Transaction History</h4>
-
           <button className="  w-[92px] sm:w-[184px] h-[30px] sm:h-[52px] rounded-md border border-[#FFB803] text-[#FFB803] hover:bg-[#FFB803] hover:text-white  text-[12px] sm:text-sm ">
             More
           </button>
