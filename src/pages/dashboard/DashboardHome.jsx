@@ -21,7 +21,6 @@ import DashboardEmptyContainer from '../../components/empty/DashboardEmptyContai
 import CoinBlocksMarquee from '../../components/widget/CoinBlocksMarquee';
 import useCurrencyFormatter from '../../hooks/useCurrencyFormatter';
 import { setUserKyc } from '../../store/reducers/transact_reducer';
-import NewDashboard from '../../components/NewDashboard';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -43,7 +42,7 @@ const DashboardHome = () => {
   const [activeOption, setActiveOption] = useState(null);
   const [showAmount, setShowAmount] = useState(true);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { data: user } = useSWR('/user/');
   const { data: history } = useSWR('plans/history');
   const { data: brokers } = useSWR('broker/user-broker/');
@@ -51,15 +50,18 @@ const DashboardHome = () => {
   const { data: chartDatas } = useSWR(
     'plans/get-user-investment-amount-by-category/'
   );
+  const { data: userBalances } = useSWR('/user/balances');
 
-   const value = `; ${document.cookie}`;
-   const cookie = value.split(`; bk_access=`);
+  const value = `; ${document.cookie}`;
+  const cookie = value.split(`; bk_access=`);
 
-   useEffect(() => {
-    if(!cookie[1]) {
-      navigate('/login')
+  console.log('😀', userBalances);
+
+  useEffect(() => {
+    if (!cookie[1]) {
+      navigate('/login');
     }
-   }, [])
+  }, []);
 
   const dispatch = useDispatch();
 

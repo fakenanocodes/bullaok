@@ -1,5 +1,4 @@
 import { TableCell, TableRow } from '@mui/material';
-import React from 'react';
 import { MdFiberManualRecord } from 'react-icons/md';
 import formatDateWithSuffix from '../../hooks/useDateFormatter';
 
