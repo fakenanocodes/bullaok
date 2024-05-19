@@ -5,10 +5,12 @@ import { useState,useEffect } from 'react';
 import {Bar,Doughnut,Pie} from 'react-chartjs-2'
 import {Chart as ChartJS, plugins} from 'chart.js/auto'
 import axios from 'axios';
+import useSWR from 'swr';
 import { set } from 'react-hook-form';
 // import plugin from 'tailwindcss';
 
 const  NewDashboard = () => {
+  const { data: transaction } = useSWR('/transaction/');
   const accountAnalyticsData = [
     {
       title: 'Total Balance',
@@ -448,30 +450,35 @@ const  NewDashboard = () => {
             </tr>
           </thead>
           <tbody>
-            {[].map((data, index) => (
+            {transaction?.map((data, index) => (
               <tr className="relative mt-4 text-[12px]  left-0 sm:left-[40px]">
                 <td>
                   <img
                     src={table_icon}
                     alt="table_icon"
-                    className="w-[20px] h-[20px]  hidden sm:inline-block absolute left-[-30px] top-3"
+                    className="w-[20px] h-[20px] sm:inline-block absolute left-[-30px] top-3 hidden sm:block"
                   />
+                  <div className='flex flex-col'>
+                  <span className='hidden sm:block'>
                   {data.description}
-                  <small className="block">{data.date}</small>
+                  </span>
+                  <span>12.57pm</span>
+                  {/* <small className="block">{data.date}</small> */}
+                  </div>
                 </td>
                 <td className="relative">
                   <span
-                    className={` absolute  left-4 w-3 h-3 rounded-[50%]  ${data.type === 'Withdrawal' ? 'bg-[#F324EC]' : `${data.type === 'Deposit' ? 'bg-[#0E0C6D]' : 'bg-[#FFB803]'}`}`}
+                    className={` absolute  left-4 w-3 h-3 rounded-[50%]   ${data.transaction_type === 'withdrawal' ? 'bg-[#F324EC]' : data.transaction_type === 'deposit' ? 'bg-[#0E0C6D]' : 'bg-[#FFB803]'}`}
                   >
-                    {' '}
+                    {''}
                   </span>
                   {data.type}
                 </td>
-                <td>{data.amount}</td>
+                <td>{parseFloat(data.usdt_amount)?.toFixed(2)}</td>
                 <td
-                  className={`${data.status === 'Completed' ? 'text-[#50E01E]' : `${data.status === 'Pending' ? 'text-[#0978F2]' : 'text-[#E91616]'}`}`}
+                  className={data.verified === true ? 'text-[#50E01E]' : data.verified === false ? 'text-[orangered] font-semibold' : 'text-[#0978F2]'}
                 >
-                  {data.status}
+                  {data.verified === true ? 'Completed' : data.verified === false ? 'Failed' : 'Pending...' }
                 </td>
               </tr>
             ))}
