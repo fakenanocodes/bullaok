@@ -1,8 +1,11 @@
 import React,{ useState } from 'react';
+import useSWR from 'swr';
 import {Doughnut} from 'react-chartjs-2'
 import {Chart as ChartJS, plugins} from 'chart.js/auto'
 
 const IndividualRetirementAccount = () => {
+  const { data: user } = useSWR(`/user/deposit/`);
+  console.log(user)
   const retirementData = [
     {
       title: 'Total Balance',
