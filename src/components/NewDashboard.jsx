@@ -301,7 +301,7 @@ const NewDashboard = () => {
         </div>
       </div>
       <div className="gridClass">
-        <aside className="bg-[#000000] px-4 py-2 rounded-[10px]">
+        <div className="bg-[#000000] px-4 py-2 rounded-[10px]">
           <table className="w-full">
             <tbody>
               <tr className="flex justify-evenly items-center gap-2 ">
@@ -345,8 +345,8 @@ const NewDashboard = () => {
             </tbody>
           </table>
           <Bar data={barChart} options={option} />
-        </aside>
-        <aside className="bg-[#000000] px-4 py-2 rounded-[10px] flex flex-col gap-12">
+        </div>
+        <div className="bg-[#000000] px-4 py-2 rounded-[10px] flex flex-col gap-12">
           <article className="flex justify-between">
             <h4 className=" text-white text-sm">Investment Plans</h4>
             <button className=" text-sm text-[#FFB803]">More</button>
@@ -427,7 +427,7 @@ const NewDashboard = () => {
               </div>
             </div>
           </article>
-        </aside>
+        </div>
       </div>
       <div className=" bg-[#000000] p-4  rounded-[12px] mt-4">
         <article className="flex justify-between text-white text-[12px] sm:text-lg">
