@@ -29,7 +29,7 @@ const  NewDashboard = () => {
       color: '#0E0C6D',
     },
   ];
-  const [doughnut, setDoughnut] = useState({
+  const [doughnut] = useState({
     // labels: accountAnalyticsData.map(data => data.title),
     datasets: [{
       data: accountAnalyticsData.map(data => data.amount),
