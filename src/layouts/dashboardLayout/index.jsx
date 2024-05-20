@@ -166,8 +166,8 @@ const DashboardLayout = () => {
           <DashboardSidebar logout={logoutOption} />
         </div>
         <div className="lg:flex-1 flex-col lg:space-y-4 ">
-          <div className="lg:p-5 hidden lg:flex">
-            <div className="flex w-full p-3 pr-10 space-x-24 rounded-[30px] bg-black bg-opacity-[34%] justify-end items-center">
+          <div className="lg:p-5 flex lg:flex">
+            <div className="flex w-full px-10  p-3 pr-10 space-x-24 rounded-[30px] bg-black bg-opacity-[34%] sm:justify-end items-center">
               <div className="flex space-x-3 items-center text-[#41073F] font-semibold">
                 <span
                   className={` cursor-pointer ${
@@ -177,17 +177,17 @@ const DashboardLayout = () => {
                   }`}
                   onClick={() => {
                     setActiveOption(0);
-                    navigate(`/dashboard/history}`);
+                    navigate(`/dashboard/history`);
                   }}
                 >
-                  <p className="bg-white px-6 rounded-[4px] py-1">
-                    Transaction History
+                  <p className="bg-white px-3 sm:px-6 rounded-[4px] py-1">
+                    <span className='hidden sm:inline'>Transaction </span>History
                   </p>
                 </span>
                 {options?.map((option, index) => (
                   <select
                     key={index}
-                    className="p-1 rounded-md px-4 gap-4 space-y-2"
+                    className="p-1 rounded-md  gap-4 w-[50%] text-[12px] sm:text-md sm:w-fit space-y-2"
                     defaultValue={JSON.stringify([menus[0], option])}
                     onChange={(e) => handleNavigationMenu(e.target.value)}
                   >
@@ -226,15 +226,17 @@ const DashboardLayout = () => {
                 className="w-[70px] h-[70px] rounded-[50%]  cursor-pointer"
                 onClick={() => navigate('/dashboard/profile')}
               /> */}
-              <Avatar
-                src={profileImage}
-                sx={{ height: 70, width: 70 }}
-                className="cursor-pointer"
-                onClick={() => navigate('/dashboard/profile')}
-              />
+              <div className="hidden sm:block">
+                <Avatar
+                  src={profileImage}
+                  sx={{ height: 70, width: 70 }}
+                  className="cursor-pointer"
+                  onClick={() => navigate('/dashboard/profile')}
+                />
+              </div>
             </div>
           </div>
-          <div className="lg:mx-7 h-[100vh] no-scrollbar lg:h-[80vh] relative overflow-auto bg-[#000]/60  rounded-xl">
+          <div className="lg:mx-7 h-fit no-scrollbar lg:h-[80vh] relative overflow-auto bg-[#000]/60  rounded-xl my-3">
             <Outlet />
           </div>
         </div>
