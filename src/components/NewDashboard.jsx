@@ -2,17 +2,13 @@ import axios from 'axios';
 import { Chart as ChartJS } from 'chart.js/auto';
 import React, { useEffect, useState } from 'react';
 import { Bar, Doughnut } from 'react-chartjs-2';
+import useSWR from 'swr';
 import dashBoard from '../assets/dashBoard.png';
 import table_icon from '../assets/table_icon.png';
-import { useState,useEffect } from 'react';
-import {Bar,Doughnut,Pie} from 'react-chartjs-2'
-import {Chart as ChartJS, plugins} from 'chart.js/auto'
-import axios from 'axios';
-import useSWR from 'swr';
-import { set } from 'react-hook-form';
 
-const  NewDashboard = () => {
+const NewDashboard = () => {
   const { data: transaction } = useSWR('/transaction/');
+  const { data: balances } = useSWR('/user/balances/');
   const accountAnalyticsData = [
     {
       title: 'Total Balance',
@@ -35,16 +31,19 @@ const  NewDashboard = () => {
   ];
   const [doughnut] = useState({
     // labels: accountAnalyticsData.map(data => data.title),
-    datasets: [{
-      data: accountAnalyticsData.map(data => data.amount),
-      backgroundColor: accountAnalyticsData.map(data => data.color),
-      borderWidth:0,
-      // boxShadow: '2 2 yellow',
-    }]
-  })
+    datasets: [
+      {
+        data: accountAnalyticsData.map((data) => data.amount),
+        backgroundColor: accountAnalyticsData.map((data) => data.color),
+        borderWidth: 0,
+        // boxShadow: '2 2 yellow',
+      },
+    ],
+  });
   const [userProfile, setUserProfile] = useState({});
-  console.log('USER PROFILE', userProfile);
-  
+  // console.log('USER PROFILE', userProfile);
+  console.log(balances);
+
   const transactionHistoryData = [
     {
       description: 'From main account',
@@ -201,10 +200,10 @@ const  NewDashboard = () => {
     fetchUserProfile();
   }, []);
 
-  window.addEventListener('resize',()=>{
-    doughnut.resize()
-    barChart.resize()
-  })
+  window.addEventListener('resize', () => {
+    doughnut.resize();
+    barChart.resize();
+  });
 
   return (
     <section className="p-4">
@@ -215,13 +214,13 @@ const  NewDashboard = () => {
           Here’s what’s happening on your account.
         </p>
       </article>
-      <div className="my-4 grid  grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="my-4 grid  grid-cols-1 md:grid-cols-3 gap-8">
         <article className="bg-[#000000CC] px-4 py-2 rounded-[10px]">
           <p className="font-medium text-[#FFFFFF] opacity-[61%] text-sm">
             Total Balance
           </p>
           <h2 className="font-extrabold  text-sm sm:text-[25px] flex items-center gap-5 h-[40px]  justify-between ">
-            $2,474.91
+            ${balances?.total_balance ? balances.total_balance : 0}
             <button className="bg-[#8E0789] w-[100px] h-[40px] text-[10px] text-[#000000] rounded-[3.73px] flex gap-1 items-center justify-center">
               <span className="">
                 <img
@@ -242,7 +241,7 @@ const  NewDashboard = () => {
             Trading Balance
           </p>
           <h2 className="font-extrabold text-sm sm:text-[25px]  flex items-center gap-5 h-[40px]  justify-between ">
-            $1,274.91
+            ${balances?.trading_balance ? balances.trading_balance : 0}
             <button className="bg-[#8E0789] w-[100px] h-[40px] text-[10px] text-[#000000] rounded-[3.73px] flex gap-1 items-center justify-center">
               <span className="">
                 <img
@@ -263,7 +262,7 @@ const  NewDashboard = () => {
             Avaliable Balance
           </p>
           <h2 className="font-extrabold text-sm sm:text-[25px] flex items-center gap-5 h-[40px] justify-between ">
-            ${userProfile.available_balance?userProfile.available_balance:0}
+            ${userProfile.available_balance ? userProfile.available_balance : 0}
             <button className="bg-[#8E0789] w-[100px] h-[40px] text-[10px] text-[#000000] rounded-[3.73px] flex gap-1 items-center justify-center">
               <span className="">
                 <img
@@ -284,25 +283,48 @@ const  NewDashboard = () => {
         <h4 className="pt-5 pl-4"> Account Analytics</h4>
         <div className="gap-3 flex items-center justify-center">
           <div className="lg:flex-1 lg:flex-row justify-between flex xs:flex-col">
-            {accountAnalyticsData.map((data, index) => (
-              <article
-                key={index}
-                className="px-10 py-2 rounded-[10px] text-[12px] sm:text-sm"
-              >
-                <p className="font-medium text-[#FFFFFF] opacity-[61%] text-sm sm:text-[20px] relative">
-                  <span
-                    className={`inline-block  w-[8px] sm:w-[16px] h-[8px] sm:h-[16px] bg-[${data.color}] rounded-[50%] absolute left-[-25px] top-2  `}
-                  ></span>
-                  {data.title}
-                </p>
-                <h2 className="font-bold  text-[12px] sm:text-[18px] flex items-center gap-5 h-[40px] ">
-                  {data.amount}
-                </h2>
-                <h4 className="text-[#4A4A4A] flex gap-4 items-center">
-                  {data.percentage}
-                </h4>
-              </article>
-            ))}
+            <article className="px-10 py-2 rounded-[10px] text-[12px] sm:text-sm">
+              <p className="font-medium text-[#FFFFFF] opacity-[61%] text-sm sm:text-[20px] relative">
+                <span
+                  className={`inline-block  w-[8px] sm:w-[16px] h-[8px] sm:h-[16px]  rounded-[50%] absolute left-[-25px] top-2  `}
+                ></span>
+                Total Balance
+              </p>
+              <h2 className="font-bold  text-[12px] sm:text-[18px] flex items-center gap-5 h-[40px] ">
+                ${balances?.total_balance ? balances.total_balance : 0}
+              </h2>
+              <h4 className="text-[#4A4A4A] flex gap-4 items-center">
+                {/* {data.percentage} */}
+              </h4>
+            </article>
+            <article className="px-10 py-2 rounded-[10px] text-[12px] sm:text-sm">
+              <p className="font-medium text-[#FFFFFF] opacity-[61%] text-sm sm:text-[20px] relative">
+                <span
+                  className={`inline-block  w-[8px] sm:w-[16px] h-[8px] sm:h-[16px]  rounded-[50%] absolute left-[-25px] top-2  `}
+                ></span>
+                Trading Balance
+              </p>
+              <h2 className="font-bold  text-[12px] sm:text-[18px] flex items-center gap-5 h-[40px] ">
+                ${balances?.trading_balance ? balances.trading_balance : 0}
+              </h2>
+              <h4 className="text-[#4A4A4A] flex gap-4 items-center">
+                {/* {data.percentage} */}
+              </h4>
+            </article>
+            <article className="px-10 py-2 rounded-[10px] text-[12px] sm:text-sm">
+              <p className="font-medium text-[#FFFFFF] opacity-[61%] text-sm sm:text-[20px] relative">
+                <span
+                  className={`inline-block  w-[8px] sm:w-[16px] h-[8px] sm:h-[16px]  rounded-[50%] absolute left-[-25px] top-2  `}
+                ></span>
+                Available Balance
+              </p>
+              <h2 className="font-bold  text-[12px] sm:text-[18px] flex items-center gap-5 h-[40px] ">
+                ${balances?.available_balance ? balances.available_balance : 0}
+              </h2>
+              <h4 className="text-[#4A4A4A] flex gap-4 items-center">
+                {/* {data.percentage} */}
+              </h4>
+            </article>
           </div>
           <div className="flex justify-center items-center -translate-y-[15%] w-[150px]   ">
             <Doughnut className="" data={doughnut} />
@@ -457,19 +479,20 @@ const  NewDashboard = () => {
           </thead>
           <tbody>
             {transaction?.map((data, index) => (
-              <tr className="relative mt-4 text-[12px]  left-0 sm:left-[40px]">
+              <tr
+                key={index}
+                className="relative mt-4 text-[12px]  left-0 sm:left-[40px]"
+              >
                 <td>
                   <img
                     src={table_icon}
                     alt="table_icon"
                     className="w-[20px] h-[20px] sm:inline-block absolute left-[-30px] top-3 hidden sm:block"
                   />
-                  <div className='flex flex-col'>
-                  <span className='hidden sm:block'>
-                  {data.description}
-                  </span>
-                  <span>12.57pm</span>
-                  {/* <small className="block">{data.date}</small> */}
+                  <div className="flex flex-col">
+                    <span className="hidden sm:block">{data.description}</span>
+                    <span>12.57pm</span>
+                    {/* <small className="block">{data.date}</small> */}
                   </div>
                 </td>
                 <td className="relative">
@@ -482,9 +505,19 @@ const  NewDashboard = () => {
                 </td>
                 <td>{parseFloat(data.usdt_amount)?.toFixed(2)}</td>
                 <td
-                  className={data.verified === true ? 'text-[#50E01E]' : data.verified === false ? 'text-[orangered] font-semibold' : 'text-[#0978F2]'}
+                  className={
+                    data.verified === true
+                      ? 'text-[#50E01E]'
+                      : data.verified === false
+                        ? 'text-[orangered] font-semibold'
+                        : 'text-[#0978F2]'
+                  }
                 >
-                  {data.verified === true ? 'Completed' : data.verified === false ? 'Failed' : 'Pending...' }
+                  {data.verified === true
+                    ? 'Completed'
+                    : data.verified === false
+                      ? 'Failed'
+                      : 'Pending...'}
                 </td>
               </tr>
             ))}
