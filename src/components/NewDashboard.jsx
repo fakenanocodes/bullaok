@@ -6,10 +6,8 @@ import useSWR from 'swr';
 import dashBoard from '../assets/dashBoard.png';
 import table_icon from '../assets/table_icon.png';
 import { set } from 'react-hook-form';
-import useSWR from 'swr';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 
-const NewDashboard = () => {
 const  NewDashboard = () => {
   const navigate = useNavigate();
   const { data: transaction } = useSWR('/transaction/');
