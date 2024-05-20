@@ -6,8 +6,10 @@ import dashBoard from '../assets/dashBoard.png';
 import table_icon from '../assets/table_icon.png';
 import useSWR from 'swr';
 import { set } from 'react-hook-form';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 
 const  NewDashboard = () => {
+  const navigate = useNavigate();
   const { data: transaction } = useSWR('/transaction/');
   const accountAnalyticsData = [
     {
@@ -437,7 +439,11 @@ const  NewDashboard = () => {
       <div className=" bg-[#000000] p-4  rounded-[12px] mt-4">
         <article className="flex justify-between text-white text-[12px] sm:text-lg">
           <h4>Transaction History</h4>
-          <button className="  w-[92px] sm:w-[184px] h-[30px] sm:h-[52px] rounded-md border border-[#FFB803] text-[#FFB803] hover:bg-[#FFB803] hover:text-white  text-[12px] sm:text-sm ">
+          <button className="  w-[92px] sm:w-[184px] h-[30px] sm:h-[52px] rounded-md border border-[#FFB803] text-[#FFB803] hover:bg-[#FFB803] hover:text-white  text-[12px] sm:text-sm "
+          onClick={() => {
+            // setActiveOption(0);
+            navigate(`/dashboard/history`);
+          }}>
             More
           </button>
         </article>

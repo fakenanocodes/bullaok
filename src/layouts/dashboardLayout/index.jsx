@@ -166,7 +166,7 @@ const DashboardLayout = () => {
           <DashboardSidebar logout={logoutOption} />
         </div>
         <div className="lg:flex-1 flex-col lg:space-y-4 ">
-          <div className="lg:p-5 hidden lg:flex">
+          <div className="lg:p-5 hiddn lg:flex">
             <div className="flex w-full p-3 pr-10 space-x-24 rounded-[30px] bg-black bg-opacity-[34%] justify-end items-center">
               <div className="flex space-x-3 items-center text-[#41073F] font-semibold">
                 <span
@@ -177,7 +177,7 @@ const DashboardLayout = () => {
                   }`}
                   onClick={() => {
                     setActiveOption(0);
-                    navigate(`/dashboard/history}`);
+                    navigate(`/dashboard/history`);
                   }}
                 >
                   <p className="bg-white px-6 rounded-[4px] py-1">
@@ -187,7 +187,7 @@ const DashboardLayout = () => {
                 {options?.map((option, index) => (
                   <select
                     key={index}
-                    className="p-1 rounded-md px-4 gap-4 space-y-2"
+                    className="p-1 rounded-md px-4 gap-4 w-5 space-y-2"
                     defaultValue={JSON.stringify([menus[0], option])}
                     onChange={(e) => handleNavigationMenu(e.target.value)}
                   >
@@ -234,7 +234,7 @@ const DashboardLayout = () => {
               />
             </div>
           </div>
-          <div className="lg:mx-7 h-[100vh] no-scrollbar lg:h-[80vh] relative overflow-auto bg-[#000]/60  rounded-xl">
+          <div className="lg:mx-7 h-fit no-scrollbar lg:h-[80vh] relative overflow-auto bg-[#000]/60  rounded-xl">
             <Outlet />
           </div>
         </div>

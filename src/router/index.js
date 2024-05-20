@@ -55,6 +55,7 @@ import Deposit from '../pages/dashboard/transactions/Deposit';
 import Transfer from '../pages/dashboard/transactions/Transfer';
 import Withdrawal from '../pages/dashboard/transactions/Withdrawal';
 import NewDashboard from '../components/NewDashboard';
+import HistoryPage from '../pages/dashboard/transactions/History';
 const router = createBrowserRouter([
   {
     path: '*',
@@ -275,6 +276,10 @@ const router = createBrowserRouter([
       {
         path: 'ira',
         Component: IndividualRetirementAccount,
+      },
+      {
+        path: 'history',
+        Component: HistoryPage,
       },
     ],
   },
