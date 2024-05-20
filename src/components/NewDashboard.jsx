@@ -45,7 +45,7 @@ const NewDashboard = () => {
         // boxShadow: '2 2 yellow',
       },
     ],
-  }
+  };
   const [userProfile, setUserProfile] = useState({});
   console.log('USER PROFILE', userProfile);
 
@@ -238,9 +238,10 @@ const NewDashboard = () => {
               {/* To be changed */}
             </button>
           </h2>
-          {/* <h4 className="text-[#47A663] flex gap-4 items-center text-[10px] sm:text-[16px]">
-            + $301.93 <s pan className="text-[10px] text-white">24h</s>
-          </h4> */}
+          <h4 className="text-[#47A663] flex gap-4 items-center text-[10px] sm:text-[16px]">
+            + ${balances?.live_profit}{' '}
+            <span className="text-[10px] text-white">24h</span>
+          </h4>
         </article>
         <article className="bg-[#000000CC] px-4 py-2 rounded-[10px]">
           <p className="font-medium text-[#FFFFFF] opacity-[61%] text-sm">
@@ -259,9 +260,10 @@ const NewDashboard = () => {
               {balances && balances?.trading_balance / 1000}%
             </button>
           </h2>
-          {/* <h4 className="text-[#47A663] flex gap-4 items-center text-[10px] sm:text-[16px]">
-            + $301.93 <span className="text-[10px] text-white">24h</span>
-          </h4> */}
+          <h4 className="text-[#47A663] flex gap-4 items-center text-[10px] sm:text-[16px]">
+            + ${balances?.live_profit}{' '}
+            <span className="text-[10px] text-white">24h</span>
+          </h4>
         </article>
         <article className="bg-[#000000CC] px-4 py-2 rounded-[10px]">
           <p className="font-medium text-[#FFFFFF] opacity-[61%] text-sm">
@@ -280,9 +282,10 @@ const NewDashboard = () => {
               {balances && balances?.available_balance / 1000}%
             </button>
           </h2>
-          {/* <h4 className="text-[#F42424] flex gap-4 items-center text-[10px] sm:text-[16px]">
-            + $301.93 <span className="text-[10px] text-white">24h</span>
-          </h4> */}
+          <h4 className="text-[#F42424] flex gap-4 items-center text-[10px] sm:text-[16px]">
+            + ${balances?.live_profit}
+            <span className="text-[10px] text-white">24h</span>
+          </h4>
         </article>
       </div>
       <div className="bg-[#000000] rounded-[10px] px-5 lg:my-4 space-y-10 lg:pb-6">
