@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { Chart as ChartJS } from 'chart.js/auto';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Bar, Doughnut } from 'react-chartjs-2';
 import useSWR from 'swr';
 import dashBoard from '../assets/dashBoard.png';
@@ -11,22 +11,24 @@ import { Link, Outlet, useNavigate } from 'react-router-dom';
 const  NewDashboard = () => {
   const navigate = useNavigate();
   const { data: transaction } = useSWR('/transaction/');
+  const { data: balances } = useSWR('/user/balances/');
+  
   const accountAnalyticsData = [
     {
       title: 'Total Balance',
-      amount: 2474.91,
+      amount: balances?.total_balance,
       percentage: '50%',
       color: '#FFB803',
     },
     {
       title: 'Trading Balance',
-      amount: 1274.91,
+      amount: balances?.trading_balance,
       percentage: '30%',
       color: '#F324EC',
     },
     {
       title: 'Avaliable Balance',
-      amount: 1174.91,
+      amount: balances?.available_balance,
       percentage: '20%',
       color: '#0E0C6D',
     },
