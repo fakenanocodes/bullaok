@@ -4,6 +4,10 @@ import React, { useEffect, useState } from 'react';
 import { Bar, Doughnut } from 'react-chartjs-2';
 import dashBoard from '../assets/dashBoard.png';
 import table_icon from '../assets/table_icon.png';
+import { useState,useEffect } from 'react';
+import {Bar,Doughnut,Pie} from 'react-chartjs-2'
+import {Chart as ChartJS, plugins} from 'chart.js/auto'
+import axios from 'axios';
 import useSWR from 'swr';
 import { set } from 'react-hook-form';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
@@ -31,7 +35,7 @@ const  NewDashboard = () => {
       color: '#0E0C6D',
     },
   ];
-  const [doughnut, setDoughnut] = useState({
+  const [doughnut] = useState({
     // labels: accountAnalyticsData.map(data => data.title),
     datasets: [{
       data: accountAnalyticsData.map(data => data.amount),
@@ -130,7 +134,7 @@ const  NewDashboard = () => {
     },
   ];
 
-  const [barChart, setBarChart] = useState({
+  const [barChart] = useState({
     labels: transactionHistoryData.map((data) => data.date),
     datasets: [
       {
@@ -156,7 +160,7 @@ const  NewDashboard = () => {
       },
     ],
   });
-  const [option, setOptions] = useState({
+  const [option] = useState({
     responsive: true,
     // maintainAspectRatio: false,
     plugins: {
@@ -308,11 +312,11 @@ const  NewDashboard = () => {
         </div>
       </div>
       <div className="gridClass">
-        <aside className="bg-[#000000] px-4 py-2 rounded-[10px]">
+        <div className="bg-[#000000] px-4 py-2 rounded-[10px] lg:w-full w-[99%] mt-4 lg:mt-0">
           <table className="w-full">
             <tbody>
               <tr className="flex justify-evenly items-center gap-2 ">
-                <td className=" not_affected  text-[10px] sm:text-sm ">
+                <td className=" not_affected  text-[10px] sm:text-sm hidden lg:flex">
                   Transaction Analytics
                 </td>
                 <td className="relative not_affected text-[10px] sm:text-sm">
@@ -352,8 +356,8 @@ const  NewDashboard = () => {
             </tbody>
           </table>
           <Bar data={barChart} options={option} />
-        </aside>
-        <aside className="bg-[#000000] px-4 py-2 rounded-[10px] flex flex-col gap-12">
+        </div>
+        <div className="bg-[#000000] px-4 py-2 rounded-[10px] flex flex-col gap-12">
           <article className="flex justify-between">
             <h4 className=" text-white text-sm">Investment Plans</h4>
             <button className=" text-sm text-[#FFB803]">More</button>
@@ -434,7 +438,7 @@ const  NewDashboard = () => {
               </div>
             </div>
           </article>
-        </aside>
+        </div>
       </div>
       <div className=" bg-[#000000] p-4  rounded-[12px] mt-4">
         <article className="flex justify-between text-white text-[12px] sm:text-lg">
@@ -448,7 +452,7 @@ const  NewDashboard = () => {
           </button>
         </article>
 
-        <table class="table-auto my-4">
+        <table className="table-auto my-4">
           <thead className="relative text-[#FFB803] text-[10px] sm:text-[16px] left-0 sm:left-[40px]">
             <tr>
               <th>Description</th>
@@ -464,7 +468,7 @@ const  NewDashboard = () => {
                   <img
                     src={table_icon}
                     alt="table_icon"
-                    className="w-[20px] h-[20px] sm:inline-block absolute left-[-30px] top-3 hidden"
+                    className="w-[20px] h-[20px] sm:inline-block absolute left-[-30px] top-3 hidden sm:block"
                   />
                   <div className='flex flex-col'>
                   <span className='hidden sm:block'>
