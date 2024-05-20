@@ -9,7 +9,7 @@ import table_icon from '../assets/table_icon.png';
 const NewDashboard = () => {
   const { data: transaction } = useSWR('/transaction/');
   const { data: balances } = useSWR('/user/balances/');
-  
+
   const accountAnalyticsData = [
     {
       title: 'Total Balance',
@@ -230,12 +230,13 @@ const NewDashboard = () => {
                   className="w-[10px] h-[10px] inline"
                 />
               </span>
-              25.69%
+              {balances && balances?.total_balance / 1000}%{' '}
+              {/* To be changed */}
             </button>
           </h2>
-          <h4 className="text-[#47A663] flex gap-4 items-center text-[10px] sm:text-[16px]">
-            + $301.93 <span className="text-[10px] text-white">24h</span>
-          </h4>
+          {/* <h4 className="text-[#47A663] flex gap-4 items-center text-[10px] sm:text-[16px]">
+            + $301.93 <s pan className="text-[10px] text-white">24h</s>
+          </h4> */}
         </article>
         <article className="bg-[#000000CC] px-4 py-2 rounded-[10px]">
           <p className="font-medium text-[#FFFFFF] opacity-[61%] text-sm">
@@ -251,19 +252,19 @@ const NewDashboard = () => {
                   className="w-[10px] h-[10px] inline"
                 />
               </span>
-              25.69%
+              {balances && balances?.trading_balance / 1000}%
             </button>
           </h2>
-          <h4 className="text-[#47A663] flex gap-4 items-center text-[10px] sm:text-[16px]">
+          {/* <h4 className="text-[#47A663] flex gap-4 items-center text-[10px] sm:text-[16px]">
             + $301.93 <span className="text-[10px] text-white">24h</span>
-          </h4>
+          </h4> */}
         </article>
         <article className="bg-[#000000CC] px-4 py-2 rounded-[10px]">
           <p className="font-medium text-[#FFFFFF] opacity-[61%] text-sm">
             Avaliable Balance
           </p>
           <h2 className="font-extrabold text-sm sm:text-[25px] flex items-center gap-5 h-[40px] justify-between ">
-            ${userProfile.available_balance ? userProfile.available_balance : 0}
+            ${balances?.available_balance ? balances?.available_balance : 0}
             <button className="bg-[#8E0789] w-[100px] h-[40px] text-[10px] text-[#000000] rounded-[3.73px] flex gap-1 items-center justify-center">
               <span className="">
                 <img
@@ -272,12 +273,12 @@ const NewDashboard = () => {
                   className="w-[10px] h-[10px] inline"
                 />
               </span>
-              25.69%
+              {balances && balances?.available_balance / 1000}%
             </button>
           </h2>
-          <h4 className="text-[#F42424] flex gap-4 items-center text-[10px] sm:text-[16px]">
+          {/* <h4 className="text-[#F42424] flex gap-4 items-center text-[10px] sm:text-[16px]">
             + $301.93 <span className="text-[10px] text-white">24h</span>
-          </h4>
+          </h4> */}
         </article>
       </div>
       <div className="bg-[#000000] rounded-[10px] px-5 lg:my-4 space-y-10 lg:pb-6">
