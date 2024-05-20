@@ -1,39 +1,41 @@
 import axios from 'axios';
 import { Chart as ChartJS } from 'chart.js/auto';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Bar, Doughnut } from 'react-chartjs-2';
+import { useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
 import dashBoard from '../assets/dashBoard.png';
 import table_icon from '../assets/table_icon.png';
-import { set } from 'react-hook-form';
-import { Link, Outlet, useNavigate } from 'react-router-dom';
 
-const  NewDashboard = () => {
+const NewDashboard = () => {
   const navigate = useNavigate();
   const { data: transaction } = useSWR('/transaction/');
   const { data: balances } = useSWR('/user/balances/');
-  
-  const accountAnalyticsData = [
-    {
-      title: 'Total Balance',
-      amount: balances?.total_balance,
-      percentage: '50%',
-      color: '#FFB803',
-    },
-    {
-      title: 'Trading Balance',
-      amount: balances?.trading_balance,
-      percentage: '30%',
-      color: '#F324EC',
-    },
-    {
-      title: 'Avaliable Balance',
-      amount: balances?.available_balance,
-      percentage: '20%',
-      color: '#0E0C6D',
-    },
-  ];
-  const [doughnut] = useState({
+
+  const accountAnalyticsData = useMemo(
+    () => [
+      {
+        title: 'Total Balance',
+        amount: balances?.total_balance,
+        percentage: '50%',
+        color: '#FFB803',
+      },
+      {
+        title: 'Trading Balance',
+        amount: balances?.trading_balance,
+        percentage: '30%',
+        color: '#F324EC',
+      },
+      {
+        title: 'Avaliable Balance',
+        amount: balances?.available_balance,
+        percentage: '20%',
+        color: '#0E0C6D',
+      },
+    ],
+    [balances]
+  );
+  const doughnut = {
     // labels: accountAnalyticsData.map(data => data.title),
     datasets: [
       {
@@ -43,10 +45,10 @@ const  NewDashboard = () => {
         // boxShadow: '2 2 yellow',
       },
     ],
-  });
+  }
   const [userProfile, setUserProfile] = useState({});
   console.log('USER PROFILE', userProfile);
-  
+
   const transactionHistoryData = [
     {
       description: 'From main account',
@@ -466,11 +468,13 @@ const  NewDashboard = () => {
       <div className=" bg-[#000000] p-4  rounded-[12px] mt-4">
         <article className="flex justify-between text-white text-[12px] sm:text-lg">
           <h4>Transaction History</h4>
-          <button className="  w-[92px] sm:w-[184px] h-[30px] sm:h-[52px] rounded-md border border-[#FFB803] text-[#FFB803] hover:bg-[#FFB803] hover:text-white  text-[12px] sm:text-sm "
-          onClick={() => {
-            // setActiveOption(0);
-            navigate(`/dashboard/history`);
-          }}>
+          <button
+            className="  w-[92px] sm:w-[184px] h-[30px] sm:h-[52px] rounded-md border border-[#FFB803] text-[#FFB803] hover:bg-[#FFB803] hover:text-white  text-[12px] sm:text-sm "
+            onClick={() => {
+              // setActiveOption(0);
+              navigate(`/dashboard/history`);
+            }}
+          >
             More
           </button>
         </article>
