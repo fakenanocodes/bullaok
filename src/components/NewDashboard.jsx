@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { Chart as ChartJS } from 'chart.js/auto';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Bar, Doughnut } from 'react-chartjs-2';
 import useSWR from 'swr';
 import dashBoard from '../assets/dashBoard.png';
@@ -9,6 +9,7 @@ import table_icon from '../assets/table_icon.png';
 const NewDashboard = () => {
   const { data: transaction } = useSWR('/transaction/');
   const { data: balances } = useSWR('/user/balances/');
+  
   const accountAnalyticsData = [
     {
       title: 'Total Balance',
