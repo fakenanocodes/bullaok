@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'; // Import Link from React Router
 import HomeIcon from '../../../../assets/icons/dashboard/HomeIcon';
 import InvestmentIcon from '../../../../assets/icons/dashboard/InvestmentIcon';
 import PlantIcon from '../../../../assets/icons/dashboard/PlantIcon';
-import TransactionIcon from '../../../../assets/icons/dashboard/TransactionIcon';
+import IraIcon from '../../../../assets/icons/dashboard/IraIcon';
 import LogoutIcon from '../../../../components/utils/icons/LogoutIcon';
 
 const DashboardSidebar = ({ logout }) => {
@@ -13,9 +13,9 @@ const DashboardSidebar = ({ logout }) => {
     { icon: <InvestmentIcon />, name: 'investment', path: 'card-application' },
     { icon: <PlantIcon />, name: 'plans', path: 'plan' },
     {
-      icon: <TransactionIcon />,
-      name: 'transaction',
-      path: 'investment/running',
+      icon: <IraIcon />,
+      name: 'ira',
+      path: 'ira',
     },
     { icon: <LogoutIcon />, name: 'logout' },
   ];
