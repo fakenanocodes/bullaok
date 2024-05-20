@@ -4,12 +4,8 @@ import React, { useEffect, useState } from 'react';
 import { Bar, Doughnut } from 'react-chartjs-2';
 import dashBoard from '../assets/dashBoard.png';
 import table_icon from '../assets/table_icon.png';
-import { useState,useEffect } from 'react';
-import {Bar,Doughnut,Pie} from 'react-chartjs-2'
-import {Chart as ChartJS, plugins} from 'chart.js/auto'
-import axios from 'axios';
-import useSWR from 'swr';
 import { set } from 'react-hook-form';
+import useSWR from 'swr';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 
 const  NewDashboard = () => {

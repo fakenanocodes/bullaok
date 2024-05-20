@@ -10,26 +10,32 @@ const HistoryPage = () => {
   let [currentPage, setCurrentPage] = useState(0);
   let [searchVal, setSearchVal] = useState('');
 
-  let num = 3
+  let num = 4;
   let page_num = useMemo(
-    () =>Number.isInteger(transaction?.length/num)? transaction?.length / num :  Math.floor(transaction?.length / num) + 1,
+    () =>
+      Number.isInteger(transaction?.length / num)
+        ? transaction?.length / num
+        : Math.floor(transaction?.length / num) + 1,
     [transaction]
   );
-  let [dataArr,setDataArr] = useState(transaction?.slice(currentPage * num, num * (currentPage + 1)));
-  
-  let data = transaction.filter(data => data.transaction_type.includes(searchVal))
-  const searchHandler = ()=>{
-    setDataArr(data)
- }
+  let [dataArr, setDataArr] = useState(
+    transaction?.slice(currentPage * num, num * (currentPage + 1))
+  );
+
+  console.log('--->', dataArr);
+
+  let data = transaction?.filter(data => data.transaction_type.includes(searchVal))
+  const searchHandler = () => {
+    setDataArr(data);
+  };
   const pageHandler = (e) => {
     if (e.target.id === 'next' && currentPage < page_num - 1) {
       setCurrentPage(++currentPage);
-    } 
-    else if(e.target.id === 'back' && currentPage > 0 ) {
+    } else if (e.target.id === 'back' && currentPage > 0) {
       setCurrentPage(--currentPage);
     }
   };
-  
+
   // console.log(searchVal);
   return (
     <div className=" h-[100%] no-scrollbar bg-white p-4 text-gray-700 overflow-scroll relative bg-bl">
@@ -41,7 +47,7 @@ const HistoryPage = () => {
           <input
             type="search"
             value={searchVal}
-            onChange={(e)=>setSearchVal(e.target.value)}
+            onChange={(e) => setSearchVal(e.target.value)}
             placeholder="search..."
             className="bg-[inherit] border-none outline-none rounded-[10px] w-[100px] h-[30px] sm:w-[150px] text-[13px]"
           />
@@ -67,46 +73,46 @@ const HistoryPage = () => {
           </tr>
         </thead>
         <tbody>
-          { dataArr === ''? <h1>Search not found</h1> : dataArr?.map((data, index) => (
-            <tr className="relative mt-4 text-[12px]  left-0 sm:left-[40px] border-y">
-              <td>
-                <img
-                  src={table_icon}
-                  alt="table_icon"
-                  className="w-[20px] h-[20px] sm:inline-block absolute left-[-30px] top-3 hidden"
-                />
-                <div className="flex flex-col">
-                  <span className="hidden sm:block">{data.description}</span>
-                  <span>12.57pm</span>
-                  <small className="block">{data.date}</small>
-                </div>
-              </td>
-              <td className="relative">
-                <span
-                  className={` absolute  left-4 w-3 h-3 rounded-[50%]   ${data.transaction_type === 'withdrawal' ? 'bg-[#F324EC]' : data.transaction_type === 'deposit' ? 'bg-[#0E0C6D]' : 'bg-[#FFB803]'}`}
+          {dataArr === ''? <tr>Search not found</tr> :           dataArr?.map((data, index) => (
+              <tr className="relative mt-4 text-[12px]  left-0 sm:left-[40px] border-y">
+                <td>
+                  <img
+                    src={table_icon}
+                    alt="table_icon"
+                    className="w-[20px] h-[20px] sm:inline-block absolute left-[-30px] top-3 hidden"
+                  />
+                  <div className="flex flex-col">
+                    <span className="hidden sm:block">{data.description}</span>
+                    <span>12.57pm</span>
+                    <small className="block">{data.date}</small>
+                  </div>
+                </td>
+                <td className="relative">
+                  <span
+                    className={` absolute  left-4 w-3 h-3 rounded-[50%]   ${data.transaction_type === 'withdrawal' ? 'bg-[#F324EC]' : data.transaction_type === 'deposit' ? 'bg-[#0E0C6D]' : 'bg-[#FFB803]'}`}
+                  >
+                    {''}
+                  </span>
+                  {data.type}
+                </td>
+                <td>{parseFloat(data.usdt_amount)?.toFixed(2)}</td>
+                <td
+                  className={
+                    data.verified === true
+                      ? 'text-[#50E01E]'
+                      : data.verified === false
+                        ? 'text-[orangered] font-semibold'
+                        : 'text-[#0978F2]'
+                  }
                 >
-                  {''}
-                </span>
-                {data.type}
-              </td>
-              <td>{parseFloat(data.usdt_amount)?.toFixed(2)}</td>
-              <td
-                className={
-                  data.verified === true
-                    ? 'text-[#50E01E]'
+                  {data.verified === true
+                    ? 'Completed'
                     : data.verified === false
-                      ? 'text-[orangered] font-semibold'
-                      : 'text-[#0978F2]'
-                }
-              >
-                {data.verified === true
-                  ? 'Completed'
-                  : data.verified === false
-                    ? 'Failed'
-                    : 'Pending...'}
-              </td>
-            </tr>
-          ))}
+                      ? 'Failed'
+                      : 'Pending...'}
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
       <div className="w-full flex justify-end text-[#8e0789] font-[500] gap-3 items-center">
