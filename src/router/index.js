@@ -29,6 +29,10 @@ import Stock from '../pages/Stock';
 import Team from '../pages/Team';
 import WhatWeInvest from '../pages/WhatWeInvest';
 import WhoWeAre from '../pages/WhoWeAre';
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
 import InvestmentHistory from '../pages/dashboard/InvestmentHistory';
 import Profile from '../pages/dashboard/Profile';
 import ReferralContainer from '../pages/dashboard/Referral';
