@@ -12,19 +12,19 @@ const NewDashboard = () => {
   const accountAnalyticsData = [
     {
       title: 'Total Balance',
-      amount: 2474.91,
+      amount: balances?.total_balance,
       percentage: '50%',
       color: '#FFB803',
     },
     {
       title: 'Trading Balance',
-      amount: 1274.91,
+      amount: balances?.trading_balance,
       percentage: '30%',
       color: '#F324EC',
     },
     {
       title: 'Avaliable Balance',
-      amount: 1174.91,
+      amount: balances?.available_balance,
       percentage: '20%',
       color: '#0E0C6D',
     },
