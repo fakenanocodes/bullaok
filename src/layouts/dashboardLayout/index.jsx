@@ -17,6 +17,8 @@ import NavigationModalTable from '../../components/Dashboard/NavigationModalTabl
 import LogoutIcon from '../../components/utils/icons/LogoutIcon';
 import useAuthentication from '../../hooks/useAuthentication';
 import DashboardSidebar from './components/Sidebar';
+import IraIcon from '../../assets/icons/dashboard/IraIcon';
+import Profile from '../../assets/icons/dashboard/Profile';
 
 let menus = [null, 'Make a', 'Pending', 'Completed', 'All'];
 
@@ -89,9 +91,19 @@ const DashboardLayout = () => {
       name: 'Running Investment',
       path: 'investment/running',
     },
+    {
+      icon: <IraIcon />,
+      name: 'ira',
+      path: 'ira',
+    },
+    {
+      icon: <Profile />,
+      name: 'Profile',
+      path: '/dashboard/profile',
+    },
     { icon: <LogoutIcon />, name: 'Logout' },
   ];
-
+  
   const profileImage =
     profile?.image ===
     'https://django-bulloak-finance-production.up.railway.app/media/r.jpg'
@@ -167,8 +179,8 @@ const DashboardLayout = () => {
         </div>
         <div className="lg:flex-1 flex-col lg:space-y-4 ">
           <div className="lg:p-5 flex lg:flex">
-            <div className="flex w-full px-10  p-3 pr-10 space-x-24 rounded-[30px] bg-black bg-opacity-[34%] sm:justify-end items-center">
-              <div className="flex space-x-3 items-center text-[#41073F] font-semibold">
+            <div className="flex w-full px-1 p-3  space-x-24 rounded-[30px] bg-black bg-opacity-[34%] sm:justify-end items-center">
+              <div className=" w-full flex gap-2 pr-2 items-center text-[#41073F] font-semibold">
                 <span
                   className={` cursor-pointer ${
                     activeOption === 0
@@ -180,14 +192,14 @@ const DashboardLayout = () => {
                     navigate(`/dashboard/history`);
                   }}
                 >
-                  <p className="bg-white px-3 sm:px-6 rounded-[4px] py-1">
+                  <p className="bg-white px-3 sm:px-6 rounded-[4px] py-1 hidden sm:inline">
                     <span className='hidden sm:inline'>Transaction </span>History
                   </p>
                 </span>
                 {options?.map((option, index) => (
                   <select
                     key={index}
-                    className="p-1 rounded-md  gap-4 w-[50%] text-[12px] sm:text-md sm:w-fit space-y-2"
+                    className="p-1 rounded-md w-[calc(100%/3)] text-[12px] sm:text-md sm:w-fit space-y-2"
                     defaultValue={JSON.stringify([menus[0], option])}
                     onChange={(e) => handleNavigationMenu(e.target.value)}
                   >
@@ -256,7 +268,7 @@ const DashboardLayout = () => {
                 <button onClick={toggleMenu} className="flex justify-end">
                   <CloseIcon fontSize="large" />
                 </button>
-                <div className="flex space-y-8 flex-col">
+                <div className="flex space-y-0 flex-col">
                   {icons?.map((item, idx) => (
                     <>
                       {item.name === 'Logout' ? (
