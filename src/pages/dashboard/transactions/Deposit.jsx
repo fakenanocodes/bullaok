@@ -12,6 +12,8 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import useSWR from 'swr';
 import SuccessIcon from '../../../components/utils/icons/SuccessIcon';
+import downloadjs from 'downloadjs';
+import html2canvas from 'html2canvas';
 
 const Deposit = () => {
   const [dropDown, setDropDown] = useState(false);
@@ -190,6 +192,14 @@ const recieptData = [
     detail : "0.00 USD"
   },
 ]
+
+    // Function for downloading Receipts
+
+    const handleCaptureClick = async () => {
+      const canvas = await html2canvas(document.querySelector('.receipt'));
+      const dataURL = canvas.toDataURL('image/png');
+      downloadjs(dataURL, 'download.png', 'image/png');
+    };
 
   return (
     <div className=" h-[100%] no-scrollbar bg-white p-4 text-gray-700 overflow-scroll relative 00">
@@ -376,11 +386,11 @@ const recieptData = [
 
       {/* Transaction reciept */}
       {successPage && (
-        <div className=" fixed top-0 left-0 w-full h-full flex  justify-center items-center bg-[#000000b3]">
+        <div className=" fixed top-0 left-0 w-full h-full flex flex-col  justify-center items-center bg-[#000000b3]">
         
 
             {/* Recipt box */}
-            <div className="bg-white w-[95%] h-fit-content sm:w-[60%] md:w-3/5 max-w-[380px] p-4 my-6 relative rounded-[15px]">
+            <div className="bg-white w-[95%] h-fit-content sm:w-[60%] md:w-3/5 max-w-[380px] p-4 my-6 relative rounded-[15px] receipt pb-20">
               <div className="flex justify-center">
                 <SuccessIcon/>
               </div>
@@ -405,10 +415,14 @@ const recieptData = [
                   }
                 </table>
               </div>
-              <div className="flex justify-end items-end h-[6vmax]">
+            </div>
+              <div className="flex justify-end items-end h-[6vmax] transform translate-x-[50px] translate-y-[-80px] sm:translate-y-[-120px]">
                 <article className="flex gap-4 font-semibold text-sm">
                   <button className=" w-[100px] h-[32px] rounded-md text-[#8E0789] font-[700]"
-                  onClick={() => setOpenModel(false)}
+                  onClick={() => {
+                    handleCaptureClick()
+                    setOpenModel(false)
+                  }}
                   >
                     Download
                   </button>
@@ -420,7 +434,6 @@ const recieptData = [
                   </button>
                 </article>
               </div>
-            </div>
         </div>
       )}
     </div>
