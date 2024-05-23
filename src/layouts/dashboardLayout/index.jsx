@@ -179,8 +179,8 @@ const DashboardLayout = () => {
         </div>
         <div className="lg:flex-1 flex-col lg:space-y-4 ">
           <div className="lg:p-5 flex lg:flex">
-            <div className="flex w-full px-1 p-3  space-x-24 rounded-[30px] bg-black bg-opacity-[34%] sm:justify-end items-center">
-              <div className=" w-full flex gap-2 pr-2 items-center text-[#41073F] font-semibold">
+            <div className="flex lg:w-full px-1 p-3  sm:space-x-10 rounded-[30px] bg-black bg-opacity-[34%] sm:justify-end items-center">
+              <div className=" flex gap-2 pr-2 items-center text-[#41073F] font-semibold">
                 <span
                   className={` cursor-pointer ${
                     activeOption === 0
@@ -206,7 +206,7 @@ const DashboardLayout = () => {
                     {menus?.map((menu, index) => (
                       <option
                         key={index}
-                        className="py-2 font-poppins"
+                        className="py-2 font-poppins text-[10px]"
                         value={[menu, option]}
                       >
                         {menu} {''} {option}
@@ -215,30 +215,10 @@ const DashboardLayout = () => {
                   </select>
                 ))}
 
-                {/* {options?.map((option, index) => (
-                  <span
-                    key={index}
-                    className={` cursor-pointer ${
-                      activeOption === index
-                        ? 'border-white p-3 rounded-lg border'
-                        : ''
-                    }`}
-                    onClick={() => {
-                      setActiveOption(index);
-                      navigate(`/dashboard/${option.toLowerCase()}`);
-                    }}
-                  >
-                    <p className="bg-white px-6 rounded-[4px] py-1">{option}</p>
-                  </span>
-                ))} */}
+                
               </div>
-              {/* <img
-                src={profileImage}
-                alt=""
-                className="w-[70px] h-[70px] rounded-[50%]  cursor-pointer"
-                onClick={() => navigate('/dashboard/profile')}
-              /> */}
-              <div className="hidden sm:block">
+          
+              <div className="hidden sm:block pr-2">
                 <Avatar
                   src={profileImage}
                   sx={{ height: 70, width: 70 }}

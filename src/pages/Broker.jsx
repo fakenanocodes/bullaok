@@ -49,10 +49,10 @@ export default function Broker() {
       setLoading(true);
       axios.post(`/broker/user-broker/`, data).then(() => {
           setSuccess('Broker selected successfully');
-          navigate('/dashboard');
       });
       dispatch(toggleBrokerStatus(true));
       setLoading(false);
+      navigate('/dashboard');
     } catch (err) {
       const errMsg = handleGenericError(err);
       setError(errMsg);
