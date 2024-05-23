@@ -11,10 +11,12 @@ import { SiLitecoin, SiTether, SiXrp } from 'react-icons/si';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import useSWR from 'swr';
+import SuccessIcon from '../../../components/utils/icons/SuccessIcon';
 
 const Deposit = () => {
   const [dropDown, setDropDown] = useState(false);
   const [openModel, setOpenModel] = useState(false);
+  const [successPage, setSuccessPage] = useState(false);
   const [loading, setLoading] = useState(false);
   const [showMobileTable, setShowMobileTable] = useState(false);
   const [wallet, setWallet] = useState('');
@@ -34,7 +36,7 @@ const Deposit = () => {
 
   // console.log('WALLET ADD', depositWallet);
 
-  console.log(depositAmount);
+  // console.log(depositAmount);
   let walletMock = {
     BTC: walletAddress?.bitcoin_address,
     LTC: walletAddress?.litecoin_address,
@@ -62,11 +64,11 @@ const Deposit = () => {
     }
   }, [wallet]);
 
-  console.log('SELECTED COIN', selectedCoin);
+  // console.log('SELECTED COIN', selectedCoin);
 
   useEffect(() => {
     async function convertToUSD(coin, amount) {
-      console.log('SELECTED COIN', coin, 'AMOUNT', amount);
+      // console.log('SELECTED COIN', coin, 'AMOUNT', amount);
       const url = `https://api.coingecko.com/api/v3/simple/price?ids=${coin}&vs_currencies=usd`;
       const response = await fetch(url);
       const data = await response.json();
@@ -112,14 +114,15 @@ const Deposit = () => {
     setLoading(true);
     try {
       const response = await axios.post('/deposit/',userData);
-      console.log('RESPONSE', response);
+      // console.log('RESPONSE', response);
       setLoading(false);
       toast.success('success');
       setOpenModel(false);
+      setSuccessPage(true);
       setOpenSuccess(!openSuccess);
     } catch (error) {
       setLoading(true);
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -164,21 +167,36 @@ const Deposit = () => {
     [user]
   );
 
+
+const recieptData = [
+  {
+    title : "Debtor Wallet Address",
+    detail : "OxF6Hgj6JIo690M..."
+  },
+  {
+    title : "Transaction Date",
+    detail : "24/05/2024, 13:22:14"
+  },
+  {
+    title : "Transaction Type",
+    detail : "Deposit"
+  },
+  {
+    title : "Destination Wallet Address",
+    detail : "OxF6Hgj6JIo690M..."
+  },
+  {
+    title : "Amount",
+    detail : "0.00 USD"
+  },
+]
+
   return (
     <div className=" h-[100%] no-scrollbar bg-white p-4 text-gray-700 overflow-scroll relative 00">
       <div className="py-3 px-20">
         <span className="text-3xl tracking-wider font-medium">New Deposit</span>
       </div>
       <div className="absolute left-0 right-0 border-b-2 border-b-gray-300"></div>
-      {/* {openSuccess && (
-        <DepositSuccess
-          wallet={wallet}
-          amount={amount}
-          defaultWallet={depositWallet?.usdt_address}
-          walletTypes={walletTypes}
-          setOpenSuccess={setOpenSuccess}
-        />
-      )} */}
 
       <div>
       <div className="lg:flex-row flex-col flex justify-between space-y-5 lg:space-y-0 py-10 lg:px-20 border-b-2 border-b-gray-300">
@@ -353,6 +371,56 @@ const Deposit = () => {
               </div>
             </div>
           </ClickAwayListener>
+        </div>
+      )}
+
+      {/* Transaction reciept */}
+      {successPage && (
+        <div className=" fixed top-0 left-0 w-full h-full flex  justify-center items-center bg-[#000000b3]">
+        
+
+            {/* Recipt box */}
+            <div className="bg-white w-[95%] h-fit-content sm:w-[60%] md:w-3/5 max-w-[380px] p-4 my-6 relative rounded-[15px]">
+              <div className="flex justify-center">
+                <SuccessIcon/>
+              </div>
+              <div className='flex flex-col items-center gap-2'>
+                <div className='flex flex-col items-center'>
+                  <p className='font-[500] text-black'>Transaction Success!</p>
+                  <p className='text-[13px]'>Your Deposit has been successfully done</p>
+                </div>
+
+                <p className='text-[12px]'>Total Deposit</p>
+                <p className='text-black font-[500] flex gap-2'><span className='text-[#8E0789]'>0.00</span>BTC</p>
+
+                {/* Transaction details */}
+                <table>
+                  {
+                    recieptData?.map(data=>(
+                      <tr className='h-fit p-0 font-[500]'>
+                    <td className='text-[12px] py-2 '>{data?.title}</td>
+                    <td className={`text-[12px] text-[${data.title ==='Amount'? '#8E0789' : 'rgba(7, 7, 7, 0.7)'}] flex justify-end py-2`}>{data?.detail}</td>
+                  </tr>
+                    ))
+                  }
+                </table>
+              </div>
+              <div className="flex justify-end items-end h-[6vmax]">
+                <article className="flex gap-4 font-semibold text-sm">
+                  <button className=" w-[100px] h-[32px] rounded-md text-[#8E0789] font-[700]"
+                  onClick={() => setOpenModel(false)}
+                  >
+                    Download
+                  </button>
+                  <button
+                    className="text-white bg-[#8E0789]  w-[80px] h-[32px] rounded-md text-sm "
+                    onClick={(e) => handleSubmit(e)}
+                  >
+                    Share
+                  </button>
+                </article>
+              </div>
+            </div>
         </div>
       )}
     </div>
