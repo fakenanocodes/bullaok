@@ -14,6 +14,8 @@ const HistoryPage = () => {
 
   useEffect(() => setArr(transaction), [transaction]);
 
+  console.log('---', arr);
+
   let num = 10;
   let page_num = useMemo(
     () =>
@@ -28,18 +30,20 @@ const HistoryPage = () => {
     [arr, currentPage]
   );
 
-
   const dateHandler = (e) => {
     setDate(e.target.value);
   };
-  useEffect(() => {
+
+  const filterbyDate = () => {
     let dateVal = `${new Date(date).getMonth() + 1} ${new Date(date).getFullYear()}`;
     let dateArr = transaction?.filter((data) => {
       let tipTime = `${new Date(data.created).getMonth() + 1} ${new Date(data.created).getFullYear()}`;
-      return tipTime.includes(dateVal)
+      return tipTime.includes(dateVal);
     });
-    setArr(dateArr)
-  }, [date]);
+
+    setArr(dateArr);
+  };
+
   const searchHandler = () => {
     let data = arr?.filter((data) => data.transaction_type.includes(searchVal));
     setArr(data);
@@ -50,7 +54,6 @@ const HistoryPage = () => {
       setCurrentPage(++currentPage);
     } else if (e.target.id === 'back' && currentPage > 0) {
       setCurrentPage(--currentPage);
-      eeeee;
     }
   };
 
@@ -61,7 +64,7 @@ const HistoryPage = () => {
   };
 
   return (
-    <div className=" h-fit no-scrollbar bg-[rgba(0,0,0,0.02)] p-4 text-gray-700 overflow-scroll relative bg-bl">
+    <div className=" h-fit no-scrollbar bg-[#fff] p-4 text-gray-700 overflow-scroll relative bg-bl">
       <div className="flex items-center justify-between">
         <span className="text-[rgba(0,0,0,0.7)] font-[600]">
           <span className="hidden sm:inline">Transaction</span> History
@@ -84,7 +87,10 @@ const HistoryPage = () => {
         <input
           type="date"
           value={date}
-          onChange={(e) => dateHandler(e)}
+          onChange={(e) => {
+            dateHandler(e);
+            filterbyDate();
+          }}
           className="rounded-[10px] w-fit text-[12px] sm:w-[200px] h-[30px] pr-3 border-[1.5px] outline-[1px] outline-[none!important] focus:border-[rgba(0,0,0,0.5)!important]"
         />
       </div>
