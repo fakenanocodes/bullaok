@@ -2,8 +2,11 @@ import React,{ useState } from 'react';
 import useSWR from 'swr';
 import {Doughnut} from 'react-chartjs-2'
 import {Chart as ChartJS, plugins} from 'chart.js/auto'
+import DashBoardHistory from '../DashBoardHistory';
+import { useNavigate } from 'react-router-dom';
 
 const IndividualRetirementAccount = () => {
+  const navigate = useNavigate();
   const { data: user } = useSWR(`/user/deposit/`);
   console.log(user)
   const retirementData = [
@@ -58,9 +61,6 @@ const IndividualRetirementAccount = () => {
       position: 'bottom'
     }
   })
-  // window.addEventListener('resize',()=>{
-  //   doughnut.resize()
-  // })
   return (
     <section className=" h-full px-6 font-poppins">
       <div className="flex gap-5  my-6 flex-col sm:flex-row  ">
@@ -143,31 +143,30 @@ const IndividualRetirementAccount = () => {
             </button>
         </div>
       </div>
-      <div className="w-full bg-[#000000] p-4 rounded-[12px]">
-        <article className="flex justify-between text-white">
+      <div className=" bg-[#000000] p-4  rounded-[12px] mt-4">
+        <article className="flex justify-between text-white text-[12px] sm:text-lg">
           <h4>Transaction History</h4>
-
-          <button className=" w-[184px] h-[52px] rounded-md border border-[#FFB803] text-[#FFB803] hover:bg-[#FFB803] hover:text-white ">
+          <button
+            className="  w-[92px] sm:w-[184px] h-[30px] sm:h-[52px] rounded-md border border-[#FFB803] text-[#FFB803] hover:bg-[#FFB803] hover:text-white  text-[12px] sm:text-sm "
+            onClick={() => {
+              // setActiveOption(0);
+              navigate(`/dashboard/history`);
+            }}
+          >
             More
           </button>
         </article>
-        <table className="my-6 table-auto ">
-          <thead className="text-[#FFB803]">
-            <tr className="">
+
+        <table className="table-auto my-4">
+          <thead className="relative text-[#FFB803] text-[10px] sm:text-[16px] left-0 sm:left-[40px]">
+            <tr>
               <th>Description</th>
               <th>Type</th>
               <th>Amount</th>
               <th>Status</th>
             </tr>
           </thead>
-          <tbody className="text-white">
-            <tr className="">
-              <td>Deposit</td>
-              <td>Deposit</td>
-              <td>$ 0.00</td>
-              <td>Completed</td>
-            </tr>
-          </tbody>
+          <DashBoardHistory/>
         </table>
       </div>
     </section>

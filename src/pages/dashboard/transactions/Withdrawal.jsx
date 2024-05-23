@@ -9,9 +9,11 @@ import { FaBitcoin, FaEthereum } from 'react-icons/fa';
 import { SiLitecoin, SiTether, SiXrp } from 'react-icons/si';
 import { toast } from 'react-toastify';
 import useSWR from 'swr';
+import SuccessIcon from '../../../components/utils/icons/SuccessIcon';
 
 const Withdrawal = () => {
   const [openModal, setOpenModal] = useState(false);
+  const [successPage, setSuccessPage] = useState(false);
   // const { data: withdraws } = useSWR(`/withdraw/`);
   const { data: user } = useSWR(`user/`);
   const [loading, setLoading] = useState(false);
@@ -109,12 +111,15 @@ const Withdrawal = () => {
           wallet_address: receiverDetail?.walletAddress,
           usdt_amount: usdtToFiveDecimalPlace.toString(),
         })
-        .then(() =>
+        .then(() =>{
           toast.success('Your transaction has been filled', {
             hideProgressBar: false,
             autoClose: 2000,
             position: 'top-right',
           })
+          setOpenModal(false)
+          setSuccessPage(true)
+        }
         )
         .catch((err) => {
           console.log(err);
@@ -154,6 +159,29 @@ const style = {
     height: '80%', // Remove max height constraint
   },
 };
+
+const recieptData = [
+  {
+    title : "Withdrawal Wallet Address",
+    detail : "OxF6Hgj6JIo690M..."
+  },
+  {
+    title : "Transaction Date",
+    detail : "24/05/2024, 13:22:14"
+  },
+  {
+    title : "Transaction Type",
+    detail : "Withdrawal"
+  },
+  {
+    title : "Destination Wallet Address",
+    detail : "OxF6Hgj6JIo690M..."
+  },
+  {
+    title : "Amount",
+    detail : "0.00 USD"
+  },
+]
 
   return (
     <div className=" h-[100%] no-scrollbar bg-white p-8 text-gray-700 overflow-scroll relative rounded-xl font-poppins">
@@ -353,6 +381,56 @@ const style = {
               </div>
             </Box>
           </Modal>
+
+          {/* The transaction reciept  */}
+          {successPage && (
+        <div className=" fixed top-0 left-0 w-full h-full flex  justify-center items-center bg-[#000000b3]">
+        
+
+            {/* Recipt box */}
+            <div className="bg-white w-[95%] h-fit-content sm:w-[60%] md:w-3/5 max-w-[380px] p-4 my-6 relative rounded-[15px]">
+              <div className="flex justify-center">
+                <SuccessIcon/>
+              </div>
+              <div className='flex flex-col items-center gap-2'>
+                <div className='flex flex-col items-center'>
+                  <p className='font-[500] text-black'>Transaction Success!</p>
+                  <p className='text-[13px]'>Your withdrawal has been successfully done</p>
+                </div>
+
+                <p className='text-[12px]'>Total Withdrawal</p>
+                <p className='text-black font-[500] flex gap-2'><span className='text-[#8E0789]'>0.00</span>BTC</p>
+
+                {/* Transaction details */}
+                <table>
+                  {
+                    recieptData?.map(data=>(
+                      <tr className='h-fit p-0 font-[500]'>
+                    <td className='text-[12px] py-2 '>{data?.title}</td>
+                    <td className={`text-[12px] text-[${data.title ==='Amount'? '#8E0789' : 'rgba(7, 7, 7, 0.7)'}] flex justify-end py-2`}>{data?.detail}</td>
+                  </tr>
+                    ))
+                  }
+                </table>
+              </div>
+              <div className="flex justify-end items-end h-[6vmax]">
+                <article className="flex gap-4 font-semibold text-sm">
+                  <button className=" w-[100px] h-[32px] rounded-md text-[#8E0789] font-[700]"
+                  onClick={() => setOpenModel(false)}
+                  >
+                    Download
+                  </button>
+                  <button
+                    className="text-white bg-[#8E0789]  w-[80px] h-[32px] rounded-md text-sm "
+                    onClick={(e) => handleSubmit(e)}
+                  >
+                    Share
+                  </button>
+                </article>
+              </div>
+            </div>
+        </div>
+      )}
         </div>
       </div>
     </div>
