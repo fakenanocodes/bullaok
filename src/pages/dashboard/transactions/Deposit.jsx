@@ -204,16 +204,7 @@ const recieptData = [
     };
 
     
-    // Function for sharing Receipts
-
-    // const handleShare = async () => {
-    //   const canvas = await html2canvas(document.querySelector('.receipt'));
-    //   const dataURL = canvas.toDataURL('image/png');
-    //   setImageUrl(dataURL)
-    //   return dataURL
-    // };
-    // handleShare()
-    console.log(imageUrl)
+  
 
     
 
@@ -444,21 +435,24 @@ const recieptData = [
                 >
                   Download
                 </button>
-                <RWebShare
-                  data={{
-                    text: "Like humans, flamingos make friends for life",
-                    url: imageUrl,
-                    title: "Flamingos",
-                  }}
-                  // onClick={() => handleShare()}
-                >
-                  <button
-                    className="text-white bg-[#8E0789]  w-[80px] h-[32px] rounded-md text-sm "
-                    // onClick={(e) => handleShare()}
+                {
+                  
+                  <RWebShare
+                    data={{
+                      text: "Like humans, flamingos make friends for life",
+                      url: imageUrl,
+                      title: "Flamingos",
+                    }}
+                    // onClick={() => handleShare()}
                   >
-                    Share
-                  </button>
-                </RWebShare>
+                    <button
+                      className="text-white bg-[#8E0789]  w-[80px] h-[32px] rounded-md text-sm "
+                      // onClick={(e) => handleShare()}
+                    >
+                      Share
+                    </button>
+                  </RWebShare>
+                }
                 
               </article>
             </div>

@@ -318,7 +318,7 @@ const Transfer = () => {
               </table>
             </div>
           </div>
-          
+
           <div className="flex justify-end items-end h-[6vmax] transform translate-x-[50px] translate-y-[-80px] sm:translate-y-[-120px]">
             <article className="flex gap-4 font-semibold text-sm">
               <button
