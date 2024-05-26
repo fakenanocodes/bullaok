@@ -14,6 +14,7 @@ import useSWR from 'swr';
 import SuccessIcon from '../../../components/utils/icons/SuccessIcon';
 import downloadjs from 'downloadjs';
 import html2canvas from 'html2canvas';
+import { RWebShare } from "react-web-share"
 
 const Deposit = () => {
   const [dropDown, setDropDown] = useState(false);
@@ -28,6 +29,7 @@ const Deposit = () => {
   const [usdtAmount, setUsdtAmount] = useState('');
   const [showNotify, setShowNotify] = useState(false);
   const [openSuccess, setOpenSuccess] = useState(false);
+  const [imageUrl, setImageUrl] = useState('');
   const { data: deposits } = useSWR(`/deposit/`);
   const { data: depositWallet } = useSWR('/walletaddress/');
   const navigate = useNavigate();
@@ -200,6 +202,20 @@ const recieptData = [
       const dataURL = canvas.toDataURL('image/png');
       downloadjs(dataURL, 'download.png', 'image/png');
     };
+
+    
+    // Function for sharing Receipts
+
+    // const handleShare = async () => {
+    //   const canvas = await html2canvas(document.querySelector('.receipt'));
+    //   const dataURL = canvas.toDataURL('image/png');
+    //   setImageUrl(dataURL)
+    //   return dataURL
+    // };
+    // handleShare()
+    console.log(imageUrl)
+
+    
 
   return (
     <div className=" h-[100%] no-scrollbar bg-white p-4 text-gray-700 overflow-scroll relative 00">
@@ -416,24 +432,36 @@ const recieptData = [
                 </table>
               </div>
             </div>
-              <div className="flex justify-end items-end h-[6vmax] transform translate-x-[50px] translate-y-[-80px] sm:translate-y-[-120px]">
-                <article className="flex gap-4 font-semibold text-sm">
-                  <button className=" w-[100px] h-[32px] rounded-md text-[#8E0789] font-[700]"
-                  onClick={() => {
-                    handleCaptureClick()
-                    setOpenModel(false)
+
+            <div className="flex justify-end items-end h-[6vmax] transform translate-x-[50px] translate-y-[-80px] sm:translate-y-[-120px]">
+              <article className="flex gap-4 font-semibold text-sm">
+
+                <button className=" w-[100px] h-[32px] rounded-md text-[#8E0789] font-[700]"
+                onClick={() => {
+                  handleCaptureClick()
+                  setOpenModel(false)
+                }}
+                >
+                  Download
+                </button>
+                <RWebShare
+                  data={{
+                    text: "Like humans, flamingos make friends for life",
+                    url: imageUrl,
+                    title: "Flamingos",
                   }}
-                  >
-                    Download
-                  </button>
+                  // onClick={() => handleShare()}
+                >
                   <button
                     className="text-white bg-[#8E0789]  w-[80px] h-[32px] rounded-md text-sm "
-                    onClick={(e) => handleSubmit(e)}
+                    // onClick={(e) => handleShare()}
                   >
                     Share
                   </button>
-                </article>
-              </div>
+                </RWebShare>
+                
+              </article>
+            </div>
         </div>
       )}
     </div>
