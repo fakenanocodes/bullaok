@@ -406,8 +406,8 @@ const recieptData = [
                 {/* Transaction details */}
                 <table>
                   {
-                    recieptData?.map(data=>(
-                      <tr className='h-fit p-0 font-[500]'>
+                    recieptData?.map((data, index)=>(
+                      <tr key={index} className='h-fit p-0 font-[500]'>
                     <td className='text-[12px] py-2 '>{data?.title}</td>
                     <td className={`text-[12px] text-[${data.title ==='Amount'? '#8E0789' : 'rgba(7, 7, 7, 0.7)'}] flex justify-end py-2`}>{data?.detail}</td>
                   </tr>

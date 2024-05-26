@@ -1,6 +1,6 @@
 import { ClickAwayListener } from '@mui/material';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { toast } from 'react-toastify';
 import useSWR from 'swr';
 import CancelIcon from '../../../components/utils/icons/CancelIcon';
@@ -10,25 +10,22 @@ import MobileTransferTable from './MobileTransferTab';
 const Transfer = () => {
   const [openModal, setOpenModal] = useState(false);
   const [successPage, setSuccessPage] = useState(false);
-  const [showMobileTable, setShowMobileTable] = useState(false);
-  const [checkInput, setCheckInput] = useState(false);
+  const [showMobileTable] = useState(false);
   const { data: transfers } = useSWR(`/transfer/`);
+  const { data: user } = useSWR(`user/`)
 
   const [transferDetails, setTransferDetails] = useState({
+    name: '',
     email: '',
     usdt_amount: 0,
   });
-  const [available_balance, setAvailableBalance] = useState(0);
-  //Function that fetches user profile
-  const fetchUserProfile = async () => {
-    try {
-      const response = await axios.get('/user/');
-      console.log('RESPONSE', response);
-      setAvailableBalance(response.data.profile.available_balance);
-    } catch (error) {
-      console.log('ERROR', error);
-    }
-  };
+
+    const availableBalance = useMemo(
+      () => user?.profile?.available_balance,
+      [user]
+    );
+
+
   //Input handler
   const inputHandler = (e) => {
     setTransferDetails({
@@ -36,47 +33,33 @@ const Transfer = () => {
       [e.target.name]: e.target.value,
     });
   };
-  useEffect(() => {
-    fetchUserProfile();
-  }, []);
 
-  let userData = {
-    email: '',
-    usdt_amount: '0',
-  };
+  console.log(transferDetails)
+
 
   const inputDetails = [
     {
-      name: 'Payee Name',
+      title: 'Payee Name',
+      name: 'name',
       type: 'text',
       placeholder: 'John Doe',
     },
     {
-      name: 'Payee Email Address',
+      title: 'Payee Email Address',
+      name: 'email',
       type: 'email',
       placeholder: 'johndoe@gmail.com',
     },
     {
-      name: 'Transfer Amount',
+      title: 'Transfer Amount',
+      name: 'usdt_amount',
       type: 'number',
       placeholder: '$0.00',
     },
   ];
-  function validateEmail(email) {
-    // Regular expression pattern for validating email addresses
-    const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    // Check if the email matches the pattern
-    return pattern.test(email);
-  }
-
-  const formSubmissionHandler = async () => {
-    // e.preventDefault();
-    if (!validateEmail(transferDetails.email)) {
-      toast.error('Invalid email address');
-      return;
-    }
-
+  const formSubmissionHandler = async (e) => {
+    e.preventDefault()
     try {
       const response = await axios.post('/transfer/', transferDetails);
       console.log('RESPONSE', response);
@@ -151,7 +134,7 @@ const Transfer = () => {
           <article>
             <p className="py-7 text-[#4A4A4A]">Account Details</p>
             <h2 className="text-[#000000] font-semibold">
-              Avaliable balance: <span>{available_balance}</span>
+              Avaliable balance: <span>${availableBalance == undefined ? '0' : availableBalance}</span>
             </h2>
           </article>
         </div>
@@ -164,18 +147,13 @@ const Transfer = () => {
               key={index}
               className="text-[#4A4A4A] text-sm block py-2 font-medium"
             >
-              {input.name}
+              {input.title}
               <input
                 type={input.type}
+                name={input.name}
                 className="block w-full sm:w-[70%] border rounded-[10px] p-2 focus:border-[#8E0789] my-2"
                 placeholder={input.placeholder}
-                onChange={(e) => {
-                  if (input.name === 'Transfer Amount') {
-                    setAmount(e.target.value);
-                  } else {
-                    setEmailAdress(e.target.value);
-                  }
-                }}
+                onChange={inputHandler}
               />
             </label>
           ))}
@@ -202,7 +180,6 @@ const Transfer = () => {
 
       {openModal && (
         <div className=" fixed top-0 left-0 w-full h-full flex  justify-center items-center bg-[#000000b3]">
-          <ClickAwayListener onClickAway={() => setOpenModel(false)}>
             <div className="bg-white h-fit-content w-[90%] md:w-3/5 max-w-[500px] p-4 my-6 relative rounded-[15px]">
               <div className="flex justify-between">
                 <p className="text-lg text-gray-600 font-semibold">Transfer</p>
@@ -266,7 +243,6 @@ const Transfer = () => {
                 </div>
               </div>
             </div>
-          </ClickAwayListener>
         </div>
       )}
 
@@ -293,8 +269,8 @@ const Transfer = () => {
 
               {/* Transaction details */}
               <table>
-                {recieptData?.map((data) => (
-                  <tr className="h-fit p-0 font-[500]">
+                {recieptData?.map((data, index) => (
+                  <tr key={index} className="h-fit p-0 font-[500]">
                     <td className="text-[12px] py-2 ">{data?.title}</td>
                     <td
                       className={`text-[12px] text-[${data.title === 'Amount' ? '#8E0789' : 'rgba(7, 7, 7, 0.7)'}] flex justify-end py-2`}
@@ -307,16 +283,10 @@ const Transfer = () => {
             </div>
             <div className="flex justify-end items-end h-[6vmax]">
               <article className="flex gap-4 font-semibold text-sm">
-                <button
-                  className=" w-[100px] h-[32px] rounded-md text-[#8E0789] font-[700]"
-                  onClick={() => setOpenModal(false)}
-                >
+                <button className=" w-[100px] h-[32px] rounded-md text-[#8E0789] font-[700]">
                   Download
                 </button>
-                <button
-                  className="text-white bg-[#8E0789]  w-[80px] h-[32px] rounded-md text-sm "
-                  onClick={(e) => handleSubmit(e)}
-                >
+                <button className="text-white bg-[#8E0789]  w-[80px] h-[32px] rounded-md text-sm ">
                   Share
                 </button>
               </article>
