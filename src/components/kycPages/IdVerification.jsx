@@ -1,4 +1,4 @@
-import { useContext, useState, useRef, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import useSWR from 'swr';
@@ -13,13 +13,12 @@ const IdVerification = () => {
   // const [id, setId] = useState('ID CARD');
   const [homeAddress, setHomeAddress] = useState('');
   const [birthDate, setBirthDate] = useState('');
-  const { kyc, setKyc } = useContext(KycContext);
+  const { kyc, set } = useContext(KycContext);
   const { dataFromChild, setDataFromChild } = useContext(KycContext);
   const [selectedCountry, setSelectedCountry] = useState('Nigeria');
   const { userDetails } = useSelector((state) => state.transact);
   const dispatch = useDispatch();
   // console.log(`USERDETAILS`, userDetails);
-
 
   const { data: countries } = useSWR('https://restcountries.com/v3.1/all');
 
@@ -27,7 +26,6 @@ const IdVerification = () => {
     setSelectedCountry(e.target.value);
     console.log(e.target.value);
   };
-
 
   const handleId = async (id) => {
     // setIdcard('passport');
@@ -41,13 +39,11 @@ const IdVerification = () => {
       default:
         return 'ID CARD';
     }
-  }
+  };
 
   useEffect(() => {
-    handleId
-  }
-    , [])
-
+    handleId;
+  }, []);
 
   // console.log(`SELECTED`, selectedCountry, idCard);
 
@@ -198,7 +194,8 @@ const IdVerification = () => {
                   {countries
                     ?.sort((a, b) =>
                       a?.name?.common.localeCompare(b?.name?.common)
-                    )?.map((country) => (
+                    )
+                    ?.map((country) => (
                       <option
                         key={country?.cca3}
                         value={country?.name?.common}
@@ -226,8 +223,8 @@ const IdVerification = () => {
                   }
                   id="kyc"
                   onClick={() => {
-                    setIdcard('idCard')
-                    handleId('ID CARD')
+                    setIdcard('idCard');
+                    handleId('ID CARD');
                   }}
                 >
                   <Idcard />
@@ -235,7 +232,7 @@ const IdVerification = () => {
                     <p className=" leading-[2px] pl-[5px] font-[Poppins] font-[400] text-[11px]">
                       ID Card
                     </p>
-                  </div>  
+                  </div>
                 </div>
 
                 <div
@@ -246,8 +243,8 @@ const IdVerification = () => {
                   }
                   id="kyc"
                   onClick={() => {
-                    setIdcard('driverLicence')
-                    handleId('Driving Licence')
+                    setIdcard('driverLicence');
+                    handleId('Driving Licence');
                   }}
                 >
                   <DriveLicence />
@@ -266,8 +263,8 @@ const IdVerification = () => {
                   }
                   id="kyc"
                   onClick={() => {
-                    setIdcard('passport')
-                    handleId('Passport')
+                    setIdcard('passport');
+                    handleId('Passport');
                   }}
                 >
                   <PassportIcon />
