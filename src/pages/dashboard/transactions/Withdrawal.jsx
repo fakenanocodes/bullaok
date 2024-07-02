@@ -12,8 +12,7 @@ import { SiLitecoin, SiTether, SiXrp } from 'react-icons/si';
 import { toast } from 'react-toastify';
 import useSWR from 'swr';
 import SuccessIcon from '../../../components/utils/icons/SuccessIcon';
-import downloadjs from 'downloadjs';
-import html2canvas from 'html2canvas';
+import { RWebShare } from "react-web-share"
 
 const Withdrawal = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -22,6 +21,7 @@ const Withdrawal = () => {
   const { data: user } = useSWR(`user/`);
   const [loading, setLoading] = useState(false);
   const [dropDown, setDropDown] = useState(false);
+  const [imageUrl, setImageUrl] = useState('');
   const [receiverDetail, setReceiverDetail] = useState({
     walletAddress: '',
     amount: 0,
@@ -99,11 +99,46 @@ const Withdrawal = () => {
     }
   };
 
-  const handleCaptureClick = async () => {
-    const canvas = await html2canvas(document.querySelector('.receipt'));
-    const dataURL = canvas.toDataURL('image/png');
-    downloadjs(dataURL, 'download.png', 'image/png');
-  };
+  // ---------------- the share functions -------------------
+  
+    const handleCaptureClick = async () => {
+      const canvas = await html2canvas(document.querySelector('.receipt'));
+      const dataURL = canvas.toDataURL('image/png');
+      downloadjs(dataURL, 'download.png', 'image/png');
+    };
+
+    const shareHandler = async () => {
+      const canvas = await html2canvas(document.querySelector('.receipt'));
+      const dataURL = canvas.toDataURL('image/png');
+      const longUrl = dataURL;
+      const shortUrl = shortenUrl(longUrl);
+      console.log(shortUrl);
+    };
+    
+    function shortenUrl(longUrl) {
+      // Use jsonstore.io to shorten the URL
+      const apiUrl = 'https://jsonstore.io/api/v1/shorten';
+      const headers = {
+        'Content-Type': 'application/json',
+      };
+      const data = {
+        'url': longUrl,
+      };
+      fetch(apiUrl, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(data),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          return data.shortUrl;
+        });
+    }
+
+  // ---------------- the share functions -------------------
+
+
+
 
   const confirmWithdrawal = () => {
     try {
@@ -192,33 +227,33 @@ const recieptData = [
 
     // Function for downloading Receipts
 
-    const handleCaptureClick = async () => {
-      const canvas = await html2canvas(document.querySelector('.receipt'));
-      const dataURL = canvas.toDataURL('image/png');
-      downloadjs(dataURL, 'download.png', 'image/png');
-    };
-  const recieptData = [
-    {
-      title: 'Withdrawal Wallet Address',
-      detail: 'OxF6Hgj6JIo690M...',
-    },
-    {
-      title: 'Transaction Date',
-      detail: '24/05/2024, 13:22:14',
-    },
-    {
-      title: 'Transaction Type',
-      detail: 'Withdrawal',
-    },
-    {
-      title: 'Destination Wallet Address',
-      detail: 'OxF6Hgj6JIo690M...',
-    },
-    {
-      title: 'Amount',
-      detail: '0.00 USD',
-    },
-  ];
+    // const handleCaptureClick = async () => {
+    //   const canvas = await html2canvas(document.querySelector('.receipt'));
+    //   const dataURL = canvas.toDataURL('image/png');
+    //   downloadjs(dataURL, 'download.png', 'image/png');
+    // };
+  // const recieptData = [
+  //   {
+  //     title: 'Withdrawal Wallet Address',
+  //     detail: 'OxF6Hgj6JIo690M...',
+  //   },
+  //   {
+  //     title: 'Transaction Date',
+  //     detail: '24/05/2024, 13:22:14',
+  //   },
+  //   {
+  //     title: 'Transaction Type',
+  //     detail: 'Withdrawal',
+  //   },
+  //   {
+  //     title: 'Destination Wallet Address',
+  //     detail: 'OxF6Hgj6JIo690M...',
+  //   },
+  //   {
+  //     title: 'Amount',
+  //     detail: '0.00 USD',
+  //   },
+  // ];
 
   return (
     <div className=" h-[100%] no-scrollbar bg-white p-8 text-gray-700 overflow-scroll relative rounded-xl font-poppins">
@@ -420,24 +455,8 @@ const recieptData = [
               </div>
             </Box>
           </Modal>
-
-          {/* The transaction reciept  */}
-          {successPage && (
-            <div className=" fixed top-0 left-0 w-full h-full flex  justify-center items-center bg-[#000000b3]">
-              {/* Recipt box */}
-              <div className="bg-white w-[95%] h-fit-content sm:w-[60%] md:w-3/5 max-w-[380px] p-4 my-6 relative rounded-[15px]">
-                <div className="flex justify-center">
-                  <SuccessIcon />
-                </div>
-                <div className="flex flex-col items-center gap-2">
-                  <div className="flex flex-col items-center">
-                    <p className="font-[500] text-black">
-                      Transaction Success!
-                    </p>
-                    <p className="text-[13px]">
-                      Your withdrawal has been successfully done
-                    </p>
-                  </div>
+          {/* Transaction reciept */}
+      {successPage && (
         <div className=" fixed top-0 left-0 w-full h-full flex flex-col  justify-center items-center bg-[#000000b3]">
         
 
@@ -452,49 +471,14 @@ const recieptData = [
                   <p className='text-[13px]'>Your withdrawal has been successfully done</p>
                 </div>
 
-                  <p className="text-[12px]">Total Withdrawal</p>
-                  <p className="text-black font-[500] flex gap-2">
-                    <span className="text-[#8E0789]">0.00</span>BTC
-                  </p>
+                <p className='text-[12px]'>Total WIthdrawal</p>
+                <p className='text-black font-[500] flex gap-2'><span className='text-[#8E0789]'>0.00</span>BTC</p>
 
-                  {/* Transaction details */}
-                  <table>
-                    {recieptData?.map((data, index) => (
-                      <tr key={index} className="h-fit p-0 font-[500]">
-                        <td className="text-[12px] py-2 ">{data?.title}</td>
-                        <td
-                          className={`text-[12px] text-[${data.title === 'Amount' ? '#8E0789' : 'rgba(7, 7, 7, 0.7)'}] flex justify-end py-2`}
-                        >
-                          {data?.detail}
-                        </td>
-                      </tr>
-                    ))}
-                  </table>
-                </div>
-                <div className="flex justify-end items-end h-[6vmax]">
-                  <article className="flex gap-4 font-semibold text-sm">
-                    <button
-                      className=" w-[100px] h-[32px] rounded-md text-[#8E0789] font-[700]"
-                      onClick={() => {
-                        handleCaptureClick();
-                        setSuccessPage(false);
-                      }}
-                    >
-                      Download
-                    </button>
-                    <button className="text-white bg-[#8E0789]  w-[80px] h-[32px] rounded-md text-sm ">
-                      Share
-                    </button>
-                  </article>
-                </div>
-              </div>
-            </div>
-          )}
                 {/* Transaction details */}
                 <table>
                   {
-                    recieptData?.map(data=>(
-                      <tr className='h-fit p-0 font-[500]'>
+                    recieptData?.map((data, index)=>(
+                      <tr key={index} className='h-fit p-0 font-[500]'>
                     <td className='text-[12px] py-2 '>{data?.title}</td>
                     <td className={`text-[12px] text-[${data.title ==='Amount'? '#8E0789' : 'rgba(7, 7, 7, 0.7)'}] flex justify-end py-2`}>{data?.detail}</td>
                   </tr>
@@ -503,26 +487,40 @@ const recieptData = [
                 </table>
               </div>
             </div>
+
             <div className="flex justify-end items-end h-[6vmax] transform translate-x-[50px] translate-y-[-80px] sm:translate-y-[-120px]">
               <article className="flex gap-4 font-semibold text-sm">
+
                 <button className=" w-[100px] h-[32px] rounded-md text-[#8E0789] font-[700]"
-                ood onClick={() => {
+                onClick={() => {
                   handleCaptureClick()
-                  setOpenModal(false)
+                  setOpenModel(false)
                 }}
                 >
                   Download
                 </button>
-                <button
-                  className="text-white bg-[#8E0789]  w-[80px] h-[32px] rounded-md text-sm "
-                  onClick={(e) => handleSubmit(e)}
-                >
-                  Share
-                </button>
+                
+                <RWebShare
+                  onClick={() => shareHandler()}
+                  data={{
+                    text: "Like humans, flamingos make friends for life",
+                    // url: imageUrl,
+                    title: "Flamingos",
+                  }}
+                  >
+                    <button
+                      className="text-white bg-[#8E0789]  w-[80px] h-[32px] rounded-md text-sm "
+                      // onClick={(e) => handleShare()}
+                    >
+                      Share
+                    </button>
+                  </RWebShare>
+                
               </article>
             </div>
         </div>
       )}
+          
         </div>
       </div>
     </div>

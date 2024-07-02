@@ -93,7 +93,7 @@ const DashboardLayout = () => {
     },
     {
       icon: <IraIcon />,
-      name: 'ira',
+      name: 'IRA',
       path: 'ira',
     },
     {

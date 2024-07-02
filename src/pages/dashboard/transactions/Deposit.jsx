@@ -204,7 +204,39 @@ const recieptData = [
     };
 
     
+  // ---------------- the share functions -------------------
   
+
+  const shareHandler = async () => {
+    const canvas = await html2canvas(document.querySelector('.receipt'));
+    const dataURL = canvas.toDataURL('image/png');
+    const longUrl = dataURL;
+    const shortUrl = shortenUrl(dataURL);
+    console.log(dataURL);
+    console.log(shortUrl);
+  };
+  
+  function shortenUrl(longUrl) {
+    // Use jsonstore.io to shorten the URL
+    const apiUrl = 'https://jsonstore.io/api/v1/shorten';
+    const headers = {
+      'Content-Type': 'application/json',
+    };
+    const data = {
+      'url': longUrl,
+    };
+    fetch(apiUrl, {
+      method: 'POST',
+      headers: headers,
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        return data.shortUrl;
+      });
+  }
+
+// ---------------- the share functions -------------------
 
     
 
@@ -440,10 +472,10 @@ const recieptData = [
                   <RWebShare
                     data={{
                       text: "Like humans, flamingos make friends for life",
-                      url: imageUrl,
-                      title: "Flamingos",
+                      url: <img src={SuccessIcon} alt=''/>,
+                      title: <img src={SuccessIcon} alt=''/>,
                     }}
-                    // onClick={() => handleShare()}
+                    onClick={() => shareHandler()}
                   >
                     <button
                       className="text-white bg-[#8E0789]  w-[80px] h-[32px] rounded-md text-sm "
