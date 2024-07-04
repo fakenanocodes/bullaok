@@ -10,7 +10,7 @@ export default function Notifications() {
   console.log(data);
   const navigate = useNavigate();
   return (
-    <div className="bg-white w-full xl:p-10 p-3  h-full flex flex-col ">
+    <div className="bg-white w-full xl:p-10 p-3  min-h-full flex flex-col ">
       <div
         onClick={() => navigate(-1)}
         className="flex items-center gap-7 justify-start w-12 py-7 text-black text-3xl cursor-pointer  "

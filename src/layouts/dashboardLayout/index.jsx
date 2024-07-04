@@ -70,7 +70,6 @@ const DashboardLayout = () => {
   const logoutOption = () => {
     cookie.remove(`bk_access`);
     cookie.remove(`bk_user`);
-    navigate('/');
     window.location.reload();
   };
 
@@ -253,8 +252,8 @@ const DashboardLayout = () => {
                     <>
                       {item.name === 'Logout' ? (
                         <div
-                          onClick={logoutOption}
-                          className="flex space-x-4 items-center hover:bg-white hover:text-[#575757] p-2"
+                          onClick={()=>logoutOption()}
+                          className="flex space-x-4 items-center cursor-pointer hover:bg-white hover:text-[#575757] p-2"
                         >
                           {item?.icon}
                           <span className="text-lg font-semibold ">

@@ -27,6 +27,7 @@ const Kyc = () => {
       navigate('/dashboard');
     }
   }, [data]);
+  // console.log('kyc data ==>',data);
 
   return (
     <div className="w-full h-full px-[50px] pt-[50px] pb-[30px]">

@@ -50,6 +50,7 @@ export default function ProfileComponent() {
     fileInputRef.current.click();
   };
 
+  console.log('profile==>',profile);
   const handleFileChange = (e) => {
     // Handle the selected file
     const selectedFile = e.target.files[0];
@@ -204,6 +205,7 @@ export default function ProfileComponent() {
             onClick={() => navigate(`/dashboard/${feature.link}`)}
             className="border flex justify-between items-center gap-2 border-[#8E0789]/20 p-4 x:px-[70px] cursor-pointer px-8"
           >
+            {console.log('features==>',feature)}
             <img src={feature.icon} alt="" />
             <div className=" w-[95%] ">
               <h2 className="font-bold xl:text-2xl text-sm">{feature.title}</h2>
