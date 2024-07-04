@@ -69,8 +69,9 @@ const DashboardLayout = () => {
 
   const logoutOption = () => {
     cookie.remove(`bk_access`);
-    cookie.remove(`bk_user`);
+    cookie.remove(`bk_user`);  
     window.location.reload();
+    navigate('/');
   };
 
   const icons = [
