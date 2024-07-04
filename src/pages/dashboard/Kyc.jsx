@@ -6,6 +6,7 @@ import KycPreview from '../../components/kycPages/KycPreview';
 import Personalinfo from '../../components/kycPages/Personalinfo';
 import Selfie from '../../components/kycPages/Selfie';
 import SuccessPage from '../../components/kycPages/SuccessPage';
+import { toast } from 'react-toastify';
 
 export const KycContext = createContext();
 
@@ -25,6 +26,11 @@ const Kyc = () => {
   useEffect(() => {
     if (data !== null) {
       navigate('/dashboard');
+      toast.success('KYC already verified', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: true,
+      });
     }
   }, [data]);
   // console.log('kyc data ==>',data);
