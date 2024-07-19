@@ -54,6 +54,7 @@ import Transfer from '../pages/dashboard/transactions/Transfer';
 import Withdrawal from '../pages/dashboard/transactions/Withdrawal';
 import NewDashboard from '../components/NewDashboard';
 import HistoryPage from '../pages/dashboard/transactions/History';
+import Learn from '../pages/ETF/Learn';
 const router = createBrowserRouter([
   {
     path: '*',
@@ -74,6 +75,10 @@ const router = createBrowserRouter([
   {
     path: '/who-we-are',
     Component: WhoWeAre,
+  },
+  {
+    path: '/learn',
+    Component: Learn,
   },
   {
     path: '/etf',

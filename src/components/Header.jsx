@@ -64,7 +64,7 @@ const Header = () => {
   const navigate = useNavigate();
   const cookie = new Cookies();
   const userDetails = cookie.get('bk_user');
-  console.log('USer', userDetails);
+  // console.log('USer', userDetails);
   const [isMenuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {

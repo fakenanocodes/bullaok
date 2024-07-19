@@ -22,14 +22,15 @@ export default function init() {
   }
 
   // Intercept responses and handle 401 errors
-  // axios.interceptors.response.use(
-  //   response => response,
-  //   error => {
-  //     if (error.response && error.response.status === 401) {
-  //       // Redirect to login page
-  //       window.location.href = '/login';
-  //     }
-  //     return Promise.reject(error);
-  //   }
-  // );
+  axios.interceptors.response.use(
+    response => response,
+    error => {
+      if (error.response && error.response.status === 401) {
+        removeCookies(["bk_access", "bk_refresh"]);
+        // Redirect to login page
+        window.location.href = '/login';
+      }
+      return Promise.reject(error);
+    }
+  );
 }

@@ -70,10 +70,11 @@ const DashboardLayout = () => {
   const logoutOption = () => {
     cookie.remove(`bk_access`);
     cookie.remove(`bk_user`);  
-    window.location.reload();
     navigate('/');
+    window.location.reload();
   };
 
+ 
   const icons = [
     { icon: <HomeIcon />, name: 'Home', path: '' },
     {
@@ -109,7 +110,7 @@ const DashboardLayout = () => {
     'https://django-bulloak-finance-production.up.railway.app/media/r.jpg'
       ? 'https://via.placeholder.com/300'
       : Api + profile?.image;
-  console.log(profileImage);
+  // console.log(profileImage);
 
   const style = {
     position: 'absolute',
