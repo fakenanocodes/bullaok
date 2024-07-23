@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
-import { images } from '../assets';
+import images from '../assets/etf_img.png';
 // import { image } from '../assets/team/teams';
 import axios from 'axios';
 import { useEffect } from 'react';
@@ -72,10 +72,10 @@ export default function Team() {
                 />
                 <div className=" border-2 p-2  border-[#8E0789] flex flex-col ">
                   <div className="flex px-3">
-                    <h3 className="mt-4 -ml-2 font-[montserrat] xl:text-xl lg:text-sm text-capitalize ">
+                    <h3 className="mt-4 -ml-2 font-[montserrat] xl:text-xl lg:text-sm capitalize ">
                       {items.position}
                     </h3>
-                    <p className="ml-auto font-[laviossa] lg:mt-3 mt-3  xl:text-xl lg:text-md">
+                    <p className="ml-auto font-[laviossa] lg:mt-3 mt-3  xl:text-xl lg:text-md capitalize">
                       {items.name}
                     </p>
                   </div>
@@ -115,6 +115,11 @@ export default function Team() {
                 className=" xl:w-3/4 w-full flex flex-col items-end mb-10"
                 key={index}
               >
+                <div
+                className='w-[100px] h-[150' 
+                >
+                  <img src={images} alt="" />
+                </div>
                 <div className="content border-2 w-full p-5 border-[#8E0789] ">
                   <p className="font-[laviossa] ">{broker.name}</p>
                   <div className="flex justify-between mt-5 ">

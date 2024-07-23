@@ -187,7 +187,7 @@ const Home = () => {
             </p>
 
             <button
-              onClick={() => navigate('/services/what-we-invest')}
+              onClick={() => navigate('/services/real-estate')}
               className="text-black font-semibold py-4 px-5 bg-transparent rounded-sm border-2 mt-7 border-[#41073F] uppercase"
             >
               Uncover more
@@ -226,7 +226,7 @@ const Home = () => {
             </p>
 
             <button
-              onClick={() => navigate('/services/what-we-invest')}
+              onClick={() => navigate('/stocks')}
               className="text-black font-semibold py-4 px-5 bg-transparent rounded-sm border-2 mt-7 border-[#41073F] uppercase"
             >
               Uncover more

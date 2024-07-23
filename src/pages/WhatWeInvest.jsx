@@ -1,4 +1,7 @@
 import Layout from '../components/Layout';
+import chart from '../assets/pie_chart.png'
+import about2 from '../assets/about2.png'
+import whatAboutBg from '../assets/whatAboutBg.png'
 
 export default function WhatWeInvest() {
   const chartData = [
@@ -33,7 +36,7 @@ export default function WhatWeInvest() {
     {
       icon: '/cannabis_icon.png',
       title: 'Cannabis',
-      link: '/invest',
+      link: '/services/cannabis',
     },
     {
       icon: '/stock_icon.png',
@@ -43,17 +46,17 @@ export default function WhatWeInvest() {
     {
       icon: '/estate_icon.png',
       title: 'Real Estate',
-      link: '/invest',
+      link: '/services/real-estate',
     },
     {
       icon: '/crypto_icon.png',
       title: 'Crypto',
-      link: '/invest',
+      link: '/services/crypto',
     },
     {
       icon: '/forex_icon.png',
       title: 'Forex Trading',
-      link: '/invest',
+      link: '/services/forex',
     },
     {
       icon: '/cannabis_icon.png',
@@ -82,12 +85,12 @@ export default function WhatWeInvest() {
 
       <main className="bg-[#fff]">
         <section
-          className="flex flex-col lg:flex-row px-8 items-center  justify-center md:gap-16 gap-8 py-[90px]   bg-cover bg-center bg-no-repeat  w-full relative"
+          className="flex flex-col sm:flex-row px-8 items-center  justify-center md:gap-16 gap-8 py-[90px]   bg-cover bg-center bg-no-repeat  w-full relative"
           style={{
-            backgroundImage: `url('invest_bg.png')`,
+            backgroundImage: `url(${whatAboutBg})`,
           }}
         >
-          <img src="chart.png" alt="" />
+          <img src={chart} alt="" className='w-[80%] sm:w-[calc(40%)]'/>
           <div className="flex flex-col gap-3">
             {chartData.map((item) => (
               <div className="flex  items-center gap-3" key={item.title}>
@@ -100,7 +103,7 @@ export default function WhatWeInvest() {
                 >
                   <circle cx="26.5" cy="26.5" r="26.5" fill={item.bg_color} />
                 </svg>
-                <div className="flex items-center lg:gap-8 gap-3  text-[#460644] font-bold font-[montserrat] lg:text-4xl text-lg">
+                <div className="flex items-center xl:gap-8 md:gap-5 gap-3  text-[#460644] font-bold font-[montserrat] xl:text-4xl md:text-2xl text-lg flex-nowrap">
                   <h2>{item.title}</h2> <span>{item.rate}</span>{' '}
                 </div>
               </div>
@@ -135,8 +138,12 @@ export default function WhatWeInvest() {
             </p>
           </div>
 
-          <div className="flex lg:flex-row flex-col-reverse justify-between items-center mt-6">
-            <p className="lg:w-1/3 w-full leading-loose lg:text-xl text-md font-[poppins]">
+          <div className="flex md:flex-row flex-col-reverse justify-between items-center mt-6"
+          style={{
+            backgroundImage: `url(${whatAboutBg})`,
+          }}
+          >
+            <p className="sm:w-1/2 2xl:w-1/3 w-full leading-loose xl:text-xl text-md font-[poppins]">
               After a client has successfully registered, verified and made a
               deposit into his or her account, we carefully allocate the funds
               and analyze the markets, define the most attractive asset
@@ -151,11 +158,11 @@ export default function WhatWeInvest() {
               of asset allocation, diversification, and regularly scheduled
               rebalancing in some portfolio management styles.
             </p>
-            <img src="chart_step.png" alt="" />
+            <img src={about2} alt="" className='w-[80%] sm:w-[calc(40%)]'/>
           </div>
         </section>
         <section
-          className="bg-cover py-8 bg-center bg-no-repeat"
+          className="flex flex-col items-center justify-center bg-cover py-8 bg-center bg-no-repeat"
           style={{
             backgroundImage: `url('invest_bg.png')`,
           }}
@@ -163,7 +170,7 @@ export default function WhatWeInvest() {
           <h2 className="text-[#8E0789] font-bold font-[laviosaa] text-center text-4xl">
             What we Invest in
           </h2>
-          <div className="grid lg:grid-cols-3 grid-cols-1 lg:w-2/3 w-full mx-auto gap-3 mt-7">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 grid-cols-1 lg:w-2/2 w-full mx-auto gap-3 mt-7">
             {invest.map((item, index) => (
               <div
                 key={index}

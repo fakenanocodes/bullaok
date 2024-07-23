@@ -1,4 +1,4 @@
-import services_banner_img from '../assets/services_banner_img.png';
+import services_banner_img from '../assets/eventBg.png';
 import MainLayout from '../components/MainLayout';
 import forexBg from '../assets/forexBg.png'
 import { useNavigate } from 'react-router-dom';
@@ -7,15 +7,14 @@ const Forex = () => {
   const navigate = useNavigate()
   return (
     <MainLayout>
-      <div className="bg-[#30022ECC] bg-opacity-10 relative w-full h-[30vh]">
+      <div className="bg-[#30022ECC] bg-opacity-10 relative w-full h-[15vh] md:h-[20vh] lg:h-[25vh]">
         <img
           src={services_banner_img}
           alt=""
           className="w-full h-full object-cover"
         />
-        <div className="absolute flex flex-col justify-center items-center gap-12 lg:gap-20 top-0 right-0 bottom-0 left-0 bg-[#30022ECC] bg-opacity-10 text-white pl-5 lg:pl-16 xl:pl-48">
-          <p className="laviossa w-full text-center text-[3rem] font-bold md:w-[30rem]">Forex</p>
-          {/* <p className="laviossa text-xl md:w-[30rem]">All about forex</p> */}
+        <div className="absolute flex items-center justify-center top-0 right-0 bottom-0 left-0 bg-[#30022ECC] bg-opacity-10 text-white pl-5 lg:pl-16 xl:pl-48">
+        <p className="laviossa w-full text-center text-[20px] md:text-[30px] lg:text-[3rem] font-bold whitespace-nowrap">Forex</p>
         </div>
       </div>
 
@@ -24,7 +23,7 @@ const Forex = () => {
         <img src={forexBg} alt="" />
         
         <div className='py-[3rem]'>
-          <p className="laviossa text-3xl font-semibold">What About Forex</p>
+          <p className="laviossa  text-xl md:text-3xl font-semibold">What About Forex</p>
           <p className="text-base lg:text-lg mt-[0.5rem]">
             Forex, short for foreign exchange, is the decentralized market where currencies are bought, sold, and exchanged at determined prices. With a daily trading volume surpassing $6 trillion, Forex stands as the largest and most liquid financial market worldwide.
           </p>
@@ -32,7 +31,7 @@ const Forex = () => {
 
         <div className="flex flex-col gap-10">
           <div>
-            <p className="font-poppins text-[25px] text-[#8E0789]">Here's why Forex trading investment deserves your attention</p>
+            <p className="font-poppins text-[20px] md:text-[25px] text-[#8E0789]">Here's why Forex trading investment deserves your attention</p>
             <div className='flex flex-col gap-3'>
               <div className='flex gap-2'>
                 <p className='font-bold'>1.</p>
@@ -62,7 +61,7 @@ const Forex = () => {
             
           </div>
 
-          <p className='text-[#8E0789] cursor-pointer my-[5rem] text-center'
+          <p className='text-[#8E0789] cursor-pointer my-[3rem] text-base text-[10px] font-poppins font-semibold text-center'
           onClick={()=>navigate('/register')}
           >Get Started Today</p>
           

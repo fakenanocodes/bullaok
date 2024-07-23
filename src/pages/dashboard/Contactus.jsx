@@ -1,10 +1,11 @@
 import { Alert } from '@mui/material';
 import axios from 'axios';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import HeroImage from '../../assets/contact/hero.png';
 import MobileHeroImage from '../../assets/contact/mobileHero.png';
 import MainLayout from '../../components/MainLayout';
 import { handleGenericError } from '../../config/mixin';
+import { scrollToTop } from '../../actions/utils';
 
 const Contactus = () => {
   const [value, setValue] = useState({
@@ -44,6 +45,10 @@ const Contactus = () => {
   //       setError(errMsg);
   //     });
   // };
+
+  useEffect(()=>{
+    scrollToTop();
+  },[])
   const sendMessage = async () => {
     setLoading(true);
     try {

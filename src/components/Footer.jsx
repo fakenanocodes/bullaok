@@ -7,9 +7,7 @@ import data from '../data/footer.json';
 import FooterItem from './common/FooterItem';
 export default function Footer() {
   const navigate = useNavigate();
-  console.log({ data });
   const { data: footer } = useSWR('/');
-  console.log('the footer==>',footer);
   const contact = [
     {
       email: footer?.site?.email,
@@ -18,32 +16,7 @@ export default function Footer() {
   ];
   return (
     <section className="w-full mx-auto py-9 px-5 lg:px-10 xl:px-20 bg-[#41073F]">
-      <div className="flex gap-4 mt-5 md:hidden text-[#fff] justify-center">
-        <BiLogoFacebook
-          style={{
-            fontSize: '30px',
-            border: '1px solid white',
-            padding: '4px',
-            borderRadius: '50%',
-          }}
-        />
-        <AiOutlineInstagram
-          style={{
-            fontSize: '30px',
-            border: '1px solid white',
-            padding: '4px',
-            borderRadius: '50%',
-          }}
-        />
-        <RiTwitterXLine
-          style={{
-            fontSize: '30px',
-            border: '1px solid white',
-            padding: '4px',
-            borderRadius: '50%',
-          }}
-        />
-      </div>
+      
       <div className="flex w-full items-start justify-between">
         <div className=" w-full  grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {data?.map((item, index) => (
@@ -61,16 +34,18 @@ export default function Footer() {
             <>
               <h2 className="font-bold">Contact</h2>
 
-              <li className="mt-4">{contact?.email}</li>
-              <li className="mt-4">{contact?.phone_number}</li>
-              <div className="md:flex gap-4 mt-5 hidden">
+              <li className="mt-4 hidden md:block">{footer?.site?.email}</li>
+              <li className="mt-4 hidden md:block">{footer?.site?.phone_number}</li>
+              <div className="flex flex-col items-center md:flex-row gap-4 mt-5">
                 <BiLogoFacebook
                   style={{
                     fontSize: '30px',
                     border: '1px solid white',
                     padding: '4px',
                     borderRadius: '50%',
+                    cursor: 'pointer'
                   }}
+                  onClick={()=>window.open(footer?.site?.facebook_url)}
                 />
                 <AiOutlineInstagram
                   style={{
@@ -78,7 +53,9 @@ export default function Footer() {
                     border: '1px solid white',
                     padding: '4px',
                     borderRadius: '50%',
+                    cursor: 'pointer'
                   }}
+                  onClick={()=>window.open(footer?.site?.instagram_url)}
                 />
                 <RiTwitterXLine
                   style={{
@@ -86,7 +63,9 @@ export default function Footer() {
                     border: '1px solid white',
                     padding: '4px',
                     borderRadius: '50%',
+                    cursor: 'pointer'
                   }}
+                  onClick={()=>window.open(footer?.site?.twitter_url)}
                 />
               </div>
             </>
