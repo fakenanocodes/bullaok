@@ -6,8 +6,11 @@ const TestimonialSwiperCard = ({ items }) => {
   
         <div className="  w-full  rounded-3xl py-5 px-5 md:px-24 flex flex-col justify-center">
           <div className=" text-base md:text-xl tracking-wide text-[#546988] ">
-              <p className="leading-loose font-[roboto] text-[#000]"> <BsQuote className="text-5xl" /> {items.text}</p>
-              <span className="w-32 block  ms-auto font-bold text-[#8E0789] ">{items.name}</span>
+              <p className="leading-loose font-[roboto] text-[#000]"> <BsQuote className="text-5xl" /> {items.testimony}</p>
+              <div className="flex justify-end items-center gap-5">
+                <span className="block  ms-auto font-bold text-[#8E0789] ">{items.name}</span>
+                <img src={items?.image} alt="" className="w-[50px] h-[50px] rounded-xl" />
+              </div>
           </div>
         </div>
       </div>

@@ -33,33 +33,35 @@ const TeamMember = () => {
             className="w-full h-full object-cover"
           />
           <div className="absolute flex flex-col justify-center items-start gap-2 lg:gap-20 top-0 right-0 bottom-0 left-0 bg-[#30022ECC] bg-opacity-10 text-white pl-5 lg:pl-16">
-            <p className="laviossa text-2xl mt-7 md:mt-10 md:text-[3rem] font-bold md:w-[30rem]">
+            <p className="laviossa text-2xl mt-7 md:mt-10 md:text-[3rem] font-bold md:w-[30rem] capitalize">
               Detailed Page
             </p>
-            <p className="laviossa  md:w-[30rem]">
+            <p className="laviossa  md:w-[30rem] capitalize">
               {singleTeamMember.name}
             </p>
           </div>
         </div>
         <div className="mt-[15px] p-1 md:p-16">
-          <p className="laviossa md:text-[2rem] font-bold md:w-[30rem] mb-2 md:mb-10">
+          <p className="laviossa md:text-[2rem] font-bold md:w-[30rem] mb-2 md:mb-10 capitalize">
             {singleTeamMember.name}
           </p>
           <div>
             <div className="flex md:gap-12 gap-3">
-              <div className="w-[60%] xl:w-[70%]">
-                <img src={singleTeamMember.image} alt="President" />
+              <div className="w-[60%] md:w-[50%] xl:w-[40%]">
+                <img src={singleTeamMember.image} alt="President"
+                className='w-full object-cover'
+                />
               </div>
               <div className="w-[40%] mt-5 md:mt-14 xl:mt-28 md:text-[26px] text-xs md:leading-10">
-                <div className=" bg-[#5d1e5b] h-1 md:h-2 -ml-12  md:-ml-44 mb-3 md:mb-10 "></div>
-                <p className="md:mt-16">
+                <div className=" bg-[#5d1e5b] h-1 md:h-2 -ml-12  md:-ml-44 mb-3 md:mb-10"></div>
+                <p className="md:mt-16 capitalize text-[20px] font-[500]">
                   {singleTeamMember.bio}
                 </p>
               </div>
             </div>
             <div>
               <p className="mt-2 md:mt-7 text-xs md:text-[26px] md:leading-10">
-                {teamMember[subpage - 1]?.paragraph2}
+                {/* {teamMember[subpage - 1]?.paragraph2} */}
               </p>
             </div>
             <div className="mt-5 md:mt-20 w-[60%]">

@@ -1,14 +1,7 @@
 import useSWR from 'swr';
 
 const FooterItem = ({ faq, about, terms }) => {
-  // const about =
-  console.log({ faq });
   const { data: footer } = useSWR('/');
-  console.log(footer);
-  // const contact = [{
-  //   email: footer?.site?.email,
-  //   phone: footer?.site?.phone_number,
-  // }];
   return (
     <div className=" items-center text-[#fff] ">
       <ul className="">

@@ -1,13 +1,13 @@
 import { AiOutlineInstagram } from 'react-icons/ai';
 import { BiLogoFacebook } from 'react-icons/bi';
 import { RiTwitterXLine } from 'react-icons/ri';
+import { useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
 import data from '../data/footer.json';
 import FooterItem from './common/FooterItem';
 export default function Footer() {
-  console.log({ data });
+  const navigate = useNavigate();
   const { data: footer } = useSWR('/');
-  console.log(footer);
   const contact = [
     {
       email: footer?.site?.email,
@@ -16,32 +16,7 @@ export default function Footer() {
   ];
   return (
     <section className="w-full mx-auto py-9 px-5 lg:px-10 xl:px-20 bg-[#41073F]">
-      <div className="flex gap-4 mt-5 md:hidden text-[#fff] justify-center">
-        <BiLogoFacebook
-          style={{
-            fontSize: '30px',
-            border: '1px solid white',
-            padding: '4px',
-            borderRadius: '50%',
-          }}
-        />
-        <AiOutlineInstagram
-          style={{
-            fontSize: '30px',
-            border: '1px solid white',
-            padding: '4px',
-            borderRadius: '50%',
-          }}
-        />
-        <RiTwitterXLine
-          style={{
-            fontSize: '30px',
-            border: '1px solid white',
-            padding: '4px',
-            borderRadius: '50%',
-          }}
-        />
-      </div>
+      
       <div className="flex w-full items-start justify-between">
         <div className=" w-full  grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {data?.map((item, index) => (
@@ -59,16 +34,18 @@ export default function Footer() {
             <>
               <h2 className="font-bold">Contact</h2>
 
-              <li className="mt-4">{contact?.email}</li>
-              <li className="mt-4">{contact?.phone_number}</li>
-              <div className="md:flex gap-4 mt-5 hidden">
+              <li className="mt-4 hidden md:block">{footer?.site?.email}</li>
+              <li className="mt-4 hidden md:block">{footer?.site?.phone_number}</li>
+              <div className="flex flex-col items-center md:flex-row gap-4 mt-5">
                 <BiLogoFacebook
                   style={{
                     fontSize: '30px',
                     border: '1px solid white',
                     padding: '4px',
                     borderRadius: '50%',
+                    cursor: 'pointer'
                   }}
+                  onClick={()=>window.open(footer?.site?.facebook_url)}
                 />
                 <AiOutlineInstagram
                   style={{
@@ -76,7 +53,9 @@ export default function Footer() {
                     border: '1px solid white',
                     padding: '4px',
                     borderRadius: '50%',
+                    cursor: 'pointer'
                   }}
+                  onClick={()=>window.open(footer?.site?.instagram_url)}
                 />
                 <RiTwitterXLine
                   style={{
@@ -84,7 +63,9 @@ export default function Footer() {
                     border: '1px solid white',
                     padding: '4px',
                     borderRadius: '50%',
+                    cursor: 'pointer'
                   }}
+                  onClick={()=>window.open(footer?.site?.twitter_url)}
                 />
               </div>
             </>
@@ -145,7 +126,9 @@ export default function Footer() {
         expiration date. Losses can potentially exceed the initial required
         deposit. You need to complete an options trading application and get
         approval on eligible accounts. Please read the{' '}
-        <a href="#">Characteristics and Risks of Standardized Options</a> before
+        <span className='text-[rgba(101,101,230,0.9)] hover:text-[rgba(101,101,230,0.7)] cursor-pointer'
+        onClick={()=>navigate('/learn')}
+         >Characteristics and Risks of Standardized Options</span> before
         trading options.
         <br />
         <br />
@@ -167,7 +150,9 @@ export default function Footer() {
         accounts and IRAs that trade U.S. listed securities via mobile devices,
         desktop or website products. A $0.55 per contract fee applies for
         certain options trades. Relevant regulatory and exchange fees may apply.
-        Please refer to our <a href="#">Fee Schedule</a> for more details.
+        Please refer to our <span className='text-[rgba(101,101,230,0.9)] hover:text-[rgba(101,101,230,0.7)] cursor-pointer'
+        onClick={()=>navigate('/contact')}
+         href="#">Fee Schedule</span>  for more details.
       </p>
       <hr />
       <p className="ml-auto w-fit text-sm text-[#fff] mt-8">

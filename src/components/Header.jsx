@@ -11,6 +11,7 @@ import BluetoothIcon from './utils/icons/BluetoothIcon';
 import PhoneIcon from './utils/icons/PhoneIcon';
 import DropDownMenu from './utils/reusables/DropDownMenu';
 import MobileDropdown from './utils/reusables/MobileDropdown';
+import useSWR from 'swr';
 
 const navItems = [
   {
@@ -64,8 +65,15 @@ const Header = () => {
   const navigate = useNavigate();
   const cookie = new Cookies();
   const userDetails = cookie.get('bk_user');
-  console.log('USer', userDetails);
+  // console.log('USer', userDetails);
   const [isMenuOpen, setMenuOpen] = useState(false);
+  
+  const { data: headerArr } = useSWR('/');
+  
+  const obj = {
+    email: headerArr?.site?.email,
+    number: headerArr?.site?.phone_number
+  }
 
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
@@ -99,23 +107,29 @@ const Header = () => {
           <DropDownMenu key={idx} item={item} />
         ))}
         <p
-          onClick={() => navigate('/')}
-          // onClick={() => window.open('https://news.bulloak.org', '_blank')}
+          // onClick={() => navigate('/')}
+          onClick={() => window.open('https://news.bulloakltd.com', '_blank')}
           className="font-semibold text-white text-sm cursor-pointer"
         >
           News
         </p>
       </div>
       <div className="xl:flex md:flex hidden items-center gap-7">
-        <div onClick={() => navigate('/history')} className="cursor-pointer">
+        {/* <div onClick={() => navigate('/history')} className="cursor-pointer">
           <BluetoothIcon />
-        </div>
-        <div onClick={() => navigate('/about')} className="cursor-pointer">
+        </div> */}
+        <a 
+        // onClick={() => navigate('/about')}
+         href={`tel:${obj?.number}`}
+         className="cursor-pointer">
           <PhoneIcon />
-        </div>
-        <div onClick={() => navigate('/about')} className="cursor-pointer">
+        </a>
+        <a 
+        // onClick={() => navigate('/about')} 
+        href={`mailto:${obj?.email}`}
+        className="cursor-pointer">
           <EmailIcon />
-        </div>
+        </a>
 
         <button
           onClick={() => {
@@ -161,24 +175,26 @@ const Header = () => {
               ))}
 
               <div className="flex mt-4 flex-wrap text-white items-center gap-7">
-                <div
+                {/* <div
                   onClick={() => navigate('/history')}
                   className="cursor-pointer"
                 >
                   <BluetoothIcon />
-                </div>
-                <div
-                  onClick={() => navigate('/about')}
+                </div> */}
+                <a
+                  // onClick={() => navigate('/about')}
+                  href={`tel:${obj?.number}`}
                   className="cursor-pointer"
                 >
                   <PhoneIcon />
-                </div>
-                <div
-                  onClick={() => navigate('/about')}
+                </a>
+                <a
+                  // onClick={() => navigate('/about')}
+                  href={`mailto:${obj?.email}`}
                   className="cursor-pointer"
                 >
                   <EmailIcon />
-                </div>
+                </a>
               </div>
               <button
                 onClick={() => {
