@@ -1,5 +1,7 @@
 import { BsArrowRight } from 'react-icons/bs';
+import { useNavigate } from 'react-router-dom';
 export default function Header() {
+  const navigate = useNavigate()
   return (
     <section
       className="flex flex-col text-white  px-3 lg:px-8 items-center justify-center md:gap-16 gap-8 py-9  bg-cover bg-center bg-no-repeat  w-full relative"
@@ -16,7 +18,12 @@ export default function Header() {
         <p className="text-center lg:text-start px-8 lg:px-0">
           A direct line of communication between investors and companies.
         </p>
-        <button className="flex items-center text-[#fff] lg:p-4 px-5 py-2 lg:px-0 lg:py-0 rounded-xl font-bold mt-6 ">
+        <button className="flex items-center text-[#fff] lg:p-4 px-5 py-2 lg:px-0 lg:py-0 rounded-xl font-bold mt-6 "
+        onClick={() => {
+          navigate('/contact');
+          scrollToTop();
+        }}
+        >
           {' '}
           <span> Get in touch today!</span>{' '}
           <BsArrowRight style={{ color: '#fff' }} />

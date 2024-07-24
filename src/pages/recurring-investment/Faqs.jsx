@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { AiFillMinusCircle } from 'react-icons/ai';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
 import { Collapse, initTE } from 'tw-elements';
+import angle from '../../assets/angleLeft.svg'
 export default function Faqs() {
   initTE({ Collapse });
   const [isCollapsed, setIsCollapsed] = useState(true);
@@ -35,9 +36,9 @@ export default function Faqs() {
                 How do you fund recurring investment schedules?
                 <span className="-mr-1 ml-auto h-5 w-5 shrink-0 rotate-[-180deg] fill-[#336dec] transition-transform duration-200 ease-in-out group-[[data-te-collapse-collapsed]]:mr-0 group-[[data-te-collapse-collapsed]]:rotate-0 group-[[data-te-collapse-collapsed]]:fill-[#212529] motion-reduce:transition-none dark:fill-blue-300 dark:group-[[data-te-collapse-collapsed]]:fill-white">
                   {isCollapsed ? (
-                    <AiFillMinusCircle />
+                    <img src={angle} alt="" className='rotate-[-90deg]'/>
                   ) : (
-                    <BsFillPlusCircleFill />
+                    <img src={angle} alt="" className='rotate-[90deg]'/>
                   )}
                 </span>
               </button>
@@ -83,9 +84,9 @@ export default function Faqs() {
                 At what frequency can you set a recurring investment?
                 <span className="-mr-1 ml-auto h-5 w-5 shrink-0 rotate-[-180deg] fill-[#336dec] transition-transform duration-200 ease-in-out group-[[data-te-collapse-collapsed]]:mr-0 group-[[data-te-collapse-collapsed]]:rotate-0 group-[[data-te-collapse-collapsed]]:fill-[#212529] motion-reduce:transition-none dark:fill-blue-300 dark:group-[[data-te-collapse-collapsed]]:fill-white">
                   {isCollapsed ? (
-                    <AiFillMinusCircle />
+                    <img src={angle} alt="" className='rotate-[-90deg]'/>
                   ) : (
-                    <BsFillPlusCircleFill />
+                    <img src={angle} alt="" className='rotate-[90deg]'/>
                   )}
                 </span>
               </button>
@@ -127,9 +128,9 @@ export default function Faqs() {
                 What should you know before you start?
                 <span className="-mr-1 ml-auto h-5 w-5 shrink-0 rotate-[-180deg] fill-[#336dec] transition-transform duration-200 ease-in-out group-[[data-te-collapse-collapsed]]:mr-0 group-[[data-te-collapse-collapsed]]:rotate-0 group-[[data-te-collapse-collapsed]]:fill-[#212529] motion-reduce:transition-none dark:fill-blue-300 dark:group-[[data-te-collapse-collapsed]]:fill-white">
                   {isCollapsed ? (
-                    <AiFillMinusCircle />
+                    <img src={angle} alt="" className='rotate-[-90deg]'/>
                   ) : (
-                    <BsFillPlusCircleFill />
+                    <img src={angle} alt="" className='rotate-[90deg]'/>
                   )}
                 </span>
               </button>

@@ -74,7 +74,6 @@ const Header = () => {
     email: headerArr?.site?.email,
     number: headerArr?.site?.phone_number
   }
-  console.log('headering =>',obj);
 
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
@@ -108,8 +107,8 @@ const Header = () => {
           <DropDownMenu key={idx} item={item} />
         ))}
         <p
-          onClick={() => navigate('/')}
-          // onClick={() => window.open('https://news.bulloak.org', '_blank')}
+          // onClick={() => navigate('/')}
+          onClick={() => window.open('https://news.bulloakltd.com', '_blank')}
           className="font-semibold text-white text-sm cursor-pointer"
         >
           News

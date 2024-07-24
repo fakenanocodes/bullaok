@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { BiSolidChevronLeft } from 'react-icons/bi';
 import { FaAngleRight } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
@@ -6,12 +6,23 @@ import { images } from '../assets';
 import Layout from '../components/Layout';
 import TestimonialsSwiper from '../components/TestimonialsSwiper';
 import CoursesCard from '../components/utils/cards/CoursesCard';
-export default function Education({ courses, header, testimonials }) {
+import { header} from '../data/education';
+import useSWR from 'swr';
+import { scrollToTop } from '../actions/utils';
+export default function Education() {
   const [showMoreContent, setShowMoreContent] = useState(false);
+  const {data: courses} = useSWR('/course/courses/')
+  const {data: testimonials} = useSWR('/testimony/list/')
 
   const toggleMoreContent = () => {
     setShowMoreContent(!showMoreContent);
   };
+  // const routeHandler = (item)=>{
+  //   scrollToTop()
+  //   if(item === ''){
+  //     window.open('')
+  //   }
+  // }
   return (
     <Layout>
       <header
@@ -52,11 +63,14 @@ export default function Education({ courses, header, testimonials }) {
                       key={index}
                       className="flex flex-col items-center  gap-5"
                     >
-                      <img
-                        src={item?.icon}
-                        className="xl:w-12  lg:w-12 h-auto  "
-                        alt=""
-                      />
+                      <Link to={item?.link}>
+                        <img
+                          src={item?.icon}
+                          className="xl:w-12  lg:w-12 h-auto  "
+                          alt=""
+                          onClick={()=>scrollToTop()}
+                        />
+                      </Link>
                       <p className="font-[montserrat] lg:text-2xl  ">
                         {item?.text}
                       </p>

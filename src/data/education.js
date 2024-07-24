@@ -5,14 +5,17 @@ export const header = [
   {
     icon: icons.video,
     text: 'Watch a video',
+    link: 'https://youtube.com'
   },
   {
     icon: icons.message,
     text: 'Send a message',
+    link:'/contact'
   },
   {
     icon: icons.invest,
     text: 'Invest Now',
+    link: '/register'
   },
 ];
 

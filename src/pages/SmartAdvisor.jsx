@@ -13,6 +13,7 @@ import smartbg from '../assets/smart-advisor_bg.png';
 import MainLayout from '../components/MainLayout';
 
 import '../CSS/main.css';
+import { Link } from 'react-router-dom';
 
 const SmartAdvisor = () => {
   const navigate = useNavigate();
@@ -250,10 +251,14 @@ const SmartAdvisor = () => {
             <p className="text-[3.5rem] font-bold text-white max-xl:text-[3rem]  max-lg:text-[2.5rem] max-md:text-[2rem] max-sm:text-[1.5rem]">
               What Is A Robo-Advisor?
             </p>
-            <button className="flex gap-3 mt-5 bg-[#D4B716] text-black px-4 py-3 items-center justify-center cursor-pointer text-lg text-center font-open-sans-semibold font-semibold leading-16 rounded-[0.5rem] max-sm:text-[1.2rem]">
-              <span> Learn More</span>
-              <span>&rarr;</span>
-            </button>
+            <Link to={'https://news.bulloakltd.com/'}>
+              <button className="flex gap-3 mt-5 bg-[#D4B716] text-black px-4 py-3 items-center justify-center cursor-pointer text-lg text-center font-open-sans-semibold font-semibold leading-16 rounded-[0.5rem] max-sm:text-[1.2rem]"
+              // onClick={()=>window.open('https://news.bulloakltd.com/')}
+              >
+                <span> Learn More</span>
+                <span>&rarr;</span>
+              </button>
+            </Link>
           </div>
         </div>
 

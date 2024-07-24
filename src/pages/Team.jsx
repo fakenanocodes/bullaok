@@ -1,19 +1,21 @@
 import { Link, useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
-import images from '../assets/etf_img.png';
+// import images from '../assets/stock_swiper_img1.png';
+import images from '../assets/presido.png';
 // import { image } from '../assets/team/teams';
 import axios from 'axios';
 import { useEffect } from 'react';
 import Layout from '../components/Layout';
 import { teamData } from '../data/team';
 import { useState } from 'react';
+import imageData from '../assets/oil.png'
 // brokerData;
 
 export default function Team() {
   const { data: brokers } = useSWR('/broker/brokers/');
   const navigate = useNavigate();
   const[teamMembersData,setTeamMembersData]=useState([]);
-  const { data: teamMembers } = useSWR('/team/members/all/');
+  // const { data: teamMembers } = useSWR('/team/members/all/');
 
 
   const handleTeam = (id) => {
@@ -27,6 +29,7 @@ export default function Team() {
     fetcher();
   }, []); 
 
+  console.log('broker =>',brokers);
   return (
     <Layout>
       <header
@@ -62,21 +65,20 @@ export default function Team() {
             and support to clients like you.
           </h2>
 
-          <div className="grid xl:grid-cols-2 md:grid-cols-2  w-full mx-auto  gap-5">
-            {teamMembersData.map((items, index) => (
-              <div className="item  " key={index}>
-                <img
-                  src={items.image}
-                  className="lg:ml-6 ml-3 -mb-8 w-[200px] aspect-auto "
-                  alt=""
-                />
-                <div className=" border-2 p-2  border-[#8E0789] flex flex-col ">
+          <div 
+          className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))]  w-full mx-auto  gap-1">
+            {teamMembersData?.map((items, index) => (
+              <div className="item  relative rounded-[15px] overflow-hidden h-[250px] cursor-pointer" 
+              key={items?.id}
+              onClick={() => handleTeam(items?.id)}
+              >
+                <div className=" border- p-2 rounded-[15px]  border-[] flex flex-col absolute top-0 left-0 w-full h-full bg-[rgba(255,100,50,0)] z-20 ImageHover">
                   <div className="flex px-3">
                     <h3 className="mt-4 -ml-2 font-[montserrat] xl:text-xl lg:text-sm capitalize ">
-                      {items.position}
+                      {/* {items.position} */}
                     </h3>
-                    <p className="ml-auto font-[laviossa] lg:mt-3 mt-3  xl:text-xl lg:text-md capitalize">
-                      {items.name}
+                    <p className="font-[laviossa]  xl:text-xl lg:text-md text-white capitalize absolute bottom-3 left-3 w-20">
+                      {items.name} markline
                     </p>
                   </div>
                   <button
@@ -84,9 +86,13 @@ export default function Team() {
                     href="#"
                     className="ml-auto px-3 text-[#8E0789] lg:text-md font-[montserrat]"
                   >
-                    Read more
+                    {/* Read more */}
                   </button>
                 </div>
+                <img
+                  src={items?.image}
+                  className="w-full h-full absolute top-0 left-0 object-cover z-[0] aspect-auto transition-all duration-700 object-center"
+                />
               </div>
             ))}
           </div>
@@ -109,18 +115,18 @@ export default function Team() {
             </h2>
           </div>
 
-          <div className="grid xl:grid-cols-2 md:grid-cols-2 w-full  mx-auto gap-5 xl:py-[90px]">
+          <div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))]  w-full  mx-auto gap-2 xl:py-[90px]">
             {brokers?.map((broker, index) => (
               <div
-                className=" xl:w-3/4 w-full flex flex-col items-end mb-10"
+                className=" flex flex-col items-end"
                 key={index}
               >
                 <div
-                className='w-[100px] h-[150' 
+                className='w-[120px] h-[150px] translate-x-[-30px] translate-y-[30px] border-4 border-white' 
                 >
-                  <img src={images} alt="" />
+                  <img src={images} alt="" className='w-full h-full object-cover object-center' />
                 </div>
-                <div className="content border-2 w-full p-5 border-[#8E0789] ">
+                <div className="content border-2 w-full p-5 pt-10 border-[#8E0789] ">
                   <p className="font-[laviossa] ">{broker.name}</p>
                   <div className="flex justify-between mt-5 ">
                     <div className="flex flex-col ">
