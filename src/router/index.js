@@ -58,6 +58,7 @@ import Learn from '../pages/ETF/Learn';
 import RealEstate from '../pages/RealEstate';
 import Cannabis from '../pages/Cannabis';
 import Crypto from '../pages/Crypto';
+import FAQ from '../components/FAQ';
 const router = createBrowserRouter([
   {
     path: '*',
@@ -70,6 +71,10 @@ const router = createBrowserRouter([
   {
     path: '/history',
     Component: History,
+  },
+  {
+    path: '/faq',
+    Component: FAQ,
   },
   {
     path: '/contact',
@@ -238,7 +243,6 @@ const router = createBrowserRouter([
         path: 'notification',
         Component: Notifications,
       },
-
       {
         path: 'card-application',
         Component: CardApplicationSetup,

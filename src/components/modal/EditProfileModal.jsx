@@ -3,8 +3,10 @@ import { Alert, CircularProgress, ClickAwayListener } from '@mui/material';
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { mutate } from 'swr';
 import * as yup from 'yup';
 import { handleGenericError } from '../../config/mixin';
+import { toast } from 'react-toastify';
 
 const schema = yup.object().shape({
   full_name: yup.string(),
@@ -20,10 +22,10 @@ export default function EditProfileModal({ setOpen, profile }) {
   const [success, setSuccess] = useState(null);
 
   const {
-    getValues,
     register,
     reset,
     handleSubmit,
+    getValues,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -32,36 +34,37 @@ export default function EditProfileModal({ setOpen, profile }) {
     mode: 'onChange',
   });
 
-  const onSubmit = async () => {
-    const data = getValues();
-    console.log(data);
+  const onSubmit = async (data) => {
+    // const data = getValues();
+    console.log('data logged ==', JSON.stringify(data));
 
     try {
       setIsLoading(true);
       const response = await axios.put('/user/profile/', data);
-      console.log(response);
+      console.log('Array data = >',response);
       setIsLoading(false);
-      setSuccess('Profile update Successful');
-
-      reset();
-      console.log(response);
+      toast.success('Profile update Successful');
+      mutate('user/');
+      // reset();
+      // console.log(response);
     } catch (err) {
       setIsLoading(false);
-      const errMsg = handleGenericError(err);
-      setError(errMsg);
+      console.log(err.message);
+      const errMsg = handleGenericError(err.message);
+      toast.error(errMsg);
     }
   };
 
-  setTimeout(() => {
-    setError(null);
-    setSuccess(null);
-  }, 4000);
+  // setTimeout(() => {
+  //   setError(null);
+  //   setSuccess(null);
+  // }, 4000);
   return (
     <div className=" fixed top-0 rounded-lg left-0 w-full h-full flex  justify-center items-center bg-[#000000b3]">
       <ClickAwayListener onClickAway={() => setOpen(false)}>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="bg-white  w-[90%] p-9 md:w-5/6 max-w-[700px] p-4 my-6  rounded-lg relative"
+          className="bg-white  w-[90%] p-9 md:w-5/6 max-w-[700px] p-4 my-6  rounded-lg overflow-auto h-[90vh]"
         >
           {success && <Alert severity="success">{success}</Alert>}
           {error && <Alert severity="error">{error}</Alert>}
@@ -140,12 +143,13 @@ export default function EditProfileModal({ setOpen, profile }) {
             <button
               type="submit"
               // onClick={}
-              className="bg-[#8E0789] text-white p-2 px-4 rounded-[15px]"
+              className="bg-[#8E0789] text-white p-2 px-4 rounded-[15px] w-[150px]"
+              // onClick={() => onSubmit}
             >
               {isLoading ? (
                 <CircularProgress sx={{ color: 'white' }} size={20} />
               ) : (
-                'Save Changes '
+                'Save Changes'
               )}
             </button>
           </div>

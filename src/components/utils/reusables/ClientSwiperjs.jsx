@@ -1,15 +1,15 @@
 import { Swiper } from 'swiper/react';
 // Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
+// import 'swiper/css';
+// import 'swiper/css/navigation';
+// import 'swiper/css/pagination';
 // import required modules
-import { Autoplay, Navigation, Pagination } from 'swiper';
+// import { Autoplay, Navigation, Pagination } from 'swiper';
 
 const ClientSwiperjs = ({ children }) => {
   return (
     <div className="md:p-[0.5rem] p-0">
-      <Swiper
+      {/* <Swiper
         autoplay={{
           delay: 3500,
           disableOnInteraction: false,
@@ -38,7 +38,7 @@ const ClientSwiperjs = ({ children }) => {
         className="mySwiper px-[0.5rem] pt-[3rem] pb-[1rem] md:pb-[2.5rem]"
       >
         <>{children}</>
-      </Swiper>
+      </Swiper> */}
     </div>
   );
 };

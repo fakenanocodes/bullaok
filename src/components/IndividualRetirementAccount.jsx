@@ -75,10 +75,16 @@ const IndividualRetirementAccount = () => {
         </article>
         <div className="">
           <article className=" flex flex-col sm:flex-row  gap-4 font-semibold text-sm text-white">
-            <button className=" w-full sm:w-[184px] h-[52px] rounded-md border border-[#8E0789] hover:bg-[#8E07894D] ">
+            <button 
+            className=" w-full sm:w-[184px] h-[52px] rounded-md border border-[#8E0789] hover:bg-[#8E07894D]"
+            onClick={()=>navigate('/dashboard/withdraw')}
+            >
               Withdraw
             </button>
-            <button className="text-white bg-[#8E0789]  w-full sm:w-[184px] h-[52px] rounded-md text-sm  ">
+            <button 
+            className="text-white bg-[#8E0789]  w-full sm:w-[184px] h-[52px] rounded-md text-sm "
+            onClick={()=>navigate('/dashboard/deposit')}
+            >
               Deposit
             </button>
           </article>
@@ -104,22 +110,13 @@ const IndividualRetirementAccount = () => {
             Month
           </button>
         </div>
-        <div className="flex flex-col sm:flex-row justify-between items-center relative h-fit py-3 md:px-10 overflow-hidden">
+        <div className="flex flex-col sm:flex-row items-center justify-center relative h-fit py-3 md:px-10 overflow-hidden">
             <div className='w-fit h-fit flex flex-col items-center pb-4 justify-center transform translate-y-[-20%] md:translate-y-[-10%]relative'>
               <div className='w-[12rem] h-[9.5rem] md:w-[12rem] md:h-44'>
                 <Doughnut data={doughnut} options={option} className='h-full'/> 
               </div>
 
               <div className='flex justify-between w-full absolute bottom-0'>
-                {/* {doughnutData.map((obj,index)=>{
-                  return (<div key={index}>
-                    <div className='flex gap-2 items-center'>
-                      <p className={`w-[10px] h-[10px] bg-[${obj.color}] rounded-[50%]`}></p>
-                      <p className='font-[300] text-[13px]'>{obj.title}</p>
-                    </div>
-                    <p className='font-[500] text-[13px]'>{obj.percentage}</p>
-                  </div>)
-                })} */}
                 <div>
                   <div className='flex gap-2 items-center'>
                     <p className='w-[10px] h-[10px] bg-[#f324ec] rounded-[50%]'></p>
@@ -138,9 +135,9 @@ const IndividualRetirementAccount = () => {
               {/* The percentage at th middle */}
               <span className='absolute text-white font-[600] top-[60%] transform translate-x-[-40%] translate-y-[-40%] left-[40%] md:left-[50%] md:translate-x-[-50%]'>75%</span>
             </div>
-            <button className="  w-full sm:w-[40%] h-[47px] rounded-md border-[0.75px] border-[#8C89B480] text-[#AEABD8]  px-2 text-sm">
+            {/* <button className="  w-full sm:w-[40%] h-[47px] rounded-md border-[0.75px] border-[#8C89B480] text-[#AEABD8]  px-2 text-sm">
               View all activity
-            </button>
+            </button> */}
         </div>
       </div>
       <div className=" bg-[#000000] p-4  rounded-[12px] mt-4">
