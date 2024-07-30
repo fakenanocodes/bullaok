@@ -44,6 +44,7 @@ export default function ProfileComponent() {
   const fileInputRef = useRef(null);
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedFile, setSelectedFIle] = useState(null);
+  console.log('my data == >', data);
 
   const handleImageClick = () => {
     // Trigger the hidden file input when the image is clicked
@@ -64,7 +65,7 @@ export default function ProfileComponent() {
   };
   const handleImageUpload = (e) => {
     e.preventDefault();
-    console.log(selectedImage);
+    // console.log(selectedImage);
     const formData = new FormData();
     if (selectedFile) {
       formData.append('image', selectedFile);
@@ -127,9 +128,10 @@ export default function ProfileComponent() {
               <>{'Upload Profile'}</>
             )}
           </button>
-          <h2 className="text-3xl font-semibold">{profile?.full_name}</h2>
+          <h2 className="text-3xl font-semibold capitalize">{profile?.full_name}</h2>
           <div className="flex mt-4 text-[30px] gap-10 text-[#8E0789]">
             <FaFacebook
+              className="cursor-pointer"
               onClick={() => window.open(profile?.facebook, '_blank')}
             />
             <FaInstagram
@@ -137,6 +139,7 @@ export default function ProfileComponent() {
               onClick={() => window.open(profile?.instagram, '_blank')}
             />
             <FaTwitter
+              className="cursor-pointer"
               onClick={() => window.open(profile?.twitter, '_blank')}
             />
           </div>
@@ -144,7 +147,7 @@ export default function ProfileComponent() {
 
         <div className="border flex gap-9 flex-col xl:w-2/4 lg:w-2/4 w-full  gap-1 border-[#8E0789]/20 rounded-lg xl:p-8 p-3">
           <div className="flex items-center justify-between">
-            <div className="text-[#222222]/90">
+            <div className="text-[#222222]/90 capitalize">
               <h2 className="font-bold text-xl text-[#222222]/90 mb-3">
                 Your Name
               </h2>
@@ -169,7 +172,8 @@ export default function ProfileComponent() {
               {!user?.email ? (
                 <h2 className="text-black">No information</h2>
               ) : (
-                <h2>{user?.email}</h2>
+                <h2 className='lowercase'>
+                  {user?.email}</h2>
               )}
             </div>
           </div>
@@ -186,7 +190,7 @@ export default function ProfileComponent() {
             </div>
           </div>
           <div className="flex justify-between items-center">
-            <div className="text-[#222222]/90">
+            <div className="text-[#222222]/90 capitalize">
               <h2 className="font-bold text-xl mb-3 ">Address</h2>
               {!profile?.address ? (
                 <h2 className="text-black">No information</h2>

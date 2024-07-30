@@ -4,17 +4,17 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 // import required modules
-import { Autoplay, Navigation, Pagination } from 'swiper';
+// import { Autoplay, Navigation, Pagination } from 'swiper';
 
 const Swiperjs = ({ children }) => {
   return (
     <div className="md:p-[0.5rem] p-0">
       <Swiper
         spaceBetween={30}
-        autoplay={{
-          delay: 2500,
-          disableOnInteraction: false,
-        }}
+        // autoplay={{
+        //   delay: 2500,
+        //   disableOnInteraction: false,
+        // }}
         breakpoints={{
           // when window width is >= 640px
           640: {
@@ -33,7 +33,7 @@ const Swiperjs = ({ children }) => {
           clickable: true,
         }}
         navigation={true}
-        modules={[Autoplay, Pagination, Navigation]}
+        // modules={[Autoplay, Pagination, Navigation]}
         className="mySwiper px-[0.5rem] pt-[3rem] pb-[1rem] md:pb-[2.5rem]"
       >
         <>{children}</>

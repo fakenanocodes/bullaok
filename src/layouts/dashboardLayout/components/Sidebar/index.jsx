@@ -9,27 +9,26 @@ import LogoutIcon from '../../../../components/utils/icons/LogoutIcon';
 const DashboardSidebar = ({ logout }) => {
   const [activeIcon, setActiveIcon] = useState(null);
   const icons = [
-    { icon: <HomeIcon />, name: 'home', path: '' },
-    { icon: <InvestmentIcon />, name: 'investment', path: 'card-application' },
-    { icon: <PlantIcon />, name: 'plans', path: 'plan' },
+    { icon: <HomeIcon />, name: 'Home', path: '' },
+    { icon: <InvestmentIcon />, name: 'Investment', path: 'card-application' },
+    { icon: <PlantIcon />, name: 'Plans', path: 'plan' },
     {
-      icon: <IraIcon />,
-      name: 'ira',
-      path: 'ira',
+      icon: <IraIcon />,name: 'Ira',path: 'ira',
     },
-    { icon: <LogoutIcon />, name: 'logout' },
+    { icon: <LogoutIcon />, name: 'Logout' },
   ];
 
   return (
     <div className="p-7 bg-black bg-opacity-[34%] absolute top-[30%] flex-col hidden lg:flex items-center space-y-9 justify-center border rounded-xl ">
       {icons?.map((item) => (
         <>
-          {item.name === 'logout' ? (
+          {item.name === 'Logout' ? (
             <div
               onClick={() => {
                 setActiveIcon(item.name === activeIcon ? null : item.name);
                 logout && logout();
               }}
+              title={item?.name}
               className={`cursor-pointer ${
                 item.name === activeIcon ? 'shadow-[#B444B0] shadow-xl' : ''
               }`}
@@ -42,6 +41,7 @@ const DashboardSidebar = ({ logout }) => {
                 onClick={() =>
                   setActiveIcon(item.name === activeIcon ? null : item.name)
                 }
+                title={item?.name}
                 className={`cursor-pointer ${
                   item.name === activeIcon ? 'shadow-[#B444B0] shadow-xl' : ''
                 }`}

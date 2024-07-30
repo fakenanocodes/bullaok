@@ -19,6 +19,7 @@ import useAuthentication from '../../hooks/useAuthentication';
 import DashboardSidebar from './components/Sidebar';
 import IraIcon from '../../assets/icons/dashboard/IraIcon';
 import Profile from '../../assets/icons/dashboard/Profile';
+// import { overflow } from 'html2canvas/dist/types/css/property-descriptors/overflow';
 
 let menus = [null, 'Make a', 'Pending', 'Completed', 'All'];
 
@@ -52,11 +53,9 @@ const DashboardLayout = () => {
     // if () {
     //   menus = menus.filter((menu) => menu !== '');
     // }
-    console.log(valueArray[0]);
     if (valueArray[0] === 'Make a') {
       navigate(`/dashboard/${valueArray[1].toLowerCase()}`);
     } else if (valueArray[0] !== '') {
-      console.log(valueArray[0]);
       setOpen(true);
       setCurrentNavigationMenu(valueArray);
     }
@@ -110,19 +109,19 @@ const DashboardLayout = () => {
     'https://django-bulloak-finance-production.up.railway.app/media/r.jpg'
       ? 'https://via.placeholder.com/300'
       : Api + profile?.image;
-  // console.log(profileImage);
 
   const style = {
     position: 'absolute',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '60%',
-    height: 600,
+    // width: '60%',
+    height: '95vh',
     bgcolor: 'background.paper',
     borderRadius: 5,
     boxShadow: 24,
     p: 4,
+    overflow: 'hidden',
   };
 
   const closeModal = () => {
@@ -139,7 +138,8 @@ const DashboardLayout = () => {
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <Box sx={style}>
+          <Box sx={style}
+          className='w-[95vw] md:w-[60%]'>
             <div className="font-poppins flex flex-col space-y-4">
               <div className="flex justify-between font-medium">
                 {currentNavigationMenu[0]} {currentNavigationMenu[1]}
@@ -163,10 +163,13 @@ const DashboardLayout = () => {
             <img
               src={logo}
               alt=""
-              className="bg-white p-2 w-14 h-14"
+              title='Home'
+              className="bg-white p-2 w-14 h-14 cursor-pointer"
               onClick={() => navigate('/')}
             />
-            <button onClick={toggleMenu}>
+            <button 
+            onClick={toggleMenu}
+            title='Menu'>
               <MenuIcon className="text-black" fontSize="large" />
             </button>
           </div>
@@ -174,7 +177,10 @@ const DashboardLayout = () => {
             onClick={() => navigate('/')}
             className="pt-4 hidden lg:flex cursor-pointer"
           >
-            <img src={logo} alt="" className="bg-white p-2 w-14 h-14" />
+            <img src={logo} 
+            alt="" 
+            title='Home'
+            className="bg-white p-2 w-14 h-14" />
           </div>
           <DashboardSidebar logout={logoutOption} />
         </div>
@@ -194,7 +200,7 @@ const DashboardLayout = () => {
                   }}
                 >
                   <p className="bg-white px-3 sm:px-6 rounded-[4px] py-1 hidden sm:inline">
-                    <span className='hidden sm:inline'>Transaction </span>History
+                    <span className='hidden lg:inline'>Transaction </span>History
                   </p>
                 </span>
                 {options?.map((option, index) => (
@@ -219,7 +225,7 @@ const DashboardLayout = () => {
                 
               </div>
           
-              <div className="hidden sm:block pr-2">
+              <div className="hidden lg:block pr-2" title='Profile'>
                 <Avatar
                   src={profileImage}
                   sx={{ height: 70, width: 70 }}

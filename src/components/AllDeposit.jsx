@@ -19,7 +19,7 @@ const AllDeposit = ({ open }) => {
 
    return (
     <div>
-      <Button onClick={() => {}}>Open modal</Button>
+      {/* <Button onClick={() => {}}>Open modal</Button>
       <Modal
         open={open}
         onClose={() => {}}
@@ -34,7 +34,7 @@ const AllDeposit = ({ open }) => {
             Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
           </Typography>
         </Box>
-      </Modal>
+      </Modal> */}
     </div>
   );
 };

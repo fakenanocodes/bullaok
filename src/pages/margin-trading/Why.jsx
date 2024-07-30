@@ -19,7 +19,7 @@ export default function Why() {
       </div>
       <WhyTable tableData={tableData} />
 
-      <div className="grid lg:grid-cols-3 grid-cols-1 gap-3 lg:divide-x divide-y lg:divide-y-0   lg:w-2/4 w-full  mt-9 mx-auto">
+      <div className="grid lg:grid-cols-3 grid-cols-1 gap-3 lg:divide-x divide-y lg:divide-y-0  w-full  mt-9 mx-auto">
         {data.map((item, index) => (
           <div
             key={index}
