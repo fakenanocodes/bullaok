@@ -87,11 +87,11 @@ const Transfer = () => {
       setOpenModal(false);
     }
     setTransferDetails();
-    // setTransferDetails({
-    //   ...transferDetails,
-    //   email: '',
-    //   usdt_amount: 0,
-    // });
+    setTransferDetails({
+      ...transferDetails,
+      email: '',
+      usdt_amount: 0,
+    });
   };
 
   
