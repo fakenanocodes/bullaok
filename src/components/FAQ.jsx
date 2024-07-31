@@ -1,10 +1,10 @@
 import about_bg from '../assets/about/about_bg.png';
-import info_img from '../assets/about/info_img.png';
-import info_img2 from '../assets/about/info_img2.png';
 import Maindashboard_layoutt from '../components/MainLayout';
 import { useState } from 'react';
+import useSWR from 'swr';
 export default function FAQ() {
-  let name = 'Johson'
+  const {data: faq} = useSWR('/faqs')
+  let objArr = []
   
   return (
       <Maindashboard_layoutt>
@@ -14,14 +14,38 @@ export default function FAQ() {
             <p className="laviossa text-[3rem] font-bold md:w-[30rem]">
               FAQ<sub>s</sub>
             </p>
-            <p className="laviossa text-xl md:w-[30rem]">
+            <p className="laviossa text-xl md:w-[30rem] tracking-[1px] text-center sm:text-left">
               Here’s what people ask about us. 
             </p>
           </div>
+        </div >
+        <div className='p-10 flex flex-col gap-5'>
+          {faq?.length === 0
+          ?
+          <div className='h-[40vh] flex justify-center items-center'>
+            <i className='text-[grey] text-[18px] tracking-[3px]'>No data</i>
+          </div>
+          :
+          faq?.map((item,index)=>(
+            <div className=''>
+            <p className='font-[600] font-[Montserrat]'><span className=' text-[35px] laviossa text-[#8E0789] capitalize'>{item?.question[0]}</span><span>{item?.question.slice(1)}</span></p>
+            <p className='font-[Montserrat] mt-5 border-[1.4px] border-[rgb(215,71,210)] p-5'>{item?.answer}</p>
+          </div>
+          ))}
         </div>
-        <p className={`before:content-["${name[0]}"]  before:font-[600] before:text-[35px]`}>{name.slice(1)}</p>
-        {}
-        <div className='h-10'></div>
+
+        <section className="px-5 lg:px-12 xl:px-40 py-20 mt-[5rem] flex flex-col items-center gap-7 bg-[#8e07894d]">
+        <p className="laviossa text-3xl text-center leading-normal text-[#8E0789]">
+          Trusted by some of the biggest companies
+        </p>
+
+        <div className="flex items-center justify-center gap-7">
+          <div className="h-16 w-16 rounded-[50%] bg-[#8E0789]"></div>
+          <div className="h-16 w-16 rounded-[50%] bg-[#8E0789]"></div>
+          <div className="h-16 w-16 rounded-[50%] bg-[#8E0789]"></div>
+          <div className="h-16 w-16 rounded-[50%] bg-[#8E0789]"></div>
+        </div>
+      </section>
       </Maindashboard_layoutt>
   );
 }
