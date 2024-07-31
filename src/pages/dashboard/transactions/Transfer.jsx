@@ -8,10 +8,12 @@ import SuccessIcon from '../../../components/utils/icons/SuccessIcon';
 import MobileTransferTable from './MobileTransferTab';
 import downloadjs from 'downloadjs';
 import html2canvas from 'html2canvas';
+import ReceiptModal from '../../../components/modal/ReceiptModal';
 
 const Transfer = () => {
   const [openModal, setOpenModal] = useState(false);
   const [successPage, setSuccessPage] = useState(false);
+  const [open, close] = useState(false);
   const [showMobileTable] = useState(false);
   const { data: transfers } = useSWR(`/transfer/`);
   const { data: user } = useSWR(`user/`)
@@ -36,7 +38,7 @@ const Transfer = () => {
     });
   };
 
-  console.log(transferDetails)
+  // console.log(transferDetails)
 
 
   const inputDetails = [
@@ -62,6 +64,7 @@ const Transfer = () => {
 
   const formSubmissionHandler = async (e) => {
     e.preventDefault()
+    setOpenModal(false)
     try {
       const response = await axios.post('/transfer/', transferDetails);
       console.log('RESPONSE', response);
@@ -71,7 +74,7 @@ const Transfer = () => {
           <p>{response}</p>
         </pre>
       );
-      setSuccessPage(true);
+    setSuccessPage(!successPage);
     } catch (error) {
       if (error)
         toast.error(
@@ -84,43 +87,14 @@ const Transfer = () => {
       setOpenModal(false);
     }
     setTransferDetails();
-    setTransferDetails({
-      ...transferDetails,
-      email: '',
-      usdt_amount: 0,
-    });
+    // setTransferDetails({
+    //   ...transferDetails,
+    //   email: '',
+    //   usdt_amount: 0,
+    // });
   };
 
-  const recieptData = [
-    {
-      title: 'Sender Email Address',
-      detail: 'johndoe@gmail.com',
-    },
-    {
-      title: 'Transaction Date',
-      detail: '24/05/2024, 13:22:14',
-    },
-    {
-      title: 'Transaction Type',
-      detail: 'Transfer',
-    },
-    {
-      title: 'Destination Email Address',
-      detail: 'johndoe@gmail.com',
-    },
-    {
-      title: 'Amount',
-      detail: '0.00 USD',
-    },
-  ];
-
-    // Function for downloading Receipts
-
-    const handleCaptureClick = async () => {
-      const canvas = await html2canvas(document.querySelector('.receipt'));
-      const dataURL = canvas.toDataURL('image/png');
-      downloadjs(dataURL, 'download.png', 'image/png');
-    };
+  
 
   return (
     <section className=" h-[100%] bg-white no-scrollbar  text-gray-700 relative overflow-y-scroll rounded-[20px] font-poppins">
@@ -234,6 +208,7 @@ const Transfer = () => {
                     type="password"
                     className="block w-full border rounded-[10px] focus:border-[#8E0789] my-2 placeholder:#76809D"
                     placeholder="*****************"
+                    required
                   />
                 </label>
                 <label className="text-[#454E68] text-sm flex  font-medium cursor-pointer gap-2 items-center">
@@ -260,62 +235,14 @@ const Transfer = () => {
 
       {/* The transaction reciept  */}
       {successPage && (
-        <div className=" fixed top-0 left-0 w-full h-full flex flex-col  justify-center items-center bg-[#000000b3]">
-          {/* Recipt box */}
-          <div className="bg-white w-[95%] h-fit-content sm:w-[60%] md:w-3/5 max-w-[380px] p-4 my-6 relative rounded-[15px] receipt pb-20">
-            <div className="flex justify-center">
-              <SuccessIcon />
-            </div>
-            <div className="flex flex-col items-center gap-2">
-              <div className="flex flex-col items-center">
-                <p className="font-[500] text-black">Transaction Success!</p>
-                <p className="text-[13px]">
-                  Your transfer has been successfully done
-                </p>
-              </div>
-
-              <p className="text-[12px]">Total Transfer</p>
-              <p className="text-black font-[500] flex gap-2">
-                <span className="text-[#8E0789]">0.00</span>BTC
-              </p>
-
-              {/* Transaction details */}
-              <table>
-                {recieptData?.map((data, index) => (
-                  <tr key={index} className="h-fit p-0 font-[500]">
-                    <td className="text-[12px] py-2 ">{data?.title}</td>
-                    <td
-                      className={`text-[12px] text-[${data.title === 'Amount' ? '#8E0789' : 'rgba(7, 7, 7, 0.7)'}] flex justify-end py-2`}
-                    >
-                      {data?.detail}
-                    </td>
-                  </tr>
-                ))}
-              </table>
-            </div>
-          </div>
-
-          <div className="flex justify-end items-end h-[6vmax] transform translate-x-[50px] translate-y-[-80px] sm:translate-y-[-120px]">
-            <article className="flex gap-4 font-semibold text-sm">
-              <button
-                className=" w-[100px] h-[32px] rounded-md text-[#8E0789] font-[700]"
-                // onClick={() => setOpenModal(false)}
-                onClick={() => {
-                  handleCaptureClick()
-                  setOpenModal(false)
-                }}
-              >
-                Download
-              </button>
-              <button
-                className="text-white bg-[#8E0789]  w-[80px] h-[32px] rounded-md text-sm "
-                onClick={(e) => handleSubmit(e)}
-              >
-                Share
-              </button>
-            </article>
-          </div>
-        </div>
+        <ReceiptModal
+          type={'email'}
+          address1={transferDetails.email}
+          address2={transferDetails.email}
+          amount={transferDetails.usdt_amount}
+          open={successPage}
+          closeFunc={setSuccessPage}
+      />
       )}
     </section>
   );

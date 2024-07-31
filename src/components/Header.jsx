@@ -48,7 +48,7 @@ const navItems = [
       { name: 'Invest', route: '/invest' },
       { name: 'Investment Packages', route: '/investment-packages' },
       { name: 'Recurring Investment', route: '/services/recurring-investment' },
-      { name: 'IRA', route: '/dashboard/ira' },
+      { name: 'IRA', route: '/ira' },
       { name: 'Fractional Shares', route: '/fractional-shares' },
       { name: 'Corporate Connect', route: '/corporate-connect' },
     ],

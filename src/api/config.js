@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { Cookies } from 'react-cookie';
 
+
 const cookies = new Cookies();
 const token = cookies.get('bk_access');
 
@@ -26,7 +27,9 @@ export default function init() {
     response => response,
     error => {
       if (error.response && error.response.status === 401) {
-        removeCookies(["bk_access", "bk_refresh"]);
+        // removeCookies(["bk_access", "bk_refresh"]);
+        cookies.remove("bk_access")
+        cookies.remove("bk_refresh")
         // Redirect to login page
         window.location.href = '/login';
       }
