@@ -1,7 +1,9 @@
 import trade_icon from '../../../assets/trade_icon.svg';
 import ForwardArrowIcon from '../icons/ForwardArrowIcon';
+import { useNavigate } from 'react-router-dom';
 
 const IraMediumCard = ({ card }) => {
+  const navigate = useNavigate()
   return (
     <div className="w-[20rem] lg:w-[22rem] rounded-3xl bg-gray-50 shadow-gray-100 flex flex-col justify-between p-5 lg:py-10 gap-5 min-h-[20rem] max-h-[20rem]">
       <div className="bg-[#8E0789] p-2 w-max rounded-[50%]">
@@ -12,7 +14,12 @@ const IraMediumCard = ({ card }) => {
         {card?.description}
       </p>
 
-      <div className="flex items-center gap-7 p-2 justify-between cursor-pointer rounded-3xl bg-[#8E0789] text-white w-[14rem] md:w-max lg:w-[14.5rem]">
+      <div className="flex items-center gap-7 p-2 justify-between cursor-pointer rounded-3xl bg-[#8E0789] text-white w-[14rem] md:w-max lg:w-[14.5rem]"
+      onClick={() => {
+        navigate('/contact');
+        scrollToTop();
+      }}
+      >
         <p className="text-sm md:text-xs lg:text-sm font-semibold">
           {`Open a ${card?.title}`}
         </p>
