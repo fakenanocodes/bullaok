@@ -123,13 +123,11 @@ const Header = () => {
           <BluetoothIcon />
         </div> */}
         <a 
-        // onClick={() => navigate('/about')}
          href={`tel:${obj?.number}`}
          className="cursor-pointer">
           <PhoneIcon />
         </a>
-        <a 
-        // onClick={() => navigate('/about')} 
+        <a  
         href={`mailto:${obj?.email}`}
         className="cursor-pointer">
           <EmailIcon />
@@ -158,7 +156,7 @@ const Header = () => {
         // onClick={toggleMenu}
       >
         <div
-          className={`absolute inset-y-0 right-0 w-80 bg-[#0C0000] overflow-y-scroll min-h-[100vh] shadow-lg transform transition-transform duration-300 ease-in-out ${
+          className={`absolute inset-y-0 right-0 w-80 bg-[#0C0000] overflow-y-scroll min-h-[100vh] lg:hidden shadow-lg transform transition-transform duration-300 ease-in-out ${
             isMenuOpen ? 'translate-x-0' : 'translate-x-full'
           }`}
         >
@@ -177,6 +175,14 @@ const Header = () => {
                   userDetails={userDetails}
                 />
               ))}
+              
+              <p
+                // onClick={() => navigate('/')}
+                onClick={() => window.open('https://news.bulloakltd.com', '_blank')}
+                className="font-semibold text-white text-sm cursor-pointer pl-4"
+              >
+                News
+              </p>
 
               <div className="flex mt-4 flex-wrap text-white items-center gap-7">
                 {/* <div
