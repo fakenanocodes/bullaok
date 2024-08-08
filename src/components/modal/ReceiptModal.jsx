@@ -4,7 +4,7 @@ import downloadjs from 'downloadjs';
 import html2canvas from 'html2canvas';
 import { RWebShare } from "react-web-share"
 
-const ReceiptModal = ({address1,address2,type,open,closeFunc,amount}) => {
+const ReceiptModal = ({address1,address2,type,open,closeFunc,amount,walletType,usdtAmount}) => {
     
   const receiptRef = useRef(null)
 
@@ -52,10 +52,10 @@ const ReceiptModal = ({address1,address2,type,open,closeFunc,amount}) => {
     const time = new Date().toLocaleTimeString()
 
     const recieptData = [
-        {
+      (address1 && {
           title : `${type === 'Withdrawal'? `${type} Wallet` : type === "deposit"? "Debtor's Wallet" : "sender email"} Address`,
           detail : `${address1?.slice(0,6)} . . . ${address1?.slice(-6)}`
-        },
+        }),
         {
           title : "Transaction Date",
           detail : `${date}, ${time}`
@@ -108,12 +108,12 @@ const ReceiptModal = ({address1,address2,type,open,closeFunc,amount}) => {
             </div>
             <div className='flex flex-col items-center gap-2'>
             <div className='flex flex-col items-center'>
-                <p className='font-[500] text-black'>Transaction Success!</p>
+                <p className='font-[500] text-black'>INVOICE</p>
                 <p className='text-[13px]'>Your {type} has been successfully done</p>
             </div>
 
             <p className='text-[12px]'>Total {type}</p>
-            <p className='text-black font-[500] flex gap-2'><span className='text-[#8E0789]'>{amount}</span>BTC</p>
+            <p className='text-black font-[500] flex gap-2'><span className='text-[#8E0789]'>{usdtAmount}</span>{walletType}</p>
 
             {/* Transaction details */}
             <table>

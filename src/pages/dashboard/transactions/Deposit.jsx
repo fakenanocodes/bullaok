@@ -36,7 +36,7 @@ const Deposit = () => {
 
   console.log('WALLET ADD', depositAmount);
 
-  // console.log(depositAmount);
+  console.log('Helo =>',deposits);
   let walletMock = {
     BTC: walletAddress?.bitcoin_address,
     LTC: walletAddress?.litecoin_address,
@@ -353,12 +353,14 @@ const Deposit = () => {
       {/* Transaction reciept */}
       {successPage && (
         <ReceiptModal
-        type={'deposit'}
-        address1={'nhfjeknhrhhnfjjfjjejfejejjijrjjirgn'}
+        type={'Deposit'}
+        // address1={'nhfjeknhrhhnfjjfjjejfejejjijrjjirgn'}
         address2={wallet || walletMock?.BTC}
         amount={amount}
+        usdtAmount={usdtAmount}
         open={successPage}
         closeFunc={setSuccessPage}
+        walletType = {walletTypes}
       />
       )}
     </div>
