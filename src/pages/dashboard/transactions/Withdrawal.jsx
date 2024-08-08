@@ -12,7 +12,6 @@ import useSWR from 'swr';
 import ReceiptModal from '../../../components/modal/ReceiptModal';
 
 const Withdrawal = () => {
-  const receiptRef = useRef(null)
   const [openModal, setOpenModal] = useState(false);
   const [successPage, setSuccessPage] = useState(false);
   // const { data: withdraws } = useSWR(`/withdraw/`);
@@ -371,12 +370,22 @@ const Withdrawal = () => {
           type={'Withdrawal'}
           address1={'nhfjeknhrhhnfjjfjjejfejejjijrjjirgn'}
           address2={receiverDetail?.walletAddress}
-          amount={receiverDetail?.amount}
+          amount={receiverDetail?.amount.toString()}
+          usdtAmount={usdtEquivalent * receiverDetail?.amount}
           open={successPage}
           closeFunc={setSuccessPage}
+          walletType = {withdrawalAccount?.value}
         />
       )
       }
+       {/* type={'deposit'}
+        address1={'nhfjeknhrhhnfjjfjjejfejejjijrjjirgn'}
+        address2={wallet || walletMock?.BTC}
+        amount={amount}
+        usdtAmount={usdtAmount}
+        open={successPage}
+        closeFunc={setSuccessPage}
+        walletType = {walletTypes} */}
           
         </div>
       </div>
