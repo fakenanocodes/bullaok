@@ -13,6 +13,10 @@
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 
   .ImageHover:hover ~ img{
     width: calc(100% + 50px);
@@ -40,10 +44,7 @@
   /* * {
     border: solid red;
   } */
-  .no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
+  
   .gradient-div {
     width: 100%; /* Set the width as per your requirement */
     height: 100%; /* Set the height as per your requirement */
