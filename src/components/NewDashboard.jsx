@@ -12,7 +12,8 @@ const NewDashboard = () => {
   const navigate = useNavigate();
   const { data: transaction } = useSWR('/transaction/');
   const { data: balances } = useSWR('/user/balances/');
-
+  const { data: profiles } = useSWR('/user/');
+ 
   const accountAnalyticsData = useMemo(
     () => [
       {
@@ -215,7 +216,8 @@ const NewDashboard = () => {
     <section className="p-4">
       <article>
         <h2 className="font-semibold text-[25px] pb-2">Dashboard</h2>
-        <h5>Welcome Back, John Doe</h5>
+        <h5 className='capitalize'>Welcome Back, {profiles?.profile?.full_name
+        }</h5>
         <p className="text-sm text-[#A6A6A6]">
           Here’s what’s happening on your account.
         </p>
