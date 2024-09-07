@@ -33,10 +33,16 @@ export default function Stock() {
           </button>
           <p className="lg:text-lg mt-5 lg:mt-0 text-xs">
             See{' '}
-            <a href="#" className="underline">
+            <span 
+              className="underline text-[rgba(101,101,230,0.9)] hover:text-[rgba(101,101,230,0.7)] cursor-pointer"
+              onClick={() => {
+                navigate('/contact');
+                scrollToTop();
+              }}
+            >
               {' '}
               Term & Conditions
-            </a>{' '}
+            </span>{' '}
             for more information regarding eligibility.
           </p>
         </div>

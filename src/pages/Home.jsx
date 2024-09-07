@@ -35,7 +35,10 @@ const Home = () => {
             An investment company with a proficient digital presence
           </p>
           <button
-            onClick={() => navigate('/services/what-we-invest')}
+            onClick={() => {
+              navigate('/services/what-we-invest')
+              scrollToTop()
+            }}
             className="text-black font-semibold py-4 px-5 bg-[#D4B716] rounded-sm uppercase"
           >
             Uncover more
@@ -187,7 +190,10 @@ const Home = () => {
             </p>
 
             <button
-              onClick={() => navigate('/services/real-estate')}
+              onClick={() => {
+                navigate('/services/real-estate')
+                scrollToTop()
+              }}
               className="text-black font-semibold py-4 px-5 bg-transparent rounded-sm border-2 mt-7 border-[#41073F] uppercase"
             >
               Uncover more
@@ -226,7 +232,10 @@ const Home = () => {
             </p>
 
             <button
-              onClick={() => navigate('/stocks')}
+              onClick={() => {
+                navigate('/stocks')
+                scrollToTop()
+              }}
               className="text-black font-semibold py-4 px-5 bg-transparent rounded-sm border-2 mt-7 border-[#41073F] uppercase"
             >
               Uncover more
@@ -269,7 +278,10 @@ const Home = () => {
             </p>
 
             <button
-              onClick={() => navigate('/services/what-we-invest')}
+              onClick={() => {
+                navigate('/services/what-we-invest')
+                scrollToTop()
+              }}
               className="text-black font-semibold py-4 px-5 bg-transparent rounded-sm border-2 mt-7 border-[#41073F] uppercase"
             >
               Uncover more

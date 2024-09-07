@@ -124,12 +124,14 @@ const Header = () => {
         </div> */}
         <a 
          href={`tel:${obj?.number}`}
-         className="cursor-pointer">
+         className="cursor-pointer"
+         title='Customer line'>
           <PhoneIcon />
         </a>
         <a  
         href={`mailto:${obj?.email}`}
-        className="cursor-pointer">
+        className="cursor-pointer"
+        title='Email'>
           <EmailIcon />
         </a>
 
@@ -143,6 +145,9 @@ const Header = () => {
           {userDetails ? 'Dashboard' : 'Get Started'}
         </button>
       </div>
+      
+      
+      {/* small screens  */}
       <button
         onClick={toggleMenu}
         className="xl:hidden lg:hidden cursor-pointer flex"

@@ -1,7 +1,10 @@
+import { useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
 
 const FooterItem = ({ faq, about, terms }) => {
-  const { data: footer } = useSWR('/');
+  console.log(faq);
+  const navigate = useNavigate()
+  
   return (
     <div className=" items-center text-[#fff] ">
       <ul className="">
@@ -9,7 +12,7 @@ const FooterItem = ({ faq, about, terms }) => {
           <>
             <h2 className="font-bold">FAQ</h2>
             {faq.categories.map((item, index) => (
-              <li key={index} className="mt-4 lg:text-lg text-xs">
+              <li onClick={()=>navigate('#')} key={index} className="mt-4 lg:text-lg text-xs">
                 {item}
               </li>
             ))}
@@ -22,7 +25,7 @@ const FooterItem = ({ faq, about, terms }) => {
           <>
             <h2 className="font-bold">About</h2>
             {about.categories.map((item, index) => (
-              <li key={index} className="mt-4 lg:text-lg text-xs">
+              <li onClick={()=>navigate('#')} key={index} className="mt-4 lg:text-lg text-xs">
                 {item}
               </li>
             ))}
@@ -34,7 +37,7 @@ const FooterItem = ({ faq, about, terms }) => {
           <>
             <h2 className="font-bold">Terms</h2>
             {terms.categories.map((item, index) => (
-              <li key={index} className="mt-4">
+              <li onClick={()=>navigate('#')} key={index} className="mt-4">
                 {item}
               </li>
             ))}

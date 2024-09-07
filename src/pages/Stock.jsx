@@ -76,7 +76,12 @@ const Stock = () => {
         <p className="my-[3rem] text-center font-medium">
           In addition to our low fees, Bulloak also offers competitive margin
           rates.{' '}
-          <span className="text-[#FFD700] cursor-pointer">
+          <span 
+             onClick={() => {
+              navigate('/contact');
+              scrollToTop();
+            }}
+            className="text-[#FFD700] cursor-pointer">
             See more pricing
           </span>
         </p>
@@ -92,7 +97,10 @@ const Stock = () => {
               <p className="text-xl tracking-wider font-medium">
                 When You Open and Fund a New Account
               </p>
-              <p className="text-[#3e3e3e] text-sm underline cursor-pointer">
+              <p
+                onClick={() => window.open('https://news.bulloakltd.com', '_blank')} 
+                className="text-[#3e3e3e] text-sm underline cursor-pointer"
+              >
                 See more about the free stock bonus
               </p>
             </div>

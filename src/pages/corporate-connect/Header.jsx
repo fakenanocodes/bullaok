@@ -30,7 +30,10 @@ export default function Header() {
         </button>
       </div>
       <div className="flex gap-6 justify-center items-center w-full lg:flex-row flex-col lg:w-3/4">
-        <div className="flex items-center gap-4 bg-gray-300 p-3 rounded-xl bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-50 ">
+        <div 
+            className="flex items-center gap-4 bg-gray-300 p-3 rounded-xl bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-50 cursor-pointer"
+            onClick={() => window.open('https://news.bulloakltd.com/')}
+          >
           <img
             src="investors.png"
             className="lg:w-24 w-18 h-16 lg:h-auto"
@@ -44,7 +47,10 @@ export default function Header() {
             </p>
           </div>
         </div>
-        <div className="flex items-center gap-4 bg-gray-300 p-3 rounded-xl bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-50">
+        <div 
+          className="flex items-center gap-4 bg-gray-300 p-3 rounded-xl bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-50 cursor-pointer"
+          onClick={() => window.open('https://news.bulloakltd.com/')}
+        >
           <img
             src="investors.png"
             className="lg:w-24 w-18 h-16  lg:h-auto"

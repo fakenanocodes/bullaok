@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 // import addfund_img from '../assets/addfund_img.png';
 // import advisorservice_img from '../assets/advisorservice_img.png';
@@ -14,9 +15,11 @@ import MainLayout from '../components/MainLayout';
 
 import '../CSS/main.css';
 import { Link } from 'react-router-dom';
+import { CircularProgress } from '@mui/material';
 
 const SmartAdvisor = () => {
   const navigate = useNavigate();
+  const [isloading,setIsLoading] = useState(false)
   return (
     <div>
       <MainLayout>
@@ -251,14 +254,21 @@ const SmartAdvisor = () => {
             <p className="text-[3.5rem] font-bold text-white max-xl:text-[3rem]  max-lg:text-[2.5rem] max-md:text-[2rem] max-sm:text-[1.5rem]">
               What Is A Robo-Advisor?
             </p>
-            <Link to={'https://news.bulloakltd.com/'}>
-              <button className="flex gap-3 mt-5 bg-[#D4B716] text-black px-4 py-3 items-center justify-center cursor-pointer text-lg text-center font-open-sans-semibold font-semibold leading-16 rounded-[0.5rem] max-sm:text-[1.2rem]"
-              // onClick={()=>window.open('https://news.bulloakltd.com/')}
-              >
+
+            <button 
+              className="flex gap-3 mt-5 bg-[#D4B716] text-black w-[150px] h-[50px] items-center justify-center cursor-pointer text-lg text-center font-open-sans-semibold font-semibold leading-16 rounded-[0.5rem] max-sm:text-[1.2rem]"
+              onClick={() => window.open('https://news.bulloakltd.com/')}
+            >
+              
+              {
+              isloading
+              ?<CircularProgress sx={{ color: 'white' }} thickness={6} size={18} />
+              :<>
                 <span> Learn More</span>
                 <span>&rarr;</span>
-              </button>
-            </Link>
+              </>}
+            </button>
+
           </div>
         </div>
 

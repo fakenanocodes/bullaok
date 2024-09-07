@@ -4,10 +4,13 @@ import angleLeft from '../../../assets/angleLeft.svg';
 import angleRight from '../../../assets/angleRight.svg';
 import searchIcon from '../../../assets/searchIcon.svg';
 import table_icon from '../../../assets/table_icon.png';
+import ReceiptModal from '../../../components/modal/ReceiptModal';
 
 const HistoryPage = () => {
   const { data: transaction } = useSWR('/transaction/');
   let [currentPage, setCurrentPage] = useState(0);
+  const [open, setOpen] = useState(false);
+  const [idNum, setIdNum] = useState('');
   let [searchVal, setSearchVal] = useState('');
   let [arr, setArr] = useState(transaction);
   const [date, setDate] = useState('');
@@ -45,7 +48,7 @@ const HistoryPage = () => {
   };
 
   const searchHandler = () => {
-    let data = arr?.filter((data) => data.transaction_type.includes(searchVal));
+    let data = transaction?.filter((data) => data.transaction_type.includes(searchVal));
     setArr(data);
   };
 
@@ -63,6 +66,13 @@ const HistoryPage = () => {
     return `${time.getDay()} ${time.toLocaleString('en-US', { month: 'long' })} at ${time.toLocaleTimeString()}`;
   };
 
+  const receiptHandler = (data)=>{
+    setIdNum(data)
+    console.log(open);
+  }
+  useEffect(()=>{setOpen(()=>true);},[idNum])
+  console.log(idNum);
+  
   return (
     <div className=" h-fit no-scrollbar bg-[#fff] p-4 text-gray-700 overflow-scroll relative bg-bl">
       <div className="flex items-center justify-between">
@@ -98,6 +108,7 @@ const HistoryPage = () => {
         <thead className="relative text-[#FFB803] text-[10px] sm:text-[16px] left-0 sm:left-[40px]">
           <tr>
             <th>Description</th>
+            <th>Reciept</th>
             <th>Type</th>
             <th>Amount</th>
             <th>Status</th>
@@ -106,20 +117,40 @@ const HistoryPage = () => {
         <tbody>
           {dataArr?.map((data, index) => (
             <tr className="relative mt-4 text-[12px]  left-0 sm:left-[40px] border-y">
-              <td>
+              <td className=''>
                 <img
                   src={table_icon}
                   alt="table_icon"
                   className="w-[20px] h-[20px] sm:inline-block absolute left-[-30px] top-3 hidden"
                 />
                 <div className="flex flex-col">
-                  <span className="hidden sm:block">{data.description}</span>
-                  <small className="block">{timeHandler(data.created)}</small>
+                  <span className="hidden sm:block">{data?.description}</span>
+                  <small className="block">{timeHandler(data?.created)}</small>
                 </div>
+              </td>
+              <td>
+              {data.transaction_type === "transfer" && (
+                <div>
+                  <span 
+                  onClick={()=>receiptHandler(data?.id)}
+                  className='text-green-600 font-semibold cursor-pointer active:px-4 active:py-1.5 border border-green-600 py-2 px-5 rounded-xl'>View</span>
+                  { open && idNum === data?.id && (
+                    <ReceiptModal
+                      type={'Transfer'}
+                      address1={data?.profile?.user?.email}
+                      usdtAmount={Number(data?.usdt_amount)?.toFixed(1)}
+                      amount={Number(data?.usdt_amount)?.toFixed(1)}
+                      dateTime={data?.created}
+                      open={open}
+                      closeFunc={setOpen}
+                    />
+                  )}
+                </div>
+              )}
               </td>
               <td className="relative">
                 <span
-                  className={` absolute  left-4 w-3 h-3 rounded-[50%]   ${data.transaction_type === 'withdrawal' ? 'bg-[#F324EC]' : data.transaction_type === 'deposit' ? 'bg-[#0E0C6D]' : 'bg-[#FFB803]'}`}
+                  className={` absolute  left-4 w-3 h-3 rounded-[50%]   ${data.transaction_type === 'withdraw' ? 'bg-[#F324EC]' : data.transaction_type === 'deposit' ? 'bg-[#0E0C6D]' : 'bg-[#FFB803]'}`}
                 >
                   {''}
                 </span>
