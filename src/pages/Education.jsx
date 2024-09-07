@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react';
 import { BiSolidChevronLeft } from 'react-icons/bi';
 import { FaAngleRight } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { images } from '../assets';
 import Layout from '../components/Layout';
 import TestimonialsSwiper from '../components/TestimonialsSwiper';
@@ -10,6 +10,7 @@ import { header} from '../data/education';
 import useSWR from 'swr';
 import { scrollToTop } from '../actions/utils';
 export default function Education() {
+  const navigate = useNavigate()
   const [showMoreContent, setShowMoreContent] = useState(false);
   const {data: courses} = useSWR('/course/courses/')
   const {data: testimonials} = useSWR('/testimony/list/')
@@ -153,11 +154,14 @@ export default function Education() {
               <CoursesCard item={item} />
             ))}
           </div>
-          <Link to="/education-courses">
-            <button className="text-[#000] bg-[#FFB803] font-[roboto] rounded-lg shadow-xl px-4 py-5 lg:text-[40px] text-[25px] text-center my-9 font-[600]">
+            <button 
+            onClick={()=>{
+              navigate("/education-courses")
+              scrollToTop()
+            }}
+            className="text-[#000] bg-[#FFB803] font-[roboto] rounded-lg shadow-xl px-4 py-5 lg:text-[40px] text-[25px] text-center my-9 font-[600]">
               See all courses
             </button>
-          </Link>
         </section>
 
         <section className="relative ">

@@ -71,27 +71,29 @@ const Transfer = () => {
       toast.success(
         <pre className="inter-font">
           <strong>Success</strong>
-          <p>{response}</p>
+          <p>{response?.data}</p>
         </pre>
       );
     setSuccessPage(!successPage);
     } catch (error) {
       if (error)
+        console.log('error',error);
+        
         toast.error(
           <pre className="inter-font">
             <strong>Error</strong>
-            <p>{error.response.data}</p>
+            <p>{error?.response?.data?.email[0]}</p>
           </pre>
         );
     } finally {
       setOpenModal(false);
     }
-    setTransferDetails();
-    setTransferDetails({
-      ...transferDetails,
-      email: '',
-      usdt_amount: 0,
-    });
+    // setTransferDetails();
+    // setTransferDetails({
+    //   ...transferDetails,
+    //   email: '',
+    //   usdt_amount: 0,
+    // });
   };
 
   
@@ -236,10 +238,11 @@ const Transfer = () => {
       {/* The transaction reciept  */}
       {successPage && (
         <ReceiptModal
-          type={'email'}
+          type={'transfer'}
           address1={transferDetails.email}
-          address2={transferDetails.email}
+          // address2={transferDetails.email}
           amount={transferDetails.usdt_amount}
+          usdtAmount={Number(transferDetails.usdt_amount).toFixed(1)}
           open={successPage}
           closeFunc={setSuccessPage}
       />

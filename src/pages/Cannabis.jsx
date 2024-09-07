@@ -3,6 +3,7 @@ import MainLayout from '../components/MainLayout';
 import cannabis_1 from '../assets/cannabis_1.png'
 import cannabis_2 from '../assets/cannabis_2.png'
 import { useNavigate } from 'react-router-dom';
+import { scrollToTop } from '../actions/utils';
 
 const Cannabis = () => {
   const navigate = useNavigate()
@@ -62,7 +63,10 @@ const Cannabis = () => {
           </div>
 
           <p className='text-[#8E0789] hover:text-[#680865] cursor-pointer my-[3rem] text-base text-[10px] font-poppins font-semibold text-center'
-          onClick={()=>navigate('/register')}
+          onClick={()=>{
+            navigate('/register')
+            scrollToTop()
+          }}
           >Get Started Today</p>
           
         </div>

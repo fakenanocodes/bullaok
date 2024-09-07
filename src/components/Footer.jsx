@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
 import data from '../data/footer.json';
 import FooterItem from './common/FooterItem';
+import { scrollToTop } from '../actions/utils';
 export default function Footer() {
   const navigate = useNavigate();
   const { data: footer } = useSWR('/');
@@ -127,7 +128,10 @@ export default function Footer() {
         deposit. You need to complete an options trading application and get
         approval on eligible accounts. Please read the{' '}
         <span className='text-[rgba(101,101,230,0.9)] hover:text-[rgba(101,101,230,0.7)] cursor-pointer'
-        onClick={()=>navigate('/learn')}
+        onClick={()=>{
+          navigate('/learn')
+          scrollToTop()
+        }}
          >Characteristics and Risks of Standardized Options</span> before
         trading options.
         <br />
