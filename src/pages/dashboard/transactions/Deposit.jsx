@@ -71,7 +71,7 @@ const Deposit = () => {
       const url = `https://api.coingecko.com/api/v3/simple/price?ids=${coin}&vs_currencies=usd`;
       const response = await fetch(url);
       const data = await response.json();
-      console.log('SELECTED COIN', data, 'AMOUNT', amount);
+      // console.log('SELECTED COIN', data, 'AMOUNT', amount);
 
       // Check if coin exists in the data
       if (!data[coin]) {
@@ -80,7 +80,7 @@ const Deposit = () => {
 
       const price = data[coin]?.usd; // Get USD price per coin
       const usdEquivalent = amount / price; // Calculate USD equivalent
-      console.log(usdEquivalent);
+      // console.log(usdEquivalent);
       
 
       return usdEquivalent.toFixed(5); // Return formatted USD amount

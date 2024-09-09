@@ -12,7 +12,7 @@ const ReceiptModal = ({
   open,
   closeFunc,
   amount,
-  walletType = 'usdt',
+  walletType = 'USDT',
   usdtAmount,
   dateTime = new Date(),
 }) => {
