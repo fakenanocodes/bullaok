@@ -34,9 +34,9 @@ const Deposit = () => {
   const { data: walletAddress } = useSWR('/walletaddress/');
   const { data: depositAmount } = useSWR('/deposit/');
 
-  console.log('WALLET ADD', depositAmount);
+  // console.log('WALLET ADD', depositAmount);
 
-  console.log('Helo =>',deposits);
+  // console.log('Helo =>',deposits);
   let walletMock = {
     BTC: walletAddress?.bitcoin_address,
     LTC: walletAddress?.litecoin_address,
@@ -46,19 +46,19 @@ const Deposit = () => {
   };
 
   useEffect(() => {
-    if (wallet == depositWallet?.litecoin_address) {
+    if (wallet == 'LTC' /*depositWallet?.litecoin_address*/) {
       setSelectedCoin(walletType[0]);
       setWalletTypes('LTC');
-    } else if (wallet == depositWallet?.xrp_address) {
+    } else if (wallet == 'XRP' /*depositWallet?.xrp_address*/) {
       setSelectedCoin(walletType[1]);
       setWalletTypes('XRP');
-    } else if (wallet == depositWallet?.etherum_address) {
+    } else if (wallet == 'ETH' /*depositWallet?.etherum_address*/) {
       setSelectedCoin(walletType[2]);
       setWalletTypes('ETH');
-    } else if (wallet == depositWallet?.bitcoin_address) {
+    } else if (wallet == 'BTC' /*depositWallet?.bitcoin_address*/) {
       setSelectedCoin(walletType[3]);
       setWalletTypes('BTC');
-    } else if (wallet == depositWallet?.usdt_address) {
+    } else if (wallet == 'USDT'/*depositWallet?.usdt_address*/) {
       setSelectedCoin(walletType[4]);
       setWalletTypes('USDT');
     }
@@ -68,10 +68,10 @@ const Deposit = () => {
 
   useEffect(() => {
     async function convertToUSD(coin, amount) {
-      // console.log('SELECTED COIN', coin, 'AMOUNT', amount);
       const url = `https://api.coingecko.com/api/v3/simple/price?ids=${coin}&vs_currencies=usd`;
       const response = await fetch(url);
       const data = await response.json();
+      console.log('SELECTED COIN', data, 'AMOUNT', amount);
 
       // Check if coin exists in the data
       if (!data[coin]) {
@@ -79,16 +79,18 @@ const Deposit = () => {
       }
 
       const price = data[coin]?.usd; // Get USD price per coin
-      const usdEquivalent = amount * price; // Calculate USD equivalent
+      const usdEquivalent = amount / price; // Calculate USD equivalent
+      console.log(usdEquivalent);
+      
 
-      return usdEquivalent.toFixed(2); // Return formatted USD amount
+      return usdEquivalent.toFixed(5); // Return formatted USD amount
     }
     const fetcher = async () => {
       let converted = await convertToUSD(selectedCoin, amount);
       setUsdtAmount(converted);
     };
     fetcher();
-  }, [walletTypes, amount]);
+  }, [walletTypes, amount,wallet]);
 
   let userData = {
     amount,
@@ -167,6 +169,12 @@ const Deposit = () => {
     [user]
   );
 
+  
+  useEffect(()=>{
+    setWallet(depositAccount?.value);
+  },[depositAccount])
+  // console.log(wallet);
+  
   return (
     <div className=" h-[100%] no-scrollbar bg-white p-4 text-gray-700 overflow-scroll relative 00">
       <div className="py-3 px-20">
@@ -202,7 +210,7 @@ const Deposit = () => {
                         key={index}
                         onClick={() => {
                           setDepositAccount(wallet);
-                          setWallet(walletMock[wallet?.value]);
+                          // setWallet(walletMock[wallet?.value]);
                           setDropDown(false);
                         }}
                         className="flex gap-2  items-center justify-start p-4 hover:bg-[#8E0789] w-full hover:rounded-lg hover:text-white"
@@ -289,7 +297,7 @@ const Deposit = () => {
           <ClickAwayListener onClickAway={() => setOpenModel(false)}>
             <div className="bg-white h-fit-content w-[90%] md:w-3/5 max-w-[500px] p-4 my-6 relative rounded-[15px]">
               <div className="flex justify-between">
-                <p className="text-lg text-gray-600 font-semibold">Transfer</p>
+                <p className="text-lg text-gray-600 font-semibold">Deposit</p>
                 <div
                   className="cursor-pointer"
                   onClick={() => setOpenModel(false)}
@@ -312,7 +320,7 @@ const Deposit = () => {
                   <input
                     type="number"
                     className="block w-full border rounded-[10px] p-2 focus:border-[#8E0789] my-2"
-                    min={0}
+                    min={0}d
                     value={amount}
                     disabled
                   />
