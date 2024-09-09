@@ -121,7 +121,7 @@ const HistoryPage = () => {
                 <img
                   src={table_icon}
                   alt="table_icon"
-                  className="w-[20px] h-[20px] sm:inline-block absolute left-[-30px] top-3 hidden"
+                  className="w-[20px] bg-purple-500 h-[20px] sm:block absolute left-[-30px] top-3"
                 />
                 <div className="flex flex-col">
                   <span className="hidden sm:block">{data?.description}</span>
