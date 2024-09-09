@@ -101,13 +101,13 @@ const Withdrawal = () => {
       setSelectedCoin(walletType[4]);
     }
   },[withdrawalAccount?.value])
-  console.log(selectedCoin);
+  // console.log(selectedCoin);
   useEffect(() => {
     async function convertUsdToUsdt(coin, amount) {
       const url = `https://api.coingecko.com/api/v3/simple/price?ids=${coin}&vs_currencies=usd`;
       const response = await fetch(url);
       const data = await response.json();
-      console.log('SELECTED COIN', data, 'AMOUNT', amount);
+      // console.log('SELECTED COIN', data, 'AMOUNT', amount);
 
       // Check if coin exists in the data
       if (!data[coin]) {
@@ -117,7 +117,6 @@ const Withdrawal = () => {
       const price = data[coin]?.usd; // Get USD price per coin
       const Equivalent = amount / price; // Calculate USD equivalent
 
-      console.log('calculated data -->',Equivalent);
       return Equivalent.toFixed(5); // Return formatted USD amount
       
     }
@@ -128,26 +127,6 @@ const Withdrawal = () => {
     fetcher();
   }, [withdrawalAccount?.value, receiverDetail?.amount]);
 
-
-  // ==================================================
-  // const convertUsdToUsdt = async () => {
-  //   try {
-  //     const response = await axios.get(
-  //       `https://api.coingecko.com/api/v3/simple/price?ids=tether&vs_currencies=usd`
-  //     );
-
-  //     setUsdtEquivalent(response?.data?.tether?.usd);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-
-  
-  // const fetcher = async () => {
-  //   let converted = await convertUsdToUsdt(selectedCoin, amount);
-  //   setUsdtEquivalent(converted);
-  // };
-  // fetcher();
   
 
 
@@ -176,7 +155,7 @@ const Withdrawal = () => {
           setSuccessPage(true);
         })
         .catch((err) => {
-          console.log(err);
+          // console.log(err);
           toast.error('Your transaction has been declined', {
             position: 'top-right',
             hideProgressBar: false,
@@ -186,7 +165,7 @@ const Withdrawal = () => {
       setLoading(false);
     } catch (err) {
       setLoading(false);
-      console.log('hello');
+      // console.log('hello');
       toast.error('Your transaction has been declined', {
         hideProgressBar: false,
         autoClose: 2000,

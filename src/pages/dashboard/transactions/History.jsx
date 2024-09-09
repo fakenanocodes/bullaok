@@ -17,7 +17,7 @@ const HistoryPage = () => {
 
   useEffect(() => setArr(transaction), [transaction]);
 
-  console.log('---', arr);
+  // console.log('---', arr);
 
   let num = 10;
   let page_num = useMemo(
@@ -68,10 +68,10 @@ const HistoryPage = () => {
 
   const receiptHandler = (data)=>{
     setIdNum(data)
-    console.log(open);
+    // console.log(open);
   }
   useEffect(()=>{setOpen(()=>true);},[idNum])
-  console.log(idNum);
+  // console.log(idNum);
   
   return (
     <div className=" h-fit no-scrollbar bg-[#fff] p-4 text-gray-700 overflow-scroll relative bg-bl">
@@ -108,7 +108,7 @@ const HistoryPage = () => {
         <thead className="relative text-[#FFB803] text-[10px] sm:text-[16px] left-0 sm:left-[40px]">
           <tr>
             <th>Description</th>
-            <th>Reciept</th>
+            <th className='text-center'>Reciept</th>
             <th>Type</th>
             <th>Amount</th>
             <th>Status</th>
@@ -130,7 +130,7 @@ const HistoryPage = () => {
               </td>
               <td>
               {data.transaction_type === "transfer" && (
-                <div>
+                <div className='flex justify-center'>
                   <span 
                   onClick={()=>receiptHandler(data?.id)}
                   className='text-green-600 font-semibold cursor-pointer active:px-4 active:py-1.5 border border-green-600 py-2 px-5 rounded-xl'>View</span>

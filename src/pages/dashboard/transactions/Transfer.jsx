@@ -67,7 +67,7 @@ const Transfer = () => {
     setOpenModal(false)
     try {
       const response = await axios.post('/transfer/', transferDetails);
-      console.log('RESPONSE', response);
+      // console.log('RESPONSE', response);
       toast.success(
         <pre className="inter-font">
           <strong>Success</strong>
@@ -77,7 +77,7 @@ const Transfer = () => {
     setSuccessPage(!successPage);
     } catch (error) {
       if (error)
-        console.log('error',error);
+        // console.log('error',error);
         
         toast.error(
           <pre className="inter-font">
