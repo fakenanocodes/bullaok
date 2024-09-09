@@ -18,6 +18,7 @@ const Withdrawal = () => {
   const { data: user } = useSWR(`user/`);
   const [loading, setLoading] = useState(false);
   const [dropDown, setDropDown] = useState(false);
+  const [selectedCoin, setSelectedCoin] = useState('tether');
   const [imageUrl, setImageUrl] = useState('');
   const [receiverDetail, setReceiverDetail] = useState({
     walletAddress: '',
@@ -84,18 +85,69 @@ const Withdrawal = () => {
     }
   };
 
-  const convertUsdToUsdt = async () => {
-    try {
-      const response = await axios.get(
-        'https://api.coingecko.com/api/v3/simple/price?ids=tether&vs_currencies=usd'
-      );
 
-      setUsdtEquivalent(response?.data?.tether?.usd);
-    } catch (err) {
-      console.log(err);
+  // ==================================================
+  const walletType = ['litecoin', 'ripple', 'ethereum', 'bitcoin', 'tether'];
+  useEffect(()=>{
+    if (withdrawalAccount?.value == 'LTC') {
+      setSelectedCoin(walletType[0]);
+    } else if (withdrawalAccount?.value == 'XRP') {
+      setSelectedCoin(walletType[1]);
+    } else if (withdrawalAccount?.value == 'ETH') {
+      setSelectedCoin(walletType[2]);
+    } else if (withdrawalAccount?.value == 'BTC') {
+      setSelectedCoin(walletType[3]);
+    } else if (withdrawalAccount?.value == 'USDT') {
+      setSelectedCoin(walletType[4]);
     }
-  };
+  },[withdrawalAccount?.value])
+  console.log(selectedCoin);
+  useEffect(() => {
+    async function convertUsdToUsdt(coin, amount) {
+      const url = `https://api.coingecko.com/api/v3/simple/price?ids=${coin}&vs_currencies=usd`;
+      const response = await fetch(url);
+      const data = await response.json();
+      console.log('SELECTED COIN', data, 'AMOUNT', amount);
 
+      // Check if coin exists in the data
+      if (!data[coin]) {
+        throw new Error(`Coin ${coin} not found in API response`);
+      }
+
+      const price = data[coin]?.usd; // Get USD price per coin
+      const Equivalent = amount / price; // Calculate USD equivalent
+
+      console.log('calculated data -->',Equivalent);
+      return Equivalent.toFixed(5); // Return formatted USD amount
+      
+    }
+    const fetcher = async () => {
+      let converted = await convertUsdToUsdt(selectedCoin, receiverDetail?.amount);
+      setUsdtEquivalent(converted);
+    };
+    fetcher();
+  }, [withdrawalAccount?.value, receiverDetail?.amount]);
+
+
+  // ==================================================
+  // const convertUsdToUsdt = async () => {
+  //   try {
+  //     const response = await axios.get(
+  //       `https://api.coingecko.com/api/v3/simple/price?ids=tether&vs_currencies=usd`
+  //     );
+
+  //     setUsdtEquivalent(response?.data?.tether?.usd);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
+  
+  // const fetcher = async () => {
+  //   let converted = await convertUsdToUsdt(selectedCoin, amount);
+  //   setUsdtEquivalent(converted);
+  // };
+  // fetcher();
   
 
 
@@ -103,16 +155,16 @@ const Withdrawal = () => {
   const confirmWithdrawal = () => {
     try {
       setLoading(true);
-      convertUsdToUsdt();
-      const usdtToFiveDecimalPlace = (
-        usdtEquivalent * receiverDetail?.amount
-      ).toFixed(5);
+      // convertUsdToUsdt();
+      // const usdtToFiveDecimalPlace = (
+      //   usdtEquivalent * receiverDetail?.amount
+      // ).toFixed(5);
       axios
         .post('/withdraw/', {
           amount: receiverDetail?.amount?.toString(),
-          wallet_type: withdrawalAccount?.value,
-          wallet_address: receiverDetail?.walletAddress,
-          usdt_amount: usdtToFiveDecimalPlace.toString(),
+          wallet_type: withdrawalAccount?.value.toString(),
+          wallet_address: receiverDetail?.walletAddress.toString(),
+          usdt_amount: usdtEquivalent.toString(),
         })
         .then(() => {
           toast.success('Your transaction has been filled', {
@@ -371,21 +423,13 @@ const Withdrawal = () => {
           address1={'nhfjeknhrhhnfjjfjjejfejejjijrjjirgn'}
           address2={receiverDetail?.walletAddress}
           amount={receiverDetail?.amount.toString()}
-          usdtAmount={usdtEquivalent * receiverDetail?.amount}
+          usdtAmount={usdtEquivalent}
           open={successPage}
           closeFunc={setSuccessPage}
           walletType = {withdrawalAccount?.value}
         />
       )
       }
-       {/* type={'deposit'}
-        address1={'nhfjeknhrhhnfjjfjjejfejejjijrjjirgn'}
-        address2={wallet || walletMock?.BTC}
-        amount={amount}
-        usdtAmount={usdtAmount}
-        open={successPage}
-        closeFunc={setSuccessPage}
-        walletType = {walletTypes} */}
           
         </div>
       </div>
