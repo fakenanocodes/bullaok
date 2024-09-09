@@ -117,7 +117,7 @@ const HistoryPage = () => {
         <tbody>
           {dataArr?.map((data, index) => (
             <tr className="relative mt-4 text-[12px]  left-0 sm:left-[40px] border-y">
-              <td className=''>
+              <td className='w-[calc(100%/4)]'>
                 <img
                   src={table_icon}
                   alt="table_icon"
@@ -148,13 +148,13 @@ const HistoryPage = () => {
                 </div>
               )}
               </td>
-              <td className="relative">
+              <td className="relative flex items-center gap-2">
                 <span
-                  className={` absolute  left-4 w-3 h-3 rounded-[50%]   ${data.transaction_type === 'withdraw' ? 'bg-[#F324EC]' : data.transaction_type === 'deposit' ? 'bg-[#0E0C6D]' : 'bg-[#FFB803]'}`}
+                  className={`   left-4 w-3 h-3 rounded-[50%]   ${data.transaction_type === 'withdraw' ? 'bg-[#F324EC]' : data.transaction_type === 'deposit' ? 'bg-[#0E0C6D]' : 'bg-[#FFB803]'}`}
                 >
                   {''}
                 </span>
-                {data.type}
+                {data.transaction_type}
               </td>
               <td>{parseFloat(data.usdt_amount)?.toFixed(2)}</td>
               <td
