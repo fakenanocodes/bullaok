@@ -92,10 +92,10 @@ const Deposit = () => {
   }, [walletTypes, amount,wallet]);
 
   let userData = {
-    amount,//coin amount
+    amount: usdtAmount,//coin amount
     wallet_type: walletTypes || 'USDT',
     wallet_address: wallet || depositWallet?.usdt_address,
-    usdt_amount: usdtAmount, //dollars amount
+    usdt_amount: amount, //dollars amount
   };
   //usdtAmount
 

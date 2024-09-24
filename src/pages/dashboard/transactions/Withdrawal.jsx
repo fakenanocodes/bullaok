@@ -1,4 +1,4 @@
-import { useMemo, useState,useRef,useEffect } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 // import { Cookies } from 'react-cookie';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
@@ -140,10 +140,10 @@ const Withdrawal = () => {
       // ).toFixed(5);
       axios
         .post('/withdraw/', {
-          amount: receiverDetail?.amount?.toString(),
+          amount: usdtEquivalent.toString(),
           wallet_type: withdrawalAccount?.value.toString(),
           wallet_address: receiverDetail?.walletAddress.toString(),
-          usdt_amount: usdtEquivalent.toString(),
+          usdt_amount: receiverDetail?.amount?.toString(),
         })
         .then(() => {
           toast.success('Your transaction has been filled', {
