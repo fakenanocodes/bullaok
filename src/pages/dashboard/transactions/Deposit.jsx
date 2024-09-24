@@ -1,8 +1,7 @@
 import { ClickAwayListener } from '@mui/material';
 import axios from 'axios';
-import CancelIcon from '../../../components/utils/icons/CancelIcon';
 import { useEffect, useMemo, useState } from 'react';
-import MobileTransferTable from './MobileTransferTab';
+import CancelIcon from '../../../components/utils/icons/CancelIcon';
 // import { Cookies } from 'react-cookie';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
@@ -93,10 +92,10 @@ const Deposit = () => {
   }, [walletTypes, amount,wallet]);
 
   let userData = {
-    amount,
+    amount,//coin amount
     wallet_type: walletTypes || 'USDT',
     wallet_address: wallet || depositWallet?.usdt_address,
-    usdt_amount: usdtAmount,
+    usdt_amount: usdtAmount, //dollars amount
   };
   //usdtAmount
 
