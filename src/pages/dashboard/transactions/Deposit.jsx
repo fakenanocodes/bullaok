@@ -33,9 +33,7 @@ const Deposit = () => {
   const { data: walletAddress } = useSWR('/walletaddress/');
   const { data: depositAmount } = useSWR('/deposit/');
 
-  // console.log('WALLET ADD', depositAmount);
-
-  // console.log('Helo =>',deposits);
+  
   let walletMock = {
     BTC: walletAddress?.bitcoin_address,
     LTC: walletAddress?.litecoin_address,
@@ -169,9 +167,9 @@ const Deposit = () => {
   );
 
   
-  useEffect(()=>{
-    setWallet(depositAccount?.value);
-  },[depositAccount])
+  // useEffect(()=>{
+  //   setWallet(depositAccount?.value);
+  // },[depositAccount])
   // console.log(wallet);
   
   return (
@@ -209,7 +207,7 @@ const Deposit = () => {
                         key={index}
                         onClick={() => {
                           setDepositAccount(wallet);
-                          // setWallet(walletMock[wallet?.value]);
+                          setWallet(walletMock[wallet?.value]);
                           setDropDown(false);
                         }}
                         className="flex gap-2  items-center justify-start p-4 hover:bg-[#8E0789] w-full hover:rounded-lg hover:text-white"

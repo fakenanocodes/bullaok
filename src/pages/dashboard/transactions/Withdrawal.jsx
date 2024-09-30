@@ -14,7 +14,7 @@ import ReceiptModal from '../../../components/modal/ReceiptModal';
 const Withdrawal = () => {
   const [openModal, setOpenModal] = useState(false);
   const [successPage, setSuccessPage] = useState(false);
-  // const { data: withdraws } = useSWR(`/withdraw/`);
+  // const { data: addressEndpoints } = useSWR(`/walletaddress/`);
   const { data: user } = useSWR(`user/`);
   const [loading, setLoading] = useState(false);
   const [dropDown, setDropDown] = useState(false);
@@ -24,6 +24,8 @@ const Withdrawal = () => {
     walletAddress: '',
     amount: 0,
   });
+  // console.log('wallet address =>',addressEndpoints);
+  
   const [withdrawalPrompt, setWithdrawalPrompt] = useState({
     password: '',
     sendReceiptToEmail: false,
@@ -144,7 +146,7 @@ const Withdrawal = () => {
           wallet_type: withdrawalAccount?.value.toString(),
           wallet_address: receiverDetail?.walletAddress.toString(),
           usdt_amount: receiverDetail?.amount?.toString(),
-        })
+          })
         .then(() => {
           toast.success('Your transaction has been filled', {
             hideProgressBar: false,
