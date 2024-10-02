@@ -50,8 +50,7 @@ const SignupForm = ({ setSignupComponent }) => {
       const response = await axios.post('/user/auth/create/', data);
       dispatch(setCurrentSignupEmail(data?.email));
       console.log(response);
-      setSignupComponent(1);
-      console.log('I got to this point');
+      navigate('/verification');
       setIsLoading(false);
       toast.success('Account Created Succesfully', {
         position: 'top-right',

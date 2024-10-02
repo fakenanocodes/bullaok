@@ -24,7 +24,6 @@ const Verification = () => {
   const handleChange = (otp) => {
     setError('');
     setState({ otp });
-    // setSignupComponent(0);
   };
 
   const onSubmit = async () => {

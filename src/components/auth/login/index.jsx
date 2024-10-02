@@ -14,6 +14,7 @@ import { getNextMonth } from '../../../store/actions/utils';
 import { setUserData } from '../../../store/auth_reducer';
 import Button from '../../utils/reusables/Button';
 import InputComponent from '../../utils/reusables/InputComponent';
+import { toast } from 'react-toastify';
 
 const schema = yup.object().shape({
   email: yup.string().required('Email field cannot be empty'),
@@ -44,6 +45,8 @@ const UserLogin = () => {
   const onSubmit = async () => {
     const data = getValues();
     const expiringDate = getNextMonth();
+    console.log('data',data);
+    
 
     try {
       setIsLoading(true);
@@ -89,7 +92,36 @@ const UserLogin = () => {
     } catch (err) {
       setIsLoading(false);
       const errMsg = handleGenericError(err);
-      setError(errMsg);
+      if(errMsg.includes('Verify your account')){
+        toast.error('account not verified', {
+          position: 'top-right',
+          autoClose: 2000,
+          hideProgressBar: false,
+        });
+        try {
+          await axios.post('user/auth/password-reset/', {
+            email: data?.email,
+          });
+
+          
+          toast.success('Verification code sent to your email', {
+            position: 'top-right',
+            autoClose: 2000,
+            hideProgressBar: false,
+          });
+          navigate('/verification');  
+    
+          // setResendingOtp(false);
+        } catch (error) {
+          // setResendingOtp(false);
+          const errMsg = handleGenericError(error);
+          setError(errMsg);
+        }
+      }
+      else{
+        setError(errMsg)
+      }
+      
     }
   };
 

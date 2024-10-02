@@ -59,6 +59,7 @@ import RealEstate from '../pages/RealEstate';
 import Cannabis from '../pages/Cannabis';
 import Crypto from '../pages/Crypto';
 import FAQ from '../components/FAQ';
+import Verify from '../pages/Verify';
 const router = createBrowserRouter([
   {
     path: '*',
@@ -197,6 +198,10 @@ const router = createBrowserRouter([
   {
     path: 'register',
     Component: Signup,
+  },
+  {
+    path: 'verification',
+    Component: Verify,
   },
   {
     path: 'forgot-password',

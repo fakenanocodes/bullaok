@@ -1,12 +1,11 @@
-import { useMemo, useState } from 'react';
 import login_bg from '../../../assets/login_bg.png';
-import SignupForm from './SignupForm';
+import Verification from './Verification';
 
-const SignupComponent = () => {
+const VerificationComponent = () => {
 
   return (
     <div className="flex flex-col-reverse lg:flex-row justify-between lg:h-[90vh]">
-      <SignupForm />
+      <Verification/>
 
       <div
         style={{
@@ -26,4 +25,4 @@ const SignupComponent = () => {
   );
 };
 
-export default SignupComponent;
+export default VerificationComponent;
