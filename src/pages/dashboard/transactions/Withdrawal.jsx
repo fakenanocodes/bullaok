@@ -128,7 +128,6 @@ const Withdrawal = () => {
       
     };
     fetcher();
-    console.log('withdrawal value', withdrawalAccount?.value + '-' +receiverDetail?.amount);
     
   }, [withdrawalAccount?.value, receiverDetail?.amount]);
 
@@ -414,7 +413,7 @@ const Withdrawal = () => {
           obj={()=>(
             setReceiverDetail({
               walletAddress: '',
-              amount: 0,
+              amount: "",
             })
           )}
         />
