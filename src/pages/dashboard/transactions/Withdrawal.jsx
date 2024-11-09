@@ -125,8 +125,11 @@ const Withdrawal = () => {
     const fetcher = async () => {
       let converted = await convertUsdToUsdt(selectedCoin, receiverDetail?.amount);
       setUsdtEquivalent(converted);
+      
     };
     fetcher();
+    console.log('withdrawal value', withdrawalAccount?.value + '-' +receiverDetail?.amount);
+    
   }, [withdrawalAccount?.value, receiverDetail?.amount]);
 
   
@@ -408,6 +411,12 @@ const Withdrawal = () => {
           open={successPage}
           closeFunc={setSuccessPage}
           walletType = {withdrawalAccount?.value}
+          obj={()=>(
+            setReceiverDetail({
+              walletAddress: '',
+              amount: 0,
+            })
+          )}
         />
       )
       }

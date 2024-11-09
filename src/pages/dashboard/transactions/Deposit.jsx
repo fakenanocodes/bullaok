@@ -43,19 +43,19 @@ const Deposit = () => {
   };
 
   useEffect(() => {
-    if (wallet == 'LTC' /*depositWallet?.litecoin_address*/) {
+    if (wallet == /*'LTC'*/ depositWallet?.litecoin_address) {
       setSelectedCoin(walletType[0]);
       setWalletTypes('LTC');
-    } else if (wallet == 'XRP' /*depositWallet?.xrp_address*/) {
+    } else if (wallet == /*'XRP'*/ depositWallet?.xrp_address) {
       setSelectedCoin(walletType[1]);
       setWalletTypes('XRP');
-    } else if (wallet == 'ETH' /*depositWallet?.etherum_address*/) {
+    } else if (wallet == /*'ETH'*/  depositWallet?.etherum_address) {
       setSelectedCoin(walletType[2]);
       setWalletTypes('ETH');
-    } else if (wallet == 'BTC' /*depositWallet?.bitcoin_address*/) {
+    } else if (wallet == /*'BTC'*/  depositWallet?.bitcoin_address) {
       setSelectedCoin(walletType[3]);
       setWalletTypes('BTC');
-    } else if (wallet == 'USDT'/*depositWallet?.usdt_address*/) {
+    } else if (wallet == /*'USDT'*/ depositWallet?.usdt_address) {
       setSelectedCoin(walletType[4]);
       setWalletTypes('USDT');
     }
@@ -87,6 +87,10 @@ const Deposit = () => {
       setUsdtAmount(converted);
     };
     fetcher();
+    console.log('walletTypes',walletTypes);
+    console.log('amount', amount);
+    console.log('wallet',wallet);
+    
   }, [walletTypes, amount,wallet]);
 
   let userData = {
@@ -366,6 +370,7 @@ const Deposit = () => {
         open={successPage}
         closeFunc={setSuccessPage}
         walletType = {walletTypes}
+        obj={()=>setAmount(0)}
       />
       )}
     </div>
