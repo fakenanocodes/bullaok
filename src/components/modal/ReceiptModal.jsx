@@ -15,6 +15,7 @@ const ReceiptModal = ({
   walletType = 'USDT',
   usdtAmount,
   dateTime = new Date(),
+  obj
 }) => {
     
   const receiptRef = useRef(null)
@@ -125,6 +126,7 @@ const ReceiptModal = ({
       const handleClickAway = (event) => {
         if (receiptRef.current && !receiptRef.current.contains(event.target)) {
           closeFunc(!open);
+          if(obj) obj()
         }
       };
       
@@ -187,6 +189,7 @@ const ReceiptModal = ({
             onClick={() => {
                 handleCaptureClick()
                 closeFunc(!open)
+                if(obj) obj()
             }}
             >
                 Download
@@ -198,6 +201,7 @@ const ReceiptModal = ({
                 onClick={(e) =>{
                   handleShare('receiptFile')
                   closeFunc(!open)
+                  if(obj) obj()
                 }}
             >
                 Share
