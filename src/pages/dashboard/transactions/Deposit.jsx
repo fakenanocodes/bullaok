@@ -87,9 +87,6 @@ const Deposit = () => {
       setUsdtAmount(converted);
     };
     fetcher();
-    console.log('walletTypes',walletTypes);
-    console.log('amount', amount);
-    console.log('wallet',wallet);
     
   }, [walletTypes, amount,wallet]);
 
@@ -370,7 +367,7 @@ const Deposit = () => {
         open={successPage}
         closeFunc={setSuccessPage}
         walletType = {walletTypes}
-        obj={()=>setAmount(0)}
+        obj={()=>setAmount("")}
       />
       )}
     </div>
