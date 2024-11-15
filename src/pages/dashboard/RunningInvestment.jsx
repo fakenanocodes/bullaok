@@ -6,8 +6,9 @@ import RunningInvestmentRow from '../../components/Dashboard/RunningInvestmentRo
 
 const RunningInvestment = () => {
   const navigate = useNavigate();
-  const { data, isLoading } = useSWR('/plans/all');
-  console.log('running investments ==>', data);
+   // const { data, isLoading } = useSWR('/plans/all');
+  const {data, isLoading } = useSWR('/plans/history')
+ console.log('running investments ==>', data);
   return (
     <div className="flex space-y-4 flex-col p-10 ">
       <div>
@@ -49,23 +50,27 @@ const RunningInvestment = () => {
           {data?.map(
             (
               {
-                category,
+                
+                investmentplan,
                 created,
-                investment_profit_percent,
+                // investment_profit_percent,
+                profit,
                 amount,
-                number_of_days,
-                referral_profit_percent,
+                //number_of_days,
+                profile,
+                // referral_profit_percent,
               },
               index
             ) => (
               <RunningInvestmentRow
                 key={index}
                 created={created}
-                category={category}
-                referral_profit_percent={referral_profit_percent}
-                number_of_days={number_of_days}
-                investment_profit_percent={investment_profit_percent}
+                category={investmentplan?.category}
+                // referral_profit_percent={referral_profit_percent}
+                number_of_days={investmentplan?.number_of_days}
+                investment_profit_percent={profit}
                 amount={amount}
+                profile={profile}
               />
             )
           )}

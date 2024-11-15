@@ -13,6 +13,8 @@ const NewDashboard = () => {
   const { data: transaction } = useSWR('/transaction/');
   const { data: balances } = useSWR('/user/balances/');
   const { data: profiles } = useSWR('/user/');
+  console.log('dashBoard balances', balances);
+  
  
   const accountAnalyticsData = useMemo(
     () => [
@@ -222,7 +224,7 @@ const NewDashboard = () => {
           Here’s what’s happening on your account.
         </p>
       </article>
-      <div className="my-4 grid  grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="my-4 grid  grid-cols-1 md:grid-cols-4 gap-8">
         <article className="bg-[#000000CC] px-4 py-2 rounded-[10px]">
           <p className="font-medium text-[#FFFFFF] opacity-[61%] text-sm">
             Total Balance
@@ -246,6 +248,8 @@ const NewDashboard = () => {
             <span className="text-[10px] text-white">24h</span>
           </h4>
         </article>
+
+        {/* Trading balance */}
         <article className="bg-[#000000CC] px-4 py-2 rounded-[10px]">
           <p className="font-medium text-[#FFFFFF] opacity-[61%] text-sm">
             Trading Balance
@@ -268,6 +272,32 @@ const NewDashboard = () => {
             <span className="text-[10px] text-white">24h</span>
           </h4>
         </article>
+
+        {/* live profit */}
+        <article className="bg-[#000000CC] px-4 py-2 rounded-[10px]">
+          <p className="font-medium text-[#FFFFFF] opacity-[61%] text-sm capitalize">
+            live profit
+          </p>
+          <h2 className="font-extrabold text-sm sm:text-[25px]  flex items-center gap-5 h-[40px]  justify-between ">
+            ${balances?.live_profit ? balances?.live_profit.toLocaleString('en-US') : 0}
+            <button className="bg-[#8E0789] w-[100px] h-[40px] text-[10px] text-[#000000] rounded-[3.73px] flex gap-1 items-center justify-center">
+              <span className="">
+                <img
+                  src={dashBoard}
+                  alt="dashBoard"
+                  className="w-[10px] h-[10px] inline"
+                />
+              </span>
+              {balances && balances?.trading_balance / 1000}%
+            </button>
+          </h2>
+          <h4 className="text-[#47A663] flex gap-4 items-center text-[10px] sm:text-[16px]">
+            + ${balances?.live_profit}{' '}
+            <span className="text-[10px] text-white">24h</span>
+          </h4>
+        </article>
+
+        {/* available balance */}
         <article className="bg-[#000000CC] px-4 py-2 rounded-[10px]">
           <p className="font-medium text-[#FFFFFF] opacity-[61%] text-sm">
             Avaliable Balance
@@ -309,6 +339,8 @@ const NewDashboard = () => {
                 {/* {data.percentage} */}
               </h4>
             </article>
+
+            {/* trading balance */}
             <article className="px-10 py-2 rounded-[10px] text-[12px] sm:text-sm">
               <p className="font-medium text-[#FFFFFF] opacity-[61%] text-sm sm:text-[20px] relative">
                 <span
@@ -318,6 +350,23 @@ const NewDashboard = () => {
               </p>
               <h2 className="font-bold  text-[12px] sm:text-[18px] flex items-center gap-5 h-[40px] ">
                 ${balances?.trading_balance ? balances.trading_balance.toLocaleString('en-US') : 0}
+              </h2>
+              <h4 className="text-[#4A4A4A] flex gap-4 items-center">
+                {/* {data.percentage} */}
+              </h4>
+            </article>
+
+            {/* Live Profit */}
+            <article className="px-10 py-2 rounded-[10px] text-[12px] sm:text-sm">
+              <p className="font-medium text-[#FFFFFF] opacity-[61%] text-sm sm:text-[20px] relative">
+                <span
+                  className={`inline-block  w-[8px] sm:w-[16px] h-[8px] sm:h-[16px]  rounded-[50%] absolute left-[-25px] top-2 capitalize
+                     `}
+                ></span>
+                Live Profit
+              </p>
+              <h2 className="font-bold  text-[12px] sm:text-[18px] flex items-center gap-5 h-[40px] ">
+                ${balances?.live_profit ? balances?.live_profit.toLocaleString('en-US') : 0}
               </h2>
               <h4 className="text-[#4A4A4A] flex gap-4 items-center">
                 {/* {data.percentage} */}
@@ -495,7 +544,7 @@ const NewDashboard = () => {
               <th>Status</th>
             </tr>
           </thead>
-          <DashBoardHistory/>
+          <DashBoardHistory />
         </table>
       </div>
     </section>

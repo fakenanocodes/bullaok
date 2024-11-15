@@ -15,7 +15,7 @@ export default function RunningInvestmentRow({
   created,
   number_of_days,
   investment_profit_percent,
-  referral_profit_percent,
+  profile,
   amount,
 }) {
   const originalDate = new Date(created);
@@ -27,7 +27,7 @@ export default function RunningInvestmentRow({
         <div className="flex items-center justify-center text-center ">
           <div className="flex justify-start items-center gap-4 w-[180px] ">
             <img
-              src={imageUrls[category?.name]}
+              src={imageUrls[profile]}
               alt=""
               className="w-16 h-16 rounded-full"
             />
@@ -50,7 +50,7 @@ export default function RunningInvestmentRow({
         <div className="flex flex-col">
           <span className="font-bold">+ ${investment_profit_percent}</span>
           <span className="text-[#47A663] font-semibold">
-            {referral_profit_percent}%
+            {investment_profit_percent}%
           </span>
         </div>
       </td>
