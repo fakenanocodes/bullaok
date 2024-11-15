@@ -11,7 +11,7 @@ const imageUrls = {
   Cannabis: images.cannabis,
 };
 export default function RunningInvestmentRow({
-  category,
+  name,
   created,
   number_of_days,
   investment_profit_percent,
@@ -31,7 +31,7 @@ export default function RunningInvestmentRow({
               alt=""
               className="w-16 h-16 rounded-full"
             />
-            <span>{category?.name}</span>
+            <span>{name}</span>
           </div>
         </div>
       </td>
