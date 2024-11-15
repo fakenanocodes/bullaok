@@ -58,6 +58,7 @@ const RunningInvestment = () => {
                 amount,
                 //number_of_days,
                 profile,
+                investment_plan_name,
                 // referral_profit_percent,
               },
               index
@@ -65,7 +66,7 @@ const RunningInvestment = () => {
               <RunningInvestmentRow
                 key={index}
                 created={created}
-                category={investmentplan?.category}
+                name={investment_plan_name}
                 // referral_profit_percent={referral_profit_percent}
                 number_of_days={investmentplan?.number_of_days}
                 investment_profit_percent={profit}
