@@ -244,7 +244,7 @@ const NewDashboard = () => {
             </button>
           </h2>
           <h4 className="text-[#47A663] flex gap-4 items-center text-[10px] sm:text-[16px]">
-            + ${balances?.live_profit}{' '}
+            + {balances?.avg_per}%{' '}
             <span className="text-[10px] text-white">24h</span>
           </h4>
         </article>
@@ -268,7 +268,7 @@ const NewDashboard = () => {
             </button>
           </h2>
           <h4 className="text-[#47A663] flex gap-4 items-center text-[10px] sm:text-[16px]">
-            + ${balances?.live_profit}{' '}
+            + {balances?.avg_per}%{' '}
             <span className="text-[10px] text-white">24h</span>
           </h4>
         </article>
@@ -292,7 +292,7 @@ const NewDashboard = () => {
             </button>
           </h2>
           <h4 className="text-[#47A663] flex gap-4 items-center text-[10px] sm:text-[16px]">
-            + ${balances?.live_profit}{' '}
+            + {balances?.avg_per}%{' '}
             <span className="text-[10px] text-white">24h</span>
           </h4>
         </article>
@@ -316,7 +316,7 @@ const NewDashboard = () => {
             </button>
           </h2>
           <h4 className="text-[#F42424] flex gap-4 items-center text-[10px] sm:text-[16px]">
-            + ${balances?.live_profit}
+            + {balances?.avg_per}%
             <span className="text-[10px] text-white">24h</span>
           </h4>
         </article>
