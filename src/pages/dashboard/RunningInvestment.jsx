@@ -8,7 +8,7 @@ const RunningInvestment = () => {
   const navigate = useNavigate();
    // const { data, isLoading } = useSWR('/plans/all');
   const {data, isLoading } = useSWR('/plans/history')
- console.log('running investments ==>', data);
+ // console.log('running investments ==>', data);
   return (
     <div className="flex space-y-4 flex-col p-10 ">
       <div>
