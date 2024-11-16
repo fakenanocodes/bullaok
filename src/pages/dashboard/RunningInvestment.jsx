@@ -51,7 +51,7 @@ const RunningInvestment = () => {
             (
               {
                 
-                investmentplan,
+                days,
                 created,
                 // investment_profit_percent,
                 profit,
@@ -59,7 +59,7 @@ const RunningInvestment = () => {
                 //number_of_days,
                 profile,
                 investment_plan_name,
-                // referral_profit_percent,
+                roi,
               },
               index
             ) => (
@@ -68,10 +68,11 @@ const RunningInvestment = () => {
                 created={created}
                 name={investment_plan_name}
                 // referral_profit_percent={referral_profit_percent}
-                number_of_days={investmentplan?.number_of_days}
+                number_of_days={days}
                 investment_profit_percent={profit}
                 amount={amount}
                 profile={profile}
+                roi={roi}
               />
             )
           )}
