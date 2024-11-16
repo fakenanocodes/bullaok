@@ -17,6 +17,7 @@ export default function RunningInvestmentRow({
   investment_profit_percent,
   profile,
   amount,
+  roi,
 }) {
   const originalDate = new Date(created);
   const formattedDate = formatDateWithSuffix(originalDate);
@@ -48,9 +49,9 @@ export default function RunningInvestmentRow({
       </td>
       <td className="text-center py-4 ">
         <div className="flex flex-col">
-          <span className="font-bold">+ ${investment_profit_percent}</span>
+          <span className="font-bold">+ ${investment_profit_percent.split('.')[0]}.{investment_profit_percent.split('.')[1].slice(0,2)}</span>
           <span className="text-[#47A663] font-semibold">
-            {investment_profit_percent}%
+            {roi}%
           </span>
         </div>
       </td>
