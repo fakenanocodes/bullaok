@@ -129,7 +129,7 @@ const HistoryPage = () => {
                 </div>
               </td>
               <td>
-              {data.transaction_type === "transfer" && (
+              {data?.verified === true && (
                 <div className='flex justify-center'>
                   <span 
                   onClick={()=>receiptHandler(data?.id)}
