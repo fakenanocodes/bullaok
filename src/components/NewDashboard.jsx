@@ -13,7 +13,6 @@ const NewDashboard = () => {
   const { data: transaction } = useSWR('/transaction/');
   const { data: balances } = useSWR('/user/balances/');
   const { data: profiles } = useSWR('/user/');
-  console.log('dashBoard balances', balances);
   
  
   const accountAnalyticsData = useMemo(
@@ -51,7 +50,6 @@ const NewDashboard = () => {
     ],
   };
   const [userProfile, setUserProfile] = useState({});
-  console.log('USER PROFILE', userProfile);
 
   const transactionHistoryData = [
     {
@@ -230,7 +228,7 @@ const NewDashboard = () => {
             Total Balance
           </p>
           <h2 className="font-extrabold  text-sm sm:text-[25px] flex items-center gap-5 h-[40px]  justify-between ">
-            ${balances?.total_balance ? balances.total_balance.toLocaleString('en-US') : 0}
+            ${balances?.total_balance ? Number(balances.total_balance).toLocaleString('en-US') : 0}
             <button className="bg-[#8E0789] w-[100px] h-[40px] text-[10px] text-[#000000] rounded-[3.73px] flex gap-1 items-center justify-center">
               <span className="">
                 <img
@@ -333,7 +331,7 @@ const NewDashboard = () => {
                 Total Balance
               </p>
               <h2 className="font-bold  text-[12px] sm:text-[18px] flex items-center gap-5 h-[40px] ">
-                ${balances?.total_balance ? balances.total_balance.toLocaleString('en-US') : 0}
+                ${balances?.total_balance ? Number(balances.total_balance).toLocaleString('en-US') : 0}
               </h2>
               <h4 className="text-[#4A4A4A] flex gap-4 items-center">
                 {/* {data.percentage} */}
