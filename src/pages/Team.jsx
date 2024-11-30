@@ -21,6 +21,10 @@ export default function Team() {
   const handleTeam = (id) => {
     navigate(`/team/member/${id}`);
   };
+
+  const handleBroker = (id) => {
+    navigate(`/team/member/${id}`);
+  };
   const fetcher = async () => {
     const res = await axios('https://api.bulloakltd.com/team/members/all/');
     setTeamMembersData(res.data);
@@ -124,7 +128,7 @@ export default function Team() {
                 <div
                 className='w-[120px] h-[150px] translate-x-[-30px] translate-y-[30px] border-4 border-white' 
                 >
-                  <img src={images} alt="" className='w-full h-full object-cover object-center' />
+                  <img src={broker?.image} alt="" className='w-full h-full object-cover object-center bg-white' />
                 </div>
                 <div className="content border-2 w-full p-5 pt-10 border-[#8E0789] ">
                   <p className="font-[laviossa] ">{broker.name}</p>
@@ -165,12 +169,12 @@ export default function Team() {
                       </p>
                     </div>
                   </div>
-                  {/* <button
+                  <button
                     onClick={() => handleBroker(broker?.id)}
                     className="ml-auto text-[#8E0789] font-[montserrat] font-bold"
                   >
                     Read more
-                  </button> */}
+                  </button>
                 </div>
               </div>
             ))}
