@@ -56,7 +56,8 @@ export default function Footer() {
                     borderRadius: '50%',
                     cursor: 'pointer'
                   }}
-                  onClick={()=>window.open(footer?.site?.instagram_url)}
+                  onClick={()=>window.open('https://www.instagram.com/bulloakfinance?igsh=aml3a21tbWU0NWh5&utm_source=qr')}
+                  // onClick={()=>window.open(footer?.site?.instagram_url)}
                 />
                 <RiTwitterXLine
                   style={{
