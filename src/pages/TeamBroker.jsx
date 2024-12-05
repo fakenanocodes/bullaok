@@ -5,9 +5,13 @@ import cert from '../assets/cert.png';
 import services_banner_img from '../assets/services_banner_img.png';
 import MainLayout from '../components/MainLayout';
 import { brokerMember } from '../data/teamMember';
+import useSWR from 'swr';
 
 const TeamBroker = () => {
+  // const[brokerData,setBrokrData]=useState('');
+
   const { subpage } = useParams();
+  const {data: broker} = useSWR(`/broker/brokers/${subpage}/`)
 
   useEffect(() => {
     scrollToMid();
@@ -27,27 +31,27 @@ const TeamBroker = () => {
               Detailed Page
             </p>
             <p className="laviossa  md:w-[30rem]">
-              {brokerMember[subpage]?.name}
+              {broker?.name}
             </p>
           </div>
         </div>
         <div className="mt-[15px] p-1 md:p-16">
           <p className="laviossa md:text-[2rem] font-bold md:w-[30rem] mb-2 md:mb-10">
-            {brokerMember[subpage]?.name}
+            {broker?.name}
           </p>
           <div>
-            <div className="flex md:gap-12 gap-3">
+            <div className="flex flex-col lg:flex-row md:gap-12 gap-3">
               <div className="w-[60%] xl:w-[70%]">
-                <img src={brokerMember[subpage]?.image} alt="President" />
+                <img src={broker?.image} alt="President" />
               </div>
-              <div className="w-[40%] mt-5 md:mt-14 xl:mt-28 md:text-[26px] text-xs md:leading-10">
+              <div className="lg:w-[40%] mt-5 md:mt-14 xl:mt-28 md:text-[26px] text-xs md:leading-10">
                 <div className=" bg-[#5d1e5b] h-1 md:h-2 -ml-12  md:-ml-44 mb-3 md:mb-10 "></div>
-                <p className="md:mt-16">{brokerMember[subpage]?.paragraph1}</p>
+                <p className="md:mt-16">{broker?.bio}</p>
               </div>
             </div>
             <div>
               <p className="mt-2 md:mt-7 text-xs md:text-[26px] md:leading-10">
-                {brokerMember[subpage]?.paragraph2}
+                {broker?.bio}
               </p>
             </div>
             <div className="mt-5 md:mt-20 w-[60%]">

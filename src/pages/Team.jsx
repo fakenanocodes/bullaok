@@ -4,26 +4,22 @@ import useSWR from 'swr';
 import images from '../assets/presido.png';
 // import { image } from '../assets/team/teams';
 import axios from 'axios';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
-import { teamData } from '../data/team';
-import { useState } from 'react';
-import imageData from '../assets/oil.png'
 // brokerData;
 
 export default function Team() {
   const { data: brokers } = useSWR('/broker/brokers/');
   const navigate = useNavigate();
-  const[teamMembersData,setTeamMembersData]=useState([]);
+  const [teamMembersData, setTeamMembersData] = useState([]);
   // const { data: teamMembers } = useSWR('/team/members/all/');
-
 
   const handleTeam = (id) => {
     navigate(`/team/member/${id}`);
   };
 
   const handleBroker = (id) => {
-    navigate(`/team/member/${id}`);
+    navigate(`/team/broker/${id}`);
   };
   const fetcher = async () => {
     const res = await axios('https://api.bulloakltd.com/team/members/all/');
@@ -31,9 +27,9 @@ export default function Team() {
   };
   useEffect(() => {
     fetcher();
-  }, []); 
+  }, []);
 
-  console.log('broker =>',brokers);
+  console.log('broker =>', brokers);
   return (
     <Layout>
       <header
@@ -69,12 +65,12 @@ export default function Team() {
             and support to clients like you.
           </h2>
 
-          <div 
-          className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))]  w-full mx-auto  gap-1">
+          <div className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))]  w-full mx-auto  gap-1">
             {teamMembersData?.map((items, index) => (
-              <div className="item  relative rounded-[15px] overflow-hidden h-[250px] cursor-pointer" 
-              key={items?.id}
-              onClick={() => handleTeam(items?.id)}
+              <div
+                className="item  relative rounded-[15px] overflow-hidden h-[250px] cursor-pointer"
+                key={items?.id}
+                onClick={() => handleTeam(items?.id)}
               >
                 <div className=" border- p-2 rounded-[15px]  border-[] flex flex-col absolute top-0 left-0 w-full h-full bg-[rgba(255,100,50,0)] z-20 ImageHover">
                   <div className="flex px-3">
@@ -121,14 +117,13 @@ export default function Team() {
 
           <div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))]  w-full  mx-auto gap-2 xl:py-[90px]">
             {brokers?.map((broker, index) => (
-              <div
-                className=" flex flex-col items-end"
-                key={index}
-              >
-                <div
-                className='w-[120px] h-[150px] translate-x-[-30px] translate-y-[30px] border-4 border-white' 
-                >
-                  <img src={broker?.image} alt="" className='w-full h-full object-cover object-center bg-white' />
+              <div className=" flex flex-col items-end" key={index}>
+                <div className="w-[120px] h-[150px] translate-x-[-30px] translate-y-[30px] border-4 border-white">
+                  <img
+                    src={broker?.image}
+                    alt=""
+                    className="w-full h-full object-cover object-center bg-white"
+                  />
                 </div>
                 <div className="content border-2 w-full p-5 pt-10 border-[#8E0789] ">
                   <p className="font-[laviossa] ">{broker.name}</p>
