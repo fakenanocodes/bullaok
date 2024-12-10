@@ -13,8 +13,10 @@ const TeamBroker = () => {
   const { subpage } = useParams();
   const {data: broker} = useSWR(`/broker/brokers/${subpage}/`)
 
+  console.log('broker =>', broker);
+
   useEffect(() => {
-    scrollToMid();
+    // scrollToMid();
   }, []);
 
   return (
@@ -46,12 +48,59 @@ const TeamBroker = () => {
               </div>
               <div className="lg:w-[40%] mt-5 md:mt-14 xl:mt-28 md:text-[26px] text-xs md:leading-10">
                 <div className=" bg-[#5d1e5b] h-1 md:h-2 -ml-12  md:-ml-44 mb-3 md:mb-10 "></div>
-                <p className="md:mt-16">{broker?.bio}</p>
+                <div className='text-lg flex flex-col gap-3'>
+                  <div className='flex gap-10 justify-between '>
+                    <b className='whitespace-nowrap'>Address: </b>
+                    <p className="w-[240px] capitalize text-left ">{broker?.address || "no data"}</p>
+                  </div>
+                  
+                  <div className='flex gap-10 justify-between'>
+                    <b className='whitespace-nowrap'>Major Licence: </b>
+                    <p className="w-[240px] text-left">{broker?.main_state_licenses || "no data"}</p>
+                  </div>
+                  <div className='flex gap-10 justify-between'>
+                    <b className='whitespace-nowrap'>Major Exams passed: </b>
+                    <p className="w-[240px] text-left">{broker?.main_exams_passed || "no data"}</p>
+                  </div>
+                  <div className='flex gap-10 justify-between'>
+                    <b className='whitespace-nowrap'>Years of experience: </b>
+                    <p className="w-[240px] text-left capitalize"> {broker?.years_of_experience || "no data"}</p>
+                  </div>
+                  <div className='flex gap-10 justify-between capitalize'>
+                    <b  className='whitespace-nowrap'>instagram profile: </b>
+                    <p className="w-[240px] text-left lowercase"> {broker?.instagram_profile || "No data"}</p>
+                  </div>
+
+                  <div className='flex gap-10 justify-between capitalize'>
+                    <b className='whitespace-nowrap'>linkedin profile: </b>
+                    <p className="w-[240px] text-left lowercase"> {broker?.linkedin_profile || "No data"}</p>
+                  </div>
+                  <div className='flex gap-10 justify-between capitalize'>
+                    <b className='whitespace-nowrap'>interests input: </b>
+                    <p className="w-[240px] text-left lowercase"> {broker?.interests_input || "No data"}</p>
+                  </div>
+                  <div className='flex gap-10 justify-between capitalize'>
+                    <b className='whitespace-nowrap'>regulator: </b>
+                    <p className="w-[240px] text-left capitalize"> {broker?.regulator || "No data"}</p>
+                  </div>
+                  <div className='capitalize flex flex-col justify-between'>
+                    <b>expertise</b>
+                    <p className="text-left capitalize"> {broker?.experience_and_expertise || "no data"}</p>
+                  </div>
+                </div>
               </div>
             </div>
-            <div>
-              <p className="mt-2 md:mt-7 text-xs md:text-[26px] md:leading-10">
+            <div className="mt-2 md:mt-7 text-lg md:text-xl flex flex-col">
+              <b>More About {broker?.name?.split(" ")[broker?.name?.split(" ").length - 1]}</b>
+              <p >
                 {broker?.bio}
+              </p>
+            </div>
+
+            <div className="mt-2 md:mt-7 text-lg md:text-xl flex flex-col capitalize">
+              <b>why choose me?</b>
+              <p >
+                {broker?.why_choose_me || "no data"}
               </p>
             </div>
             <div className="mt-5 md:mt-20 w-[60%]">
