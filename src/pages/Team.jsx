@@ -28,8 +28,6 @@ export default function Team() {
   useEffect(() => {
     fetcher();
   }, []);
-
-  console.log('broker =>', brokers);
   return (
     <Layout>
       <header

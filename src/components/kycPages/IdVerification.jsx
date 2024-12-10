@@ -57,7 +57,7 @@ const IdVerification = () => {
       toast.error('Please complete the required information');
       return;
     }
-    setKyc('selfie');
+      ('selfie');
     const moreDetails = {
       ...userDetails,
       country: selectedCountry,
