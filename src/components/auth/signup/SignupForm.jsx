@@ -22,8 +22,14 @@ const schema = yup.object().shape({
   referral_code: yup.string(),
 });
 const SignupForm = ({ setSignupComponent }) => {
-  const urlSearchParams = new URLSearchParams(window.location.search);
-  const referral = urlSearchParams.get('referral') | null;
+  const [referral, setReferral] = useState('');
+  useEffec(() => {
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const referralCode = urlSearchParams.get('referral') || null;
+    if (referralCode) {
+      setReferral(referralCode);
+    }
+  },[referral])
 
   const navigate = useNavigate();
   const [error, setError] = useState(null);
