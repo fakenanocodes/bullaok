@@ -1,7 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Alert, CircularProgress } from '@mui/material';
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -23,7 +23,7 @@ const schema = yup.object().shape({
 });
 const SignupForm = ({ setSignupComponent }) => {
   const [referral, setReferral] = useState('');
-  useEffec(() => {
+  useEffect(() => {
     const urlSearchParams = new URLSearchParams(window.location.search);
     const referralCode = urlSearchParams.get('referral') || null;
     if (referralCode) {

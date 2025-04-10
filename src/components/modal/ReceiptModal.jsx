@@ -35,7 +35,7 @@ const ReceiptModal = ({
     if (shareableDiv) {
       // Convert the div to a canvas
       const canvas = await html2canvas(shareableDiv);
-      const imageData = canvas.toDataURL("image/jpeg", 1.0); // Use JPEG format for better compatibility
+    const imageData = canvas.toDataURL("image/jpeg", 1.0); // Use JPEG format for better compatibility
       // Create a new PDF document
       const pdfWidth = 200;
       const pdfHeight = 300;
