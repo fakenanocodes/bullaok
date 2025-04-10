@@ -137,6 +137,7 @@ const SignupForm = ({ setSignupComponent }) => {
             value={referral}
             label={'Referral Code'}
             placeholder={'Referral Code'}
+            disabled
           />
         </div>
       </div>
