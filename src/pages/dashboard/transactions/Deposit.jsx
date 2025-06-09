@@ -2,7 +2,6 @@ import { ClickAwayListener } from '@mui/material';
 import axios from 'axios';
 import { useEffect, useMemo, useState } from 'react';
 import CancelIcon from '../../../components/utils/icons/CancelIcon';
-// import { Cookies } from 'react-cookie';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import { FaBitcoin, FaEthereum } from 'react-icons/fa';
@@ -17,162 +16,104 @@ const Deposit = () => {
   const [openModel, setOpenModel] = useState(false);
   const [successPage, setSuccessPage] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [showMobileTable, setShowMobileTable] = useState(false);
   const [wallet, setWallet] = useState('');
   const [amount, setAmount] = useState('');
   const [selectedCoin, setSelectedCoin] = useState('tether');
-  const [walletTypes, setWalletTypes] = useState('');
+  const [walletTypes, setWalletTypes] = useState('USDT');
   const [usdtAmount, setUsdtAmount] = useState('');
-  const [showNotify, setShowNotify] = useState(false);
   const [openSuccess, setOpenSuccess] = useState(false);
-  const { data: deposits } = useSWR(`/deposit/`);
-  const { data: depositWallet } = useSWR('/walletaddress/');
-  const navigate = useNavigate();
-  const walletType = ['litecoin', 'ripple', 'ethereum', 'bitcoin', 'tether'];
+
   const { data: user } = useSWR(`/user/`);
   const { data: walletAddress } = useSWR('/walletaddress/');
-  const { data: depositAmount } = useSWR('/deposit/');
+  const navigate = useNavigate();
 
-  
-  let walletMock = {
+  const Wallets = [
+    { name: 'bitcoin', value: 'BTC', icon: <FaBitcoin className="text-yellow-300" /> },
+    { name: 'ethereum', value: 'ETH', icon: <FaEthereum className="text-[#e2e2e6]" /> },
+    { name: 'litecoin', value: 'LTC', icon: <SiLitecoin className="text-[#A6A9AA]" /> },
+    { name: 'tether', value: 'USDT', icon: <SiTether className="text-[#26A17B]" /> },
+    { name: 'ripple', value: 'XRP', icon: <SiXrp className="text-[#FF6633]" /> },
+  ];
+
+  const [depositAccount, setDepositAccount] = useState(Wallets[0]);
+
+  const walletMock = {
     BTC: walletAddress?.bitcoin_address,
+    ETH: walletAddress?.ethereum_address, // Fixed typo here
     LTC: walletAddress?.litecoin_address,
-    XRP: walletAddress?.xrp_address,
-    ETH: walletAddress?.etherum_address,
     USDT: walletAddress?.usdt_address,
+    XRP: walletAddress?.xrp_address,
   };
 
-  useEffect(() => {
-    if (wallet == /*'LTC'*/ depositWallet?.litecoin_address) {
-      setSelectedCoin(walletType[0]);
-      setWalletTypes('LTC');
-    } else if (wallet == /*'XRP'*/ depositWallet?.xrp_address) {
-      setSelectedCoin(walletType[1]);
-      setWalletTypes('XRP');
-    } else if (wallet == /*'ETH'*/  depositWallet?.etherum_address) {
-      setSelectedCoin(walletType[2]);
-      setWalletTypes('ETH');
-    } else if (wallet == /*'BTC'*/  depositWallet?.bitcoin_address) {
-      setSelectedCoin(walletType[3]);
-      setWalletTypes('BTC');
-    } else if (wallet == /*'USDT'*/ depositWallet?.usdt_address) {
-      setSelectedCoin(walletType[4]);
-      setWalletTypes('USDT');
-    }
-  }, [wallet]);
-
-  // console.log('SELECTED COIN', selectedCoin);
-
+  // 🔁 Coin Conversion (with fix for USDT)
   useEffect(() => {
     async function convertToUSD(coin, amount) {
-      const url = `https://api.coingecko.com/api/v3/simple/price?ids=${coin}&vs_currencies=usd`;
-      const response = await fetch(url);
-      const data = await response.json();
-      // console.log('SELECTED COIN', data, 'AMOUNT', amount);
-
-      // Check if coin exists in the data
-      if (!data[coin]) {
-        throw new Error(`Coin ${coin} not found in API response`);
+      if (!amount || isNaN(amount)) {
+        setUsdtAmount('');
+        return;
       }
 
-      const price = data[coin]?.usd; // Get USD price per coin
-      const usdEquivalent = amount / price; // Calculate USD equivalent
-      // console.log(usdEquivalent);
-      
+      try {
+        if (coin === 'tether') {
+          setUsdtAmount(amount); // Direct 1:1 for USDT
+          return;
+        }
 
-      return usdEquivalent.toFixed(5); // Return formatted USD amount
+        const url = `https://api.coingecko.com/api/v3/simple/price?ids=${coin}&vs_currencies=usd`;
+        const response = await fetch(url);
+        const data = await response.json();
+
+        if (!data[coin]) {
+          throw new Error(`Coin ${coin} not found`);
+        }
+
+        const price = data[coin].usd;
+        const usdEquivalent = amount / price;
+        setUsdtAmount(usdEquivalent.toFixed(5));
+      } catch (error) {
+        console.error('Conversion error:', error);
+        setUsdtAmount('');
+      }
     }
-    const fetcher = async () => {
-      let converted = await convertToUSD(selectedCoin, amount);
-      setUsdtAmount(converted);
-    };
-    fetcher();
-    
-  }, [walletTypes, amount,wallet]);
 
-  let userData = {
-    amount: usdtAmount,//coin amount
-    wallet_type: walletTypes || 'USDT',
-    wallet_address: wallet || depositWallet?.usdt_address,
-    usdt_amount: amount, //dollars amount
+    convertToUSD(selectedCoin, amount);
+  }, [selectedCoin, amount]);
+
+  const userData = {
+    amount: usdtAmount,
+    wallet_type: walletTypes,
+    wallet_address: wallet || walletMock?.USDT,
+    usdt_amount: amount,
   };
-  //usdtAmount
 
-  // console.log('userData', depositWallet);
-
-  const handleDeposit = ()=> {
-    if(amount !== 0 && amount !== null && amount !== ''){
-      setOpenModel(true)
+  const handleDeposit = () => {
+    if (amount) {
+      setOpenModel(true);
+    } else {
+      toast.error('Deposit amount is required');
     }
-    else{
-      toast.error('Deposit must not be empty');
-    }
-  }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.post('/deposit/',userData);
-      // console.log('RESPONSE', response);
+      await axios.post('/deposit/', userData);
       setLoading(false);
-      toast.success('success');
+      toast.success('Deposit successful');
       setOpenModel(false);
       setSuccessPage(true);
       setOpenSuccess(!openSuccess);
     } catch (error) {
-      setLoading(true);
-      // console.log(error);
+      console.error(error);
+      setLoading(false);
     }
   };
 
-  const handleOpenModel = () => {
-    if (amount) {
-      setOpenModel(true);
-    } else {
-      setShowNotify(true);
-    }
-  };
-
-  const Wallets = [
-    {
-      name: 'bitcoin',
-      value: 'BTC',
-      icon: <FaBitcoin className="text-yellow-300" />,
-    },
-    {
-      name: 'ethereum',
-      value: 'ETH',
-      icon: <FaEthereum className="text-[#e2e2e6]" />,
-    },
-    {
-      name: 'litecoin',
-      value: 'LTC',
-      icon: <SiLitecoin className="text-[#A6A9AA]" />,
-    },
-    {
-      name: 'tether',
-      value: 'USDT',
-      icon: <SiTether className="text-[#26A17B]" />,
-    },
-    {
-      name: 'ripple',
-      value: 'XRP',
-      icon: <SiXrp className="text-[#FF6633]" />,
-    },
-  ];
-  const [depositAccount, setDepositAccount] = useState(Wallets[0]);
   const availableBalance = useMemo(
     () => user?.profile?.available_balance,
     [user]
   );
-
-  
-  // useEffect(()=>{
-  //   setWallet(depositAccount?.value);
-  // },[depositAccount])
-  // console.log(wallet);
-  
   return (
     <div className=" h-[100%] no-scrollbar bg-white p-4 text-gray-700 overflow-scroll relative 00">
       <div className="py-3 px-20">
@@ -186,42 +127,42 @@ const Deposit = () => {
             <span className="font-semibold text-lg">From</span>
             <div className="flex flex-col gap-4">
               <span className="text-[#4A4A4A] font-medium">Select Account</span>
-              <div className="relative" onMouseLeave={() => setDropDown(false)}>
-                <button
-                  onClick={() => setDropDown(!dropDown)}
-                  className="bg-[#8E0789] p-4 w-full lg:w-[28vw] rounded-lg flex justify-between"
-                >
-                  <div className="flex gap-2 items-center">
-                    {depositAccount?.icon}
-                    <span className="text-white">{depositAccount?.value}</span>
-                  </div>      
-                  {dropDown ? (
-                    <ArrowDropUpIcon className="text-white" />
-                  ) : (
-                    <ArrowDropDownIcon className="text-white" />
-                  )}
-                </button>
-                {dropDown && (
-                  <div className="absolute transition-all duration-1000 top-[58px] right-0 left-0 bg-white backdrop-filter backdrop-blur-md bg-opacity-60 border border-gray-200 shadow-lg rounded-lg space-y-2">
-                    {Wallets?.map((wallet, index) => (
-                      <button
-                        key={index}
-                        onClick={() => {
-                          setDepositAccount(wallet);
-                          setWallet(walletMock[wallet?.value]);
-                          setDropDown(false);
-                        }}
-                        className="flex gap-2  items-center justify-start p-4 hover:bg-[#8E0789] w-full hover:rounded-lg hover:text-white"
-                      >
-                        {wallet?.icon}
-                        <span className="w-full h-full text-left">
-                          {wallet?.value}
-                        </span>
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
+                <div className="relative" onMouseLeave={() => setDropDown(false)}>
+                  <button
+                    onClick={() => setDropDown(!dropDown)}
+                    className="bg-[#8E0789] p-4 w-full lg:w-[28vw] rounded-lg flex justify-between"
+                  >
+                    <div className="flex gap-2 items-center">
+                      {depositAccount?.icon}
+                      <span className="text-white">{depositAccount?.value}</span>
+                    </div>
+                    {dropDown ? (
+                      <ArrowDropUpIcon className="text-white" />
+                    ) : (
+                      <ArrowDropDownIcon className="text-white" />
+                    )}
+                  </button>
+                  {dropDown && (
+                <div className="absolute top-[58px] right-0 left-0 bg-white border border-gray-200 shadow-lg rounded-lg space-y-2 z-50">
+                  {Wallets.map((wallet, index) => (
+                    <button
+                      key={index}
+                      onClick={() => {
+                        setDepositAccount(wallet);
+                        setWallet(walletMock[wallet.value]);
+                        setSelectedCoin(wallet.name);
+                        setWalletTypes(wallet.value);
+                        setDropDown(false);
+                      }}
+                      className="flex gap-2 items-center justify-start p-4 hover:bg-[#8E0789] w-full hover:rounded-lg hover:text-white"
+                    >
+                      {wallet.icon}
+                      <span>{wallet.value}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
+                </div>
             </div>
           </div>
           <div className="flex flex-col space-y-8 pb-5 justify-center ">
