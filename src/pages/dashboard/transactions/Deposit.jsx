@@ -18,8 +18,8 @@ const Deposit = () => {
   const [loading, setLoading] = useState(false);
   const [wallet, setWallet] = useState('');
   const [amount, setAmount] = useState('');
-  const [selectedCoin, setSelectedCoin] = useState('tether');
-  const [walletTypes, setWalletTypes] = useState('USDT');
+  const [selectedCoin, setSelectedCoin] = useState('bitcoin');
+  const [walletTypes, setWalletTypes] = useState('BTC');
   const [usdtAmount, setUsdtAmount] = useState('');
   const [openSuccess, setOpenSuccess] = useState(false);
 
