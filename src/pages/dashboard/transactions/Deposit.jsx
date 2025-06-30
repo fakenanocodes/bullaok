@@ -37,6 +37,7 @@ const Deposit = () => {
 
   const [depositAccount, setDepositAccount] = useState(Wallets[0]);
 
+// walletMock
   const walletMock = {
     BTC: walletAddress?.bitcoin_address,
     ETH: walletAddress?.ethereum_address, // Fixed typo here
