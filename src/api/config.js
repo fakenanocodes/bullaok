@@ -1,12 +1,12 @@
 import axios from 'axios';
 import { Cookies } from 'react-cookie';
+import { toast } from 'react-toastify';
 
 
 const cookies = new Cookies();
 const token = cookies.get('bk_access');
 
 export const API_URL = 'https://api.bulloakltd.com/';
-console.log(token);
 
 export default function init() {
   // Set base URL for Axios
@@ -26,14 +26,23 @@ export default function init() {
   axios.interceptors.response.use(
     response => response,
     error => {
-      if (error.response && error.response.status === 401) {
-        // removeCookies(["bk_access", "bk_refresh"]);
+      if("error --> ",error?.response?.data?.code === "token_not_valid"){
         cookies.remove("bk_access")
         cookies.remove("bk_refresh")
-        // Redirect to login page
+        cookies.remove("refresh")
+        toast.error("Your session has expired. Please log in again.")
+        window.location.href = '/login';
+        return  
+      }
+      else if (error.response && error.response.status === 401) {
+        cookies.remove("bk_access")
+        cookies.remove("bk_refresh")
+        cookies.remove("refresh")
         window.location.href = '/login';
       }
-      return Promise.reject(error);
+      else{
+        return Promise.reject(error);
+      }
     }
   );
 }
