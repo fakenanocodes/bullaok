@@ -4,7 +4,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { Avatar, CircularProgress } from '@mui/material';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Cookies } from 'react-cookie';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
@@ -19,6 +19,8 @@ import useAuthentication from '../../hooks/useAuthentication';
 import DashboardSidebar from './components/Sidebar';
 import IraIcon from '../../assets/icons/dashboard/IraIcon';
 import Profile from '../../assets/icons/dashboard/Profile';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 // import { overflow } from 'html2canvas/dist/types/css/property-descriptors/overflow';
 
 let menus = [null, 'Make a', 'Pending', 'Completed', 'All'];
@@ -35,6 +37,43 @@ const DashboardLayout = () => {
   const [currentNavigationMenu, setCurrentNavigationMenu] = useState(null);
 
   const navigate = useNavigate();
+
+
+  useEffect(() => {
+    const token = cookie.get('bk_access');
+
+    // Set token on mount if exists
+    if (token) {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    }
+
+    // Add Axios response interceptor
+    const interceptor = axios.interceptors.response.use(
+      response => response,
+      error => {
+        const code = error?.response
+        ?.data?.code;
+        const status = error?.response?.status;
+
+        if (code === 'token_not_valid' || status === 401) {
+          cookie.remove('bk_access');
+          cookie.remove('bk_refresh');
+          cookie.remove('refresh');
+          toast.error('Session expired. Please log in again.');
+          navigate('/login');
+        }
+
+        return Promise.reject(error);
+      }
+    );
+
+    // Cleanup interceptor on unmount
+    return () => {
+      axios.interceptors.response.eject(interceptor);
+    };
+  }, []);
+
+
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
   };

@@ -60,6 +60,7 @@ import Cannabis from '../pages/Cannabis';
 import Crypto from '../pages/Crypto';
 import FAQ from '../components/FAQ';
 import Verify from '../pages/Verify';
+// import ProtectedRoute from '../components/dashboardLoayout/ProtectedRoute';
 const router = createBrowserRouter([
   {
     path: '*',
@@ -225,7 +226,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/dashboard',
-    Component: DashboardLayout,
+    Component:  DashboardLayout,
     children: [
       {
         path: '',
@@ -237,7 +238,7 @@ const router = createBrowserRouter([
         Component: Kyc,
       },
       {
-        path: 'profile',
+        path: 'pr file',
         Component: Profile,
       },
       {
