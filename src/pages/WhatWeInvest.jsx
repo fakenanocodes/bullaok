@@ -8,27 +8,32 @@ export default function WhatWeInvest() {
     {
       bg_color: '#FFB803',
       title: 'Stock',
-      rate: '30%',
+      rate: '40%',
     },
     {
       bg_color: '#FF03A9',
       title: 'Cannabis',
-      rate: '30%',
+      rate: '32%',
     },
     {
       bg_color: '#B3B3CB',
       title: 'Forestry',
-      rate: '30%',
+      rate: '60%',
     },
     {
       bg_color: '#41073F',
       title: 'REAL ESTATE',
-      rate: '30%',
+      rate: '60%',
     },
     {
       bg_color: '#F24129',
       title: 'ETFs',
-      rate: '30%',
+      rate: '108%',
+    },
+    {
+      bg_color: '#8E0789',
+      title: 'Asset',
+      rate: '60%',
     },
   ];
 

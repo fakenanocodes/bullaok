@@ -154,7 +154,7 @@ const UserLogin = () => {
             />
             <p
               onClick={() => navigate('/forgot-password')}
-              className="text-[#8E0789] text-right my-2 cursor-pointer font-medium -mt-3"
+              className="text-[#8E0789] text-right my-2 cursor-pointer font-medium -mt-3 whi"
             >
               Forgot password?
             </p>
