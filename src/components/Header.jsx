@@ -20,6 +20,7 @@ const navItems = [
       { name: 'About us', route: '/about' },
       { name: 'History', route: '/history' },
       { name: 'Team', route: '/team' },
+      { name: 'Registration', route: '/registration' },
     ],
   },
   {
@@ -220,7 +221,7 @@ const Header = () => {
               >
                 {userDetails ? 'Dashboard' : 'Get Started'}
               </button>
-            </div>
+            </div>  
           </div>
         </div>
       </div>

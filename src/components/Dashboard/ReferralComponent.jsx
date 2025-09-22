@@ -200,7 +200,7 @@ export default function ReferralComponent() {
         <img src={images.referral} alt="" className="xl:w-2/6 w-full" />
         <div className="flex flex-col xl:w-2/5 w-full p-4 gap-8">
           <div className="gradient-referral hidden  w-full relative px-6 p-3 xl:flex justify-between items-center">
-            <CustomizedProgressBars referral={profile?.referrals?.length} />
+            {/* <CustomizedProgressBars referral={profile?.referrals?.length} /> */}
             <div className="absolute top-0  2xl:left-[100px] lg:left-[70px] left-8 flex flex-col gap-2  text-[#41073F] ">
               <div className="flex text-lg items-center font-bold rounded-lg justify-center h-12 w-20 bg-[#FFB803]">
                 $20.00
