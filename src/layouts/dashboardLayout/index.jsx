@@ -38,6 +38,8 @@ const DashboardLayout = () => {
 
   const navigate = useNavigate();
 
+  
+
 
   useEffect(() => {
     const token = cookie.get('bk_access');
@@ -105,11 +107,15 @@ const DashboardLayout = () => {
   }
   const Api = 'https://django-bulloak-finance-production.up.railway.app';
 
+  
+  const allCookies = cookie.getAll();
+
   const logoutOption = () => {
-    cookie.remove(`bk_access`);
-    cookie.remove(`bk_user`);  
-    navigate('/');
-    window.location.reload();
+    for(let k in allCookies){
+      cookie.remove(`bk_access`);
+    }
+    window.location.reload(); 
+    navigate('/login');
   };
 
  

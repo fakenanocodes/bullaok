@@ -61,6 +61,7 @@ import Crypto from '../pages/Crypto';
 import FAQ from '../components/FAQ';
 import Verify from '../pages/Verify';
 import Regitrastion from '../pages/Registration';
+import Disclosure from '../pages/Disclosure';
 // import ProtectedRoute from '../components/dashboardLoayout/ProtectedRoute';
 const router = createBrowserRouter([
   {
@@ -154,6 +155,10 @@ const router = createBrowserRouter([
   {
     path: 'team',
     Component: Team,
+  },
+  {
+    path: '/disclosure',
+    Component: Disclosure,
   },
   {
     path: '/registration',

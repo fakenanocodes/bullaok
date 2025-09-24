@@ -58,7 +58,8 @@ const navItems = [
     title: 'Hub',
     list: [
       { name: 'Learn', route: '/services/education' },
-      { name: 'FAQ', route: '/faq' }
+      { name: 'FAQ', route: '/faq' },
+      { name: 'Disclosure', route: '/disclosure' },
 
     ],
   },
