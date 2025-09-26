@@ -110,12 +110,25 @@ const DashboardLayout = () => {
   
   const allCookies = cookie.getAll();
 
-  const logoutOption = () => {
-    for(let k in allCookies){
-      cookie.remove(`bk_access`);
+  const logoutOption = async() => {
+    try {
+      const response = await axios.post('/user/auth/logout/')
+      toast.success('logged out successful', {
+        position: 'top-right',
+        autoClose: 2000,
+        hideProgressBar: false,
+      });
+      for(let k in allCookies){
+        cookie.remove(k);
+      }
+      navigate('/login');
+    } catch (err) {
+      toast.error('failed to logout', {
+        position: 'top-right',
+        autoClose: 2000,
+        hideProgressBar: false,
+      });
     }
-    window.location.reload(); 
-    navigate('/login');
   };
 
  

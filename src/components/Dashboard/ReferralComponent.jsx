@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import Box from '@mui/material/Box';
 import LinearProgress, {
@@ -9,10 +9,15 @@ import { AiOutlineQuestion } from 'react-icons/ai';
 import { FaEdit } from 'react-icons/fa';
 import { MdOutlineArrowBackIos } from 'react-icons/md';
 import { PiMedalMilitaryFill } from 'react-icons/pi';
+import { GiShare } from "react-icons/gi";
+import { IoIosCopy } from "react-icons/io";
+import { GrTransaction } from "react-icons/gr";
+import { GoTriangleDown } from "react-icons/go";
+
 
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { RWebShare } from 'react-web-share';
+// import { RWebShare } from 'react-web-share';
 import useSWR from 'swr';
 import { images } from '../../assets';
 
@@ -32,7 +37,6 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 
 function CustomizedProgressBars({ referral }) {
   const [progressValue, setProgressValue] = useState(0);
-  console.log(referral);
   useEffect(() => {
     if (referral === null) {
       setProgressValue(0);
@@ -96,35 +100,55 @@ function MobileCustomizedProgressBars({ referral }) {
 const descriptionArray = [
   {
     text: 'Invite your friends using your referral code',
-    icon: <AiOutlineQuestion />,
+    icon: <AiOutlineQuestion className='text-3xl border min-w-7 p-1.5 h-7 rounded-full' />,
   },
   {
     text: 'Your code will be entered on registration',
-    icon: <FaEdit />,
+    icon: <FaEdit className='text-3xl border min-w-7 p-1.5 h-7 rounded-full' />,
   },
   {
     text: 'You receive reward points for every successful referral',
-    icon: <PiMedalMilitaryFill />,
+    icon: <PiMedalMilitaryFill className='text-3xl border min-w-7 p-1.5 h-7 rounded-full' />,
   },
 ];
 
 const boxesData = [
-  { icon: images.share, text: 'Share your invitation code/link' },
-  { icon: images.signin, text: 'Friends sign in with your invitation codes' },
-  { icon: images.transaction, text: 'Friends make the first transaction' },
+  { icon: <IoIosCopy className='text-3xl border min-w-7 p-1.5 h-7 rounded-full' />, text: 'copy or share your invitation link' },
+  { icon: <GiShare className='text-3xl border min-w-7 p-1.5 h-7 rounded-full' />, text: 'Friends sign in with your invitation codes' },
+  { icon: <GrTransaction className='text-3xl border min-w-7 p-1.5 h-7 rounded-full' />, text: 'Friends make the first transaction' },
 ];
+
 export default function ReferralComponent() {
   const [isShareable, setIsShareable] = useState(false);
+  const [openShare, setOpenShare] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
   const { data: profile } = useSWR('user/');
-  const { data: referralData } = useSWR('referral/');
-  console.log("profile",referralData);
+  const { data: referralData, isLoading } = useSWR('referral/');
   const navigate = useNavigate();
-  // const { data: referral, isLoading } = useSWR('referral/');
+  
+  
   const referralCode = profile?.profile?.user?.username;
   const baseUrl = 'https://bulloakltd.com'; // Replace with your specific login URL
 
+  const shareRef = useRef(null);
+
   const referralUrl = `${baseUrl}/register?referral=${referralCode}`;
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (shareRef.current && !shareRef.current.contains(event.target)) {
+        setOpenShare(false);
+      }
+    };
+
+    if (openShare) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [openShare]);
 
   useEffect(() => {
     if (navigator.share) {
@@ -140,7 +164,12 @@ export default function ReferralComponent() {
       return await navigator.clipboard.writeText(text);
     } else {
       return document.execCommand('copy', true, text);
-    }
+    }   
+  }
+
+  const openShareHandler = () => {
+    setOpenShare(prev => !prev)
+    
   }
 
   // onClick handler function for the copy button
@@ -150,49 +179,47 @@ export default function ReferralComponent() {
       .then(() => {
         // If successful, update the isCopied state value
         setIsCopied(true);
+        toast.success("copied invite link to clipboard")
         setTimeout(() => {
           setIsCopied(false);
         }, 1500);
       })
       .catch((err) => {
-        console.log(err);
         toast.error('Failed to copy referral code.', {
           position: 'top-center',
           autoClose: 2000, // Close after 2 seconds
         });
-      });
+      }).finally(
+        setOpenShare(prev => !prev)
+      );
   };
 
   const handleShare = async () => {
     try {
       if (navigator.share) {
-        console.log('working');
         await navigator.share({
           title: 'Your Bulloak Referral Code',
           text: 'Invite your friends using your referral code',
           url: referralUrl,
         });
-        toast.success('shared successfully.', {
-          position: 'top-center',
-          autoClose: 2000, // Close after 2 seconds
-        });
+        setOpenShare(prev => !prev)
       } else {
         // Fallback for browsers that do not support the Web Share API
         throw new Error('Web Share API not supported');
       }
     } catch (error) {
-      console.error(error);
       toast.error('Failed to share referral code.', {
         position: 'top-center',
         autoClose: 2000, // Close after 2 seconds
-      });
+      })
+      setOpenShare(prev => !prev)
     }
   };
   return (
-    <div className="xl:px-8 px-2 ">
+    < div className="xl:px-8 px-2 bg-[#41073F] md:bg-inherit">
       <div
         onClick={() => navigate(-1)}
-        className="flex items-center gap-7 py-7 text-black text-2xl xl:hidden "
+        className="flex items-center gap-7 py-7 text-white text-2xl xl:hidden "
       >
         <MdOutlineArrowBackIos />
         <h2>Referral</h2>
@@ -201,22 +228,22 @@ export default function ReferralComponent() {
         <img src={images.referral} alt="" className="xl:w-2/6 w-full" />
         <div className="flex flex-col xl:w-2/5 w-full p-4 gap-8">
           <div className="gradient-referral hidden  w-full relative px-6 p-3 xl:flex justify-between items-center">
-            <CustomizedProgressBars referral={profile?.referrals?.length} />
+            <CustomizedProgressBars referral={5} />
             <div className="absolute top-0  2xl:left-[100px] lg:left-[70px] left-8 flex flex-col gap-2  text-[#41073F] ">
               <div className="flex text-lg items-center font-bold rounded-lg justify-center h-12 w-20 bg-[#FFB803]">
-                $20.00
+                 10%
               </div>
               <p className="text-white ml-2">1 user</p>
             </div>
             <div className="absolute top-0 2xl:left-[310px] lg:left-[210px] left-[100px] flex flex-col gap-2 ">
               <div className="rounded-lg  h-12 w-20 bg-[#FFB803] text-[#41073F] flex items-center font-bold justify-center">
-                $40.00
+                20%
               </div>
               <p className="text-white ml-2">2 users</p>
             </div>
             <div className="absolute top-0 right-0 flex flex-col gap-2">
               <div className="rounded-lg h-12 w-20   bg-[#FFB803] text-[#41073F] flex items-center font-bold justify-center">
-                $60.00
+                30%
               </div>
               <p className="text-white ml-2">3 users</p>
             </div>
@@ -227,50 +254,90 @@ export default function ReferralComponent() {
                 referral={profile?.referrals?.length}
               />
               <div className="absolute -top-2 rounded-lg  left-8 md:left-[70px] h-8  w-12 bg-[#FFB803] text-[#41073F] flex p-3 text-xs items-center font-bold justify-center">
-                $20.00
+                10%
               </div>
               <div className="absolute -top-2 rounded-lg  left-[150px] md:left-[170px] h-8  w-12 bg-[#FFB803] text-[#41073F] p-3 text-xs flex items-center font-bold justify-center">
-                $40.00
+                20%
               </div>
               <div className="absolute -top-2 rounded-lg h-8  w-10  right-0 bg-[#FFB803] text-[#41073F] flex items-center font-bold p-3 text-xs justify-center">
-                $60.00
+                30%
               </div>
             </div>
           </div>
-          {/* <button
-            onClick={handleShare}
-            className="bg-[#FFB803] w-full block text-black text-xl rounded-xl p-4"
-          >
-            Invite now
-          </button> */}
-          <div className="bg-white h-[300px] rounded-xl w-full xl:px-6 xl:p-3 ">
-            <h2 className="text-black text-center my-4">How do you get?</h2>
-            <hr />
-            <div className="flex  justify-around mt-9 ">
-              {boxesData?.map((box, index) => (
-                <RWebShare
-                  data={{
-                    title: 'Your Bulloak Referral Code',
-                    text: 'Invite your friends using your referral code',
-                    url: referralUrl,
-                  }}
-                  onClick={() => console.log('shared successfully!')}
-                  key={index}
-                >
-                  <button
+
+          <div className="shadow-[1px_1px_10px_#c6a6c6] h-fit rounded-xl w-full flex items-start ">
+            
+            {/* ------------ the left side ------------  */}
+
+            <div className="h-fit w-full xl:px-6 xl:p-3 ">
+              <h2 className="text-white text-center my-4">How do you get?</h2>
+              <hr />
+              <div className="flex flex-col justify-around mt-9 gap-4 ">
+                {boxesData?.map((box, index) => (
+                  < button
                     onClick={() => {}}
                     key={index}
-                    className="box w-[90px] text-[#925C90]"
+                    className="box w-full flex bg-[#380837] rounded-lg p-2 text-white text-sm items-center text-left gap-3 cursor-default"
                   >
-                    <div className="border flex items-center justify-center rounded-lg xl:p-4 p-2 border-[#925C90] mb-2">
-                      <img src={box.icon} alt="" />
-                    </div>
+                    {box.icon}
                     <p>{box.text}</p>
                   </button>
-                </RWebShare>
-              ))}
+                ))}
+              </div>
+            </div> 
+
+            {/* ------------  the right side ------------  */}
+
+            <div className="h-fit w-full border-l xl:px-6 xl:p-3 ">
+              <h2 className="text-white text-center my-4">How do you get?</h2>
+              <hr />
+              <div className="flex flex-col justify-around mt-9 gap-4 ">
+                {descriptionArray?.map((box, index) => (
+                  < button
+                    onClick={() => {}}
+                    key={index}
+                    className="box w-full flex bg-[#380837] rounded-lg p-2 text-white text-sm items-center text-left gap-3 cursor-default"
+                  >
+                    {box.icon}
+                    <p>{box?.text}</p>
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
+          
+          <div className='relative'>
+            <button
+              onClick={openShareHandler}
+              className="bg-[#FFB803] block  w-full rounded-xl p-4 hover:scale-95 transform transition-all duration-200 relative z-10"
+            >
+              Share or copy your code
+            </button>
+              
+            <div
+              ref={shareRef}
+              className={`flex flex-col items-center w-fit h-fit absolute right-0 bottom-full translate-y-6 z-0 transition-all duration-300 origin-bottom-right ${openShare? "scale-100" : "scale-0 translate-x-10"}`}
+            >
+              <div className='border flex flex-col gap-4 w-fit px-10 py-5 bg-[rgb(229,221,221)] rounded-xl'>
+                <button
+                  onClick={handleCopyClick}
+                  className="shadow-[1px_1px_4px_#c6a6c6] bg-[#72076E] hover:bg-[#4e104c] w-fit block rounded-xl p-4 hover:scale-95 transition-all duration-200"
+                >
+                  <span>{isCopied ? 'Copied!' : 'Copy your link'}</span>
+                </button>
+                <button
+                  onClick={handleShare}
+                  className="shadow-[1px_1px_4px_#c6a6c6] bg-[#72076E] hover:bg-[#4e104c] w-fit block rounded-xl p-4 hover:scale-95 transition-all duration-200"
+                >
+                  <span>{'share your link'}</span>
+                </button>
+              </div>
+
+              <GoTriangleDown className='text-4xl w-fit transform -translate-y-1/3' />
+
+            </div>
+          </div>
+        
         </div>
       </div>
       <hr className="border-[#8E0789] xl:block hidden" />
@@ -281,68 +348,53 @@ export default function ReferralComponent() {
             {profile?.profile?.user?.username}
           </p>
 
-          <h3 className="text-[#C771C4]">Referred Users</h3>
+          <h3 className="text-[#C771C4]">Number of referred Users</h3>
           <h3 className="xl:text-[70px] text-[30px]">
             {' '}
             {profile?.referrals?.length}
           </h3>
         </div>
 
-        <div className="flex flex-col xl:w-2/6 w-full  gap-4 mt-4">
-          {descriptionArray?.map((item, index) => (
-            <div
-              key={index}
-              className="flex items-center justify-between gap-6"
-            >
-              <div className="flex items-center justify-between w-full gap-4">
-                {item?.icon && (
-                  <span className="xl:text-3xl text-xl border border-[#FF9EFB] xl:p-4 p-3 rounded-[40px] flex items-center justify-center">
-                    { item?.icon }
-                  </span>
-                )}
-                <p
-                  key={index}
-                  className="text-start rounded-lg  px-4 w-full xl:text-xl text-[13px] bg-[#41073F] p-2"
-                >
-                  {item?.text}
-                </p>
-              </div>
+        <div className="shadow-[1px_1px_10px_#c6a6c6] h-fit rounded-xl flex items-start mt-10">
+
+          <div className="max-h-96 w-full xl:px-6 xl:p-3 flex flex-col items-center ">
+            <h2 className="text-white text-center my-4 w-fit border-b px-5 pb-3">Referred Users</h2>
+            {/* <hr /> */}
+            <div className="flex flex-col justify-around gap-4 max-h-72 overflow-auto no-scrollbar">
+              
+              {
+                isLoading? (
+                  <span>referrals loading . . .</span>
+                ):referralData?.length > 0?
+                (<table>
+                  <thead >
+                    <th>Name</th>
+                    <th>User Name</th>
+                    <th>bonus</th>
+                  </thead>
+                    <tbody className=''>
+                      {
+                        referralData?.map((refer,ind) => (
+                          <tr className='text-center border-t mt-3'>
+                            <td>{refer?.referred_user?.first_name + " " + refer?.referred_user?.last_name}</td>
+                            <td>{refer?.referred_user?.username}</td>
+                            <td>${refer?.referral_profit}</td>
+                          </tr>
+                        ))
+                      }
+                    </tbody>
+                  </table>
+                ):(
+                  <div className='flex flex-col items-center gap-1'>
+                    <em>you have no referrals</em>
+                    <i>click the button above to invite your friend</i>
+                  </div>
+                )
+              }
             </div>
-          ))}
-          {isShareable && (
-            <button
-              onClick={handleShare}
-              className="bg-[#FFB803] xl:block hidden  w-full rounded-xl p-4"
-            >
-              Share your code
-            </button>
-          )}
-          {!isShareable && (
-            <button
-              onClick={handleCopyClick}
-              className="bg-[#FFB803] xl:block hidden  w-full rounded-xl p-4"
-            >
-              <span>{isCopied ? 'Copied!' : 'Copy your code'}</span>
-            </button>
-          )}
+          </div>
         </div>
       </div>
-      {isShareable && (
-        <button
-          onClick={handleShare}
-          className="bg-[#FFB803] xl:hidden block mt-4 w-full rounded-xl p-4"
-        >
-          Share your code
-        </button>
-      )}
-      {!isShareable && (
-        <button
-          onClick={handleCopyClick}
-          className="bg-[#FFB803] xl:hidden block mt-4 w-full rounded-xl p-4"
-        >
-          <span>{isCopied ? 'Copied!' : 'Copy your code'}</span>
-        </button>
-      )}
     </div>
   );
 }
