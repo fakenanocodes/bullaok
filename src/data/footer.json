@@ -2,33 +2,28 @@
   {
     "FAQ": {
       "categories": [
-        "Fee Schedule",
-        "Account",
-        "Margin Trading",
-        "How To File an Inquiry",
-        "Customer Relationship Summary"
+        {"title": "Fee Schedule","link": "/faq"},
+        {"title": "Account","link": "/faq"},
+        {"title": "Margin Trading","link": "/faq"},
+        {"title": "How To File an Inquiry","link": "/faq"},
+        {"title": "Customer Relationship Summary","link": "/faq"}
       ]
     }
   },
   {
     "About": {
       "categories": [
-        "Our Story",
-        "Careers",
-        "Blog",
-        "Broker Check",
-        "Our Execution Quality",
-        "Script Editor"
+        {"title": "Blog","link": "https://news.bulloakltd.com/"},
+        {"title": "Broker Check","link": "/brokers"}
       ]
     }
   },
   {
     "Terms": {
       "categories": [
-        "Privacy Policy",
-        "Business Continuity Plan",
-        "Disclosures",
-        "Data Disclaimer"
+        {"title": "Privacy Policy","link": "/disclosure"},
+        {"title": "Business Continuity Plan","link": "/dashboard/plan"},
+        {"title": "Disclosures","link": "/disclosure"}
       ]
     }
   },
@@ -38,3 +33,5 @@
     }
   }
 ]
+
+

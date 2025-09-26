@@ -13,6 +13,7 @@ import { GiShare } from "react-icons/gi";
 import { IoIosCopy } from "react-icons/io";
 import { GrTransaction } from "react-icons/gr";
 import { GoTriangleDown } from "react-icons/go";
+import { CgDollar } from "react-icons/cg";
 
 
 import { useNavigate } from 'react-router-dom';
@@ -99,23 +100,28 @@ function MobileCustomizedProgressBars({ referral }) {
 
 const descriptionArray = [
   {
-    text: 'Invite your friends using your referral code',
+    text: 'Go to your dashboard',
     icon: <AiOutlineQuestion className='text-3xl border min-w-7 p-1.5 h-7 rounded-full' />,
   },
   {
-    text: 'Your code will be entered on registration',
+    text: 'click on your profile',
+    icon: <PiMedalMilitaryFill className='text-3xl border min-w-7 p-1.5 h-7 rounded-full' />,
+  },
+  {
+    text: 'Seleect "Refer and Get Bonus"',
     icon: <FaEdit className='text-3xl border min-w-7 p-1.5 h-7 rounded-full' />,
   },
   {
-    text: 'You receive reward points for every successful referral',
-    icon: <PiMedalMilitaryFill className='text-3xl border min-w-7 p-1.5 h-7 rounded-full' />,
+    text: 'click on "copy and share link"',
+    icon: <IoIosCopy className='text-3xl border min-w-7 p-1.5 h-7 rounded-full' />,
   },
 ];
 
 const boxesData = [
   { icon: <IoIosCopy className='text-3xl border min-w-7 p-1.5 h-7 rounded-full' />, text: 'copy or share your invitation link' },
-  { icon: <GiShare className='text-3xl border min-w-7 p-1.5 h-7 rounded-full' />, text: 'Friends sign in with your invitation codes' },
+  { icon: <GiShare className='text-3xl border min-w-7 p-1.5 h-7 rounded-full' />, text: 'Invite your friends using your referral code' },
   { icon: <GrTransaction className='text-3xl border min-w-7 p-1.5 h-7 rounded-full' />, text: 'Friends make the first transaction' },
+  { icon: <CgDollar className='text-3xl border min-w-7 p-1.5 h-7 rounded-full' />, text: 'You receive reward points' },
 ];
 
 export default function ReferralComponent() {
@@ -270,7 +276,7 @@ export default function ReferralComponent() {
             {/* ------------ the left side ------------  */}
 
             <div className="h-fit w-full xl:px-6 xl:p-3 ">
-              <h2 className="text-white text-center my-4">How do you get?</h2>
+              <h2 className="text-white text-center my-4">How to get bonus</h2>
               <hr />
               <div className="flex flex-col justify-around mt-9 gap-4 ">
                 {boxesData?.map((box, index) => (
@@ -289,7 +295,7 @@ export default function ReferralComponent() {
             {/* ------------  the right side ------------  */}
 
             <div className="h-fit w-full border-l xl:px-6 xl:p-3 ">
-              <h2 className="text-white text-center my-4">How do you get?</h2>
+              <h2 className="text-white text-center my-4">where to get my link</h2>
               <hr />
               <div className="flex flex-col justify-around mt-9 gap-4 ">
                 {descriptionArray?.map((box, index) => (

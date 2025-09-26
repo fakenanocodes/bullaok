@@ -149,11 +149,11 @@ const DashboardLayout = () => {
       name: 'Running Investment',
       path: 'investment/running',
     },
-    {
-      icon: <IraIcon />,
-      name: 'IRA',
-      path: 'ira',
-    },
+    // {
+    //   icon: <IraIcon />,
+    //   name: 'IRA',
+    //   path: 'ira',
+    // },
     {
       icon: <Profile />,
       name: 'Profile',

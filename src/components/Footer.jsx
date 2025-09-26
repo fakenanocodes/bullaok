@@ -6,6 +6,9 @@ import useSWR from 'swr';
 import data from '../data/footer.json';
 import FooterItem from './common/FooterItem';
 import { scrollToTop } from '../actions/utils';
+
+
+
 export default function Footer() {
   const navigate = useNavigate();
   const { data: footer } = useSWR('/');
