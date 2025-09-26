@@ -24,7 +24,7 @@ const SmartAdvisor = () => {
     <div>
       <MainLayout>
         <div
-          className="min-h-[100vh] relative max-xl:bg-left"
+          className="min-h-[100vh] w-full relative max-xl:bg-left"
           style={{
             backgroundImage: `url(${smartbg})`,
             backgroundSize: 'cover',
@@ -32,15 +32,18 @@ const SmartAdvisor = () => {
             color: 'white',
           }}
         >
-          <div className=" translate-y-[-50%] absolute top-[50%] left-[10%]">
+          <div className=" translate-y-[-50%] absolute top-[50%] left-0 sm:left-[10%] px-3">
             <div className="mb-5">
-              <h1 className="font-extrabold flex gap-3 text-[3.5rem] max-xl:text-[3rem]  max-lg:text-[2.5rem] max-md:text-[2rem] max-sm:text-[1.5rem]">
-                <span className="text-white mb-10">BULLOAK</span>
+              <h1 className="font-extrabold block sm:flex text-center gap-3 pb-2 sm:pb-0 text-[3.5rem] w-full max-xl:text-[3rem]  max-lg:text-[2.5rem] max-md:text-[2rem] max-sm:text-[1.5rem]">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-yellow-400 to-indigo-700 mb-10">BULLOAK</span> {" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-yellow-400 to-indigo-700 mb-10">
                   SMART
                 </span>
 
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-yellow-400 to-indigo-700 mb-10">
+                <br className='block sm:hidden'/>
+                
+
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-yellow-400 to-indigo-700 mb-10 pt-3 sm:pt-0">
                   ADVISOR
                 </span>
               </h1>
@@ -88,7 +91,7 @@ const SmartAdvisor = () => {
               </p>
             </div>
 
-            <ul className="list-disc p-0 m-0   text-[1.2rem]  font-opensans-semibold leading-[2rem] max-sm:text-[1rem]">
+            <ul className="list-disc p-0 m-0 list-inside text-[1.2rem]  font-opensans-semibold leading-[2rem] max-sm:text-[1rem]">
               <li>Low Minimum Investment</li>
               <li>Personalized risk distribution</li>
               <li>Hands-off Portfolio Monitoring</li>

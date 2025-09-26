@@ -25,6 +25,9 @@ const Deposit = () => {
 
   const { data: user } = useSWR(`/user/`);
   const { data: walletAddress } = useSWR('/walletaddress/');
+
+  console.log("wallet",walletAddress);
+  
   const navigate = useNavigate();
 
   const Wallets = [
@@ -40,7 +43,7 @@ const Deposit = () => {
 // walletMock
   const walletMock = {
     BTC: walletAddress?.bitcoin_address,
-    ETH: walletAddress?.ethereum_address, // Fixed typo here
+    ETH: walletAddress?.etherum_address, // Fixed typo here
     LTC: walletAddress?.litecoin_address,
     USDT: walletAddress?.usdt_address,
     XRP: walletAddress?.xrp_address,
@@ -55,10 +58,10 @@ const Deposit = () => {
       }
 
       try {
-        if (coin === 'tether') {
-          setUsdtAmount(amount); // Direct 1:1 for USDT
-          return;
-        }
+        // if (coin === 'tether') {
+        //   setUsdtAmount(amount); // Direct 1:1 for USDT
+        //   return;
+        // }
 
         const url = `https://api.coingecko.com/api/v3/simple/price?ids=${coin}&vs_currencies=usd`;
         const response = await fetch(url);
@@ -70,7 +73,7 @@ const Deposit = () => {
 
         const price = data[coin].usd;
         const usdEquivalent = amount / price;
-        setUsdtAmount(usdEquivalent.toFixed(5));
+        coin === 'tether'? setUsdtAmount(usdEquivalent.toFixed(2)) : setUsdtAmount(usdEquivalent.toFixed(5));
       } catch (error) {
         console.error('Conversion error:', error);
         setUsdtAmount('');
@@ -115,6 +118,11 @@ const Deposit = () => {
     () => user?.profile?.available_balance,
     [user]
   );
+
+  const handleCopyWallet = (walletAddress) => {
+    navigator.clipboard.writeText(walletAddress);
+    toast.success("wallet address copied to clipboard");
+  };
   return (
     <div className=" h-[100%] no-scrollbar bg-white p-4 text-gray-700 overflow-scroll relative 00">
       <div className="py-3 px-20">
@@ -191,12 +199,21 @@ const Deposit = () => {
             </div>
             <div className="flex flex-col gap-2 w-full lg:w-fit">
               <span>Deposit Wallet Address</span>
-              <input
-                type="text"
-                className="w-full lg:w-[28vw] rounded-lg p-3  border-[#8E0789]"
-                value={wallet || walletMock?.BTC}
-                disabled
-              />
+              <div className="flex gap-2 w-full lg:w-fit">
+                <input
+                  type="text"
+                  className="w-full lg:max-w-[28vw] rounded-lg p-3  border-[#8E0789]"
+                  value={wallet || walletMock?.BTC}
+                  disabled
+                />
+                <button 
+                  type='button'
+                  className='rounded-lg p-3 border  border-[#8E0789] w-fit whitespace-nowrap hover:scale-95 transition-all duration-300'
+                  onClick={() => handleCopyWallet(wallet || walletMock?.BTC)}
+                >
+                  copy Address
+                </button>
+              </div>
             </div>
           </div>
 

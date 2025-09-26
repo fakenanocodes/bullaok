@@ -38,6 +38,8 @@ const DashboardLayout = () => {
 
   const navigate = useNavigate();
 
+  
+
 
   useEffect(() => {
     const token = cookie.get('bk_access');
@@ -105,11 +107,28 @@ const DashboardLayout = () => {
   }
   const Api = 'https://django-bulloak-finance-production.up.railway.app';
 
-  const logoutOption = () => {
-    cookie.remove(`bk_access`);
-    cookie.remove(`bk_user`);  
-    navigate('/');
-    window.location.reload();
+  
+  const allCookies = cookie.getAll();
+
+  const logoutOption = async() => {
+    try {
+      const response = await axios.post('/user/auth/logout/')
+      toast.success('logged out successful', {
+        position: 'top-right',
+        autoClose: 2000,
+        hideProgressBar: false,
+      });
+      for(let k in allCookies){
+        cookie.remove(k);
+      }
+      navigate('/login');
+    } catch (err) {
+      toast.error('failed to logout', {
+        position: 'top-right',
+        autoClose: 2000,
+        hideProgressBar: false,
+      });
+    }
   };
 
  
@@ -130,11 +149,11 @@ const DashboardLayout = () => {
       name: 'Running Investment',
       path: 'investment/running',
     },
-    {
-      icon: <IraIcon />,
-      name: 'IRA',
-      path: 'ira',
-    },
+    // {
+    //   icon: <IraIcon />,
+    //   name: 'IRA',
+    //   path: 'ira',
+    // },
     {
       icon: <Profile />,
       name: 'Profile',

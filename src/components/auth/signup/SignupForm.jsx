@@ -22,15 +22,12 @@ const schema = yup.object().shape({
   referral_code: yup.string(),
 });
 const SignupForm = ({ setSignupComponent }) => {
-  const [referral, setReferral] = useState('');
-  useEffect(() => {
-    const urlSearchParams = new URLSearchParams(window.location.search);
-    const referralCode = urlSearchParams.get('referral') || null;
-    if (referralCode) {
-      setReferral(referralCode);
-    }
-  },[referral])
+  const urlSearchParams = new URLSearchParams(window.location.search);
+  const referralCode = urlSearchParams.get('referral') || null;
 
+  const [referral, setReferral] = useState(referralCode);
+
+  
   const navigate = useNavigate();
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -39,6 +36,7 @@ const SignupForm = ({ setSignupComponent }) => {
     getValues,
     register,
     reset,
+    setValue,
     handleSubmit,
     formState: { errors },
   } = useForm({
@@ -47,6 +45,13 @@ const SignupForm = ({ setSignupComponent }) => {
     reValidateMode: 'onSubmit',
     mode: 'onChange',
   });
+  
+  useEffect(() => {
+    if (referralCode) {
+      setReferral(referralCode);
+      setValue('referral_code', referralCode); 
+    }
+  },[referralCode])
 
   const onSubmit = async () => {
     const data = getValues();
@@ -55,7 +60,6 @@ const SignupForm = ({ setSignupComponent }) => {
       setIsLoading(true);
       const response = await axios.post('/user/auth/create/', data);
       dispatch(setCurrentSignupEmail(data?.email));
-      console.log(response);
       navigate('/verification');
       setIsLoading(false);
       toast.success('Account Created Succesfully', {
@@ -132,7 +136,6 @@ const SignupForm = ({ setSignupComponent }) => {
         <div className="w-full">
           <InputComponent
             error={errors?.referral_code?.message}
-            register={register('referral_code')}
             type={'text'}
             value={referral}
             label={'Referral Code'}

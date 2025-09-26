@@ -50,12 +50,13 @@ export default function Team() {
         </div>
       </header>
 
-      <main className="bg-[#fff] xl:px-[150px] lg:px-5 px-4">
+      <main className="bg-[#fff] xl:px-[150px] lg:px-5 px-4 pb-10 sm:pb-0">
         <section className="p-3">
           <h2 className=" w-full mx-auto font-[montserrat] lg:text-3xl text-[17px] text-justify lg:text-start py-8">
             <span className="text-[#8E0789] font-[laviossa] lg:text-[69px] text-[31px]">
               A
             </span>
+            {" "}
             little intro to the awesome team at Bulloak Finance Management.
             They&apos;re a group of finance experts who are passionate about
             helping people achieve their financial goals. These talented
