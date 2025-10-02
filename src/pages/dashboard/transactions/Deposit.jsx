@@ -43,7 +43,7 @@ const Deposit = () => {
 // walletMock
   const walletMock = {
     BTC: walletAddress?.bitcoin_address,
-    ETH: walletAddress?.etherum_address, // Fixed typo here
+    ETH: walletAddress?.ethereum_address, // Fixed typo here
     LTC: walletAddress?.litecoin_address,
     USDT: walletAddress?.usdt_address,
     XRP: walletAddress?.xrp_address,
