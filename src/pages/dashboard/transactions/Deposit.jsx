@@ -26,7 +26,7 @@ const Deposit = () => {
   const { data: user } = useSWR(`/user/`);
   const { data: walletAddress } = useSWR('/walletaddress/');
 
-  console.log("wallet",walletAddress);
+  // console.log("wallet",walletAddress);
   
   const navigate = useNavigate();
 
