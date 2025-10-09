@@ -1,41 +1,56 @@
-import React,{ useState } from 'react';
-import useSWR from 'swr';
+import React,{ useEffect, useMemo, useState } from 'react';
+import useSWR, { mutate } from 'swr';
 import {Doughnut} from 'react-chartjs-2'
 import {Chart as ChartJS, plugins} from 'chart.js/auto'
 import DashBoardHistory from '../DashBoardHistory';
 import { useNavigate } from 'react-router-dom';
 
 const IndividualRetirementAccount = () => {
-  const navigate = useNavigate();
-  const { data: user } = useSWR(`/user/deposit/`);
-  console.log(user)
+  const { data: user } = useSWR(`/user/`);
+
+  
+  const isMobileWidth = window.innerWidth < 640;
+
+  useEffect(() => {
+    mutate();
+  },[user])
+
+  const availableBalanceUser = useMemo(
+    () => user?.profile,
+    [user]
+  );
+
+  const totalBalance = Number(availableBalanceUser?.available_balance) + Number(availableBalanceUser?.ira_balance);
+
+  const remainingBalance = Number(availableBalanceUser?.available_balance);
+  const retirementBalance = Number(availableBalanceUser?.ira_balance);
+
   const retirementData = [
     {
       title: 'Total Balance',
-      amount: '$ 0.00',
+      amount: `$ ${totalBalance || 0.00}`,
     },
     {
-      title: 'Savings Balance',
-      amount: '$ 0.00',
+      title: 'Remaining Balance',
+      amount: `$ ${remainingBalance || 0.00}`,
+      percentage: `${((remainingBalance / totalBalance) * 100).toFixed(2)}%`,
     },
     {
       title: 'Retirement Balance',
-      amount: '$ 0.00',
+      amount: `$ ${retirementBalance || 0.00}`,
+      percentage: `${((retirementBalance / totalBalance) * 100).toFixed(2)}%`,
     },
   ];
 
-  // data for the doughnuts
   const doughnutData = [
     {
-      title: 'Saving balance',
-      amount: 2474.91,
-      percentage: '55%',
+      title: 'Remaining Balance',
+      amount: Number(availableBalanceUser?.available_balance),
       color: '#f324ec',
     },
     {
-      title: 'REtirement balance',
-      amount: 1274.91,
-      percentage: '25%',
+      title: 'Retirement Balance',
+      amount: Number(availableBalanceUser?.ira_balance),
       color: '#0e0c6d',
     },
   ];
@@ -44,10 +59,9 @@ const IndividualRetirementAccount = () => {
       data: doughnutData.map(data => data.amount),
       backgroundColor: doughnutData.map(data => data.color),
       borderWidth:0,
-      // boxShadow: '2 2 yellow',
     }]
   })
-  const [option,setOption] = useState({
+  const [option,setOptions] = useState({
     responsive:true,
     maintainAspectRatio: true,
     rotation: -90,
@@ -63,7 +77,7 @@ const IndividualRetirementAccount = () => {
   })
   return (
     <section className=" h-full px-6 font-poppins">
-      <div className="flex gap-5  my-6 flex-col sm:flex-row  ">
+      <div className="flex gap-10 items-center justify-between px-5  my-6 flex-col sm:flex-row  ">
         <article>
           <h2 className="font-semibold text-white ">
             Individual Retirement Account (IRA)
@@ -73,22 +87,6 @@ const IndividualRetirementAccount = () => {
             </p>
           </h2>
         </article>
-        <div className="">
-          <article className=" flex flex-col sm:flex-row  gap-4 font-semibold text-sm text-white">
-            <button 
-            className=" w-full sm:w-[184px] h-[52px] rounded-md border border-[#8E0789] hover:bg-[#8E07894D]"
-            onClick={()=>navigate('/dashboard/withdraw')}
-            >
-              Withdraw
-            </button>
-            <button 
-            className="text-white bg-[#8E0789]  w-full sm:w-[184px] h-[52px] rounded-md text-sm "
-            onClick={()=>navigate('/dashboard/deposit')}
-            >
-              Deposit
-            </button>
-          </article>
-        </div>
       </div>
       <div className="flex  justify-between flex-wrap gap-4 my-4">
         {retirementData.map((data, index) => (
@@ -112,58 +110,48 @@ const IndividualRetirementAccount = () => {
         </div>
         <div className="flex flex-col sm:flex-row items-center justify-center relative h-fit py-3 md:px-10 overflow-hidden">
             <div className='w-fit h-fit flex flex-col items-center pb-4 justify-center transform translate-y-[-20%] md:translate-y-[-10%]relative'>
-              <div className='w-[12rem] h-[9.5rem] md:w-[12rem] md:h-44'>
+              {
+                user?.profile && (
+                  <div className='w-[12rem] h-[9.5rem] md:w-[12rem] md:h-44'>
                 <Doughnut data={doughnut} options={option} className='h-full'/> 
               </div>
-
-              <div className='flex justify-between w-full absolute bottom-0'>
-                <div>
-                  <div className='flex gap-2 items-center'>
+                )
+              }
+              <div className='flex justify-between w-full absolute bottom-0 -translate-x-[10%] md:-translate-x-[5%]'>
+                <div  className='flex flex-col justify-center items-center'>
+                  <div className='flex items-center flex-col justify-center mt-5'>
                     <p className='w-[10px] h-[10px] bg-[#f324ec] rounded-[50%]'></p>
-                    <p className='font-[300] text-[13px]'>Savings</p>
+                    <p className='font-[300] text-[13px]'>{retirementData[1]?.title?.split(" ")[0]}</p>
                   </div>
-                  <p className='font-[500] text-[13px]'>55%</p>
+                  <p className='font-[500] text-[13px]'>{retirementData[1].percentage}</p>
                 </div>
-                <div>
-                  <div className='flex gap-2 items-center'>
+                <div className='flex flex-col justify-center items-center'>
+                  <div className='flex items-center flex-col justify-center mt-5'>
                     <p className='w-[10px] h-[10px] bg-[#0e0c6d] rounded-[50%]'></p>
-                    <p className='font-[300] text-[13px]'>Savings</p>
+                    <p className='font-[300] text-[13px]'>{retirementData[2]?.title?.split(" ")[0]}</p>
                   </div>
-                  <p className='font-[500] text-[13px]'>25%</p>
+                  <p className='font-[500] text-[13px]'>{retirementData[2].percentage}</p>
                 </div>
               </div>
-              {/* The percentage at th middle */}
-              <span className='absolute text-white font-[600] top-[60%] transform translate-x-[-40%] translate-y-[-40%] left-[40%] md:left-[50%] md:translate-x-[-50%]'>75%</span>
-            </div>
-            {/* <button className="  w-full sm:w-[40%] h-[47px] rounded-md border-[0.75px] border-[#8C89B480] text-[#AEABD8]  px-2 text-sm">
-              View all activity
-            </button> */}
+
+             </div>
         </div>
       </div>
       <div className=" bg-[#000000] p-4  rounded-[12px] mt-4">
         <article className="flex justify-between text-white text-[12px] sm:text-lg">
           <h4>Transaction History</h4>
-          <button
-            className="  w-[92px] sm:w-[184px] h-[30px] sm:h-[52px] rounded-md border border-[#FFB803] text-[#FFB803] hover:bg-[#FFB803] hover:text-white  text-[12px] sm:text-sm "
-            onClick={() => {
-              // setActiveOption(0);
-              navigate(`/dashboard/history`);
-            }}
-          >
-            More
-          </button>
         </article>
 
         <table className="table-auto my-4">
           <thead className="relative text-[#FFB803] text-[10px] sm:text-[16px] left-0 sm:left-[40px]">
             <tr>
               <th>Description</th>
-              <th>Type</th>
+              {!isMobileWidth && <th>Type</th>}
               <th>Amount</th>
               <th>Status</th>
             </tr>
           </thead>
-          <DashBoardHistory/>
+          <DashBoardHistory slice={7} isFilter/>
         </table>
       </div>
     </section>

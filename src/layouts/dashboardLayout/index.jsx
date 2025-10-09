@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { useEffect, useState } from 'react';
 import { Cookies } from 'react-cookie';
-import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
 import logo from '../../assets/dashboard/logo.svg';
 import HomeIcon from '../../assets/icons/dashboard/HomeIcon';
@@ -21,7 +21,7 @@ import IraIcon from '../../assets/icons/dashboard/IraIcon';
 import Profile from '../../assets/icons/dashboard/Profile';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-// import { overflow } from 'html2canvas/dist/types/css/property-descriptors/overflow';
+import IraPaymentModal from './components/Sidebar/IRaPaymentModal';
 
 let menus = [null, 'Make a', 'Pending', 'Completed', 'All'];
 
@@ -33,13 +33,16 @@ const DashboardLayout = () => {
   const profile = data?.profile;
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [activeOption, setActiveOption] = useState(null);
+  // const [iraFunds, setIraFunds] = useState(null);
   const [open, setOpen] = useState(false);
   const [currentNavigationMenu, setCurrentNavigationMenu] = useState(null);
+  const [isIraFunds, setIraFunds] = useState(false);
+
+  const location = useLocation().pathname;
+
+  console.log('location', location);
 
   const navigate = useNavigate();
-
-  
-
 
   useEffect(() => {
     const token = cookie.get('bk_access');
@@ -53,8 +56,7 @@ const DashboardLayout = () => {
     const interceptor = axios.interceptors.response.use(
       response => response,
       error => {
-        const code = error?.response
-        ?.data?.code;
+        const code = error?.response?.data?.code;
         const status = error?.response?.status;
 
         if (code === 'token_not_valid' || status === 401) {
@@ -73,8 +75,8 @@ const DashboardLayout = () => {
     return () => {
       axios.interceptors.response.eject(interceptor);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
 
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
@@ -88,12 +90,9 @@ const DashboardLayout = () => {
     );
   }
 
-  const handleNavigationMenu = (value) => {
+  const handleNavigationMenu = value => {
     const valueArray = value?.split(',');
 
-    // if () {
-    //   menus = menus.filter((menu) => menu !== '');
-    // }
     if (valueArray[0] === 'Make a') {
       navigate(`/dashboard/${valueArray[1].toLowerCase()}`);
     } else if (valueArray[0] !== '') {
@@ -107,18 +106,17 @@ const DashboardLayout = () => {
   }
   const Api = 'https://django-bulloak-finance-production.up.railway.app';
 
-  
   const allCookies = cookie.getAll();
 
-  const logoutOption = async() => {
+  const logoutOption = async () => {
     try {
-      const response = await axios.post('/user/auth/logout/')
+      const response = await axios.post('/user/auth/logout/');
       toast.success('logged out successful', {
         position: 'top-right',
         autoClose: 2000,
         hideProgressBar: false,
       });
-      for(let k in allCookies){
+      for (let k in allCookies) {
         cookie.remove(k);
       }
       navigate('/login');
@@ -131,7 +129,6 @@ const DashboardLayout = () => {
     }
   };
 
- 
   const icons = [
     { icon: <HomeIcon />, name: 'Home', path: '' },
     {
@@ -149,11 +146,11 @@ const DashboardLayout = () => {
       name: 'Running Investment',
       path: 'investment/running',
     },
-    // {
-    //   icon: <IraIcon />,
-    //   name: 'IRA',
-    //   path: 'ira',
-    // },
+    {
+      icon: <IraIcon />,
+      name: 'IRA',
+      path: 'ira',
+    },
     {
       icon: <Profile />,
       name: 'Profile',
@@ -161,7 +158,7 @@ const DashboardLayout = () => {
     },
     { icon: <LogoutIcon />, name: 'Logout' },
   ];
-  
+
   const profileImage =
     profile?.image ===
     'https://django-bulloak-finance-production.up.railway.app/media/r.jpg'
@@ -173,7 +170,6 @@ const DashboardLayout = () => {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    // width: '60%',
     height: '95vh',
     bgcolor: 'background.paper',
     borderRadius: 5,
@@ -196,8 +192,7 @@ const DashboardLayout = () => {
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <Box sx={style}
-          className='w-[95vw] md:w-[60%]'>
+          <Box sx={style} className="w-[95vw] md:w-[60%]">
             <div className="font-poppins flex flex-col space-y-4">
               <div className="flex justify-between font-medium">
                 {currentNavigationMenu[0]} {currentNavigationMenu[1]}
@@ -221,13 +216,11 @@ const DashboardLayout = () => {
             <img
               src={logo}
               alt=""
-              title='Home'
+              title="Home"
               className="bg-white p-2 w-14 h-14 cursor-pointer"
               onClick={() => navigate('/')}
             />
-            <button 
-            onClick={toggleMenu}
-            title='Menu'>
+            <button onClick={toggleMenu} title="Menu">
               <MenuIcon className="text-black" fontSize="large" />
             </button>
           </div>
@@ -235,55 +228,69 @@ const DashboardLayout = () => {
             onClick={() => navigate('/')}
             className="pt-4 hidden lg:flex cursor-pointer"
           >
-            <img src={logo} 
-            alt="" 
-            title='Home'
-            className="bg-white p-2 w-14 h-14" />
+            <img
+              src={logo}
+              alt=""
+              title="Home"
+              className="bg-white p-2 w-14 h-14"
+            />
           </div>
           <DashboardSidebar logout={logoutOption} />
         </div>
-        <div className="lg:flex-1 flex-col lg:space-y-4 ">
+        <div className="lg:flex-1 flex-col lg:space-y-4  px-3 sm:px-0">
           <div className="lg:p-5 flex lg:flex">
-            <div className="flex lg:w-full px-1 p-3  sm:space-x-10 rounded-[30px] bg-black bg-opacity-[34%] sm:justify-end items-center">
-              <div className=" flex gap-2 pr-2 items-center text-[#41073F] font-semibold">
-                <span
-                  className={` cursor-pointer ${
-                    activeOption === 0
-                      ? 'border-white p-3 rounded-lg border'
-                      : ''
-                  }`}
-                  onClick={() => {
-                    setActiveOption(0);
-                    navigate(`/dashboard/history`);
-                  }}
-                >
-                  <p className="bg-white px-3 sm:px-6 rounded-[4px] py-1 hidden sm:inline">
-                    <span className='hidden lg:inline'>Transaction </span>History
-                  </p>
-                </span>
-                {options?.map((option, index) => (
-                  <select
-                    key={index}
-                    className="p-1 rounded-md w-[calc(100%/3)] text-[12px] sm:text-md sm:w-fit space-y-2"
-                    defaultValue={JSON.stringify([menus[0], option])}
-                    onChange={(e) => handleNavigationMenu(e.target.value)}
+            <div className="flex w-full md:px-1 p-3  sm:space-x-10 rounded-[30px] bg-black bg-opacity-[34%] justify-end items-center mt-5 mb-2 px-5">
+              {
+                // Use startsWith so children routes like /dashboard/ira/settings still show the button
+                location.startsWith('/dashboard/ira') ? (
+                  <button
+                    className="bg-white px-3 sm:px-6 rounded-[4px] py-1 text-black cursor-pointer active:scale-95"
+                    onClick={() => setIraFunds(true)}
+                    aria-label="Manage IRA Funds"
                   >
-                    {menus?.map((menu, index) => (
-                      <option
+                    Manage IRA Funds
+                  </button>
+                ) : (
+                  <div className=" flex gap-2 pr-2 items-center text-[#41073F] font-semibold">
+                    <span
+                      className={` cursor-pointer ${
+                        activeOption === 0
+                          ? 'border-white p-3 rounded-lg border'
+                          : ''
+                      }`}
+                      onClick={() => {
+                        setActiveOption(0);
+                        navigate(`/dashboard/history`);
+                      }}
+                    >
+                      <p className="bg-white px-3 sm:px-6 rounded-[4px] py-1 hidden sm:inline">
+                        <span className="hidden lg:inline">Transaction </span>
+                        History
+                      </p>
+                    </span>
+                    {options?.map((option, index) => (
+                      <select
                         key={index}
-                        className="py-2 font-poppins text-[10px]"
-                        value={[menu, option]}
+                        className="p-1 rounded-md w-[calc(100%/3)] text-[12px] sm:text-md sm:w-fit space-y-2"
+                        defaultValue={JSON.stringify([menus[0], option])}
+                        onChange={e => handleNavigationMenu(e.target.value)}
                       >
-                        {menu} {''} {option}
-                      </option>
+                        {menus?.map((menu, mIdx) => (
+                          <option
+                            key={mIdx}
+                            className="py-2 font-poppins text-[10px]"
+                            value={[menu, option]}
+                          >
+                            {menu} {''} {option}
+                          </option>
+                        ))}
+                      </select>
                     ))}
-                  </select>
-                ))}
+                  </div>
+                )
+              }
 
-                
-              </div>
-          
-              <div className="hidden lg:block pr-2" title='Profile'>
+              <div className="hidden lg:block pr-2" title="Profile">
                 <Avatar
                   src={profileImage}
                   sx={{ height: 70, width: 70 }}
@@ -315,10 +322,10 @@ const DashboardLayout = () => {
                 </button>
                 <div className="flex space-y-0 flex-col">
                   {icons?.map((item, idx) => (
-                    <>
+                    <div key={idx}>
                       {item.name === 'Logout' ? (
                         <div
-                          onClick={()=>logoutOption()}
+                          onClick={() => logoutOption()}
                           className="flex space-x-4 items-center cursor-pointer hover:bg-white hover:text-[#575757] p-2"
                         >
                           {item?.icon}
@@ -327,7 +334,7 @@ const DashboardLayout = () => {
                           </span>
                         </div>
                       ) : (
-                        <Link to={item?.path} key={idx} className="text-white">
+                        <Link to={item?.path} className="text-white">
                           <div className="flex space-x-4 items-center hover:bg-white hover:text-[#575757] p-2">
                             {item?.icon}
                             <span className="text-lg font-semibold ">
@@ -336,7 +343,7 @@ const DashboardLayout = () => {
                           </div>
                         </Link>
                       )}
-                    </>
+                    </div>
                   ))}
                 </div>
               </div>
@@ -344,6 +351,13 @@ const DashboardLayout = () => {
           </div>
         </div>
       </div>
+      {/* <div
+        className={`fixed flex items-center justify-center inset-0 bg-black bg-opacity-50 transition-all duration-300 ease-in-out origin-bottom-right ${
+          isIraFunds ? 'scale-100' : 'scale-0 pointer-events-none'
+        }`}
+      >
+      </div> */}
+      <IraPaymentModal setIraFunds={setIraFunds} isIraFunds={isIraFunds} />
     </div>
   );
 };
