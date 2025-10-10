@@ -2,15 +2,20 @@ import React, { useEffect, useMemo, useState } from 'react';
 import useSWR from 'swr';
 import table_icon from '../src/assets/table_icon.png';
 
-const DashBoardHistory = () => {
+const DashBoardHistory = ({ isFilter, slice = 4}) => {
   const { data: transaction } = useSWR('/transaction/');
   let [arr, setArr] = useState();
+
+  const isMobileWidth = window.innerWidth < 640;
 
 
   useEffect(() => setArr(transaction), [transaction]);
 
+  
+    console.log("history arr", arr);
 
-  let dataArr = useMemo(() => arr?.slice(0, 4), [arr]);
+
+  let dataArr = useMemo(() => isFilter?  arr?.filter(item => item.transaction_type?.toLowerCase()?.includes('ira'))?.slice(0, slice) : arr?.slice(0, slice), [arr, slice]);
 
 
   const timeHandler = (timestamp) => {
@@ -37,14 +42,18 @@ const DashBoardHistory = () => {
               <small className="block">{timeHandler(data.created)}</small>
             </div>
           </td>
-          <td className="relative">
-            <span
-              className={` absolute  left-4 w-3 h-3 rounded-[50%]   ${data.transaction_type === 'withdrawal' ? 'bg-[#F324EC]' : data.transaction_type === 'deposit' ? 'bg-[#0E0C6D]' : 'bg-[#FFB803]'}`}
-            >
-              {''}
-            </span>
-            {data.type}
-          </td>
+          {
+            !isMobileWidth && (
+              <td className="relative text-white">
+                <span
+                  className={` absolute  left-4 w-3 h-3 rounded-[50%]   ${data.transaction_type === 'withdrawal' ? 'bg-[#F324EC]' : data.transaction_type === 'deposit' ? 'bg-[#0E0C6D]' : 'bg-[#FFB803]'}`}
+                >
+                  {''}
+                </span>
+                <span className='hover:text-white'>{data.type}</span>
+              </td>
+            )
+          }
           <td>{parseFloat(data.usdt_amount)?.toFixed(2)}</td>
           <td
             className={

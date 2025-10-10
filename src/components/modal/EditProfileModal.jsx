@@ -64,7 +64,7 @@ export default function EditProfileModal({ setOpen, profile }) {
       <ClickAwayListener onClickAway={() => setOpen(false)}>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="bg-white  w-[90%] p-9 md:w-5/6 max-w-[700px] p-4 my-6  rounded-lg overflow-auto h-[90vh]"
+          className="bg-white  w-[90%] md:w-5/6 max-w-[700px] p-4 my-6  rounded-lg overflow-auto h-[90vh]"
         >
           {success && <Alert severity="success">{success}</Alert>}
           {error && <Alert severity="error">{error}</Alert>}

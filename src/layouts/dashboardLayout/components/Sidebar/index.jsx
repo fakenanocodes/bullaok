@@ -13,7 +13,7 @@ const DashboardSidebar = ({ logout }) => {
     { icon: <InvestmentIcon />, name: 'Investment', path: 'card-application' },
     { icon: <PlantIcon />, name: 'Plans', path: 'plan' },
     {
-      // icon: <IraIcon />,name: 'Ira',path: 'ira',
+      icon: <IraIcon />,name: 'Ira',path: 'ira',
     },
     { icon: <LogoutIcon />, name: 'Logout' },
   ];
