@@ -9,7 +9,7 @@ import table_icon from '../assets/table_icon.png';
 import DashBoardHistory from '../DashBoardHistory';
 import { CgArrowTopRight } from "react-icons/cg";
 import { Balance } from '@mui/icons-material';
-import AssetsModal from '../layouts/dashboardLayout/components/AssetsModal';
+import AssetModal from '../layouts/dashboardLayout/components/AssetModal';
 
 const NewDashboard = () => {
   const navigate = useNavigate();
@@ -17,6 +17,8 @@ const NewDashboard = () => {
   const { data: balances } = useSWR('/user/balances/');
   const { data: profiles } = useSWR('/user/');
   const { data: investments } = useSWR('/plan/investments/');
+  const [isAssetModal, setIsAssetModal] = useState(true);
+  const [selectedAsset, setSelectedAsset] = useState(null);
 
   const investmentData = useMemo(() => {
     return investments?.data?.map((investment, index) => ({
@@ -29,7 +31,10 @@ const NewDashboard = () => {
 
   console.log('investments', investmentData);
   
-  
+  const selectAssetHandler = (asset) => {
+    setSelectedAsset(asset);
+    setIsAssetModal(true);
+  }
  
   const accountAnalyticsData = useMemo(
     () => [
@@ -336,13 +341,10 @@ const NewDashboard = () => {
       </div>
       <div className="bg-[#000000] rounded-[10px] px-5 lg:my-4 space-y-10 lg:pb-6">
         <h4 className="pt-5 pl-4"> Account Analytics</h4>
-        <div className="gap-3 flex items-center justify-center">
-          <div className="lg:flex-1 lg:flex-row justify-between flex xs:flex-col">
+        <div className="gap-3 flex flex-col md:flex-row items-center justify-center">
+          <div className="grid grid-cols-2 lg:flex-1 border-b border-b-gray-300/30 mb-5 md:border-b-0 md:mb-0 md:flex-row justify-between md:flex xs:flex-col">
             <article className="px-10 py-2 rounded-[10px] text-[12px] sm:text-sm">
               <p className="font-medium text-[#FFFFFF] opacity-[61%] text-sm sm:text-[20px] relative">
-                <span
-                  className={`inline-block  w-[8px] sm:w-[16px] h-[8px] sm:h-[16px]  rounded-[50%] absolute left-[-25px] top-2  `}
-                ></span>
                 Total Balance
               </p>
               <h2 className="font-bold  text-[12px] sm:text-[18px] flex items-center gap-5 h-[40px] ">
@@ -356,9 +358,6 @@ const NewDashboard = () => {
             {/* trading balance */}
             <article className="px-10 py-2 rounded-[10px] text-[12px] sm:text-sm">
               <p className="font-medium text-[#FFFFFF] opacity-[61%] text-sm sm:text-[20px] relative">
-                <span
-                  className={`inline-block  w-[8px] sm:w-[16px] h-[8px] sm:h-[16px]  rounded-[50%] absolute left-[-25px] top-2  `}
-                ></span>
                 Trading Balance
               </p>
               <h2 className="font-bold  text-[12px] sm:text-[18px] flex items-center gap-5 h-[40px] ">
@@ -400,9 +399,9 @@ const NewDashboard = () => {
               </h4>
             </article>
           </div>
-          {/* <div className="flex justify-center items-center -translate-y-[15%] w-[150px]   ">
+          <div className="flex justify-center items-center -translate-y-[15%] w-[150px]   ">
             <Doughnut className="" data={doughnut} />
-          </div> */}
+          </div>
         </div>
       </div>
       <div className="gridClass">
@@ -460,7 +459,10 @@ const NewDashboard = () => {
             
             {
               investmentData?.map((investment) => (
-                <div className="flex gap-[15px] items-center cursor-pointer relative shadow-[1px_1px_5px_rgba(128,0,128,0.7)] p-3" key={investment?.id}>
+                <div 
+                  className="flex gap-[15px] items-center cursor-pointer relative shadow-[1px_1px_5px_rgba(128,0,128,0.7)] p-3" key={investment?.id}
+                  onClick={() => selectAssetHandler(investment?.type)}
+                >
                   <p className="bg-[#9b9bef] text-[#0a07ff] text-[15px] font-[600] w-[40px] h-[35px] rounded-[50%] flex justify-center items-center whitespace-nowrap">
                     {investment?.type?.charAt(0)}
                   </p>
@@ -481,7 +483,7 @@ const NewDashboard = () => {
                     </div>
                     <div className="w-full h-[8px] rounded-[5px] bg-[#9b9bef]">
                       <div 
-                        className="h-full rounded-[5px] bg-[purple]"
+                        className="h-full rounded-[5px] bg-[rgb(128,0,128)]"
                         style={{ width: `${investment?.rate?.toFixed(1)}%` }}
                       ></div>
                     </div>
@@ -519,9 +521,13 @@ const NewDashboard = () => {
           <DashBoardHistory />
         </table>
       </div>
-      <AssetsModal />
+      <AssetModal
+        isOpen={isAssetModal}
+        onClose={setIsAssetModal}
+        selectedAsset={selectedAsset}
+        setSelectedAsset={setSelectedAsset}
+      />    
     </section>
   );
 };
-
 export default NewDashboard;

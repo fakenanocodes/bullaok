@@ -351,12 +351,6 @@ const DashboardLayout = () => {
           </div>
         </div>
       </div>
-      {/* <div
-        className={`fixed flex items-center justify-center inset-0 bg-black bg-opacity-50 transition-all duration-300 ease-in-out origin-bottom-right ${
-          isIraFunds ? 'scale-100' : 'scale-0 pointer-events-none'
-        }`}
-      >
-      </div> */}
       <IraPaymentModal setIraFunds={setIraFunds} isIraFunds={isIraFunds} />
     </div>
   );

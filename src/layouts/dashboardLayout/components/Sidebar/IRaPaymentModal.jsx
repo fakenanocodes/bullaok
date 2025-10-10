@@ -75,121 +75,12 @@ const closeModal = () => {
 if (!isIraFunds) return null;
 
   return (
-    // <div
-    //   className={`fixed flex items-center justify-center inset-0 bg-black bg-opacity-50 transition-all duration-300 ease-in-out origin-bottom-right ${
-    //     isIraFunds ? 'scale-100' : 'scale-0 pointer-events-none'
-    //   }`}
-    // >
-    //   <ClickAwayListener onClickAway={closeModal}>
-    //     <div className={`h-[80%] w-[90%] md:w-[80%] no-scrollbar bg-white p-4 text-gray-700 overflow-scroll relative rounded-xl ${isIraFunds ? 'block' : 'hidden'}`}>
-    //       <div className="py-3  md:px-20 flex justify-between items-center">
-    //         <span className="text-xl md:text-3xl tracking-wider font-semibold">{switcher === "toIRA" ? "Fund IRA Account" : "Withdraw from IRA"}</span>
-    //         <button 
-    //           className='text-2 xl text-gray-600  transition-all duration-200 active:scale-90 hover:bg-gray-500/50 rounded-full p-1 hover:text-white'
-    //           onClick={closeModal}
-    //         >
-    //           <IoMdClose />
-    //         </button>
-    //       </div>
-    //       <div className="absolute left-0 right-0 border-b-2 border-b-gray-300"></div>
-
-    //       <div>
-    //       <div className="lg:flex-row flex-col flex justify-between md:gap-5 items-center lg:space-y-0 py-10 lg:px-20 border-b border-b-gray-300">
-    //           <div className="space-y-8 w-full">
-    //             <p className="font-semibold text-lg hidden md:block">From</p>
-    //             <div className="flex md:flex-col flex-nowrap w-full">
-    //                 <button
-    //                     className="bg-[#8E0789] p-4 w-fit md:w-full rounded-l-lg md:rounded-bl-none md:rounded-t-lg flex justify-center cursor-default"
-    //                 >
-    //                 <span className="text-white whitespace-nowrap">{ switcher === "toIRA" ? "Main Account" : "IRA Account"}</span>
-    //                 </button>
-    //                 <button
-    //                   className="bg-[rgba(142,7,138,0.11)] border border-[#8E0789] p-4 w-full rounded-r-lg md:rounded-tr-none md:rounded-b-lg flex justify-center cursor-default"
-    //                 >
-    //                     <span className="text-[#4A4A4A] font-semibold">${switcher === "toIRA" ? availableBalanceUser?.available_balance : availableBalanceUser?.ira_balance}</span>
-    //                 </button>
-    //             </div>
-    //           </div>
-    
-    //           <div className="space-y-8 hidden md:block">
-    //             <span></span>
-    //             <div className='flex flex-col items-center justify-center'>
-    //                 <p 
-    //                     className='text-base font-semibold text-[#8E0789] border border-[#8E0789] px-7 py-2 rounded-md cursor-pointer active:scale-95 transition-all duration-200 active:bg-[#8e078a21]'
-    //                     onClick={switchHandler} 
-    //                 >
-    //                     switch
-    //                 </p>
-    //                 <BiTransferAlt className='text-[#8E0789] text-2xl' />
-    //             </div>
-    //           </div>
-              
-    //             <BiTransferAlt className='text-[#8E0789] text-3xl rotate-90 block md:hidden translate-y-5' />
-
-    //           <div className="flex flex-col space-y-8 pb-5 justify-center w-full items-end">
-    //             <p className="text-[#4A4A4A] font-bold text-lg text-end hidden md:block">To</p>
-    //             <div className="flex md:flex-col flex-nowrap w-full">
-    //                 <button 
-    //                     className="bg-[#8E0789] p-4 w-fit md:w-full rounded-l-lg md:rounded-bl-none md:rounded-t-lg flex justify-center cursor-default"
-    //                 >
-    //                     <span className="text-white whitespace-nowrap">{switcher === "toIRA" ? "IRA Account" : "Main Account"}</span>
-    //                 </button>
-    //                 <button
-    //                     className="bg-[rgba(142,7,138,0.11)] border border-[#8E0789] p-4 w-full rounded-r-lg md:rounded-tr-none md:rounded-b-lg flex justify-center cursor-default"
-    //                 >
-    //                 <span className="text-[#4A4A4A] font-semibold">${switcher === "toIRA" ? availableBalanceUser?.ira_balance : availableBalanceUser?.available_balance}</span>
-    //                 </button>
-    //             </div>
-    //           </div>
-
-    //             <p 
-    //                 className='text-base font-semibold text-[#8E0789] border border-[#8E0789] px-7 py-2 rounded-md cursor-pointer active:scale-95 transition-all duration-200 active:bg-[#8e078a21] block md:hidden'
-    //                 onClick={switchHandler} 
-    //             >
-    //                 switch
-    //             </p>
-    //         </div>
-
-    //         <div className="py-10 px-0 lg:px-20 space-y-10">
-              
-    //           <div className="flex flex-col gap-2 w-full lg:w-fit">
-    //             <span>{switcher === "toIRA" ? "Funding" : "Transfer"} Amount</span>
-    //             <input
-    //               type="text"
-    //               className="w-full lg:w-[28vw] rounded-lg p-3  border-[#8E0789]"
-    //               value={amount}
-    //               onChange={(e) => setAmount(e.target.value)}
-    //             />
-    //           </div>
-    //         </div>
-
-    //         <div className="w-full flex flex-col lg:flex-row justify-center items-center gap-8 pt-5">
-    //           <button 
-    //             className="bg-[#8E0789] bg-opacity-30 px-16 font-semibold  py-3 rounded-lg w-full lg:w-fit"
-    //             onClick={closeModal}
-    //           >
-    //             Cancel 
-    //           </button>
-    //           <button
-    //             onClick={(e)=>submitHandler(e)}
-    //             className="bg-[#8E0789] py-3 text-white rounded-lg px-8 font-semibold w-full lg:w-fit"
-    //           >
-    //             {loading || isLoading ? "Processing..." : `Make ${switcher === "toIRA" ? "Deposit" : "Withdrawal"}`}
-    //           </button>
-    //         </div>
-
-          
-    //       </div>
-    //     </div>
-    //   </ClickAwayListener>
-    // </div>
-
     <SlideModal 
       setIraFunds={closeModal} 
       isIraFunds={isIraFunds}
       title={switcher === "toIRA" ? "Fund IRA Account" : "Withdraw from IRA"}
     >
-       <div>
+       <div className='pb-10 px-4'>
       <div className="lg:flex-row flex-col flex justify-between md:gap-5 items-center lg:space-y-0 py-10 lg:px-20 border-b border-b-gray-300">
           <div className="space-y-8 w-full">
             <p className="font-semibold text-lg hidden md:block">From</p>
