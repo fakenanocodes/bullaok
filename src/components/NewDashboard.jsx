@@ -16,7 +16,7 @@ const NewDashboard = () => {
   const { data: transaction } = useSWR('/transaction/');
   const { data: balances } = useSWR('/user/balances/');
   const { data: profiles } = useSWR('/user/');
-  const { data: investments } = useSWR('/plan/investments/');
+  const { data: investments, isLoading: isLoadingInvestments } = useSWR('/plan/investments/');
   const [isAssetModal, setIsAssetModal] = useState(true);
   const [selectedAsset, setSelectedAsset] = useState(null);
 
@@ -348,7 +348,7 @@ const NewDashboard = () => {
                 Total Balance
               </p>
               <h2 className="font-bold  text-[12px] sm:text-[18px] flex items-center gap-5 h-[40px] ">
-                ${balances?.total_balance ? Number(balances.total_balance).toLocaleString('en-US') : 0}
+                ${(Number(balances?.total_balance) + Number(balances?.ira_balance)).toLocaleString('en-US') || 0}
               </h2>
               <h4 className="text-[#4A4A4A] flex gap-4 items-center">
                 {/* {data.percentage} */}
@@ -456,13 +456,19 @@ const NewDashboard = () => {
             {/* <button className=" text-sm text-[#FFB803]">More</button> */}
           </article>
           <article className="flex flex-col gap-10 pb-5">
-            
+
             {
-              investmentData?.map((investment) => (
-                <div 
-                  className="flex gap-[15px] items-center cursor-pointer relative shadow-[1px_1px_5px_rgba(128,0,128,0.7)] p-3" key={investment?.id}
-                  onClick={() => selectAssetHandler(investment?.type)}
-                >
+              isLoadingInvestments? (
+                <div className='flex flex-col items-center justify-center gap-2'>
+                  <p className="text-center text-gray-500">Loading...</p>
+                </div>
+              ) : investmentData?.length > 0 ? (
+                investmentData?.map((investment) => (
+                  <div
+                    className="flex gap-[15px] items-center cursor-pointer relative shadow-[1px_1px_5px_rgba(128,0,128,0.7)] p-3"
+                    key={investment?.id}
+                    onClick={() => selectAssetHandler(investment?.type)}
+                  >
                   <p className="bg-[#9b9bef] text-[#0a07ff] text-[15px] font-[600] w-[40px] h-[35px] rounded-[50%] flex justify-center items-center whitespace-nowrap">
                     {investment?.type?.charAt(0)}
                   </p>
@@ -491,6 +497,12 @@ const NewDashboard = () => {
                   <CgArrowTopRight className='absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 text-[rgba(255,255,0,0.7)]'/>
                 </div>
               ))
+              ) : (
+                <div className='flex flex-col items-center justify-center gap-2'>
+                  <p className="text-center text-gray-500">Ooops!!</p>
+                  <p className="text-center text-gray-500">No Investment Plan Found</p>
+                </div>
+              )
             }
           </article>
         </div>
