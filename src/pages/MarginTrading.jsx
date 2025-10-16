@@ -1,4 +1,5 @@
 import Layout from '../components/Layout';
+import Trading from './ETF/Trading';
 import Benefits from './margin-trading/Benefits';
 import Faqs from './margin-trading/Faqs';
 import Header from './margin-trading/Header';
