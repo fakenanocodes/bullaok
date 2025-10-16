@@ -22,7 +22,7 @@ export default function Footer() {
     <section className="w-full mx-auto py-9 px-5 lg:px-10 xl:px-20 bg-[#41073F]">
       
       <div className="flex w-full items-start justify-between">
-        <div className=" w-full  grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className=" w-full  grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {data?.map((item, index) => (
             <FooterItem
               key={index}
