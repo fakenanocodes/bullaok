@@ -13,12 +13,6 @@ const TeamBroker = () => {
   const { subpage } = useParams();
   const {data: broker} = useSWR(`/broker/brokers/${subpage}/`)
 
-  console.log('broker =>', broker);
-
-  useEffect(() => {
-    // scrollToMid();
-  }, []);
-
   return (
     <div>
       <MainLayout>

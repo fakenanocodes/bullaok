@@ -1,10 +1,18 @@
 import { useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
+import { scrollToMid } from '../../actions/utils';
 
 const FooterItem = ({ faq, about, terms }) => {
-  console.log("faq",faq);
+
   const navigate = useNavigate()
   
+  
+  const navHandler = (link) => {
+    navigate(link)
+    scrollToMid();
+  }
+  
+
   return (
     <div className=" items-center text-[#fff] ">
       <ul className="">
@@ -12,7 +20,7 @@ const FooterItem = ({ faq, about, terms }) => {
           <>
             <h2 className="font-bold">FAQ</h2>
             {faq.categories.map((item, index) => (
-              <li onClick={()=>navigate(item.link)} key={index} className="mt-4 cursor-pointer lg:text-lg text-xs">
+              <li onClick={()=>navHandler(item.link)} key={index} className="mt-4 cursor-pointer lg:text-lg text-xs">
                 {item.title}
               </li>
             ))}
@@ -25,7 +33,7 @@ const FooterItem = ({ faq, about, terms }) => {
           <>
             <h2 className="font-bold">About</h2>
             {about.categories.map((item, index) => (
-              <li onClick={()=>navigate(item.link)} key={index} className="mt-4 cursor-pointer lg:text-lg text-xs">
+              <li onClick={()=>navHandler(item.link)} key={index} className="mt-4 cursor-pointer lg:text-lg text-xs">
                 {item.title}
               </li>
             ))}
@@ -37,7 +45,7 @@ const FooterItem = ({ faq, about, terms }) => {
           <>
             <h2 className="font-bold">Terms</h2>
             {terms.categories.map((item, index) => (
-              <li onClick={()=>navigate(item.link)} key={index} className="mt-4 cursor-pointer">
+              <li onClick={()=>navHandler(item.link)} key={index} className="mt-4 cursor-pointer">
                 {item.title}
               </li>
             ))}
