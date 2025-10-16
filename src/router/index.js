@@ -62,6 +62,10 @@ import FAQ from '../components/FAQ';
 import Verify from '../pages/Verify';
 import Regitrastion from '../pages/Registration';
 import Disclosure from '../pages/Disclosure';
+import FeeSchedule from '../pages/FeeSchedule';
+import Margin from '../pages/Margin';
+import FilingEnquiry from '../pages/FilingEnquiry';
+import CustomerRelationship from '../pages/CustomerRelation';
 // import ProtectedRoute from '../components/dashboardLoayout/ProtectedRoute';
 const router = createBrowserRouter([
   {
@@ -159,6 +163,22 @@ const router = createBrowserRouter([
   {
     path: '/disclosure',
     Component: Disclosure,
+  },
+  {
+    path: '/fee-schedule',
+    Component: FeeSchedule,
+  },
+  {
+    path: '/filing-enquiry',
+    Component: FilingEnquiry,
+  },
+  {
+    path: '/customer-relationship',
+    Component: CustomerRelationship,
+  },
+  {
+    path: '/margin',
+    Component: Margin,
   },
   {
     path: '/registration',

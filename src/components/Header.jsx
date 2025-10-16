@@ -60,6 +60,10 @@ const navItems = [
       { name: 'Learn', route: '/services/education' },
       { name: 'FAQ', route: '/faq' },
       { name: 'Disclosure', route: '/disclosure' },
+      { name: 'Fee Schedule', route: '/fee-schedule' },
+      { name: 'Margin Trading Terms', route: '/margin' },
+      { name: 'Filing Enquiry', route: '/filing-enquiry' },
+      { name: 'Customer Relationship', route: '/customer-relationship' },
 
     ],
   },
