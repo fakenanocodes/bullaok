@@ -1,10 +1,23 @@
 import about_bg from '../assets/about/about_bg.png';
 import Maindashboard_layoutt from '../components/MainLayout';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useSWR from 'swr';
+
 export default function FAQ() {
   const {data: faq} = useSWR('/faqs')
   let objArr = []
+
+  // const hash = window.location.hash.substring(1);
+  // useEffect(() => {
+  //   if (hash) {
+  //     const target = document.getElementById(hash);
+  //     if (target) {
+  //       setTimeout(() => {
+  //         target.scrollIntoView({ behavior: "smooth", block: "start" });
+  //       }, 300);
+  //     }
+  //   }
+  // }, [hash]);
   
   return (
       <Maindashboard_layoutt>
@@ -27,9 +40,9 @@ export default function FAQ() {
           </div>
           :
           faq?.map((item,index)=>(
-            <div className=''>
-            <p className='font-[600] font-[Montserrat]'><span className=' text-[35px] laviossa text-[#8E0789] capitalize'>{item?.question[0]}</span><span>{item?.question.slice(1)}</span></p>
-            <p className='font-[Montserrat] mt-5 border-[1.4px] border-[rgb(215,71,210)] p-5'>{item?.answer}</p>
+            <div className='' key={index} id={`footer-${index + 1}`}>
+              <p className='font-[600] font-[Montserrat]'><span className=' text-[35px] laviossa text-[#8E0789] capitalize'>{item?.question[0]}</span><span>{item?.question.slice(1)}</span></p>
+              <p className='font-[Montserrat] mt-5 border-[1.4px] border-[rgb(215,71,210)] p-5'>{item?.answer}</p>
           </div>
           ))}
         </div>
