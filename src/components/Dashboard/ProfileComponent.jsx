@@ -44,14 +44,14 @@ export default function ProfileComponent() {
   const fileInputRef = useRef(null);
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedFile, setSelectedFIle] = useState(null);
-  console.log('my data == >', data);
+  // console.log('my data == >', data);
 
   const handleImageClick = () => {
     // Trigger the hidden file input when the image is clicked
     fileInputRef.current.click();
   };
 
-  console.log('profile==>',profile);
+  // console.log('profile==>',profile);
   const handleFileChange = (e) => {
     // Handle the selected file
     const selectedFile = e.target.files[0];
@@ -75,7 +75,7 @@ export default function ProfileComponent() {
     axios
       .put('user/profile/update-profile-image/', formData)
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         setSuccess('Image Upload successful');
         setLoading(false);
         mutate("user/")
@@ -93,7 +93,7 @@ export default function ProfileComponent() {
   }, 5000);
   const Api = 'https://django-bulloak-finance-production.up.railway.app';
   const profileImage = Api + profile?.image;
-  console.log(profile?.image);
+  // console.log(profile?.image);
   return (
     <div className="grid grid-cols-1 xl:w-4/5 w-full mx-auto text-black xl:pb-8 p-3">
       <div className="flex xl:flex-row lg:flex-row flex-col gap-3 justify-between xl:p-8  xl:ml-8 ml-0">

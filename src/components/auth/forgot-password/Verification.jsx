@@ -53,8 +53,6 @@ const Verification = ({ setForgotPasswordComponent }) => {
         })
         .then((res) => {
           setResendingOtp(false);
-
-          console.log(res);
           toast.success('We have resent a code to your email', {
             position: 'top-right',
             autoClose: 5000,

@@ -27,7 +27,6 @@ const UserLogin = () => {
   const [isLoading, setIsLoading] = useState(false);
   const cookies = new Cookies();
   const broker = useSelector((state) => state.broker.broker);
-  console.log(broker);
   const dispatch = useDispatch();
   const {
     getValues,
@@ -45,7 +44,6 @@ const UserLogin = () => {
   const onSubmit = async () => {
     const data = getValues();
     const expiringDate = getNextMonth();
-    console.log('data',data);
     
 
     try {
@@ -85,7 +83,6 @@ const UserLogin = () => {
       });
 
       reset();
-      console.log(response);
       
       window.location.replace('/dashboard');
       

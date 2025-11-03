@@ -28,8 +28,6 @@ const NewDashboard = () => {
       rate: investment?.total_interest_rate,
     }));
   }, [investments]);
-
-  console.log('investments', investmentData);
   
   const selectAssetHandler = (asset) => {
     setSelectedAsset(asset);
@@ -217,11 +215,10 @@ const NewDashboard = () => {
   const fetchUserProfile = async () => {
     try {
       const response = await axios.get('/user/');
-      console.log('RESPONSE', response);
 
       setUserProfile(response.data.profile);
     } catch (error) {
-      console.log('ERROR', error);
+      console.error('ERROR', error);
     }
   };
   useEffect(() => {

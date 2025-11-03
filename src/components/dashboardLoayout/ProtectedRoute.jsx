@@ -19,7 +19,7 @@ const ProtectedRoute = ({ children }) => {
   axios.interceptors.response.use(
     response => response,
     error => {
-      if("error --> ",error?.response?.data?.code === "token_not_valid"){
+      if(error?.response?.data?.code === "token_not_valid"){
         cookies.remove("bk_access")
         cookies.remove("bk_refresh")
         cookies.remove("refresh")

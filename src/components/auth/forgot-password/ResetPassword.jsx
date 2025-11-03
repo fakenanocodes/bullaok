@@ -22,8 +22,7 @@ const ResetPasswordForm = ({ setSignupComponent }) => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const otp = useSelector((state) => state.auth.otp);
-
-  console.log(otp);
+  
   const {
     getValues,
     register,

@@ -11,9 +11,6 @@ const DashBoardHistory = ({ isFilter, slice = 4}) => {
 
   useEffect(() => setArr(transaction), [transaction]);
 
-  
-    console.log("history arr", arr);
-
 
   let dataArr = useMemo(() => isFilter?  arr?.filter(item => item.transaction_type?.toLowerCase()?.includes('ira'))?.slice(0, slice) : arr?.slice(0, slice), [arr, slice]);
 
