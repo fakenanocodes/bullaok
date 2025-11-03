@@ -52,7 +52,6 @@ export default function ForgotPasswordForm({ setForgotPasswordComponent }) {
       setSuccess('Login Successful');
 
       reset();
-      console.log(response);
       setForgotPasswordComponent(1);
       //   navigate('/dashboard');
     } catch (err) {

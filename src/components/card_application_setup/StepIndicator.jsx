@@ -18,7 +18,6 @@ const StepIndicator = ({ chatStep }) => {
   const [error, setError] = useState(false);
 
   const navigateSteps = (step) => {
-    console.log(step);
     if (step === 0) {
       if (cardInformation?.firstName && cardInformation?.lastName && cardInformation?.phoneNumber) {
         dispatch(setCardStep(step));

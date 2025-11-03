@@ -30,12 +30,9 @@ const CurrencyCard = ({ handleNext }) => {
       });
       return;
     }
-    console.log(cardType);
     handleNext(3);
     dispatch(setCardInformation({ ...cardInformation, type: cardType }));
-    console.log('done');
   };
-  console.log(cardInformation);
 
   const handleCancel = () => {
     navigate(-1)

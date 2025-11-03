@@ -20,7 +20,6 @@ const SecurityData = ({ handleNext }) => {
   });
 
   const handleChange = (e) => {
-    console.log(inputValue);
     setInputValue({
       ...inputValue,
       [e.target.name]: e.target.value,
@@ -29,7 +28,6 @@ const SecurityData = ({ handleNext }) => {
 
   const storeCardInfo = (e) => {
     e.preventDefault();
-    console.log('done');
     dispatch(setCardInformation({ ...cardInformation, ...inputValue }));
     if (
       !inputValue?.nameOnCard ||

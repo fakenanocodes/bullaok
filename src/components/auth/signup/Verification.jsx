@@ -36,7 +36,7 @@ const Verification = () => {
         await axios.post('user/auth/verify-email/', data);
         setIsLoading(false);
         setSuccess('Your account has been verified');
-        navigate('/brokers')
+        navigate('/login')
       } catch (error) {
         setIsLoading(false);
         const err = handleGenericError(error);

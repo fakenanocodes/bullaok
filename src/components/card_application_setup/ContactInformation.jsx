@@ -26,7 +26,6 @@ const ContactInformation = ({ handleNext }) => {
   };
 
   const storeCardInfo = () => {
-    console.log('done');
     dispatch(setCardInformation(inputValue));
     if (
       !inputValue?.firstName ||
@@ -41,7 +40,6 @@ const ContactInformation = ({ handleNext }) => {
     }
     handleNext(1);
   };
-  console.log('🙂', cardInformation);
   const handleCancel = () => {
     navigate(-1)
     dispatch(resetCardInformation())

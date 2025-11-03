@@ -21,8 +21,7 @@ const DeliveryOption = ({handleNext}) => {
     area: cardInformation?.area || '',
   });
 
-  const handleChange = (e) => {
-    console.log(inputValue);
+    const handleChange = (e) => {
     setInputValue({
       ...inputValue,
       [e.target.name]: e.target.value,
@@ -52,7 +51,6 @@ const DeliveryOption = ({handleNext}) => {
         setIsLoading(true)
       const response = await axios.post('/card/api/create_card/', userData);
       setIsLoading(false)
-      console.log('RESPONSE', response);
       setInputValue({
         zipCode: '',
         city: '',

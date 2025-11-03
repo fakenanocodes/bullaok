@@ -34,7 +34,6 @@ const InvestmentPlanCard = ({ plan }) => {
 
   async function onSubmit(id) {
     const data = getValues();
-    console.log(id);
     const apiData = {
       amount: data?.amount,
       plan_id: id,
@@ -42,7 +41,6 @@ const InvestmentPlanCard = ({ plan }) => {
     setLoading(true);
     try {
       const res = await axios.post('/plans/', apiData);
-      console.log(res);
       toast.success(res?.data?.message, {
         position: 'top-right',
         autoClose: 3000,

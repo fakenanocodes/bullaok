@@ -31,9 +31,7 @@ const PersonalData = ({ handleNext }) => {
     }
     handleNext(2);
     dispatch(setCardInformation({ ...cardInformation, currency }));
-    console.log('done');
   };
-  console.log(cardInformation);
 
   const handleCancel = () => {
     navigate(-1)

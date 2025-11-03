@@ -10,9 +10,9 @@ const NavigationModalTable = ({ currentNavigationMenu }) => {
   );
   const { data: allTrans } = useSWR(`/${currentNavigationMenu[1].toLowerCase()}/`);
 
-  console.log(`all ${currentNavigationMenu[1]} ==>`,allTrans);
-  console.log(`pending ${currentNavigationMenu[1]} ==>`,pending);
-  console.log(`completed ${currentNavigationMenu[1]} ==>`,completed);
+  // console.log(`all ${currentNavigationMenu[1]} ==>`,allTrans);
+  // console.log(`pending ${currentNavigationMenu[1]} ==>`,pending);
+  // console.log(`completed ${currentNavigationMenu[1]} ==>`,completed);
   const [rowItems, setRowItems] = useState(null);
 
   useEffect(() => {

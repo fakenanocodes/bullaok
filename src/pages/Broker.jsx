@@ -10,6 +10,7 @@ import useSWR from 'swr';
 import BrokerModal from '../components/modal/BrokerModal';
 import { handleGenericError } from '../config/mixin';
 import { toggleBrokerStatus } from '../store/reducers/brokerReducer';
+import { toast } from 'react-toastify';
 
 export default function Broker() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -77,10 +78,11 @@ export default function Broker() {
 
       dispatch(toggleBrokerStatus(true));
       setSuccess('Broker selected successfully');
+      toast.success('Broker selected successfully, login to continue');
 
       // small delay so user sees success then navigate
       setTimeout(() => {
-        navigate('/dashboard');
+        navigate('/login');
       }, 700);
     } catch (err) {
       const errMsg = handleGenericError(err);
@@ -103,7 +105,7 @@ export default function Broker() {
   return (
     <div className="flex font-[poppins]">
       <div className="brokersbg bg-[#D2C2D2] h-[100vh] hidden xl:block py-8 p-4 text-center">
-        <h2 className="text-3xl text-center my-5 font-bold">Broker Matchup</h2>
+        <h2 className="text-3xl2 text-center my-5 font-bold">Broker Matchup</h2>
         <p className="text-center my-5">
           Please select the <span className="text-[#8E0789]">broker</span> for
           your preferred <span className="text-[#8E0789]">investment</span>{' '}

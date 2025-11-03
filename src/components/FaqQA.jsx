@@ -1,5 +1,4 @@
 function FaqQA({ servicesData }) {
-  console.log(servicesData);
   return (
     <div className=" mx-auto lg:p-8 p-2 ">
       {servicesData.map((service, index) => (

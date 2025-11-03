@@ -29,7 +29,8 @@ const options = ['Withdraw', 'Deposit', 'Transfer'];
 
 const DashboardLayout = () => {
   const cookie = new Cookies();
-  const { data } = useSWR('user/');
+  const { data: broker, isLoading: isLoadingBroker } = useSWR('/broker/user-broker/');
+  const { data, isLoading: isLoadingUser } = useSWR('user/');
   const profile = data?.profile;
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [activeOption, setActiveOption] = useState(null);
@@ -39,8 +40,6 @@ const DashboardLayout = () => {
   const [isIraFunds, setIraFunds] = useState(false);
 
   const location = useLocation().pathname;
-
-  console.log('location', location);
 
   const navigate = useNavigate();
 
@@ -182,6 +181,20 @@ const DashboardLayout = () => {
     setOpen(false);
     setCurrentNavigationMenu(null);
   };
+
+  if(isLoadingBroker || isLoadingUser){
+     return (
+      <div className='w-full h-screen bg-gray-300 flex justify-center items-center'>
+        <CircularProgress color="secondary" thickness={3} size={80} />
+      </div>
+     )
+  }
+
+  if(broker?.length === 0){
+    toast.info("Choose a broker and login again")
+    navigate("/brokers")
+    return
+  }
 
   return (
     <div className="relative overflow-hidden bg-custom-bg bg-opacity-20 bg-cover bg-center bg-no-repeat min-h-screen">
