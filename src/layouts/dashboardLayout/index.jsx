@@ -17,6 +17,7 @@ import NavigationModalTable from '../../components/Dashboard/NavigationModalTabl
 import LogoutIcon from '../../components/utils/icons/LogoutIcon';
 import useAuthentication from '../../hooks/useAuthentication';
 import DashboardSidebar from './components/Sidebar';
+import useLogout from '../../hooks/useLogout';
 import IraIcon from '../../assets/icons/dashboard/IraIcon';
 import Profile from '../../assets/icons/dashboard/Profile';
 import axios from 'axios';
@@ -42,6 +43,7 @@ const DashboardLayout = () => {
   const location = useLocation().pathname;
 
   const navigate = useNavigate();
+  const logout = useLogout();
 
   useEffect(() => {
     const token = cookie.get('bk_access');
@@ -108,24 +110,7 @@ const DashboardLayout = () => {
   const allCookies = cookie.getAll();
 
   const logoutOption = async () => {
-    try {
-      const response = await axios.post('/user/auth/logout/');
-      toast.success('logged out successful', {
-        position: 'top-right',
-        autoClose: 2000,
-        hideProgressBar: false,
-      });
-      for (let k in allCookies) {
-        cookie.remove(k);
-      }
-      navigate('/login');
-    } catch (err) {
-      toast.error('failed to logout', {
-        position: 'top-right',
-        autoClose: 2000,
-        hideProgressBar: false,
-      });
-    }
+    await logout();
   };
 
   const icons = [
