@@ -1,11 +1,11 @@
-import axios from 'axios';
-import { Cookies } from 'react-cookie';
-import { toast } from 'react-toastify';
+import axios from "axios";
+import { Cookies } from "react-cookie";
+import { toast } from "react-toastify";
 
 const cookies = new Cookies();
-const token = cookies.get('bk_access');
+const token = cookies.get("bk_access");
 
-export const API_URL = 'https://api.bulloakltd.com/';
+export const API_URL = "https://api.bulloakinc.com/";
 
 export default function init() {
   // Set base URL for Axios
@@ -14,9 +14,9 @@ export default function init() {
 
   if (token) {
     // Set Authorization header with the token
-    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   } else {
     // Clear Authorization header if there's no token
-    delete axios.defaults.headers.common['Authorization'];
+    delete axios.defaults.headers.common["Authorization"];
   }
 }
