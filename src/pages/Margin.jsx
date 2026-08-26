@@ -1,7 +1,7 @@
 // MarginTrading.jsx  (or app/margin-trading/page.jsx)
-import MainLayout from '../components/MainLayout';
-import home_bg from '../assets/home/home_bg.png';
 import bulloak from '../assets/bulloak.png';
+import home_bg from '../assets/home/home_bg.png';
+import MainLayout from '../components/MainLayout';
 
 export default function Margin() {
   return (
@@ -166,7 +166,7 @@ export default function Margin() {
             <section className="pb-6">
               <h2 className="font-bold text-lg md:text-2xl text-[#8E0789]">Contact</h2>
               <p className="mt-3 text-gray-700 leading-relaxed">
-                For more information about margin accounts, approval criteria, or rate schedules, please contact your advisor or email <span className="font-medium">admin@bulloakltd.com</span>. We can provide margin disclosure documents and answer questions about suitability and risk management.
+                For more information about margin accounts, approval criteria, or rate schedules, please contact your advisor or email <span className="font-medium">admin@bulloakinc.com</span>. We can provide margin disclosure documents and answer questions about suitability and risk management.
               </p>
             </section>
 

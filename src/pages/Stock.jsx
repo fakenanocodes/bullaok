@@ -98,7 +98,7 @@ const Stock = () => {
                 When You Open and Fund a New Account
               </p>
               <p
-                onClick={() => window.open('https://news.bulloakltd.com', '_blank')} 
+                onClick={() => window.open('https://news.bulloakinc.com', '_blank')} 
                 className="text-[#3e3e3e] text-sm underline cursor-pointer"
               >
                 See more about the free stock bonus

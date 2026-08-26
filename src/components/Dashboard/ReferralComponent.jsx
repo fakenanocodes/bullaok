@@ -6,14 +6,14 @@ import LinearProgress, {
 } from '@mui/material/LinearProgress';
 import { styled } from '@mui/material/styles';
 import { AiOutlineQuestion } from 'react-icons/ai';
+import { CgDollar } from "react-icons/cg";
 import { FaEdit } from 'react-icons/fa';
+import { GiShare } from "react-icons/gi";
+import { GoTriangleDown } from "react-icons/go";
+import { GrTransaction } from "react-icons/gr";
+import { IoIosCopy } from "react-icons/io";
 import { MdOutlineArrowBackIos } from 'react-icons/md';
 import { PiMedalMilitaryFill } from 'react-icons/pi';
-import { GiShare } from "react-icons/gi";
-import { IoIosCopy } from "react-icons/io";
-import { GrTransaction } from "react-icons/gr";
-import { GoTriangleDown } from "react-icons/go";
-import { CgDollar } from "react-icons/cg";
 
 
 import { useNavigate } from 'react-router-dom';
@@ -134,7 +134,7 @@ export default function ReferralComponent() {
   
   
   const referralCode = profile?.profile?.user?.username;
-  const baseUrl = 'https://bulloakltd.com'; // Replace with your specific login URL
+  const baseUrl = 'https://bulloakinc.com'; // Replace with your specific login URL
 
   const shareRef = useRef(null);
 

@@ -1,7 +1,7 @@
 // CustomerRelationshipSummary.jsx  (or app/customer-relationship-summary/page.jsx)
-import MainLayout from '../components/MainLayout';
-import home_bg from '../assets/home/home_bg.png';
 import bulloak from '../assets/bulloak.png';
+import home_bg from '../assets/home/home_bg.png';
+import MainLayout from '../components/MainLayout';
 
 export default function CustomerRelationship() {
   return (
@@ -154,7 +154,7 @@ export default function CustomerRelationship() {
             <section id="complaints" className="pb-6">
               <h2 className="font-bold text-lg md:text-2xl text-[#8E0789]">Complaints & Dispute Resolution</h2>
               <p className="mt-3 text-gray-700 leading-relaxed">
-                If you are dissatisfied with any aspect of our service, please contact client services at <span className="font-medium">admin@bulloakltd.com</span>.
+                If you are dissatisfied with any aspect of our service, please contact client services at <span className="font-medium">admin@bulloakinc.com</span>.
                 We aim to investigate and resolve complaints promptly. If you remain unsatisfied, you may have the option to pursue escalation
                 through regulatory complaint channels; details are available in your account documentation and on request.
               </p>
@@ -174,7 +174,7 @@ export default function CustomerRelationship() {
             <section id="get-copy" className="pb-6">
               <h2 className="font-bold text-lg md:text-2xl text-[#8E0789]">How to Request a Copy</h2>
               <p className="mt-3 text-gray-700 leading-relaxed">
-                You may request a full copy of the Firm's disclosure documents and Client Agreement by emailing <span className="font-medium">admin@bulloakltd.com</span>
+                You may request a full copy of the Firm's disclosure documents and Client Agreement by emailing <span className="font-medium">admin@bulloakinc.com</span>
                 or contacting your advisor. We will provide electronic copies upon request and may provide printed copies where required by law.
               </p>
             </section>
@@ -186,7 +186,7 @@ export default function CustomerRelationship() {
                 For further questions about your relationship with the Firm, the services offered, or to request more information, please contact:
               </p>
               <ul className="pl-6 mt-3 text-gray-700 space-y-2">
-                <li><strong>Email:</strong> <span className="font-medium">admin@bulloakltd.com</span></li>
+                <li><strong>Email:</strong> <span className="font-medium">admin@bulloakinc.com</span></li>
                 <li><strong>Phone:</strong> The support number listed on the website.</li>
                 <li><strong>Advisor:</strong> Contact your assigned financial advisor for account-specific queries.</li>
               </ul>

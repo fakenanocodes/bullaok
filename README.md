@@ -24,7 +24,7 @@ Currently, two official plugins are available:
   {
     "About": {
       "categories": [
-        {"title": "Blog","link": "https://news.bulloakltd.com/"},
+        {"title": "Blog","link": "https://news.bulloakinc.com/"},
         {"title": "Broker Check","link": "/brokers"},
         {"title": "Our Execution Quality","link": "who-we-are"},
         {"title": "Script Editor","link": "#"}

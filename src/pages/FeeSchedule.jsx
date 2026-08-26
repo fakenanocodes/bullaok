@@ -1,9 +1,9 @@
 // FeeSchedule.jsx (or app/fee-schedule/page.jsx)
 // Reuses same MainLayout and assets as Disclosure page
 
-import MainLayout from '../components/MainLayout';
-import home_bg from '../assets/home/home_bg.png';
 import bulloak from '../assets/bulloak.png';
+import home_bg from '../assets/home/home_bg.png';
+import MainLayout from '../components/MainLayout';
 
 export default function FeeSchedule() {
   return (
@@ -143,7 +143,7 @@ export default function FeeSchedule() {
               <p className="mt-3 text-gray-700 leading-relaxed">
                 If an error occurs in fee calculation or billing, the Firm will investigate promptly and make appropriate
                 adjustments or refunds where warranted. If you dispute a fee, please contact our compliance team at
-                <span className="font-medium"> admin@bulloakltd.com</span> with account details and a summary of your concern.
+                <span className="font-medium"> admin@bulloakinc.com</span> with account details and a summary of your concern.
                 We will acknowledge receipt and aim to resolve disputes in a timely manner.
               </p>
             </section>
@@ -164,7 +164,7 @@ export default function FeeSchedule() {
               <h2 className="font-bold text-lg md:text-2xl text-[#8E0789]">Contact</h2>
               <p className="mt-3 text-gray-700 leading-relaxed">
                 For questions about fees or to request a personalized fee schedule for a particular service, please contact
-                us at <span className="font-medium">admin@bulloakltd.com</span> or by telephone at the number listed on the website.
+                us at <span className="font-medium">admin@bulloakinc.com</span> or by telephone at the number listed on the website.
               </p>
             </section>
 

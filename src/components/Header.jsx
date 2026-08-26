@@ -7,11 +7,10 @@ import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useState } from 'react';
 import { Cookies } from 'react-cookie';
-import BluetoothIcon from './utils/icons/BluetoothIcon';
+import useSWR from 'swr';
 import PhoneIcon from './utils/icons/PhoneIcon';
 import DropDownMenu from './utils/reusables/DropDownMenu';
 import MobileDropdown from './utils/reusables/MobileDropdown';
-import useSWR from 'swr';
 
 const navItems = [
   {
@@ -118,7 +117,7 @@ const Header = () => {
         ))}
         <p
           // onClick={() => navigate('/')}
-          onClick={() => window.open('https://news.bulloakltd.com', '_blank')}
+          onClick={() => window.open('https://news.bulloakinc.com', '_blank')}
           className="font-semibold text-white text-sm cursor-pointer"
         >
           News
@@ -189,7 +188,7 @@ const Header = () => {
               
               <p
                 // onClick={() => navigate('/')}
-                onClick={() => window.open('https://news.bulloakltd.com', '_blank')}
+                onClick={() => window.open('https://news.bulloakinc.com', '_blank')}
                 className="font-semibold text-white text-sm cursor-pointer pl-4"
               >
                 News

@@ -22,7 +22,7 @@ export default function Team() {
     navigate(`/team/broker/${id}`);
   };
   const fetcher = async () => {
-    const res = await axios('https://api.bulloakltd.com/team/members/all/');
+    const res = await axios('https://api.bulloakinc.com/team/members/all/');
     setTeamMembersData(res.data);
   };
   useEffect(() => {

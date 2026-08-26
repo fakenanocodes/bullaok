@@ -1,7 +1,7 @@
 // HowToFileAnEnquiry.jsx  (or app/how-to-file-an-enquiry/page.jsx)
-import MainLayout from '../components/MainLayout';
-import home_bg from '../assets/home/home_bg.png';
 import bulloak from '../assets/bulloak.png';
+import home_bg from '../assets/home/home_bg.png';
+import MainLayout from '../components/MainLayout';
 
 export default function FilingEnquiry() {
   return (
@@ -91,7 +91,7 @@ export default function FilingEnquiry() {
                 <div className="bg-gray-50 border border-purple-100 p-4 rounded">
                   <h3 className="font-semibold text-[#8E0789]">Email</h3>
                   <p className="mt-2 text-gray-700">
-                    Send an email to <span className="font-medium">admin@bulloakltd.com</span> with the subject line "Enquiry: [brief subject]".
+                    Send an email to <span className="font-medium">admin@bulloakinc.com</span> with the subject line "Enquiry: [brief subject]".
                     Attach supporting documents as needed.
                   </p>
                 </div>
@@ -135,7 +135,7 @@ export default function FilingEnquiry() {
                 If you are unsatisfied with our handling of your enquiry:
               </p>
               <ul className="list-disc pl-6 mt-3 text-gray-700 space-y-2">
-                <li><strong>First,</strong> reply to the support response or send a follow-up to <span className="font-medium">admin@bulloakltd.com</span> requesting escalation.</li>
+                <li><strong>First,</strong> reply to the support response or send a follow-up to <span className="font-medium">admin@bulloakinc.com</span> requesting escalation.</li>
                 <li><strong>Second,</strong> you may request that the matter be reviewed by our Compliance or Client Services Manager.</li>
                 <li><strong>Final recourse:</strong> If you remain unsatisfied, the Firm’s formal dispute resolution procedures and regulatory complaint process are available; we will provide details on next steps as needed.</li>
               </ul>
@@ -200,7 +200,7 @@ export default function FilingEnquiry() {
                 For enquiries and support, please contact:
               </p>
               <ul className="pl-6 mt-3 text-gray-700 space-y-2">
-                <li><strong>Email:</strong> <span className="font-medium">admin@bulloakltd.com</span></li>
+                <li><strong>Email:</strong> <span className="font-medium">admin@bulloakinc.com</span></li>
                 <li><strong>Support Form:</strong> Visit the Contact / Support page on our website and choose "Submit an Enquiry".</li>
                 <li><strong>Phone:</strong> The support number listed on the website (for urgent matters).</li>
               </ul>

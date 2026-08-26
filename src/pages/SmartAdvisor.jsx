@@ -13,9 +13,8 @@ import smartbg from '../assets/smart-advisor_bg.png';
 // import smartAdvisorVideo from '../assets/smartadvisorvideo.mp4';
 import MainLayout from '../components/MainLayout';
 
-import '../CSS/main.css';
-import { Link } from 'react-router-dom';
 import { CircularProgress } from '@mui/material';
+import '../CSS/main.css';
 
 const SmartAdvisor = () => {
   const navigate = useNavigate();
@@ -260,7 +259,7 @@ const SmartAdvisor = () => {
 
             <button 
               className="flex gap-3 mt-5 bg-[#D4B716] text-black w-[150px] h-[50px] items-center justify-center cursor-pointer text-lg text-center font-open-sans-semibold font-semibold leading-16 rounded-[0.5rem] max-sm:text-[1.2rem]"
-              onClick={() => window.open('https://news.bulloakltd.com/')}
+              onClick={() => window.open('https://news.bulloakinc.com/')}
             >
               
               {

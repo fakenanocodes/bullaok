@@ -1,20 +1,17 @@
-import { useEffect } from 'react';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { scrollToMid } from '../actions/utils';
 import cert from '../assets/cert.png';
 import services_banner_img from '../assets/services_banner_img.png';
 import MainLayout from '../components/MainLayout';
-import { teamMember } from '../data/teamMember';
-import useSWR from 'swr';
-import { useState } from 'react';
-import axios from 'axios';
 
 const TeamMember = () => {
   const { subpage } = useParams();
    const [singleTeamMember, setSingleTeamMember] = useState({});
 
    const fetcher = async () => {
-     const res = await axios(`https://api.bulloakltd.com/team/members/${subpage}/`);
+     const res = await axios(`https://api.bulloakinc.com/team/members/${subpage}/`);
      setSingleTeamMember(res.data);
    };
 

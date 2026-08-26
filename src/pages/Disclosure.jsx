@@ -1,6 +1,5 @@
-import Layout from '../components/Layout'
-import home_bg from '../assets/home/home_bg.png'
 import bulloak from '../assets/bulloak.png';
+import home_bg from '../assets/home/home_bg.png';
 import MainLayout from '../components/MainLayout';
 
 export default function Disclosure() {
@@ -181,7 +180,7 @@ export default function Disclosure() {
                   permission is required for (i) any commercial use of materials on this website; (ii) making more 
                   than minimal copies of website materials; and (iii) copying large portions of our website, such as 
                   by bots, robots, or spiders that “harvest” the website. If you seek permission for such use of our 
-                  website, please contact us at admin@bulloakltd.com. Any unauthorized use of the images may 
+                  website, please contact us at admin@bulloakinc.com. Any unauthorized use of the images may 
                   violate copyright laws, trademark laws, the laws of privacy and publicity, and communications 
                   regulations and statutes. <br />
                   You hereby represent and warrant to the Firm that you will not use this website for any purpose 
@@ -191,7 +190,7 @@ export default function Disclosure() {
                   information about other users of the website; or (c) systematically extracting content or other 
                   information or data contained in the website to populate databases or other sites. 
                   For more information about the Firm’s privacy safeguards, please contact us at 
-                  admin@bulloakltd.com to read our Privacy Notice. 
+                  admin@bulloakinc.com to read our Privacy Notice. 
                 </p><br />   
 
               </div>
@@ -211,7 +210,7 @@ export default function Disclosure() {
                   version of the Terms and Conditions and of all applicable laws. <br />
                   Contact Information. We welcome you to contact the Firm regarding our services, policies, and 
                   to let us know if you have any questions, concerns, or complaints. You may reach us at 
-                  admin@bulloakltd.com 
+                  admin@bulloakinc.com 
                 </p><br />   
 
               </div>

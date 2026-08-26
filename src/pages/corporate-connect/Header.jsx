@@ -32,7 +32,7 @@ export default function Header() {
       <div className="flex gap-6 justify-center items-center w-full lg:flex-row flex-col lg:w-3/4">
         <div 
             className="flex items-center gap-4 bg-gray-300 p-3 rounded-xl bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-50 cursor-pointer"
-            onClick={() => window.open('https://news.bulloakltd.com/')}
+            onClick={() => window.open('https://news.bulloakinc.com/')}
           >
           <img
             src="investors.png"
@@ -49,7 +49,7 @@ export default function Header() {
         </div>
         <div 
           className="flex items-center gap-4 bg-gray-300 p-3 rounded-xl bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-50 cursor-pointer"
-          onClick={() => window.open('https://news.bulloakltd.com/')}
+          onClick={() => window.open('https://news.bulloakinc.com/')}
         >
           <img
             src="investors.png"
