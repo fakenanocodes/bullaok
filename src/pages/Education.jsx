@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { images } from '../assets';
 import Layout from '../components/Layout';
 import TestimonialsSwiper from '../components/TestimonialsSwiper';
+import BulloakInfrastructure from '../components/BulloakInfrastructure';
 import CoursesCard from '../components/utils/cards/CoursesCard';
 import { header} from '../data/education';
 import useSWR from 'swr';
@@ -145,6 +146,9 @@ export default function Education() {
           </h2>
           <TestimonialsSwiper testimonials={testimonials} />
         </section>
+
+        <BulloakInfrastructure />
+
         <section className="bg-[#fff] flex flex-col items-center py-8">
           <h2 className="text-center font-bold font-[laviossa] lg:text-4xl text-3xl text-[#000] mb-8 py-6 px-4">
             Features Investment Courses
