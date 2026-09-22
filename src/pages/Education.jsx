@@ -140,14 +140,14 @@ export default function Education() {
       </header>
 
       <main>
+        <BulloakInfrastructure />
+
         <section className="bg-[#fff]">
           <h2 className="text-center font-bold font-[laviossa] lg:text-4xl text-3xl text-[#8E0789] py-6">
             Testimonial
           </h2>
           <TestimonialsSwiper testimonials={testimonials} />
         </section>
-
-        <BulloakInfrastructure />
 
         <section className="bg-[#fff] flex flex-col items-center py-8">
           <h2 className="text-center font-bold font-[laviossa] lg:text-4xl text-3xl text-[#000] mb-8 py-6 px-4">
